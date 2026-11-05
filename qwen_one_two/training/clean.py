@@ -37,7 +37,7 @@ class CleanView:
         # Global source IDs, parent offsets, hidden scenario IDs and labels are
         # deliberately absent. Local references are derived in this order.
         model_bytes = canonical({'references': [r.content.decode() for r in self.references],
-                                 'sources': [x.decode() for x in excerpts], 'purpose': self.purpose})
+                                 'sources': [x.decode() for x in excerpts], 'purpose': self.purpose, 'operation': self.operation})
         return tuple(excerpts), model_bytes
 
 
@@ -66,9 +66,11 @@ def tokenize_excerpt(tokenizer, excerpt):
             offsets.append((len(body[:a-start].encode()), len(body[:b-start].encode())))
     check(bool(selected) and selected == list(range(selected[0], selected[-1]+1)), 'source token continuity')
     check(offsets[0][0] == 0 and offsets[-1][1] == len(excerpt), 'unmapped source bytes')
-    # Byte-level tokenizers can have overlapping character offsets for Unicode;
-    # keep verified originals, never invent finer byte boundaries.
+    # Character offsets can overlap for split UTF-8 byte tokens. Such mappings
+    # cannot be passed off as verified codec byte coordinates. Reject before
+    # encoding instead of inventing boundaries or expanding/cropping the view.
     check(all(0 <= a < b <= len(excerpt) for a, b in offsets), 'source mapping')
+    check(all(offsets[i-1][1] == offsets[i][0] for i in range(1,len(offsets))), 'noncontiguous/overlapping source byte mapping')
     return encoded['input_ids'], selected, tuple(offsets)
 
 
@@ -84,6 +86,7 @@ class CleanEncoder:
         cuda_only()
         check(len(checkpoint_hash) == len(profile_hash) == 64, 'encoder artifact identities')
         check(reference.frozen and all(not p.requires_grad for p in reference.parameters()), 'reference must be frozen')
+        check(reference.artifact_id == reference.fingerprint(), 'frozen reference state changed')
         self.backbone, self.reference = backbone, reference
         self.identity = {'checkpoint': checkpoint_hash, 'profile': profile_hash,
                          'source_mode': 'D', 'reference': reference.artifact_id, 'fresh_state': True, 'kind': 'clean_component'}

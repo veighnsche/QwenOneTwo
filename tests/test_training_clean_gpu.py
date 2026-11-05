@@ -17,8 +17,8 @@ class CleanGPU(unittest.TestCase):
         cls.math = sdpa_kernel(SDPBackend.MATH); cls.math.__enter__()
         cls.b, cls.c, _ = load(os.environ['QOT_QUALIFY_SNAPSHOT'], 'data/g1-proof/gate-repair-v2-20261105/diagnostic.safetensors')
         cls.ref = Reference(cls.b, cls.c)
-        # Identifier marks synthetic engineering state, never semantic approval.
-        cls.ref.freeze(digest(b'untrained engineering reference fixture'))
+        # Hash actual untrained reference tensors; this does not grant semantic approval.
+        cls.ref.freeze()
 
     @classmethod
     def tearDownClass(cls):
@@ -36,7 +36,10 @@ class CleanGPU(unittest.TestCase):
         return CleanView((ref,),(binding,),frozenset({'fact','q'})), p
 
     def test_clean_twins_reencode_and_have_local_registry(self):
-        encoder = CleanEncoder(self.b,self.ref,checkpoint_hash='1'*64,profile_hash='2'*64)
+        from pathlib import Path
+        from qwen_one_two.training.manifest import DIAGNOSTIC_SHA
+        encoder = CleanEncoder(self.b,self.ref,checkpoint_hash=DIAGNOSTIC_SHA,
+                               profile_hash=digest(Path('docs/codec-feedback-precision-v3.md').read_bytes()))
         view,p = self.make(b' Hidden: active.')
         a = encoder.encode(view,p,run='twin-a')
         view,p = self.make(b' Hidden: expired and more text.')
@@ -72,7 +75,7 @@ class CleanGPU(unittest.TestCase):
         from pathlib import Path
         import tempfile
         from qwen_one_two.training.engine import Window, live_groups
-        from qwen_one_two.training.checkpoint import bundle_tensors, save, load_export, IDENTITIES
+        from qwen_one_two.training.checkpoint import bundle_tensors, save, restore_model, IDENTITIES
         window=Window(live_groups(self.b,self.c,self.ref))
         weights=bundle_tensors(self.b,self.c,self.ref)
         identities={k:digest(k.encode()) for k in IDENTITIES}
@@ -87,7 +90,7 @@ class CleanGPU(unittest.TestCase):
             with torch.no_grad():
                 self.c.budget_row.add_(1)
                 next(iter(self.b.adapter_parameters('R'))).add_(.01)
-            load_export(path,weights,identities)
+            restore_model(path,self.b,self.c,self.ref,identities)
             with torch.no_grad():
                 restored,_=self.b(self.b.initial(),'R',self.b.embedding(ids))
                 raw=self.b.table.scalar(248077,restored[0,-1])

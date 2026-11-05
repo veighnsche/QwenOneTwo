@@ -90,6 +90,10 @@ def _load_weights(path, targets, manifest):
         value = incoming[name]
         check(value.shape == target.shape and value.dtype == target.dtype and bool(value.isfinite().all()), 'tensor shape/dtype/value: '+name)
         check(manifest['weights'][name] == {'shape':list(target.shape),'dtype':str(target.dtype)}, 'tensor manifest drift')
+    reference_state = {name.removeprefix('reference.'):value for name,value in incoming.items() if name.startswith('reference.')}
+    if manifest['reference_frozen'] and reference_state:
+        from .reference import state_fingerprint
+        check(state_fingerprint(reference_state) == manifest['reference_id'], 'reference state hash mismatch')
     if 'effective-rows.safetensors' in manifest['files']:
         effective = load_file(str(Path(path)/'effective-rows.safetensors'),device='cuda')
         check(set(effective) == {'codec.budget_row','codec.score_row'}, 'private rows')
@@ -160,4 +164,30 @@ def resume(path, window, targets, expected_identities):
     window.scheduled_windows = manifest['scheduled_windows']
     window.optimizer_updates = manifest['optimizer_updates']
     window.optimizer.zero_grad(set_to_none=True)
+    return manifest
+
+
+def restore_model(path, backbone, codec, reference, expected_identities, *, window=None):
+    """Model-aware installation: enforce v3, tying and reference freeze state."""
+    check(backbone.compensated and backbone.feedback_precision == 'fp32' and backbone.precision_parts == 2,
+          'restore requires qualified v3 arithmetic')
+    table = backbone.model.model.embed_tokens.weight
+    check(table.dtype == torch.bfloat16 and not table.requires_grad and
+          table.data_ptr() == backbone.model.lm_head.weight.data_ptr(), 'frozen BF16 tied base required')
+    manifest = inspect(path,expected_identities)
+    check(manifest['reference_frozen'] or manifest['phase'] == 'reference', 'unfrozen live reference bundle')
+    check(not manifest['reference_frozen'] or manifest['reference_id'] == expected_identities['reference'], 'reference artifact identity')
+    # Reject a trainability mismatch before loading; don't toggle parameter
+    # ownership underneath a prepared optimizer or an active graph.
+    check(reference.frozen == manifest['reference_frozen'], 'construct reference with matching freeze state before restore')
+    reference.assert_isolated(codec)
+    weights = bundle_tensors(backbone,codec,reference)
+    if window is None:
+        manifest = load_export(path,weights,expected_identities)
+    else:
+        manifest = resume(path,window,weights,expected_identities)
+    reference.artifact_id = manifest['reference_id']
+    check(not reference.frozen or reference.fingerprint() == reference.artifact_id, 'restored reference state hash mismatch')
+    backbone.bind_rows(codec)
+    reference.assert_isolated(codec)
     return manifest

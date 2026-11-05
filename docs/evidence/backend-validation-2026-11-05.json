@@ -1,0 +1,30 @@
+{
+  "scope": "backend mechanism tests; no capability fitting or semantic promotion",
+  "gpu_uuid": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+  "full_model_optimizer_updates": 0,
+  "synthetic_leaf_optimizer_steps": true,
+  "logs": {
+    "final-gpu-tests.log": {
+      "tests_passed": 18,
+      "seconds": 15.063,
+      "sha256": "a097750ff71c87d2d10ba8a75ea3f48b4a53f645a65d8dd4094800017ebd4626"
+    },
+    "reference-identity-tests.log": {
+      "tests_passed": 6,
+      "seconds": 15.41,
+      "sha256": "6e9b269ce6c1cc5b83908165b0d90f046b52d021476a240bfbbeb3dadc19328f"
+    }
+  },
+  "model_free_tests": {
+    "inputs": 10,
+    "schedule": 4,
+    "protocol_coverage": 2,
+    "codec_exact": 6
+  },
+  "reference_overlap_failures": {
+    "attempts": 2,
+    "kind": "CUDA OOM with concurrent numeric worker",
+    "resolution": "share frozen vocabulary slice per reconstruction episode; rerun affected suite passed"
+  },
+  "numeric_1024_status": "RUNNING; separate report required"
+}

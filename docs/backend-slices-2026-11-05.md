@@ -149,3 +149,20 @@ This supersedes the earlier explicit outer-checkpoint rejection in slice 2.
 Annotation W remains frozen; T/reference codec/pooler have separate owners and
 storage. The reference-objective test is backward-only engineering evidence,
 not a reference fitting run, reviewed recovery score or semantic promotion.
+
+## Final integration hardening
+
+Model-aware restore now requires the qualified v3 flags, BF16 frozen tied W,
+matching reference freeze state and actual reference tensor fingerprints before
+installing a frozen reference bundle. Effective rows are checked against their
+masters and rebound to the shared provider. Clean encoding rejects unverified
+overlapping/gapped source mappings before GPU encoding; it never invents token
+coordinates. The view hash also includes the declared operation.
+
+The final combined GPU run passed **18/18 in 15.063 seconds**. After adding actual
+reference-state hashing, the affected six-test suite passed **6/6 in 15.410
+seconds**. Raw logs and hashes are listed in the
+[portable validation summary](evidence/backend-validation-2026-11-05.json).
+The model-free checks are 10 input/provenance + 4 sampler/profile + 2 protocol
+coverage, plus the six existing exact codec tests. None executes a model on CPU.
+No original 324-case matrix was rerun.

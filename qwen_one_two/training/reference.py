@@ -1,5 +1,6 @@
 """Independent small reference weights sharing the frozen W, never a second W."""
 import math
+import hashlib
 import torch
 from torch import nn
 from torch.func import functional_call
@@ -102,14 +103,19 @@ class Reference(nn.Module):
             hidden, state = self(state, 'T', self.backbone.embedding([token])[0])
         return torch.stack(losses).mean()
 
-    def freeze(self, artifact_id):
-        check(isinstance(artifact_id, str) and len(artifact_id) == 64, 'reference artifact hash')
+    def fingerprint(self):
+        return state_fingerprint(self.state_dict())
+
+    def freeze(self, artifact_id=None):
+        actual = self.fingerprint()
+        check(artifact_id is None or artifact_id == actual, 'reference state hash mismatch')
+        artifact_id = actual
         self.requires_grad_(False).eval()
         self.frozen = True
         self.artifact_id = artifact_id
 
     def initialize_live(self, live_codec):
-        check(self.frozen, 'reference must be frozen before live initialization')
+        check(self.frozen and self.artifact_id == self.fingerprint(), 'reference must be frozen and unchanged before live initialization')
         live_codec.load_state_dict(self.codec.state_dict())
         self.assert_isolated(live_codec)
 
@@ -147,3 +153,14 @@ def reference_objective(reference, annotation, provenance, *, operation=None, co
         if value is not None:
             losses['contrast'] = value
     return losses,payload
+
+
+def state_fingerprint(state):
+    """Content identity of named small tensors, independent of serialization."""
+    from .inputs import canonical
+    h = hashlib.sha256()
+    for name,tensor in sorted(state.items()):
+        h.update(canonical({'name':name,'shape':list(tensor.shape),'dtype':str(tensor.dtype)}))
+        # Host byte hashing is artifact bookkeeping, not CPU inference.
+        h.update(tensor.detach().contiguous().reshape(-1).view(torch.uint8).cpu().numpy().tobytes())
+    return h.hexdigest()
