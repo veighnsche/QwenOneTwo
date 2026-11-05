@@ -103,6 +103,31 @@ class Reference(nn.Module):
             hidden, state = self(state, 'T', self.backbone.embedding([token])[0])
         return torch.stack(losses).mean()
 
+    def reconstruct_teacher_forced(self,prefix,targets):
+        """Same causal objective in one transformer sequence, microbatch one.
+
+        Position n predicts target n from preceding targets only. The source
+        annotation is never a decoder prefix. Vocabulary arithmetic is unchanged.
+        Serial reconstruct remains available for parity and historical evidence.
+        """
+        cuda_only(prefix)
+        check(prefix.ndim==2 and prefix.shape[1]==1024 and len(prefix)>0,'latent prefix shape')
+        check(targets and targets[-1]==248046 and len(prefix)+len(targets)<=512,'reconstruction length/end')
+        check(all(type(t) is int and (0<=t<248044 or t==248046) for t in targets),'masked reconstruction target')
+        preceding=self.backbone.embedding(targets[:-1])[0] if len(targets)>1 else prefix.new_empty((0,1024))
+        hidden,_=self(self.backbone.initial(),'T',torch.cat((prefix,preceding)))
+        hidden=hidden[0,len(prefix)-1:]
+        indices=torch.cat((torch.arange(248044,device='cuda'),torch.tensor([248046],device='cuda')))
+        vocabulary=self.backbone.model.model.embed_tokens.weight[indices]
+        check(not vocabulary.requires_grad,'frozen reconstruction vocabulary')
+        if self.backbone.compensated and vocabulary.dtype==torch.bfloat16:
+            from ..g1_precision_math import compensated_linear
+            from ..codec.precision import linear
+            scores=(linear if self.backbone.precision_parts==3 else compensated_linear)(hidden,vocabulary)
+        else:scores=torch.nn.functional.linear(hidden.to(vocabulary.dtype),vocabulary).float()
+        labels=torch.tensor([248044 if t==248046 else t for t in targets],device='cuda')
+        return torch.nn.functional.cross_entropy(scores,labels)
+
     @torch.no_grad()
     def exact_recovery(self,prefix,targets):
         """Conservative read-only recovery of an existing reviewed annotation.

@@ -45,7 +45,8 @@ def main():
                 root=Path(args.reference_bundle);raw=(root/'manifest.json').read_bytes()
                 check(args.bundle_sha256 is not None and digest(raw)==args.bundle_sha256,'bundle manifest hash')
                 manifest=json.loads(raw)
-                check(manifest['format']=='qot-training-bundle-v1' and manifest['reference_frozen'] is True,'frozen reference bundle required')
+                check(manifest['format'] in {'qot-training-bundle-v1','qot-frozen-reference-v1'}
+                      and manifest['reference_frozen'] is True,'frozen reference bundle required')
                 weights=root/'weights.safetensors'
                 check(file_hash(weights)==manifest['files']['weights.safetensors'],'bundle weights hash')
                 with safe_open(weights,framework='pt',device='cuda') as tensors:
