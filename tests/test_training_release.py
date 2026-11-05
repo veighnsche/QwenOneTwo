@@ -26,6 +26,8 @@ class ReleaseTests(unittest.TestCase):
         self.assertFalse(release.summary['semantic_authentication'])
         release.records['fixture']['human_input']['prompt'] = 'mutation'
         self.assertIn('SCHEMA', release.records['fixture']['human_input']['prompt'])
+        release.record('fixture')['human_input']['prompt'] = 'single-record mutation'
+        self.assertIn('SCHEMA', release.record('fixture')['human_input']['prompt'])
         (self.root/'sources/s.txt').write_bytes(b'changed')
         self.assertEqual(release.asset('sources/s.txt'), source)
         with self.assertRaisesRegex(ValueError, 'hash mismatch'):

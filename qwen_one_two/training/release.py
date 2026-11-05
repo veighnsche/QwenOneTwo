@@ -9,6 +9,7 @@ from dataclasses import dataclass
 import json
 import math
 from pathlib import Path, PurePosixPath
+from types import MappingProxyType
 
 from .inputs import Source, canonical, check, digest, validate_record_manifest
 
@@ -146,13 +147,14 @@ class ReviewedRelease:
     """Immutable byte snapshot; properties return fresh JSON copies to callers."""
     identity: str
     _manifest: bytes
-    _records: bytes
+    _records: MappingProxyType
     _assets: tuple
     _summary: bytes
 
     def __init__(self, identity, manifest, records, assets, summary, *, _token=None):
         check(_token is _TOKEN, 'use load_release to validate release evidence')
-        for name, value in (('identity', identity), ('_manifest', manifest), ('_records', canonical(records)),
+        snapshots = MappingProxyType({key:canonical(record) for key,record in records.items()})
+        for name, value in (('identity', identity), ('_manifest', manifest), ('_records', snapshots),
                             ('_assets', tuple(sorted(assets.items()))), ('_summary', canonical(summary))):
             object.__setattr__(self, name, value)
 
@@ -162,7 +164,11 @@ class ReviewedRelease:
 
     @property
     def records(self):
-        return decode(self._records)
+        return {key:self.record(key) for key in self._records}
+
+    def record(self, key):
+        """Decode only this record; each exposure receives its own fresh copy."""
+        return decode(self._records[key])
 
     @property
     def summary(self):

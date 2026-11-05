@@ -66,7 +66,9 @@ class DriverTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'identity mismatch'):
             self.driver(sampler=sampler)
         sampler = Sampler.from_release(self.release,'guided_joint')
-        sampler.rows['direct']['category'] = 'interleaved'
+        rows = [dict(row) for row in sampler.rows.values()]
+        next(row for row in rows if row['id'] == 'direct')['category'] = 'interleaved'
+        sampler = Sampler(rows,'guided_joint',release_hash=self.release.identity)
         with self.assertRaisesRegex(ValueError,'catalogue mismatch'):
             self.driver(sampler=sampler)
 
@@ -117,12 +119,31 @@ class DriverTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'explicit checkpoint resume'):
             driver.run_window(producer)
 
-    def test_mutation_after_initial_binding_rejects_without_exposure(self):
+    def test_catalogue_and_pools_cannot_mutate_after_binding(self):
         driver = self.driver()
-        driver.sampler.rows['direct']['category'] = 'interleaved'
-        with self.assertRaisesRegex(ValueError,'catalogue mismatch'):
-            driver.run_window(lambda *args:self.fail('must reject before producer'))
+        with self.assertRaises(TypeError):
+            driver.sampler.rows['direct']['category'] = 'interleaved'
+        with self.assertRaises(TypeError):
+            driver.sampler.pools[('direct',)] = ('interleaved',)
+        for name in ('rows','pools','domains'):
+            with self.assertRaises(AttributeError):
+                setattr(driver.sampler,name,{})
         self.assertEqual(driver.sampler.windows,0)
+
+    def test_windows_decode_only_scheduled_records_without_revalidating_release(self):
+        from qwen_one_two.training.release import ReviewedRelease, decode
+        driver = self.driver()
+        def collect(window,*args):
+            window.examples += 1
+            return {'simulation_only':True}
+        with patch.object(ReviewedRelease,'sampler_rows',side_effect=AssertionError('catalogue rebuilt')), \
+             patch('qwen_one_two.training.release.decode',wraps=decode) as decoding, \
+             patch('qwen_one_two.training.driver.collect_session',collect):
+            for _ in range(2):
+                driver.run_window(lambda *args:(None,{},None))
+        decoded = [decode(call.args[0]) for call in decoding.call_args_list]
+        self.assertEqual(len(decoded),16)
+        self.assertTrue(all(record['id'] in driver.sampler.rows for record in decoded))
 
     def test_forged_receiver_catalogue_labels_reject(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -131,7 +152,9 @@ class DriverTests(unittest.TestCase):
             write_release(temp,[record],purpose='training',pilot_hash=self.pilot.identity)
             release = load_release(temp)
             sampler = Sampler.from_release(release,'components')
-            sampler.rows['receiver']['status'] = 'Insufficient'
+            rows = [dict(row) for row in sampler.rows.values()]
+            rows[0]['status'] = 'Insufficient'
+            sampler = Sampler(rows,'components',release_hash=release.identity)
             with self.assertRaisesRegex(ValueError,'catalogue mismatch'):
                 Driver(WindowFixture('components'),sampler,release,self.pilot,self.prerequisites)
 

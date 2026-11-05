@@ -26,6 +26,15 @@ schema-only reviewed model roots load, missing provenance/second review rejects.
 `PYTHONPATH=tests .venv/bin/python -m unittest test_training_release
 test_training_inputs test_drafts -q`: **39/39 passed in 0.934 s**.
 
+Release/sampler binding is now checked once against immutable catalogue/pool
+contents. Records are snapshotted individually; windows decode only the eight
+selected exposures, with fresh copies even for repeated IDs. Acceptance: mutation
+of sampler contents rejects, forged initial catalogues still reject, resume is
+unchanged, and two simulated windows decode exactly 16 records without rebuilding
+the catalogue. `PYTHONPATH=tests .venv/bin/python -m unittest test_training_driver
+test_training_release test_training_schedule -q`: **28/28 passed in 1.179 s**.
+These are CPU metadata/counter simulations, not model or throughput measurements.
+
 The user then explicitly requested deletion of the old Muse framework. The
 active local `muse-implementation` skill has been replaced with the cheap
 single-call default; its four coordinator/runtime/tmux reference files and

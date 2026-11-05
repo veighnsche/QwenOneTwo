@@ -1,6 +1,7 @@
 """Deterministic A4 exposure scheduling; no data generation or model execution."""
 from collections import defaultdict
 import random
+from types import MappingProxyType
 from .profile import PHASES
 from .inputs import canonical, digest, check
 
@@ -23,25 +24,39 @@ class Sampler:
         sha256(release_hash)
         check(phase in PHASES and seed == 17, 'sampler profile')
         self.phase, self.release_hash, self.seed = phase,release_hash,seed
-        self.rows = {row['id']:dict(row) for row in rows}
-        check(len(self.rows) == len(rows), 'duplicate sample ID')
-        self.catalogue_hash = digest(canonical(self.rows))
-        self.pools = defaultdict(list)
-        self.domains = defaultdict(set)
-        for row in rows:
+        catalogue = {row['id']:dict(row) for row in rows}
+        check(len(catalogue) == len(rows), 'duplicate sample ID')
+        self.catalogue_hash = digest(canonical(catalogue))
+        pools, domains = defaultdict(list), defaultdict(set)
+        for row in catalogue.values():
             check(row['split'] == 'train', 'nontraining sampler record')
             category = row['category']
             if category in {'writer','receiver'}:
                 operation,status,domain = row['operation'],row['status'],row['domain']
                 check(operation in NONASSESSED and status in ('Assessed',)+NONASSESSED[operation], 'sampler operation/status')
                 prefix = (category,operation,status)
-                self.domains[prefix].add(domain)
+                domains[prefix].add(domain)
                 key = (*prefix,domain)
             else:
                 key = (category,)
-            self.pools[key].append(row['id'])
+            pools[key].append(row['id'])
+        self._rows = MappingProxyType({key:MappingProxyType(row) for key,row in catalogue.items()})
+        self._pools = MappingProxyType({key:tuple(ids) for key,ids in pools.items()})
+        self._domains = MappingProxyType({key:frozenset(values) for key,values in domains.items()})
         self.cursors = defaultdict(int)
         self.windows = 0
+
+    @property
+    def rows(self):
+        return self._rows
+
+    @property
+    def pools(self):
+        return self._pools
+
+    @property
+    def domains(self):
+        return self._domains
 
     @classmethod
     def from_release(cls, release, phase):
@@ -68,13 +83,13 @@ class Sampler:
             index = self._counter(('status',category,op))
             status = 'Assessed' if index % 2 == 0 else NONASSESSED[op][(index//2)%len(NONASSESSED[op])]
             prefix = (category,op,status)
-            domains = sorted(self.domains[prefix])
+            domains = sorted(self.domains.get(prefix, ()))
             check(bool(domains), 'missing operation/status coverage: '+str(prefix))
             domain = domains[self._counter(('domain',*prefix)) % len(domains)]
             key = (*prefix,domain)
         else:
             key = (category,)
-        pool = sorted(self.pools[key])
+        pool = sorted(self.pools.get(key, ()))
         check(bool(pool), 'missing scheduled category: '+category)
         index = self._counter(('pool',*key))
         epoch,offset = divmod(index,len(pool))

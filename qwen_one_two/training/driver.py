@@ -32,15 +32,9 @@ class Driver:
         self.reports = []
         self.failed = False
 
-    @property
-    def records(self):
-        return self.release.records
-
     def run_window(self, producer):
         check(not self.failed, 'failed window requires explicit checkpoint resume')
         check(self.window.examples == 0 and self.sampler.windows == self.window.scheduled_windows, 'window boundary')
-        self.sampler.assert_release(self.release)
-        records = self.records
         ids = self.sampler.next_window()
         exposures = []
         try:
@@ -48,7 +42,7 @@ class Driver:
                 # No count-first replay: every scheduled exposure executes once.
                 # A producer may mutate its own copy; repeated exposures always
                 # begin from the immutable reviewed bytes, without label drift.
-                session,losses,exposure = producer(decode(canonical(records[key])),self.window.phase,self.window.scheduled_windows+1)
+                session,losses,exposure = producer(self.release.record(key),self.window.phase,self.window.scheduled_windows+1)
                 exposures.append(dict(record=key,**collect_session(self.window,session,losses,exposure)))
                 del session,losses
             result = self.window.step()

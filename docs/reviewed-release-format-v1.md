@@ -157,7 +157,9 @@ prerequisites, numeric=loaded_numeric_evidence)` for joint phases. The old
 raw-record/parent/hash-string driver arguments are
 removed; there are no repository callers to migrate. The driver checks the linked
 pilot and exact catalogue, including receiver/writer operation, reference status
-and domain, before any producer runs. Every window rechecks catalogue integrity.
+and domain, before any producer runs. The bound sampler rows, pools and domains
+are read-only, so windows do not rebuild or hash the catalogue. Each exposure
+decodes only its selected record from immutable bytes into a fresh private copy.
 
 Each scheduled producer receives a fresh JSON copy of the original record.
 Mutating that copy cannot change later repeated exposures. Window reports bind
