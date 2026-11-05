@@ -43,16 +43,16 @@ Noul / four Choice / five Score; seven Assessed / three Insufficient / one
 Conflicting / one NoFeasibleChoice. This is not full status coverage. All reviews
 remain empty, release state draft, effort absent and split development.
 
-The draft validator no longer hard-codes the first generation's run ID. It
+At generation time, the draft validator no longer hard-coded the first generation's run ID. It
 requires a nonempty run ID matching the draft release and rejects mixed-run
 batches. **15/15 model-free tests passed in 0.015 seconds**, including fresh-run
 identity and mixed-run rejection. No codec/model/GPU tests were needed or rerun.
 
-Reproduce validation:
+Current model-free checker (the results above retain their original source identity):
 
 ```sh
-PYTHONPATH=tests .venv/bin/python -m unittest test_training_drafts -v
-.venv/bin/python -m qwen_one_two.training.drafts \
+PYTHONPATH=tests .venv/bin/python -m unittest test_drafts -v
+.venv/bin/python -m scripts.validate_drafts \
   data/muse-economy-12/drafts/scenarios.jsonl
 ```
 

@@ -6,6 +6,18 @@ are historical. This handoff records measured mechanisms, not learned capability
 
 ## Current checkpoint
 
+The user authorized small fixes for confirmed overengineering, excluding generation
+orchestration/cost controls; no model calls are permitted for this cleanup.
+Draft inspection now lives in `scripts/validate_drafts.py`, outside the training
+package. It preserves source/hash, role/Reason and unreviewed-draft checks without
+fixed counts, IDs, domain quotas, producer-name heuristics or run/release identity
+equality. Run `.venv/bin/python -m scripts.validate_drafts <scenarios.jsonl>`.
+Acceptance: arbitrary-size/ID/run batches validate, duplicate IDs reject and draft
+records cannot pass release. `PYTHONPATH=tests .venv/bin/python -m unittest
+test_drafts test_training_inputs -q`: **25/25 passed in 0.012 s**. Both saved
+12-record batches also pass draft checking; **24/24 reject release**. No data
+bytes, annotations or historical evidence receipts changed.
+
 The user then explicitly requested deletion of the old Muse framework. The
 active local `muse-implementation` skill has been replaced with the cheap
 single-call default; its four coordinator/runtime/tmux reference files and

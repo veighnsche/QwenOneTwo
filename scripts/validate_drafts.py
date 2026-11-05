@@ -1,4 +1,4 @@
-"""Model-free draft validation for muse-pilot AUTHORING-12 batches.
+"""Inspect unreviewed model-proposed development drafts without running models.
 
 Validates DRAFT model proposals only. Never approves, reviews, trains,
 fits, runs models, or weakens reviewed-release gates in
@@ -21,7 +21,7 @@ import argparse
 import json
 from pathlib import Path, PurePosixPath
 
-from .inputs import (
+from qwen_one_two.training.inputs import (
     Binding,
     Field,
     Node,
@@ -33,17 +33,9 @@ from .inputs import (
     reference_input,
     validate_record_manifest,
 )
-from .release import decode
+from qwen_one_two.training.release import DOMAINS, decode
 
 DRAFT_SCHEMA_ID = "draft-schema-v1.1"
-DOMAINS = frozenset({
-    "refund_eligibility",
-    "scheduling",
-    "demo_preparation",
-    "access_rules",
-    "resource_allocation",
-    "issue_prioritization",
-})
 OPERATIONS = frozenset({"Noul", "Choice", "Score"})
 STATUSES = frozenset({"Assessed", "Insufficient", "Conflicting", "Unresolved", "NoFeasibleChoice"})
 SPLITS = frozenset({"development"})
@@ -151,7 +143,6 @@ def validate_draft_record(record, drafts_root, parents, *, allow_inline_content=
     check(record.get("fictional") is True, "fictional must be true")
     check(record.get("domain") in DOMAINS, "domain")
     _nonempty_str(record.get("author"), "author")
-    check("muse" in record["author"].lower() or "model" in record["author"].lower(), "author must be model identity")
     check(record.get("effort_proposal") is None, "effort_proposal must stay null")
     check(record.get("reviews") == [], "reviews must stay []")
     release = record.get("release", {})
@@ -315,10 +306,10 @@ def validate_draft_record(record, drafts_root, parents, *, allow_inline_content=
     for key in ("checkpoint", "prompt_hash", "sampling", "software", "gpu", "output_hash"):
         check(key in assistance, f"missing model provenance {key}")
     _nonempty_str(assistance.get("run_id"), "model_assistance run_id")
-    check(assistance["run_id"] == release.get("id"), "draft release/run identity mismatch")
-    check(assistance.get("gpu") is None, "remote GPU must stay null; never claim local RTX3090")
-    check(bool(assistance.get("gpu_reason", "").strip()), "gpu_reason")
-    check("225509c3" not in json.dumps(assistance), "never label remote generation as local RTX3090")
+    if assistance["gpu"] is None:
+        _nonempty_str(assistance.get("gpu_reason"), "gpu_reason")
+    else:
+        _nonempty_str(assistance["gpu"], "gpu provenance")
     stated_output = assistance.get("output_hash")
     if stated_output is None:
         # Transient lane handoff only; sealed records carry a verified hash.
@@ -365,20 +356,9 @@ def validate_draft_record(record, drafts_root, parents, *, allow_inline_content=
 
 
 def validate_batch(records, drafts_root, *, allow_inline_content=False):
-    check(len(records) == 12, "batch must contain exactly twelve records")
-    check(len({r.get("model_assistance", {}).get("run_id") for r in records}) == 1,
-          "mixed generation runs")
+    check(bool(records), "empty draft batch")
     ids = [r.get("id") for r in records]
-    check(ids == sorted(ids), "records must be sorted by id")
-    check(len(set(ids)) == 12, "duplicate ids")
-    check(set(ids) == {f"pilot-{i:02d}" for i in range(1, 13)}, "ids must be pilot-01..pilot-12")
-    families = [r.get("family") for r in records]
-    check(len(set(families)) == 12, "families must be unique")
-    prompts = [r.get("human_input", {}).get("prompt") for r in records]
-    check(len(set(prompts)) == 12, "duplicate human prompts")
-    domains = [r.get("domain") for r in records]
-    for domain in DOMAINS:
-        check(domains.count(domain) == 2, f"domain {domain} must appear twice")
+    check(len(set(ids)) == len(ids), "duplicate ids")
     parents = {}
     exercised_all = {}
     for record in records:

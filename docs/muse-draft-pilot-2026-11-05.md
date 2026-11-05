@@ -97,11 +97,11 @@ Validation evidence:
 - **12/12** draft records reject at the approved-record gate. No human reviewers,
   approvals, model rollouts or semantic competence results were fabricated.
 
-Reproduce the model-free validation against the local artifacts:
+Current model-free checker (the results above retain their original source identity):
 
 ```bash
-PYTHONPATH=tests .venv/bin/python -m unittest test_training_drafts -v
-.venv/bin/python -m qwen_one_two.training.drafts \
+PYTHONPATH=tests .venv/bin/python -m unittest test_drafts -v
+.venv/bin/python -m scripts.validate_drafts \
   data/muse-pilot-20261105T191615Z/drafts/scenarios.jsonl
 ```
 

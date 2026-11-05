@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from qwen_one_two.training.drafts import load_jsonl, validate_batch, validate_draft_record
+from scripts.validate_drafts import load_jsonl, validate_batch, validate_draft_record
 
 
 def base_record(key="pilot-01", domain="refund_eligibility", operation="Noul", status="Assessed"):
@@ -117,15 +117,16 @@ class DraftTests(unittest.TestCase):
             exercised = self.check_one(record)
             self.assertTrue(exercised)
 
-    def test_fresh_run_keeps_its_own_release_identity(self):
+    def test_run_identity_does_not_require_a_release_identity(self):
         record, content = base_record()
         fix_source(record, content)
         record["model_assistance"]["run_id"] = "fresh-generation"
         record["release"]["id"] = "fresh-generation"
         self.check_one(record)
         record["release"]["id"] = "old-generation"
-        with self.assertRaisesRegex(ValueError, "identity mismatch"):
-            self.check_one(record)
+        self.check_one(record)
+        record["release"].pop("id")
+        self.check_one(record)
         record["model_assistance"]["run_id"] = " "
         with self.assertRaisesRegex(ValueError, "run_id"):
             self.check_one(record)
@@ -212,7 +213,7 @@ class DraftTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.check_one(record)
 
-    def test_noul_determinate_and_effort_reviews_gpu_gates(self):
+    def test_noul_determinate_and_effort_reviews_provenance_gates(self):
         record, content = base_record("pilot-01", "scheduling", "Noul", "Assessed")
         fix_source(record, content)
         record["labels"]["payload"] = {"p_true": 0.8}
@@ -221,7 +222,7 @@ class DraftTests(unittest.TestCase):
         for mutate in (
             lambda r: r.update(effort_proposal=0.05),
             lambda r: r.update(reviews=[{"reviewer": "x"}]),
-            lambda r: r["model_assistance"].update(gpu="GPU-0"),
+            lambda r: r["model_assistance"].update(gpu_reason=""),
         ):
             record, content = base_record("pilot-01", "scheduling", "Noul", "Assessed")
             fix_source(record, content)
@@ -347,48 +348,21 @@ class DraftTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.check_one(mutated)
 
-    def test_batch_counts_and_uniqueness(self):
-        import hashlib
-        import json
-        domains = ["refund_eligibility"] * 2 + ["scheduling"] * 2 + ["demo_preparation"] * 2 + ["access_rules"] * 2 + ["resource_allocation"] * 2 + ["issue_prioritization"] * 2
+    def test_batch_accepts_arbitrary_size_ids_and_runs_but_not_duplicate_ids(self):
         records = []
-        for i in range(1, 13):
-            operation = ["Noul", "Choice", "Score"][i % 3]
-            status = "Assessed" if i % 2 else "Insufficient"
-            key = f"pilot-{i:02d}"
-            record, content = base_record(key, domains[i - 1], operation, status)
-            if operation == "Choice" and status != "Assessed":
-                record["labels"]["payload"] = None
-                record["labels"]["feasibility"] = {"a": "unknown", "b": "unknown"}
-                record["reason"] = {"status": status, "support": "Availability unknown for the target."}
-                record["labels"]["justification"] = "Supported abstention."
-            if operation == "Score" and status != "Assessed":
-                record["labels"]["payload"] = None
-                record["reason"] = {"status": status, "support": "Effect evidence missing for the target."}
-                record["labels"]["justification"] = "Supported abstention."
-            if operation == "Noul" and status != "Assessed":
-                record["labels"]["payload"] = None
+        for key in ('z-example', 'a-example', 'third-example'):
+            record, content = base_record(key)
             fix_source(record, content)
-            record["human_input"]["prompt"] = f"Fictional request {key} distinct prompt {i}."
+            record['author'] = 'TEST-ONLY-checkpoint'
+            record['release']['id'] = key
+            record['model_assistance'].update(run_id=key, gpu='TEST-ONLY-remote GPU')
             records.append(record)
-        with tempfile.TemporaryDirectory() as tmp:
-            path = Path(tmp) / "scenarios.jsonl"
-            path.write_text("\n".join(json.dumps(r, ensure_ascii=False) for r in records) + "\n", encoding="utf-8")
-            exercised = validate_batch(records, tmp, allow_inline_content=True)
-            self.assertEqual(len(exercised), 12)
-            bad = copy.deepcopy(records)
-            bad[0]["model_assistance"]["run_id"] = "another-run"
-            bad[0]["release"]["id"] = "another-run"
-            with self.assertRaisesRegex(ValueError, "mixed generation runs"):
-                validate_batch(bad, tmp, allow_inline_content=True)
-            bad = copy.deepcopy(records)
-            bad[0]["id"] = bad[1]["id"]
-            with self.assertRaises(ValueError):
-                validate_batch(bad, tmp, allow_inline_content=True)
-            bad = copy.deepcopy(records)
-            bad.pop()
-            with self.assertRaises(ValueError):
-                validate_batch(bad, tmp, allow_inline_content=True)
+        self.assertEqual(len(validate_batch(records, self.root, allow_inline_content=True)), 3)
+        self.assertEqual(len(validate_batch(records[:1], self.root, allow_inline_content=True)), 1)
+        with self.assertRaisesRegex(ValueError, 'duplicate ids'):
+            validate_batch(records + records[:1], self.root, allow_inline_content=True)
+        with self.assertRaisesRegex(ValueError, 'empty draft batch'):
+            validate_batch([], self.root)
 
 
 if __name__ == "__main__":
