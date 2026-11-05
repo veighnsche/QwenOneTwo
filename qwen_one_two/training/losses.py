@@ -122,6 +122,12 @@ class Eligibility:
     reason_supported: bool = False
     runtime_failure: bool = False
 
+    def __post_init__(self):
+        statuses = {'Assessed','Insufficient','Conflicting','Unresolved','NoFeasibleChoice',None}
+        check(self.operation in {'Noul','Choice','Score'} and self.reference_status in statuses
+              and self.actual_status in statuses, 'eligibility operation/status')
+        check(self.operation == 'Choice' or 'NoFeasibleChoice' not in (self.reference_status,self.actual_status), 'Choice-only eligibility')
+
     def mask(self):
         semantic = self.supported_packet and not self.runtime_failure and self.reference_status is not None
         assessed = semantic and self.reference_status == 'Assessed'

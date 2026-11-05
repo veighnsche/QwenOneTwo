@@ -3,7 +3,6 @@
 No dataset launcher or capability-training loop. Callers must supply complete
 supported episodes and reviewed targets; this module never invents labels.
 """
-import math
 from collections import defaultdict
 import torch
 from torch import nn
@@ -12,26 +11,7 @@ from ..codec.ownership import parameter_groups
 from .inputs import check
 from .losses import COEFFICIENTS, REFERENCE_COEFFICIENTS
 
-PHASES = {'reference':1000, 'components':2000, 'guided_joint':1000,
-          'transition':2000, 'free_joint':1000}
-
-
-def schedule(phase, window):
-    total = PHASES[phase]
-    check(1 <= window <= total, 'phase window')
-    warmup = math.ceil(.05*total)
-    return window/warmup if window <= warmup else .1+.45*(1+math.cos(math.pi*(window-warmup)/(total-warmup)))
-
-
-def guided_events(phase, window, events, *, compatible=True):
-    check(phase in PHASES and 1 <= window <= PHASES[phase] and events >= 0, 'guidance schedule')
-    if not compatible:
-        return 0
-    if phase == 'guided_joint':
-        return events
-    if phase == 'transition':
-        return math.floor((1-(window-1)/1999)*events)
-    return 0
+from .profile import PHASES, schedule, guided_events
 
 
 def reference_groups(reference):

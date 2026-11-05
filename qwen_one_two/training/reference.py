@@ -3,6 +3,7 @@ import math
 import torch
 from torch import nn
 from torch.func import functional_call
+from torch.utils.checkpoint import checkpoint
 from ..codec.neural import Codec, ReferencePooler, cuda_only
 from .inputs import check
 
@@ -41,7 +42,6 @@ class Reference(nn.Module):
 
     def forward(self, state, mode, embeds):
         check(mode in {'base', 'T'}, 'reference mode')
-        check(not self.backbone.checkpointing, 'reference functional substitution requires outer checkpointing off')
         if mode == 'base':
             # Annotation encoding is frozen W with zero adapter contribution.
             mapping = {name: torch.zeros_like(p) for name, p in zip(self.names, self.T)}
@@ -49,7 +49,19 @@ class Reference(nn.Module):
             mapping = dict(zip(self.names, self.T))
         # functional_call scopes substitutions; no .data swaps or graph-time
         # trainability switches. The live parameters are restored on return.
-        return functional_call(self.backbone, mapping, (state, 'R', embeds), strict=False)
+        # A live layer checkpoint must never replay after the T mapping has
+        # been restored to R. Wrap the whole scoped call instead, so replay
+        # reinstalls precisely the same explicit T/base parameters.
+        def scoped(current_state, current_embeds):
+            outer = self.backbone.checkpointing
+            self.backbone.checkpointing = False
+            try:
+                return functional_call(self.backbone, mapping, (current_state, 'R', current_embeds), strict=False)
+            finally:
+                self.backbone.checkpointing = outer
+        if self.backbone.checkpointing and torch.is_grad_enabled():
+            return checkpoint(scoped,state,embeds,use_reentrant=False)
+        return scoped(state,embeds)
 
     def annotation_states(self, ids):
         check(len(ids) <= 256, 'reference annotation length')
@@ -68,9 +80,22 @@ class Reference(nn.Module):
         check(bool(targets) and targets[-1] == 248046 and len(prefix)+len(targets) <= 512, 'reconstruction length/end')
         state = self.backbone.initial()
         hidden, state = self(state, 'T', prefix)
+        # One frozen allowed-vocabulary slice per auxiliary episode. Indexing
+        # the tied table afresh at every target would retain ~485 MiB copies
+        # in each projection's autograd context without changing any values.
+        indices = torch.cat((torch.arange(248044,device='cuda'),torch.tensor([248046],device='cuda')))
+        vocabulary = self.backbone.model.model.embed_tokens.weight[indices]
+        check(not vocabulary.requires_grad, 'frozen reconstruction vocabulary')
         losses = []
         for token in targets:
-            scores, indices = self.backbone.ordinary_logits(hidden[0, -1], 1)
+            h = hidden[0,-1]
+            if self.backbone.compensated and vocabulary.dtype == torch.bfloat16:
+                from ..g1_precision_math import compensated_linear
+                from ..codec.precision import linear
+                project = linear if self.backbone.precision_parts == 3 else compensated_linear
+                scores = project(h,vocabulary)
+            else:
+                scores = torch.nn.functional.linear(h.to(vocabulary.dtype),vocabulary).float()
             target = (indices == token).nonzero().flatten()
             check(len(target) == 1, 'masked reconstruction target')
             losses.append(torch.nn.functional.cross_entropy(scores[None], target))
@@ -87,3 +112,38 @@ class Reference(nn.Module):
         check(self.frozen, 'reference must be frozen before live initialization')
         live_codec.load_state_dict(self.codec.state_dict())
         self.assert_isolated(live_codec)
+
+
+def reference_objective(reference, annotation, provenance, *, operation=None, contrast_candidates=None, positives=(), negatives=()):
+    """Reference preparation objective over a previously F7-validated record.
+
+    Returns one normalized example loss per component. This builds a graph;
+    it does not perform an optimizer update or assert semantic approval.
+    """
+    from ..codec.schema import Role
+    from .inputs import SLOTS
+    from .clean import CleanView
+    CleanView((annotation,),(),frozenset(annotation.dependencies),
+              purpose="reader" if annotation.role == "reason" else "receiver", operation=operation).materialize(provenance)
+    from .losses import contrast
+    check(not reference.frozen, 'cannot fit a frozen reference artifact')
+    b = reference.backbone
+    text = annotation.content.decode('utf-8')
+    rendered = b.tokenizer.apply_chat_template([{'role':'user','content':text}],tokenize=False,
+                                              add_generation_prompt=True,enable_thinking=True)
+    ids = b.tokenizer.encode(rendered,add_special_tokens=False)
+    states = reference.annotation_states(ids)
+    payload = reference.pooler(states,*SLOTS[annotation.role])
+    roles = {'question':Role.QUESTION,'target':Role.TARGET,'alternative':Role.CANDIDATE,
+             'dimension':Role.DIMENSION,'conditions':Role.CONDITIONS,'zero':Role.ZERO,
+             'one':Role.ONE,'midpoint':Role.MIDPOINT,'key':Role.KEY,'reason':Role.REASON}
+    role = roles[annotation.role]
+    prefix = torch.stack([reference.codec.wire(vector,role,i,0,0 if annotation.role == 'key' else None)
+                          for i,vector in enumerate(payload)])
+    targets = b.tokenizer.encode(text,add_special_tokens=False)+[248046]
+    losses = {'reconstruction':reference.reconstruct(prefix,targets)}
+    if contrast_candidates is not None:
+        value = contrast(payload,contrast_candidates,positives,negatives)
+        if value is not None:
+            losses['contrast'] = value
+    return losses,payload

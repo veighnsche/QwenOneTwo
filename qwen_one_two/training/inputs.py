@@ -126,6 +126,7 @@ class ReferenceInput:
     role: str
     content: bytes
     dependencies: tuple[str, ...]
+    bindings: tuple[tuple[str, str], ...]
 
     @property
     def sha256(self):
@@ -152,7 +153,8 @@ def reference_input(role, fields, provenance, *, permitted_nodes=None, operation
               'annotation bytes do not match provenance')
         keys.append(field.provenance)
     deps = provenance.permit(keys, allowed, permitted_nodes)
-    return ReferenceInput(role, canonical({'role': role, 'fields': {k: fields[k].text for k in fields}}), deps)
+    return ReferenceInput(role, canonical({'role': role, 'fields': {k: fields[k].text for k in fields}}), deps,
+                          tuple(sorted((name, field.provenance) for name, field in fields.items())))
 
 
 def scenario_reference(row, role, record, provenance, **kwargs):

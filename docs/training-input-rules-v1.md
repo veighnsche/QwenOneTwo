@@ -1,5 +1,7 @@
 # Role-specific training-input rules v1
 
+Current implementation update (2026-11-05): Role/branch builders and mechanical provenance validation now exist. Current outcome dependencies are excluded from request roles; non-assessed Reason remains separate. See [backend slice evidence](backend-slices-2026-11-05.md). The original design-only status below is historical; normative rules remain in force.
+
 Status: recorded design response to Astra F7, not implemented, independently
 re-reviewed or GPU-validated. No coding, model execution, training, service
 change, commit or deployment is authorized. Future model workloads remain on

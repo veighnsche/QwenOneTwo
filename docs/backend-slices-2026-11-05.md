@@ -103,3 +103,49 @@ Acceptance/evidence:
 These checks do not promote a reference/capability artifact or validate learned
 semantics. Callers must bind the expected immutable artifact identities and
 supply actual reviewed sampler/data manifests; no fabricated release is created.
+
+## Slice 5: actual packet/session integration and reference preparation
+
+Implementation adds `episodes.py`, `profile.py`, `sampler.py`, `driver.py` and
+reference-objective construction. Decision loss eligibility binds to the actual
+sealed snapshot, resolves acceptable Choice refs through its bank, retains raw
+value loss under predicted abstention, and masks unsupported/divergent outcomes.
+Session collection checks one prefill/lineage, exact P+B+A+H, settled holds and
+terminal completion before accumulating. Failed exposures retain their IDs;
+there is no count-first replay or automatic substitution of an easier example.
+
+The deterministic sampler records catalogue/release identity and cursor, uses the
+A4 eight-example/replay recipes and operation/status/domain cycles, and restores
+exact order. Guidance takes only a contiguous reviewed prefix and stops at the
+first incompatibility. The native driver requires supplied reviewed release/pilot
+and numeric prerequisite evidence; it has no CLI or automatic training launch.
+Task-specific episode producers still need actual reviewed annotation releases.
+
+Acceptance/evidence:
+
+- 10 input/provenance tests pass after adding revalidation of canonical field
+  bindings at clean materialization (forged bytes cannot bypass the role builder).
+- 4 model-free sampler/profile tests pass: exact mixture/order/resume, missing
+  pools reject without replacement, balanced component cycles and prefix stopping.
+- 2 packet-loss GPU tests pass (0.395 seconds): assessed raw loss under abstention,
+  changed-snapshot masking, stable candidate refs and partial feasibility labels.
+- The combined infrastructure suite passed 16/16 (7.991 seconds) before the last
+  two reference checks were added. The affected clean/reference suite then passed
+  6/6 (14.407 seconds), including the completed-session buffer collection, frozen
+  decoder input gradients, reference pooler/codec/T gradients, export, and exact
+  checkpoint off/on outputs/input gradients. Full-model optimizer updates: zero.
+
+Two overlapping reference-objective attempts hit GPU OOM alongside the numeric
+worker and pre-existing service allocation. Inspection found an actual auxiliary
+memory defect: each reconstruction target retained a new ~485 MiB frozen allowed-
+vocabulary slice. Reconstruction now shares one slice per episode, preserving
+identical projection arithmetic. The successful six-test run includes the full
+objective under the same RTX 3090 allocation; no CPU/3060 fallback, tolerance
+change, service interruption or matrix restart occurred.
+
+Reference checkpoint replay now wraps the whole functional T/base mapping, so
+recomputation reinstalls that mapping rather than accidentally using live R.
+This supersedes the earlier explicit outer-checkpoint rejection in slice 2.
+Annotation W remains frozen; T/reference codec/pooler have separate owners and
+storage. The reference-objective test is backward-only engineering evidence,
+not a reference fitting run, reviewed recovery score or semantic promotion.

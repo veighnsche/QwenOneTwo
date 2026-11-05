@@ -95,3 +95,66 @@ class CleanGPU(unittest.TestCase):
             self.assertEqual(self.b.model.lm_head.weight.data_ptr(),self.b.model.model.embed_tokens.weight.data_ptr())
             self.ref.assert_isolated(self.c)
             self.assertEqual(window.optimizer_updates,0)
+
+    def test_complete_session_accumulates_once_with_no_scalar_row_gradient(self):
+        from qwen_one_two.codec.session import Session
+        from qwen_one_two.training.engine import Window, live_groups
+        from qwen_one_two.training.episodes import collect_session
+        from qwen_one_two.training.inputs import Exposure
+        ids=self.b.tokenizer.encode('Continue normally.',add_special_tokens=False)
+        session=Session.open(self.b,self.c,ids,answer=4,override=512,run='training-guard-fixture')
+        session.close()
+        token=self.b.tokenizer.encode('Done',add_special_tokens=False)[0]
+        losses,_=session.native([token],True)
+        session.runtime.debit('H',1,'chat_end')
+        session.step(self.b.embedding([248046])[0],'R','end')
+        session.runtime.terminate('Completed',emit_end=False)
+        window=Window(live_groups(self.b,self.c,self.ref))
+        report=collect_session(window,session,{'native':losses[0]},Exposure('native_writer',native_teacher_forcing=True,budget_override=512))
+        self.assertTrue(report['accepted']);self.assertEqual(window.examples,1)
+        self.assertEqual(window.counts['native'],1)
+        active={window.names[i] for i in window.buffers['native']}
+        self.assertTrue(any(n.endswith('.R_B') for n in active))
+        self.assertTrue(any(n.endswith('.D_B') for n in active))
+        self.assertNotIn('codec.budget_row',active);self.assertNotIn('codec.score_row',active)
+        self.assertEqual(window.optimizer_updates,0)
+        window.abort()
+
+    def test_reference_objective_has_independent_pooler_codec_and_T_gradients(self):
+        from qwen_one_two.training.reference import reference_objective
+        from qwen_one_two.training.engine import reference_groups, ownership_manifest
+        reference=Reference(self.b,self.c)
+        manifest=ownership_manifest(reference_groups(reference))
+        queries=[entry for group in manifest if group['name']=='reference_other'
+                 for entry in group['parameters'] if entry['name']=='pooler.queries']
+        self.assertEqual(len(queries),1)
+        text='Property meaning'
+        provenance=Provenance({'key':Node('request_semantics',digest(text.encode()))},{})
+        annotation=reference_input('key',{'property':Field(text,'key')},provenance)
+        self.b.checkpointing=True
+        try:
+            losses,payload=reference_objective(reference,annotation,provenance)
+            selected=[reference.pooler.queries,reference.codec.tags.weight,reference.T[1]]
+            grads=torch.autograd.grad(losses['reconstruction'],selected)
+        finally:
+            self.b.checkpointing=False
+        self.assertEqual(tuple(payload.shape),(2,1024))
+        self.assertTrue(all(bool(g.isfinite().all()) and g.norm().item()>0 for g in grads))
+        reference.assert_isolated(self.c)
+
+    def test_reference_checkpoint_replay_retains_T_mapping(self):
+        prefix=torch.randn(2,1024,device='cuda',requires_grad=True)
+        target=[248046]
+        self.b.checkpointing=False
+        loss=self.ref.reconstruct(prefix,target)
+        expected=torch.autograd.grad(loss,prefix)[0]
+        self.b.checkpointing=True
+        try:
+            actual_loss=self.ref.reconstruct(prefix,target)
+            # Replay after changing the outer flag must retain the scoped map.
+            self.b.checkpointing=False
+            actual=torch.autograd.grad(actual_loss,prefix)[0]
+        finally:
+            self.b.checkpointing=False
+        self.assertTrue(torch.equal(loss,actual_loss))
+        self.assertTrue(torch.equal(expected,actual))

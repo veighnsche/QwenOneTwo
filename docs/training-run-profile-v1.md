@@ -1,5 +1,7 @@
 # A4: training run profile v1
 
+Current implementation update (2026-11-05): Loss, eligible-example accumulation, optimizer ownership, reference isolation, sampling and checkpoint/export/resume mechanisms now exist. No scheduled capability-training phase has run. See [backend slice evidence](backend-slices-2026-11-05.md). The original design-only status below is historical; normative rules remain in force.
+
 Status: recorded starting design, not an implemented trainer, instantiated run
 manifest, reviewed dataset or GPU result. No coding, model workload, service
 change, commit or deployment is authorized. All model/optimizer/derivative

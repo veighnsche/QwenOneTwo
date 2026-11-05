@@ -1,12 +1,11 @@
 # Exact modules, optimizer ownership and accumulation v1
 
-Implementation update: The runtime blocks, heads, pointers and parameter ownership now has a scoped implementation in
-`qwen_one_two/codec/`. See the [implementation](full-codec-implementation.md)
-and [measured qualification](codec-qualification-results-2026-11-05.md).
-The original design status below is historical; training and frontend
-expansion remain excluded, and expanded mixed-precision qualification
-is not passed. The recorded normative rules/tolerances remain in force.
-
+Implementation update (2026-11-05): Runtime blocks and owners are implemented
+in `codec/`; training mechanisms and reference isolation now live in `training/`.
+See [backend slice evidence](backend-slices-2026-11-05.md) and the
+[passing v3 numeric report](codec-feedback-results-2026-11-05.md). The old
+BF16-transformer failure remains historical; capability training has not run.
+Original design-only status paragraphs below do not supersede measured evidence.
 
 Status: recorded design response to Astra F6, not implemented, independently
 re-reviewed or GPU-validated. No coding, model execution, training, service change,

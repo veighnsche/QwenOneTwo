@@ -1,6 +1,7 @@
 """F3 fresh permitted-view source/reference construction, offline only."""
 from dataclasses import dataclass
-from .inputs import Binding, ReferenceInput, SLOTS, check, digest, canonical, REQUEST_KINDS
+import json
+from .inputs import Binding, ReferenceInput, SLOTS, check, digest, canonical, REQUEST_KINDS, Field, reference_input
 
 
 @dataclass(frozen=True)
@@ -9,11 +10,19 @@ class CleanView:
     evidence: tuple[Binding, ...]
     permitted_nodes: frozenset[str]
     purpose: str = 'receiver'
+    operation: str | None = None
 
     def materialize(self, provenance):
         check(self.purpose in {'receiver', 'reader', 'writer'}, 'clean view purpose')
         allowed = REQUEST_KINDS | ({'reason', 'approved_return'} if self.purpose == 'reader' else set())
         for ref in self.references:
+            data = json.loads(ref.content)
+            check(set(data) == {'role', 'fields'} and data['role'] == ref.role, 'reference serialization')
+            bindings = dict(ref.bindings)
+            check(len(bindings) == len(ref.bindings) and set(bindings) == set(data['fields']), 'reference field bindings')
+            rebuilt = reference_input(ref.role, {name: Field(text, bindings[name]) for name,text in data['fields'].items()},
+                                      provenance, permitted_nodes=self.permitted_nodes, operation=self.operation)
+            check(rebuilt == ref, 'reference input/provenance drift')
             provenance.permit(ref.dependencies, allowed, self.permitted_nodes)
         excerpts = []
         for binding in self.evidence:

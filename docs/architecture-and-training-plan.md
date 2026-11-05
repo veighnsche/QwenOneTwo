@@ -2,6 +2,9 @@
 
 ## Status, authority and implementation entry point
 
+Current implementation and measured backend updates are recorded in the
+[next-agent handoff](next-agent-handoff.md) and [backend slice report](backend-slices-2026-11-05.md). Original design-only authorization and unimplemented-status paragraphs below are historical; their normative contracts remain in force.
+
 This is the consolidated target specification. It records requirements and
 versioned starting designs, not an implemented or validated complete flow.
 The current task authorizes documentation consolidation only. No code changes,

@@ -93,3 +93,11 @@ class InputTests(unittest.TestCase):
         with self.assertRaises(ValueError):validate_record_manifest(record,{},for_training=True)
         record['parents']=['parent']
         with self.assertRaises(ValueError):validate_record_manifest(record,{'parent':{'family':'f','split':'locked'}})
+
+    def test_forged_clean_reference_bytes_cannot_bypass_builder(self):
+        from dataclasses import replace
+        from qwen_one_two.training.inputs import canonical
+        field=self.field('q','Original permitted question')
+        p=self.provenance();ref=reference_input('question',{'proposition':field},p)
+        forged=replace(ref,content=canonical({'role':'question','fields':{'proposition':'Smuggled current answer'}}))
+        with self.assertRaises(ValueError):CleanView((forged,),(),frozenset({'q'})).materialize(p)
