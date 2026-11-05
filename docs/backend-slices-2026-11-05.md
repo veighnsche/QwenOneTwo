@@ -78,3 +78,28 @@ eligible-component buffer/moment memory envelope remains a distinct future
 measurement; the numeric runner's conservative allocation is not that result.
 Phase advancement requires complete scheduled windows and supplied final-two-
 checkpoint development evidence; no promotion evidence has been created here.
+
+## Slice 4: versioned checkpoint/export/resume
+
+Implementation: `training/checkpoint.py`; hashes pin base/Qev/protocol/precision/
+reference/dataset/source identities. Artifacts contain small trainable masters,
+reference weights, codec buffers, effective private rows, named optimizer owners,
+CUDA moments, phase counters, sampler state and RNGs. Frozen W is never exported
+as a second trainable table. Saving requires a completed window and never
+intentionally overwrites an existing artifact. Load validates manifests, hashes,
+shapes, dtypes and ownership before installation, with rollback on failure.
+
+Acceptance/evidence:
+
+- `test_training_checkpoint_gpu.py`: 2/2 pass in 0.377 seconds. Exact next-update
+  and RNG agreement after resume; sampler/counter restoration; mismatched
+  identities, corrupted files and mid-window save rejection.
+- `test_training_clean_gpu.py`: now 3/3 pass in 6.601 seconds, including the added
+  full-backbone export/load round trip. Forward tensors/private scalar readout
+  are bit-identical after restoration; tied base storage and reference/live
+  isolation remain intact. The full-model optimizer is constructed but never
+  stepped (zero optimizer updates).
+
+These checks do not promote a reference/capability artifact or validate learned
+semantics. Callers must bind the expected immutable artifact identities and
+supply actual reviewed sampler/data manifests; no fabricated release is created.

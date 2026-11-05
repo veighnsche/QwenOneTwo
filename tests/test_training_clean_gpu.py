@@ -67,3 +67,31 @@ class CleanGPU(unittest.TestCase):
         self.assertTrue(all(g is None for g in grads[1:]))
         self.assertTrue(all(torch.equal(p,q) for p,q in zip(self.b.adapter_parameters('R'),before)))
         self.ref.assert_isolated(self.c)
+
+    def test_full_bundle_export_preserves_rows_tying_and_forward(self):
+        from pathlib import Path
+        import tempfile
+        from qwen_one_two.training.engine import Window, live_groups
+        from qwen_one_two.training.checkpoint import bundle_tensors, save, load_export, IDENTITIES
+        window=Window(live_groups(self.b,self.c,self.ref))
+        weights=bundle_tensors(self.b,self.c,self.ref)
+        identities={k:digest(k.encode()) for k in IDENTITIES}
+        identities['reference']=self.ref.artifact_id
+        ids=self.b.tokenizer.encode('A short engineering input.',add_special_tokens=False)
+        with torch.no_grad():
+            hidden,_=self.b(self.b.initial(),'R',self.b.embedding(ids))
+            scalar=self.b.table.scalar(248077,hidden[0,-1]).clone()
+        with tempfile.TemporaryDirectory() as temp:
+            path=Path(temp)/'bundle'
+            save(path,window,weights,identities,{'cursor':0},reference_frozen=True,reference_id=self.ref.artifact_id)
+            with torch.no_grad():
+                self.c.budget_row.add_(1)
+                next(iter(self.b.adapter_parameters('R'))).add_(.01)
+            load_export(path,weights,identities)
+            with torch.no_grad():
+                restored,_=self.b(self.b.initial(),'R',self.b.embedding(ids))
+                raw=self.b.table.scalar(248077,restored[0,-1])
+            self.assertTrue(torch.equal(hidden,restored));self.assertTrue(torch.equal(scalar,raw))
+            self.assertEqual(self.b.model.lm_head.weight.data_ptr(),self.b.model.model.embed_tokens.weight.data_ptr())
+            self.ref.assert_isolated(self.c)
+            self.assertEqual(window.optimizer_updates,0)
