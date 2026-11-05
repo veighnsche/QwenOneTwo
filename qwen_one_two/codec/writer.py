@@ -4,6 +4,7 @@ import torch
 from .schema import Role, Kind, Port, Status, ValueKind, Mode, Invalid, require, decode_atoms, Atom, parse_numeric
 from .records import Semantic, Attribute, Value, Span, History, Reason
 from .render import Renderer
+from .neural import finite
 
 
 @dataclass(frozen=True)
@@ -58,6 +59,7 @@ class Decoder:
             require(bool(offsets),'no legal source boundary')
             k=self.codec.clipping_keys(self.codec.pointer_key(s.states[index]),offsets)
             logits=(k*self.codec.pointers[name](f)).sum(-1)/16
+            finite(logits,'clipping pointer logits')
             return offsets[int(logits.argmax())]
         a=clip(start,'clip_start');b=clip(last,'clip_end',a if count==1 else None)
         span=Span(ref,start,count,a,b);self.registry.span(span)

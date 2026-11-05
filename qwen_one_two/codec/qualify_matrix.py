@@ -62,6 +62,7 @@ def main():
                 child=json.loads((out/name/'report.json').read_text())
                 if (child['status']!='PARTIAL_MATRIX_PASSED' or not child.get('requested_checks_passed')
                         or not child.get('all_live_parameters_unchanged') or not child['frozen_base']['pass']
+                        or not child['frozen_base'].get('base_tied_storage')
                         or child['source_hashes']!=sources):
                     raise RuntimeError(f'{name} evidence mismatch')
                 finished.append((name,child))

@@ -1,0 +1,177 @@
+{
+  "protocol": "v3-1024-v1",
+  "status": "PASSED",
+  "protocol_complete": true,
+  "cases": 108,
+  "scope": "prescribed numeric traces at 1024; not learned invocation, semantic competence, full A4 optimizer memory or full context",
+  "aggregate_sha256": "3387858c77ea2de9c1d9eb500a29c5991d14ede997503de18d033f81146d43cf",
+  "raw_bundle": "data/codec-qualification/1024-v1-20261105",
+  "elapsed_seconds": 5598.540981531143,
+  "workers": 1,
+  "gpu_uuid": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+  "driver_version": "615.71.10",
+  "environment": {
+    "torch": "2.15.0+cu132",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "cuda": "13.2"
+  },
+  "precision": {
+    "frozen_candidate_storage": "BF16",
+    "feedback_dense_arithmetic": "fp32",
+    "native_vocabulary_arithmetic": "2-part BF16 products, FP32 output",
+    "reference": "genuine FP32 PyTorch projections; no reference rounding"
+  },
+  "profile": "b1-full-v3-feedback-fp32-vocab-compensated2-temporal32",
+  "checkpoint_sha256": "1dd2e8527e14caa9002d672b4187253cdc174fb3c204ab56e80f257f23943640",
+  "lengths": [
+    1024
+  ],
+  "ports": [
+    1,
+    2,
+    3
+  ],
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "repeats": 3,
+  "profiles": [
+    "functional",
+    "checkpoint",
+    "serving",
+    "fp32"
+  ],
+  "operation_status_cells": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      2,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      2,
+      4
+    ],
+    [
+      2,
+      5
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      3,
+      2
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      3,
+      4
+    ]
+  ],
+  "worst": {
+    "worst_state_rms": 0,
+    "worst_logit_rms": 3.12525587881255e-06,
+    "worst_scalar_absolute": 0,
+    "budget_raw_absolute": 0
+  },
+  "worst_gradient_rms_by_group": {
+    "R": 3.4302212563911994e-06,
+    "D": 3.642939414466705e-06,
+    "wire": 3.848441887921371e-06,
+    "emitter": 3.840339087040678e-06
+  },
+  "peak_allocated_bytes": 13093139968,
+  "peak_reserved_bytes": 13432258560,
+  "peak_allocated_by_profile": {
+    "functional": 11762018816,
+    "checkpoint": 6375453184,
+    "serving": 3902594560,
+    "fp32": 13093139968
+  },
+  "one_prefill_one_lineage_exact_accounting": true,
+  "all_live_parameters_unchanged": true,
+  "frozen_base": {
+    "1024-port2": {
+      "pass": true,
+      "parameters_checked": 320,
+      "mismatches": [],
+      "base_tied_storage": true
+    },
+    "1024-port3": {
+      "pass": true,
+      "parameters_checked": 320,
+      "mismatches": [],
+      "base_tied_storage": true
+    },
+    "1024-port1": {
+      "pass": true,
+      "parameters_checked": 320,
+      "mismatches": [],
+      "base_tied_storage": true
+    }
+  },
+  "state_memory_reservation": {
+    "enabled": true,
+    "moment_copies": 2,
+    "component_buffer_copies": 3,
+    "bytes": 446489460,
+    "optimizer_created": false,
+    "optimizer_steps": 0,
+    "eligibility_scope": "conservative all-parameter envelope, not A4 qualification"
+  },
+  "child_reports": {
+    "1024-port2": "18b6f85a7c39ace3471dfed5a982a9bcbe01b42fd9a0044d616773115b019248",
+    "1024-port3": "ff18569bdf757d3db94b63033a42bd69428f66e4e8213459b0ec76e2118e25b7",
+    "1024-port1": "ec66e5a66579162844f6e375608444b3fab325c4d1026adbc8e80d2328eb7af9"
+  },
+  "qualified_source_hashes": {
+    "__init__.py": "9b577482d1138d4d449fcc2bc9aa493538658afefe0bffb2a72828ab12e7ea38",
+    "backbone.py": "1fbc6747eb02e450f65b48b1ed2f37eba2137513cfe89f12e8e42e1b32793075",
+    "fixtures.py": "36c91e9d949d2d03d4aaaafa709853eaeb7796465b02f6a9853f109f95221bc3",
+    "neural.py": "472877b5a1f748aafe0c3264c4709d85083c79824ea712e2bd48f54bb670725c",
+    "ownership.py": "d9f10f5f6f8a8233b208110820f4e620253e668463042a30ad2dbbce0357f8dc",
+    "precision.py": "9eb775efc303ce6d9eb8bbec26ffdcd6422f37ad0732e03ef0885ae9433c8e5b",
+    "qualify.py": "acad6f20b89734fe84c8d503c89183652c936e752e43b7a5e19e5f9b84023116",
+    "records.py": "089eb06d1fd55e9a1629297759c942f046dc570058cf9cb304c8d88069287b04",
+    "render.py": "9e16fb579268e4261cd134883e698f6ae3c69a2802f1dbc2502855062920b82b",
+    "runtime.py": "350c79f141e6898c5f762bf9b9c1708bd11297bdd01227c93a39abec2bd61d3a",
+    "schema.py": "5a2ff9f2f38b7338da5cf6d7f605bed953e136c37445983f0cf965f1e17dbe23",
+    "session.py": "a5330460093fe54c7721b658d4af09140486664054d718ba17e86eb56f2a92a8",
+    "writer.py": "5d9994b811d73e1f0bad6416e327eae45ba9bd41eeaf452d004e71b4ae035543",
+    "diagnose_precision.py": "4edc64ec7af6525493e57c33f5fe4866e9ec0c0709086ae1fa99898d75fb23f3",
+    "qualify_matrix.py": "737231f3abd6e157277be4d0daa8ca632632cbf82bfc5465a8534aae2455a433"
+  },
+  "source_snapshot_manifest_sha256": "be734000ad58c709a75e9d9841ff5ba83fc495b9bc2b97645e40f326b42b0737",
+  "training_performed": false,
+  "real_model_optimizer_updates": 0,
+  "validation_only_followup": "After this run: nonfinite codec rejection guards, unchanged finite arithmetic; separate focused regression evidence."
+}

@@ -13,9 +13,21 @@ def cuda_only(x=None):
     if x is not None:require(x.is_cuda,'CPU model execution prohibited')
 
 
+def finite(x,label='codec value'):
+    cuda_only(x)
+    require(bool(x.isfinite().all()),'nonfinite '+label)
+    return x
+
+
+def finite_linear_output(module,inputs,output):
+    # Validation only: preserve the identical output tensor/autograd graph.
+    finite(output,'codec linear output')
+
+
 def norm(x):
     cuda_only(x)
     x=x.float();m=x.square().mean(-1,keepdim=True)
+    finite(m,'codec normalization magnitude')
     return x/torch.sqrt(torch.where(m>1e-12,m,torch.full_like(m,1e-12)))
 
 
@@ -112,6 +124,7 @@ class Codec(nn.Module):
         if isinstance(module,nn.Linear):
             nn.init.xavier_uniform_(module.weight)
             if module.bias is not None:nn.init.zeros_(module.bias)
+            module.register_forward_hook(finite_linear_output)
         elif isinstance(module,nn.Embedding):nn.init.normal_(module.weight,std=.02)
 
     def atom_features(self,a):
@@ -206,6 +219,7 @@ class Codec(nn.Module):
         if optional:k=torch.cat((k.new_zeros(1,256),k))
         require(len(k)>0,'empty required pointer')
         logits=(k*self.pointers[name](f)).sum(-1)/16
+        finite(logits,'pointer logits')
         if mask is not None:
             require(mask.shape==logits.shape and bool(mask.any()),'pointer mask')
             logits=logits.masked_fill(~mask,-torch.inf)
@@ -224,14 +238,18 @@ class Codec(nn.Module):
         q=self.qev_q(h.float())
         if port==Port.NOUL:
             logits=(self.qev_k(self.prototypes)*q).sum(-1)/16
+            finite(logits,'Noul logits')
+            finite(logits[1]-logits[0],'Noul truth logit')
             result.update(value=(logits[1]-logits[0]).sigmoid(),raw=logits[1]-logits[0])
         elif port==Port.SCORE:
             raw=self.table.scalar(248078,h)
+            finite(raw,'raw task Score')
             result.update(value=raw.clamp(0,1),raw=raw)
         else:
             require(candidate_states is not None and 1<=len(candidate_states)<=16,'candidate boundary states')
             k=self.qev_k(candidate_states.float())
             result['pointer_logits']=(k*q).sum(-1)/16
+            finite(result['pointer_logits'],'Choice logits')
             result['feasibility_logits']=self.feasibility(torch.cat((q.expand_as(k),k,q*k,q-k),-1))
         return result
 

@@ -9,8 +9,9 @@ Historical design-only authorization/status paragraphs do not override that task
 
 Acceptance and direct implementation review are in
 [the protocol](codec-1024-protocol-v1.md). Two coverage tests and six exact codec
-tests pass. The 108-case 1024 run is in progress; no result is inferred from the
-324 earlier passing cases. No arithmetic/tolerance change was made.
+tests pass. The separate 108-case 1024 run now passes; see the
+[measured report](codec-1024-results-2026-11-05.md). It did not repeat the
+324 earlier cases. No arithmetic/tolerance change was made.
 
 ## Slice 2: role/branch inputs and clean construction
 
@@ -36,9 +37,10 @@ Measured checks:
 Reference annotation encoding uses frozen W, while clean source preparation uses
 fresh W+D as F3 requires. Separate T parameters share W through scoped functional
 calls; no second backbone, data swap or live adapter trainability toggle occurs.
-Reference outer layer checkpointing currently rejects explicitly, because replay
-of a temporary parameter mapping after it is restored would be incorrect. Pure
-32-token recurrence rematerialization remains available. Reference freeze and
+At this initial slice, reference outer checkpointing rejected explicitly to
+avoid replaying a restored live mapping. Slice 5 below supersedes that guard
+with scoped T/base replay and an exact-gradient test. Pure 32-token recurrence
+rematerialization remains available. Reference freeze and
 live initialization are explicit; actual semantic promotion has not happened.
 
 These are synthetic engineering fixtures and untrained reference weights, not a
@@ -194,3 +196,33 @@ these new clean tests do not claim reviewed Choice/Score semantic coverage.
 This brings the backend GPU regression inventory to 20 unique tests; the earlier
 18-test run plus the affected/new suites cover it, without rerunning the old
 324-case numeric matrix.
+
+
+## Slice 7: reject nonfinite decoding before lossy controls
+
+Final code review found that an overflowing finite Score row could produce an
+infinite raw readout, then clamp it to a seemingly valid 1.0. Gate logits and
+normalization magnitudes also lacked rejection before argmax/normalization.
+A CUDA regression reproduced three failures in four checks before the fix.
+
+The codec now validates linear outputs, normalization magnitudes, raw scalar and
+pointer products before clamping/selection. Intentional structural -infinity
+masks remain downstream of finite-logit validation. A nonfinite native gate
+terminates Failed without dispatch; writer/evaluator numeric failures retain the
+existing unsafe-failure path. These guards preserve the same finite tensors and
+floating operation order. They do not revise v3 arithmetic or numeric tolerances.
+The matrix aggregator also now requires explicit tied-base storage evidence.
+
+Acceptance: all **44 focused GPU regressions pass in 22.329 seconds** after the
+patch: 18 existing codec/precision, 6 nonfinite-boundary, and 20 backend tests.
+Finite linear values/input gradients match their direct PyTorch oracle exactly;
+Score, Noul/Choice, gate/pointer and normalization overflow reject before an
+apparently valid decision is emitted. Two coverage and six exact codec checks
+also pass. Log hashes, including the failing pre-fix run, are in the portable
+validation summary.
+
+The 108-case matrix finished before these validation-only guards were applied,
+so its source hashes/snapshot are preserved verbatim. The current source manifest
+pins the subsequent guards separately. The passing matrix certifies the unchanged
+v3 numeric core; the post-guard tests certify the new rejection behavior and
+finite-path regressions. No expensive matrix was rerun to overwrite that history.

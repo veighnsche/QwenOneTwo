@@ -23,6 +23,11 @@
       "tests_passed": 3,
       "seconds": 5.901,
       "sha256": "ae98161d774721254dd7544c752d573d590e42f98cfbae458f80cc11beb3960d"
+    },
+    "post-guards-gpu-tests.log": {
+      "tests_passed": 44,
+      "seconds": 22.329,
+      "sha256": "93b7a549bdbf05d934bf607312f9151fa32087c76a1bf6bffd162a614f78a11a"
     }
   },
   "model_free_tests": {
@@ -36,6 +41,12 @@
     "kind": "CUDA OOM with concurrent numeric worker",
     "resolution": "share frozen vocabulary slice per reconstruction episode; rerun affected suite passed"
   },
-  "numeric_1024_status": "RUNNING; separate report required",
-  "unique_backend_gpu_tests": 20
+  "numeric_1024_status": "PASSED: 108/108; see codec-1024-v1-summary.json",
+  "unique_backend_gpu_tests": 20,
+  "nonfinite_regression_before": {
+    "tests": 4,
+    "failures": 3,
+    "sha256": "b2e76fdcfe8ca430e6ea4a6a63dc24976262418e30db83c49457e864ad464fbb"
+  },
+  "final_codec_and_backend_gpu_tests": 44
 }

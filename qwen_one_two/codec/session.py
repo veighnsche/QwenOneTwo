@@ -168,7 +168,11 @@ class Session:
             rt.debit('H',1,'forced_chat_end');self.step(self.backbone.embedding([248046])[0],'R','forced_chat_end',False)
             rt.terminate('Limited',emit_end=False)
             return None
-        logits=self.codec.gate(self.codec.feature(self.hidden[0,-1],rt.counters()))
+        try:
+            logits=self.codec.gate(self.codec.feature(self.hidden[0,-1],rt.counters()))
+        except ValueError:
+            rt.terminate('Failed',usable=False,emit_end=False)
+            raise
         if rt.b==rt.budget or rt.attempts>=16:
             logits=logits.clone();logits[1:]=-torch.inf
         action=int(logits.argmax())
