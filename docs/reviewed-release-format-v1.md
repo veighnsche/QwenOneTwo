@@ -104,6 +104,13 @@ recorded session where available. Preserve honest author/session provenance;
 markers alone cannot prove blindness or independence. A batch may share one
 prompt/response pair across its per-record review artifacts.
 
+Deterministic views may bind constituent source-state and composition reviews.
+Their artifacts declare this scope explicitly and preserve the actual judgments,
+source case, transformation and recipe-review provenance. The current annotation
+hash still binds the complete materialized view. A shared constituent review is
+not a new literal-row model call; exact transformations need independent local
+checks, and meanings outside the reviewed recipe need fresh content review.
+
 Single-review records do not need a second-review batch. Declared batches still
 have at most 200 members. An empty `second_review` list is valid. If populated,
 its members must have two actual reviews and cover the declared batch strata;

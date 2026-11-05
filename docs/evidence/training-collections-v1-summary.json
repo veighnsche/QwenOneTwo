@@ -1,0 +1,574 @@
+{
+  "releases": {
+    "train": {
+      "records": 8000,
+      "families": 288,
+      "release_sha256": "c70d4f44135a34c00e7fa0348833b1ec56613def15f5753231589492ed35478f",
+      "categories": {
+        "reference": 500,
+        "receiver": 1500,
+        "writer": 750,
+        "reader": 750,
+        "interleaved": 2000,
+        "direct": 500,
+        "language_replay": 1000,
+        "decision_replay": 1000
+      },
+      "reference_distinct_meanings": {
+        "question": 5,
+        "target": 5,
+        "alternative": 5,
+        "dimension": 5,
+        "conditions": 5,
+        "zero": 5,
+        "one": 5,
+        "midpoint": 5,
+        "key": 5,
+        "reason": 5
+      }
+    },
+    "development": {
+      "records": 1000,
+      "families": 120,
+      "release_sha256": "5b8f4cffdc4f33e255d3a34306cac03a68c50dcd9dab905ae8d8adcf89c81e77",
+      "categories": {
+        "RF": 100,
+        "W": 70,
+        "E": 130,
+        "R": 100,
+        "F": 400,
+        "X": 200
+      },
+      "reference_distinct_meanings": {
+        "question": 5,
+        "target": 5,
+        "alternative": 5,
+        "dimension": 5,
+        "conditions": 5,
+        "zero": 5,
+        "one": 5,
+        "midpoint": 5,
+        "key": 5,
+        "reason": 5
+      }
+    },
+    "locked": {
+      "records": 2000,
+      "families": 288,
+      "release_sha256": "d13594f18738056ee179b3498d54d8261f7f7654aad633fabb776810681aa1cf",
+      "categories": {
+        "RF": 100,
+        "W": 100,
+        "E": 130,
+        "R": 130,
+        "F": 1000,
+        "X": 500,
+        "M": 40
+      },
+      "reference_distinct_meanings": {
+        "question": 5,
+        "target": 5,
+        "alternative": 5,
+        "dimension": 5,
+        "conditions": 5,
+        "zero": 5,
+        "one": 5,
+        "midpoint": 5,
+        "key": 5,
+        "reason": 5
+      }
+    }
+  },
+  "review_scope": "Actual model reviews of source states and canonical definitions plus one shared composition review; per-record evidence binds constituent reviews and exact deterministic transformations. Not11000 separate literal-row model judgments.",
+  "actual_model_calls": 31,
+  "usage": {
+    "input_tokens": 965889,
+    "output_tokens": 254566,
+    "cached_tokens": 0,
+    "reasoning_tokens": 25010
+  },
+  "currency_cost": null,
+  "calls": [
+    {
+      "name": "author-locked-access_rules",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 17305,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 3256,
+          "reasoning_tokens": 392
+        }
+      ]
+    },
+    {
+      "name": "author-locked-demo_preparation",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 17342,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 3471,
+          "reasoning_tokens": 765
+        }
+      ]
+    },
+    {
+      "name": "author-locked-issue_prioritization",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 17257,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 3612,
+          "reasoning_tokens": 698
+        }
+      ]
+    },
+    {
+      "name": "author-locked-refund_eligibility",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 17423,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 3126,
+          "reasoning_tokens": 383
+        }
+      ]
+    },
+    {
+      "name": "author-locked-resource_allocation",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 17164,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 3411,
+          "reasoning_tokens": 178
+        }
+      ]
+    },
+    {
+      "name": "author-locked-scheduling",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 17269,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 4410,
+          "reasoning_tokens": 1272
+        }
+      ]
+    },
+    {
+      "name": "author-train-access_rules",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 17315,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 3595,
+          "reasoning_tokens": 661
+        }
+      ]
+    },
+    {
+      "name": "author-train-demo_preparation",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 17334,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 3183,
+          "reasoning_tokens": 655
+        }
+      ]
+    },
+    {
+      "name": "author-train-issue_prioritization",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 17261,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 3609,
+          "reasoning_tokens": 360
+        }
+      ]
+    },
+    {
+      "name": "author-train-refund_eligibility",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 17417,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 3327,
+          "reasoning_tokens": 473
+        }
+      ]
+    },
+    {
+      "name": "author-train-resource_allocation",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 17162,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 2773,
+          "reasoning_tokens": 141
+        }
+      ]
+    },
+    {
+      "name": "author-train-scheduling",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 17267,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 3285,
+          "reasoning_tokens": 847
+        }
+      ]
+    },
+    {
+      "name": "review-composition",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 16740,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 1162,
+          "reasoning_tokens": 854
+        }
+      ]
+    },
+    {
+      "name": "review-development-controlled",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 32284,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 7847,
+          "reasoning_tokens": 960
+        }
+      ]
+    },
+    {
+      "name": "review-development-extra",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 40206,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 12195,
+          "reasoning_tokens": 1485
+        }
+      ]
+    },
+    {
+      "name": "review-effort-development",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 27648,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 5239,
+          "reasoning_tokens": 867
+        }
+      ]
+    },
+    {
+      "name": "review-locked-access_rules",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 49805,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 16744,
+          "reasoning_tokens": 882
+        }
+      ]
+    },
+    {
+      "name": "review-locked-demo_preparation",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 48949,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 14213,
+          "reasoning_tokens": 982
+        }
+      ]
+    },
+    {
+      "name": "review-locked-issue_prioritization",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 49413,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 17284,
+          "reasoning_tokens": 960
+        }
+      ]
+    },
+    {
+      "name": "review-locked-refund_eligibility",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 48402,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 15021,
+          "reasoning_tokens": 1016
+        }
+      ]
+    },
+    {
+      "name": "review-locked-resource_allocation",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 49409,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 14466,
+          "reasoning_tokens": 1008
+        }
+      ]
+    },
+    {
+      "name": "review-locked-scheduling",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 47854,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 15341,
+          "reasoning_tokens": 1063
+        }
+      ]
+    },
+    {
+      "name": "review-reference-development",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 19716,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 2186,
+          "reasoning_tokens": 458
+        }
+      ]
+    },
+    {
+      "name": "review-reference-locked",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 19901,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 2107,
+          "reasoning_tokens": 489
+        }
+      ]
+    },
+    {
+      "name": "review-reference-train",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 19885,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 2305,
+          "reasoning_tokens": 642
+        }
+      ]
+    },
+    {
+      "name": "review-train-access_rules",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 48033,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 14076,
+          "reasoning_tokens": 812
+        }
+      ]
+    },
+    {
+      "name": "review-train-demo_preparation",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 47001,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 15082,
+          "reasoning_tokens": 1168
+        }
+      ]
+    },
+    {
+      "name": "review-train-issue_prioritization",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 49829,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 15315,
+          "reasoning_tokens": 1122
+        }
+      ]
+    },
+    {
+      "name": "review-train-refund_eligibility",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 48100,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 14794,
+          "reasoning_tokens": 1686
+        }
+      ]
+    },
+    {
+      "name": "review-train-resource_allocation",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 48453,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 13020,
+          "reasoning_tokens": 847
+        }
+      ]
+    },
+    {
+      "name": "review-train-scheduling",
+      "calls": 1,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 46745,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 15111,
+          "reasoning_tokens": 884
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "split_family_overlap": 0,
+    "train_evaluation_identical_input_payloads": 0,
+    "exact_literals_verified": 30302,
+    "identical_hidden_fact_pairs": 35,
+    "production_runtime_negative_fixtures": 40,
+    "local_model_workloads": 0,
+    "training_runs": 0
+  },
+  "limitations": [
+    "400 prescribed correction specifications remain masked until bound to actual runtime packets/snapshots.",
+    "Replay is a synthetic grounded-language/decision preservation proxy, not recovered original training corpora.",
+    "Tensor/source-token materialization and actual episode producers are still required.",
+    "Templated controlled examples and parent-family counts do not establish semantic independence or learned capability."
+  ],
+  "local_root": "data/training-collections-20261105",
+  "tests": {
+    "command": "PYTHONPATH=tests .venv/bin/python -m unittest test_data_production test_drafts test_training_inputs test_training_release test_training_driver test_training_schedule -v",
+    "log_sha256": "e139c506c0e0c8cff331d8d1f35f585e88f58882bd1036349ec91719c199c98c",
+    "result": "Ran 64 tests in 2.198s\n\nOK"
+  },
+  "secondary_development_mechanical": {
+    "executions": 40,
+    "families": 20,
+    "artifact_sha256": "0b696c07a2e2bee7b7019525ddfc51987afa2b8c186bab9e15c9a54694801c26"
+  },
+  "source_sha256": {
+    "scripts/produce_training_data.py": "0d54fdb613c5e05ae2cdadcd2a2fd725d4590cf357fe24edd203873332c17369",
+    "tests/test_data_production.py": "0fc458720032c6f4646955e6cc00ea258bfb33c088b28c0c0ce4b06a6b5f3802"
+  },
+  "workflow_sha256": {
+    "call.py": "6cf0e93e1dbcc190d672d066deb33ab3ea5581c50ffc9588dae97f2bfa59c3b1",
+    "check_review.py": "452738c13c14c54ca77c6e8942ffc0c9cc814f99a986f8be88c8079ca3d53dcf",
+    "prepare_development.py": "2d791ce04b9edbd2aed1da1567ec9b48fd5945d8eec70e8f01a92a2495997168",
+    "finalize.py": "8f9da86e217a1b2cd7e1d596d3a2dfdd190680019370c0f522e42722947d83f5",
+    "reference_banks.py": "16a4e16519a3eed7faa5ae4a729f332b0de6a82f104e298370bb8e9bf7beb3bc",
+    "verify_collections.py": "4c1b394076a9fec8da7e5eba102c60db8eddcd071d9be0b9cd864ec3abc477f1",
+    "extend_development.py": "6a015767215aec66ea96d54aa98a297ec325cac5715744886715e5ea2189ce7e",
+    "secondary_mechanical.py": "046344a2709c1205dc2f5482e0b13866093659248fc38147b4675440fa10708b"
+  },
+  "artifact_sha256": {
+    "train-examples.jsonl": "0d17c52dd5dfc34a20c58759d7ffd8857fbd9927b4aa7d89f2c74ee40c006ff3",
+    "development-examples.jsonl": "b8acb25305d55e954e63816d55460fdfec5783c0b2001ae19051cd167d6fe535",
+    "locked-examples.jsonl": "d92a68b8c8fa114a80966121be82b0123f2ac9f4196cd6f174b5f22e5d67075d",
+    "verification.json": "e0707fd3685897b5ce87cad8ff784ca4473071cab8dad9cd4516a4d75388c9be",
+    "split-allocation.json": "7c6d8975bd447e1bf035c424a64b7c9c74d81729d8068c5a213b521c0203a4b9"
+  }
+}

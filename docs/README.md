@@ -67,6 +67,7 @@ not override them. Future changes must update the owner and affected examples.
 | [Release-boundary slices](backend-release-slices-2026-11-05.md) | Content-bound releases, pilot/sampler/driver identities, deterministic resumed exposures and actual numeric-evidence inspection |
 | [Reviewed release format v1](reviewed-release-format-v1.md) | Local source/review/approval bytes, immutable release snapshots, pilot/batch checks and driver ingestion |
 | [120-case pilot results](pilot-120-results-2026-11-05.md) | Actual model-reviewed development release, 14 bounded calls, content repairs and exact validation |
+| [Training collections](training-collections-results-2026-11-05.md) | 8,000 training / 1,000 development / 2,000 locked annotations, composed content review and measured usage |
 | [Muse draft pilot](muse-draft-pilot-2026-11-05.md) | Twelve local model-proposed scenarios, repaired setup, independent model-assisted checks, exact usage and remaining content reviews |
 | [Post-proof expansion plan](post-proof-expansion-plan.md) | Conditional codec/runtime qualification, reviewed data, training phases, same-job frontend integration and release order after measured proof success |
 | [Losses and training schedule](loss-configuration-and-training-schedule.md) | Starting weights, eligibility masks, replay, forcing dimensions and joint-training advancement |

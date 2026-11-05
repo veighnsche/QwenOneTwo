@@ -119,6 +119,12 @@ claims. Record `kind:model`, actual model/session and saved prompt/response byte
 The same model may author and review in separate sessions; correlated errors
 remain possible. This is experimental model-reviewed data, not human-certified gold.
 
+For deterministic reuse, content review may cover the exact source states plus
+an explicit composition recipe. Each derived record must bind those actual
+reviews and its current annotation bytes, and pass exact transformation checks.
+Describe this as compositional review; never invent an additional model call or
+literal-row judgment. New meanings outside the reviewed recipe need fresh review.
+
 No mandatory second review or stratified human audit. Optional existing human
 reviews remain valid historical evidence. If an optional second-review audit is
 declared, its stated membership, second reviews and coverage must be truthful.

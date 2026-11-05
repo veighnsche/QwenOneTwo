@@ -7,6 +7,41 @@ This handoff records measured mechanisms, not learned capability.
 
 ## Current checkpoint
 
+The user authorized the remaining data collections with cheap batched generation,
+reuse, model content review and **no training**. Complete annotation releases
+now exist under `data/training-collections-20261105/`:
+
+- Training: **8,000** records; manifest
+  `c70d4f44135a34c00e7fa0348833b1ec56613def15f5753231589492ed35478f`.
+- Development: **1,000** base cases plus 40 secondary mechanical executions;
+  manifest `5b8f4cffdc4f33e255d3a34306cac03a68c50dcd9dab905ae8d8adcf89c81e77`.
+- Locked: **2,000** cases; manifest
+  `d13594f18738056ee179b3498d54d8261f7f7654aad633fabb776810681aa1cf`.
+
+See the [collection report](training-collections-results-2026-11-05.md) and
+[portable receipt](evidence/training-collections-v1-summary.json).
+`catalogue.json` identifies usable releases; `*-candidate-*` folders are history.
+The pilot remains development-only. Content review is explicitly compositional:
+actual source-state/canonical-definition reviews plus exact reviewed view recipes,
+with per-record hash and transformation checks. It does not claim 11,000 separate
+literal-row model judgments or independent scenarios.
+
+Actual usage: **31** capped Muse calls, 965,889 input / 254,566 output tokens;
+no agents, automatic retries, local model runs or training. **64/64 model-free
+tests passed in 2.198s**. Independent audit accepts all releases, exact allocations
+and family/status/domain minima, disjoint split families/input payloads, five
+reference meanings per role, 30,302 exact source literals and 35 hidden-fact pairs.
+Production sampler ID windows work in all five phases. One unsupported development
+effort preference is masked and omitted from effort-scored free-job selection.
+
+The 400 correction records contain prescribed intervention specifications;
+correction losses stay masked until a producer binds an actual runtime packet/
+snapshot. Replay is a generated preservation proxy, not recovered original data.
+Token/source materialization, actual episode producers, reference artifacts and
+the documented full-trainer memory qualification remain prerequisites. No
+training, fitting, deployment, service changes or further generation is queued.
+Earlier no-training-release statements below are historical.
+
 The user explicitly authorized reviewing the existing 24 drafts and generating
 the remaining 96 for the pilot, with no humans, agents or training. **Complete:**
 `data/pilot-120-20261105/release/` loads as an approved 120-record development pilot
@@ -234,8 +269,8 @@ of the separate training or promotion collections. No new generation is queued.
 producers and semantic/promotion fixtures.** The driver accepts a complete-episode
 producer; it is not a source of reviewed annotations or a complete trained flow.
 The [release format](reviewed-release-format-v1.md) and read-only preflight now
-exist and the pilot files are now supplied. The training release and actual
-task-specific episode producers remain unfinished. Load both releases with
+exist and the pilot and training annotation files are now supplied. Actual
+task-specific episode producers and token/packet materialization remain unfinished. Load both releases with
 `load_release`; construct the sampler using
 `Sampler.from_release`. Joint `Driver` construction requires a loaded
 `NumericEvidence`, supplied via `numeric=`, rather than a pass dictionary.
