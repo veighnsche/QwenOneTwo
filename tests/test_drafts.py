@@ -332,13 +332,15 @@ class DraftTests(unittest.TestCase):
             mutated = copy.deepcopy(record)
             mutated["labels"]["payload"] = {"acceptable_selection_ids": ["a"]}
             mutated["labels"]["feasibility"] = {"a": bad_value, "b": False}
-            with self.assertRaisesRegex(ValueError, "exact boolean"):
+            with self.assertRaisesRegex(ValueError, "exact values"):
                 self.check_one(mutated)
         mutated = copy.deepcopy(record)
         mutated["labels"]["payload"] = {"acceptable_selection_ids": ["a"]}
         mutated["labels"]["feasibility"] = {"a": "unknown", "b": False}
-        with self.assertRaisesRegex(ValueError, "exact boolean"):
+        with self.assertRaisesRegex(ValueError, "selection must be feasible"):
             self.check_one(mutated)
+        mutated["labels"]["feasibility"] = {"a": True, "b": "unknown"}
+        self.check_one(mutated)
         mutated = copy.deepcopy(record)
         mutated["labels"]["status"] = "NoFeasibleChoice"
         mutated["labels"]["payload"] = None

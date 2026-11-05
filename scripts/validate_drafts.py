@@ -243,13 +243,10 @@ def validate_draft_record(record, drafts_root, parents, *, allow_inline_content=
             identities = [a["identity"] for a in semantics["alternatives"]]
             feasibility = labels.get("feasibility")
             check(isinstance(feasibility, dict) and set(feasibility) == set(identities), "Choice feasibility coverage")
-            if status == "Assessed":
-                check(all(type(v) is bool for v in feasibility.values()), "Choice feasibility exact booleans")
-            else:
-                check(all(type(v) is bool or (type(v) is str and v == "unknown")
-                          for v in feasibility.values()), "Choice feasibility exact values")
-            if status == "NoFeasibleChoice":
-                check(all(v is False for v in feasibility.values()), "NoFeasibleChoice needs every entry false")
+            # An any-workable request can be assessed with one confirmed option
+            # even when other candidates are unknown (result-statuses.md).
+            check(all(type(v) is bool or (type(v) is str and v == "unknown")
+                      for v in feasibility.values()), "Choice feasibility exact values")
             check(set(payload) == {"acceptable_selection_ids"}, "Choice payload holds selections only")
             selection = payload.get("acceptable_selection_ids")
             check(isinstance(selection, list) and len(selection) >= 1, "Choice acceptable selections")

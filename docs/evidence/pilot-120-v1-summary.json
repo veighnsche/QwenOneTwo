@@ -1,0 +1,351 @@
+{
+  "release": {
+    "approval_kind": "automated",
+    "blocked_records": 0,
+    "format": "qot-reviewed-release-v1",
+    "id": "pilot-120-20261105",
+    "purpose": "pilot",
+    "release_sha256": "177147b46629f7ee2ff39b567fd90543621fba07fed6960bca123b6aa32b4c9d",
+    "retained_audit_records": 0,
+    "review_policy": "automated-content-v1",
+    "selected_categories": {
+      "unspecified": 120
+    },
+    "selected_domains": {
+      "access_rules": 20,
+      "demo_preparation": 20,
+      "issue_prioritization": 20,
+      "refund_eligibility": 20,
+      "resource_allocation": 20,
+      "scheduling": 20
+    },
+    "selected_operations": {
+      "Choice": 44,
+      "Noul": 38,
+      "Score": 38
+    },
+    "selected_records": 120,
+    "selected_review_artifacts": 120,
+    "selected_review_kinds": {
+      "model": 120
+    },
+    "selected_statuses": {
+      "Assessed": 56,
+      "Conflicting": 19,
+      "Insufficient": 20,
+      "NoFeasibleChoice": 8,
+      "Unresolved": 17
+    },
+    "semantic_authentication": false,
+    "version": 1
+  },
+  "model_calls": 14,
+  "generation_calls": 6,
+  "review_calls": 8,
+  "new_generated_cases": 96,
+  "existing_cases_reviewed": 24,
+  "unique_final_reviews": 120,
+  "review_case_exposures": 142,
+  "calls": [
+    {
+      "name": "generate-access_rules",
+      "session_id": "5795c0e6-ea8a-49cb-b825-d30c20f25d37",
+      "calls": 1,
+      "seconds": 54.16464641501079,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 16872,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 5773,
+          "reasoning_tokens": 1093
+        }
+      ]
+    },
+    {
+      "name": "generate-demo_preparation",
+      "session_id": "139e8e18-2013-471a-a6c7-428636100e0d",
+      "calls": 1,
+      "seconds": 37.188749782013474,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 16917,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 5399,
+          "reasoning_tokens": 1121
+        }
+      ]
+    },
+    {
+      "name": "generate-issue_prioritization",
+      "session_id": "bfa11472-ce62-4ccd-b072-47d0f0ecca4a",
+      "calls": 1,
+      "seconds": 56.86822238500463,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 16915,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 5718,
+          "reasoning_tokens": 1547
+        }
+      ]
+    },
+    {
+      "name": "generate-refund_eligibility",
+      "session_id": "191ce1f6-91a1-4445-a6a2-eee9727d6e5e",
+      "calls": 1,
+      "seconds": 56.56825818499783,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 16947,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 5955,
+          "reasoning_tokens": 1482
+        }
+      ]
+    },
+    {
+      "name": "generate-resource_allocation",
+      "session_id": "3dbaec9d-d60c-4bed-8c34-598b998219d0",
+      "calls": 1,
+      "seconds": 55.16366776500945,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 16910,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 5877,
+          "reasoning_tokens": 1270
+        }
+      ]
+    },
+    {
+      "name": "generate-scheduling",
+      "session_id": "1977dc5b-8085-4be0-8061-72ce539f0387",
+      "calls": 1,
+      "seconds": 68.48863049101783,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 16920,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 7179,
+          "reasoning_tokens": 2180
+        }
+      ]
+    },
+    {
+      "name": "review-access_rules",
+      "session_id": "6b19aa24-52e1-43cd-81a9-34449f93b943",
+      "calls": 1,
+      "seconds": 11.084117304009851,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 20064,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 5367,
+          "reasoning_tokens": 2326
+        }
+      ]
+    },
+    {
+      "name": "review-demo_preparation",
+      "session_id": "e3500a6f-3382-474e-9a8a-03af70eeb06c",
+      "calls": 1,
+      "seconds": 9.431368138000835,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 19733,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 4952,
+          "reasoning_tokens": 1853
+        }
+      ]
+    },
+    {
+      "name": "review-focused",
+      "session_id": "97c2f32b-f5dc-461a-a6de-5f4443cf8b81",
+      "calls": 1,
+      "seconds": 44.84551472499152,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 20392,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 6278,
+          "reasoning_tokens": 2538
+        }
+      ]
+    },
+    {
+      "name": "review-issue_prioritization",
+      "session_id": "59a36800-5ea7-49c0-8be6-42913a5be11f",
+      "calls": 1,
+      "seconds": 48.00290969200432,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 19594,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 5158,
+          "reasoning_tokens": 1874
+        }
+      ]
+    },
+    {
+      "name": "review-refund_eligibility",
+      "session_id": "102714a4-29df-4424-b4ec-26aa8a2e212a",
+      "calls": 1,
+      "seconds": 60.82509080300224,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 19726,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 6000,
+          "reasoning_tokens": 2681
+        }
+      ]
+    },
+    {
+      "name": "review-replacement",
+      "session_id": "54687ec7-2378-4924-99f4-f55c91451908",
+      "calls": 1,
+      "seconds": 7.878135568986181,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 16562,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 852,
+          "reasoning_tokens": 667
+        }
+      ]
+    },
+    {
+      "name": "review-resource_allocation",
+      "session_id": "b9bcaa4a-524c-4fe7-8129-d10f72bce1c6",
+      "calls": 1,
+      "seconds": 40.594766470981995,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 19888,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 4679,
+          "reasoning_tokens": 1505
+        }
+      ]
+    },
+    {
+      "name": "review-scheduling",
+      "session_id": "d5bd8740-31a7-4d78-aa87-ff56c34e9aba",
+      "calls": 1,
+      "seconds": 56.46575158898486,
+      "usage": [
+        {
+          "cached_tokens": 0,
+          "calls": 1,
+          "input_tokens": 20328,
+          "model": "muse-spark-1.3-contributor",
+          "output_tokens": 7157,
+          "reasoning_tokens": 3852
+        }
+      ]
+    }
+  ],
+  "usage": {
+    "input_tokens": 257768,
+    "output_tokens": 76344,
+    "cached_tokens": 0,
+    "reasoning_tokens": 25989
+  },
+  "currency_cost": null,
+  "usage_scope": "Muse generation/review only, excluding Codex supervision and local edits. Reasoning may be included in output; do not sum blindly.",
+  "operation_status_cells": {
+    "Choice/Assessed": 21,
+    "Choice/Conflicting": 5,
+    "Choice/Insufficient": 5,
+    "Choice/NoFeasibleChoice": 8,
+    "Choice/Unresolved": 5,
+    "Noul/Assessed": 16,
+    "Noul/Conflicting": 8,
+    "Noul/Insufficient": 9,
+    "Noul/Unresolved": 5,
+    "Score/Assessed": 19,
+    "Score/Conflicting": 6,
+    "Score/Insufficient": 6,
+    "Score/Unresolved": 7
+  },
+  "preserved_original_files": 125,
+  "independent_verification": {
+    "actual_blind_prompt_matches_final_inputs": 120,
+    "actual_response_matches_final_labels_reason_guidance": 120,
+    "bound_model_judgments": 120,
+    "source_ranges": "all verified",
+    "distinct_prompt_strings": 120,
+    "declared_root_families": 120,
+    "per_domain": 20,
+    "native_children": 0,
+    "tool_events": 0,
+    "model_step_cap_per_call": 1,
+    "local_model_runs": 0,
+    "training_runs": 0
+  },
+  "artifact_sha256": {
+    "release/manifest.json": "177147b46629f7ee2ff39b567fd90543621fba07fed6960bca123b6aa32b4c9d",
+    "reviewed-scenarios.jsonl": "0f07f17216cb9777d52d45a129cd34bef762721d5b68cb5db4b1f3cdd55b0f70",
+    "review-inputs.md": "94f595461e2661031032a002ed30a591bf0479ae4aee8a7506573e5f9ac95f6e",
+    "reviewed-outcomes.md": "aafa78960db0ce0b0c7353fa87f18a7a82890697e51181870c0a1934fc1dd360",
+    "corrections.json": "854db2dd658b0a342c05b327d2556d15ef9ee7732594c04cbedb3163035cdd1b",
+    "duplicate-replacement.json": "2242524ff09497ecf3bdb829b0e381205447b0e0b3653d3bf0cc27110d4cd582",
+    "review-differences.json": "88017ed8e85c5044b02aeef394d0fb8ead617fd6ed7b297d6d0d0e40406c9096"
+  },
+  "local_root": "data/pilot-120-20261105",
+  "tests": {
+    "command": "PYTHONPATH=tests .venv/bin/python -m unittest test_drafts test_training_inputs test_training_release test_training_driver test_training_schedule -v",
+    "passed": 55,
+    "seconds": 1.334,
+    "log_sha256": "eff7d7fcf015e032d42da59f458263309bec02844908f63dfa10cb3129ae2d7d"
+  },
+  "code_sha256": {
+    "scripts/validate_drafts.py": "594258b058f5df5c78606cd10a933f05d9fbc55b1c6bdfe744f3dcf9b39293d4",
+    "tests/test_drafts.py": "6b10261481ce8fd52708a0317fead388d1e96db3207bf0bac8f30a6fc9b4215e"
+  },
+  "workflow_sha256": {
+    "call.py": "6cf0e93e1dbcc190d672d066deb33ab3ea5581c50ffc9588dae97f2bfa59c3b1",
+    "prepare.py": "9c44102d6c6d913a5d83c86541895169d14722022ea2e2585521016c159861a1",
+    "materialize.py": "b82885520a49d25691344faed4eca81d802a104b1792e304792b18c15e7cd159",
+    "review_prompt.py": "97a7ae231296166e03ece3c2c4db6a422ac1f17046678b4a2d929cf2ac7f8d46",
+    "inspect_reviews.py": "637d26f58bcbc4f02f1a339364cc866de7317abadec05fec098dfa94b48466bd",
+    "normalize.py": "379e6d1fd8675c0d0206db603b1c104339ac653cb150f817e11a3f8cbd5c9141",
+    "repair_cases.py": "ea2b14acc1e80c966276e3b83a0f47289c542cf50afa7212ebfe7700f59d82b6",
+    "package_release.py": "ccf01a8e4ae24723f086cd93610b8f3c8019ae2d94fc5b74f2221f1e3ca62d19",
+    "replace_duplicate.py": "d66200dd769ad98a914e70e874bde91002e21161d7d5a97b15c13777fda78318",
+    "verify.py": "4cf579cfd80e24b5898db32df615c7250f04250d30984f7a08d5e1889ba36384"
+  },
+  "limitations": [
+    "Experimental model-reviewed development pilot, not human-certified truth or learned capability evidence.",
+    "Model-proposed content and model-assisted edits retain their origin; metadata family counts do not establish semantic independence.",
+    "No training release, actual training episodes, fitting, local GPU workload, frontend changes or deployment.",
+    "Existing 324-case and108-case numeric matrices were not rerun."
+  ]
+}

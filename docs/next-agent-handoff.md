@@ -7,6 +7,25 @@ This handoff records measured mechanisms, not learned capability.
 
 ## Current checkpoint
 
+The user explicitly authorized reviewing the existing 24 drafts and generating
+the remaining 96 for the pilot, with no humans, agents or training. **Complete:**
+`data/pilot-120-20261105/release/` loads as an approved 120-record development pilot
+under `automated-content-v1`, with 20 per domain and all 13 operation/status cells.
+See the [pilot report](pilot-120-results-2026-11-05.md) and
+[portable receipt](evidence/pilot-120-v1-summary.json). Manifest SHA256:
+`177147b46629f7ee2ff39b567fd90543621fba07fed6960bca123b6aa32b4c9d`.
+All 120 final records bind actual separate outcome-blind model review; no human
+review/certification is claimed. Existing 24 inputs and 125 original run files
+remain unchanged. 14 capped Muse calls used 257,768 input/76,344 output tokens;
+six generation, six initial reviews, one 21-case correction review and one
+replacement review after a duplicate was caught. No automated retry loop.
+Independent checks bind final inputs/outcomes to actual review bytes; 55/55
+model-free tests passed in 1.334s. Draft validation now correctly allows unknown
+nonselected candidates in assessed any-workable Choice while requiring selected
+candidates to be known feasible. No numeric/model/GPU tests were rerun. No
+training, service changes or deployment occurred. Earlier no-pilot statements
+below are historical; do not regenerate this pilot.
+
 The user explicitly removed mandatory human review for this experiment.
 Current policy is mechanical checks plus one separate, outcome-blind
 model-assisted content review per record (batched calls permitted), followed by
@@ -206,20 +225,18 @@ Exact log/test source hashes are in the
 
 ## Next unfinished slice / blockers
 
-The replacement twelve pilot proposals now exist; do not regenerate them merely
-because older handoffs reported no data. Obtain actual separate model-assisted
-content reviews and resolve or exclude failures before automated approval or expansion. Reviewed model-proposed roots
-can now count under the same pilot review/approval rules; never relabel these as
-human-authored or fabricate review evidence. The batch covers 7/13 status cells,
-and the full 120-case pilot remains incomplete. Generation usage/overhead is
-recorded in the new report; assess it before scaling.
+The 120-case model-reviewed pilot now exists and passes release ingestion. Use
+the exact local release and pinned hash above; preserve model-proposal origin
+and development split. Its 13-cell coverage is pilot coverage, not completion
+of the separate training or promotion collections. No new generation is queued.
 
 **Integrate a genuinely reviewed pilot release with task-specific episode
 producers and semantic/promotion fixtures.** The driver accepts a complete-episode
 producer; it is not a source of reviewed annotations or a complete trained flow.
 The [release format](reviewed-release-format-v1.md) and read-only preflight now
-exist, so this prerequisite needs actual reviewed files, not another hash-string
-stub. Load both releases with `load_release`; construct the sampler using
+exist and the pilot files are now supplied. The training release and actual
+task-specific episode producers remain unfinished. Load both releases with
+`load_release`; construct the sampler using
 `Sampler.from_release`. Joint `Driver` construction requires a loaded
 `NumericEvidence`, supplied via `numeric=`, rather than a pass dictionary.
 The G1 prerequisite remains an explicit caller attestation. Content hashes
