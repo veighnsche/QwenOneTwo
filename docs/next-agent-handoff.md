@@ -6,6 +6,16 @@ are historical. This handoff records measured mechanisms, not learned capability
 
 ## Current checkpoint
 
+The user then explicitly requested deletion of the old Muse framework. The
+active local `muse-implementation` skill has been replaced with the cheap
+single-call default; its four coordinator/runtime/tmux reference files and
+reference symlink are deleted. The existing skill name/link still resolves.
+Repository `AGENTS.md` now makes the same default persistent. See the
+[removal receipt](evidence/muse-default-migration.json). Both generated batches,
+raw responses, saved run scripts and pre-existing evidence were hash-checked
+unchanged. No model call was made for this change. Historical launch scripts
+must not be reused as the workflow. Further generation is not queued.
+
 The user rejected the first batch's disproportionate generation overhead and
 requested a fresh batch with cost saving. The replacement is complete in
 `data/muse-economy-12/drafts/`: **12 drafts in one Muse completion**, no retries,
@@ -18,7 +28,7 @@ release. Prefer this bounded single-call workflow for small draft requests;
 do not restart the rejected coordinator/worker/observer workflow. The old batch
 and its evidence remain historical, unchanged. No further generation is queued.
 
-The user subsequently explicitly authorized Muse setup repair and **12 draft
+Earlier, the user explicitly authorized Muse setup repair and **12 draft
 scenarios**. This bounded batch is complete: two per domain, 17 source files,
 all development/model_proposal, zero human reviews and no approvals. See the
 [Muse draft report](muse-draft-pilot-2026-11-05.md) and

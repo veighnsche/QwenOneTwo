@@ -1,0 +1,33 @@
+{
+  "replaced_entrypoint": "/home/vince/.codex/skills/SKILL.md",
+  "new_sha256": "5efa5b68e27f05e2ba8e28c7ede0d9402d1236accaa3b12b2912e0a58b3af13e",
+  "removed_files": [
+    "/home/vince/.codex/skills/references/checklist-template.md",
+    "/home/vince/.codex/skills/references/runtime-records.md",
+    "/home/vince/.codex/skills/references/coordination.md",
+    "/home/vince/.codex/skills/references/tmux-launch.md"
+  ],
+  "removed_symlink": "/home/vince/.codex/skills/muse-implementation/references",
+  "previous_hashes": {
+    "/home/vince/.codex/skills/SKILL.md": "feb1504b0987631e926e6a1773f42667534f8b82b07a6b51fe726fcc1aae023c",
+    "/home/vince/.codex/skills/references/checklist-template.md": "4098149f33da12104dd08ddd97a70f3d18c50b9c88c70c8a231c9db3011eff82",
+    "/home/vince/.codex/skills/references/runtime-records.md": "89017f924312a750e090a4feba924dd8c558aefb550ad03d3df10836f249144f",
+    "/home/vince/.codex/skills/references/coordination.md": "2c7350f8e129be5c838b9f2daf77b73adbf170ba27dbb430f7766128257eb37d",
+    "/home/vince/.codex/skills/references/tmux-launch.md": "6335da2389776d154d6a569c7da92ed3cb1a46b24eb84eabf7e9f78391118180"
+  },
+  "compatibility_entrypoint": "/home/vince/.codex/skills/muse-implementation/SKILL.md",
+  "paid_calls": 0,
+  "preservation": {
+    "files_checked": 133,
+    "all_unchanged": true,
+    "roots": [
+      "data/muse-pilot-20261105T191615Z",
+      "data/muse-economy-12",
+      "docs/evidence (pre-existing files)"
+    ],
+    "manifest_path": "data/muse-default-migration/preservation-before.json",
+    "manifest_sha256": "3d03fc41f09a4f03f3cfccad67b99280bf9197611af32c59b5dd3b4c83cbb1c9"
+  },
+  "validation": "skill-creator quick_validate: Skill is valid!; old reference paths absent; compatibility skill link resolves to replacement",
+  "scope": "Active instructions replaced and obsolete references deleted. Archived run files remain evidence. No model call, training, deployment or unrelated service change."
+}

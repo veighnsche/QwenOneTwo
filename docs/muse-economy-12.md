@@ -62,3 +62,21 @@ No training, fitting, service changes or deployment occurred. Next unfinished
 work is independent human review/adjudication and the existing
 provenance-preserving pilot admission reconciliation. No further generation is
 authorized by this report or queued automatically.
+
+## Default workflow replacement
+
+At the user's subsequent request, the old active orchestration framework was
+removed. `/home/vince/.codex/skills/SKILL.md` now defines the single-call workflow;
+the compatible `muse-implementation/SKILL.md` link resolves to it. The four old
+references (`checklist-template.md`, `runtime-records.md`, `coordination.md`,
+`tmux-launch.md`) and the skill's `references` link were deleted. Repository
+`AGENTS.md` records the same default. Low reasoning, one model step, disabled
+reminders/tools and no automatic retry apply to future explicitly requested
+Muse work; Codex applies and validates results locally.
+
+Both completed run directories and all pre-existing portable evidence are
+preserved. Saved launch scripts remain solely as historical evidence, not active
+entrypoints. Shared Muse/tmux installations and unrelated services were not
+removed or altered. Skill validation passed without another model call. The
+[migration receipt](evidence/muse-default-migration.json) records the removed
+paths, replacement skill hash and preservation check.
