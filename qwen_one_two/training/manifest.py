@@ -13,7 +13,8 @@ OWNERS = ('architecture-and-training-plan.md','latent-packet-codec.md','typed-va
           'numeric-profile-v1.md','numeric-verification.md','codec-feedback-precision-v3.md',
           'codec-1024-protocol-v1.md','training-input-rules-v1.md','clean-test-construction-v1.md',
           'module-and-optimizer-contract-v1.md','training-run-profile-v1.md',
-          'loss-configuration-and-training-schedule.md','scalar-row-handling.md','data-operations.md')
+          'loss-configuration-and-training-schedule.md','scalar-row-handling.md','data-operations.md',
+          'reviewed-release-format-v1.md')
 
 
 def file_hash(path):

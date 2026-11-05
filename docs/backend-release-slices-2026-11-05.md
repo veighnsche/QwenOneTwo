@@ -103,3 +103,26 @@ remain unchanged. Raw inspection receipt:
 `data/backend-release-20261105/loaded-1024-evidence.json`. A fresh-process import
 again confirms no torch/model runtime is loaded. No GPU workload or optimizer
 step occurred in this continuation.
+
+## Final evidence and next unfinished slice
+
+After the final numeric pass-marker validation, **14/14 affected numeric/driver
+tests passed in 0.312 s**. Commands, exact log hashes and test-source hashes are
+in the [portable validation](evidence/backend-release-validation-2026-11-05.json).
+The [new backend profile](evidence/backend-profile-release-v1.json) pins this
+continuation's sources/contracts and verifies the same base/Qev/diagnostic
+artifacts. Its SHA256 is
+`929ce379f69f5510a03504aebae1d7ac57f302c3a7f6dd7dba6565865b9d9776`.
+The prior backend profile and all numeric reports remain unchanged.
+Final static checks recomputed all 41 current source hashes, 18 contract hashes,
+four log hashes and test-source hashes; 85 local documentation links resolve.
+`git diff --check` passes, and codec sources are unchanged from `2da8e43`.
+
+Next unfinished slice: supply an actual independently reviewed pilot and named
+training release, then implement task-specific episode producers against those
+annotations and review semantic/promotion fixtures. No such reviews or semantic
+targets were invented here. The current loader can check their bytes and
+declarations, but cannot establish truthful review or derive semantic gold.
+Full A4 participating-buffer/auxiliary-graph memory qualification remains separate
+and requires the actual episode mix. No capability training is authorized by
+these engineering results. See the [updated handoff](next-agent-handoff.md).

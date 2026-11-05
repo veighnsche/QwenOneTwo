@@ -1,0 +1,80 @@
+{
+  "current_profile": {
+    "path": "docs/evidence/backend-profile-release-v1.json",
+    "sha256": "929ce379f69f5510a03504aebae1d7ac57f302c3a7f6dd7dba6565865b9d9776"
+  },
+  "existing_numeric_inspection": {
+    "aggregate_sha256": "3387858c77ea2de9c1d9eb500a29c5991d14ede997503de18d033f81146d43cf",
+    "archived_files_checked": 28,
+    "cases": 108,
+    "child_reports": {
+      "1024-port1": "ec66e5a66579162844f6e375608444b3fab325c4d1026adbc8e80d2328eb7af9",
+      "1024-port2": "18b6f85a7c39ace3471dfed5a982a9bcbe01b42fd9a0044d616773115b019248",
+      "1024-port3": "ff18569bdf757d3db94b63033a42bd69428f66e4e8213459b0ec76e2118e25b7"
+    },
+    "matrix_rerun": false,
+    "protocol": "v3-1024-v1",
+    "receipt_path": "data/backend-release-20261105/loaded-1024-evidence.json",
+    "receipt_sha256": "ac010b0b1ab016d168153269a84759e5b899ae49f8d3c319899230ff5fd1b295",
+    "source_snapshot_manifest_sha256": "be734000ad58c709a75e9d9841ff5ba83fc495b9bc2b97645e40f326b42b0737"
+  },
+  "gpu_workloads_this_continuation": 0,
+  "implementation_commits": [
+    "f385f04",
+    "5fe8e0b",
+    "4d96af1"
+  ],
+  "logs": {
+    "boundary-tests-final.log": {
+      "path": "data/backend-release-20261105/boundary-tests-final.log",
+      "result": "PASSED",
+      "seconds": 0.82,
+      "sha256": "5fa101db6a9d3b431006954b9929c53d4013bd376714766d1ffdf24df2272e20",
+      "tests": 36,
+      "workload": "model-free schema/metadata tests"
+    },
+    "evidence-tests.log": {
+      "path": "data/backend-release-20261105/evidence-tests.log",
+      "result": "PASSED",
+      "seconds": 0.95,
+      "sha256": "3e085ed10094436276bfb378cc5a5956433bf12173ecde4f395baac6d1cccf7a",
+      "tests": 42,
+      "workload": "model-free schema/metadata tests"
+    },
+    "qualification-final-tests.log": {
+      "path": "data/backend-release-20261105/qualification-final-tests.log",
+      "result": "PASSED",
+      "seconds": 0.312,
+      "sha256": "3bd201f7a025e1eff0549f7df90c54cf81ed691238cb890347cc81d81d68c3a2",
+      "tests": 14,
+      "workload": "model-free schema/metadata tests"
+    },
+    "release-tests-final.log": {
+      "path": "data/backend-release-20261105/release-tests-final.log",
+      "result": "PASSED",
+      "seconds": 0.637,
+      "sha256": "8dff45b1c7549b2f24dc0a120a0c9a412015b8c7098b5da4d01bebfccc2d2a8a",
+      "tests": 23,
+      "workload": "model-free schema/metadata tests"
+    }
+  },
+  "next_unfinished": "Actual independently reviewed pilot/training release, task-specific episode producers and semantic/promotion fixtures; full A4 training-memory qualification remains outstanding.",
+  "optimizer_updates_this_continuation": 0,
+  "preflight_imports_torch": false,
+  "real_pilot_or_review_created": false,
+  "scope": "release/driver/resume/numeric-report ingestion; no semantic approval, model workload or capability training",
+  "semantic_data_generated": false,
+  "tests_source_hashes": {
+    "tests/qualification_fixtures.py": "3c6654fc1b971c0e955e185a1bf75e4bf04057703345c16772886ffca1099f44",
+    "tests/release_fixtures.py": "97724cd2564cde611e32d56473ca53c504b4069bf0285af4fd95fb6ebbc71335",
+    "tests/test_training_checkpoint_gpu.py": "0a4e2e47a69c4236c5e175eac771cfa18ae193e4d87114ca50ccdfa9f505aaac",
+    "tests/test_training_clean_gpu.py": "61294464a49819bc29bc409ef0ecbe08e52a2f006155883a5b05444f9c11513b",
+    "tests/test_training_driver.py": "55208fdcf558dcd1b5eed6f13302870b430c7bbf06927efe8adcfdb9a70374e8",
+    "tests/test_training_engine_gpu.py": "9cd42159e631003e6ddf8abeb64b7f7ff4b5cdc61069b80c6e1a727c0aeb438d",
+    "tests/test_training_episodes_gpu.py": "865fc68beea0f2defd6737149ead482b8e409be702615a9736be60fc6e3090cb",
+    "tests/test_training_inputs.py": "abdf58bc7c685ed02ea02d62865fdc52202df6140c24f97b2c3fbf04d28bd575",
+    "tests/test_training_qualification.py": "93e36bf280ddd797cdb57ee5d49bd00f2ff68b9fdbfef20c5913fde0cb3e67ac",
+    "tests/test_training_release.py": "be0219fb4c116e8ab993f7c24c496a1db8e7163bfd7387c0308e25f8d763950a",
+    "tests/test_training_schedule.py": "4f7e3a453c0c5b65c57ea2c2a6d7d7b94f3b40cb3539821be7b624d8a2715efe"
+  }
+}

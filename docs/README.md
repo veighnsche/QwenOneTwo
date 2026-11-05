@@ -76,6 +76,8 @@ not override them. Future changes must update the owner and affected examples.
 | [Feedback v3 qualification](codec-feedback-results-2026-11-05.md) | Follow-up matrix evidence, cache/gradient/accounting results and the remaining scope limits |
 | [1024 qualification](codec-1024-results-2026-11-05.md) | Separate 108-case numeric pass, exact source provenance and memory limits |
 | [Backend slices](backend-slices-2026-11-05.md) | Contract fixes, F7/F3 builders, losses/accumulation, reference isolation and export/resume evidence |
+| [Release-boundary slices](backend-release-slices-2026-11-05.md) | Content-bound releases, pilot/sampler/driver identities, deterministic resumed exposures and actual numeric-evidence inspection |
+| [Reviewed release format v1](reviewed-release-format-v1.md) | Local source/review/approval bytes, immutable release snapshots, pilot/batch checks and driver ingestion |
 | [Post-proof expansion plan](post-proof-expansion-plan.md) | Conditional codec/runtime qualification, reviewed data, training phases, same-job frontend integration and release order after measured proof success |
 | [Losses and training schedule](loss-configuration-and-training-schedule.md) | Starting weights, eligibility masks, replay, forcing dimensions and joint-training advancement |
 | [Scalar rows](scalar-row-handling.md) | Private row indices, tied-table overrides, gradient ownership, vocabulary masking and precision/export |

@@ -12,7 +12,14 @@ results and limitations. No capability/reference fitting, bulk semantic data,
 frontend integration or deployment was performed. The Operating Table and other
 live services remain unchanged.
 
-Implementation/evidence commit: `abd8dcf`; this handoff follows it.
+Latest continuation implementation commit: `4d96af1`; this handoff follows it.
+The prior numeric/finite-guard evidence remains at `abd8dcf`, followed by the
+original final handoff at `2da8e43`. The new
+[release-boundary slices](backend-release-slices-2026-11-05.md) implement actual
+source/annotation/review/approval byte checks, immutable release snapshots,
+pilot/driver/sampler binding, exact resumed exposure cursors and a read-only
+loader for the existing numeric evidence. No real reviewed pilot was created.
+
 The original **324/324** v3 cases at 128/256/512 remain passed and were not rerun.
 The separate **108/108** `v3-1024-v1` matrix passed in **5598.540981531143 s**:
 one prefill/cache lineage, connected gradients, exact accounting, unchanged live
@@ -99,11 +106,28 @@ Two concurrent reference-objective attempts hit GPU OOM; sharing the identical
 vocabulary slice resolved the auxiliary retention defect and the affected GPU
 suite passed. No numeric matrix restart, tolerance relaxation or CPU fallback.
 
+Continuation validation: **42/42 model-free tests passed in 0.950 s**; after the
+final numeric Boolean-marker guard, the **14/14 affected numeric/driver tests
+passed in 0.312 s**. The new evidence loader separately validated the existing
+108-case aggregate, three child reports and 28 archived source/test files.
+Release/driver/qualification preflight imports no torch. These are metadata/schema
+checks, not new GPU/model runs. Tests use explicit temporary schema fixtures;
+their human/pass markers are never actual review or measured-model evidence.
+Exact log/test source hashes are in the
+[portable continuation validation](evidence/backend-release-validation-2026-11-05.json).
+
 ## Next unfinished slice / blockers
 
 **Integrate a genuinely reviewed pilot release with task-specific episode
 producers and semantic/promotion fixtures.** The driver accepts a complete-episode
 producer; it is not a source of reviewed annotations or a complete trained flow.
+The [release format](reviewed-release-format-v1.md) and read-only preflight now
+exist, so this prerequisite needs actual reviewed files, not another hash-string
+stub. Load both releases with `load_release`; construct the sampler using
+`Sampler.from_release`. Joint `Driver` construction requires a loaded
+`NumericEvidence`, supplied via `numeric=`, rather than a pass dictionary.
+The G1 prerequisite remains an explicit caller attestation. Content hashes
+establish bytes, not the identity/honesty of reviewers or semantic correctness.
 No approved pilot, independent semantic reviews, subjective gold labels, trained
 reference artifact or promotion evidence was fabricated. Follow data operations:
 120 fictional scenarios, 20 in each of six domains, actual independent reviews
@@ -133,6 +157,7 @@ passing these engineering slices. Full context/maximum budget remain unqualified
 |---|---|
 | `codec/` | Existing typed runtime, session, v3 arithmetic and qualification |
 | `training/inputs.py`, `clean.py`, `clean_packets.py` | F7 builders/provenance and fresh F3 artifacts/packets |
+| `training/release.py`, `qualification.py` | Content-checked release/pilot and existing numeric evidence ingestion; no model execution |
 | `training/losses.py`, `episodes.py` | Losses/masks and actual snapshot/session guards |
 | `training/engine.py`, `profile.py`, `sampler.py`, `driver.py` | CUDA component buffers/owners, scheduling and producer orchestration |
 | `training/reference.py`, `checkpoint.py`, `manifest.py` | Independent reference/T, small-weight export/resume and identity pinning |
@@ -151,8 +176,11 @@ Local inputs, never committed:
   [portable evidence](evidence/codec-feedback-v3-summary.json). Do not rerun for
   documentation-only or unrelated training-package changes.
 - New numeric raw bundle: `data/codec-qualification/1024-v1-20261105/`.
-- Backend logs: `data/backend-slices-20261105/`. Actual immutable identities and
-  source/contract hashes: [backend manifest](evidence/backend-profile-v1.json).
+- Backend logs: `data/backend-slices-20261105/`; continuation logs:
+  `data/backend-release-20261105/`. Current source/contract identities:
+  [continuation backend manifest](evidence/backend-profile-release-v1.json).
+  The [prior backend manifest](evidence/backend-profile-v1.json) remains unchanged
+  for the earlier slice evidence.
 
 Missing pinned artifacts block model execution; do not download another model,
 refit the diagnostic checkpoint or use CPU. The 1024 command is in its
