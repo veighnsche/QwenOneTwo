@@ -46,6 +46,10 @@ The official Qwen revision is `2fc06364715b967f1860aea9cf38778875588b17`. Qev is
 
 ## Implementation documentation
 
+Start a new agent with the [current handoff](docs/next-agent-handoff.md): it
+separates completed GPU qualification from remaining data, training, 1024-position
+checks, frontend migration and release work.
+
 The [latest G1 gate repair/rerun](docs/g1-gate-results-2026-11-05.md) PASSED bounded
 G1-core: 72 numeric cases at unchanged tolerances, 36 released continuations and
 all gate/cache/gradient/accounting/optimizer/base-integrity checks. Only the

@@ -1,5 +1,9 @@
 # QwenOneTwo documentation map
 
+For current measured status, artifact locations and remaining tasks, start with
+the [next-agent handoff](next-agent-handoff.md). The v3 324-case numeric matrix
+through 512 positions passes; learned semantic capability remains untrained.
+
 The [repository and artifact guide](repository-and-artifacts.md) explains what
 is included in GitHub, which evidence remains local and how to run from a clone.
 
@@ -12,15 +16,18 @@ The [final decision audit](final-decision-audit.md) records reconciled ambiguiti
 remaining interface/configuration freeze items and coding-readiness assessment.
 
 A1-A4 and B1 initial design profiles are recorded and consolidated in the
-specification. B1 fixes exact neural input encoding; implementation, matching
-reference vectors, approved artifacts and GPU evidence remain unperformed.
-A recorded profile is not a run.
+specification. The full codec/runtime, engineering vectors and v3 numeric
+qualification through 512 positions now have scoped implementation/evidence.
+Approved semantic datasets, reference/capability training, 1024 qualification
+and frontend migration remain outstanding. A recorded design is not trained
+capability; use the current handoff and measured reports for completion status.
 
 The [Astra review](review-astra-2026-11-05.md) is a historical independent report,
 not a live claim about subsequently edited sources. B1 section 11 records the
 role/target mapping response to F2/F4; the resource owner records the F1 admission
-response. F1-F8 responses are now recorded; the current audit retains independent
-re-review, implementation, artifact and empirical validation work.
+response. F1-F8 responses are recorded; independent review of the later
+implementation, reviewed training artifacts and further empirical validation
+remain outstanding.
 
 ## Authority and status
 
@@ -62,7 +69,7 @@ not override them. Future changes must update the owner and affected examples.
 | [G1 gate measured results](g1-gate-results-2026-11-05.md) | Latest bounded G1-core PASSED: 72 numeric cases, 36 released continuations, 144 gate labels and 612 unforced decisions; no expansion |
 | [G1 gate repair](g1-gate-repair-v1.md) | Undertrained readout and supervision-counter mismatch, bounded GPU-only head fit, unchanged four-way argmax and stronger anti-collapse checks |
 | [Full codec implementation](full-codec-implementation.md) | Full typed transport, learned writer interfaces, immutable memory, resource reservations and one-cache runtime; no training/frontend |
-| [Full codec qualification](codec-qualification-results-2026-11-05.md) | GPU component/reference results and blocked 512-position BF16/FP32 gate; incomplete qualification is explicit |
+| [Original full codec qualification](codec-qualification-results-2026-11-05.md) | Historical component/reference results and failed 512-position BF16 arithmetic gate; retained alongside the later v3 pass |
 | [Feedback precision v3](codec-feedback-precision-v3.md) | Serial feedback diagnosis, projection ablations and explicit BF16-storage/FP32-feedback arithmetic revision; unchanged tolerances |
 | [Feedback v3 qualification](codec-feedback-results-2026-11-05.md) | Follow-up matrix evidence, cache/gradient/accounting results and the remaining scope limits |
 | [Post-proof expansion plan](post-proof-expansion-plan.md) | Conditional codec/runtime qualification, reviewed data, training phases, same-job frontend integration and release order after measured proof success |

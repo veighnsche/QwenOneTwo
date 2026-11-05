@@ -1,5 +1,11 @@
 # Implementation handoff and remaining decisions
 
+Current execution handoff: [next-agent handoff](next-agent-handoff.md).
+The full codec/runtime and 324-case v3 numeric matrix through 512 positions
+are implemented and passed. Training, clean reviewed data, 1024 qualification
+and frontend migration remain outstanding. The older preparation/status text
+below is a historical design checklist, not the current completion report.
+
 Status: documentation consolidation and implementation plan. No implementation,
 model workload, service change or deployment was performed or authorized by
 writing this file. Follow the [specification](architecture-and-training-plan.md)

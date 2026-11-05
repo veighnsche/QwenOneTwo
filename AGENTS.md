@@ -1,5 +1,8 @@
 # QwenOneTwo
 
+Read `docs/next-agent-handoff.md` for the current measured status, artifact paths,
+remaining work and scope boundaries before continuing implementation.
+
 All model workloads must run on an explicitly selected CUDA GPU. Use the RTX
 3090 UUID GPU-225509c3-d702-6c27-de03-76b5e99b33b1. No CPU fallback for inference,
 training, extraction, fitting or real-model tests. Ordinary static tests may use CPU.
