@@ -53,3 +53,16 @@ class ScheduleTests(unittest.TestCase):
         events=('a','b','c','d')
         self.assertEqual(guidance_prefix('guided_joint',1,events,first_incompatible=2),('a','b'))
         self.assertEqual(guidance_prefix('transition',2000,events),())
+
+    def test_resume_cannot_skip_or_replace_scheduled_exposures(self):
+        from copy import deepcopy
+        sampler=Sampler(self.rows(),'guided_joint',release_hash='a'*64)
+        sampler.next_window(); state=sampler.state_dict()
+        for mutate in (lambda s:s['cursors'][0].update(value=999),
+                       lambda s:s['cursors'].append({'key':['unknown'],'value':1}),
+                       lambda s:s.update(windows=2)):
+            bad=deepcopy(state); mutate(bad)
+            before=sampler.state_dict()
+            with self.assertRaisesRegex(ValueError,'scheduled exposures'):
+                sampler.load_state_dict(bad)
+            self.assertEqual(sampler.state_dict(),before)

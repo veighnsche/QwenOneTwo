@@ -19,7 +19,9 @@ class Sampler:
     This is a training exposure recipe, never a runtime invocation quota.
     """
     def __init__(self, rows, phase, *, release_hash, seed=17):
-        check(phase in PHASES and seed == 17 and len(release_hash) == 64, 'sampler profile')
+        from .release import sha256
+        sha256(release_hash)
+        check(phase in PHASES and seed == 17, 'sampler profile')
         self.phase, self.release_hash, self.seed = phase,release_hash,seed
         self.rows = {row['id']:dict(row) for row in rows}
         check(len(self.rows) == len(rows), 'duplicate sample ID')
@@ -40,6 +42,21 @@ class Sampler:
             self.pools[key].append(row['id'])
         self.cursors = defaultdict(int)
         self.windows = 0
+
+    @classmethod
+    def from_release(cls, release, phase):
+        from .release import ReviewedRelease
+        check(isinstance(release, ReviewedRelease), 'load a reviewed training release first')
+        return cls(release.sampler_rows(), phase, release_hash=release.identity)
+
+    def assert_release(self, release):
+        """Verify every ID and operation/status/domain, not just category names."""
+        from .release import ReviewedRelease
+        check(isinstance(release, ReviewedRelease), 'load a reviewed training release first')
+        expected = {row['id']:row for row in release.sampler_rows()}
+        check(self.release_hash == release.identity, 'sampler/release identity mismatch')
+        check(self.rows == expected and self.catalogue_hash == digest(canonical(expected)),
+              'sampler/release catalogue mismatch')
 
     def _counter(self, key):
         value = self.cursors[key]; self.cursors[key] += 1
@@ -83,7 +100,13 @@ class Sampler:
     def load_state_dict(self,state):
         for field in ('phase','release_hash','catalogue_hash','seed'):
             check(state[field] == getattr(self,field), 'sampler identity mismatch: '+field)
-        check(0 <= state['windows'] <= PHASES[self.phase], 'sampler window cursor')
+        check(type(state['windows']) is int and 0 <= state['windows'] <= PHASES[self.phase], 'sampler window cursor')
         cursors = {tuple(item['key']):item['value'] for item in state['cursors']}
         check(len(cursors) == len(state['cursors']) and all(type(v) is int and v >= 0 for v in cursors.values()), 'sampler cursor')
+        # Window number alone must not allow skipping/replacing exposures. This
+        # is identifier-only schedule replay, never a model or rollout replay.
+        expected = Sampler(list(self.rows.values()), self.phase, release_hash=self.release_hash, seed=self.seed)
+        for _ in range(state['windows']):
+            expected.next_window()
+        check(cursors == dict(expected.cursors), 'sampler cursors do not match scheduled exposures')
         self.windows = state['windows']; self.cursors = defaultdict(int,cursors)

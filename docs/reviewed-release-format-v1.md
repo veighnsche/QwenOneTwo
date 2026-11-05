@@ -139,3 +139,27 @@ by passing these mechanical checks. The CLI explicitly reports
 The command either emits mechanical counts/identity or exits 1 with `REJECTED`.
 It imports no model runtime and makes no model/optimizer calls. No real release
 is bundled. Data and review artifacts stay under ignored local artifact paths.
+
+Pass `--pilot /path/to/pilot` to check the linked pilot identity and exact
+family/input leakage between those two releases. Pilot development families may
+be retained as development audit material, but cannot be relabelled as training.
+Near-duplicate detection and review of other releases remain external duties.
+
+## Driver and schedule binding
+
+Construct the sampler with `Sampler.from_release(training_release, phase)` and
+the native driver with `Driver(window, sampler, training_release, pilot_release,
+prerequisites)`. The old raw-record/parent/hash-string driver arguments are
+removed; there are no repository callers to migrate. The driver checks the linked
+pilot and exact catalogue, including receiver/writer operation, reference status
+and domain, before any producer runs. Every window rechecks catalogue integrity.
+
+Each scheduled producer receives a fresh JSON copy of the original record.
+Mutating that copy cannot change later repeated exposures. Window reports bind
+the training/pilot manifest identities. Producer failure preserves the failed
+sample IDs/cursor, aborts the active window and requires explicit resume.
+
+Sampler resume recomputes the identifier-only deterministic schedule to verify
+that its counters agree exactly with its window number. This never replays a
+model/rollout. Invented, skipped or foreign cursor entries reject transactionally.
+Actual Session, graph and optimizer checks retain their separate CUDA evidence.

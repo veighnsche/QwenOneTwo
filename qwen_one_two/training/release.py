@@ -280,7 +280,8 @@ def load_release(path, *, expected_hash=None):
         check(len(selected) == 120 and len({records[k]['family'] for k in selected}) == 120, 'pilot needs 120 independent scenario families')
         check(len(duplicates) == 120, 'pilot repeats identical human inputs')
         check(all(records[k].get('pilot') is True and records[k].get('fictional') is True
-                  and not records[k]['parents'] for k in selected), 'pilot root/fictional provenance')
+                  and records[k]['origin'] == 'authored' and not records[k]['parents'] for k in selected),
+              'pilot authored root/fictional provenance')
         check(Counter(records[k].get('domain') for k in selected) == Counter({d:20 for d in DOMAINS}), 'pilot domain allocation')
     if purpose == 'locked':
         check(not any(records[k].get('design_exposed') or records[k].get('test_driven_tuning') for k in selected),
@@ -307,13 +308,35 @@ def load_release(path, *, expected_hash=None):
     return ReviewedRelease(identity, raw, records, assets, summary, _token=_TOKEN)
 
 
+def bind_pilot(training, pilot):
+    """Bind the prerequisite and catch exact leakage between these two releases."""
+    check(isinstance(training, ReviewedRelease) and isinstance(pilot, ReviewedRelease),
+          'loaded training and pilot releases required')
+    check(training.manifest['purpose'] == 'training' and pilot.manifest['purpose'] == 'pilot',
+          'training/pilot release purpose')
+    check(training.manifest['pilot_release_sha256'] == pilot.identity, 'training/pilot release binding')
+    train_splits, pilot_splits = training.manifest['family_splits'], pilot.manifest['family_splits']
+    check(all(train_splits[k] == pilot_splits[k] for k in set(train_splits) & set(pilot_splits)),
+          'pilot/training family split leakage')
+    pilot_inputs = {digest(canonical(r['human_input'])):r['split'] for r in pilot.records.values()
+                    if isinstance(r.get('human_input'), dict)}
+    for record in training.records.values():
+        if isinstance(record.get('human_input'), dict):
+            fingerprint = digest(canonical(record['human_input']))
+            check(fingerprint not in pilot_inputs or pilot_inputs[fingerprint] == record['split'],
+                  'pilot/training duplicate input leakage')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('release')
     parser.add_argument('--expected-hash')
+    parser.add_argument('--pilot', help='also check training/pilot identity and cross-release split leakage')
     args = parser.parse_args()
     try:
         release = load_release(args.release, expected_hash=args.expected_hash)
+        if args.pilot:
+            bind_pilot(release, load_release(args.pilot))
     except (ValueError, KeyError, TypeError, OSError) as exc:
         parser.exit(1, 'REJECTED: '+str(exc)+'\n')
     print(json.dumps(release.summary, sort_keys=True))
