@@ -54,6 +54,10 @@ class ReferenceQualificationTests(unittest.TestCase):
     def test_hash_or_frozen_flag_is_not_a_qualification_attestation(self):
         with self.assertRaisesRegex(ValueError,'measured'):
             ReferenceEvidence('a'*64,'b'*64,'c'*64)
+        from qwen_one_two.training.component_producer import ComponentProducer
+        with self.assertRaisesRegex(ValueError,'measured reference evidence'):
+            ComponentProducer(None,None,None,object(),checkpoint_hash=None,profile_hash=None,
+                              reference_evidence={'qualified':True},diagnostic_reference=True)
 
     def intervention_release(self,category,original,changed,*,include_positive=True):
         rows=[]

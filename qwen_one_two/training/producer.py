@@ -102,17 +102,30 @@ class EpisodeProducer:
     Training guidance changes actions/structure, never substitutes latent slots
     or the evaluator result. Free phases run the production gate and writer.
     """
-    def __init__(self, backbone, codec, release, *, reference=None, checkpoint_hash=None, profile_hash=None):
+    def __init__(self, backbone, codec, release, *, reference=None, checkpoint_hash=None, profile_hash=None,
+                 reference_evidence=None,diagnostic_reference=False):
         check(isinstance(release,ReviewedRelease), 'load a reviewed release first')
         self.backbone,self.codec,self.release = backbone,codec,release
+        self.reference,self.reference_evidence=reference,reference_evidence
+        self.diagnostic_reference=diagnostic_reference
         self.component = None
+        from .reference_qualification import ReferenceEvidence
+        check(reference_evidence is None or (isinstance(reference_evidence,ReferenceEvidence) and reference is not None),
+              'load measured reference evidence for this artifact')
+        check(not (reference_evidence is not None and diagnostic_reference),'qualified/diagnostic reference modes are distinct')
         if reference is not None:
+            from .reference_qualification import ReferenceEvidence
+            if isinstance(reference_evidence,ReferenceEvidence):reference_evidence.assert_reference(reference)
+            elif not diagnostic_reference:
+                raise PrerequisiteError('measured reference qualification required; freezing untrained weights is insufficient')
             from .component_producer import ComponentProducer
             self.component=ComponentProducer(backbone,codec,release,reference,
-                checkpoint_hash=checkpoint_hash,profile_hash=profile_hash)
+                checkpoint_hash=checkpoint_hash,profile_hash=profile_hash,
+                reference_evidence=reference_evidence,diagnostic_reference=diagnostic_reference)
         self.last_report = None
 
     def __call__(self,row,phase,window):
+        if self.reference_evidence is not None:self.reference_evidence.assert_reference(self.reference)
         check(canonical(row)==canonical(self.release.record(row['id'])),'record/release drift')
         check(self.release.manifest['purpose']!='locked','locked collection is not an episode-development source')
         check(any(e['id']==row['id'] and e['selected'] for e in self.release.manifest['records']), 'unselected episode record')
@@ -157,23 +170,39 @@ class EpisodeProducer:
                   'continuation_loss':'masked after predicted requests/returns',
                   'correction_losses':'masked: prescribed interventions are not observed corrections'}
         session.episode_report = report
+        report['diagnostic_reference']=self.diagnostic_reference
+        qualified=self.reference_evidence is not None and not self.diagnostic_reference
+        report['reference_semantics_qualified']=qualified
         self.last_report = report
         teacher_forcing=plan.target is not None and phase in {'components','guided_joint'}
+        compatible_prefix=bool(plan.calls)
         try:
             if plan.during_answer and plan.calls:
                 session.close()
-            for control in plan.calls:
+            for index,control in enumerate(plan.calls):
+                targets=None
+                if self.reference is not None:
+                    from .binding import request_targets
+                    targets=request_targets(self.reference,self.release,row,plan.prompt.encode(),call_index=index,
+                        source_ref=source,source_record=rt.registry.get(source,Kind.SOURCE))
                 # One incompatible return ends the compatible guidance prefix.
                 # Without semantic verification no later annotated call is safe.
-                if not self._guided_call(session,source,control,book,report,plan.limit):
+                if not self._guided_call(session,source,control,book,report,plan.limit,targets=targets):
+                    compatible_prefix=False
                     break
-                if len(plan.calls)>1:
+                if not report['calls'][-1].get('compatible_return',False):
+                    compatible_prefix=False
                     report['guidance_stopped']='first return has no verified continuation binding'
                     break
+            expected=len(row.get('trajectory',{}).get('calls',[])) if plan.category=='interleaved' else 1
+            if compatible_prefix and len(plan.calls)==expected and phase in {'components','guided_joint'}:
+                plan=replace(plan,target=row['supervision']['continuations'][0])
+                teacher_forcing=True
+                report['continuation_loss']='supported by exact request and actual return bindings'
             # Direct and language replay teacher forcing are safe only while
             # no model decision has changed the task state. Afterwards use the
             # real gate/native path, with unsupported continuation losses masked.
-            if teacher_forcing and not rt.calls:
+            if teacher_forcing and (not rt.calls or compatible_prefix):
                 if rt.phase==0:session.close()
                 targets = self.backbone.tokenizer.encode(plan.target,add_special_tokens=False)
                 check(len(targets) <= rt.answer, 'answer target exceeds A; never truncate')
@@ -209,7 +238,7 @@ class EpisodeProducer:
                           decision_forcing=bool(plan.calls) or teacher_forcing,budget_override=plan.override)
         exposure.validate()
         report.update(summary=session.summary(),eligible_components=sorted(losses),
-                      actual_returns_only=True,reference_semantics_qualified=False)
+                      actual_returns_only=True)
         return session,losses,exposure
 
     @staticmethod
@@ -217,7 +246,7 @@ class EpisodeProducer:
         report['failure']='complete episode exceeds training ceiling; all prefix losses discarded'
         session.runtime.terminate('Failed',usable=False,emit_end=False)
 
-    def _guided_call(self,s,source,control,book,report,limit):
+    def _guided_call(self,s,source,control,book,report,limit,targets=None):
         """Teacher-forced structure with live R semantic emissions, actual D result."""
         import torch
         from ..codec.schema import Port,Kind,Role
@@ -274,13 +303,27 @@ class EpisodeProducer:
         d=writer.draft
         packet=rt.seal(d.question,d.target,d.evidence,d.rubric,d.candidates)
         if rt.position+rt.call.position_hold>limit:raise EpisodeLengthError()
+        labels=None;binding={'supported':False,'reason':'reference qualification missing'}
+        if targets is not None:
+            from .binding import formation_losses,bind_labels
+            formation_losses(self.reference,rt.registry,packet.snapshot,targets,book)
+            labels,binding=bind_labels(self.reference,self.reference_evidence,rt.registry,packet.snapshot,targets,runtime=rt)
         inputs,evaluated,_=s.evaluate(packet)
         item={'operation':operation,'snapshot':packet.snapshot.identity,'request_positions':len(packet),
               'input_shape':list(inputs.shape),'input_dtype':str(inputs.dtype),'cuda':inputs.is_cuda,
               'text_tokens_for_invocation':0,'predicted_status':int(evaluated['status_logits'].argmax())+1,
-              'selected_by':'actual Qev heads','semantic_targets_applied':False}
+              'selected_by':'actual Qev heads','semantic_targets_applied':labels is not None,'binding':binding}
         report['calls'].append(item)
         returned=decode_result(self.codec,rt,evaluated)
+        if labels is not None:
+            from .episodes import decision_losses
+            from .binding import compatible_return
+            actual=rt.registry.get(rt.call.result,Kind.RESULT).status
+            values,masks=decision_losses(rt.registry,packet.snapshot,actual,evaluated,labels)
+            for name,value in values.items():
+                book.add(name,'call-'+str(rt.call.ordinal),value,role='reason' if name=='alignment' else None)
+            item['eligibility']=masks
+            item['compatible_return']=compatible_return(rt.registry,rt.call.result,labels,targets)
         delivered=s.deliver(returned)
         item.update(return_positions=len(returned) if returned is not None else 0,consumed=delivered)
         return delivered

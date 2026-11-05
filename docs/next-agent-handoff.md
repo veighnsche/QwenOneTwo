@@ -1,4 +1,4 @@
-# Next-agent handoff — 2026-11-05
+# Next-agent handoff — 2026-11-06
 
 Read this first for current status, then the
 [implementation specification](architecture-and-training-plan.md) and its linked
@@ -6,6 +6,50 @@ topic contracts. Historical reports describe their recorded sources and runs.
 This handoff records measured mechanisms, not learned capability.
 
 ## Current checkpoint
+
+The user requested the remaining reference qualification/binding work with
+existing data, **no generation, agents or training**. The read-only runner,
+qualification-evidence gate and conservative actual-content binding are now
+implemented. See the [reference/binding report](reference-binding-results-2026-11-06.md)
+and [portable receipt](evidence/reference-binding-v1.json).
+
+**Actual learned reference qualification is BLOCKED.** No compatible trained
+reference artifact was found among 107 local safetensors headers. The explicitly
+untrained frozen reference recovered **0/100 exact canonical annotations** (all
+100 unresolved, ten per role). The same tensor fingerprint separated **100/100
+role contrast groups**, reused from 40 existing reviewed intervention pairs
+across 39 families. No new contrasts/scenarios were authored or reviewed. The
+missing standalone contrast manifest was resolved by materializing the existing
+reviewed transformations and identical same-family positives. Contrast separation
+alone cannot satisfy the >=95% recovery / >=90% contrast gate. No qualification
+was granted and no fitting was performed.
+
+**63/63 model-free checks passed in 2.647 s; nine distinct focused GPU checks
+passed** (5/5 in 37.414 s, 3/3 in 53.287 s, and 3/3 in 18.618 s with two relevant
+comparison reruns). Alignment/reconstruction retain input gradients through frozen
+T without live-adapter/reference gradients in the isolated engineering fixture.
+Binding checks actual role contents, source identity/states/coordinates, rubric
+metadata and stable candidate identities, including reorderings. Outcome labels
+require a measured qualified reference and current admitted snapshot; actual
+return compatibility additionally gates continuations and later guided calls.
+Unresolved learned deviations remain masked; a decoded gloss alone cannot approve
+them. Explicit diagnostic reference episodes reject optimizer accumulation.
+
+`scripts/qualify_reference.py` is read-only. Supply the pinned development release
+and a frozen reference bundle to qualify; `--diagnostic-untrained` is explicitly
+nonqualifying. `--contrast-only` avoids repeating completed RF measurements and
+cannot grant qualification. Actual diagnostic/preflight exits were 2/BLOCKED.
+The original setup rejections and exact recovery/contrast source snapshots are
+retained. Existing annotation release hashes, services and prior numeric evidence
+remain unchanged. Model-service calls, agents and optimizer updates were zero.
+
+**Next unfinished:** a genuinely trained frozen reference artifact and its passing
+qualification. That requires later fitting authorization; do not create one under
+the current no-training instruction. Existing data already supplies the recovery
+and applicable contrast cases. After qualification, enable supported producer
+bindings and perform the outstanding full-trainer memory and semantic/promotion
+checks. Observed correction materialization remains distinct. No further data
+generation is queued. Earlier missing-runner/binding statements below are history.
 
 The user authorized episode production and proof of latent Qev invocation using
 existing data, **no generation, agents or training**. Implemented:
@@ -305,7 +349,10 @@ the exact local release and pinned hash above; preserve model-proposal origin
 and development split. Its 13-cell coverage is pilot coverage, not completion
 of the separate training or promotion collections. No new generation is queued.
 
-**Qualify reference semantics and bind actual writer packets to reviewed losses.**
+**Obtain a trained reference artifact under later authorization and run its gate.**
+The runner, formation objectives, exact actual-packet binding and compatible-return
+gates are now implemented as recorded above. No actual learned reference pass
+exists; diagnostic fixtures cannot enter optimizer accumulation.
 The producer slice above supplies task-specific native and clean component
 callbacks. It does not establish reference recovery, writer meaning, compatible
 multi-call continuations, observed correction materialization or promotion.
@@ -349,6 +396,7 @@ passing these engineering slices. Full context/maximum budget remain unqualified
 | `codec/` | Existing typed runtime, session, v3 arithmetic and qualification |
 | `training/inputs.py`, `clean.py`, `clean_packets.py` | F7 builders/provenance and fresh F3 artifacts/packets |
 | `training/producer.py`, `component_producer.py` | Native/clean complete-episode callbacks and existing annotation materialization; no auto-launch |
+| `training/reference_qualification.py`, `binding.py`, `scripts/qualify_reference.py` | Read-only recovery/contrast gate, qualified-reference evidence and actual-content/return binding |
 | `training/release.py`, `qualification.py` | Content-checked release/pilot and existing numeric evidence ingestion; no model execution |
 | `training/losses.py`, `episodes.py` | Losses/masks and actual snapshot/session guards |
 | `training/engine.py`, `profile.py`, `sampler.py`, `driver.py` | CUDA component buffers/owners, scheduling and producer orchestration |

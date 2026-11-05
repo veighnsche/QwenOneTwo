@@ -1,0 +1,181 @@
+{
+  "format": "qot-reference-binding-v1",
+  "created_utc": "2026-11-05T23:04:11.331724+00:00",
+  "implementation": "qualification runner and conservative binding integrated",
+  "actual_reference_qualification": {
+    "status": "BLOCKED",
+    "reason": "no compatible trained frozen reference artifact; no fitting authorized",
+    "reference_sha256": "411438b8e8e58218b7d9c3d409b5c9e68a8be7ead2b5cdb460ae70aa73b7f9e2",
+    "recovery": {
+      "scheduled": 100,
+      "executed": 100,
+      "exact": 0,
+      "unresolved": 100
+    },
+    "contrast": {
+      "scheduled": 100,
+      "passed": 100
+    },
+    "recovery_rule": "exact autoregressive canonical match; nonexact outputs unresolved",
+    "recovery_roles": {
+      "question": 10,
+      "target": 10,
+      "alternative": 10,
+      "dimension": 10,
+      "conditions": 10,
+      "zero": 10,
+      "one": 10,
+      "midpoint": 10,
+      "key": 10,
+      "reason": 10
+    },
+    "contrast_roles": {
+      "question": 40,
+      "dimension": 10,
+      "conditions": 20,
+      "zero": 10,
+      "one": 20
+    },
+    "contrast_pairs": 40,
+    "contrast_families": 39,
+    "diagnostic_untrained": true,
+    "qualification_granted": false
+  },
+  "checks": {
+    "model_free": {
+      "passed": 63,
+      "elapsed_seconds": 2.647,
+      "log": "cpu-complete.log"
+    },
+    "gpu_binding": {
+      "passed": 5,
+      "elapsed_seconds": 37.414,
+      "log": "gpu-binding-initial.log"
+    },
+    "gpu_integration": {
+      "passed": 3,
+      "elapsed_seconds": 53.287,
+      "log": "gpu-integration.log"
+    },
+    "gpu_permutation": {
+      "passed": 3,
+      "elapsed_seconds": 18.618,
+      "log": "gpu-permutation.log",
+      "repeated_after_relevant_change": 2
+    },
+    "gpu_distinct_passed": 9,
+    "input_gradient_norm": 0.25784578919410706,
+    "diagnostic_report_load": "rejected: diagnostic fixtures cannot qualify a reference"
+  },
+  "gpu_uuid": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+  "profile": "b1-full-v3-feedback-fp32-vocab-compensated2-temporal32",
+  "optimizer_updates": 0,
+  "reference_fitting_updates": 0,
+  "model_service_calls": 0,
+  "agents": 0,
+  "source_sha256": {
+    "qwen_one_two/training/reference.py": "d736ff05e0fb31a0db9f848e273654134bf6a15220429023f0a0fc20a4bf2988",
+    "qwen_one_two/training/reference_qualification.py": "55957afb8c59ff2d7c244c76c5a805afe4d58398a55cbcaab1a8845675f50a0f",
+    "qwen_one_two/training/binding.py": "a94fd01f32346cc35f95c1c3053743c3694d75cc2f958aaabfe4f211d038f28f",
+    "qwen_one_two/training/producer.py": "72c3838cd429b7d55a51aa225e4c03e05ce0d9a581e5447fdb7d17238b1e2184",
+    "qwen_one_two/training/component_producer.py": "7f3bd6fe5522eb5311e67365f1daa37112ce297d76dc1ef1ebd7d9de314b81b1",
+    "qwen_one_two/training/episodes.py": "0181ca87dff0f2cf4c3f7552aa197b9b67cd3bc0f1ad0b73e84ddcf284a7a5a5",
+    "scripts/qualify_reference.py": "9e5f2918d5b36f54954787c37d4d172a36b24cf60cfb437687415c7a32b76d0b",
+    "tests/test_reference_qualification.py": "0828994d5744260ab6098d2ca7ef7ef80b074077594f71ba1653beb9f1c28328",
+    "tests/test_semantic_binding_gpu.py": "a9e7e596cdab6b42ed11e25a68f2cd7428c3d769b978c1b232f2d3de6004e3a2",
+    "tests/test_episode_producer_gpu.py": "bf14edfc9850044fcdbd3182e0672b06781d9b6e851b94b8ae99fdac8c000846"
+  },
+  "artifacts": {
+    "cpu-initial.log": {
+      "path": "data/reference-binding-20261105/cpu-initial.log",
+      "sha256": "c3e110e0fac513bf0ecbe45eda75d2ff22f8523bbbed601821602db7f8606d26"
+    },
+    "gpu-binding-initial.log": {
+      "path": "data/reference-binding-20261105/gpu-binding-initial.log",
+      "sha256": "2c957badcd5534897f653df47c6a951ffb86c137cc76dd8043a5ad4ab1fc5ccf"
+    },
+    "preflight.json": {
+      "path": "data/reference-binding-20261105/preflight.json",
+      "sha256": "a82d2446f74b9d5989caff03d7a4d0d968216076f55a94ed2aa5503ee2cc2d99"
+    },
+    "artifact-inventory.json": {
+      "path": "data/reference-binding-20261105/artifact-inventory.json",
+      "sha256": "3b2816d30054dfc3c6b7c53b8b2e5f2d7e9a05b088c830e7284a9a772fb67865"
+    },
+    "recovery.log": {
+      "path": "data/reference-binding-20261105/recovery.log",
+      "sha256": "bf0398154cc188c473a607e770e0d492bcb19a1d108ffab47c848ee881ef2019"
+    },
+    "cpu-final.log": {
+      "path": "data/reference-binding-20261105/cpu-final.log",
+      "sha256": "d226485411380d0f547447cf0662303ca1963649890bdf16afa64fa599b4321f"
+    },
+    "recovery-final.log": {
+      "path": "data/reference-binding-20261105/recovery-final.log",
+      "sha256": "e0f59c59278787bc94af5b0e62839091cc9f10ec71013ab25a0f1bba5c42b857"
+    },
+    "untrained-recovery.json": {
+      "path": "data/reference-binding-20261105/untrained-recovery.json",
+      "sha256": "260d8ae3c060024efb90f556426c71c3c8337d922cf00cc09555d728aa7f3c53"
+    },
+    "gpu-integration.log": {
+      "path": "data/reference-binding-20261105/gpu-integration.log",
+      "sha256": "34b90bbd4971ee15c0d4f00c11383863bff95fc444e3353df61bf670749bb6e6"
+    },
+    "gpu-permutation.log": {
+      "path": "data/reference-binding-20261105/gpu-permutation.log",
+      "sha256": "7358e289f955385d4a7b1d268dffbbf9d4d236dbbb048d1132e0c6aca46df018"
+    },
+    "contrasts.log": {
+      "path": "data/reference-binding-20261105/contrasts.log",
+      "sha256": "d62afedb4f35c542641417b122c9d926b167c814d45abcc9d818bba54224afdf"
+    },
+    "contrasts-final.log": {
+      "path": "data/reference-binding-20261105/contrasts-final.log",
+      "sha256": "126c0c8e72267c5ec9837fd161d20f2b3a29535c97766c058483a3f903cd12d8"
+    },
+    "untrained-contrasts.json": {
+      "path": "data/reference-binding-20261105/untrained-contrasts.json",
+      "sha256": "1af162eb00189b7af4b6a34c8ab4e0a12fc0df937e1863a7a5ea31a8bd64db20"
+    },
+    "cpu-latest.log": {
+      "path": "data/reference-binding-20261105/cpu-latest.log",
+      "sha256": "f751de1e452695fb84cfeb462d92a6dd98dfd51e9a73bf9fba3e16e5ba0bb1d9"
+    },
+    "cpu-final-success.log": {
+      "path": "data/reference-binding-20261105/cpu-final-success.log",
+      "sha256": "51b3455b699536de009b67be300b45566d423131d1d017608ba7b5c23fc00dab"
+    },
+    "cpu-complete.log": {
+      "path": "data/reference-binding-20261105/cpu-complete.log",
+      "sha256": "e27de0316c907d84eed198c8fb2161439024172261bde0ae5621a56c75f9f9c1"
+    },
+    "recovery-source-snapshot": {
+      "path": "data/reference-binding-20261105/recovery-source-snapshot/manifest.json",
+      "sha256": "48465e0e9234ba703c7d7511e0710aca194b0f175872da30e7a9d75b1d30c3c8",
+      "files": 11
+    },
+    "contrast-source-snapshot": {
+      "path": "data/reference-binding-20261105/contrast-source-snapshot/manifest.json",
+      "sha256": "d3c2ca3cb6d3e420c014cea5c7e3874e8734afb54b2f52086ee0e2bc14e3a4b3",
+      "files": 11
+    }
+  },
+  "release_manifests": {
+    "train": "c70d4f44135a34c00e7fa0348833b1ec56613def15f5753231589492ed35478f",
+    "development": "5b8f4cffdc4f33e255d3a34306cac03a68c50dcd9dab905ae8d8adcf89c81e77",
+    "locked": "d13594f18738056ee179b3498d54d8261f7f7654aad633fabb776810681aa1cf"
+  },
+  "preserved_setup_failures": [
+    "Initial recovery profile guard mistakenly required three-part vocabulary; rejected before executing cases. Corrected to the existing qualified v3 two-part profile.",
+    "Initial contrast preflight searched X records only; it rejected missing positives before model work. Corrected to reuse identical selected reviewed role views within the same family.",
+    "Two temporary schema tests omitted mandatory construction metadata; corrected suite passed 63/63."
+  ],
+  "scope": [
+    "Recovery and contrast measurements use the same untrained reference fingerprint; no actual learned request/reference is certified.",
+    "Exact measured sources are archived separately. Later binding/permutation and coverage-guard changes are represented by final source hashes, not retroactively substituted into earlier runs.",
+    "The recovery report predates reuse of existing intervention contrasts. The supplemental 100/100 contrast evidence removes that earlier implementation gap while recovery still blocks qualification.",
+    "No new scenario/annotation/review, capability fitting, service change, deployment, or numeric matrix rerun. Original BF16 transformer arithmetic remains failed."
+  ],
+  "first_slice_commit": "41d955a"
+}

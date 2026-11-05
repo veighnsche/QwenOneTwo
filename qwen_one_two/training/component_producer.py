@@ -106,10 +106,18 @@ def reference_record_objective(reference,release,row):
 
 
 class ComponentProducer:
-    def __init__(self,backbone,codec,release,reference,*,checkpoint_hash,profile_hash):
+    def __init__(self,backbone,codec,release,reference,*,checkpoint_hash,profile_hash,
+                 reference_evidence=None,diagnostic_reference=False):
         if reference is None:
             raise PrerequisiteError('isolated components require a frozen reference artifact; no reference fitting is authorized')
         self.backbone,self.codec,self.release=backbone,codec,release
+        from .reference_qualification import ReferenceEvidence
+        check(reference_evidence is None or isinstance(reference_evidence,ReferenceEvidence),
+              'load measured reference evidence first')
+        check(not (reference_evidence is not None and diagnostic_reference),'qualified/diagnostic reference modes are distinct')
+        if isinstance(reference_evidence,ReferenceEvidence):reference_evidence.assert_reference(reference)
+        elif not diagnostic_reference:raise PrerequisiteError('measured reference qualification required')
+        self.evidence,self.diagnostic=reference_evidence,diagnostic_reference
         self.encoder=CleanEncoder(backbone,reference,checkpoint_hash=checkpoint_hash,profile_hash=profile_hash)
         self.last_report=None
 
@@ -122,6 +130,7 @@ class ComponentProducer:
         from ..codec.schema import Port,Status,Kind
         from ..codec.writer import decode_result
         check(phase!='reference','native component phase')
+        if self.evidence is not None:self.evidence.assert_reference(self.encoder.reference)
         view,p,indices=component_view(self.release,row)
         reading=view.purpose=='reader'
         run=str(uuid.uuid4())
@@ -138,7 +147,8 @@ class ComponentProducer:
         check(len(ids)+6<limit,'component prompt exceeds ceiling')
         s=Session.open(self.backbone,self.codec,ids,128,override=override,run=run)
         rt=s.runtime;report={'producer':'clean-component-episodes-v1','record':row['id'],
-            'reference':self.encoder.reference.artifact_id,'reference_semantics_qualified':False,
+            'reference':self.encoder.reference.artifact_id,'reference_semantics_qualified':self.evidence is not None,
+            'diagnostic_reference':self.diagnostic,
             'construction_audit':encoded['audit'],'gold_return':reading,'text_tokens_for_invocation':0}
         self.last_report=report;s.episode_report=report
         # A total-position guard runs before every ledger mutation/forward.

@@ -150,7 +150,7 @@ class ProducerGPU(unittest.TestCase):
         from qwen_one_two.training.manifest import DIAGNOSTIC_SHA
         from qwen_one_two.training.inputs import digest
         reference=Reference(self.b,self.c);reference.freeze()
-        producer=EpisodeProducer(self.b,self.c,self.release,reference=reference,
+        producer=EpisodeProducer(self.b,self.c,self.release,reference=reference,diagnostic_reference=True,
             checkpoint_hash=DIAGNOSTIC_SHA,profile_hash=digest(Path('docs/codec-feedback-precision-v3.md').read_bytes()))
         samples=[next(r['id'] for r in self.release.sampler_rows() if r['category']==category)
                  for category in ('receiver','reader','decision_replay')]
@@ -216,7 +216,7 @@ class ProducerGPU(unittest.TestCase):
         key=next(r['id'] for r in self.release.sampler_rows() if r['category']=='reader'
                  and len((self.release.record(r['id'])['labels'].get('payload') or {}).get('acceptable_selection_ids',[]))>1)
         reference=Reference(self.b,self.c);reference.freeze()
-        producer=EpisodeProducer(self.b,self.c,self.release,reference=reference,
+        producer=EpisodeProducer(self.b,self.c,self.release,reference=reference,diagnostic_reference=True,
             checkpoint_hash=DIAGNOSTIC_SHA,profile_hash=digest(Path('docs/codec-feedback-precision-v3.md').read_bytes()))
         with torch.no_grad():s,losses,exposure=producer(self.release.record(key),'components',1)
         self.assertEqual(s.runtime.terminal,'Completed',producer.last_report)

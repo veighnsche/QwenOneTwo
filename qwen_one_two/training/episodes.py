@@ -63,6 +63,8 @@ def collect_session(window, session, losses, exposure):
     truncated-prefix gradients. No extra prefill or detached replay is used.
     """
     check(isinstance(exposure,Exposure), 'explicit exposure metadata required')
+    check(not getattr(session,'episode_report',{}).get('diagnostic_reference',False),
+          'diagnostic reference episodes cannot enter optimizer accumulation')
     exposure.validate()
     summary = session.summary()
     rt = session.runtime
