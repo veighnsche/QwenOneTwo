@@ -1,0 +1,204 @@
+{
+  "format": "qot-bounded-muse-drafts-v2",
+  "run_id": "muse-economy-12",
+  "local_artifacts": "data/muse-economy-12",
+  "session_id": "73748b07-dd71-4b2a-bf6e-728deab46310",
+  "model_step_cap": 1,
+  "automatic_retries": 0,
+  "requested_effort": "low",
+  "reminders_enabled": false,
+  "preset": "empty",
+  "usage": {
+    "allowance": {
+      "as_of_ms": 1793909561934,
+      "source": "stream",
+      "tier": null,
+      "weekly": {
+        "resets_at_ms": 1794182400000,
+        "used_percent": 2
+      },
+      "window": {
+        "resets_at_ms": 1793924821000,
+        "used_percent": 0
+      }
+    },
+    "calls": 1,
+    "cancelled_calls": 0,
+    "children_included": false,
+    "command_id": "01a1ad57-2743-7312-8938-1f09e75a46ea",
+    "completed_calls": 1,
+    "failed_calls": 0,
+    "kind": "run_usage",
+    "models": [
+      {
+        "cached_tokens": 0,
+        "calls": 1,
+        "input_tokens": 16293,
+        "model": "muse-spark-1.3-contributor",
+        "output_tokens": 4637,
+        "reasoning_tokens": 1445
+      }
+    ],
+    "run_stream": {
+      "id": "01a1ad57-2743-7312-8938-1f09e75a46ea",
+      "kind": "run"
+    }
+  },
+  "elapsed_seconds": 29.96903317401302,
+  "validation": {
+    "format": "qot-draft-batch-v1",
+    "schema": "draft-schema-v1.1",
+    "state": "draft",
+    "records": 12,
+    "domains": {
+      "refund_eligibility": 2,
+      "scheduling": 2,
+      "demo_preparation": 2,
+      "access_rules": 2,
+      "resource_allocation": 2,
+      "issue_prioritization": 2
+    },
+    "operations": {
+      "Noul": 3,
+      "Choice": 4,
+      "Score": 5
+    },
+    "statuses": {
+      "Assessed": 7,
+      "Insufficient": 3,
+      "Conflicting": 1,
+      "NoFeasibleChoice": 1
+    },
+    "reviews": [],
+    "approval": "absent",
+    "semantic_authentication": false,
+    "role_builders_exercised": {
+      "pilot-01": [
+        "question",
+        "target"
+      ],
+      "pilot-02": [
+        "question",
+        "target",
+        "reason"
+      ],
+      "pilot-03": [
+        "question",
+        "target",
+        "alternative[0]",
+        "alternative[1]",
+        "alternative[2]"
+      ],
+      "pilot-04": [
+        "question",
+        "target",
+        "rubric/dimension",
+        "rubric/conditions",
+        "rubric/zero",
+        "rubric/one"
+      ],
+      "pilot-05": [
+        "question",
+        "target",
+        "alternative[0]",
+        "alternative[1]"
+      ],
+      "pilot-06": [
+        "question",
+        "target",
+        "rubric/dimension",
+        "rubric/conditions",
+        "rubric/zero",
+        "rubric/one",
+        "reason"
+      ],
+      "pilot-07": [
+        "question",
+        "target",
+        "reason"
+      ],
+      "pilot-08": [
+        "question",
+        "target",
+        "rubric/dimension",
+        "rubric/conditions",
+        "rubric/zero",
+        "rubric/one"
+      ],
+      "pilot-09": [
+        "question",
+        "target",
+        "alternative[0]",
+        "alternative[1]",
+        "alternative[2]",
+        "reason"
+      ],
+      "pilot-10": [
+        "question",
+        "target",
+        "rubric/dimension",
+        "rubric/conditions",
+        "rubric/zero",
+        "rubric/one"
+      ],
+      "pilot-11": [
+        "question",
+        "target",
+        "alternative[0]",
+        "alternative[1]",
+        "reason"
+      ],
+      "pilot-12": [
+        "question",
+        "target",
+        "rubric/dimension",
+        "rubric/conditions",
+        "rubric/zero",
+        "rubric/one"
+      ]
+    },
+    "scenario_sha256": "986ae7fbd98e95e8ad3b80e430c75a9cbc23d89e4133541458f5eaf6e0c90326",
+    "note": "Model assistance only; human review absent. Reviewed-release loader rejection must remain.",
+    "rejected_at_approved_release_gate": 12,
+    "semantic_fields_match_documented_repaired_response": true,
+    "content_edit_count": 8,
+    "syntax_repairs": 2
+  },
+  "validation_tests": {
+    "passed": 15,
+    "log": "data/muse-economy-12/tests.log"
+  },
+  "currency_cost": null,
+  "limits": "Usage covers this Muse generation only, excluding Codex supervision/review. No claim of monetary price, human review or training readiness.",
+  "hashes": {
+    "drafts/outcome-proposals.md": "dc38e7072766bbb95a34d2b8366a6f1d439c19519087ac0ffc45f3c48bbf06d2",
+    "drafts/review-inputs.md": "f8bc067a2dad0666b7237518ff8fe01de36d4cd50b1e5da13ae3b0b0d9b6104a",
+    "drafts/scenarios.jsonl": "986ae7fbd98e95e8ad3b80e430c75a9cbc23d89e4133541458f5eaf6e0c90326",
+    "drafts/sources/pilot-01.txt": "dddeae7c85d374daa5715ec9bb0836dfcb4ca97e75d72d6cd05e6fa3ba04fa82",
+    "drafts/sources/pilot-02.txt": "23cd68ab226be561a670efb19d89e19ade95f7d7e206dbdea49f17e82cda1bf2",
+    "drafts/sources/pilot-03.txt": "7bbc097c0104806e65e0c2bfa35505259f71a7a5c94314b14188b36e826c63e5",
+    "drafts/sources/pilot-04.txt": "a055f72d46a30e99b304f6aa883c0326a2f54e1c1d57189f897c5d9155016efe",
+    "drafts/sources/pilot-05.txt": "3b972f96fcc81e1c856b88351e1539e48dff8a0860f788b128af37b2b5278dc4",
+    "drafts/sources/pilot-06.txt": "cef5d41bd47d69778b981def0a4643f0870747e84c65236d1f51a0ad01625ea3",
+    "drafts/sources/pilot-07.txt": "bc08ed6c2f98572c16ec350d2a20072499f4ccedeeb122270a2a5fae1e30b12d",
+    "drafts/sources/pilot-08.txt": "dc082a5efe6de1d8ecfd6bee26e84bda075d0023d1ce0e6b6df7ccac7e179a29",
+    "drafts/sources/pilot-09.txt": "c89ff0a35e102f3e5dfdcb66382e30df68819bd567413e9c255c3d7f13197abe",
+    "drafts/sources/pilot-10.txt": "74e9311f438c364089457cd73ac9ea67b17ff2128840a82851fa3e009a45b070",
+    "drafts/sources/pilot-11.txt": "45abc329a918e8e1959c045bd60b5d86dcc04163df38a56a33332aa094bd4c13",
+    "drafts/sources/pilot-12.txt": "2e1680f7d3589910adaed734a5a999b46fd3b43a790464fa4a6d34aea8e7ba68",
+    "drafts/validation-report.json": "349b5b32076e778253ff1a6a1688cb1fb3eeca958c41defe2eda7bb5b1c8e7a3",
+    "events.jsonl": "bd6a30928ee5a4d22c94aa74bd21460c696c9a0c054833ea33b0e70cece56283",
+    "exit.json": "b0dc45822e46777cd002e2fe0353fa758b2b11dcb05e40c55998045c37d03ed2",
+    "invocation.json": "d360a56b6461d79be0dbaa76f3e1e1defa4e3b7c6abd5a4183ee8a98a42c62ed",
+    "package.py": "f989be5ce2d45ebf14da2d6c9546376b77f0f7fdb2dd3e6804f23c2eb9eac85d",
+    "prompt.txt": "994c0451fc8442bf5c55b50cd1a7278d663496857c5063dad53943d5d3c66fb1",
+    "repairs.json": "addd0a3ae609c7ad35bd0715ae11b4d62781fb41f9c1b9bd24a0ca55ecb05399",
+    "repairs.py": "a1372bb23b536f8ad24e31f978c989266ca518c0d8f97e315ab4bab1773a08ac",
+    "response-syntax-normalized.json": "3c61a1de3385f3fe5526ae0570216ef6ed4fb63f7cf43fe5a30fb36b86954e5f",
+    "response.txt": "6b81c5f08bb3553cf2bd352a231b8a9bd54db19761016edf7bfd71e969ae93d7",
+    "run.py": "9fbdc44d7009ca04cd84fff9e9c341e9455bb4c88c69c77a203a81c17af9f4bf",
+    "stderr.txt": "7f4448e87d3d5b644b53163c155d408c2c48d978365e267f69878c6b6127a0e2",
+    "tests.log": "a91483e29980a144e113dc19777fcd4de472d80a94c1b296c756cab0c9a8fc48"
+  },
+  "closure": "Headless process returned 0; no native child directory or tool events; no timers/tmux launched."
+}

@@ -6,6 +6,18 @@ are historical. This handoff records measured mechanisms, not learned capability
 
 ## Current checkpoint
 
+The user rejected the first batch's disproportionate generation overhead and
+requested a fresh batch with cost saving. The replacement is complete in
+`data/muse-economy-12/drafts/`: **12 drafts in one Muse completion**, no retries,
+tools, children or reminders; 29.969 seconds, 16,293 input / 4,637 output tokens.
+See [bounded-generation evidence](muse-economy-12.md). Fifteen model-free tests
+pass; all twelve records pass draft validation and reject approved release.
+Original response and explicit Codex syntax/content repairs are retained.
+This batch is also unreviewed model-proposed development data, not a training
+release. Prefer this bounded single-call workflow for small draft requests;
+do not restart the rejected coordinator/worker/observer workflow. The old batch
+and its evidence remain historical, unchanged. No further generation is queued.
+
 The user subsequently explicitly authorized Muse setup repair and **12 draft
 scenarios**. This bounded batch is complete: two per domain, 17 source files,
 all development/model_proposal, zero human reviews and no approvals. See the
@@ -128,8 +140,8 @@ Exact log/test source hashes are in the
 
 ## Next unfinished slice / blockers
 
-The first twelve pilot proposals now exist; do not regenerate them merely because
-the prior handoff reported no data. Obtain actual independent human reviews and
+The replacement twelve pilot proposals now exist; do not regenerate them merely
+because older handoffs reported no data. Obtain actual independent human reviews and
 adjudicate/revise before approval or expansion. The existing full-pilot loader
 requires authored roots, so admitting a reviewed model-proposed pilot needs an
 explicit provenance-preserving policy reconciliation; never relabel these as

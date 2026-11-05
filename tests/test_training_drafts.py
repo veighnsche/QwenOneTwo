@@ -117,6 +117,19 @@ class DraftTests(unittest.TestCase):
             exercised = self.check_one(record)
             self.assertTrue(exercised)
 
+    def test_fresh_run_keeps_its_own_release_identity(self):
+        record, content = base_record()
+        fix_source(record, content)
+        record["model_assistance"]["run_id"] = "fresh-generation"
+        record["release"]["id"] = "fresh-generation"
+        self.check_one(record)
+        record["release"]["id"] = "old-generation"
+        with self.assertRaisesRegex(ValueError, "identity mismatch"):
+            self.check_one(record)
+        record["model_assistance"]["run_id"] = " "
+        with self.assertRaisesRegex(ValueError, "run_id"):
+            self.check_one(record)
+
     def test_nonassessed_requires_reason_and_assessed_rejects_reason(self):
         record, content = base_record("pilot-01", "scheduling", "Noul", "Insufficient")
         fix_source(record, content)
@@ -363,6 +376,11 @@ class DraftTests(unittest.TestCase):
             path.write_text("\n".join(json.dumps(r, ensure_ascii=False) for r in records) + "\n", encoding="utf-8")
             exercised = validate_batch(records, tmp, allow_inline_content=True)
             self.assertEqual(len(exercised), 12)
+            bad = copy.deepcopy(records)
+            bad[0]["model_assistance"]["run_id"] = "another-run"
+            bad[0]["release"]["id"] = "another-run"
+            with self.assertRaisesRegex(ValueError, "mixed generation runs"):
+                validate_batch(bad, tmp, allow_inline_content=True)
             bad = copy.deepcopy(records)
             bad[0]["id"] = bad[1]["id"]
             with self.assertRaises(ValueError):

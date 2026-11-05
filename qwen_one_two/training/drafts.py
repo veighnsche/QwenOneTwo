@@ -314,7 +314,8 @@ def validate_draft_record(record, drafts_root, parents, *, allow_inline_content=
     assistance = record.get("model_assistance", {})
     for key in ("checkpoint", "prompt_hash", "sampling", "software", "gpu", "output_hash"):
         check(key in assistance, f"missing model provenance {key}")
-    check(assistance.get("run_id") == "muse-pilot-20261105T191615Z", "model_assistance run_id")
+    _nonempty_str(assistance.get("run_id"), "model_assistance run_id")
+    check(assistance["run_id"] == release.get("id"), "draft release/run identity mismatch")
     check(assistance.get("gpu") is None, "remote GPU must stay null; never claim local RTX3090")
     check(bool(assistance.get("gpu_reason", "").strip()), "gpu_reason")
     check("225509c3" not in json.dumps(assistance), "never label remote generation as local RTX3090")
@@ -365,6 +366,8 @@ def validate_draft_record(record, drafts_root, parents, *, allow_inline_content=
 
 def validate_batch(records, drafts_root, *, allow_inline_content=False):
     check(len(records) == 12, "batch must contain exactly twelve records")
+    check(len({r.get("model_assistance", {}).get("run_id") for r in records}) == 1,
+          "mixed generation runs")
     ids = [r.get("id") for r in records]
     check(ids == sorted(ids), "records must be sorted by id")
     check(len(set(ids)) == 12, "duplicate ids")
