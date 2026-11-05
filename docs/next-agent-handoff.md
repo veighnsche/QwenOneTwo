@@ -6,6 +6,16 @@ are historical. This handoff records measured mechanisms, not learned capability
 
 ## Current checkpoint
 
+The user subsequently explicitly authorized Muse setup repair and **12 draft
+scenarios**. This bounded batch is complete: two per domain, 17 source files,
+all development/model_proposal, zero human reviews and no approvals. See the
+[Muse draft report](muse-draft-pilot-2026-11-05.md) and
+[portable evidence](evidence/muse-draft-pilot-v1-summary.json). Local data:
+`data/muse-pilot-20261105T191615Z/drafts/`; open `review-inputs.md` before the separate
+`outcome-proposals.md` for outcome-blind review. This user authorization does not
+start bulk generation, capability fitting or deployment. Muse has exited cleanly
+and all run-owned workers/commands/tmux resources are released.
+
 Backend implementation slices are committed and pushed directly to `main`.
 The [slice report](backend-slices-2026-11-05.md) records acceptance conditions,
 results and limitations. No capability/reference fitting, bulk semantic data,
@@ -117,6 +127,15 @@ Exact log/test source hashes are in the
 [portable continuation validation](evidence/backend-release-validation-2026-11-05.json).
 
 ## Next unfinished slice / blockers
+
+The first twelve pilot proposals now exist; do not regenerate them merely because
+the prior handoff reported no data. Obtain actual independent human reviews and
+adjudicate/revise before approval or expansion. The existing full-pilot loader
+requires authored roots, so admitting a reviewed model-proposed pilot needs an
+explicit provenance-preserving policy reconciliation; never relabel these as
+human-authored or fabricate review evidence. The batch covers 7/13 status cells,
+and the full 120-case pilot remains incomplete. Generation usage/overhead is
+recorded in the new report; assess it before scaling.
 
 **Integrate a genuinely reviewed pilot release with task-specific episode
 producers and semantic/promotion fixtures.** The driver accepts a complete-episode

@@ -1,0 +1,195 @@
+{
+  "approvals": 0,
+  "approved_record_gate_rejections": 12,
+  "artifacts": {
+    "draft-review.md": {
+      "path": "data/muse-pilot-20261105T191615Z/drafts/draft-review.md",
+      "sha256": "ae9ca9ee436f43e2a9e06c93ee0872a8c2d63f914eaf66e5afc7ab52f9824349"
+    },
+    "lane-a.jsonl": {
+      "path": "data/muse-pilot-20261105T191615Z/drafts/lane-a.jsonl",
+      "sha256": "1b1b591346e12c474833bcac48885ad93e9d44920178283af00f844e80337319"
+    },
+    "lane-b.jsonl": {
+      "path": "data/muse-pilot-20261105T191615Z/drafts/lane-b.jsonl",
+      "sha256": "c89b4cd6e8243cfb5e6691a747c5c3dbf86b65a43746319b8450f6fe76072476"
+    },
+    "manifest.json": {
+      "path": "data/muse-pilot-20261105T191615Z/drafts/manifest.json",
+      "sha256": "f81202e350abad389eabce0e5c635d88d60171a9e00d802e594dd83b4dcc4c1f"
+    },
+    "outcome-proposals.md": {
+      "path": "data/muse-pilot-20261105T191615Z/drafts/outcome-proposals.md",
+      "sha256": "7c9600567a15db3372d14bd34e119bde963dced9b75a5dce92471c20ddc4a013"
+    },
+    "review-inputs.md": {
+      "path": "data/muse-pilot-20261105T191615Z/drafts/review-inputs.md",
+      "sha256": "74af4a866baad84c0aefa60735b897851b705cce2ca9fe9274aa0d879af87bdd"
+    },
+    "scenarios.jsonl": {
+      "path": "data/muse-pilot-20261105T191615Z/drafts/scenarios.jsonl",
+      "sha256": "927c789b412037b8aa9ff807fe9140becf81be4d6ed01245a61991aa718189a7"
+    },
+    "validation-report.json": {
+      "path": "data/muse-pilot-20261105T191615Z/drafts/validation-report.json",
+      "sha256": "c0076824761f16e98550eebac3e704c1e4080492a72d08859dfabe113208b825"
+    }
+  },
+  "closure": {
+    "Muse_exit": "clean session.end record observed",
+    "closed_at": "2026-11-05T19:46:29.626910+00:00",
+    "coordinator_session_id": "01a1ad2b-c648-7be3-8267-95444190e031",
+    "heartbeat": null,
+    "heartbeat_note": "automation_update unavailable; no timer was created; foreground supervision completed",
+    "native_authors": "terminally complete; coordinator work_list empty in final handoff",
+    "owner": "Codex",
+    "resources_released": true,
+    "tmux_server": "not running; list-sessions verified",
+    "worker_timer": null
+  },
+  "counts": {
+    "domains": {
+      "access_rules": 2,
+      "demo_preparation": 2,
+      "issue_prioritization": 2,
+      "refund_eligibility": 2,
+      "resource_allocation": 2,
+      "scheduling": 2
+    },
+    "operations": {
+      "Choice": 4,
+      "Noul": 5,
+      "Score": 3
+    },
+    "records": 12,
+    "statuses": {
+      "Assessed": 7,
+      "Conflicting": 2,
+      "Insufficient": 2,
+      "NoFeasibleChoice": 1
+    }
+  },
+  "format": "qot-muse-draft-pilot-evidence-v1",
+  "git_base": "688f91dc9a37087540975ffda8d3fa5179f35d05",
+  "human_reviews": 0,
+  "loss_label_swap_preserves_actual_request_bytes": true,
+  "manifest_artifacts_verified": 28,
+  "next_unfinished": "Two actual independent human reviews per scenario, adjudication/revision, full-pilot provenance policy reconciliation and eventual completion of the 120-case pilot; no training authorized.",
+  "operation_status_cell_count": 7,
+  "operation_status_cells": [
+    [
+      "Choice",
+      "Assessed"
+    ],
+    [
+      "Choice",
+      "Insufficient"
+    ],
+    [
+      "Choice",
+      "NoFeasibleChoice"
+    ],
+    [
+      "Noul",
+      "Assessed"
+    ],
+    [
+      "Noul",
+      "Conflicting"
+    ],
+    [
+      "Score",
+      "Assessed"
+    ],
+    [
+      "Score",
+      "Insufficient"
+    ]
+  ],
+  "producer": {
+    "CLI": "1.4.14-R7309.1",
+    "author_provenance_path": "data/muse-pilot-20261105T191615Z/codex-review/native-author-provenance.json",
+    "author_provenance_sha256": "91db6596a81137c89a6eae0d5267e562afd4036b22ad02c649bace267f5f0c9c",
+    "coordinator_session_id": "01a1ad2b-c648-7be3-8267-95444190e031",
+    "live_Contributor": "on",
+    "live_coordinator_effort": "xhigh",
+    "local_model_workloads": 0,
+    "model": "muse-spark-1.3-contributor",
+    "native_author_models_verified": [
+      "muse-spark-1.3-contributor",
+      "muse-spark-1.3-contributor"
+    ],
+    "native_effort": "requested/inherited xhigh; independent per-child field not exposed",
+    "remote_gpu": null
+  },
+  "review_findings": {
+    "F-DRAFT-01": "resolved: absent non-assessed values, separate feasibility",
+    "F-DRAFT-02": "resolved: no semantic keyword censorship, file-bound sources, exact selections/feasibility",
+    "F-DRAFT-03": "resolved: actual native prompt binding, sealed record hashes",
+    "F-DRAFT-04": "resolved in draft revision: unsupported details, selection leakage, anchors, temporal evidence, direct alternatives",
+    "F-DRAFT-05": "resolved: same observation time, aligned user question, true coverage count, exact Score flag/range and active schema"
+  },
+  "review_kind": "Codex model-assisted implementation/content review; not independent human review",
+  "run": "muse-pilot-20261105T191615Z",
+  "scope": "Twelve draft development scenarios; no human approval, capability training, local model run or service change",
+  "setup": {
+    "entrypoint_unchanged": true,
+    "heartbeat_created": false,
+    "references": "four newly reconstructed support files; skill validator passes",
+    "same_chat_automation_tool_available": false,
+    "skill_entrypoint_sha256": "feb1504b0987631e926e6a1773f42667534f8b82b07a6b51fe726fcc1aae023c",
+    "supervision": "active Codex chat through clean closure",
+    "tmux": "official 3.7c build; prior OS snapshot capture-pane crash reproduced and quarantined",
+    "tmux_archive_sha256": "cc56bd1cc873eb6089c615f0496b072385bda8a6d944069f38564a5d49c128aa"
+  },
+  "source_files": 17,
+  "source_hashes": {
+    "qwen_one_two/training/drafts.py": "361d2b467dc40df0e35c6115742ff3ee0244fd1c47d9494123481088afff8714",
+    "tests/test_training_drafts.py": "a12611c3e3bfee3aa84cb40aec8c673de5f205efbada044aa395f19963854abd"
+  },
+  "test_logs": {
+    "draft-validator-tests.log": {
+      "path": "data/muse-pilot-20261105T191615Z/codex-review/draft-validator-tests.log",
+      "scope": "model-free checks",
+      "seconds": 0.012,
+      "sha256": "dd4aabfc196e2a45d8c9b382774514edae1e452b966622132cbede60bea2afe3",
+      "status": "PASSED",
+      "tests": 12
+    },
+    "final-affected-tests.log": {
+      "path": "data/muse-pilot-20261105T191615Z/codex-review/final-affected-tests.log",
+      "scope": "model-free checks",
+      "seconds": 0.014,
+      "sha256": "8ed28625ed9f6b80a4978bdceb03dc05f0150dc93413ad217a31176cf79aae9a",
+      "status": "PASSED",
+      "tests": 14
+    },
+    "final-model-free-tests.log": {
+      "path": "data/muse-pilot-20261105T191615Z/codex-review/final-model-free-tests.log",
+      "scope": "model-free checks",
+      "seconds": 0.667,
+      "sha256": "cc0d34f3e8b315f009433a47f9dec54a89fe52e5a3e4439a9e4ad38345859eb8",
+      "status": "PASSED",
+      "tests": 36
+    }
+  },
+  "usage": {
+    "currency_estimate": null,
+    "note": "Input includes cached context; reasoning may be part of output; all coordinator/author/runtime observer traffic included.",
+    "raw_provider_usage_sums": {
+      "cache_read_tokens": 28079085,
+      "cache_write_tokens": 0,
+      "cached_tokens": 28079085,
+      "input_tokens": 28894817,
+      "output_tokens": 188759,
+      "reasoning_tokens": 100501
+    },
+    "receipt_path": "data/muse-pilot-20261105T191615Z/codex-review/usage-final.json",
+    "receipt_sha256": "65004555cbf36766e203ba105ce875468ee311cbe7350c00ad181b46442081df",
+    "unique_provider_completion_records": 194
+  },
+  "verification_receipt": {
+    "path": "data/muse-pilot-20261105T191615Z/codex-review/final-verification.json",
+    "sha256": "0449b3bc20bc0d3e3e60261e15d0dbe72bb158a84b7e1ee34175b1c67ec303d7"
+  }
+}
