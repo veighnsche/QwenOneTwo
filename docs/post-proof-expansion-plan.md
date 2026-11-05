@@ -1,14 +1,12 @@
 # Expansion after the small GPU proof
 
-Status: recorded conditional work order. The user requests codec, reviewed data,
-training and frontend expansion AFTER the proof passes. Subsequent explicitly
-authorized [G1 execution](g1-core-results-2026-11-05.md) failed on RTX3090. The
-[precision rerun](g1-precision-results-2026-11-05.md) passed numerics but failed
-released Noul. The later [gate repair/rerun](g1-gate-results-2026-11-05.md) PASSED
-bounded G1-core. The user's current instruction stops at repair/rerun, without
-expansion. Expansion has not started. The proof's diagnostic exercises do not count as
-capability training. All future model workloads use the selected RTX3090;
-no CPU fallback. No service/frontend/deployment changes were made by the proof.
+Status: G1-core passed. The user subsequently authorized the full codec/runtime
+and the next RTX 3090 qualification checks only, with no training or frontend
+expansion. The [implementation](full-codec-implementation.md) is isolated in
+`qwen_one_two/codec/`; [qualification](codec-qualification-results-2026-11-05.md)
+keeps component/FP32 successes separate from the failed expanded mixed-precision
+gate. Reviewed data, capability training and frontend work have not begun.
+All model workloads remain GPU-only. No service or deployment change occurred.
 
 Owner: dependencies and deliverables after [G1-core](small-gpu-proof-v1.md).
 The [specification](architecture-and-training-plan.md) and detailed topic owners
@@ -192,7 +190,8 @@ The Operating Table. Claims and UI limits remain bounded by tested lengths;
 longer-context/G6 qualification is a separate step. Full C/max B, optimal effort
 or answer-quality improvement cannot be claimed from short pilot success.
 
-Current position is scoped G1-core PASSED under its compensated precision and
-diagnostic gate-repair profiles. No downstream gate is marked passed or begun;
-the user's current scope remains repair/rerun only. Live services/frontend and
-production capability checkpoints remain unchanged.
+Current position: G1-core PASSED; the full codec/runtime candidate is implemented
+and its initial qualification is measured separately. The expanded 512-position
+mixed-precision gate is not passed. No reviewed-data, capability-training,
+frontend, 1024-position or release gate is marked passed or begun. Live services
+and production capability checkpoints remain unchanged.

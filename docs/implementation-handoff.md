@@ -48,7 +48,10 @@ The subsequent [gate repair/rerun](g1-gate-results-2026-11-05.md) PASSED G1-core
 72 numeric cases at unchanged tolerances, 36 released continuations, raw gate,
 cache/gradient/accounting/optimizer and frozen-base checks. The isolated child
 changes only the existing gate weight/bias, not the live capability checkpoint.
-The user's current repair/rerun scope does not start downstream expansion.
+A later instruction authorized the [full codec/runtime](full-codec-implementation.md)
+and [next qualification](codec-qualification-results-2026-11-05.md) only. Its
+component/reference successes do not override the expanded mixed-precision
+failure. Training, reviewed-data and frontend expansion remain excluded.
 The [post-proof expansion plan](post-proof-expansion-plan.md) records the requested
 conditional work order after measured success: full codec/component qualification,
 reviewed data, A4 phases, same-job frontend integration and release preparation.

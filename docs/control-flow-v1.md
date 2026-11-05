@@ -1,5 +1,13 @@
 # Control flow v1: consumption, closure and termination
 
+Implementation update: The serial session/lifecycle path now has a scoped implementation in
+`qwen_one_two/codec/`. See the [implementation](full-codec-implementation.md)
+and [measured qualification](codec-qualification-results-2026-11-05.md).
+The original design status below is historical; training and frontend
+expansion remain excluded, and expanded mixed-precision qualification
+is not passed. The recorded normative rules/tolerances remain in force.
+
+
 Status: recorded design response to Astra F5, not implemented or GPU-validated.
 No code, model workload, training, service change, commit or deployment is
 authorized. All future model workloads use the explicitly selected RTX 3090;

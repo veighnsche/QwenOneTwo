@@ -129,8 +129,11 @@ G1-core PASSED: 72 numeric cases, 36 released continuations, 144 raw gate labels
 connected gradients, accounting, optimizer and frozen-base checks. No numeric
 tolerance was relaxed. All 612 released actions followed raw argmax without a
 resource mask. This does not establish semantic/general invocation readiness.
-The user's current scope stops after repair/rerun; no downstream expansion,
-service/frontend change or production capability-checkpoint promotion occurred.
+The subsequent [full codec/runtime work](full-codec-implementation.md) was
+separately authorized without training or frontend expansion. Its
+[qualification](codec-qualification-results-2026-11-05.md) is distinct: component
+and FP32-reference successes do not close the failing expanded mixed-precision
+gate. No service/frontend change or production checkpoint promotion occurred.
 
 The [small GPU proof protocol](small-gpu-proof-v1.md) records the concrete
 G1-core profile, originally requested as protocol-first. Its measured status is

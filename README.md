@@ -49,8 +49,11 @@ The official Qwen revision is `2fc06364715b967f1860aea9cf38778875588b17`. Qev is
 The [latest G1 gate repair/rerun](docs/g1-gate-results-2026-11-05.md) PASSED bounded
 G1-core: 72 numeric cases at unchanged tolerances, 36 released continuations and
 all gate/cache/gradient/accounting/optimizer/base-integrity checks. Only the
-isolated diagnostic gate weight/bias changed; no codec, curriculum, capability
-training pipeline or frontend expansion has begun.
+isolated diagnostic gate weight/bias changed in that G1 repair. Subsequent
+[full codec/runtime implementation](docs/full-codec-implementation.md) is isolated
+in `qwen_one_two/codec/`; its [qualification](docs/codec-qualification-results-2026-11-05.md)
+remains blocked on the expanded 512-position BF16/FP32 comparison. No curriculum,
+capability-training pipeline, frontend or live-service expansion has begun.
 
 Start with the [consolidated implementation specification](docs/architecture-and-training-plan.md), then the [implementation handoff](docs/implementation-handoff.md). The [documentation map](docs/README.md) identifies the owner of every protocol, budget, cache and training decision.
 

@@ -61,6 +61,8 @@ not override them. Future changes must update the owner and affected examples.
 | [G1 compensated precision v2](g1-compensated-precision-v2.md) | BF16 truncation diagnosis, controlled ablations, compensated GPU products and explicit FP32 zones; unchanged thresholds and no expansion |
 | [G1 gate measured results](g1-gate-results-2026-11-05.md) | Latest bounded G1-core PASSED: 72 numeric cases, 36 released continuations, 144 gate labels and 612 unforced decisions; no expansion |
 | [G1 gate repair](g1-gate-repair-v1.md) | Undertrained readout and supervision-counter mismatch, bounded GPU-only head fit, unchanged four-way argmax and stronger anti-collapse checks |
+| [Full codec implementation](full-codec-implementation.md) | Full typed transport, learned writer interfaces, immutable memory, resource reservations and one-cache runtime; no training/frontend |
+| [Full codec qualification](codec-qualification-results-2026-11-05.md) | GPU component/reference results and blocked 512-position BF16/FP32 gate; incomplete qualification is explicit |
 | [Post-proof expansion plan](post-proof-expansion-plan.md) | Conditional codec/runtime qualification, reviewed data, training phases, same-job frontend integration and release order after measured proof success |
 | [Losses and training schedule](loss-configuration-and-training-schedule.md) | Starting weights, eligibility masks, replay, forcing dimensions and joint-training advancement |
 | [Scalar rows](scalar-row-handling.md) | Private row indices, tied-table overrides, gradient ownership, vocabulary masking and precision/export |
