@@ -103,6 +103,33 @@ class Reference(nn.Module):
             hidden, state = self(state, 'T', self.backbone.embedding([token])[0])
         return torch.stack(losses).mean()
 
+    @torch.no_grad()
+    def exact_recovery(self,prefix,targets):
+        """Conservative read-only recovery of an existing reviewed annotation.
+
+        Stop at the first greedy mismatch: the exact-match outcome is already
+        determined. No target is ever supplied before the model predicts it.
+        Nonexact paraphrases remain unresolved, never automatically approved.
+        """
+        cuda_only(prefix)
+        check(self.frozen and self.artifact_id==self.fingerprint(),'frozen unchanged reference required')
+        check(targets and targets[-1]==248046 and len(prefix)+len(targets)<=512,'recovery length/end')
+        hidden,state=self(self.backbone.initial(),'T',prefix)
+        indices=torch.cat((torch.arange(248044,device='cuda'),torch.tensor([248046],device='cuda')))
+        vocabulary=self.backbone.model.model.embed_tokens.weight[indices]
+        from ..codec.precision import linear
+        from ..g1_precision_math import compensated_linear
+        for index,target in enumerate(targets):
+            project=linear if self.backbone.precision_parts==3 else compensated_linear
+            scores=project(hidden[0,-1],vocabulary)
+            check(bool(scores.isfinite().all()),'nonfinite recovery logits')
+            token=int(indices[scores.argmax()])
+            if token!=target:
+                return {'exact':False,'matched_tokens':index,'target_tokens':len(targets),
+                        'first_mismatch':{'index':index,'predicted_token':token,'target_token':target}}
+            if index+1<len(targets):hidden,state=self(state,'T',self.backbone.embedding([token])[0])
+        return {'exact':True,'matched_tokens':len(targets),'target_tokens':len(targets),'first_mismatch':None}
+
     def fingerprint(self):
         return state_fingerprint(self.state_dict())
 
@@ -114,7 +141,10 @@ class Reference(nn.Module):
         self.frozen = True
         self.artifact_id = artifact_id
 
-    def initialize_live(self, live_codec):
+    def initialize_live(self, live_codec, evidence=None):
+        from .reference_qualification import ReferenceEvidence
+        check(isinstance(evidence,ReferenceEvidence),'measured reference qualification required before live initialization')
+        evidence.assert_reference(self)
         check(self.frozen and self.artifact_id == self.fingerprint(), 'reference must be frozen and unchanged before live initialization')
         live_codec.load_state_dict(self.codec.state_dict())
         self.assert_isolated(live_codec)

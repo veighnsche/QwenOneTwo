@@ -86,7 +86,8 @@ def reference_record(release,row):
     check(canonical(row)==canonical(release.record(row['id'])),'record/release drift')
     check(release.manifest['purpose']!='locked','locked reference material')
     check(any(e['id']==row['id'] and e['selected'] for e in release.manifest['records']),'unselected reference record')
-    check(row['training_category']=='reference','reference category')
+    check(row['training_category']=='reference' or
+          (row['split']=='development' and row.get('evaluation_slice')=='RF'),'reference category')
     check(set(row['model_inputs'])=={'role','meaning'},'reference input whitelist')
     role=row['model_inputs']['role'];meaning=row['model_inputs']['meaning']
     check(role==row['reference_role'],'reference role drift')
@@ -101,7 +102,7 @@ def reference_record_objective(reference,release,row):
     """Future reference-stage callback; returns graph only, never fits/steps."""
     from .reference import reference_objective
     annotation,p=reference_record(release,row)
-    return reference_objective(reference,annotation,p)
+    return reference_objective(reference,annotation,p,operation=row['operation'])
 
 
 class ComponentProducer:
