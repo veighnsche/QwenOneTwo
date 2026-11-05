@@ -1,11 +1,7 @@
 # Clean test construction v1
 
-Current implementation update (2026-11-05): Fresh permitted-view source/reference construction now exists, with measured hidden-twin identity and visible-change GPU checks. This is engineering evidence, not reviewed clean semantic evaluation. See [backend slice evidence](backend-slices-2026-11-05.md). The original design-only status below is historical; normative rules remain in force.
-
-Status: recorded design response to Astra F3, not implemented, independently
-re-reviewed or GPU-validated. No coding, model execution, training, service
-change, commit or deployment is authorized. All future encoding/testing model
-workloads use the explicitly selected RTX 3090; no CPU fallback.
+Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
+for implementation status, measured evidence and remaining work.
 
 Owner: information boundaries, clean tensor/materialization lineage and distinct
 clean/transfer/whole-flow evaluation protocols. Follow the

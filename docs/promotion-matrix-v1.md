@@ -1,10 +1,7 @@
 # Promotion matrix v1
 
-Status: recorded design response to Astra F8, not implemented, independently
-re-reviewed, populated with approved cases or GPU-validated. Counts/thresholds
-are starting acceptance settings, not measured performance or optimal values.
-No coding, model execution, training, service change, commit or deployment is
-authorized. Future model workloads remain on the explicitly selected RTX 3090.
+Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
+for implementation status, measured evidence and remaining work.
 
 Owner: evaluation slices, minimum coverage, denominators, effort metrics, phase
 promotion and regression protocols. Specializes [data/readiness](training-data-and-readiness.md)

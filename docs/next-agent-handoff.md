@@ -1,8 +1,9 @@
 # Next-agent handoff — 2026-11-05
 
-Read this first, then the [implementation specification](architecture-and-training-plan.md)
-and its linked topic owners. Older design-only status/authorization paragraphs
-are historical. This handoff records measured mechanisms, not learned capability.
+Read this first for current status, then the
+[implementation specification](architecture-and-training-plan.md) and its linked
+topic contracts. Historical reports describe their recorded sources and runs.
+This handoff records measured mechanisms, not learned capability.
 
 ## Current checkpoint
 
@@ -34,6 +35,17 @@ unchanged, and two simulated windows decode exactly 16 records without rebuildin
 the catalogue. `PYTHONPATH=tests .venv/bin/python -m unittest test_training_driver
 test_training_release test_training_schedule -q`: **28/28 passed in 1.179 s**.
 These are CPU metadata/counter simulations, not model or throughput measurements.
+
+Cleanup code commits: `1e86c08` (draft tool), `3cfa11c` (pilot provenance),
+`fa94776` (release windows). README/topic headers now defer current status to
+this handoff; obsolete status/authorization banners were removed and older
+checklists/audits labeled historical. Acceptance: all **610 local links across
+58 Markdown files resolve**, and `git diff --check` passes. Historical measured
+reports/receipts and normative numeric/cache/gradient contracts are preserved.
+No model calls or GPU reruns were made. Optimizer rollback and finite guards
+remain unchanged; their full-trainer memory/performance costs remain unmeasured.
+Next unfinished work is still genuinely reviewed records and concrete episode
+producers, followed by the already documented trainer-memory qualification.
 
 The user then explicitly requested deletion of the old Muse framework. The
 active local `muse-implementation` skill has been replaced with the cheap
@@ -73,7 +85,7 @@ results and limitations. No capability/reference fitting, bulk semantic data,
 frontend integration or deployment was performed. The Operating Table and other
 live services remain unchanged.
 
-Latest continuation implementation commit: `4d96af1`; this handoff follows it.
+Historical release-boundary implementation commit: `4d96af1`.
 The prior numeric/finite-guard evidence remains at `abd8dcf`, followed by the
 original final handoff at `2da8e43`. The new
 [release-boundary slices](backend-release-slices-2026-11-05.md) implement actual

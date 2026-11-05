@@ -1,16 +1,7 @@
 # Exact modules, optimizer ownership and accumulation v1
 
-Implementation update (2026-11-05): Runtime blocks and owners are implemented
-in `codec/`; training mechanisms and reference isolation now live in `training/`.
-See [backend slice evidence](backend-slices-2026-11-05.md) and the
-[passing v3 numeric report](codec-feedback-results-2026-11-05.md). The old
-BF16-transformer failure remains historical; capability training has not run.
-Original design-only status paragraphs below do not supersede measured evidence.
-
-Status: recorded design response to Astra F6, not implemented, independently
-re-reviewed or GPU-validated. No coding, model execution, training, service change,
-commit or deployment is authorized. All future model/gradient/optimizer work
-uses RTX 3090 UUID GPU-225509c3-d702-6c27-de03-76b5e99b33b1; no CPU fallback.
+Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
+for implementation status, measured evidence and remaining work.
 
 Owner: exact new protocol blocks, shared-module boundaries, missing heads/pointers,
 initialization, optimizer ownership and eligibility-based accumulation. Specializes

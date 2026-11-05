@@ -1,10 +1,9 @@
 # Training data scope, annotation procedures and readiness criteria
 
-Status: recorded initial design plan, not a generated dataset or measured
-result. Counts and thresholds are proposed acceptance targets, not evidence
-that the architecture works. No implementation, model workloads or deployment
-are authorized by this document. Resolve annotation ambiguities before locking
-the test set; never choose thresholds after observing its outcomes.
+See the [current handoff](next-agent-handoff.md) for implementation status and
+measured evidence. Counts and thresholds below are proposed acceptance targets,
+not evidence that the architecture works. Resolve annotation ambiguities before
+locking the test set; never choose thresholds after observing its outcomes.
 
 Owner: data quantities, splits, scoring and semantic acceptance. Exact annotation,
 review/adjudication and provenance rules belong to [data operations](data-operations.md);

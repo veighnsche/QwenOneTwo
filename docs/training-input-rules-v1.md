@@ -1,11 +1,7 @@
 # Role-specific training-input rules v1
 
-Current implementation update (2026-11-05): Role/branch builders and mechanical provenance validation now exist. Current outcome dependencies are excluded from request roles; non-assessed Reason remains separate. See [backend slice evidence](backend-slices-2026-11-05.md). The original design-only status below is historical; normative rules remain in force.
-
-Status: recorded design response to Astra F7, not implemented, independently
-re-reviewed or GPU-validated. No coding, model execution, training, service
-change, commit or deployment is authorized. Future model workloads remain on
-the explicitly selected RTX 3090; no CPU fallback.
+Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
+for implementation status, measured evidence and remaining work.
 
 Owner: per-role canonical input whitelists, branch exposure, permitted
 outcome-bearing Reason supervision and associated masks/provenance. Specializes

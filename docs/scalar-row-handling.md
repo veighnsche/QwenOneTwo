@@ -1,9 +1,7 @@
 # Budget and Score scalar rows
 
-Status: recorded design choice, not implemented or GPU-validated. Row indices
-below were checked from pinned local configuration/tokenizer JSON without
-loading or executing a model. Training, tying, precision and export still need
-GPU verification. This document authorizes no coding, model workloads or deployment.
+Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
+for implementation status, measured evidence and remaining work.
 
 Owner: private row indices, shared-table parametrization, row optimizer/gradient
 ownership, vocabulary exclusion and precision/export equivalence. Follow the

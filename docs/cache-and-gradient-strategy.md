@@ -1,7 +1,7 @@
 # Cache and gradient strategy
 
-Status: recorded design strategy, with GPU feasibility still unverified. This
-document authorizes no implementation, training, service change or deployment.
+Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
+for implementation status, measured evidence and remaining work.
 
 Owner: state/gradient strategy. Follow the
 [specification](architecture-and-training-plan.md) for the common lifecycle and

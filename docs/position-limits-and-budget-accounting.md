@@ -1,20 +1,11 @@
 # Position limits and budget accounting
 
-Implementation update: The full resource ledger and admission path now has a scoped implementation in
-`qwen_one_two/codec/`. See the [implementation](full-codec-implementation.md)
-and [measured qualification](codec-qualification-results-2026-11-05.md).
-The original design status below is historical; training and frontend
-expansion remain excluded, and expanded mixed-precision qualification
-is not passed. The recorded normative rules/tolerances remain in force.
-
-
-Status: recorded design choice, not implemented or validated capability. No
-code changes, model workloads or deployment are authorized by this document.
+Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
+for implementation status, measured evidence and remaining work.
 
 Owner: context/position accounting and resource admission for positions, local
 handles and new immutable records. The post-Astra admission section records F1's
-design response; implementation, independent re-review and GPU validation remain
-unperformed. Use the
+design response. Use the current handoff for implementation and validation. Use the
 [implementation specification](architecture-and-training-plan.md) for lifecycle
 and [handoff G0](implementation-handoff.md) to freeze codec lengths before
 claiming that the packet ceilings fit real requests.

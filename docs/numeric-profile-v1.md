@@ -1,9 +1,7 @@
 # A3: numeric profile v1
 
-Status: recorded design accepted for documentation, not implemented, calibrated
-or GPU-validated. No coding, model execution, training, service change or
-deployment is authorized. All model and derivative workloads use the explicitly
-selected RTX 3090; never use a CPU fallback.
+Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
+for implementation status, measured evidence and remaining work.
 
 Owner: exact A3 near-zero rules, budget evaluation, backend flags and fixtures.
 The [numeric verification plan](numeric-verification.md) owns the broader

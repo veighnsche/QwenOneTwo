@@ -1,15 +1,7 @@
 # Typed result statuses
 
-Implementation update: All thirteen operation/status transport cells now has a scoped implementation in
-`qwen_one_two/codec/`. See the [implementation](full-codec-implementation.md)
-and [measured qualification](codec-qualification-results-2026-11-05.md).
-The original design status below is historical; training and frontend
-expansion remain excluded, and expanded mixed-precision qualification
-is not passed. The recorded normative rules/tolerances remain in force.
-
-
-Status: recorded design choice, not implemented or validated capability. This
-document authorizes no code changes, model training or deployment.
+Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
+for implementation status, measured evidence and remaining work.
 
 Owner: semantic status and value-presence rules. The
 [implementation specification](architecture-and-training-plan.md) owns the

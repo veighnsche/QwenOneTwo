@@ -1,16 +1,7 @@
 # Small GPU proof: G1-core v1
 
-Status: protocol first recorded, then scoped implementation/execution explicitly
-authorized by the user. The initial RTX3090 run failed numerical agreement; see
-[original results](g1-core-results-2026-11-05.md). The subsequent
-[precision diagnosis/rerun](g1-precision-results-2026-11-05.md) passed all 72 numeric
-cases at unchanged tolerances plus cache/gradient/accounting/optimizer controls.
-The subsequent [gate-head repair/rerun](g1-gate-results-2026-11-05.md) PASSED
-bounded G1-core: all 72 numeric cases, 36 released continuations and supporting
-gate/cache/gradient/accounting/optimizer/base-integrity checks. No tolerance was
-relaxed or gate action overridden. The user's current scope ends at the rerun;
-no expansion, service change, production capability-checkpoint promotion or
-frontend change occurred. All model workloads were GPU-only.
+Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
+for implementation status, measured evidence and remaining work.
 
 Owner: bounded G1-core scope, fixtures, trace/accounting, path-specific gradient
 evidence, comparison matrix and exit bundle. Follow the

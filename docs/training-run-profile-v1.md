@@ -1,11 +1,7 @@
 # A4: training run profile v1
 
-Current implementation update (2026-11-05): Loss, eligible-example accumulation, optimizer ownership, reference isolation, sampling and checkpoint/export/resume mechanisms now exist. No scheduled capability-training phase has run. See [backend slice evidence](backend-slices-2026-11-05.md). The original design-only status below is historical; normative rules remain in force.
-
-Status: recorded starting design, not an implemented trainer, instantiated run
-manifest, reviewed dataset or GPU result. No coding, model workload, service
-change, commit or deployment is authorized. All model/optimizer/derivative
-workloads use RTX 3090 UUID GPU-225509c3-d702-6c27-de03-76b5e99b33b1; no CPU fallback.
+Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
+for implementation status, measured evidence and remaining work.
 
 Owner: A4 phase lengths, optimizer groups/schedule, exact loss subtypes,
 correction allocation and development promotion fixtures. The

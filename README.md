@@ -46,37 +46,15 @@ The official Qwen revision is `2fc06364715b967f1860aea9cf38778875588b17`. Qev is
 
 ## Implementation documentation
 
-Start a new agent with the [current handoff](docs/next-agent-handoff.md): it
-separates completed GPU qualification from remaining data, training, 1024-position
-checks, frontend migration and release work.
+The [current handoff](docs/next-agent-handoff.md) owns implementation status,
+measured results, artifact locations and remaining work. The
+[specification](docs/architecture-and-training-plan.md) owns the target contracts;
+the [documentation map](docs/README.md) links detailed topic owners and historical
+reports. Prototype commands above do not implement the complete learned flow.
 
-The [latest G1 gate repair/rerun](docs/g1-gate-results-2026-11-05.md) PASSED bounded
-G1-core: 72 numeric cases at unchanged tolerances, 36 released continuations and
-all gate/cache/gradient/accounting/optimizer/base-integrity checks. Only the
-isolated diagnostic gate weight/bias changed in that G1 repair. Subsequent
-[full codec/runtime implementation](docs/full-codec-implementation.md) is isolated
-in `qwen_one_two/codec/`. Its [original qualification](docs/codec-qualification-results-2026-11-05.md)
-failed the expanded 512-position BF16/FP32 comparison. The explicit
-[feedback precision v3](docs/codec-feedback-precision-v3.md) revision and
-[follow-up results](docs/codec-feedback-results-2026-11-05.md) address that failure
-without changing tolerances: all 324 prescribed 128/256/512-position numeric
-qualification traces pass on RTX 3090. Frozen storage is BF16; transformer
-computation is FP32, with compensated BF16 vocabulary projection. No curriculum,
-capability-training pipeline, frontend or live-service expansion has begun.
-
-Start with the [consolidated implementation specification](docs/architecture-and-training-plan.md), then the [implementation handoff](docs/implementation-handoff.md). The [documentation map](docs/README.md) identifies the owner of every protocol, budget, cache and training decision.
-
-The [implementation specification](docs/architecture-and-training-plan.md) consolidates the recorded [A1 typed ABI](docs/typed-value-abi.md), [A2 model configuration](docs/model-configuration.md), [A3 numeric profile](docs/numeric-profile-v1.md), [A4 training run profile](docs/training-run-profile-v1.md) and [B1 neural input encoding](docs/neural-input-encoding-v1.md). The [audit](docs/final-decision-audit.md) separates those designs from outstanding implementation, reference-vector checks, approved data/run artifacts and GPU evidence.
-
-The [latent packet codec](docs/latent-packet-codec.md) records request/result framing, typed exact data, role-aware vector inputs, continuous scalar feedback and structural position costs. The [writer schedule](docs/latent-writer-schedule.md) records native preparation steps, parallel record heads, learned references and completion. Full loss configuration and broader GPU qualification remain design/verification work.
-
-The [semantic-supervision design](docs/semantic-supervision.md), [loss configuration](docs/loss-configuration-and-training-schedule.md), [scalar-row design](docs/scalar-row-handling.md) and [numeric plan](docs/numeric-verification.md) record the training/verification defaults. The [data-operations procedure](docs/data-operations.md) fixes annotation/review, immutable sources, provenance and releases. These are documented designs, not trained capability, assigned reviewers or passing GPU results.
-
-The [worked-example index](docs/complete-training-examples.md) links the complete [Noul](docs/noul-training-walkthrough.md), [Choice](docs/choice-training-walkthrough.md) and [Score](docs/score-training-walkthrough.md) training walkthroughs. They remain review drafts, with subjective score and effort labels awaiting review.
-
-The [original natural prompts](docs/natural-invocation-prompts.md) preserve the initial discussion and remain excluded from training/tuning. They are illustrative rather than fresh blind tests.
-
-The target design uses one reasoning allowance for reasoning text and all additional latent work, including answer-phase calls. Zero permits a normal answer but no additional Qev calls. This target accounting and the full learned request/result flow are not implemented by the prototype commands above. No coding, training or deployment is authorized by documenting them.
+The [worked examples](docs/complete-training-examples.md) remain review drafts.
+Keep the [original natural prompts](docs/natural-invocation-prompts.md) and close
+paraphrases out of training/tuning; they are illustrative, not blind evaluation.
 
 ## Verification and deployment
 

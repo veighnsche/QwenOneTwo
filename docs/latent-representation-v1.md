@@ -1,9 +1,7 @@
 # Version-one latent representation proposal
 
-Status: recorded design choice for the next experiment, not implemented or
-validated capability. No coding, training, service changes or deployment are
-authorized by this document. Capacities below are starting choices, not proven
-optimal sizes or guarantees of sufficient semantic capacity.
+Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
+for implementation status, measured evidence and remaining work.
 
 Owner: semantic field layout. The
 [implementation specification](architecture-and-training-plan.md) owns the

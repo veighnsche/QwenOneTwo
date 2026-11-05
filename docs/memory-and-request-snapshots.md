@@ -1,16 +1,7 @@
 # Memory references and immutable request snapshots
 
-Implementation update: The append-only registry and immutable binding path now has a scoped implementation in
-`qwen_one_two/codec/`. See the [implementation](full-codec-implementation.md)
-and [measured qualification](codec-qualification-results-2026-11-05.md).
-The original design status below is historical; training and frontend
-expansion remain excluded, and expanded mixed-precision qualification
-is not passed. The recorded normative rules/tolerances remain in force.
-
-
-Status: recorded design choice, not implemented or validated capability. No
-coding, training, service changes or deployment are authorized by this document.
-This records the memory proposal discussed after the latent representation.
+Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
+for implementation status, measured evidence and remaining work.
 
 Owner: references, immutable snapshots and one-time consumption. Use the
 [implementation specification](architecture-and-training-plan.md) for dispatch

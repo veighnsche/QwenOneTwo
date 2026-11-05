@@ -1,9 +1,10 @@
 # Semantic supervision without hidden outcome labels
 
-Status: recorded training design, not implemented or GPU-validated. No coding,
-model workload, service change or deployment is authorized by this document.
-This provides an empirical semantic training/verification strategy, not a formal
-proof that every writer output contains zero information about an answer.
+Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
+for implementation status, measured evidence and remaining work.
+
+This is an empirical supervision strategy, not a proof that writer outputs
+contain zero information about an answer.
 
 Owner: allowed semantic inputs, frozen reference targets, writer/receiver
 alignment and semantic interventions. Follow the

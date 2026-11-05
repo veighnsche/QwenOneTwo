@@ -1,7 +1,7 @@
 # How the training data will be made
 
-Status: recorded production procedure, not an existing generated/reviewed
-dataset. No coding, model workloads or deployment are authorized.
+Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
+for implementation status, measured evidence and remaining work.
 
 Owner: scenario production. Use the
 [data/readiness contract](training-data-and-readiness.md) for labels and splits,

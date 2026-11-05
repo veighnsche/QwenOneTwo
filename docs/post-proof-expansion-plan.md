@@ -1,13 +1,7 @@
 # Expansion after the small GPU proof
 
-Status: G1-core passed. Subsequent authorized work implemented the full
-codec/runtime, numeric qualification and backend training infrastructure, with
-no capability fitting or frontend expansion. The [implementation](full-codec-implementation.md) is isolated in
-`qwen_one_two/codec/`. The [original expanded BF16 gate](codec-qualification-results-2026-11-05.md)
-failed; the later [feedback precision v3](codec-feedback-precision-v3.md) revision
-has separate [rerun evidence](codec-feedback-results-2026-11-05.md) at unchanged
-tolerances. Reviewed data, capability training and frontend work have not begun.
-All model workloads remain GPU-only. No service or deployment change occurred.
+Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
+for implementation status, measured evidence and remaining work.
 
 Owner: dependencies and deliverables after [G1-core](small-gpu-proof-v1.md).
 The [specification](architecture-and-training-plan.md) and detailed topic owners

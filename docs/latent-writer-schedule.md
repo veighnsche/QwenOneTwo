@@ -1,15 +1,7 @@
 # Latent writer schedule
 
-Implementation update: The bounded runtime writer and typed decoding heads now has a scoped implementation in
-`qwen_one_two/codec/`. See the [implementation](full-codec-implementation.md)
-and [measured qualification](codec-qualification-results-2026-11-05.md).
-The original design status below is historical; training and frontend
-expansion remain excluded, and expanded mixed-precision qualification
-is not passed. The recorded normative rules/tolerances remain in force.
-
-
-Status: recorded design choice, not implemented or GPU-validated. This document
-authorizes no coding, model workload, service change or deployment.
+Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
+for implementation status, measured evidence and remaining work.
 
 Owner: native writer steps, parallel record emission, learned references and
 completion. Follow the [specification](architecture-and-training-plan.md),

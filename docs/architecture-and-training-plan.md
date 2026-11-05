@@ -2,17 +2,9 @@
 
 ## Status, authority and implementation entry point
 
-Current implementation and measured backend updates are recorded in the
-[next-agent handoff](next-agent-handoff.md) and [backend slice report](backend-slices-2026-11-05.md). Original design-only authorization and unimplemented-status paragraphs below are historical; their normative contracts remain in force.
-
-This is the consolidated target specification. It records requirements and
-versioned starting designs, not an implemented or validated complete flow.
-The current task authorizes documentation consolidation only. No code changes,
-model workloads, service changes, commits, publication or deployment follow
-from this file. Later explicit user instructions can authorize implementation.
-
-Read this file first, then [implementation handoff](implementation-handoff.md)
-for dependency order, migration gaps and remaining contract-freeze work. The
+This is the consolidated target specification: requirements and versioned
+starting designs. The [current handoff](next-agent-handoff.md) owns implementation
+status, measured evidence and remaining work. The
 [documentation map](README.md) assigns ownership to detailed topic contracts.
 User instructions and AGENTS.md take precedence; within the docs this file
 resolves cross-component conflicts. Examples do not override the specification.
@@ -610,35 +602,11 @@ R is the native adapter; T in the model profile is the training-
 only reconstruction adapter. It adds no deployed mode: the runtime remains
 W+R/W+D. Keep D initialized from the pinned Qev architecture.
 
-After later explicit implementation authorization, a scoped GPU proof can start
-once its fixture-specific profile is fixed. Do not start the full general codec/
-training pipeline while treating codec validation, actual run/data artifacts or
-GPU feasibility as already completed. No implementation,
-training or service changes are authorized by this consolidation.
-
-The [small GPU proof](small-gpu-proof-v1.md) records that G1-core profile:
-<=256-position Noul-thinking/Score-answering traces, genuine continuous payloads,
-isolated return-path gradients, matching execution and exact holds/debits. It
-was subsequently implemented/run on the user's explicit authorization; the
-[original measured result failed](g1-core-results-2026-11-05.md). The subsequent
-[compensated precision rerun](g1-precision-results-2026-11-05.md) passed numerics
-but remained blocked on released Noul. The subsequent
-[gate-head repair/rerun](g1-gate-results-2026-11-05.md) PASSED bounded G1-core:
-72 numeric cases at unchanged tolerances, 36 released continuations and all
-gate/cache/gradient/accounting/optimizer/base-integrity checks. Only the diagnostic
-gate's two tensors changed. Broader A3 and semantic readiness remain unqualified;
-a subsequent user instruction authorized the isolated full codec/runtime and
-next qualification only. Its [implementation](full-codec-implementation.md) and
-[original failed results](codec-qualification-results-2026-11-05.md) are separate from
-G1-core. The [feedback precision v3](codec-feedback-precision-v3.md) revision
-and [follow-up qualification](codec-feedback-results-2026-11-05.md) explicitly
-version the later arithmetic change at unchanged tolerances. No training or
-frontend expansion has begun. The
-[conditional expansion plan](post-proof-expansion-plan.md) fixes work after a
-measured pass: full codec/runtime and512 qualification, reviewed pilot/data,
-reference/component training,1024 qualification before joint phases, unforced
-promotion and same-job frontend integration. A core pass does not certify all
-A3, learned invocation, full context or readiness to deploy.
+The [current handoff](next-agent-handoff.md) records measured mechanisms,
+qualified arithmetic profiles and remaining prerequisites. The
+[expansion plan](post-proof-expansion-plan.md) defines dependency order. A
+bounded engineering pass does not certify learned invocation, full context or
+readiness to deploy.
 
 Follow G0 contract freeze -> G1 short GPU feasibility -> G2 runtime/memory ->
 G3 component skills -> G4 complete trajectories -> G5 free generation/UI ->

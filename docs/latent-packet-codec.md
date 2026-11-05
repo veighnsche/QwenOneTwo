@@ -1,16 +1,7 @@
 # Latent request and result packet codec
 
-Implementation update: Full request/result/draft rendering now has a scoped implementation in
-`qwen_one_two/codec/`. See the [implementation](full-codec-implementation.md)
-and [measured qualification](codec-qualification-results-2026-11-05.md).
-The original design status below is historical; training and frontend
-expansion remain excluded, and expanded mixed-precision qualification
-is not passed. The recorded normative rules/tolerances remain in force.
-
-
-Status: recorded design choice, not implemented or GPU-validated. These are
-versioned starting layouts/capacities, not proof of shared semantic understanding.
-This document authorizes no coding, model workload, service change or deployment.
+Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
+for implementation status, measured evidence and remaining work.
 
 Owner: packet records, neural position layout, typed-value representation and
 request/result framing. The [semantic layout](latent-representation-v1.md) owns

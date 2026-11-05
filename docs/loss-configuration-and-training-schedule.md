@@ -1,10 +1,7 @@
 # Loss configuration and training schedule
 
-Current implementation update (2026-11-05): The recorded loss subtypes, eligibility masks and CUDA accumulation now have implementation and focused engineering tests. No capability fitting or coefficient tuning has occurred. See [backend slice evidence](backend-slices-2026-11-05.md). The original design-only status below is historical; normative rules remain in force.
-
-Status: recorded starting configuration, not implemented, tuned or GPU-validated.
-Weights are explicit pilot/development defaults, not measured optimums. This
-document authorizes no coding, model workload, service change or deployment.
+Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
+for implementation status, measured evidence and remaining work.
 
 Owner: losses, masks, normalization, gradient ownership, sampling and forcing.
 Follow [semantic supervision](semantic-supervision.md),

@@ -1,9 +1,9 @@
 # Final design consolidation and pre-implementation audit
 
-Status: documentation audit, not an implementation/GPU readiness report. No
-code, model workload, service, checkpoint, commit or deployment is authorized.
-This file owns the closure assessment and residual list; the
-[specification](architecture-and-training-plan.md) owns the target contracts.
+Historical design closure assessment, not a current implementation audit.
+Use the [current handoff](next-agent-handoff.md) for measured completion and
+remaining work; the [specification](architecture-and-training-plan.md) owns
+the target contracts.
 
 ## Recorded decisions
 

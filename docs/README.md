@@ -1,28 +1,16 @@
 # QwenOneTwo documentation map
 
 For current measured status, artifact locations and remaining tasks, start with
-the [next-agent handoff](next-agent-handoff.md). The v3 324-case numeric matrix
-through 512 positions and the separate 108-case 1024 extension pass. Backend
-training infrastructure is implemented; learned semantic capability remains untrained.
+the [next-agent handoff](next-agent-handoff.md). This is the single current
+completion report; topic documents below define contracts and starting defaults.
 
 The [repository and artifact guide](repository-and-artifacts.md) explains what
 is included in GitHub, which evidence remains local and how to run from a clone.
 
-Start with the [implementation specification](architecture-and-training-plan.md),
-then the [implementation handoff](implementation-handoff.md). The first owns
-cross-component decisions; the second owns work order, migration gaps and
-unresolved items. Neither authorizes coding, training or deployment by itself.
-
-The [final decision audit](final-decision-audit.md) records reconciled ambiguities,
-remaining interface/configuration freeze items and coding-readiness assessment.
-
-A1-A4 and B1 initial design profiles are recorded and consolidated in the
-specification. The full codec/runtime, engineering vectors and v3 numeric
-qualification through 1024 positions now have scoped implementation/evidence.
-Role-specific input/clean builders and training infrastructure are implemented.
-Approved semantic datasets, task-specific episode integration, full A4 training
-memory qualification, reference/capability training and frontend migration remain outstanding. A recorded design is not trained
-capability; use the current handoff and measured reports for completion status.
+The [implementation specification](architecture-and-training-plan.md) owns
+cross-component decisions. The [implementation checklist](implementation-handoff.md)
+and [design audit](final-decision-audit.md) preserve historical work order and
+closure assessments; use them as background, not additional completion reports.
 
 The [Astra review](review-astra-2026-11-05.md) is a historical independent report,
 not a live claim about subsequently edited sources. B1 section 11 records the
@@ -49,8 +37,8 @@ not override them. Future changes must update the owner and affected examples.
 | Document | Owns |
 |---|---|
 | [Implementation specification](architecture-and-training-plan.md) | Requirements, component ownership, lifecycle, contract summaries |
-| [Implementation handoff](implementation-handoff.md) | Dependency order, implementation gaps, remaining freeze decisions, evidence needed |
-| [Final decision audit](final-decision-audit.md) | Current design/validation status, recorded profiles and remaining Astra findings |
+| [Implementation checklist](implementation-handoff.md) | Historical dependency order and design preparation |
+| [Design audit](final-decision-audit.md) | Historical design closure assessment and recorded profiles |
 | [Independent Astra review](review-astra-2026-11-05.md) | Historical full-document/math review, original source hashes, findings and readiness verdicts |
 | [Latent representation](latent-representation-v1.md) | Semantic field roles, shapes and exact-data requirements |
 | [Packet codec](latent-packet-codec.md) | Typed request/result layout, role encodings, exact-value bodies and structural position costs |

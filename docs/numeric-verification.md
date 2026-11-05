@@ -1,8 +1,7 @@
 # Numeric agreement and gradient verification
 
-Status: recorded starting acceptance plan, not GPU measurements or passing
-results. No coding, model workload, service change or deployment is authorized.
-All model/derivative checks use the explicitly selected RTX 3090; no CPU fallback.
+Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
+for implementation status, measured evidence and remaining work.
 
 Owner: exact invariants, floating-point tolerances, control parity, gradient
 correctness and export checks. Follow [scalar rows](scalar-row-handling.md),

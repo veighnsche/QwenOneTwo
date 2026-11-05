@@ -1,16 +1,7 @@
 # Typed-value ABI and bounded returns
 
-Implementation update: The complete typed-value ABI now has a scoped implementation in
-`qwen_one_two/codec/`. See the [implementation](full-codec-implementation.md)
-and [measured qualification](codec-qualification-results-2026-11-05.md).
-The original design status below is historical; training and frontend
-expansion remain excluded, and expanded mixed-precision qualification
-is not passed. The recorded normative rules/tolerances remain in force.
-
-
-Status: recorded v1 design, not implemented or GPU-validated. No coding, model
-execution, training, service change or deployment is authorized. This closes
-A1 as a design; exact transport and semantic use still require verification.
+Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
+for implementation status, measured evidence and remaining work.
 
 Owner: typed-body counts, bounded value heads and return envelope. Follow the
 [codec](latent-packet-codec.md), [writer](latent-writer-schedule.md),
