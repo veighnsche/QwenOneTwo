@@ -20,5 +20,9 @@ that limitation honestly. Never claim stock Qev already learned latent invocatio
 Training data and capabilities must have honest, reproducible provenance.
 
 Independent of The Operating Table: never change its service, data or artifacts.
-No model caches, local configuration or generated artifacts in git. No commits,
-publication or deployment without user authorization.
+No model caches, local configuration or generated artifacts in git.
+
+For user-authorized work in this repository, commit directly to `main` and push
+when the work is complete. Do not create feature branches, pull requests or drafts.
+This is standing authorization to commit and push that work; do not ask again.
+Deployment still requires explicit user authorization.
