@@ -76,6 +76,11 @@ identities, actual calls/usage, tests, source and workflow hashes. Local artifac
 - `verify_collections.py`, `verification.json`, `tests.log`: independent audit.
 - `development-secondary-mechanical.json`: the additional execution protocol.
 
+Per-record generator hashes bind the exact source archived inside each release.
+The checkout subsequently removes trailing whitespace only; Python AST equality
+was verified, the nine construction tests passed again, and dataset bytes and
+manifest identities remain unchanged.
+
 Reproduce the read-only checks without calling a model:
 
 ```sh

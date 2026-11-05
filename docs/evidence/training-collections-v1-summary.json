@@ -560,7 +560,7 @@
     "prepare_development.py": "2d791ce04b9edbd2aed1da1567ec9b48fd5945d8eec70e8f01a92a2495997168",
     "finalize.py": "8f9da86e217a1b2cd7e1d596d3a2dfdd190680019370c0f522e42722947d83f5",
     "reference_banks.py": "16a4e16519a3eed7faa5ae4a729f332b0de6a82f104e298370bb8e9bf7beb3bc",
-    "verify_collections.py": "4c1b394076a9fec8da7e5eba102c60db8eddcd071d9be0b9cd864ec3abc477f1",
+    "verify_collections.py": "cf1548b48bdaa2d2d2c648d79cb8efc07e733e28082bd85a65ec07cf9438c26c",
     "extend_development.py": "6a015767215aec66ea96d54aa98a297ec325cac5715744886715e5ea2189ce7e",
     "secondary_mechanical.py": "046344a2709c1205dc2f5482e0b13866093659248fc38147b4675440fa10708b"
   },
@@ -570,5 +570,15 @@
     "locked-examples.jsonl": "d92a68b8c8fa114a80966121be82b0123f2ac9f4196cd6f174b5f22e5d67075d",
     "verification.json": "e0707fd3685897b5ce87cad8ff784ca4473071cab8dad9cd4516a4d75388c9be",
     "split-allocation.json": "7c6d8975bd447e1bf035c424a64b7c9c74d81729d8068c5a213b521c0203a4b9"
+  },
+  "source_snapshot_note": "Per-record generator hashes bind the exact archived materialization source. Current checkout removes trailing whitespace only; Python AST equivalence verified. Dataset bytes/manifests unchanged.",
+  "current_checkout_source_sha256": {
+    "scripts/produce_training_data.py": "c4cdde8ad09d9cc9f5833eb2cbb210c4395a401025252f0ed21ea011d3ef035e"
+  },
+  "source_snapshot_verification": {
+    "python_ast_equal": true,
+    "post_format_construction_tests": 9,
+    "seconds": 0.849,
+    "final_audit_sha256": "58aef73da801fc002b1b7a65931723d9c498dceb77f46fb50d00377166bf4dc3"
   }
 }
