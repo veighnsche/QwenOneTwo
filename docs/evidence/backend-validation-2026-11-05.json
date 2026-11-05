@@ -13,6 +13,16 @@
       "tests_passed": 6,
       "seconds": 15.41,
       "sha256": "6e9b269ce6c1cc5b83908165b0d90f046b52d021476a240bfbbeb3dadc19328f"
+    },
+    "clean-packet-all-tests.log": {
+      "tests_passed": 8,
+      "seconds": 17.64,
+      "sha256": "f20c63233296e40ba9db26c3a8851832a09327a06d0d8de1a2ba8351de559777"
+    },
+    "clean-packet-lineage-tests.log": {
+      "tests_passed": 3,
+      "seconds": 5.901,
+      "sha256": "ae98161d774721254dd7544c752d573d590e42f98cfbae458f80cc11beb3960d"
     }
   },
   "model_free_tests": {
@@ -26,5 +36,6 @@
     "kind": "CUDA OOM with concurrent numeric worker",
     "resolution": "share frozen vocabulary slice per reconstruction episode; rerun affected suite passed"
   },
-  "numeric_1024_status": "RUNNING; separate report required"
+  "numeric_1024_status": "RUNNING; separate report required",
+  "unique_backend_gpu_tests": 20
 }

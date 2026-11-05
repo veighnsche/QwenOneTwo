@@ -45,7 +45,9 @@ class CleanGPU(unittest.TestCase):
         view,p = self.make(b' Hidden: expired and more text.')
         b = encoder.encode(view,p,run='twin-b')
         self.assertEqual(a['input_hash'],b['input_hash'])
-        self.assertEqual(a['audit'],b['audit'])
+        self.assertEqual([{k:v for k,v in x.items() if k != 'parent'} for x in a['audit']],
+                         [{k:v for k,v in x.items() if k != 'parent'} for x in b['audit']])
+        self.assertNotEqual(a['audit'][0]['parent']['sha256'],b['audit'][0]['parent']['sha256'])
         self.assertTrue(torch.equal(a['slots'][0],b['slots'][0]))
         sa=a['registry'].get(a['sources'][0]); sb=b['registry'].get(b['sources'][0])
         self.assertEqual(sa.text,b'Orientation completed.')
@@ -161,3 +163,72 @@ class CleanGPU(unittest.TestCase):
             self.b.checkpointing=False
         self.assertTrue(torch.equal(loss,actual_loss))
         self.assertTrue(torch.equal(expected,actual))
+
+    def test_complete_clean_packet_twins_and_supplied_returns(self):
+        from pathlib import Path
+        from qwen_one_two.training.clean_packets import CleanPackets
+        from qwen_one_two.training.manifest import DIAGNOSTIC_SHA
+        from qwen_one_two.codec.schema import Port, Status
+        encoder=CleanEncoder(self.b,self.ref,checkpoint_hash=DIAGNOSTIC_SHA,
+                             profile_hash=digest(Path('docs/codec-feedback-precision-v3.md').read_bytes()))
+        packets=[]
+        for index,hidden in enumerate((b' Hidden active.',b' Hidden expired.')):
+            view,p=self.make(hidden)
+            text='The bound participant'
+            nodes=dict(p.nodes);nodes['target']=Node('request_semantics',digest(text.encode()))
+            p=Provenance(nodes,p.sources)
+            target=reference_input('target',{'referent':Field(text,'target')},p)
+            view=CleanView(view.references+(target,),view.evidence,frozenset({'q','fact','target'}),purpose='reader',operation='Noul')
+            encoded=encoder.encode(view,p,run=f'clean-packet-{index}')
+            factory=CleanPackets(encoded,view,p)
+            packet=factory.request(Port.NOUL,0,1,evidence=(factory.span(0,0,len(encoded['registry'].get(encoded['sources'][0]).token_ids)),))
+            request,request_audit=factory.encode(self.c,packet)
+            result=factory.supplied_return(Status.ASSESSED,scalar=torch.tensor(.25,device='cuda'))
+            returned,return_audit=factory.encode(self.c,result)
+            self.assertTrue(return_audit["supplied_component_return"])
+            self.assertFalse(request_audit["supplied_component_return"])
+            packets.append((request,returned,[(int(x.role),x.owner,x.slot) for x in packet.positions]))
+            with self.assertRaises(ValueError):factory.supplied_return(Status.ASSESSED,scalar=torch.tensor(.5,device='cuda'))
+        self.assertTrue(torch.equal(packets[0][0],packets[1][0]))
+        self.assertTrue(torch.equal(packets[0][1],packets[1][1]))
+        self.assertEqual(packets[0][2],packets[1][2])
+
+    def test_clean_exact_attributes_are_local_grounded_and_immutable(self):
+        from pathlib import Path
+        from dataclasses import replace
+        from qwen_one_two.training.clean_packets import CleanPackets
+        from qwen_one_two.training.inputs import canonical
+        from qwen_one_two.training.manifest import DIAGNOSTIC_SHA
+        from qwen_one_two.codec.schema import Port,ValueKind,Role
+        texts=[b'2',b'1.20',b'true',b'""',b'Jo']
+        sources={str(i):Source(str(i),1,t,digest(t)) for i,t in enumerate(texts)}
+        bindings=tuple(Binding(str(i),1,0,len(t)) for i,t in enumerate(texts))
+        nodes={str(i):Node('source_fact',digest(t),binding=bindings[i]) for i,t in enumerate(texts)}
+        for key,text in (('q','What are the supplied fields?'),('target','Item'),('key','Property')):
+            nodes[key]=Node('request_semantics',digest(text.encode()))
+        nodes['absent']=Node('request_semantics',digest(canonical({'kind':int(ValueKind.INT64),'present':False})))
+        p=Provenance(nodes,sources)
+        refs=(reference_input('question',{'proposition':Field('What are the supplied fields?','q')},p),
+              reference_input('target',{'referent':Field('Item','target')},p),
+              reference_input('key',{'property':Field('Property','key')},p),
+              reference_input('target',{'referent':Field('Jo','4')},p))
+        view=CleanView(refs,bindings,frozenset(nodes),operation='Noul')
+        encoder=CleanEncoder(self.b,self.ref,checkpoint_hash=DIAGNOSTIC_SHA,
+                             profile_hash=digest(Path('docs/codec-feedback-precision-v3.md').read_bytes()))
+        encoded=encoder.encode(view,p,run='clean-exact-fixture')
+        factory=CleanPackets(encoded,view,p)
+        spans=[factory.span(i,0,len(encoded['registry'].get(ref).token_ids)) for i,ref in enumerate(encoded['sources'])]
+        attrs=(factory.source_attribute(2,spans[0],ValueKind.INT64),
+               factory.source_attribute(2,spans[1],ValueKind.DECIMAL),
+               factory.source_attribute(2,spans[2],ValueKind.BOOLEAN),
+               factory.quoted_utf8_attribute(2,spans[3]),
+               factory.source_attribute(2,spans[4],ValueKind.SOURCE_STRING),
+               factory.reference_attribute(2,3,spans[4]),
+               factory.absent_attribute(2,ValueKind.INT64,p,'absent'))
+        self.assertEqual(attrs[0].value.data,2);self.assertEqual(attrs[1].value.data,(120,-2))
+        self.assertEqual(attrs[3].value.data,b'');self.assertTrue(attrs[3].value.present)
+        self.assertFalse(attrs[6].value.present)
+        packet=factory.request(Port.NOUL,0,1,target_attributes=attrs)
+        self.assertTrue(bool(self.c.encode(packet).isfinite().all()))
+        self.assertEqual(len([x for x in packet.positions if x.role==Role.ATTRIBUTE_DESC]),7)
+        with self.assertRaises(ValueError):factory.source_attribute(2,replace(spans[0],source=attrs[5].value.data),ValueKind.INT64)

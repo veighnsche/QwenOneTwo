@@ -115,7 +115,11 @@ class CleanEncoder:
             body_states = states[selected]
             ref = registry.publish(Kind.SOURCE, Source(excerpt, tuple(ids[i] for i in selected), offsets, body_states))
             refs.append(ref)
+            binding = view.evidence[index]
+            parent = provenance.sources[binding.source]
             audit.append(dict(self.identity, local_source=index, input_hash=digest(excerpt),
+                              parent={'source':binding.source,'version':binding.version,'sha256':parent.sha256,
+                                      'byte_start':binding.start,'byte_end':binding.end},
                               tokens=len(ids), offsets=offsets, transformations=['fresh_tokenize', 'W+D', 'body_states'],
                               tensor_hash=digest(body_states.contiguous().cpu().numpy().tobytes())))
         for ref in view.references:
@@ -127,7 +131,7 @@ class CleanEncoder:
             with torch.no_grad():
                 payload = self.reference.pooler(states, *SLOTS[ref.role])
             slots.append(payload)
-            audit.append(dict(self.identity, role=ref.role, input_hash=ref.sha256,
+            audit.append(dict(self.identity, role=ref.role, input_hash=ref.sha256, bindings=ref.bindings, dependencies=ref.dependencies,
                               transformations=['role_whitelist', 'fresh_tokenize', 'frozen_W', 'frozen_pooler'],
                               tensor_hash=digest(payload.contiguous().cpu().numpy().tobytes())))
         return {'registry': registry, 'sources': tuple(refs), 'slots': tuple(slots),

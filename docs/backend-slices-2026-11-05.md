@@ -166,3 +166,31 @@ seconds**. Raw logs and hashes are listed in the
 The model-free checks are 10 input/provenance + 4 sampler/profile + 2 protocol
 coverage, plus the six existing exact codec tests. None executes a model on CPU.
 No original 324-case matrix was rerun.
+
+## Slice 6: complete clean packet construction
+
+`training/clean_packets.py` builds clean offline component requests and supplied
+reader returns with the existing immutable registry, production renderer and
+admission/result checks. It accepts only role-matched, hash-verified clean
+artifacts. Grounded exact fields cover Boolean, int64, scale-preserving decimal,
+source-string, UTF8 (including quoted empty strings), local reference identities
+and separately declared absence. Reference attributes require a neutral local
+identity matching the selected source literal; no arbitrary original-registry
+reference is imported. Attributes must have been issued by this construction.
+
+The complete request and return wire tensors are identical across hidden-fact
+twins. Return construction rejects a duplicate and verifies the Reason/carrier
+status. `encode` rebuilds the authoritative packet and records its tensor hash,
+codec state hash, construction transformations and external lineage. Source-parent
+hashes/original byte coordinates are retained in that external audit and may
+differ between hidden twins; they never enter the derived sources/model inputs.
+
+Acceptance evidence: the expanded clean/reference suite passed **8/8 in 17.640
+seconds**. After adding the external parent lineage and authoritative packet audit,
+the three affected clean tests passed **3/3 in 5.901 seconds**. The tests exercise
+all six exact kinds, absence versus empty, local-source rejection and full Noul
+request/return equality. Choice/Score construction uses the same codec path;
+these new clean tests do not claim reviewed Choice/Score semantic coverage.
+This brings the backend GPU regression inventory to 20 unique tests; the earlier
+18-test run plus the affected/new suites cover it, without rerunning the old
+324-case numeric matrix.
