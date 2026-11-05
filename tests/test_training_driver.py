@@ -3,7 +3,6 @@
 Release objects use explicit TEST-ONLY schema markers, not real human evidence.
 Actual one-cache Session validation remains covered by the earlier CUDA tests.
 """
-from copy import deepcopy
 from pathlib import Path
 import tempfile
 import unittest
@@ -12,7 +11,9 @@ from unittest.mock import patch
 from qwen_one_two.training.driver import Driver
 from qwen_one_two.training.release import load_release
 from qwen_one_two.training.sampler import Sampler
+from qwen_one_two.training.qualification import load_numeric_evidence
 from release_fixtures import row, pilot_rows, write_release
+from qualification_fixtures import write_numeric_fixture
 
 
 class WindowFixture:
@@ -42,14 +43,15 @@ class DriverTests(unittest.TestCase):
                    for category in ('interleaved','direct','language_replay','decision_replay')]
         write_release(root/'training', records, purpose='training', pilot_hash=cls.pilot.identity)
         cls.release = load_release(root/'training')
-        cls.prerequisites = {'g1_core':True, 'numeric_1024':{'protocol':'v3-1024-v1',
-            'protocol_complete':True, 'status':'PASSED', 'report_hash':'b'*64}}
+        cls.prerequisites = {'g1_core':True}
+        numeric_hash = write_numeric_fixture(root/'numeric')
+        cls.numeric = load_numeric_evidence(root/'numeric',expected_hash=numeric_hash)
 
     def driver(self, *, release=None, pilot=None, sampler=None, prerequisites=None):
         release = self.release if release is None else release
         return Driver(WindowFixture(), sampler or Sampler.from_release(self.release,'guided_joint'),
                       release, self.pilot if pilot is None else pilot,
-                      self.prerequisites if prerequisites is None else prerequisites)
+                      self.prerequisites if prerequisites is None else prerequisites,numeric=self.numeric)
 
     def test_unverified_strings_and_wrong_release_purpose_reject(self):
         for release in ({'pilot_review_hash':'anything'}, self.pilot):
@@ -75,9 +77,11 @@ class DriverTests(unittest.TestCase):
             release = load_release(temp)
             with self.assertRaisesRegex(ValueError,'pilot release binding'):
                 self.driver(release=release,sampler=Sampler.from_release(release,'guided_joint'))
-        bad = deepcopy(self.prerequisites); bad['numeric_1024']['protocol_complete'] = False
-        with self.assertRaisesRegex(ValueError,'1024 qualification'):
-            self.driver(prerequisites=bad)
+        with self.assertRaisesRegex(ValueError,'loaded 1024 qualification'):
+            Driver(WindowFixture(),Sampler.from_release(self.release,'guided_joint'),
+                   self.release,self.pilot,self.prerequisites,numeric={'status':'PASSED','report_hash':'b'*64})
+        with self.assertRaisesRegex(ValueError,'attestation dictionary'):
+            self.driver(prerequisites={'g1_core':True,'numeric_1024':{'status':'PASSED'}})
 
     def test_repeated_exposures_receive_original_bytes_and_bound_report(self):
         driver = self.driver()

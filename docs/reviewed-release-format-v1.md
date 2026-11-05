@@ -149,7 +149,8 @@ Near-duplicate detection and review of other releases remain external duties.
 
 Construct the sampler with `Sampler.from_release(training_release, phase)` and
 the native driver with `Driver(window, sampler, training_release, pilot_release,
-prerequisites)`. The old raw-record/parent/hash-string driver arguments are
+prerequisites, numeric=loaded_numeric_evidence)` for joint phases. The old
+raw-record/parent/hash-string driver arguments are
 removed; there are no repository callers to migrate. The driver checks the linked
 pilot and exact catalogue, including receiver/writer operation, reference status
 and domain, before any producer runs. Every window rechecks catalogue integrity.
@@ -163,3 +164,19 @@ Sampler resume recomputes the identifier-only deterministic schedule to verify
 that its counters agree exactly with its window number. This never replays a
 model/rollout. Invented, skipped or foreign cursor entries reject transactionally.
 Actual Session, graph and optimizer checks retain their separate CUDA evidence.
+
+Joint phases require a `NumericEvidence` from `load_numeric_evidence(bundle,
+expected_hash=...)`, not a caller-supplied pass dictionary. The read-only loader
+checks the exact aggregate/child hashes, complete 108-case axes, thirteen status
+cells, one-prefill/cache/accounting settlement, parameter/frozen-storage reports,
+v3 profile and archived source bytes. It preserves the original measured source
+snapshot, including its documented distinction from subsequent finite guards.
+It does not establish equivalence with arbitrary later code edits or measure the
+full A4 trainer memory mix. The separate G1 prerequisite remains an explicitly
+supplied attestation; this transport work does not recreate G1 qualification.
+
+```bash
+.venv/bin/python -m qwen_one_two.training.qualification \
+  data/codec-qualification/1024-v1-20261105 \
+  --expected-hash 3387858c77ea2de9c1d9eb500a29c5991d14ede997503de18d033f81146d43cf
+```

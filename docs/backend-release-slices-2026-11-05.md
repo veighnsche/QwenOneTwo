@@ -69,3 +69,37 @@ No real reviewed pilot/review artifacts were found among local data manifests;
 the existing Qev/qualification manifests are different artifact types. Actual
 pilot integration and task-specific episode production remain blocked on real
 reviewed annotations. These mechanics do not establish semantic competence.
+
+## Slice 3: consume actual numeric evidence at the joint-phase gate
+
+Finding: the joint-phase prerequisite still accepted an arbitrary pass dictionary
+and hash string. Acceptance: load the existing pinned aggregate, verify all child
+bytes/axes/invariants and archived sources, then require that immutable receipt
+before any joint-phase producer runs. No numeric matrix rerun is needed.
+
+`training/qualification.py` validates the recorded v3-1024-v1 bundle, all 108
+unique cases, thirteen operation/status cells, parameter/tied-base evidence,
+one-prefill/cache/accounting settlement and archived source content. The driver
+requires its `NumericEvidence`; bare dictionaries reject. The loader does not
+assert that later arbitrary source edits match the measured implementation.
+The historical finite-guard delta remains documented separately. The G1 flag
+remains a caller attestation, and actual A4 training memory is still unqualified.
+
+Validation: **42/42 focused model-free tests passed in 0.950 s** (the preceding 36
+plus six numeric-evidence regressions). After the final Boolean-marker guard,
+the affected suites were rerun as recorded in the portable validation summary.
+Test report-shaped objects are explicitly schema-only; their pass markers are
+never measured model results. Actual recorded evidence was separately loaded:
+
+```bash
+.venv/bin/python -m qwen_one_two.training.qualification \
+  data/codec-qualification/1024-v1-20261105 \
+  --expected-hash 3387858c77ea2de9c1d9eb500a29c5991d14ede997503de18d033f81146d43cf
+```
+
+The actual bundle passed inspection: 108 cases, three matching child hashes and
+28 archived source/test files. Its aggregate identity and original measurements
+remain unchanged. Raw inspection receipt:
+`data/backend-release-20261105/loaded-1024-evidence.json`. A fresh-process import
+again confirms no torch/model runtime is loaded. No GPU workload or optimizer
+step occurred in this continuation.

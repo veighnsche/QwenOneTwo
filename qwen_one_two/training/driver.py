@@ -6,6 +6,7 @@ this driver cannot relabel a divergent packet or supply gold joint returns.
 """
 from .inputs import check, canonical
 from .release import bind_pilot, decode
+from .qualification import NumericEvidence
 
 
 def collect_session(*args):
@@ -15,18 +16,18 @@ def collect_session(*args):
 
 
 class Driver:
-    def __init__(self, window, sampler, release, pilot, prerequisites):
+    def __init__(self, window, sampler, release, pilot, prerequisites, *, numeric=None):
         check(window.phase == sampler.phase and window.phase != 'reference', 'native driver phase')
         check(window.scheduled_windows == sampler.windows, 'sampler/window cursor mismatch')
         bind_pilot(release, pilot)
         sampler.assert_release(release)
         check(prerequisites.get('g1_core') is True, 'G1 prerequisite')
         if window.phase in {'guided_joint','transition','free_joint'}:
-            numeric = prerequisites.get('numeric_1024', {})
-            check(numeric.get('protocol') == 'v3-1024-v1' and numeric.get('protocol_complete') is True
-                  and numeric.get('status') == 'PASSED' and bool(numeric.get('report_hash')), '1024 qualification prerequisite')
+            check(isinstance(numeric, NumericEvidence), 'loaded 1024 qualification evidence required')
+        check('numeric_1024' not in prerequisites, 'replace numeric attestation dictionary with loaded evidence')
         self.window,self.sampler = window,sampler
         self.release, self.pilot = release, pilot
+        self.numeric = numeric
         self._prerequisites = canonical(prerequisites)
         self.reports = []
         self.failed = False
@@ -53,7 +54,8 @@ class Driver:
             result = self.window.step()
             report = {'samples':ids,'exposures':exposures,'window':result,'sampler':self.sampler.state_dict(),
                       'release_sha256':self.release.identity,'pilot_release_sha256':self.pilot.identity,
-                      'prerequisites':decode(self._prerequisites)}
+                      'prerequisites':decode(self._prerequisites),
+                      'numeric_1024':None if self.numeric is None else self.numeric.summary}
             self.reports.append(report)
             return report
         except BaseException as exc:
