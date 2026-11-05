@@ -7,6 +7,21 @@ This handoff records measured mechanisms, not learned capability.
 
 ## Current checkpoint
 
+The user explicitly removed mandatory human review for this experiment.
+Current policy is mechanical checks plus one separate, outcome-blind
+model-assisted content review per record (batched calls permitted), followed by
+automated release approval. This applies to pilot, training, development, locked,
+subjective Score/effort and new rubrics. No reviewer hiring, mandatory second pass
+or human sign-off remains. `kind:model` review evidence binds actual model/session
+and prompt/response assets; `kind:automated` approval binds policy and release.
+Old human-review evidence is still readable but is not required. Unreviewed,
+rejected, stale or quarantined records still reject. Do not automatically retry
+generation/review or mislabel model review as human certification. This policy
+change performed no model calls and approved no real dataset. Historical review
+requirements below describe earlier checks, not the current policy. See the
+[validation receipt](evidence/automated-content-review-v1.json) and
+[current review procedure](data-operations.md#5-independent-semantic-and-outcome-review).
+
 The user authorized small fixes for confirmed overengineering, excluding generation
 orchestration/cost controls; no model calls are permitted for this cleanup.
 Draft inspection now lives in `scripts/validate_drafts.py`, outside the training
@@ -192,8 +207,8 @@ Exact log/test source hashes are in the
 ## Next unfinished slice / blockers
 
 The replacement twelve pilot proposals now exist; do not regenerate them merely
-because older handoffs reported no data. Obtain actual independent human reviews and
-adjudicate/revise before approval or expansion. Reviewed model-proposed roots
+because older handoffs reported no data. Obtain actual separate model-assisted
+content reviews and resolve or exclude failures before automated approval or expansion. Reviewed model-proposed roots
 can now count under the same pilot review/approval rules; never relabel these as
 human-authored or fabricate review evidence. The batch covers 7/13 status cells,
 and the full 120-case pilot remains incomplete. Generation usage/overhead is

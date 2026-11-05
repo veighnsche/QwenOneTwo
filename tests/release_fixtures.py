@@ -28,7 +28,7 @@ def pilot_rows():
 
 def write_release(root, records=None, *, purpose='development', selected=None, batches=None,
                   exclusions=None, assets=None, review_counts=None, mutate_review=None,
-                  pilot_hash='a'*64):
+                  pilot_hash='a'*64, review_kind='human', approval_kind='human'):
     root = Path(root); root.mkdir(parents=True, exist_ok=True)
     records = deepcopy(records if records is not None else [row()])
     assets = dict(assets or {})
@@ -40,14 +40,21 @@ def write_release(root, records=None, *, purpose='development', selected=None, b
             reviewer = f'TEST-ONLY-reviewer-{index}'
             evidence = dict(format='qot-review-v1', record={'id':key, 'version':record['version'],
                             'annotation_sha256':annotation_hash(record)}, reviewer=reviewer,
-                            kind='human', semantics_blind=True, outcome_independent=True,
+                            kind=review_kind, semantics_blind=True, outcome_independent=True,
                             decision='approved', judgments={'semantics':'SCHEMA FIXTURE; no review performed',
                                                            'outcome':'SCHEMA FIXTURE; no outcome exists'})
+            if review_kind == 'model':
+                producer = dict(model='TEST-ONLY-model', session_id='TEST-ONLY-review-session')
+                for field in ('prompt', 'response'):
+                    path = f'reviews/{key}-{index}-{field}.txt'
+                    assets[path] = ('SCHEMA ONLY; no model executed: '+field).encode()
+                    producer[field] = dict(path=path, sha256=digest(assets[path]))
+                evidence['model_assistance'] = producer
             if mutate_review:
                 mutate_review(evidence)
             name = f'reviews/{key}-{index}.json'
             data = canonical(evidence); assets[name] = data
-            record['reviews'].append(dict(reviewer=reviewer, kind='human', semantics_blind=True,
+            record['reviews'].append(dict(reviewer=reviewer, kind=review_kind, semantics_blind=True,
                     outcome_independent=True, decision='approved', artifact_path=name,
                     artifact_hash=digest(data), record_version=record['version']))
     manifest = dict(format=FORMAT, id='TEST-ONLY', version=1, state='approved', purpose=purpose,
@@ -67,14 +74,16 @@ def write_release(root, records=None, *, purpose='development', selected=None, b
     for name, data in assets.items():
         target = root/name; target.parent.mkdir(parents=True, exist_ok=True); target.write_bytes(data)
         manifest['assets'].append(dict(path=name, sha256=digest(data)))
-    approve(root, manifest)
+    approve(root, manifest, kind=approval_kind)
     return manifest
 
 
-def approve(root, manifest):
+def approve(root, manifest, *, kind='human'):
     """Test-only consistency helper; never supplies a real approval."""
     evidence = dict(format='qot-release-approval-v1', release_sha256=approval_target(manifest),
-                    approver='TEST-ONLY-schema-marker', kind='human', decision='approved')
+                    approver='TEST-ONLY-schema-marker', kind=kind, decision='approved')
+    if kind == 'automated':
+        evidence['policy'] = 'automated-content-v1'
     data = canonical(evidence); name = manifest['approval']['artifact_path']
     (Path(root)/name).write_bytes(data)
     manifest['approval']['artifact_hash'] = digest(data)

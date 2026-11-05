@@ -120,8 +120,9 @@ estimate. Deduplication uses actual source-run record IDs across runtime streams
 The local usage receipt preserves exact counters and log snapshot hashes. This
 orchestration overhead should be assessed before scaling the generation process.
 
-Next work: obtain the required independent human reviews, adjudicate/revise these
-proposals, then decide whether/how to complete the 120-scenario pilot. These twelve
+Next work: apply separate model-assisted content review under the updated
+[data-operations policy](data-operations.md), revise or exclude failures, then
+decide whether/how to complete the 120-scenario pilot. No human review is required. These twelve
 are not an approved full pilot or training release. Preserve their model-proposal
 origin in any later release; the existing authored-root pilot admission rule
 needs explicit reconciliation before accepting a reviewed model-proposed pilot.

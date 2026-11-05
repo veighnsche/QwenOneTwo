@@ -1,0 +1,34 @@
+{
+  "policy": "automated-content-v1",
+  "change": "User explicitly removed human-review and human-approval requirements for the experiment. One separate content review plus mechanical checks; no mandatory second review.",
+  "model_calls": 0,
+  "new_data_generated": 0,
+  "real_releases_approved": 0,
+  "tests": {
+    "command": "PYTHONPATH=tests .venv/bin/python -m unittest test_training_release test_training_inputs test_drafts test_training_driver test_training_schedule -v",
+    "passed": 55,
+    "seconds": 1.319,
+    "scope": "Model-free tests with explicit synthetic schema fixtures; no real review or model execution"
+  },
+  "preservation": {
+    "unchanged_files": 133,
+    "existing_drafts_still_rejected": 24
+  },
+  "acceptance": [
+    "Single model review and automated approval load for pilot, training, development and locked schema fixtures, including subjective/new-rubric markers.",
+    "Missing review, model/session provenance, review input/output assets, author-session reuse and unknown automated policy reject.",
+    "Source hashes, current annotation/review binding, split/exclusion protections and immutable releases remain checked."
+  ],
+  "limits": [
+    "Model-assisted review is experimental evidence, not human certification.",
+    "Hashes do not authenticate judgment honesty or prove semantic correctness.",
+    "No generator/reviewer was launched and no review evidence was fabricated."
+  ],
+  "sha256": {
+    "qwen_one_two/training/inputs.py": "8a96776ac2ab7a65f2cc51c3baaee12a333e76278775cc3d6b37b68cee99e332",
+    "qwen_one_two/training/release.py": "2d9e0d216cf13bac3e57c652bb486dfea6880b6a5e1ff51e3d0ac5c699af9da3",
+    "tests/release_fixtures.py": "ccc7630d450f416355c57db49edc7e18f049a9082f2237a37547cf94c337c718",
+    "tests/test_training_release.py": "5ab5bd3b1c3e8bbf86135d0569f0dc601f587e437b9231f7a889763fd22efca4",
+    "data/automated-content-review-v1/tests.log": "558ab4e8bcbabb034b75373bf4c856d53a7cc1a21835db4fd5cae1bb7949608a"
+  }
+}

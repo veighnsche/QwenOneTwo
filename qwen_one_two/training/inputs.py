@@ -188,12 +188,9 @@ def validate_record_manifest(record, parents, *, for_training=False, for_release
         check(record['release'].get('state') == 'approved' and record['reviews'], 'unreviewed material')
         check(bool(record.get('author')), 'missing author identity')
         reviews = record['reviews']
-        required_count = 2 if record['split'] == 'locked' or any(
-            record.get(k, False) for k in ('pilot', 'subjective', 'new_rubric')) else 1
-        check(len({r.get('reviewer') for r in reviews}) >= required_count, 'insufficient independent reviews')
         for review in reviews:
             check(bool(review.get('reviewer')) and review['reviewer'] != record['author'], 'self or missing review')
-            check(review.get('kind') == 'human' and review.get('semantics_blind') is True
+            check(review.get('kind') in {'human', 'model'} and review.get('semantics_blind') is True
                   and review.get('outcome_independent') is True, 'review independence')
             check(review.get('decision') == 'approved' and bool(review.get('artifact_hash'))
                   and review.get('record_version') == record['version'], 'review version/artifact/decision')

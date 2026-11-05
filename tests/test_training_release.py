@@ -66,15 +66,44 @@ class ReleaseTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 load_release(self.root)
 
-    def test_locked_single_review_rejected(self):
-        r = row(split='locked')
-        write_release(self.root, [r], purpose='locked', review_counts={'fixture':1})
-        with self.assertRaisesRegex(ValueError, 'independent reviews'):
+    def test_one_model_review_and_automated_approval_need_no_human(self):
+        r = row(split='locked', subjective=True, new_rubric=True)
+        for purpose in ('locked', 'development', 'training'):
+            r['split'] = {'training':'train'}.get(purpose, purpose)
+            write_release(self.root, [r], purpose=purpose, review_counts={'fixture':1},
+                          review_kind='model', approval_kind='automated')
+            release = load_release(self.root)
+            self.assertEqual(release.summary['selected_review_kinds'], {'model':1})
+            self.assertEqual(release.summary['approval_kind'], 'automated')
+        write_release(self.root, [row()], review_counts={'fixture':0}, approval_kind='automated')
+        with self.assertRaisesRegex(ValueError, 'unreviewed material'):
             load_release(self.root)
-        r['reviews'] = [dict(reviewer='one', kind='human', semantics_blind=True,
-              outcome_independent=True, decision='approved', artifact_hash='a'*64, record_version=1)]
-        with self.assertRaisesRegex(ValueError, 'independent reviews'):
-            validate_record_manifest(r, {}, for_release=True)
+
+    def test_model_review_requires_bound_prompt_response_and_separate_session(self):
+        for change in (lambda e:e.pop('model_assistance'),
+                       lambda e:e['model_assistance'].update(session_id='author-session'),
+                       lambda e:e['model_assistance']['prompt'].update(sha256='0'*64),
+                       lambda e:e['model_assistance']['response'].update(path='missing.txt'),
+                       lambda e:e.update(semantics_blind=False),
+                       lambda e:e.update(decision='rejected')):
+            r = row(model_assistance={'session_id':'author-session'})
+            write_release(self.root, [r], review_counts={'fixture':1}, review_kind='model',
+                          approval_kind='automated', mutate_review=change)
+            with self.assertRaises(ValueError):
+                load_release(self.root)
+
+    def test_automated_approval_requires_known_policy_even_with_consistent_hashes(self):
+        manifest = write_release(self.root, review_kind='model', approval_kind='automated')
+        path = self.root/'approval.json'
+        evidence = decode(path.read_bytes())
+        evidence['policy'] = 'skip-content-review'
+        data = canonical(evidence)
+        path.write_bytes(data)
+        manifest['approval']['artifact_hash'] = digest(data)
+        next(a for a in manifest['assets'] if a['path'] == 'approval.json')['sha256'] = digest(data)
+        (self.root/'manifest.json').write_bytes(canonical(manifest))
+        with self.assertRaisesRegex(ValueError, 'approval policy'):
+            load_release(self.root)
 
     def test_pilot_exact_independent_families_and_domain_counts(self):
         rows = pilot_rows()
@@ -105,8 +134,11 @@ class ReleaseTests(unittest.TestCase):
         release = load_release(self.root)
         self.assertEqual(release.records[proposed['id']]['origin'], 'model_proposal')
         self.assertEqual(release.records[proposed['id']]['author'], 'TEST-ONLY-model')
-        write_release(self.root, rows, purpose='pilot', review_counts={proposed['id']:1})
-        with self.assertRaisesRegex(ValueError, 'independent reviews'):
+        write_release(self.root, rows, purpose='pilot', review_counts={r['id']:1 for r in rows},
+                      review_kind='model', approval_kind='automated')
+        self.assertEqual(load_release(self.root).summary['selected_review_kinds'], {'model':120})
+        write_release(self.root, rows, purpose='pilot', review_counts={proposed['id']:0})
+        with self.assertRaisesRegex(ValueError, 'unreviewed material'):
             load_release(self.root)
         proposed['model_assistance'].pop('output_hash')
         write_release(self.root, rows, purpose='pilot')
@@ -155,7 +187,7 @@ class ReleaseTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'duplicate human input'):
             load_release(self.root)
 
-    def test_second_review_audit_counts_and_strata(self):
+    def test_optional_second_review_claims_are_still_verified(self):
         rows = [row(str(i), batch='b') for i in range(21)]
         counts = {str(i):2 if i < 20 else 1 for i in range(21)}
         batch = {'b':{'members':[str(i) for i in range(21)], 'second_review':[str(i) for i in range(20)]}}
@@ -163,8 +195,10 @@ class ReleaseTests(unittest.TestCase):
         load_release(self.root)
         batch['b']['second_review'] = ['0']
         write_release(self.root, rows, batches=batch, review_counts=counts)
-        with self.assertRaisesRegex(ValueError, 'insufficient second-review audit'):
-            load_release(self.root)
+        load_release(self.root)
+        batch['b']['second_review'] = []
+        write_release(self.root, rows, batches=batch, review_counts={r['id']:1 for r in rows})
+        load_release(self.root)
         batch['b']['second_review'] = [str(i) for i in range(20)]
         rows[-1]['domain'] = 'new-schema-stratum'
         write_release(self.root, rows, batches=batch, review_counts=counts)

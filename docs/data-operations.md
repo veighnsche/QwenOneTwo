@@ -14,10 +14,13 @@ owns scenario construction. Follow the [specification](architecture-and-training
 
 Begin with 120 distinct fictional root scenarios, 20 per agreed domain.
 Authored templates require no model generator. Model-proposed roots may also
-count after the same two independent human reviews and release approval; retain
+count after mechanical checks, a separate model-assisted content review and
+automated release approval; retain
 `origin:model_proposal`, actual author and model-assistance provenance. Never
 relabel them as authored. Variations follow scenario construction. A model
-cannot certify its own outputs; draft validation supplies no human review.
+cannot certify its own outputs: use a separate review session, with proposed
+outcomes hidden during independent derivation. Draft validation alone supplies
+no content review.
 
 | Field group | Contents |
 |---|---|
@@ -103,30 +106,33 @@ proposed gold outcomes/model predictions. Then independently derive status,
 values, selections and continuation requirements. Reviewers still see evidence
 and can infer an answer; outcome blindness means not copying the proposed label.
 
-| Material | Required review |
-|---|---|
-| Every pilot scenario | Two independent semantic/outcome reviews |
-| Locked semantic tests | Two independent reviews |
-| Subjective Score and effort labels | Two independent reviews |
-| Other training examples | One independent review plus stratified second-review audit |
-| New/changed rubric definitions | Two independent reviews |
+For this experiment, **no human review, reviewer hiring or human approval is
+required**, including pilot, locked tests, subjective scores, effort labels and
+new rubrics. The user explicitly replaced the previous human-review policy.
 
-The author cannot be the sole reviewer of their own label. Model-assisted
-checking is recorded as such, not an independent human review. Reviewer roles
-are currently unassigned; do not claim completion or name fictional reviewers.
+One separate model-assisted content review per record is sufficient after
+mechanical checks. Batch multiple records in a single bounded review call;
+store per-record judgments bound to the shared prompt/response artifacts. Use
+a fresh session, hide proposed outcomes while deriving judgments, and check
+question fidelity, evidence sufficiency, candidate/rubric meaning and continuation
+claims. Record `kind:model`, actual model/session and saved prompt/response bytes.
+The same model may author and review in separate sessions; correlated errors
+remain possible. This is experimental model-reviewed data, not human-certified gold.
 
-## 6. Adjudication and batch audit
+No mandatory second review or stratified human audit. Optional existing human
+reviews remain valid historical evidence. If an optional second-review audit is
+declared, its stated membership, second reviews and coverage must be truthful.
 
-Reviewers judge independently before seeing each other's conclusions. Resolve
-categorical disagreement using supplied facts/criterion. For subjective scores,
-compare anchor interpretations, then agree a justified point/interval. Never
-automatically average disagreeing numbers. Revise rubric/example or exclude
-unresolved material.
+## 6. Disagreements and batch checks
 
-Bulk training batches contain at most 200 examples. Second-review at least 10%,
-with minimum 20 where possible; audit all if smaller. Stratify by operation,
-status, domain and transformation. All material already requiring two reviews
-retains that requirement; the audit is not a substitute.
+Use executable rules to verify determinate labels where possible. Model review
+must still check language and meaning; hashes/schema checks cannot do that.
+Check all records mechanically, with batches of at most 200 examples. Quarantine
+ambiguous or contradictory proposals, or make an explicit local revision and
+obtain review of the changed version within a separately authorized review call.
+Do not average conflicting subjective judgments or invent effort preferences;
+unsupported labels stay masked. There is no automatic regeneration/review loop
+and no requirement to commission human adjudication.
 
 A critical error (truth, winner, status, source binding, hidden outcome label or
 unsupported claim) quarantines the affected batch. Investigate generator/rule/
@@ -179,8 +185,9 @@ Edits create new record/release versions; prior reports keep their original
 hashes. Generated datasets/traces stay under ignored data/artifact paths;
 documentation authorizes no commit or publication.
 
-The first concrete artifact is the small pilot with scenario specs, independent
-reviews and provenance manifest. Scale production only after pilot review and
+The first concrete artifact is the small pilot with scenario specs, separate
+model-assisted content reviews and provenance manifest. Automated release
+approval records the policy and exact release hash; the loader never creates it. Scale production only after pilot review and
 the GPU feasibility gate. These activities have not been performed by recording
 this procedure.
 

@@ -7,13 +7,13 @@ import argparse
 from collections import Counter
 from dataclasses import dataclass
 import json
-import math
 from pathlib import Path, PurePosixPath
 from types import MappingProxyType
 
 from .inputs import Source, canonical, check, digest, validate_record_manifest
 
 FORMAT = 'qot-reviewed-release-v1'
+REVIEW_POLICY = 'automated-content-v1'
 DOMAINS = frozenset({'refund_eligibility', 'scheduling', 'demo_preparation',
                      'access_rules', 'resource_allocation', 'issue_prioritization'})
 CATEGORIES = frozenset({'reference', 'writer', 'receiver', 'reader', 'interleaved',
@@ -88,6 +88,19 @@ def _reviews(record, assets):
         judgments = evidence.get('judgments', {})
         check(all(isinstance(judgments.get(k), str) and judgments[k].strip()
                   for k in ('semantics', 'outcome')), 'missing independent review judgments')
+        if review['kind'] == 'model':
+            producer = evidence.get('model_assistance', {})
+            check(all(isinstance(producer.get(k), str) and producer[k].strip()
+                      for k in ('model', 'session_id')), 'missing review model/session provenance')
+            author_session = record.get('model_assistance', {}).get('session_id')
+            check(producer['session_id'] != author_session, 'author session cannot review itself')
+            for field in ('prompt', 'response'):
+                descriptor = producer.get(field, {})
+                check(set(descriptor) == {'path', 'sha256'}, 'missing review '+field+' descriptor')
+                check(descriptor['path'] in assets and
+                      digest(assets[descriptor['path']]) == sha256(descriptor['sha256']),
+                      'missing or mismatched review '+field+' bytes')
+                check(bool(assets[descriptor['path']].strip()), 'empty review '+field)
 
 
 def _lineage(records, splits):
@@ -124,7 +137,9 @@ def _batch_audits(manifest, records, selected):
         # required to pass review. Selected members still need a passing audit.
         if not set(members) & selected:
             continue
-        check(len(audit) >= min(len(members), max(20, math.ceil(.1*len(members)))), 'insufficient second-review audit')
+        # Second review is optional. If a release declares it, verify the claim.
+        if not audit:
+            continue
         for key in audit:
             record = records[key]
             validate_record_manifest(record, records, for_release=True)
@@ -135,11 +150,6 @@ def _batch_audits(manifest, records, selected):
             check({stratum(k) for k in members} <= {stratum(k) for k in audit}, 'uncovered batch audit stratum: '+field)
         check({records[k]['labels'].get('status') for k in members} <=
               {records[k]['labels'].get('status') for k in audit}, 'uncovered batch audit status')
-    for key in selected:
-        record = records[key]
-        if len({r['reviewer'] for r in record['reviews']}) < 2:
-            name = record.get('batch')
-            check(name in batches and key in batches[name]['members'], 'single-review record needs audited batch')
 
 
 @dataclass(frozen=True, init=False)
@@ -302,7 +312,9 @@ def load_release(path, *, expected_hash=None):
     check(evidence.get('format') == 'qot-release-approval-v1'
           and evidence.get('release_sha256') == approval_target(manifest), 'release approval binding')
     check(isinstance(evidence.get('approver'), str) and evidence['approver'].strip()
-          and evidence.get('kind') == 'human' and evidence.get('decision') == 'approved', 'release approval decision')
+          and evidence.get('kind') in {'human', 'automated'} and evidence.get('decision') == 'approved', 'release approval decision')
+    if evidence['kind'] == 'automated':
+        check(evidence.get('policy') == REVIEW_POLICY, 'automated release approval policy')
     summary = {'format':FORMAT, 'release_sha256':identity, 'id':manifest['id'], 'version':manifest['version'],
                'purpose':purpose, 'selected_records':len(selected), 'retained_audit_records':len(records)-len(selected),
                'blocked_records':len(blocked), 'selected_review_artifacts':review_count,
@@ -310,6 +322,8 @@ def load_release(path, *, expected_hash=None):
                'selected_operations':dict(Counter(records[k].get('operation', 'unspecified') for k in selected)),
                'selected_statuses':dict(Counter(records[k]['labels'].get('status', 'unlabelled') for k in selected)),
                'selected_categories':dict(Counter(records[k].get('training_category', 'unspecified') for k in selected)),
+               'review_policy':REVIEW_POLICY, 'approval_kind':evidence['kind'],
+               'selected_review_kinds':dict(Counter(r['kind'] for k in selected for r in records[k]['reviews'])),
                'semantic_authentication':False}
     return ReviewedRelease(identity, raw, records, assets, summary, _token=_TOKEN)
 

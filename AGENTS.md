@@ -21,6 +21,11 @@ Keep answer and thinking limits separate, cancellation and normal answering.
 Mixed adapter cache reuse is experimental; preserve cache identity and report
 that limitation honestly. Never claim stock Qev already learned latent invocation.
 Training data and capabilities must have honest, reproducible provenance.
+For this experiment, no human reviewers, paid review staff or human approval
+gates are required. Use mechanical checks and one separate outcome-blind
+model-assisted content review per record (batched in one call where practical).
+Record model review as model review. Release approval may be automated after
+checks pass; retain rejected/ambiguous records without automatic retry loops.
 
 Independent of The Operating Table: never change its service, data or artifacts.
 No model caches, local configuration or generated artifacts in git.

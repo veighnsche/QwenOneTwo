@@ -66,7 +66,7 @@ not override them. Future changes must update the owner and affected examples.
 | [Backend slices](backend-slices-2026-11-05.md) | Contract fixes, F7/F3 builders, losses/accumulation, reference isolation and export/resume evidence |
 | [Release-boundary slices](backend-release-slices-2026-11-05.md) | Content-bound releases, pilot/sampler/driver identities, deterministic resumed exposures and actual numeric-evidence inspection |
 | [Reviewed release format v1](reviewed-release-format-v1.md) | Local source/review/approval bytes, immutable release snapshots, pilot/batch checks and driver ingestion |
-| [Muse draft pilot](muse-draft-pilot-2026-11-05.md) | Twelve local model-proposed scenarios, repaired setup, independent model-assisted checks, exact usage and remaining human reviews |
+| [Muse draft pilot](muse-draft-pilot-2026-11-05.md) | Twelve local model-proposed scenarios, repaired setup, independent model-assisted checks, exact usage and remaining content reviews |
 | [Post-proof expansion plan](post-proof-expansion-plan.md) | Conditional codec/runtime qualification, reviewed data, training phases, same-job frontend integration and release order after measured proof success |
 | [Losses and training schedule](loss-configuration-and-training-schedule.md) | Starting weights, eligibility masks, replay, forcing dimensions and joint-training advancement |
 | [Scalar rows](scalar-row-handling.md) | Private row indices, tied-table overrides, gradient ownership, vocabulary masking and precision/export |

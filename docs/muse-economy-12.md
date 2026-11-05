@@ -59,8 +59,8 @@ PYTHONPATH=tests .venv/bin/python -m unittest test_drafts -v
 The [portable receipt](evidence/muse-economy-12-summary.json) binds usage,
 validation and local artifact hashes. Generated data and raw logs remain ignored.
 No training, fitting, service changes or deployment occurred. Next unfinished
-work is independent human review/adjudication and the existing
-provenance-preserving pilot admission reconciliation. No further generation is
+work is separate model-assisted content review under the updated
+[data-operations policy](data-operations.md); no human reviewers are required. No further generation is
 authorized by this report or queued automatically.
 
 ## Default workflow replacement

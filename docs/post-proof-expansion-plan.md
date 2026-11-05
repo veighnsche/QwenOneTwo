@@ -67,8 +67,9 @@ Reason/continuation targets, effort preferences and provenance. No handwritten
 latent vectors or outcome columns in request inputs. Reason's permitted outcome
 content follows F7. Label actual views/packets, not withheld world truth.
 
-Every pilot scenario needs two independent semantic/outcome reviews and any
-required adjudication; assigned reviewers and approvals must be real. Review
+Every pilot scenario needs mechanical checks and one separate model-assisted
+semantic/outcome review under the current data-operations policy. No human
+review is required; recorded reviews and automated approvals must be real. Review
 request semantics before proposed outcomes, then outcomes, Reason and native
 continuation for the actual result. Treat subjective effort/Score examples as
 drafts until reviewed. Quarantine critical errors and affected descendants.

@@ -372,11 +372,12 @@ The [data-operations procedure](data-operations.md) fixes a 120-scenario pilot,
 may count under the same reviews/approval with their origin preserved, per that
 procedure. Keep human input, semantics, gold outcomes, guidance and provenance
 separate. Use semantic review with proposed outcomes hidden, then independent
-outcome derivation. Pilot, locked semantic cases, subjective Score/effort labels
-and new rubrics require two independent reviews. Other training cases require
-one independent review plus stratified second audit (batches <=200; >=10%,
-minimum 20 where possible; all if smaller). Critical errors quarantine affected
-batches/lineage. Reviewer assignments and actual reviews remain unperformed.
+outcome derivation in a separate model session. All records, including pilot,
+locked, subjective and rubric cases, need one model-assisted content review
+plus mechanical checks. No human reviewers or second-review quotas are required
+for this experiment. Release approval may be automated; review and approval
+artifacts must bind actual bytes. Critical errors quarantine affected batches/
+lineage. No content-review execution is implied by this policy.
 
 Preserve original source hashes, byte spans and verified token/prefill mapping;
 edits create new versions. Record origin, parents, generator/seed, label method,
@@ -386,8 +387,8 @@ remain separate. Annotation disagreement is not a semantic Unresolved label.
 
 Initial scale is 6000 core examples + 2000 replay, 1000 development and 2000
 locked test cases (500 component, 500 interventions, 1000 free prompts). These
-are starting quantities. Independent reviewers adjudicate locked semantic
-labels before testing. Subjective scores/intervals and effort preferences must
+are starting quantities. Separate model review checks locked semantic labels
+before testing; unresolved proposals are excluded. Subjective scores/intervals and effort preferences must
 be reviewed; example .04/.05/.06 budgets and .30 severity are not approved gold.
 
 Training progresses through operation/receiver semantics, native latent writing

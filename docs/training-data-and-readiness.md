@@ -83,12 +83,12 @@ remain separate from this startup port.
 
 ## Annotation production and review
 
-Apply the [data-operations procedure](data-operations.md): two independent
-reviews for pilot/locked semantics/subjective labels/new rubrics, one independent
-review plus stratified audit for other training records. No model generator
+Apply the [data-operations procedure](data-operations.md): mechanical checks and
+one separate outcome-blind model-assisted content review per record, with
+automated release approval. No human reviewers or second-review quota are required. No model generator
 is required for the 120-scenario pilot; reviewed model-proposed roots retain
 their origin under the same review/approval rules. Quarantine critical errors
-and preserve provenance/rejected records. Reviewers are not yet assigned.
+and preserve provenance/rejected records. No review execution is claimed here.
 
 For deterministic tasks, derive outcomes from explicit scenario rules and
 independently check the rules and examples. A current Qev prediction or prototype
@@ -103,11 +103,10 @@ review and freeze it before locked evaluation. Revise unclear rubrics rather
 than widen labels after observing predictions. The .30 severity and .04/.05/.06
 effort labels in the examples remain review drafts and do not bypass this process.
 
-Use two independent reviewers for the locked semantic test set. Adjudicate
-disagreements before testing. Reviewer assignment remains an operational task;
-this plan does not claim reviewers or a reviewed dataset already exist.
-Training annotations may combine checked generation with human review; record
-which source produced and which checks validated each annotation.
+Use a separate outcome-blind model review for locked semantic tests before
+testing; exclude unresolved disagreements. Keep locked families isolated. Record
+which model/source produced and reviewed each annotation and which checks ran.
+This experiment does not require human review or claim human-certified labels.
 
 Review question fidelity and continuation fidelity separately. A correct final
 answer cannot excuse an incorrect question, wrong evidence binding or unrelated

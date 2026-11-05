@@ -86,7 +86,7 @@ must match that hash and decode to:
 |---|---|
 | `format` | `qot-review-v1` |
 | `record` | `{id,version,annotation_sha256}` for the exact current annotation |
-| `reviewer`, `kind`, `semantics_blind`, `outcome_independent`, `decision` | Match the embedded review entry; approved independent human review required |
+| `reviewer`, `kind`, `semantics_blind`, `outcome_independent`, `decision` | Match the embedded review entry; approved separate content review, `kind:model` or legacy `human` |
 | `judgments.semantics`, `judgments.outcome` | Nonempty independent judgments |
 
 `annotation_sha256` hashes the canonical record excluding only `reviews` and
@@ -95,31 +95,40 @@ construction, lineage, exposure flags and any other annotation fields. Changing
 an annotation therefore invalidates the review even when the file descriptor and
 release approval are subsequently updated. Review metadata cannot bind itself.
 
-Pilot, locked, subjective labels and new rubrics require two distinct independent
-reviewers. Other records need at least one independent review and a stratified
-second-review batch audit. An active batch has at most 200 members; audit size
-is `min(size,max(20,ceil(.10*size)))`. Audited members need two independent reviews.
-Every represented operation/status/domain/transformation value must occur in
-the audit. Selection is still a review procedure: these structural checks do not
-prove unbiased sampling. Single-review selected records without a valid batch
-reject. Unresolved or rejected current judgments cannot be silently approved.
-Adjudication/revision must produce current approved evidence; previous decisions
-remain retained audit assets, without being presented as current approvals.
+All selected records need at least one approved, outcome-blind content review.
+Human reviewers and second-review quotas are no longer required. Model reviews
+use `kind:model`; their artifact adds `model_assistance` with nonempty `model`,
+`session_id`, and `prompt`/`response` descriptors `{path,sha256}` pointing to
+nonempty release assets. The review session must differ from the author's
+recorded session where available. Preserve honest author/session provenance;
+markers alone cannot prove blindness or independence. A batch may share one
+prompt/response pair across its per-record review artifacts.
+
+Single-review records do not need a second-review batch. Declared batches still
+have at most 200 members. An empty `second_review` list is valid. If populated,
+its members must have two actual reviews and cover the declared batch strata;
+there is no minimum audit percentage. Unreviewed, rejected, stale or quarantined
+records still reject. Local annotation edits invalidate existing review hashes.
 
 ## Release approval and pilot gate
 
 The release approval asset is `qot-release-approval-v1` with `approver`,
-`kind:"human"`, `decision:"approved"` and `release_sha256`. This target is the
+`kind:"automated"`, `policy:"automated-content-v1"`, `decision:"approved"` and
+`release_sha256`. Legacy human approval remains accepted but is never required.
+Automated approval is a recorded pipeline result, not another model/human call.
+The loader validates it and all review artifacts; it never invents approval.
+This target is the
 canonical manifest excluding its `approval` field and the approval asset's own
 descriptor. That avoids circular hashing while binding every record, peer asset,
 split, exclusion, batch and prerequisite. The complete manifest identity binds
 the approval descriptor and its actual bytes as well.
 
 A `pilot` selects exactly 120 distinct root families in development, each marked
-`pilot:true` and `fictional:true`, with two independent reviews. Exactly 20 belong
+`pilot:true` and `fictional:true`, with one separate content review each. Exactly 20 belong
 to each domain. Roots may be `authored` or `model_proposal`; model-proposed roots
 retain their actual author/origin and required model-assistance provenance.
-Neither draft validation nor model review replaces the human reviews/approval.
+Draft validation alone does not replace content review. No human review or
+human release approval is required.
 The domains are
 refund_eligibility, scheduling, demo_preparation, access_rules,
 resource_allocation, issue_prioritization. Repeated identical human inputs reject;
@@ -130,8 +139,8 @@ marked design-exposed or retired through test-driven tuning rejects.
 Hashes establish content identity, not the identity/honesty of human reviewers.
 There is no signature authority or automatic semantic approval. An unsigned,
 fabricated set of mutually consistent files cannot become honest review evidence
-by passing these mechanical checks. The CLI explicitly reports
-`semantic_authentication:false`.
+by passing these mechanical checks. The CLI explicitly reports `semantic_authentication:false`, the
+`automated-content-v1` review policy, actual review-kind counts and approval kind.
 
 ## Read-only preflight
 
