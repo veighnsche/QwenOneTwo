@@ -1,0 +1,23 @@
+[Unit]
+Description=QwenOneTwo — learned internal Qev decisions
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/QwenOneTwo
+ExecStart=%h/QwenOneTwo/.venv/bin/python -m qwen_one_two.server
+Environment=QOT_PORT=3211
+Environment=QOT_DATA_DIR=%h/QwenOneTwo/data
+Environment=QOT_HF_CACHE=%h/the-operating-table/data/huggingface
+Environment=QOT_PUBLIC_ORIGIN=https://operation-room.dimensionlab.net
+Environment=CUDA_VISIBLE_DEVICES=GPU-225509c3-d702-6c27-de03-76b5e99b33b1
+Environment=QOT_DEVICE=cuda:0
+Environment=HF_HUB_OFFLINE=1
+Environment=TOKENIZERS_PARALLELISM=false
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=20
+NoNewPrivileges=true
+
+[Install]
+WantedBy=default.target

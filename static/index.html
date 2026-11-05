@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#151515">
+  <meta name="description" content="Qwen chooses its thinking budget and answers in one continuous inference run.">
+  <title>QwenOneTwo</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231c1b19'/%3E%3Cpath d='M8 9h9a6 6 0 0 1 0 12H8zM17 21l7 5' fill='none' stroke='%23e4b782' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="QwenOneTwo home"><span class="brand-mark" aria-hidden="true">q</span><span>Qwen<span class="brand-accent">OneTwo</span></span></a>
+    <span class="topbar-caption">ONE PROMPT · ONE INFERENCE RUN</span>
+    <div class="topbar-actions"><span class="connection"><i id="connection-dot"></i><span id="connection">Connecting</span></span><button class="icon-button" id="about-open" aria-label="About the embedded head" title="About the embedded head">ⓘ</button></div>
+  </header>
+
+  <main class="workspace">
+    <section class="conversation" aria-label="Prompt and response">
+      <div class="conversation-heading"><span class="eyebrow">WORKSPACE</span><span class="quiet">Each prompt starts fresh</span></div>
+      <div class="transcript" id="transcript" tabindex="0" aria-label="Conversation output">
+        <div class="empty" id="empty">
+          <div class="empty-symbol" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+          <p class="eyebrow accent">A DECISION INSIDE THE WEIGHTS</p>
+          <h1>A little thought.<br>Or a little more.</h1>
+          <p class="empty-copy">Send a prompt. Qwen sets a continuous thinking budget, invokes its decision adapter when needed, and continues into its answer.</p>
+          <div class="flow"><span><b>01</b> Prompt</span><i aria-hidden="true">→</i><span><b>02</b> Score</span><i aria-hidden="true">→</i><span><b>03</b> Generate</span></div>
+          <div class="samples" aria-label="Sample prompts">
+            <button data-prompt="Translate good morning into French. Only the translation."><span>Native answer</span>Translate a greeting <span aria-hidden="true">↗</span></button>
+            <button data-prompt="Mira's application was approved. Is the application approved? Answer yes or no."><span>Noul decision</span>Check an application <span aria-hidden="true">↗</span></button>
+            <button data-prompt="The requested color is blue. Choose the matching option.&#10;A: red&#10;B: blue"><span>Choice decision</span>Select a matching color <span aria-hidden="true">↗</span></button>
+            <button data-prompt="A progress indicator shows 70 percent complete. Give its completion score between 0 and 1."><span>Continuous score</span>Score completion <span aria-hidden="true">↗</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="message" id="message" role="alert" hidden><span id="message-text"></span><button id="message-dismiss" class="icon-button" aria-label="Dismiss message">×</button></div>
+      <form class="composer" id="composer">
+        <label class="sr-only" for="prompt">Your prompt</label>
+        <textarea id="prompt" rows="3" maxlength="2000" placeholder="What would you like Qwen to work through?" spellcheck="false"></textarea>
+        <div class="composer-footer"><span id="compose-hint">Send once. Qwen chooses its budget and answers.</span><div class="compose-actions"><button type="button" class="button stop-button" id="stop" hidden>Stop</button><button class="button primary" id="primary" type="submit" disabled>Send prompt <span aria-hidden="true">↗</span></button></div></div>
+      </form>
+      <footer class="workspace-footer"><span id="model-label">Qwen3.5 · 0.8B</span><span id="gpu-label">GPU inference only</span><span class="shortcut"><kbd>Ctrl</kbd> <kbd>↵</kbd> to continue</span></footer>
+    </section>
+
+    <aside class="instrument" aria-label="Live decision and budget">
+      <div class="instrument-heading"><h2>Score & budget</h2><span class="live-dot" id="live-dot" aria-hidden="true"></span></div>
+      <div class="selection"><span class="eyebrow" id="selection-label">AWAITING A PROMPT</span><div class="selected-number"><strong id="model-score">—</strong><span>/ 1</span></div><p id="selection-note">One scalar from the prompt prefill.</p></div>
+      <progress id="score-progress" class="sr-only" value="0" max="1" aria-label="Continuous thinking score"></progress>
+      <svg class="score-curve" viewBox="0 0 300 80" role="img" aria-label="S-curve mapping of score to token budget">
+        <path class="curve-axis" d="M4 4V76H296"/>
+        <path class="curve-line" d="M4 76C101.333333 76 198.666667 4 296 4"/>
+        <circle id="score-point" cx="4" cy="76" r="3" visibility="hidden"/>
+      </svg>
+      <div class="score-scale"><span>0 · no thinking</span><span>1 · 131,072 tokens</span></div>
+      <div class="mapped-budget"><span>Mapped thinking budget</span><strong><span id="selected-budget">—</span> <small>tokens</small></strong></div>
+      <p class="preference-note">Budget = round(S(score) × 131072), where S(s) = 3s² − 2s³. The score is an illustrative effort preference, not a confidence.</p>
+
+      <section class="activity" aria-labelledby="activity-title"><div class="section-label"><h3 id="activity-title">Live activity</h3><span class="elapsed" id="elapsed">0.0s</span></div>
+        <div class="phase" role="status"><span class="phase-symbol" id="phase-symbol">○</span><span id="phase">Waiting for a prompt</span></div>
+        <div class="budget-summary"><span>Thinking used</span><strong><span id="thinking-count">0</span><span class="muted"> / </span><span id="effective-budget">—</span></strong></div>
+        <progress id="budget-progress" value="0" max="1" aria-label="Thinking budget consumed"></progress>
+        <div class="remaining"><span id="remaining">Budget not chosen</span><span id="budget-source">model score</span></div>
+        <div class="answer-count"><span>Answer tokens</span><strong><span id="answer-count">0</span><span class="muted"> / </span><span id="answer-allowance">256</span></strong></div>
+      </section>
+
+      <section class="activity" aria-label="Internal decisions"><div class="section-label"><h3>Internal decisions</h3><span id="adapter-mode">Native Qwen</span></div><div id="decision-calls" aria-live="polite">No decisions yet.</div></section>
+      <section class="controls" aria-labelledby="controls-title"><div class="section-label"><h3 id="controls-title">Generation controls</h3></div>
+        <label for="override">Thinking override <span>optional</span></label><div class="number-control"><input id="override" type="number" min="0" max="131072" step="1" placeholder="Auto"><span>tokens</span></div>
+        <label for="answer-limit">Answer allowance</label><div class="number-control"><input id="answer-limit" type="number" min="1" max="512" step="1" value="256"><span>tokens</span></div>
+        <p class="control-note">Thinking stops early when finished. The answer has its own allowance.</p>
+      </section>
+      <div class="instrument-footer"><button id="details-open" class="text-button">Inside the head <span aria-hidden="true">↗</span></button><span id="head-state">Checking</span></div>
+    </aside>
+  </main>
+
+  <dialog id="details" aria-labelledby="details-title"><div class="drawer-heading"><div><p class="eyebrow accent">UNDER THE HOOD</p><h2 id="details-title">A small head. Real weights.</h2></div><button class="icon-button" id="about-close" aria-label="Close details">×</button></div>
+    <p>Qev’s decision adapter is enabled for the initial scalar thinking budget, then disabled for normal generation. A trained internal gate can request Noul, Choice or Score during thinking and answering. A learned hidden vector carries the request and a learned feedback vector returns its result. No separate decision request is sent by the browser.</p>
+    <div class="detail-facts"><div><span>Base model</span><strong>Qwen3.5-0.8B</strong></div><div><span>Decision adapter</span><strong>Qev · rank 16</strong></div><div><span>Training</span><strong>Routing LoRA + latent controls</strong></div><div><span>Compute</span><strong id="detail-gpu">CUDA GPU required</strong></div></div>
+    <h3>Experimental training</h3><p>The learned gate, query and result feedback are trained on a small synthetic curriculum. The budget uses scalar regression against illustrative effort preferences, not measured optimal budgets. Broad decision quality and latent invocation generalization are not established. The adapter modes share a hybrid cache; compatibility is experimental.</p>
+    <details><summary>Training provenance</summary><div id="seeds"></div></details>
+    <details><summary>How the budget is enforced</summary><p>Every run prefills the prompt once. Zero closes the open thinking section through that same cache without sampling reasoning. Positive budgets cap sampled thinking tokens. At the cap, the closing thinking delimiter is fed through the same hybrid cache before the final answer. Natural early closure is preserved.</p><p>Unused output rows never enter generated text. Prompt tokens are excluded; sampled and injected control tokens are counted separately below each response. A budget can interrupt a thought; an exhausted answer allowance can truncate an answer.</p></details>
+    <details><summary>Score provenance</summary><pre id="provenance">Send a prompt to inspect the run’s provenance.</pre></details>
+    <div class="head-actions"><button class="button" id="prepare">Verify trained weights</button><span id="prepare-note">Training is performed explicitly on GPU.</span></div>
+  </dialog>
+</body>
+</html>

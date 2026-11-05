@@ -1,0 +1,10 @@
+# Merge within the existing allowed-client block. Preserve its access controls.
+redir /qwen-one-two /qwen-one-two/ 308
+redir /qwen-budget /qwen-one-two/ 308
+handle_path /qwen-budget/* {
+    redir * /qwen-one-two{uri} 308
+}
+handle_path /qwen-one-two/* {
+    reverse_proxy 127.0.0.1:3211
+}
+# Existing root app remains in its own fallback handle block.

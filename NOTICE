@@ -1,0 +1,8 @@
+QwenOneTwo integrates Qev's pretrained adapter and pointer head:
+https://github.com/loadchange/qev
+https://huggingface.co/twainsk/qev-0.8b
+Qev is distributed under Apache License 2.0. Its PointerHead query/key scoring
+formula is reproduced in qwen_one_two/decision.py with attribution. Original
+license and notices are preserved with the downloaded adapter under data/qev/.
+The foundation model is Qwen/Qwen3.5-0.8B (Apache License 2.0).
+The source distribution also includes Qev license and notices in licenses/.
