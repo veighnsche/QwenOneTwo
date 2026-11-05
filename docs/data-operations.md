@@ -1,5 +1,12 @@
 # Annotation, review and dataset provenance
 
+Implementation update (2026-11-05): a read-only, model-free
+[reviewed-release loader and format](reviewed-release-format-v1.md) now bind
+actual source, annotation, review, split and approval bytes. See the
+[release-boundary evidence](backend-release-slices-2026-11-05.md). No real reviewed
+pilot, assigned reviewers or semantic approval is implied; the historical status
+below describes the procedure's original recording.
+
 Status: recorded operating procedure, not an existing reviewed dataset or
 assigned reviewer team. No coding, data/model generation, training, publication
 or deployment is authorized by this document. Model work remains GPU-only.

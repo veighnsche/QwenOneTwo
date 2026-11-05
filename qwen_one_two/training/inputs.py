@@ -162,12 +162,16 @@ def scenario_reference(row, role, record, provenance, **kwargs):
     return reference_input(role, row['semantics'][role][record], provenance, **kwargs)
 
 
-def validate_record_manifest(record, parents, *, for_training=False):
+def validate_record_manifest(record, parents, *, for_training=False, for_release=False):
     """Mechanical lineage gate; never creates reviews or certifies semantics."""
     required = {'id', 'version', 'family', 'split', 'parents', 'origin', 'construction',
                 'sources', 'labels', 'reviews', 'release'}
     check(required <= set(record), 'missing mandatory provenance')
-    check(record['version'] > 0 and record['split'] in {'train', 'development', 'locked'}, 'identity/split')
+    check(all(isinstance(record[k], str) and record[k].strip() for k in ('id', 'family'))
+          and type(record['version']) is int and record['version'] > 0
+          and record['split'] in {'train', 'development', 'locked'}, 'identity/split')
+    check(isinstance(record['parents'], list) and len(set(record['parents'])) == len(record['parents'])
+          and record['id'] not in record['parents'], 'duplicate or self parent')
     check(record['origin'] in {'authored', 'deterministic', 'model_proposal', 'replay', 'rollout_correction'}, 'origin')
     for parent_id in record['parents']:
         parent = parents[parent_id]
@@ -180,10 +184,12 @@ def validate_record_manifest(record, parents, *, for_training=False):
         check({'checkpoint', 'trace_hash', 'forcing', 'substitution', 'override'} <= set(record.get('rollout', {})), 'missing rollout provenance')
     if for_training:
         check(record['split'] == 'train' and not record.get('design_excluded', False), 'excluded training material')
+    if for_training or for_release:
         check(record['release'].get('state') == 'approved' and record['reviews'], 'unreviewed material')
         check(bool(record.get('author')), 'missing author identity')
         reviews = record['reviews']
-        required_count = 2 if any(record.get(k, False) for k in ('pilot', 'subjective', 'new_rubric')) else 1
+        required_count = 2 if record['split'] == 'locked' or any(
+            record.get(k, False) for k in ('pilot', 'subjective', 'new_rubric')) else 1
         check(len({r.get('reviewer') for r in reviews}) >= required_count, 'insufficient independent reviews')
         for review in reviews:
             check(bool(review.get('reviewer')) and review['reviewer'] != record['author'], 'self or missing review')
