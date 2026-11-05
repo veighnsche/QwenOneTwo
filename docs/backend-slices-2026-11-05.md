@@ -51,3 +51,30 @@ operations. No reviewers, approvals or semantic annotations were invented.
 Clean preparation constructs fresh source/reference artifacts; caller-built
 receiver/reader packets must still use their local registry and immutable
 bindings. Full reviewed clean semantic fixtures and F8 coverage remain absent.
+
+## Slice 3: loss/mask and optimizer-window mechanisms
+
+Implementation: `training/losses.py`, `engine.py`.
+
+Acceptance: raw-value supervision follows supported reference validity even when
+predicted status abstains; incompatible Reason losses mask separately. Exact
+int/decimal/UTF8 subtypes, acceptable sets, role-balanced semantic means and native
+exclusions follow A4. Eight scheduled examples accumulate separate CUDA component
+VJPs using eligible-example denominators, combine/clip once, and preserve inactive
+`grad=None`. Failure must not leave a partial optimizer update.
+
+`test_training_engine_gpu.py`: 8/8 pass on the selected RTX 3090 in 0.501 seconds.
+The unequal-count gradient oracle is 6.0 (native (2+6)/2 plus structure 0.5*4),
+with a separate 0.5 gradient on its other leaf. Inactive parameters/moments with
+prior Adam state remain bit-identical. Overlength/incomplete exposures are counted
+without backward; zero-eligibility windows advance without updating parameters.
+Injected partial-step mutation restores parameters/moments. Loss subtype,
+reference-status masks, native exclusions, detached semantic targets, schedule
+endpoints and duplicate ownership rejection pass.
+
+These optimizer steps use tiny synthetic CUDA algebra leaves only; no backbone,
+adapter, codec capability checkpoint or dataset is fitted. The A4 full-model
+eligible-component buffer/moment memory envelope remains a distinct future
+measurement; the numeric runner's conservative allocation is not that result.
+Phase advancement requires complete scheduled windows and supplied final-two-
+checkpoint development evidence; no promotion evidence has been created here.
