@@ -226,3 +226,16 @@ so its source hashes/snapshot are preserved verbatim. The current source manifes
 pins the subsequent guards separately. The passing matrix certifies the unchanged
 v3 numeric core; the post-guard tests certify the new rejection behavior and
 finite-path regressions. No expensive matrix was rerun to overwrite that history.
+
+## Final handoff and identity check
+
+The current [backend profile](evidence/backend-profile-v1.json) was generated
+after the finite guards and owner-status updates. It validates the pinned base,
+Qev release files and diagnostic checkpoint, and records 39 source and 17 contract
+hashes. Manifest SHA256:
+`3ccc4e63c0c16e8d8a2d9d8be410a64111d33ad73843a67794925c99a3941aba`.
+All recorded source/contract hashes were recomputed successfully; 107 relative
+links in the five updated status documents resolve and `git diff --check` passes.
+These are model-free checks. The [handoff](next-agent-handoff.md) records the
+reviewed-pilot/episode integration prerequisite and the remaining full A4
+training-memory qualification separately from the completed numeric matrix.

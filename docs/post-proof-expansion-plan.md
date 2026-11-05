@@ -1,8 +1,8 @@
 # Expansion after the small GPU proof
 
-Status: G1-core passed. The user subsequently authorized the full codec/runtime
-and the next RTX 3090 qualification checks only, with no training or frontend
-expansion. The [implementation](full-codec-implementation.md) is isolated in
+Status: G1-core passed. Subsequent authorized work implemented the full
+codec/runtime, numeric qualification and backend training infrastructure, with
+no capability fitting or frontend expansion. The [implementation](full-codec-implementation.md) is isolated in
 `qwen_one_two/codec/`. The [original expanded BF16 gate](codec-qualification-results-2026-11-05.md)
 failed; the later [feedback precision v3](codec-feedback-precision-v3.md) revision
 has separate [rerun evidence](codec-feedback-results-2026-11-05.md) at unchanged
@@ -194,6 +194,11 @@ or answer-quality improvement cannot be claimed from short pilot success.
 Current position: G1-core PASSED; the full codec/runtime candidate is implemented
 and its initial failed qualification is preserved. See the separately versioned
 [v3 results](codec-feedback-results-2026-11-05.md) for the current numeric gate.
-No reviewed-data, capability-training,
-frontend, 1024-position or release gate is marked passed or begun. Live services
-and production capability checkpoints remain unchanged.
+The separate [1024 numeric extension](codec-1024-results-2026-11-05.md) now passes
+108/108 cases. [Backend slices](backend-slices-2026-11-05.md) implement role inputs,
+provenance, clean construction, reference/live separation, losses/accumulation
+and checkpoint/export/resume. Next are genuinely reviewed pilot integration,
+task-specific episode producers and semantic/promotion fixtures. Full A4 actual
+training-memory qualification is also outstanding. No reviewed-data release,
+capability fitting, frontend or deployment gate is passed. Live services and
+production capability checkpoints remain unchanged.

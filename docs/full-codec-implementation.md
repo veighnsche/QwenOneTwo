@@ -6,6 +6,13 @@ The implementation is isolated in `qwen_one_two/codec/`; the legacy server,
 frontend, running services, original G1 code and original checkpoints are unchanged.
 Nothing in this document promotes a diagnostic checkpoint to learned capability.
 
+Subsequent authorized backend work implemented `qwen_one_two/training/` and
+completed the separate [1024 qualification](codec-1024-results-2026-11-05.md).
+The [slice report](backend-slices-2026-11-05.md) records finite-validation fixes,
+input/clean builders, reference preparation infrastructure, losses, accumulation
+and export/resume. The exclusions below describe the original codec round;
+no capability fitting or deployment occurred in either round.
+
 ## Implemented runtime surface
 
 | Module | Contract |
@@ -19,7 +26,7 @@ Nothing in this document promotes a diagnostic checkpoint to learned capability.
 | [session](../qwen_one_two/codec/session.py) | Single D prefill, initial continuous budget, R/D switching on one causal state, native generation, writer execution, notices and same-phase return |
 | [ownership](../qwen_one_two/codec/ownership.py) | Unique positive-LR owners for live parameters; no optimizer update |
 | [backbone](../qwen_one_two/codec/backbone.py) | Original functional backbone equations with 32-token recurrent rematerialization; no detached history or cache replay |
-| [qualify](../qwen_one_two/codec/qualify.py) | Prescribed 128/256/512 traces, numerical/gradient comparisons, memory envelopes and frozen-parameter checks |
+| [qualify](../qwen_one_two/codec/qualify.py) | Prescribed 128/256/512 and versioned 1024 traces, numerical/gradient comparisons, memory envelopes and frozen-parameter checks |
 
 All six typed bodies are implemented: Boolean, signed int64, scale-preserving
 decimal, exact reference, source-backed string and constructed UTF-8. Absent
@@ -103,7 +110,9 @@ The qualifier records requested axes and incomplete coverage explicitly. Initial
 seed-17 development probes cannot certify the required three-seed/three-repeat
 A3 matrix. Any failed applicable numeric check blocks broader qualification;
 neither successful FP32 execution nor component tests override that failure.
-1024-position qualification and full-context operation remain unmeasured.
+The subsequent 108-case 1024 numeric extension passed; see its linked report
+for exact provenance. Full-context operation and the full A4 participating-buffer/
+auxiliary-graph memory qualification remain unmeasured.
 
 GPU memory probes may reserve two FP32 moment copies and three full-parameter
 component-buffer envelopes without constructing or stepping an optimizer. These
@@ -138,3 +147,7 @@ The underlying `codec.qualify` entry point also accepts smaller axes.
 It stops on a measured failure. Smaller development axes and reference-only
 runs record their incomplete coverage explicitly; they cannot report a full
 A3 qualification pass. Use a new output directory for every attempt.
+
+The separate `--protocol v3-1024-v1 --workers 1` extension requires 108 unique
+cases. Its [protocol](codec-1024-protocol-v1.md) and measured report preserve
+exact run commands; neither completed matrix needs repeating for unrelated edits.

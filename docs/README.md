@@ -2,7 +2,8 @@
 
 For current measured status, artifact locations and remaining tasks, start with
 the [next-agent handoff](next-agent-handoff.md). The v3 324-case numeric matrix
-through 512 positions passes; learned semantic capability remains untrained.
+through 512 positions and the separate 108-case 1024 extension pass. Backend
+training infrastructure is implemented; learned semantic capability remains untrained.
 
 The [repository and artifact guide](repository-and-artifacts.md) explains what
 is included in GitHub, which evidence remains local and how to run from a clone.
@@ -17,9 +18,10 @@ remaining interface/configuration freeze items and coding-readiness assessment.
 
 A1-A4 and B1 initial design profiles are recorded and consolidated in the
 specification. The full codec/runtime, engineering vectors and v3 numeric
-qualification through 512 positions now have scoped implementation/evidence.
-Approved semantic datasets, reference/capability training, 1024 qualification
-and frontend migration remain outstanding. A recorded design is not trained
+qualification through 1024 positions now have scoped implementation/evidence.
+Role-specific input/clean builders and training infrastructure are implemented.
+Approved semantic datasets, task-specific episode integration, full A4 training
+memory qualification, reference/capability training and frontend migration remain outstanding. A recorded design is not trained
 capability; use the current handoff and measured reports for completion status.
 
 The [Astra review](review-astra-2026-11-05.md) is a historical independent report,
@@ -72,6 +74,8 @@ not override them. Future changes must update the owner and affected examples.
 | [Original full codec qualification](codec-qualification-results-2026-11-05.md) | Historical component/reference results and failed 512-position BF16 arithmetic gate; retained alongside the later v3 pass |
 | [Feedback precision v3](codec-feedback-precision-v3.md) | Serial feedback diagnosis, projection ablations and explicit BF16-storage/FP32-feedback arithmetic revision; unchanged tolerances |
 | [Feedback v3 qualification](codec-feedback-results-2026-11-05.md) | Follow-up matrix evidence, cache/gradient/accounting results and the remaining scope limits |
+| [1024 qualification](codec-1024-results-2026-11-05.md) | Separate 108-case numeric pass, exact source provenance and memory limits |
+| [Backend slices](backend-slices-2026-11-05.md) | Contract fixes, F7/F3 builders, losses/accumulation, reference isolation and export/resume evidence |
 | [Post-proof expansion plan](post-proof-expansion-plan.md) | Conditional codec/runtime qualification, reviewed data, training phases, same-job frontend integration and release order after measured proof success |
 | [Losses and training schedule](loss-configuration-and-training-schedule.md) | Starting weights, eligibility masks, replay, forcing dimensions and joint-training advancement |
 | [Scalar rows](scalar-row-handling.md) | Private row indices, tied-table overrides, gradient ownership, vocabulary masking and precision/export |

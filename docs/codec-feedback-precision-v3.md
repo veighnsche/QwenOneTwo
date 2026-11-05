@@ -88,5 +88,7 @@ matrix, provenance, resource accounting and memory. The original [failure
 report](codec-qualification-results-2026-11-05.md) remains historical evidence.
 No training, optimizer update, reviewed-data expansion or frontend work belongs
 to this revision. Passing prescribed numeric traces cannot establish learned
-invocation, request meaning or answer quality. 1024 positions and maximum
-context still require separate qualification.
+invocation, request meaning or answer quality. The subsequent separate
+[1024 extension](codec-1024-results-2026-11-05.md) passed 108/108 prescribed cases.
+That report distinguishes the measured source snapshot from later finite guards.
+Maximum context and full A4 trainer memory still require separate qualification.
