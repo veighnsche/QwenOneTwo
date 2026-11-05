@@ -16,6 +16,14 @@ records the BF16 truncation diagnosis and compensated-forward/FP32-state/backwar
 fix. It changes arithmetic zones, not the tolerances below. The original
 single-pass BF16 profile remains selectable for historical reproduction.
 
+Full-codec arithmetic revision: [feedback precision v3](codec-feedback-precision-v3.md)
+promotes transformer dense computation to FP32 while retaining BF16 frozen
+storage and compensated BF16 vocabulary products. This supersedes the G1
+arithmetic zones for that scoped codec profile only. All limits, floors,
+budget formulas and genuine reference rules below remain unchanged. See its
+[measured results](codec-feedback-results-2026-11-05.md) separately from the
+original failed expanded BF16 profile.
+
 ## 1. Near-zero comparisons
 
 Compute verification norms/metrics in GPU FP64, separately for every layer,

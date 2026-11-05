@@ -10,10 +10,19 @@ from types import MethodType
 from torch.nn import functional as F
 from torch.utils.checkpoint import checkpoint
 from ..g1_backbone import Backbone as CoreBackbone,DualLinear,EffectiveTable,MODE
-from .precision import linear
+from .precision import linear,feedback_linear,COUNTS
 
 
 def expanded_dual(self,x):
+    if (self.compensated and self.base.weight.dtype==torch.bfloat16
+            and self.precision_owner.feedback_precision=='fp32'):
+        mode=MODE.get();a,b=(self.R_A,self.R_B) if mode=='R' else (self.D_A,self.D_B)
+        if self.effective_reference:a=a.to(torch.bfloat16).float();b=b.to(torch.bfloat16).float()
+        update=F.linear(F.linear(x.float(),a),b)*2.
+        base=feedback_linear(x,self.base.weight,self.base.bias)
+        COUNTS['fp32_adapter_forward']+=2
+        if self.capture and mode==self.capture_mode and update.requires_grad:self.evaluation_outputs.append(update)
+        return base+update
     if not self.compensated or self.base.weight.dtype!=torch.bfloat16 or self.precision_owner.precision_parts==2:
         return DualLinear.forward(self,x)
     mode=MODE.get();a,b=(self.R_A,self.R_B) if mode=='R' else (self.D_A,self.D_B)
@@ -47,6 +56,10 @@ class Backbone(CoreBackbone):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
         self.precision_parts=2
+        # v3: serial latent feedback needs consistent FP32 dense arithmetic.
+        # Frozen weights remain BF16; native vocabulary GEMMs remain compensated
+        # BF16. The original v2 path stays selectable for diagnosis/reproduction.
+        self.feedback_precision='fp32'
         for dual in self.duals:
             # Non-module owner reference: do not register the backbone as its
             # own descendant or create a second parameter owner.

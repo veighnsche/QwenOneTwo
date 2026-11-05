@@ -51,8 +51,13 @@ G1-core: 72 numeric cases at unchanged tolerances, 36 released continuations and
 all gate/cache/gradient/accounting/optimizer/base-integrity checks. Only the
 isolated diagnostic gate weight/bias changed in that G1 repair. Subsequent
 [full codec/runtime implementation](docs/full-codec-implementation.md) is isolated
-in `qwen_one_two/codec/`; its [qualification](docs/codec-qualification-results-2026-11-05.md)
-remains blocked on the expanded 512-position BF16/FP32 comparison. No curriculum,
+in `qwen_one_two/codec/`. Its [original qualification](docs/codec-qualification-results-2026-11-05.md)
+failed the expanded 512-position BF16/FP32 comparison. The explicit
+[feedback precision v3](docs/codec-feedback-precision-v3.md) revision and
+[follow-up results](docs/codec-feedback-results-2026-11-05.md) address that failure
+without changing tolerances: all 324 prescribed 128/256/512-position numeric
+qualification traces pass on RTX 3090. Frozen storage is BF16; transformer
+computation is FP32, with compensated BF16 vocabulary projection. No curriculum,
 capability-training pipeline, frontend or live-service expansion has begun.
 
 Start with the [consolidated implementation specification](docs/architecture-and-training-plan.md), then the [implementation handoff](docs/implementation-handoff.md). The [documentation map](docs/README.md) identifies the owner of every protocol, budget, cache and training decision.

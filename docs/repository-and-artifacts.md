@@ -7,6 +7,8 @@ dependency lockfile, tests, implementation specifications, training walkthroughs
 design decisions, Astra review, diagnostic repair protocols and measured G1 reports.
 Start with the [documentation map](README.md) and
 [latest G1-core results](g1-gate-results-2026-11-05.md).
+The subsequent [full-codec v3 results](codec-feedback-results-2026-11-05.md)
+record the expanded numeric qualification and its explicit precision revision.
 
 The [GPU-only workspace rules](../AGENTS.md) apply to inference, training, feature
 extraction, readout fitting and real-model tests. No CPU fallback is permitted.

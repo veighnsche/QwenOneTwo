@@ -21,6 +21,8 @@ from .runtime import Runtime
 from .session import Session
 from .writer import Draft
 from .ownership import parameter_groups
+from .precision import COUNTS as FEEDBACK_COUNTS
+from ..g1_precision_math import COUNTS as COMPENSATED_COUNTS
 from dataclasses import replace
 
 
@@ -159,11 +161,14 @@ def trace(b,c,port,total,gradients):
 
 
 def compare(test,base,fp32):
-    errors=[];worst=0.;boundaries=[]
-    for key in ('P','B','A','H','total','attempts','dispatched','consumed','phase','terminal','switches','events'):
+    errors=[];worst=0.;boundaries=[];logit_worst=0.;scalar_worst=0.
+    for key in ('P','B','A','H','total','attempts','dispatched','consumed','phase','state','terminal',
+                'prefills','lineage','held_positions','released_positions','new_records','switches','events',
+                'boundaries','predicted_budget','granted_budget','override'):
         if test['summary'][key]!=base['summary'][key]:errors.append('exact:'+key)
     require(len(test['snapshots'])==len(base['snapshots']),'snapshot counts')
     for (label,h,states),(other,rh,reference) in zip(test['snapshots'],base['snapshots']):
+        require(len(states)==len(reference),'cache tensor counts')
         boundary_worst=0.
         if label!=other:errors.append('boundary label')
         for x,y in [(h,rh),*zip(states,reference)]:
@@ -173,13 +178,20 @@ def compare(test,base,fp32):
             boundary_worst=max(boundary_worst,e['normalized_rms'])
             if not e['pass']:errors.append('state:'+label)
         boundaries.append({'label':label,'worst_state_rms':boundary_worst})
+    require(len(test['logits'])==len(base['logits']),'logit counts')
     for x,y in zip(test['logits'],base['logits']):
         actual,ref=(y,x) if fp32 else (x,y)
-        if not tensor_error(actual,ref,.05,.02,.01)['pass']:errors.append('logits')
+        e=tensor_error(actual,ref,.05,.02,.01)
+        logit_worst=max(logit_worst,e['normalized_rms'])
+        if not e['pass']:errors.append('logits')
+    require(len(test['calls'])==len(base['calls']),'call counts')
     for a,z in zip(test['calls'],base['calls']):
         for k in ('status','predicted_status','q','r','handles','selected'):
             if a[k]!=z[k]:errors.append('call:'+k)
-        if a['scalar'] is not None and abs(a['scalar']-z['scalar'])>.002:errors.append('scalar')
+        require((a['scalar'] is None)==(z['scalar'] is None),'scalar presence')
+        if a['scalar'] is not None:
+            scalar_worst=max(scalar_worst,abs(a['scalar']-z['scalar']))
+            if abs(a['scalar']-z['scalar'])>.002:errors.append('scalar')
     gradients={}
     for name,v in test['vectors'].items():
         if fp32:e=grad_error(base['vectors'][name],v,.05,.995)
@@ -187,7 +199,9 @@ def compare(test,base,fp32):
         gradients[name]=e
         if not e['pass']:errors.append('gradient:'+name)
     if abs(test['budget_raw']-base['budget_raw'])>1e-5:errors.append('startup')
-    return {'pass':not errors,'errors':errors[:30],'worst_state_rms':worst,'boundaries':boundaries,'gradients':gradients}
+    return {'pass':not errors,'errors':errors[:30],'worst_state_rms':worst,'worst_logit_rms':logit_worst,
+            'worst_scalar_absolute':scalar_worst,'budget_raw_absolute':abs(test['budget_raw']-base['budget_raw']),
+            'boundaries':boundaries,'gradients':gradients}
 
 
 def main():
@@ -196,10 +210,14 @@ def main():
     ap.add_argument('--ports',type=int,nargs='+',default=[1,2,3]);ap.add_argument('--seeds',type=int,nargs='+',default=[17,29,43])
     ap.add_argument('--repeats',type=int,default=3);ap.add_argument('--profiles',nargs='+',default=['functional','checkpoint','serving','fp32'])
     ap.add_argument('--precision-parts',type=int,choices=(2,3),default=2)
+    ap.add_argument('--feedback-precision',choices=('fp32','compensated'),default='fp32')
     ap.add_argument('--reserve-state-memory',action='store_true',help='Allocate CUDA moment/component-buffer envelopes; never step an optimizer')
     args=ap.parse_args();out=Path(args.output);out.mkdir(parents=True,exist_ok=False)
     report={'status':'RUNNING','scope':'full-codec prescribed runtime qualification; no training/frontend',
-            'profile':f'b1-full-v1-compensated{args.precision_parts}-temporal32','cases':[],
+            'profile':f'b1-full-v3-feedback-{args.feedback_precision}-vocab-compensated{args.precision_parts}-temporal32','cases':[],
+            'precision':{'frozen_candidate_storage':'BF16','feedback_dense_arithmetic':args.feedback_precision,
+                         'native_vocabulary_arithmetic':f'{args.precision_parts}-part BF16 products, FP32 output',
+                         'reference':'genuine FP32 PyTorch projections; no reference rounding'},
             'training_performed':False,'optimizer_updates':0,'frontend_changed':False,
             'prescribed_operations_and_statuses':True,'semantic_ability_claimed':False,
             'requested_matrix':{'lengths':args.lengths,'ports':args.ports,'seeds':args.seeds,'repeats':args.repeats,'profiles':args.profiles},
@@ -212,6 +230,7 @@ def main():
         with sdpa_kernel(SDPBackend.MATH):
             b,c,copied=load(args.snapshot,args.checkpoint)
             b.precision_parts=args.precision_parts
+            b.feedback_precision=args.feedback_precision
             owners=parameter_groups(b,c)
             parameters=[p for g in owners for _,p in g['named_parameters']]
             masters=[p.detach().clone() for p in parameters]
@@ -238,13 +257,19 @@ def main():
                                 torch.manual_seed(seed);b.checkpointing=profile=='checkpoint'
                                 b.set_precision(torch.float32 if profile=='fp32' else torch.bfloat16)
                                 torch.cuda.reset_peak_memory_stats();t=time.time()
+                                counts_before={**FEEDBACK_COUNTS,**COMPENSATED_COUNTS}
                                 with torch.set_grad_enabled(profile!='serving'):
                                     current=trace(b,c,Port(port),total,profile!='serving')
                                 comparison={'pass':True} if base is None else compare(current,base,profile=='fp32')
                                 row={k:current[k] for k in ('summary','calls','probe','loss','budget_raw')}
                                 row.update(length=total,port=port,profile=profile,seed=seed,repeat=repeat,
+                                           arithmetic_counts={k:v-counts_before[k] for k,v in {**FEEDBACK_COUNTS,**COMPENSATED_COUNTS}.items()},
                                            comparison=comparison,seconds=time.time()-t,
                                            allocated=torch.cuda.max_memory_allocated(),reserved=torch.cuda.max_memory_reserved())
+                                if args.feedback_precision=='fp32' and profile!='fp32':
+                                    require(row['arithmetic_counts']['fp32_frozen_forward']>0,'feedback FP32 path not exercised')
+                                    require(row['arithmetic_counts']['bf16_forward_products']>0,'BF16 vocabulary path not exercised')
+                                    require(all(d.base.weight.dtype==torch.bfloat16 for d in b.duals),'candidate weight storage drift')
                                 report['cases'].append(row)
                                 (out/'progress.json').write_text(json.dumps(report,indent=2))
                                 print(json.dumps({k:row[k] for k in ('length','port','profile','seed','repeat','comparison','seconds','allocated')}),flush=True)

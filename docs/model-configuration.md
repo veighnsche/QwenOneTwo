@@ -2,10 +2,9 @@
 
 Implementation update: The runtime codec modules and untrained reference-pooler shape now has a scoped implementation in
 `qwen_one_two/codec/`. See the [implementation](full-codec-implementation.md)
-and [measured qualification](codec-qualification-results-2026-11-05.md).
+and [v3 qualification](codec-feedback-results-2026-11-05.md).
 The original design status below is historical; training and frontend
-expansion remain excluded, and expanded mixed-precision qualification
-is not passed. The recorded normative rules/tolerances remain in force.
+expansion remain excluded. The recorded normative rules/tolerances remain in force.
 
 
 Status: recorded starting model profile, not instantiated, trained, tuned or
@@ -30,6 +29,13 @@ products with FP32 accumulation/residual/state/backward arithmetic. It supersede
 the generic precision rows below for that proof candidate only, with unchanged
 tolerances/weights. Broader capability-training/serving adoption is not performed
 by the proof, and the legacy profile remains reproducible.
+
+For the full-codec candidate, [feedback precision v3](codec-feedback-precision-v3.md)
+supersedes both the generic precision table and the G1 dense-product zones:
+frozen BF16 storage, transformer base/adapter FP32 arithmetic, FP32 incoming
+residual/latent vectors and compensated BF16 native vocabulary projection.
+Widths, normalization, scalar-row isolation and adapter settings do not change.
+This is an arithmetic revision, not a claim that BF16 transformer products passed.
 
 ## 1. Preserve the backbone
 

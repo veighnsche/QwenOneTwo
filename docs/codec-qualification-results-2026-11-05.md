@@ -1,5 +1,9 @@
 # Full-codec qualification — 2026-11-05
 
+Historical report for the original expanded BF16 arithmetic. The subsequent
+[feedback v3 diagnosis/rerun](codec-feedback-results-2026-11-05.md) uses an explicit
+precision-profile revision; it does not change or overwrite these failed results.
+
 **Full codec/runtime implemented. Expanded qualification: BLOCKED.**
 The 512-position BF16/FP32 state and gradient comparison fails unchanged A3
 limits. Component tests, shorter development probes and FP32 reference execution

@@ -66,8 +66,11 @@ only exhausted resource allowances. No domain keywords choose operations.
 
 ## Numerical implementation and current boundary
 
-The expanded path retains G1's compensated BF16 dense/FP32-state candidate and
-genuine FP32 reference. The new temporal rematerialization checkpoints pure
+The expanded path now uses [feedback precision v3](codec-feedback-precision-v3.md):
+BF16 frozen matrix storage, FP32 transformer base/LoRA arithmetic and compensated
+BF16 native vocabulary products, with a genuine FP32 reference. This explicitly
+supersedes G1's dense-product precision zones for the full codec only. Temporal
+rematerialization checkpoints pure
 32-token recurrence blocks, retaining connected incoming/outgoing state. A GPU
 regression compares outputs, cache states and input gradients exactly with the
 original layer equations. Outer-layer checkpointing is separately selectable.
@@ -78,6 +81,9 @@ same-profile checkpoint/serving parity. The optional three-part BF16 experiment
 also failed and is not an approved precision replacement. No numeric tolerance,
 fixture status semantics or reference arithmetic was changed to mark these passed.
 FP32 reference-path success must be reported separately from full qualification.
+The follow-up [diagnosis and v3 results](codec-feedback-results-2026-11-05.md)
+record the explicit precision revision; the old BF16 arithmetic remains a
+failed historical profile. The reference, fixtures and thresholds are unchanged.
 
 ## Explicit exclusions and evidence types
 
@@ -116,7 +122,8 @@ export CUBLAS_WORKSPACE_CONFIG=:4096:8
 export QOT_QUALIFY_SNAPSHOT=/path/to/pinned/Qwen3.5-0.8B/snapshot
 .venv/bin/python -m unittest discover -s tests -p test_codec_exact.py -v
 .venv/bin/python -m unittest discover -s tests -p test_codec_gpu.py -v
-.venv/bin/python -m qwen_one_two.codec.qualify \
+.venv/bin/python -m unittest discover -s tests -p test_codec_precision_gpu.py -v
+.venv/bin/python -m qwen_one_two.codec.qualify_matrix \
   --snapshot "$QOT_QUALIFY_SNAPSHOT" \
   --checkpoint data/g1-proof/gate-repair-v2-20261105/diagnostic.safetensors \
   --output data/codec-qualification/new-run
@@ -124,6 +131,10 @@ export QOT_QUALIFY_SNAPSHOT=/path/to/pinned/Qwen3.5-0.8B/snapshot
 
 The default requested matrix includes all three lengths/operations, seeds
 17/29/43 and three repeats across functional/checkpoint/serving/FP32 paths.
+The matrix runner schedules at most two workers on the selected RTX 3090,
+checks every child's source/input/profile evidence and requires all 324 unique
+cases before reporting a pass. Use `--workers 1` for serial execution.
+The underlying `codec.qualify` entry point also accepts smaller axes.
 It stops on a measured failure. Smaller development axes and reference-only
 runs record their incomplete coverage explicitly; they cannot report a full
 A3 qualification pass. Use a new output directory for every attempt.

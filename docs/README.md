@@ -63,6 +63,8 @@ not override them. Future changes must update the owner and affected examples.
 | [G1 gate repair](g1-gate-repair-v1.md) | Undertrained readout and supervision-counter mismatch, bounded GPU-only head fit, unchanged four-way argmax and stronger anti-collapse checks |
 | [Full codec implementation](full-codec-implementation.md) | Full typed transport, learned writer interfaces, immutable memory, resource reservations and one-cache runtime; no training/frontend |
 | [Full codec qualification](codec-qualification-results-2026-11-05.md) | GPU component/reference results and blocked 512-position BF16/FP32 gate; incomplete qualification is explicit |
+| [Feedback precision v3](codec-feedback-precision-v3.md) | Serial feedback diagnosis, projection ablations and explicit BF16-storage/FP32-feedback arithmetic revision; unchanged tolerances |
+| [Feedback v3 qualification](codec-feedback-results-2026-11-05.md) | Follow-up matrix evidence, cache/gradient/accounting results and the remaining scope limits |
 | [Post-proof expansion plan](post-proof-expansion-plan.md) | Conditional codec/runtime qualification, reviewed data, training phases, same-job frontend integration and release order after measured proof success |
 | [Losses and training schedule](loss-configuration-and-training-schedule.md) | Starting weights, eligibility masks, replay, forcing dimensions and joint-training advancement |
 | [Scalar rows](scalar-row-handling.md) | Private row indices, tied-table overrides, gradient ownership, vocabulary masking and precision/export |

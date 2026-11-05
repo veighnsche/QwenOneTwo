@@ -131,9 +131,12 @@ tolerance was relaxed. All 612 released actions followed raw argmax without a
 resource mask. This does not establish semantic/general invocation readiness.
 The subsequent [full codec/runtime work](full-codec-implementation.md) was
 separately authorized without training or frontend expansion. Its
-[qualification](codec-qualification-results-2026-11-05.md) is distinct: component
-and FP32-reference successes do not close the failing expanded mixed-precision
-gate. No service/frontend change or production checkpoint promotion occurred.
+[original qualification](codec-qualification-results-2026-11-05.md) failed the
+expanded BF16 arithmetic gate. The subsequent [feedback precision v3](codec-feedback-precision-v3.md)
+revision and [rerun evidence](codec-feedback-results-2026-11-05.md) are distinct:
+FP32 transformer arithmetic with BF16 storage is an explicit profile change,
+not a passing claim for the original BF16 transformer arithmetic. No service/
+frontend change or production checkpoint promotion occurred.
 
 The [small GPU proof protocol](small-gpu-proof-v1.md) records the concrete
 G1-core profile, originally requested as protocol-first. Its measured status is

@@ -49,9 +49,11 @@ The subsequent [gate repair/rerun](g1-gate-results-2026-11-05.md) PASSED G1-core
 cache/gradient/accounting/optimizer and frozen-base checks. The isolated child
 changes only the existing gate weight/bias, not the live capability checkpoint.
 A later instruction authorized the [full codec/runtime](full-codec-implementation.md)
-and [next qualification](codec-qualification-results-2026-11-05.md) only. Its
-component/reference successes do not override the expanded mixed-precision
-failure. Training, reviewed-data and frontend expansion remain excluded.
+and next qualification only. Its [original expanded BF16 profile](codec-qualification-results-2026-11-05.md)
+failed; component/reference successes did not override that result. The later
+[feedback precision v3](codec-feedback-precision-v3.md) revision and
+[rerun evidence](codec-feedback-results-2026-11-05.md) are separately versioned.
+Training, reviewed-data and frontend expansion remain excluded.
 The [post-proof expansion plan](post-proof-expansion-plan.md) records the requested
 conditional work order after measured success: full codec/component qualification,
 reviewed data, A4 phases, same-job frontend integration and release preparation.

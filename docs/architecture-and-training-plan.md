@@ -625,8 +625,10 @@ gate/cache/gradient/accounting/optimizer/base-integrity checks. Only the diagnos
 gate's two tensors changed. Broader A3 and semantic readiness remain unqualified;
 a subsequent user instruction authorized the isolated full codec/runtime and
 next qualification only. Its [implementation](full-codec-implementation.md) and
-[measured results](codec-qualification-results-2026-11-05.md) are separate from
-G1-core; expanded mixed-precision qualification remains blocked. No training or
+[original failed results](codec-qualification-results-2026-11-05.md) are separate from
+G1-core. The [feedback precision v3](codec-feedback-precision-v3.md) revision
+and [follow-up qualification](codec-feedback-results-2026-11-05.md) explicitly
+version the later arithmetic change at unchanged tolerances. No training or
 frontend expansion has begun. The
 [conditional expansion plan](post-proof-expansion-plan.md) fixes work after a
 measured pass: full codec/runtime and512 qualification, reviewed pilot/data,

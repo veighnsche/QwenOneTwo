@@ -3,9 +3,10 @@
 Status: G1-core passed. The user subsequently authorized the full codec/runtime
 and the next RTX 3090 qualification checks only, with no training or frontend
 expansion. The [implementation](full-codec-implementation.md) is isolated in
-`qwen_one_two/codec/`; [qualification](codec-qualification-results-2026-11-05.md)
-keeps component/FP32 successes separate from the failed expanded mixed-precision
-gate. Reviewed data, capability training and frontend work have not begun.
+`qwen_one_two/codec/`. The [original expanded BF16 gate](codec-qualification-results-2026-11-05.md)
+failed; the later [feedback precision v3](codec-feedback-precision-v3.md) revision
+has separate [rerun evidence](codec-feedback-results-2026-11-05.md) at unchanged
+tolerances. Reviewed data, capability training and frontend work have not begun.
 All model workloads remain GPU-only. No service or deployment change occurred.
 
 Owner: dependencies and deliverables after [G1-core](small-gpu-proof-v1.md).
@@ -191,7 +192,8 @@ longer-context/G6 qualification is a separate step. Full C/max B, optimal effort
 or answer-quality improvement cannot be claimed from short pilot success.
 
 Current position: G1-core PASSED; the full codec/runtime candidate is implemented
-and its initial qualification is measured separately. The expanded 512-position
-mixed-precision gate is not passed. No reviewed-data, capability-training,
+and its initial failed qualification is preserved. See the separately versioned
+[v3 results](codec-feedback-results-2026-11-05.md) for the current numeric gate.
+No reviewed-data, capability-training,
 frontend, 1024-position or release gate is marked passed or begun. Live services
 and production capability checkpoints remain unchanged.

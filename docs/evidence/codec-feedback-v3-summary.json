@@ -1,0 +1,370 @@
+{
+  "status": "PASSED",
+  "scope": "prescribed 128/256/512 codec numeric qualification; no learned capability claim",
+  "case_count": 324,
+  "comparison_count": 315,
+  "axes": {
+    "lengths": [
+      128,
+      256,
+      512
+    ],
+    "ports": [
+      "Noul",
+      "Choice",
+      "Score"
+    ],
+    "profiles": [
+      "functional",
+      "checkpoint",
+      "serving",
+      "fp32"
+    ],
+    "seeds": [
+      17,
+      29,
+      43
+    ],
+    "repeats": 3
+  },
+  "precision": {
+    "frozen_candidate_storage": "BF16",
+    "feedback_dense_arithmetic": "fp32",
+    "native_vocabulary_arithmetic": "2-part BF16 products, FP32 output",
+    "reference": "genuine FP32 PyTorch projections; no reference rounding"
+  },
+  "metrics": {
+    "worst_state_rms": 0,
+    "worst_logit_rms": 5.825623065110945e-06,
+    "worst_scalar_absolute": 0,
+    "budget_raw_absolute": 0,
+    "gradients": {
+      "R": {
+        "maximum_normalized_rms": 8.149575206211349e-06,
+        "minimum_cosine": 0.9999999999931394
+      },
+      "D": {
+        "maximum_normalized_rms": 7.784975292192915e-06,
+        "minimum_cosine": 0.9999999999934059
+      },
+      "wire": {
+        "maximum_normalized_rms": 7.5177415008448995e-06,
+        "minimum_cosine": 0.9999999999901952
+      },
+      "emitter": {
+        "maximum_normalized_rms": 8.316676446703025e-06,
+        "minimum_cosine": 0.9999999999915314
+      }
+    }
+  },
+  "accounting": [
+    {
+      "length": 128,
+      "port": 1,
+      "cases": 36,
+      "P": 27,
+      "B": 39,
+      "A": 56,
+      "H": 6,
+      "total": 128,
+      "dispatched": 1,
+      "consumed": 1,
+      "held_positions": 0,
+      "released_positions": 36,
+      "prefills": 1,
+      "lineage": 1
+    },
+    {
+      "length": 128,
+      "port": 2,
+      "cases": 36,
+      "P": 27,
+      "B": 68,
+      "A": 27,
+      "H": 6,
+      "total": 128,
+      "dispatched": 1,
+      "consumed": 1,
+      "held_positions": 0,
+      "released_positions": 28,
+      "prefills": 1,
+      "lineage": 1
+    },
+    {
+      "length": 128,
+      "port": 3,
+      "cases": 36,
+      "P": 27,
+      "B": 62,
+      "A": 33,
+      "H": 6,
+      "total": 128,
+      "dispatched": 1,
+      "consumed": 1,
+      "held_positions": 0,
+      "released_positions": 36,
+      "prefills": 1,
+      "lineage": 1
+    },
+    {
+      "length": 256,
+      "port": 1,
+      "cases": 36,
+      "P": 27,
+      "B": 102,
+      "A": 121,
+      "H": 6,
+      "total": 256,
+      "dispatched": 2,
+      "consumed": 2,
+      "held_positions": 0,
+      "released_positions": 68,
+      "prefills": 1,
+      "lineage": 1
+    },
+    {
+      "length": 256,
+      "port": 2,
+      "cases": 36,
+      "P": 27,
+      "B": 152,
+      "A": 71,
+      "H": 6,
+      "total": 256,
+      "dispatched": 2,
+      "consumed": 2,
+      "held_positions": 0,
+      "released_positions": 60,
+      "prefills": 1,
+      "lineage": 1
+    },
+    {
+      "length": 256,
+      "port": 3,
+      "cases": 36,
+      "P": 27,
+      "B": 159,
+      "A": 64,
+      "H": 6,
+      "total": 256,
+      "dispatched": 2,
+      "consumed": 2,
+      "held_positions": 0,
+      "released_positions": 68,
+      "prefills": 1,
+      "lineage": 1
+    },
+    {
+      "length": 512,
+      "port": 1,
+      "cases": 36,
+      "P": 27,
+      "B": 188,
+      "A": 291,
+      "H": 6,
+      "total": 512,
+      "dispatched": 4,
+      "consumed": 4,
+      "held_positions": 0,
+      "released_positions": 132,
+      "prefills": 1,
+      "lineage": 1
+    },
+    {
+      "length": 512,
+      "port": 2,
+      "cases": 36,
+      "P": 27,
+      "B": 345,
+      "A": 134,
+      "H": 6,
+      "total": 512,
+      "dispatched": 5,
+      "consumed": 5,
+      "held_positions": 0,
+      "released_positions": 155,
+      "prefills": 1,
+      "lineage": 1
+    },
+    {
+      "length": 512,
+      "port": 3,
+      "cases": 36,
+      "P": 27,
+      "B": 291,
+      "A": 188,
+      "H": 6,
+      "total": 512,
+      "dispatched": 4,
+      "consumed": 4,
+      "held_positions": 0,
+      "released_positions": 132,
+      "prefills": 1,
+      "lineage": 1
+    }
+  ],
+  "arithmetic_counts": {
+    "fp32_frozen_forward": {
+      "minimum": 2046,
+      "maximum": 16368
+    },
+    "fp32_frozen_backward": {
+      "minimum": 0,
+      "maximum": 10461
+    },
+    "fp32_adapter_forward": {
+      "minimum": 4092,
+      "maximum": 30000
+    },
+    "bf16_forward_products": {
+      "minimum": 2,
+      "maximum": 2
+    },
+    "fp32_backward_products": {
+      "minimum": 0,
+      "maximum": 2
+    }
+  },
+  "peak_allocated_bytes": 9937098240,
+  "peak_reserved_bytes": 10034872320,
+  "state_memory_reservation": {
+    "enabled": true,
+    "moment_copies": 2,
+    "component_buffer_copies": 3,
+    "bytes": 446489460,
+    "optimizer_created": false,
+    "optimizer_steps": 0,
+    "eligibility_scope": "conservative all-parameter envelope, not A4 qualification"
+  },
+  "environment": {
+    "torch": "2.15.0+cu132",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "cuda": "13.2"
+  },
+  "gpu_uuid": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+  "workers": 2,
+  "all_live_parameters_unchanged": true,
+  "frozen_base_parameters_checked_per_group": 320,
+  "training_performed": false,
+  "optimizer_updates": 0,
+  "frontend_changed": false,
+  "semantic_ability_claimed": false,
+  "qualified_1024": false,
+  "elapsed_seconds": 3308.354545354843,
+  "source_hashes": {
+    "__init__.py": "9b577482d1138d4d449fcc2bc9aa493538658afefe0bffb2a72828ab12e7ea38",
+    "backbone.py": "1fbc6747eb02e450f65b48b1ed2f37eba2137513cfe89f12e8e42e1b32793075",
+    "fixtures.py": "36c91e9d949d2d03d4aaaafa709853eaeb7796465b02f6a9853f109f95221bc3",
+    "neural.py": "472877b5a1f748aafe0c3264c4709d85083c79824ea712e2bd48f54bb670725c",
+    "ownership.py": "d9f10f5f6f8a8233b208110820f4e620253e668463042a30ad2dbbce0357f8dc",
+    "precision.py": "9eb775efc303ce6d9eb8bbec26ffdcd6422f37ad0732e03ef0885ae9433c8e5b",
+    "qualify.py": "acad6f20b89734fe84c8d503c89183652c936e752e43b7a5e19e5f9b84023116",
+    "records.py": "089eb06d1fd55e9a1629297759c942f046dc570058cf9cb304c8d88069287b04",
+    "render.py": "9e16fb579268e4261cd134883e698f6ae3c69a2802f1dbc2502855062920b82b",
+    "runtime.py": "350c79f141e6898c5f762bf9b9c1708bd11297bdd01227c93a39abec2bd61d3a",
+    "schema.py": "5a2ff9f2f38b7338da5cf6d7f605bed953e136c37445983f0cf965f1e17dbe23",
+    "session.py": "a5330460093fe54c7721b658d4af09140486664054d718ba17e86eb56f2a92a8",
+    "writer.py": "5d9994b811d73e1f0bad6416e327eae45ba9bd41eeaf452d004e71b4ae035543",
+    "diagnose_precision.py": "4edc64ec7af6525493e57c33f5fe4866e9ec0c0709086ae1fa99898d75fb23f3",
+    "qualify_matrix.py": "40ce5128b781a034bb6c1c2ee3e5d9e5a16380ed6b28fdfbeabaa75b4ecb8db9"
+  },
+  "inputs": {
+    "data/g1-proof/gate-repair-v2-20261105/diagnostic.safetensors": "1dd2e8527e14caa9002d672b4187253cdc174fb3c204ab56e80f257f23943640",
+    "/home/vince/the-operating-table/data/huggingface/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17/model.safetensors-00001-of-00001.safetensors": "04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696",
+    "data/qev/adapter/adapter_model.safetensors": "2a922c06a2b3eb7e25d5d9d5a8a24dbd49a2d311281d47f9f4df22b8d9faf3be",
+    "data/qev/pointer.safetensors": "c4e7d9439a101a4a398f98932e75fa5c92396fd9101d156b0f8af66694fff66a",
+    "/home/vince/the-operating-table/data/huggingface/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17/config.json": "b90b86f35c8e6925ef74ee04d0e758f0a845c83a42089ad82bbaa948de9b4204",
+    "/home/vince/the-operating-table/data/huggingface/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17/tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+    "/home/vince/the-operating-table/data/huggingface/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17/tokenizer_config.json": "49e2b6e395f959f077f1e992b338919c0d4a9732fc6e613995e06557f843500c"
+  },
+  "packages": {
+    "torch": "2.15.0",
+    "transformers": "5.22.1",
+    "peft": "0.21.0",
+    "safetensors": "0.8.0"
+  },
+  "raw_report_sha256": "157b1dcb196da3fb7f97295b59e29ca9f19a644b7623cf7795336e4c359307e4",
+  "child_reports": {
+    "512-port2": {
+      "sha256": "80fc74c6d7ceab8345335e044329abb27d049e85842857268e121a3afb9c33f1",
+      "frozen_base": {
+        "pass": true,
+        "parameters_checked": 320,
+        "mismatches": [],
+        "base_tied_storage": true
+      }
+    },
+    "512-port3": {
+      "sha256": "3e532d56ec26a090d02a5522e20e781b025371c761df76e6004192b47af92d28",
+      "frozen_base": {
+        "pass": true,
+        "parameters_checked": 320,
+        "mismatches": [],
+        "base_tied_storage": true
+      }
+    },
+    "256-port2": {
+      "sha256": "a693f5b1529413ffb74d2f01cdf33f3c0a294669362653db918368b9b69d73a0",
+      "frozen_base": {
+        "pass": true,
+        "parameters_checked": 320,
+        "mismatches": [],
+        "base_tied_storage": true
+      }
+    },
+    "512-port1": {
+      "sha256": "bfead6dd154c3e3e5de6168cea2b073046dfef6e7a5f48f9f4905ad0a3eedc67",
+      "frozen_base": {
+        "pass": true,
+        "parameters_checked": 320,
+        "mismatches": [],
+        "base_tied_storage": true
+      }
+    },
+    "256-port3": {
+      "sha256": "b824452e02731162ee939ef8b1d00a4f3374342301d6766449787c9f94decb9d",
+      "frozen_base": {
+        "pass": true,
+        "parameters_checked": 320,
+        "mismatches": [],
+        "base_tied_storage": true
+      }
+    },
+    "128-port2": {
+      "sha256": "57cf8133dcc4254fd1ed7db966446b00eee3f34af69a633304a5c11b4d750cf1",
+      "frozen_base": {
+        "pass": true,
+        "parameters_checked": 320,
+        "mismatches": [],
+        "base_tied_storage": true
+      }
+    },
+    "256-port1": {
+      "sha256": "d2a69fc299dbaa838707d31dac41251fe2eed2ca717e05f27de606c682d65443",
+      "frozen_base": {
+        "pass": true,
+        "parameters_checked": 320,
+        "mismatches": [],
+        "base_tied_storage": true
+      }
+    },
+    "128-port3": {
+      "sha256": "8397aa5661e45c50844648acddb63991dd6237f83f78d1206ef002490ef29092",
+      "frozen_base": {
+        "pass": true,
+        "parameters_checked": 320,
+        "mismatches": [],
+        "base_tied_storage": true
+      }
+    },
+    "128-port1": {
+      "sha256": "70a65815c65b671d2f33d72b9ae2b1bd5dc1e88bdc0896debc18ba9d474389d8",
+      "frozen_base": {
+        "pass": true,
+        "parameters_checked": 320,
+        "mismatches": [],
+        "base_tied_storage": true
+      }
+    }
+  }
+}
