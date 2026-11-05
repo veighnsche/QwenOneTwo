@@ -68,7 +68,10 @@ def collect_session(window, session, losses, exposure):
     rt = session.runtime
     if window.phase in {'transition','free_joint'}:
         check(exposure.budget_override is None and summary['override'] is None, 'override after guided phase')
-    if window.phase == 'free_joint':
+    # A4 retains an isolated decision-replay exposure in free-control windows.
+    # Its reviewed component packet is distinct from forcing the native policy
+    # in a joint/direct trajectory; preserve both exposure labels explicitly.
+    if window.phase == 'free_joint' and exposure.branch != 'isolated_receiver':
         check(not exposure.decision_forcing, 'forced free-control decisions')
     check(exposure.budget_override == summary['override'], 'override telemetry mismatch')
     check(summary['prefills'] == 1 and summary['lineage'] == 1, 'one prefill/cache lineage')

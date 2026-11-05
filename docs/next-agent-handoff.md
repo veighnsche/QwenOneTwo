@@ -7,6 +7,45 @@ This handoff records measured mechanisms, not learned capability.
 
 ## Current checkpoint
 
+The user authorized episode production and proof of latent Qev invocation using
+existing data, **no generation, agents or training**. Implemented:
+`training/producer.py` supplies native complete-episode callbacks;
+`training/component_producer.py` materializes clean receiver/reader/decision replay
+and selects reference-stage annotations. `Session.evaluate` rejects textual and
+dictionary requests before any forward. Clean packets can execute their actual
+preparation positions in the same Session. See the
+[producer report](episode-producer-results-2026-11-05.md) and
+[source/log-bound receipt](evidence/episode-producer-v1.json).
+
+**57/57 model-free checks passed in 2.217 s; 11 distinct focused RTX 3090 GPU tests
+passed.** Eight actual checks passed in a 77.136 s run that also had one incorrect
+test-class selector (overall exit 1); the corrected selector plus a new free-window
+guard then passed 2/2 in 15.833 s. A final tied-choice reader binding regression
+passed 1/1 in 16.793 s. This runner error and the initial genuine
+untrained Reason failure are retained. No numeric matrix was repeated.
+
+Transport proofs use existing train-writer-0004/0000/0001: Noul/Choice/Score request
+tensors have 103/143/110 positions, width 1024, FP32 CUDA. Embedding lookup and
+tokenization are disabled during each call. Actual Qev outputs are delivered;
+native losses have connected packet gradients, with one prefill/cache lineage,
+exact accounting and no remaining holds. Optional calls have no textual decision
+prompt. Initial human-text W+D prefill/continuous effort selection is preserved.
+Positive fixtures prescribe writer controls and Reason child-count zero; clean
+component tests use an untrained frozen reference. **This is transport/construction
+evidence, not learned invocation, qualified reference semantics or training readiness.**
+The unmodified Reason decoder still fails honestly with zero losses and no gold
+repair. No optimizer step, reference fitting, data-service call, agent or service
+change occurred; existing annotation release hashes remain unchanged.
+
+Next unfinished: qualified reference recovery/contrast and verified binding of
+actual predicted request meanings to supervision. Joint semantic/outcome and
+post-return continuation losses stay masked; later annotated guidance stops at
+the first unverified return. Writer semantic-loss integration, compatible serial
+continuations and actual correction bindings remain unfinished. Generic unknown
+candidate feasibility is masked rather than inventing a four-class label. Full
+trainer-memory qualification still precedes training. Do not launch training or
+regenerate data. Older missing-producer statements below are historical.
+
 The user authorized the remaining data collections with cheap batched generation,
 reuse, model content review and **no training**. Complete annotation releases
 now exist under `data/training-collections-20261105/`:
@@ -37,7 +76,8 @@ effort preference is masked and omitted from effort-scored free-job selection.
 The 400 correction records contain prescribed intervention specifications;
 correction losses stay masked until a producer binds an actual runtime packet/
 snapshot. Replay is a generated preservation proxy, not recovered original data.
-Token/source materialization, actual episode producers, reference artifacts and
+The producer slice above now implements token/source and episode materialization;
+qualified reference artifacts, semantic binding and
 the documented full-trainer memory qualification remain prerequisites. No
 training, fitting, deployment, service changes or further generation is queued.
 Earlier no-training-release statements below are historical.
@@ -265,12 +305,15 @@ the exact local release and pinned hash above; preserve model-proposal origin
 and development split. Its 13-cell coverage is pilot coverage, not completion
 of the separate training or promotion collections. No new generation is queued.
 
-**Integrate a genuinely reviewed pilot release with task-specific episode
-producers and semantic/promotion fixtures.** The driver accepts a complete-episode
+**Qualify reference semantics and bind actual writer packets to reviewed losses.**
+The producer slice above supplies task-specific native and clean component
+callbacks. It does not establish reference recovery, writer meaning, compatible
+multi-call continuations, observed correction materialization or promotion.
+The driver accepts a complete-episode
 producer; it is not a source of reviewed annotations or a complete trained flow.
 The [release format](reviewed-release-format-v1.md) and read-only preflight now
 exist and the pilot and training annotation files are now supplied. Actual
-task-specific episode producers and token/packet materialization remain unfinished. Load both releases with
+semantic/promotion fixtures and verified predicted-packet loss binding remain unfinished. Load both releases with
 `load_release`; construct the sampler using
 `Sampler.from_release`. Joint `Driver` construction requires a loaded
 `NumericEvidence`, supplied via `numeric=`, rather than a pass dictionary.
@@ -305,6 +348,7 @@ passing these engineering slices. Full context/maximum budget remain unqualified
 |---|---|
 | `codec/` | Existing typed runtime, session, v3 arithmetic and qualification |
 | `training/inputs.py`, `clean.py`, `clean_packets.py` | F7 builders/provenance and fresh F3 artifacts/packets |
+| `training/producer.py`, `component_producer.py` | Native/clean complete-episode callbacks and existing annotation materialization; no auto-launch |
 | `training/release.py`, `qualification.py` | Content-checked release/pilot and existing numeric evidence ingestion; no model execution |
 | `training/losses.py`, `episodes.py` | Losses/masks and actual snapshot/session guards |
 | `training/engine.py`, `profile.py`, `sampler.py`, `driver.py` | CUDA component buffers/owners, scheduling and producer orchestration |

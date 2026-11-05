@@ -1,0 +1,275 @@
+{
+  "format": "qot-episode-producer-proof-v1",
+  "created_utc": "2026-11-05T22:27:47.001214+00:00",
+  "gpu": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+  "profile": "codec-feedback-precision-v3",
+  "source_sha256": {
+    "qwen_one_two/codec/session.py": "3ebce62feb3f0d18b55a893fb2db18e88aeb00fc8dba0808877ce684e3a3534e",
+    "qwen_one_two/training/clean_packets.py": "7f0d846319a3b9fa391524f73894b8f13baa4f6632b3b127f094f60ba3d2a028",
+    "qwen_one_two/training/episodes.py": "0a3d387cedb4d295cbb4683d712a4bb453fc0ad9fef17aa6b9e2a24d07a17b80",
+    "qwen_one_two/training/producer.py": "77a4fac28f6a6bd9f57c6c1d719ab340555001abf24291e713ddd381df5c6d64",
+    "qwen_one_two/training/component_producer.py": "cc108ef57689ec3c5dcf8410f75c27e62f65a2e8b94c9889a03997fcdc552d93",
+    "tests/test_episode_producer.py": "cbfad686cac9b434c85839e8e969052860dbb4f99fe883eed72230ca122cc8cf",
+    "tests/test_episode_producer_gpu.py": "6be80cb90aeb22ec854e0b61906c0d7d62c51c9a7e0206fd539f4098a8dc75be"
+  },
+  "logs": {
+    "gpu-initial.log": {
+      "path": "data/episode-producer-20261105/gpu-initial.log",
+      "sha256": "97bcc190f2b3201f849fb4f918568144347e17cfee2135975211afd66134d1f4"
+    },
+    "gpu-transport.log": {
+      "path": "data/episode-producer-20261105/gpu-transport.log",
+      "sha256": "4dee8935b389d3c91cfc5c7ed826ca83d16509867da7edc2cfd64517a82ebe7b"
+    },
+    "gpu-components.log": {
+      "path": "data/episode-producer-20261105/gpu-components.log",
+      "sha256": "c1a3fd7f3cf4bb8c5562727d45c69d9885e05e611b130e184f14eeb9a658cc85"
+    },
+    "cpu.log": {
+      "path": "data/episode-producer-20261105/cpu.log",
+      "sha256": "85e1de3e38fe8b5f93ad1df8996c84fd4fb8396f2a3143b7421f86a102ed9c27"
+    },
+    "gpu-final.log": {
+      "path": "data/episode-producer-20261105/gpu-final.log",
+      "sha256": "edb9b157cbbad69848e452730e59a49045393b5596e97427120411600837b7f4"
+    },
+    "cpu-final.log": {
+      "path": "data/episode-producer-20261105/cpu-final.log",
+      "sha256": "b173cc46ca9eb47b9b538198ffe227a181b3d16f40d6f7d89affa2bf98e36dff"
+    },
+    "gpu-followup.log": {
+      "path": "data/episode-producer-20261105/gpu-followup.log",
+      "sha256": "03c45c0a0fa4775d62984675031b850ef74459b9ad83f065d0418a38f50e438c"
+    },
+    "gpu-reader-binding.log": {
+      "path": "data/episode-producer-20261105/gpu-reader-binding.log",
+      "sha256": "fe2219baa4a0b49064b725aa0fe10c8670f9b30c7cb0e328b2f8967b7ac03c49"
+    },
+    "cpu-last.log": {
+      "path": "data/episode-producer-20261105/cpu-last.log",
+      "sha256": "83488189f42abda6abfbdc863e332b63a2e23754270df464f12b6f138c0061da"
+    }
+  },
+  "annotation_release_manifests": {
+    "train": "c70d4f44135a34c00e7fa0348833b1ec56613def15f5753231589492ed35478f",
+    "development": "5b8f4cffdc4f33e255d3a34306cac03a68c50dcd9dab905ae8d8adcf89c81e77",
+    "locked": "d13594f18738056ee179b3498d54d8261f7f7654aad633fabb776810681aa1cf"
+  },
+  "checks": {
+    "model_free": {
+      "passed": 57,
+      "elapsed_seconds": 2.217,
+      "log": "cpu-last.log"
+    },
+    "gpu_primary": {
+      "passed": 8,
+      "elapsed_seconds_including_loader_error": 77.136,
+      "runner_exit": 1,
+      "log": "gpu-final.log",
+      "loader_error": "Incorrect selector test_codec_gpu.CodecGPU; no such class. Eight actual tests passed."
+    },
+    "gpu_followup": {
+      "passed": 2,
+      "elapsed_seconds": 15.833,
+      "runner_exit": 0,
+      "log": "gpu-followup.log",
+      "tests": [
+        "test_free_window_allows_isolated_replay_but_rejects_forced_native_policy",
+        "FullCodecGPU.test_zero_budget_factory_and_direct_native_helper_preserve_one_cache"
+      ]
+    },
+    "gpu_unique_passed": 11,
+    "optimizer_steps": 0,
+    "reference_fitting_steps": 0,
+    "generation_service_calls": 0,
+    "agents": 0,
+    "gpu_reader_binding": {
+      "passed": 1,
+      "elapsed_seconds": 16.793,
+      "runner_exit": 0,
+      "log": "gpu-reader-binding.log"
+    }
+  },
+  "traces": [
+    {
+      "record": "train-receiver-0000",
+      "category": "receiver",
+      "qualification": "untrained frozen reference construction fixture",
+      "total": 169,
+      "loss_components": [
+        "choice",
+        "feasibility",
+        "status"
+      ],
+      "gold_return": false
+    },
+    {
+      "record": "train-reader-0000",
+      "category": "reader",
+      "qualification": "untrained frozen reference construction fixture",
+      "total": 74,
+      "loss_components": [
+        "native"
+      ],
+      "gold_return": true
+    },
+    {
+      "record": "train-decision-replay-0000",
+      "category": "decision_replay",
+      "qualification": "untrained frozen reference construction fixture",
+      "total": 169,
+      "loss_components": [
+        "choice",
+        "feasibility",
+        "status"
+      ],
+      "gold_return": false
+    },
+    {
+      "record": "train-reader-0032",
+      "category": "reader",
+      "qualification": "untrained frozen reference construction fixture",
+      "total": 57,
+      "loss_components": [
+        "native"
+      ],
+      "gold_return": true
+    },
+    {
+      "record": "train-reader-0035",
+      "category": "reader",
+      "qualification": "untrained frozen reference construction fixture",
+      "total": 73,
+      "loss_components": [
+        "native"
+      ],
+      "gold_return": true
+    },
+    {
+      "record": "train-writer-0004",
+      "operation": "Noul",
+      "proof": "actual latent transport; prescribed control",
+      "diagnostic_fixture": "Reason attachment count prescribed zero; no parameter updates",
+      "summary": {
+        "P": 97,
+        "B": 126,
+        "A": 1,
+        "H": 6,
+        "total": 230,
+        "prefills": 1,
+        "lineage": 1,
+        "dispatched": 1,
+        "consumed": 1
+      },
+      "packet_gradient_norm": 148.95587158203125,
+      "calls": [
+        {
+          "operation": "Noul",
+          "snapshot": 4,
+          "request_positions": 103,
+          "input_shape": [
+            103,
+            1024
+          ],
+          "input_dtype": "torch.float32",
+          "cuda": true,
+          "text_tokens_for_invocation": 0,
+          "predicted_status": 2,
+          "selected_by": "actual Qev heads",
+          "semantic_targets_applied": false,
+          "return_positions": 18,
+          "consumed": true
+        }
+      ]
+    },
+    {
+      "record": "train-writer-0000",
+      "operation": "Choice",
+      "proof": "actual latent transport; prescribed control",
+      "diagnostic_fixture": "Reason attachment count prescribed zero; no parameter updates",
+      "summary": {
+        "P": 121,
+        "B": 170,
+        "A": 1,
+        "H": 6,
+        "total": 298,
+        "prefills": 1,
+        "lineage": 1,
+        "dispatched": 1,
+        "consumed": 1
+      },
+      "packet_gradient_norm": 935.7823486328125,
+      "calls": [
+        {
+          "operation": "Choice",
+          "snapshot": 8,
+          "request_positions": 143,
+          "input_shape": [
+            143,
+            1024
+          ],
+          "input_dtype": "torch.float32",
+          "cuda": true,
+          "text_tokens_for_invocation": 0,
+          "predicted_status": 1,
+          "selected_by": "actual Qev heads",
+          "semantic_targets_applied": false,
+          "return_positions": 18,
+          "consumed": true
+        }
+      ]
+    },
+    {
+      "record": "train-writer-0001",
+      "operation": "Score",
+      "proof": "actual latent transport; prescribed control",
+      "diagnostic_fixture": "Reason attachment count prescribed zero; no parameter updates",
+      "summary": {
+        "P": 93,
+        "B": 141,
+        "A": 1,
+        "H": 6,
+        "total": 241,
+        "prefills": 1,
+        "lineage": 1,
+        "dispatched": 1,
+        "consumed": 1
+      },
+      "packet_gradient_norm": 2565.18359375,
+      "calls": [
+        {
+          "operation": "Score",
+          "snapshot": 5,
+          "request_positions": 110,
+          "input_shape": [
+            110,
+            1024
+          ],
+          "input_dtype": "torch.float32",
+          "cuda": true,
+          "text_tokens_for_invocation": 0,
+          "predicted_status": 1,
+          "selected_by": "actual Qev heads",
+          "semantic_targets_applied": false,
+          "return_positions": 25,
+          "consumed": true
+        }
+      ]
+    }
+  ],
+  "diagnostic_controls": [
+    "Reviewed operation and writer structure are prescribed in the transport fixture.",
+    "Positive fixture prescribes Reason child-count zero via a test-only forward override; no parameter updates. Qev status/value/selection and live semantic slots remain actual outputs.",
+    "Clean component construction uses a newly instantiated, untrained reference frozen with its actual fingerprint; this is not a qualified reference artifact.",
+    "Fixed Done continuation tests derivatives and transport, not native answer competence."
+  ],
+  "preserved_failure": "Unmodified diagnostic Reason decoder has no structurally compatible historical-result pointer. Producer returns Failed, zero losses and no gold repair.",
+  "limits": [
+    "No learned invocation, request semantics, Reason competence, free-job quality or full trainer readiness is certified.",
+    "Unverified actual writer packets receive no semantic outcome or post-return continuation targets; later annotated guidance stops at the first unverified return.",
+    "Generic unknown feasibility is masked because the corpus does not distinguish Insufficient from Conflicting per candidate.",
+    "No numeric matrix rerun; original BF16 transformer arithmetic remains failed.",
+    "Set-valued reader selection annotations do not supervise a single selected return; native continuation loss is masked."
+  ],
+  "boundary_commit": "628ff16"
+}
