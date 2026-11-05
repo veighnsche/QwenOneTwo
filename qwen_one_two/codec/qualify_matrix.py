@@ -1,4 +1,4 @@
-"""Run the unchanged 324-case qualification in bounded RTX 3090 workers.
+"""Run a versioned qualification matrix in bounded RTX 3090 workers.
 
 The parent only schedules subprocesses and verifies/merges JSON evidence. Each
 child runs model/gradient work on the same explicitly selected CUDA device.
@@ -14,21 +14,34 @@ import sys
 import time
 
 GPU_UUID='GPU-225509c3-d702-6c27-de03-76b5e99b33b1'
+PROTOCOLS={'v3-512':(128,256,512),'v3-1024-v1':(1024,)}
+
+
+def validate_coverage(rows,protocol):
+    expected=set(itertools.product(PROTOCOLS[protocol],(1,2,3),
+                 ('functional','checkpoint','serving','fp32'),(17,29,43),range(3)))
+    keys=[tuple(row[k] for k in ('length','port','profile','seed','repeat')) for row in rows]
+    if len(keys)!=len(expected) or set(keys)!=expected:
+        raise ValueError('Qualification matrix is incomplete or duplicated')
+    if not all(row['comparison']['pass'] for row in rows):
+        raise ValueError('Failed case in matrix')
 
 
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument('--snapshot',required=True);ap.add_argument('--checkpoint',required=True)
     ap.add_argument('--output',required=True);ap.add_argument('--workers',type=int,choices=(1,2),default=2)
+    ap.add_argument('--protocol',choices=tuple(PROTOCOLS),default='v3-512')
     args=ap.parse_args()
     if os.environ.get('CUDA_VISIBLE_DEVICES')!=GPU_UUID:
         raise RuntimeError('Explicit RTX 3090 UUID required; no CPU fallback')
     out=Path(args.output);out.mkdir(parents=True,exist_ok=False)
     sources={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in Path(__file__).parent.glob('*.py')}
-    pending=list(itertools.product((512,256,128),(2,3,1)))
+    pending=list(itertools.product(reversed(PROTOCOLS[args.protocol]),(2,3,1)))
     active=[];finished=[];started=time.time()
     report={'status':'RUNNING','full_A3_matrix_complete':False,'cases':[],
-            'scope':'prescribed 128/256/512 codec numeric qualification; no learned capability claim',
+            'protocol':args.protocol,'requested_lengths':PROTOCOLS[args.protocol],
+            'protocol_complete':False,'scope':'prescribed codec numeric qualification; no learned capability claim',
             'training_performed':False,'optimizer_updates':0,'frontend_changed':False,
             'gpu_uuid':GPU_UUID,'workers':args.workers,'source_hashes':sources}
     try:
@@ -55,18 +68,15 @@ def main():
                 print(json.dumps({'completed':name,'cases':len(child['cases']),'groups_complete':len(finished)}),flush=True)
             time.sleep(1)
         rows=[dict(row,evidence_group=name) for name,child in finished for row in child['cases']]
-        keys=[tuple(row[k] for k in ('length','port','profile','seed','repeat')) for row in rows]
-        expected=set(itertools.product((128,256,512),(1,2,3),('functional','checkpoint','serving','fp32'),(17,29,43),range(3)))
-        if len(keys)!=324 or len(set(keys))!=324 or set(keys)!=expected:
-            raise RuntimeError('Qualification matrix is incomplete or duplicated')
-        if not all(row['comparison']['pass'] for row in rows):raise RuntimeError('Failed case in matrix')
+        validate_coverage(rows,args.protocol)
         for field in ('checkpoint_sha256','precision','profile','environment','state_memory_reservation'):
             value=finished[0][1][field]
             if not all(child[field]==value for _,child in finished):raise RuntimeError('Mixed '+field)
             report[field]=value
         if {p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in Path(__file__).parent.glob('*.py')}!=sources:
             raise RuntimeError('Sources changed during qualification')
-        report.update(status='PASSED',full_A3_matrix_complete=True,cases=rows,
+        report.update(status='PASSED',full_A3_matrix_complete=args.protocol=='v3-512',
+                      protocol_complete=True,cases=rows,
                       all_live_parameters_unchanged=True,frozen_base_all_groups_pass=True,
                       child_reports={name:hashlib.sha256((out/name/'report.json').read_bytes()).hexdigest() for name,_ in finished})
     except BaseException as exc:
