@@ -23,15 +23,21 @@ class Session:
         rt=Runtime(run or str(uuid.uuid4()),len(ids),0,answer)
         s=cls(backbone,codec,rt,cancelled)
         s.prefill(ids)
-        raw=backbone.table.scalar(248077,s.hidden[0,-1])
+        s.start_budget(override)
+        return s
+
+    def start_budget(self,override=None):
+        """Finish startup after registering connected source states from prefill."""
+        require(self.prefills==1 and self.runtime.state=='Prefill','budget startup boundary')
+        rt=self.runtime
+        raw=self.backbone.table.scalar(248077,self.hidden[0,-1])
         predicted=int(thinking_budget(raw));available=rt.context-rt.prompt-rt.answer-64
         if override is not None:
             require(type(override) is int and 0<=override<=131072 and override<=available,'manual budget override')
         rt.budget=min(predicted,available) if override is None else override
-        s.predicted_budget=predicted;s.override=override
-        s.startup(raw)
-        if rt.budget==0:s.close()
-        return s
+        self.predicted_budget=predicted;self.override=override
+        self.startup(raw)
+        if rt.budget==0:self.close()
 
     def step(self,embeds,mode,label,capture=True):
         require(embeds.is_cuda,'CUDA inputs required')
@@ -98,6 +104,8 @@ class Session:
         return writer
 
     def evaluate(self,packet):
+        from .render import Packet
+        require(isinstance(packet,Packet),'Qev invocation requires a latent Packet; text is forbidden')
         require(packet is self.runtime.call.request and packet.snapshot==self.runtime.call.snapshot,
                 'unadmitted or mismatched request presentation')
         # The authoritative snapshot owns the content. A mutable Tensor view in
@@ -106,9 +114,11 @@ class Session:
         self.runtime.semantic_positions(len(packet))
         inputs=self.codec.encode(packet)
         self.backbone.capture_evaluator(torch.is_grad_enabled())
-        h=self.step(inputs,'D','request')
-        during=[v for dual in self.backbone.duals for v in dual.evaluation_outputs]
-        self.backbone.capture_evaluator(False)
+        try:
+            h=self.step(inputs,'D','request')
+            during=[v for dual in self.backbone.duals for v in dual.evaluation_outputs]
+        finally:
+            self.backbone.capture_evaluator(False)
         candidate=torch.stack([h[0,i] for _,i in packet.candidate_ends]) if packet.candidate_ends else None
         evaluated=self.codec.evaluate(h[0,-1],self.runtime.call.port,candidate)
         return inputs,evaluated,during

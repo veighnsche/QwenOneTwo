@@ -108,14 +108,21 @@ class CleanPackets:
         return attribute
 
     def request(self,port,question,target,*,evidence=(),candidates=(),rubric=(),direction=1,
-                target_attributes=(),candidate_attributes=()):
+                target_attributes=(),candidate_attributes=(),session=None):
         check(self.runtime is None, 'one immutable clean request per construction')
         check(self.view.operation in (None,{Port.NOUL:'Noul',Port.CHOICE:'Choice',Port.SCORE:'Score'}[port]), 'clean operation mismatch')
         check(all(isinstance(span,Span) and span.source in self.sources for span in evidence), 'clean evidence scope')
         # No incoming state, draft, catalogue or registry from the full context.
-        rt = Runtime(self.registry.run,0,512,128)
-        rt.registry = self.registry
-        rt.startup(); rt.begin(port)
+        if session is None:
+            rt = Runtime(self.registry.run,0,512,128)
+            rt.registry = self.registry
+            rt.startup(); rt.begin(port)
+        else:
+            rt=session.runtime
+            check(rt.registry.run==self.registry.run and not rt.registry.refs() and rt.state=='Native',
+                  'clean component requires a fresh session registry')
+            rt.registry=self.registry
+            writer=session.begin_writer(port)
         def validate_attrs(attributes):
             for attribute in attributes:
                 check(id(attribute) in self.attributes, 'attribute not constructed from this clean source view')
@@ -137,7 +144,13 @@ class CleanPackets:
             if len(rubric) == 4:
                 payload = torch.cat((payload,payload.new_zeros(2,1024)))
             rubric_ref = rt.publish(Kind.RUBRIC,Semantic(payload,direction=direction,midpoint=len(rubric)==5))
-        rt.writer_position(); rt.writer_position()
+        if session is None:
+            rt.writer_position(); rt.writer_position()
+        else:
+            from dataclasses import replace
+            writer.draft=replace(writer.draft,question=q,target=t,evidence=tuple(evidence),
+                                 candidates=tuple(refs),rubric=rubric_ref)
+            session.step(writer.tick_vector(session.hidden[0,-1])[None],'R','component_finish',False)
         packet = rt.seal(q,t,tuple(evidence),rubric_ref,tuple(refs))
         self.runtime = rt
         return packet
@@ -146,7 +159,11 @@ class CleanPackets:
         check(self.view.purpose == 'reader' and self.runtime is not None, 'supplied return only in clean reader construction')
         rt = self.runtime
         check(rt.state == 'Evaluating', 'return already constructed')
-        rt.semantic_positions(len(rt.call.request))
+        # Offline construction has not run a request forward. A real component
+        # Session has already charged/evaluated it; never debit it twice.
+        if rt.call.q_remaining:
+            check(rt.call.q_remaining==len(rt.call.request),'partially evaluated component request')
+            rt.semantic_positions(len(rt.call.request))
         if reason is not None:
             from .episodes import STATUS_NAMES
             check(json.loads(self.view.references[reason].content)['fields']['status'] == STATUS_NAMES[status], 'Reason/carrier mismatch')
