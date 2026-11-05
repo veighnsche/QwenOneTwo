@@ -92,6 +92,25 @@ class ReleaseTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'identical human inputs'):
             load_release(self.root)
 
+    def test_model_proposed_pilot_preserves_origin_and_requires_provenance_and_reviews(self):
+        rows = pilot_rows()
+        proposed = rows[0]
+        proposed.update(origin='model_proposal', author='TEST-ONLY-model',
+                        model_assistance=dict(checkpoint='TEST-ONLY', prompt_hash='a'*64,
+                                              sampling=None, software='TEST-ONLY', gpu=None,
+                                              output_hash='b'*64))
+        write_release(self.root, rows, purpose='pilot')
+        release = load_release(self.root)
+        self.assertEqual(release.records[proposed['id']]['origin'], 'model_proposal')
+        self.assertEqual(release.records[proposed['id']]['author'], 'TEST-ONLY-model')
+        write_release(self.root, rows, purpose='pilot', review_counts={proposed['id']:1})
+        with self.assertRaisesRegex(ValueError, 'independent reviews'):
+            load_release(self.root)
+        proposed['model_assistance'].pop('output_hash')
+        write_release(self.root, rows, purpose='pilot')
+        with self.assertRaisesRegex(ValueError, 'missing model provenance'):
+            load_release(self.root)
+
     def test_design_exposed_or_retired_locked_material_rejected(self):
         for flag in ('design_exposed', 'test_driven_tuning'):
             write_release(self.root, [row(split='locked', **{flag:True})], purpose='locked')

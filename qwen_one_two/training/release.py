@@ -280,8 +280,8 @@ def load_release(path, *, expected_hash=None):
         check(len(selected) == 120 and len({records[k]['family'] for k in selected}) == 120, 'pilot needs 120 independent scenario families')
         check(len(duplicates) == 120, 'pilot repeats identical human inputs')
         check(all(records[k].get('pilot') is True and records[k].get('fictional') is True
-                  and records[k]['origin'] == 'authored' and not records[k]['parents'] for k in selected),
-              'pilot authored root/fictional provenance')
+                  and records[k]['origin'] in {'authored', 'model_proposal'} and not records[k]['parents'] for k in selected),
+              'pilot root/fictional provenance')
         check(Counter(records[k].get('domain') for k in selected) == Counter({d:20 for d in DOMAINS}), 'pilot domain allocation')
     if purpose == 'locked':
         check(not any(records[k].get('design_exposed') or records[k].get('test_driven_tuning') for k in selected),

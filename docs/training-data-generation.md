@@ -72,9 +72,9 @@ guided prefixes and actual joint returns retain distinct exposure labels.
 ## Pilot before scaling
 
 The [data-operations owner](data-operations.md) fixes the initial pilot at 120
-authored scenarios, 20 per domain, with deterministic templates and no model
-generator dependency. It owns independent review/adjudication, provenance and
-release rules. Do not describe model-assisted proposals as reviewed gold.
+fictional roots, 20 per domain. Authored templates need no model generator;
+reviewed model-proposed roots retain their actual provenance and meet the same
+review/approval rules. Do not describe unreviewed proposals as gold.
 
 Review about 120 distinct scenarios across the six domains, then controlled
 variants. Check deterministic labels against scenario rules. Review subjective

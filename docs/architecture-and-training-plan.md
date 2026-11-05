@@ -376,8 +376,9 @@ Split scenario families before generating variants; related contrasts stay
 within a split. Preserve ordinary direct-answer and original decision replay.
 
 The [data-operations procedure](data-operations.md) fixes a 120-scenario pilot,
-20 per domain, with authored rules and deterministic templates; no model generator
-is required. Keep human input, semantics, gold outcomes, guidance and provenance
+20 per domain. Authored templates need no model generator; model-proposed roots
+may count under the same reviews/approval with their origin preserved, per that
+procedure. Keep human input, semantics, gold outcomes, guidance and provenance
 separate. Use semantic review with proposed outcomes hidden, then independent
 outcome derivation. Pilot, locked semantic cases, subjective Score/effort labels
 and new rubrics require two independent reviews. Other training cases require

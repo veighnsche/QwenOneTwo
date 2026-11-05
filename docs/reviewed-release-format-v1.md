@@ -117,7 +117,11 @@ the approval descriptor and its actual bytes as well.
 
 A `pilot` selects exactly 120 distinct root families in development, each marked
 `pilot:true` and `fictional:true`, with two independent reviews. Exactly 20 belong
-to each domain: refund_eligibility, scheduling, demo_preparation, access_rules,
+to each domain. Roots may be `authored` or `model_proposal`; model-proposed roots
+retain their actual author/origin and required model-assistance provenance.
+Neither draft validation nor model review replaces the human reviews/approval.
+The domains are
+refund_eligibility, scheduling, demo_preparation, access_rules,
 resource_allocation, issue_prioritization. Repeated identical human inputs reject;
 semantic independence still requires actual review. Training selects only train;
 development and locked select their respective named splits. Locked material

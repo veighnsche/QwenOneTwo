@@ -18,6 +18,14 @@ test_drafts test_training_inputs -q`: **25/25 passed in 0.012 s**. Both saved
 12-record batches also pass draft checking; **24/24 reject release**. No data
 bytes, annotations or historical evidence receipts changed.
 
+Pilot policy now accepts authored or model-proposed fictional roots without
+changing the 120-family/20-per-domain allocation, two independent human reviews,
+source/review/approval byte binding or split protections. Model origin/author and
+assistance metadata remain intact; no real release was approved. Acceptance:
+schema-only reviewed model roots load, missing provenance/second review rejects.
+`PYTHONPATH=tests .venv/bin/python -m unittest test_training_release
+test_training_inputs test_drafts -q`: **39/39 passed in 0.934 s**.
+
 The user then explicitly requested deletion of the old Muse framework. The
 active local `muse-implementation` skill has been replaced with the cheap
 single-call default; its four coordinator/runtime/tmux reference files and
@@ -164,9 +172,8 @@ Exact log/test source hashes are in the
 
 The replacement twelve pilot proposals now exist; do not regenerate them merely
 because older handoffs reported no data. Obtain actual independent human reviews and
-adjudicate/revise before approval or expansion. The existing full-pilot loader
-requires authored roots, so admitting a reviewed model-proposed pilot needs an
-explicit provenance-preserving policy reconciliation; never relabel these as
+adjudicate/revise before approval or expansion. Reviewed model-proposed roots
+can now count under the same pilot review/approval rules; never relabel these as
 human-authored or fabricate review evidence. The batch covers 7/13 status cells,
 and the full 120-case pilot remains incomplete. Generation usage/overhead is
 recorded in the new report; assess it before scaling.

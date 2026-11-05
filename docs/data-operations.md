@@ -20,10 +20,12 @@ owns scenario construction. Follow the [specification](architecture-and-training
 
 ## 1. Pilot and separated record fields
 
-Begin with 120 distinct authored fictional scenarios, 20 per agreed domain,
-and deterministic wording templates. Variations follow scenario construction.
-No model generator is required for this pilot. A future GPU teacher may propose
-wording/annotations but cannot certify its own outputs.
+Begin with 120 distinct fictional root scenarios, 20 per agreed domain.
+Authored templates require no model generator. Model-proposed roots may also
+count after the same two independent human reviews and release approval; retain
+`origin:model_proposal`, actual author and model-assistance provenance. Never
+relabel them as authored. Variations follow scenario construction. A model
+cannot certify its own outputs; draft validation supplies no human review.
 
 | Field group | Contents |
 |---|---|

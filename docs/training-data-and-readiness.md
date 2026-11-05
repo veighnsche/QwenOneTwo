@@ -87,7 +87,8 @@ remain separate from this startup port.
 Apply the [data-operations procedure](data-operations.md): two independent
 reviews for pilot/locked semantics/subjective labels/new rubrics, one independent
 review plus stratified audit for other training records. No model generator
-is required for the authored 120-scenario pilot. Quarantine critical errors
+is required for the 120-scenario pilot; reviewed model-proposed roots retain
+their origin under the same review/approval rules. Quarantine critical errors
 and preserve provenance/rejected records. Reviewers are not yet assigned.
 
 For deterministic tasks, derive outcomes from explicit scenario rules and
