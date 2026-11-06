@@ -7,41 +7,52 @@ This handoff records measured mechanisms, not learned capability.
 
 ## Current checkpoint
 
-**Target-private encoder qualification is running. Do not launch a duplicate fit.**
-The user authorized fixing encoder/pooling learning with existing data on the
-RTX 3090, no new data/agents/capability training. The implementation is committed
-and pushed as `fb920fd`, after stationary-decoder infrastructure `7b5aaed`.
-Read the [measured encoder report](reference-encoder-results-2026-11-06.md) and
+**The Target-private encoder block finished and failed qualification. No fit is
+running. The user's requested recovery fix remains unfinished.** Implementation
+`fb920fd` (after `7b5aaed`) is committed/pushed. Read the
+[full measured report](reference-encoder-results-2026-11-06.md),
+[portable receipt](evidence/reference-encoder-v2.json) and
 [preregistered Target-private v2](reference-encoder-target-v2.md).
 
-The accepted training-only probe recovered **6/6 exactly at window 64** with
-unchanged decoder/live/base and both directions of role-gradient isolation.
-Migration preserves all ten role outputs exactly and 30 active queries. A private
-Target branch increases small pooling weights from 2,110,720 to 4,213,760; other
-nine roles still share the original architecture. W/T/codec and actual slot/
-position counts are unchanged. **Six relevant GPU checks passed in 15.560 s;
-68 model-free checks passed in 2.811 s.** These are not held-out qualification.
+Target-only learning recovered both Target controls while regressing other
+roles. The minimal private Target branch then passed **6/6 focused training
+recoveries**, exact initial migration for all ten roles, 30 total queries,
+private gradients and export/load. **Six GPU regressions passed in 15.560 s;
+68 model-free checks passed in 2.811 s.** Pooler parameters are 4,213,760 versus
+2,110,720 originally. Other nine roles remain shared; W/T/codec are not duplicated.
+Five earlier candidate probes failed and are retired; seven probes used exactly
+448 reference updates / 3,584 exposures and 96 separate latent-variable steps.
+All raw sources/results remain under `data/reference-encoder-20261106/`.
 
-Five earlier 64-window mixed-role controls failed (CE 5/6, dense MSE 4/6,
-field-value memory 5/6, 5x LR 5/6, focal CE 5/6). Target-only learning recovered
-both Targets but regressed other roles (3/6 overall), motivating the private
-branch. Rejected source/patches/results remain under
-`data/reference-encoder-20261106/`; retired candidates are not active profiles.
-Seven probes completed **448 reference updates / 3,584 exposures**, separately
-from any final artifact lineage; the MSE probe also used 96 disposable latent
-steps. Do not count those as model updates or held-out recovery.
+The accepted architecture's full run reset to the original parent, not probe
+weights. It completed **1,000 reference updates / 8,000 eligible exposures** over
+all **3,376** existing reviewed views, exact sampler/owners, no failed exposures.
+Every gate 100–1,000 remained **0/100 exact recovery, 100/100 contrasts**; both
+900/1,000 are rejected by the real qualification loader. Initial checkpoint
+save/restore succeeded. All 483 T/codec tensors are byte-identical to the parent
+at all 11 checkpoints, live weights unchanged, 320 frozen tensors/tying pass,
+all checkpoint/export/source hashes verify and all three release hashes are unchanged.
+Mean first/last-100 CE is 0.5453864361013985 / 0.5070646067904454; median window
+2.4458106085003237 s; run 3913.555469761999 s; peak 4193888256 bytes; exit 2/BLOCKED.
+This is semantic failure, not unavailable hardware. Capability updates are zero.
 
-The full job uses `data/reference-encoder-20261106/run/`, progress `fit.log` and
-`run/windows.jsonl`. It reset to the original parent `d0d4aef44b4415beb19311350eb24533190e1a27406c5d6f59a15a5a57402dec`,
-repeated deterministic splitting and started fresh pooler-only AdamW. Probe
-weights are discarded. It runs exactly 1,000 windows / 8,000 exposures over the
-same 3,376 reviewed views, original CE/LR/sampler and frozen decoder. All 100
-unchanged RF development cases and 100 contrasts are evaluated every 100 windows;
-**both 900 and 1,000 must pass >=95% recovery / >=90% contrasts**. No development
-or locked fitting. Check actual process state and final `run/report.json` before
-resuming; final outcome is not yet known. Prior 0/100 findings below remain
-historical evidence, not a new result for this running job. No live initialization
-or capability training is authorized or performed.
+Final export: `run/reference-1000/`, fingerprint
+`6b90e7b706239374a088462777eb072cd166a055e353135b0058c583b9da1dd8`.
+GPU readback verifies it and connected frozen-decoder input gradients, but the
+full-data artifact recovers only **2/6 training controls**. The focused 6/6 gain
+does not transfer to the full recipe. Do not certify the encoder/learned flow.
+The lineage has 3,000 reference updates; physical reference work is 3,464 including
+448 probes and the original discarded 16-update setup. Latent-variable steps
+are separate (96 in current probes, 384 in earlier isolation).
+
+The user subsequently asked an opinion on direct weight-space programming.
+Primary research was checked and a **read-only** RTX 3090 weight audit performed;
+no edit or external model/agent call. Projection spectra do not show obvious
+rank collapse or dominant bias. This does not rule out a targeted repair, nor
+demonstrate one. W remains frozen. No additional fitting, generation, agents,
+capability training, numeric matrix rerun or service changes are queued/performed.
+Next unfinished is full-mixture reference recovery/generalization and retention;
+keep the unchanged >=95%/90% final-two gate and locked-data prohibition.
 
 ## Prior recovery revision checkpoint
 
@@ -543,17 +554,15 @@ Exact log/test source hashes are in the
 
 ## Next unfinished slice / blockers
 
-**Reference recovery still fails after the documented recovery-v1 revision.**
-Use the retained final artifact and actual 900/1,000 reports in
-`data/reference-recovery-20261106/run/`, not the earlier artifact alone. The
-reuse/ablation implementation passed engineering checks but never passed a
-recovery gate. The bounded training-only probe now demonstrates six locally
-recoverable annotations through the fixed decoder/wire; their original pooled
-vectors recover only one. Develop a causal encoder/pooling learning revision
-using existing training views; do not rerun the failed block, relax gates or
-repair from development/locked labels. A low loss,
-exported artifact or 100% contrasts cannot promote this reference. See the
-[current result](reference-recovery-results-2026-11-06.md) for exact evidence.
+**Reference recovery still fails after the Target-private v2 block.** Use
+`data/reference-encoder-20261106/run/` and the current result above. A focused
+6/6 training gain fell to 2/6 controls under the separately reset full-data run,
+while all 100 held-out cases still fail. Full-mixture generalization/retention,
+encoder/decoder behavior and any mechanistic weight repair remain unfinished.
+No further fit is running. Do not rerun/extend failed blocks, relax gates, repair
+from locked labels, invent semantic approvals or initialize live weights from
+these unqualified artifacts. The weight-space question did not authorize a
+change to the frozen base; no programmed weight repair has been attempted.
 
 The dispatch performance slice is now implemented and qualified through the
 separate graph-v1 protocol above. Keep its source-bound evidence distinct from

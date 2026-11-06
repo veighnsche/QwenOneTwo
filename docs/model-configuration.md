@@ -123,6 +123,13 @@ Reconstruction uses W+T and Qwen's existing decoder/vocabulary head, not another
 full decoder. Its input is the allowed latent record and roles, not the source
 annotation. Apply the scalar/private-vocabulary exclusion to reconstruction too.
 
+The experimental [Target-private v2 reference revision](reference-encoder-target-v2.md)
+adds a second small pooling branch for Target and retains shared pooling for
+other roles. It keeps 30 active queries and the per-record layer/slot dimensions
+above; frozen exports identify the distinct `target-v2` tensor layout. The
+[measured full run](reference-encoder-results-2026-11-06.md) still fails recovery;
+it is not a qualified reference or a serving-model change.
+
 ## 5. Runtime writer and memory
 
 Protocol working width is 256. The writer trunk receives normalized native
