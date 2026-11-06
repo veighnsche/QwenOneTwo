@@ -105,3 +105,67 @@ class ViewSampler:
         check(state==expected.state_dict(),'reference sampler identity/cursor drift')
         self.windows=expected.windows;self.cursors=expected.cursors
         self.role_cursor=expected.role_cursor;self.orders=expected.orders
+
+
+class CompleteViewSampler:
+    """One exposure per unique view per shuffled pass, with exact resume."""
+    def __init__(self, views, release_hash):
+        self.views = tuple(views)
+        self.release_hash = release_hash
+        self.catalogue_hash = ViewSampler(self.views, release_hash).catalogue_hash
+        self.ids = tuple(v.identity for v in self.views)
+        check(len(self.ids) == len(set(self.ids)) and len(self.ids) % 8 == 0,
+              'complete coverage needs distinct views and whole eight-example windows')
+        self.windows = 0
+        self.order = None
+
+    @property
+    def windows_per_pass(self):
+        return len(self.ids)//8
+
+    def next_window(self):
+        epoch, offset = divmod(self.windows*8, len(self.ids))
+        if offset == 0 or self.order is None:
+            self.order = list(self.ids)
+            random.Random(f'17:reference-complete-v1:{epoch}').shuffle(self.order)
+        result = tuple(self.order[offset:offset+8])
+        self.windows += 1
+        return result
+
+    def state_dict(self):
+        return dict(protocol='reference-complete-v1', release_hash=self.release_hash,
+                    catalogue_hash=self.catalogue_hash, windows=self.windows, seed=17)
+
+    def load_state_dict(self, state):
+        check(type(state.get('windows')) is int and state['windows'] >= 0, 'coverage sampler cursor')
+        expected = dict(self.state_dict(), windows=state['windows'])
+        check(state == expected, 'coverage sampler identity/cursor drift')
+        self.windows = state['windows']; self.order = None
+        # next_window reconstructs the current pass without replaying old passes.
+
+
+def coverage_panel(views, required):
+    """Fixed outcome-independent role coverage, retaining prior diagnostics."""
+    selected = set(required)
+    check(selected <= {v.identity for v in views}, 'foreign coverage diagnostic')
+    for role in SLOTS:
+        candidates = sorted((v for v in views if v.role == role),
+                            key=lambda v: digest(('17:coverage-panel:'+v.identity).encode()))
+        count = sum(v.identity in selected for v in candidates)
+        for view in candidates:
+            if count >= min(32, len(candidates)):break
+            if view.identity not in selected:
+                selected.add(view.identity); count += 1
+    return tuple(v.identity for v in views if v.identity in selected)
+
+
+def coverage_plateau(curves):
+    """Three complete shuffled passes without a best recovery or loss."""
+    stale = 0; best_exact = -1; best_loss = float('inf')
+    for curve in curves:
+        loss = curve.get('mean_reconstruction')
+        improved = curve['panel_exact'] > best_exact or (loss is not None and loss < best_loss)
+        best_exact = max(best_exact, curve['panel_exact'])
+        if loss is not None:best_loss = min(best_loss, loss)
+        stale = 0 if improved else stale+1
+    return stale >= 3

@@ -13,6 +13,7 @@ import torch
 from safetensors.torch import load_file, save_file
 from ..codec.neural import cuda_only
 from .engine import PHASES, clone_state, tensors
+from .profile import scheduled_rate
 from .inputs import canonical, digest, check
 
 FORMAT = 'qot-training-bundle-v1'
@@ -57,6 +58,7 @@ def save(path, window, weights, identities, sampler, *, reference_frozen, refere
                     'python':random.getstate()},temp/'rng.pt')
         manifest = {'format':FORMAT,'identities':identities,'ownership':window.ownership,
                     'phase':window.phase,'scheduled_windows':window.scheduled_windows,
+                    'schedule_profile':window.schedule_profile,
                     'optimizer_updates':window.optimizer_updates,'sampler':sampler,
                     'reference_frozen':reference_frozen,'reference_id':reference_id,
                     'weights':{n:{'shape':list(t.shape),'dtype':str(t.dtype)} for n,t in weights.items()},
@@ -122,7 +124,11 @@ def resume(path, window, targets, expected_identities):
     check(window.examples == 0 and not window.buffers, 'resume over active window')
     manifest = inspect(path,expected_identities)
     check(manifest['ownership'] == window.ownership, 'optimizer ownership mismatch')
-    check(manifest['phase'] == window.phase and 0 <= manifest['scheduled_windows'] <= PHASES[window.phase], 'resume phase/window')
+    check(manifest['phase'] == window.phase and type(manifest['scheduled_windows']) is int
+          and manifest['scheduled_windows'] >= 0, 'resume phase/window')
+    check(manifest.get('schedule_profile', 'a4-v1') == window.schedule_profile, 'resume schedule profile')
+    if manifest['scheduled_windows']:
+        scheduled_rate(window.phase, manifest['scheduled_windows'], window.schedule_profile)
     check(manifest['optimizer_updates'] >= 0, 'optimizer counter')
     check(all(targets[n] is p for n,p in zip(window.names,window.parameters)), 'resume optimizer/weight aliases')
     incoming = _load_weights(path,targets,manifest)

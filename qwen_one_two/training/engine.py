@@ -11,7 +11,7 @@ from ..codec.ownership import parameter_groups
 from .inputs import check
 from .losses import COEFFICIENTS, REFERENCE_COEFFICIENTS
 
-from .profile import PHASES, schedule, guided_events
+from .profile import PHASES, schedule, scheduled_rate, guided_events
 
 
 def reference_groups(reference):
@@ -76,9 +76,11 @@ def tensors(value):
 
 
 class Window:
-    def __init__(self, groups, phase='components'):
+    def __init__(self, groups, phase='components', *, schedule_profile='a4-v1'):
         cuda_only()
         check(phase in PHASES, 'phase')
+        scheduled_rate(phase, 1, schedule_profile)
+        self.schedule_profile = schedule_profile
         self.ownership = ownership_manifest(groups)
         self.parameters = [p for group in groups for _,p in group['named_parameters']]
         self.names = [name for group in groups for name,_ in group['named_parameters']]
@@ -144,7 +146,7 @@ class Window:
         check(all(p.grad is None or bool(p.grad.isfinite().all()) for p in self.parameters), 'nonfinite combined gradient')
 
     def step(self):
-        check(self.scheduled_windows < PHASES[self.phase], 'phase completed; promotion required')
+        multiplier = scheduled_rate(self.phase, self.scheduled_windows+1, self.schedule_profile)
         backup = None
         try:
             self.combine()
@@ -153,7 +155,7 @@ class Window:
             active = [p for p in self.parameters if p.grad is not None]
             if active:
                 for group in self.optimizer.param_groups:
-                    group['lr'] = group['peak_lr']*schedule(self.phase,self.scheduled_windows+1)
+                    group['lr'] = group['peak_lr']*multiplier
                 check(all(t.is_cuda and bool(t.isfinite().all()) for state in self.optimizer.state.values()
                           for t in tensors(state)), 'invalid optimizer state')
                 report['unclipped_norm'] = float(torch.nn.utils.clip_grad_norm_(active,1.,error_if_nonfinite=True))

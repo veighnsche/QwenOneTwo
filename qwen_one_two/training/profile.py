@@ -13,6 +13,16 @@ def schedule(phase, window):
     return window/warmup if window <= warmup else .1+.45*(1+math.cos(math.pi*(window-warmup)/(total-warmup)))
 
 
+def scheduled_rate(phase, window, profile='a4-v1'):
+    """A4 remains bounded; explicit reference continuation has constant peak LR."""
+    check(type(window) is int and window >= 1, 'schedule window')
+    if profile == 'reference-coverage-v1':
+        check(phase == 'reference', 'coverage schedule is reference-only')
+        return 1.
+    check(profile == 'a4-v1', 'unknown schedule profile')
+    return schedule(phase, window)
+
+
 def guided_events(phase, window, events, *, compatible=True):
     check(phase in PHASES and 1 <= window <= PHASES[phase] and events >= 0, 'guidance schedule')
     if not compatible:

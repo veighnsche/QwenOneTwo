@@ -66,3 +66,23 @@ class CheckpointGPU(unittest.TestCase):
             before=weights['p'].detach().clone()
             with self.assertRaises(ValueError):load_export(path,weights,identities)
             self.assertTrue(torch.equal(before,weights['p']))
+
+    def test_reference_coverage_continues_and_resumes_after_a4_boundary(self):
+        p=torch.nn.Parameter(torch.tensor([.2],device='cuda'))
+        groups=[dict(name='fixture',named_parameters=[('p',p)],lr=2e-4,weight_decay=.01)]
+        w=Window(groups,phase='reference',schedule_profile='reference-coverage-v1')
+        w.scheduled_windows=1000
+        def step(window):
+            for _ in range(8):window.add_episode({'reconstruction':p.square().sum()},complete=True,positions=4)
+            return window.step()
+        self.assertEqual(step(w)['window'],1001)
+        self.assertEqual(w.optimizer.param_groups[0]['lr'],2e-4)
+        identities={k:'0'*64 for k in IDENTITIES}
+        with tempfile.TemporaryDirectory() as temp:
+            path=Path(temp)/'coverage'
+            save(path,w,{'p':p},identities,{'windows':1},reference_frozen=False,reference_id=None)
+            step(w);expected=p.detach().clone()
+            resume(path,w,{'p':p},identities);step(w)
+            self.assertTrue(torch.equal(p,expected))
+            wrong=Window(groups,phase='reference')
+            with self.assertRaisesRegex(ValueError,'schedule profile'):resume(path,wrong,{'p':p},identities)
