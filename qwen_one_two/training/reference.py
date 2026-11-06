@@ -218,9 +218,10 @@ class Reference(nn.Module):
 
     def initialize_live(self, live_codec, evidence=None):
         from .reference_qualification import ReferenceEvidence
-        check(isinstance(evidence,ReferenceEvidence),'measured reference qualification required before live initialization')
-        evidence.assert_reference(self)
-        check(self.frozen and self.artifact_id == self.fingerprint(), 'reference must be frozen and unchanged before live initialization')
+        check(evidence is None or isinstance(evidence,ReferenceEvidence),'load measured reference evidence first')
+        if evidence is not None:evidence.assert_reference(self)
+        check(self.frozen and all(not p.requires_grad for p in self.parameters())
+              and self.artifact_id == self.fingerprint(), 'reference must be frozen and unchanged before live initialization')
         live_codec.load_state_dict(self.codec.state_dict())
         self.assert_isolated(live_codec)
 

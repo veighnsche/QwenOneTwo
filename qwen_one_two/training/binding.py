@@ -201,8 +201,10 @@ def bind_labels(reference,evidence,registry,snapshot,targets,*,runtime=None):
     from .reference_qualification import ReferenceEvidence
     from .episodes import DecisionLabels,STATUS_NAMES
     from .release import decode
-    if not isinstance(evidence,ReferenceEvidence):return None,{'supported':False,'reason':'reference qualification missing'}
-    evidence.assert_reference(reference)
+    check(evidence is None or isinstance(evidence,ReferenceEvidence),'load measured reference evidence first')
+    check(reference.frozen and all(not p.requires_grad for p in reference.parameters())
+          and reference.artifact_id==reference.fingerprint(),'frozen reference changed')
+    if evidence is not None:evidence.assert_reference(reference)
     if runtime is None or runtime.registry is not registry or runtime.state!='Evaluating' or runtime.call.snapshot!=snapshot:
         return None,{'supported':False,'reason':'no current admitted request'}
     check(targets.reference==reference.artifact_id,'target reference mismatch')
@@ -220,7 +222,8 @@ def bind_labels(reference,evidence,registry,snapshot,targets,*,runtime=None):
         score_interval=tuple(payload['score_interval']) if 'score_interval' in payload else None,
         feasibility=feasibility,reason_slots=targets.reason)
     return labels,{'supported':True,'reason':reason,'snapshot':snapshot.identity,
-                  'record_hash':targets.record_hash,'qualification':evidence.identity}
+                  'record_hash':targets.record_hash,'qualification':None if evidence is None else evidence.identity,
+                  'receiver_behavior_accepted':evidence is not None}
 
 
 def compatible_return(registry,result,labels,targets):

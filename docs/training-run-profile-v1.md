@@ -233,11 +233,18 @@ collections. Record slice/denominator/route judgements before running evaluation
 
 | Phase | Development promotion |
 |---|---|
-| Reference | >=95% reviewed semantic recovery; >=90% applicable contrast-group success |
+| Reference/receiver compatibility | [Latent semantic/behavioral protocol](reference-behavior-v1.md): existing component thresholds and complete applicable intervention pairs; canonical text recovery is diagnostic |
 | Components | >=95% fully correct writer structure/typed fields; >=90% semantic success overall and >=85% per operation; >=95% status accuracy; >=90% reviewed Score agreement; >=95% isolated-reader success |
 | Guided/transition | >=90% complete-flow success under DECLARED guidance and >=90% applicable intervention-group success; not autonomous evidence |
 | Free control | Same semantic/readiness thresholds on unforced runs; >=50 valid unforced calls per operation across multiple domains; >=100 successful direct-answer jobs |
 | Every phase | Applicable A3 checks; zero observed binding/cache/accounting/GPU-only violations; fabricated values <=1% of non-assessable cases |
+
+Frozen candidate references may supply exactly bound experimental supervision
+without a passing reconstruction or receiver certificate. This permits constructing
+learning inputs; it does not authorize a run, assert semantic acceptance, or promote
+weights. Diagnostic fixtures remain ineligible. Receiver acceptance binds the
+actual tested reference and receiver and has the limited scope above. Learned
+invocation, Reason support meaning and native result use require separate evidence.
 
 Always count failed/rejected/overlength cases in the applicable denominators.
 Missing/insufficient operation/status coverage is incomplete readiness, not a pass.

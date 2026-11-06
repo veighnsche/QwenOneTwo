@@ -1,4 +1,7 @@
-"""Read-only reference qualification. No fitting, invented relations or reviews."""
+"""Historical exact-reconstruction diagnostics and semantic evidence handle.
+
+Recovery-v1 reports remain diagnostics; only behavior-v1 can supply acceptance.
+"""
 from dataclasses import dataclass
 from pathlib import Path
 from .inputs import canonical,check,digest,SLOTS
@@ -167,43 +170,24 @@ class ReferenceEvidence:
     identity:str
     reference_sha256:str
     development_release_sha256:str
+    receiver_sha256:str
 
-    def __init__(self,identity,reference,development,*,_token=None):
+    def __init__(self,identity,reference,development,receiver=None,*,_token=None):
         check(_token is _TOKEN,'load measured reference qualification first')
         for name,value in (('identity',identity),('reference_sha256',reference),('development_release_sha256',development)):
             object.__setattr__(self,name,value)
+        object.__setattr__(self,'receiver_sha256',receiver)
 
     def assert_reference(self,reference):
         check(reference.frozen and all(not p.requires_grad for p in reference.parameters())
               and reference.artifact_id==reference.fingerprint()==self.reference_sha256,'qualified reference changed')
 
+    def assert_receiver(self,backbone,codec):
+        from .behavior_qualification import receiver_hash
+        check(receiver_hash(backbone,codec)==self.receiver_sha256,'accepted receiver changed; re-evaluate behavior')
+
 
 def load_reference_evidence(path,release,*,expected_hash):
-    raw=Path(path).read_bytes();check(digest(raw)==sha256(expected_hash),'qualification report hash')
-    report=decode(raw);ids=suite(release);groups=relations(release)
-    check(report.get('diagnostic_untrained') is False,'diagnostic fixtures cannot qualify a reference')
-    check(report['reference_after_sha256']==report['reference_sha256'],'reference mutated during qualification')
-    check(report['protocol']==PROTOCOL and report['profile']==PROFILE and report['development_release_sha256']==release.identity,'qualification release/protocol')
-    check(report['source_hashes']==source_hashes(),'qualification source drift')
-    check(report['gpu_uuid']=='GPU-225509c3-d702-6c27-de03-76b5e99b33b1' and report['optimizer_updates']==0,'qualification GPU/updates')
-    check([c['id'] for c in report['cases']]==list(ids),'missing/reordered/foreign recovery cases')
-    from .component_producer import reference_record
-    for case in report['cases']:
-        annotation,_=reference_record(release,release.record(case['id']))
-        check(case['annotation_sha256']==annotation.sha256 and case['role']==annotation.role,'recovery annotation drift')
-        r=case['recovery']
-        check(type(r['exact']) is bool and type(r['matched_tokens']) is int and type(r['target_tokens']) is int
-              and 0<=r['matched_tokens']<=r['target_tokens'] and r['target_tokens']>0,'recovery accounting')
-        check((r['exact'] and r['matched_tokens']==r['target_tokens'] and r['first_mismatch'] is None)
-              or (not r['exact'] and r['matched_tokens']<r['target_tokens'] and isinstance(r['first_mismatch'],dict)),
-              'recovery result inconsistency')
-    check(len(report['groups'])==len(groups),'contrast coverage')
-    for measured,group in zip(report['groups'],groups):
-        check(all(measured[k]==v for k,v in group.items()),'contrast membership drift')
-        p,n=measured['positive'],measured['negative']
-        check(len(p)==len(group['positives']) and len(n)==len(group['negatives'])
-              and all(type(x) in (int,float) and -1.00001<=x<=1.00001 for x in p+n),'contrast scores')
-        check(measured['passed'] is (min(p)>max(n)),'contrast pass mismatch')
-    checked=summarize(report['cases'],report['groups'],complete=True,unchanged=True)
-    check(checked['status']=='PASSED' and report['status']=='PASSED','reference qualification did not pass')
-    return ReferenceEvidence(digest(raw),sha256(report['reference_sha256']),release.identity,_token=_TOKEN)
+    """Exact reconstruction never grants semantic/behavioral acceptance."""
+    from .behavior_qualification import load_behavior_evidence
+    return load_behavior_evidence(path,release,expected_hash=expected_hash)

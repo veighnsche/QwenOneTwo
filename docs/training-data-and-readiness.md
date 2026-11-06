@@ -225,6 +225,16 @@ and original-decision replay checks as regression evidence, not a new answer-
 improvement study. Do not combine component/reader/guided/free denominators into
 one flattering readiness percentage.
 
+## Reference and receiver acceptance
+
+Use the [latent behavioral protocol](reference-behavior-v1.md) for the current
+reference/receiver configuration. Exact canonical text reconstruction remains a
+diagnostic and cannot grant semantic acceptance. Grounded candidate-reference
+supervision can be constructed without a pass; this is not authorization to train.
+The scoped receiver check tests actual Noul/Choice/Score outputs and reviewed
+input changes, retaining exact numeric/source/candidate/snapshot bindings. It does
+not certify learned invocation, Reason support meaning or native answer use.
+
 ## Meaning and limits of readiness
 
 Report component skills, complete supervised trajectories, free invocation and

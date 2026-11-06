@@ -31,7 +31,7 @@ class SemanticBindingGPU(unittest.TestCase):
         del cls.ref,cls.b,cls.c,cls.release
         cls.math.__exit__(None,None,None);torch.cuda.empty_cache()
 
-    def fixture(self,key='train-writer-0004'):
+    def fixture(self,key='train-writer-0004',*,perturb_question=False):
         from qwen_one_two.training.clean import tokenize_excerpt
         from qwen_one_two.codec.runtime import Runtime
         row=self.release.record(key)
@@ -45,6 +45,8 @@ class SemanticBindingGPU(unittest.TestCase):
         # Reference-equal semantic payloads are prescribed for comparison tests;
         # they are never substituted into the native producer's actual writer.
         leaf=targets.payloads[0].clone().requires_grad_()
+        if perturb_question:
+            with torch.no_grad():leaf[0,0]+=.001
         writer=s.begin_writer(Port.NOUL if row['operation']=='Noul' else Port.CHOICE)
         q=rt.publish(Kind.QUESTION,Semantic(leaf));t=rt.publish(Kind.TARGET,Semantic(targets.payloads[1]))
         candidates=tuple(rt.publish(Kind.ALTERNATIVE,Semantic(payload)) for role,payload in zip(targets.names,targets.payloads) if role=='alternative')
@@ -54,13 +56,13 @@ class SemanticBindingGPU(unittest.TestCase):
         packet=rt.seal(q,t,evidence,candidates=candidates)
         return s,packet,targets,leaf
 
-    def test_exact_content_compares_but_unqualified_reference_never_mints_labels(self):
+    def test_exact_candidate_binding_is_supervision_not_acceptance(self):
         with torch.no_grad():s,packet,targets,_=self.fixture()
         matches,reason=compare_request(s.runtime.registry,packet.snapshot,targets)
         self.assertTrue(matches,reason)
         labels,binding=bind_labels(self.ref,None,s.runtime.registry,packet.snapshot,targets,runtime=s.runtime)
-        self.assertIsNone(labels);self.assertFalse(binding['supported'])
-        self.assertIn('qualification',binding['reason'])
+        self.assertIsNotNone(labels);self.assertTrue(binding['supported'])
+        self.assertIsNone(binding['qualification']);self.assertFalse(binding['receiver_behavior_accepted'])
 
     def test_matching_ids_and_nearby_slots_are_not_semantic_approval(self):
         with torch.no_grad():s,packet,targets,_=self.fixture()
@@ -76,6 +78,19 @@ class SemanticBindingGPU(unittest.TestCase):
         self.assertFalse(compare_request(reg,snap,targets)[0])
         snap=reg.publish(Kind.SNAPSHOT,replace(spec,evidence=spec.evidence[:-1]))
         self.assertFalse(compare_request(reg,snap,targets)[0])
+        labels,binding=bind_labels(self.ref,None,reg,snap,targets,runtime=s.runtime)
+        self.assertIsNone(labels);self.assertIn('admitted',binding['reason'])
+        # Registry reads are protected copies; editing one cannot rewrite the
+        # current sealed request. Its original exact binding remains supported.
+        with torch.no_grad():q.slots[0,0]+=.001
+        labels,binding=bind_labels(self.ref,None,reg,packet.snapshot,targets,runtime=s.runtime)
+        self.assertIsNotNone(labels);self.assertTrue(binding['supported'])
+
+    def test_admitted_candidate_with_different_contents_does_not_receive_labels(self):
+        with torch.no_grad():s,packet,targets,_=self.fixture(perturb_question=True)
+        labels,binding=bind_labels(self.ref,None,s.runtime.registry,packet.snapshot,targets,runtime=s.runtime)
+        self.assertIsNone(labels);self.assertFalse(binding['supported'])
+        self.assertIn('question content',binding['reason'])
 
     def test_candidate_permutation_preserves_stable_identity_bindings(self):
         from qwen_one_two.codec.records import Bank
@@ -112,13 +127,15 @@ class SemanticBindingGPU(unittest.TestCase):
                'formation_components':sorted(values),'input_gradient_norm':gradients[0].norm().item(),
                'live_adapter_gradients':0,'optimizer_updates':0},flush=True)
 
-    def test_unqualified_reference_and_diagnostic_accumulation_reject(self):
+    def test_candidate_construction_and_diagnostic_accumulation(self):
         from qwen_one_two.training.episodes import collect_session
         from qwen_one_two.training.inputs import Exposure
-        with self.assertRaisesRegex(PrerequisiteError,'qualification'):
-            EpisodeProducer(self.b,self.c,self.release,reference=self.ref)
-        with self.assertRaisesRegex(ValueError,'qualification'):
-            self.ref.initialize_live(self.c)
+        producer=EpisodeProducer(self.b,self.c,self.release,reference=self.ref,
+            checkpoint_hash='a'*64,profile_hash='b'*64)
+        self.assertIsNone(producer.reference_evidence)
+        # Copying a frozen candidate is initialization, not measured acceptance.
+        self.ref.initialize_live(self.c)
+        self.ref.assert_isolated(self.c)
         with self.assertRaisesRegex(ValueError,'diagnostic reference'):
             collect_session(None,SimpleNamespace(episode_report={'diagnostic_reference':True}),{},Exposure('native_writer'))
 

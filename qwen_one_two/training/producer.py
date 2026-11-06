@@ -115,9 +115,9 @@ class EpisodeProducer:
         check(not (reference_evidence is not None and diagnostic_reference),'qualified/diagnostic reference modes are distinct')
         if reference is not None:
             from .reference_qualification import ReferenceEvidence
-            if isinstance(reference_evidence,ReferenceEvidence):reference_evidence.assert_reference(reference)
-            elif not diagnostic_reference:
-                raise PrerequisiteError('measured reference qualification required; freezing untrained weights is insufficient')
+            if isinstance(reference_evidence,ReferenceEvidence):
+                reference_evidence.assert_reference(reference)
+                reference_evidence.assert_receiver(backbone,codec)
             from .component_producer import ComponentProducer
             self.component=ComponentProducer(backbone,codec,release,reference,
                 checkpoint_hash=checkpoint_hash,profile_hash=profile_hash,
@@ -172,7 +172,7 @@ class EpisodeProducer:
         session.episode_report = report
         report['diagnostic_reference']=self.diagnostic_reference
         qualified=self.reference_evidence is not None and not self.diagnostic_reference
-        report['reference_semantics_qualified']=qualified
+        report['receiver_behavior_accepted']=qualified
         self.last_report = report
         teacher_forcing=plan.target is not None and phase in {'components','guided_joint'}
         compatible_prefix=bool(plan.calls)
@@ -303,7 +303,7 @@ class EpisodeProducer:
         d=writer.draft
         packet=rt.seal(d.question,d.target,d.evidence,d.rubric,d.candidates)
         if rt.position+rt.call.position_hold>limit:raise EpisodeLengthError()
-        labels=None;binding={'supported':False,'reason':'reference qualification missing'}
+        labels=None;binding={'supported':False,'reason':'reviewed reference targets unavailable'}
         if targets is not None:
             from .binding import formation_losses,bind_labels
             formation_losses(self.reference,rt.registry,packet.snapshot,targets,book)

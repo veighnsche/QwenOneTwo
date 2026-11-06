@@ -41,7 +41,63 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint
+## Current checkpoint — semantic/behavioral gate replacement
+
+**Implemented and evaluated; the tested configuration is BLOCKED by actual
+receiver behavior, not by exact text reconstruction. No job remains active.**
+Read the [new protocol](reference-behavior-v1.md),
+[measured results](reference-behavior-results-2026-11-06.md) and
+[portable evidence](evidence/reference-behavior-v1.json).
+
+`load_reference_evidence` now accepts only the latent behavioral protocol;
+recovery-v1 artifacts are diagnostics and cannot grant acceptance. Frozen,
+fingerprint-checked candidate references may construct exactly bound experimental
+supervision or initialize private codecs without a receiver pass. This is not
+semantic acceptance or authorization to train. Nearby/mutated semantic contents,
+foreign/incomplete sources, unadmitted snapshots and incompatible actual returns
+remain unsupported. Diagnostic accumulation remains forbidden; Reason keeps its
+separate approved status/support input exception.
+
+On the specified RTX 3090, **180 existing development receiver cases / 90 pairs**
+completed with actual latent requests/results, unmodified heads, neutral Session
+prompts and no gold-return substitution. Noul passes **13/100**, Choice **31/40**,
+Score **0/40**; complete pairs **16/90**; returned-status accuracy **91/180**.
+There are **164 valid exchanges / 16 blocked invalid Reason decodes** (13 pointer
+compatibility failures, three aggregate-bound failures). **All 180** receipt audits
+pass single prefill/cache lineage/exact accounting. Rejected decodes are failures,
+not wrongly admitted bindings. Source/value/unit bytes, candidate identities and
+approved Score intervals are preserved without widening.
+
+All **320 W tensors / physical tying** pass; reference and receiver fingerprints
+are unchanged; gradients are None and optimizer updates zero. The loader
+recomputes outcomes and rejects this failed report; no acceptance was granted.
+The existing pass-12 reference is unchanged. No agents, new data, fitting,
+capability training, promotion, service changes or pass 13. The separate 20
+category-9 supplied-return reader cases are explicitly omitted, not certified.
+
+**34 model-free tests pass**, the original seven GPU binding/gradient tests pass
+in **43.426 s**, and four final strengthened GPU binding tests pass in **17.467 s**.
+The input-gradient norm remains **0.25784578919410706**, with no live-adapter
+gradients or optimizer updates. A test that mistook a protected registry copy for
+admitted content was corrected; its failed log is retained. Compilation,
+whitespace, source-snapshot and evidence-recalculation checks pass. Existing
+numeric matrices were reused, since model arithmetic is unchanged.
+
+Raw evidence: `data/reference-behavior-20261106/`. Setup/interruption exits are
+**1 / 143 / 1**; the final run exits **2** for unsuccessful qualification. All
+**29 completed partial-run cases were reused**, followed by **151 newly completed
+cases**; no completed model measurement was repeated. Source/forward AST,
+record/view, reference/receiver/profile identities and recomputed grades bind
+reuse. Do not claim an exact physical-work total around interruption.
+
+**Next unfinished slice:** distinguish the reference/pooler's contribution from
+the receiver's using these saved behavioral failures before choosing further
+fitting. Reason support meaning, Choice feasibility, other statuses, unforced
+invocation/writing and native answer consumption remain unqualified. This result
+is not full-flow certification and does not prove a unique failure cause. No
+follow-on run is queued; further training/new data remain unauthorized.
+
+## Previous checkpoint — complete-coverage endpoint
 
 **The complete-coverage reference experiment is STOPPED after pass 12, exactly
 as the user requested. Pass 13 never started. No experiment job remains active.**
@@ -122,7 +178,7 @@ Final unqualified frozen reference:
 Final complete resume bundle: `final-pass/checkpoint-006064` in the same parent.
 It stores the user final-pass limit. **Do not start pass 13 or additional fitting.**
 
-Next unfinished work is reference meaning/recovery transfer, particularly the
+At that earlier endpoint, unfinished work was reference meaning/recovery transfer, particularly the
 weak Question/Target/Reason roles, and distinguishing encoder/readout limitations
 from actual receiver use. Coverage improves training recovery but has not
 established held-out transfer, a unique cause, or connected Noul/Choice/Score

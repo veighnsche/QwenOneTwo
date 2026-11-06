@@ -9,13 +9,16 @@ from .clean import CleanView,CleanEncoder
 from .producer import PrerequisiteError,EpisodeLengthError
 
 
-def component_view(release,row):
+def component_view(release,row,*,intervention=False):
     """Build per-role inputs with byte-bound facts; Reason stays separate."""
     check(canonical(row)==canonical(release.record(row['id'])),'record/release drift')
     check(release.manifest['purpose']!='locked','locked collection is not an episode-development source')
     check(any(e['id']==row['id'] and e['selected'] for e in release.manifest['records']),'unselected component record')
     category=row['training_category']
-    check(category in {'receiver','reader','decision_replay'},'isolated component category')
+    if intervention:
+        check(row.get('evaluation_slice')=='X' and category is None,'reviewed intervention view')
+        category='intervention'
+    check(category in {'receiver','reader','decision_replay','intervention'},'isolated component category')
     reading=category=='reader'
     inputs=row['model_inputs']
     if reading:
@@ -24,6 +27,10 @@ def component_view(release,row):
     elif category=='receiver':
         check(set(inputs)=={'request','evidence'},'receiver input whitelist')
         semantics=inputs['request']
+    elif category=='intervention':
+        check(set(inputs)<= {'prompt','evidence','request','supplied_return'},'intervention input whitelist')
+        semantics=row['semantics']
+        check(inputs.get('request',semantics)==semantics,'intervention semantics drift')
     else:
         check(set(inputs)<= {'prompt','evidence'},'decision replay input whitelist')
         semantics=row['supervision']['request_semantics']
@@ -115,8 +122,9 @@ class ComponentProducer:
         check(reference_evidence is None or isinstance(reference_evidence,ReferenceEvidence),
               'load measured reference evidence first')
         check(not (reference_evidence is not None and diagnostic_reference),'qualified/diagnostic reference modes are distinct')
-        if isinstance(reference_evidence,ReferenceEvidence):reference_evidence.assert_reference(reference)
-        elif not diagnostic_reference:raise PrerequisiteError('measured reference qualification required')
+        if isinstance(reference_evidence,ReferenceEvidence):
+            reference_evidence.assert_reference(reference)
+            reference_evidence.assert_receiver(backbone,codec)
         self.evidence,self.diagnostic=reference_evidence,diagnostic_reference
         self.encoder=CleanEncoder(backbone,reference,checkpoint_hash=checkpoint_hash,profile_hash=profile_hash)
         self.last_report=None
@@ -147,7 +155,7 @@ class ComponentProducer:
         check(len(ids)+6<limit,'component prompt exceeds ceiling')
         s=Session.open(self.backbone,self.codec,ids,128,override=override,run=run)
         rt=s.runtime;report={'producer':'clean-component-episodes-v1','record':row['id'],
-            'reference':self.encoder.reference.artifact_id,'reference_semantics_qualified':self.evidence is not None,
+            'reference':self.encoder.reference.artifact_id,'receiver_behavior_accepted':self.evidence is not None,
             'diagnostic_reference':self.diagnostic,
             'construction_audit':encoded['audit'],'gold_return':reading,'text_tokens_for_invocation':0}
         self.last_report=report;s.episode_report=report
