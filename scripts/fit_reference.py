@@ -44,7 +44,7 @@ def main():
     parser.add_argument('--snapshot',required=True)
     parser.add_argument('--output',required=True)
     parser.add_argument('--resume')
-    parser.add_argument('--profile',choices=('legacy-v1','recovery-v1'),default='recovery-v1')
+    parser.add_argument('--profile',choices=('legacy-v1','recovery-v1','encoder-v1'),default='recovery-v1')
     parser.add_argument('--initial-reference',help='Explicit unqualified reference-only warm start; fresh optimizer')
     args=parser.parse_args()
     output=Path(args.output);output.mkdir(parents=True,exist_ok=False)
@@ -80,9 +80,17 @@ def main():
             check(ref.fingerprint()==manifest['reference_id'],'warm-start tensor identity')
             warm_start={'manifest_sha256':digest((path/'manifest.json').read_bytes()),'reference_id':ref.fingerprint(),
                         'prior_optimizer_updates':manifest['optimizer_updates'],'optimizer_reset':True}
+        encoder_only=args.profile=='encoder-v1'
+        if encoder_only:
+            check(args.initial_reference or args.resume,'encoder revision requires an existing decoder')
+            ref.train_pooler_only()
+        decoder_before=ref.decoder_fingerprint()
+        revision_path=(Path('docs/reference-encoder-revision-v1.md') if encoder_only else
+                       Path('docs/reference-recovery-revision-v1.md') if args.profile=='recovery-v1' else None)
+        revision_hash=digest(revision_path.read_bytes()) if revision_path is not None else None
         live_before=state_fingerprint({**dict(b.named_parameters()),**{'codec.'+n:p for n,p in c.state_dict().items()}})
         sources=source_snapshot(output)
-        views=catalogue(train) if args.profile=='recovery-v1' else None
+        views=catalogue(train) if args.profile!='legacy-v1' else None
         sampler=ViewSampler(views,train.identity) if views is not None else Sampler.from_release(train,'reference')
         groups=reference_groups(ref)
         for group in groups:
@@ -95,7 +103,7 @@ def main():
                     'precision':digest(Path('docs/codec-feedback-precision-v3.md').read_bytes()),
                     'reference':ref.fingerprint(),'dataset':train.identity,
                     'sources':digest(canonical({'files':sources,'profile':args.profile,'catalogue':sampler.catalogue_hash,
-                        'revision':digest(Path('docs/reference-recovery-revision-v1.md').read_bytes()) if views is not None else None}))}
+                        'revision':revision_hash}))}
         prepared={};feature_cache={}
         # Frozen-W feature extraction only; pooler/T remain live and are never
         # cached. Duplicate canonical meanings still retain all scheduled IDs.
@@ -124,6 +132,7 @@ def main():
             identities['reference']=old['identities']['reference']
             restored=restore_model(args.resume,b,c,ref,identities,window=window)
             sampler.load_state_dict(restored['sampler'])
+            decoder_before=ref.decoder_fingerprint()
         else:
             # Exercise the actual full reference ownership/export/resume path
             # before the first update, not after 100 windows of fitting.
@@ -134,8 +143,9 @@ def main():
             sampler.load_state_dict(restored['sampler'])
         run={'scope':'reference only; no capability training','train_release':train.identity,'development_release':dev.identity,
              'profile':args.profile,'warm_start':warm_start,'catalogue_hash':sampler.catalogue_hash,
-             'target_history':'alternate full preceding targets / zero preceding-target vectors' if views is not None else 'full teacher forcing',
-             'reference_revision_contract':digest(Path('docs/reference-recovery-revision-v1.md').read_bytes()) if views is not None else None,
+             'target_history':'alternate full preceding targets / zero preceding-target vectors' if args.profile=='recovery-v1' else 'full teacher forcing',
+             'reference_revision_contract':revision_hash,'encoder_only':encoder_only,
+             'decoder_before_sha256':decoder_before,
              'recurrence_backend':b.recurrence_backend,
              'scheduled_windows':1000,'examples_per_window':8,'training_seed':17,'reference_records':len(prepared),
              'frozen_W_feature_cache_entries':len(feature_cache),'cache_device':'cuda',
@@ -153,7 +163,7 @@ def main():
                     check(states._version==version,'mutated frozen feature cache')
                     payload=ref.pooler(states,*SLOTS[annotation.role])
                     prefix=wire_payload(ref,payload,annotation.role)
-                    use_history=views is None or (ordinal+window.scheduled_windows)%2==0
+                    use_history=args.profile!='recovery-v1' or (ordinal+window.scheduled_windows)%2==0
                     histories.append(use_history)
                     loss=ref.reconstruct_teacher_forced(prefix,targets,target_history=use_history)
                     loss_values.append(float(loss.detach()))
@@ -171,6 +181,8 @@ def main():
                     print(json.dumps({k:record[k] for k in ('window','mean_reconstruction','seconds','elapsed_seconds','peak_allocated')}),flush=True)
                 if window.scheduled_windows%100:continue
                 number=window.scheduled_windows
+                if encoder_only:
+                    check(ref.decoder_fingerprint()==decoder_before,'frozen reference decoder changed')
                 save(output/f'checkpoint-{number:04d}',window,bundle_tensors(b,c,ref),identities,sampler.state_dict(),
                      reference_frozen=False,reference_id=None)
                 # Independent frozen evaluation copy; preserve the next update's RNG.
@@ -193,6 +205,8 @@ def main():
                     del evaluated
         live_after=state_fingerprint({**dict(b.named_parameters()),**{'codec.'+n:p for n,p in c.state_dict().items()}})
         frozen=frozen_check(b,args.snapshot)
+        decoder_after=ref.decoder_fingerprint()
+        check(not encoder_only or decoder_before==decoder_after,'frozen reference decoder changed')
         check(live_before==live_after and frozen['pass'],'live/base weights changed during reference fitting')
         final_two=[q for q in qualifications if q['window'] in (900,1000)]
         promoted=len(final_two)==2 and all(q['status']=='PASSED' for q in final_two)
@@ -200,6 +214,7 @@ def main():
             final_two_passed=promoted,optimizer_updates=window.optimizer_updates,scheduled_windows=window.scheduled_windows,
             live_parameters_unchanged=live_before==live_after,live_before_sha256=live_before,live_after_sha256=live_after,
             frozen_base=frozen,capability_optimizer_updates=0,reference_fitting_only=True,
+            encoder_only=encoder_only,decoder_before_sha256=decoder_before,decoder_after_sha256=decoder_after,
             peak_allocated=torch.cuda.max_memory_allocated(),elapsed_seconds=time.monotonic()-started)
         (output/'report.json').write_bytes(canonical(result));print(json.dumps(result),flush=True)
         return 0 if promoted else 2

@@ -69,5 +69,21 @@ class ReferenceFitGPU(unittest.TestCase):
         finally:self.b.embedding=original
         self.assertTrue(bool(gradient.isfinite().all()));self.assertGreater(float(gradient.norm()),1e-10)
 
+    def test_stationary_decoder_owns_only_pooler_and_passes_its_gradients(self):
+        from qwen_one_two.training.engine import reference_groups
+        from qwen_one_two.training.binding import wire_payload
+        ref=Reference(self.b,self.c)
+        before=ref.decoder_fingerprint();ref.train_pooler_only()
+        owned={id(p) for group in reference_groups(ref) for _,p in group['named_parameters']}
+        self.assertEqual(owned,{id(p) for p in ref.pooler.parameters()})
+        states=torch.randn(20,1024,device='cuda')
+        payload=ref.pooler(states,8,2)
+        loss=ref.reconstruct_teacher_forced(wire_payload(ref,payload,'target'),[10,11,248046])
+        loss.backward()
+        self.assertTrue(all(p.grad is not None and bool(p.grad.isfinite().all()) for p in ref.pooler.parameters()))
+        self.assertGreater(sum(float(p.grad.norm()) for p in ref.pooler.parameters()),1e-10)
+        self.assertTrue(all(p.grad is None for p in list(ref.T.parameters())+list(ref.codec.parameters())+list(self.b.parameters())+list(self.c.parameters())))
+        self.assertEqual(before,ref.decoder_fingerprint())
+
 
 if __name__=='__main__':unittest.main()

@@ -70,6 +70,21 @@ class Reference(nn.Module):
             states, _ = self(self.backbone.initial(), 'base', self.backbone.embedding(ids))
         return states[0]
 
+    def train_pooler_only(self):
+        """Keep the reconstruction map stationary while learning its encoder.
+
+        Frozen decoder operations still pass derivatives into pooled vectors.
+        This is a reference-fitting policy, not a qualified/frozen reference.
+        """
+        check(not self.frozen, 'cannot fit a frozen reference')
+        self.T.requires_grad_(False)
+        self.codec.requires_grad_(False)
+        self.pooler.requires_grad_(True)
+
+    def decoder_fingerprint(self):
+        return state_fingerprint({name:value for name,value in self.state_dict().items()
+                                  if name.startswith(('T.', 'codec.'))})
+
     def reconstruct(self, prefix, targets, *, target_history=True):
         """Role/slot/presence wire prefix only, followed by preceding targets.
 
