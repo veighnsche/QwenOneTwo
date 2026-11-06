@@ -56,8 +56,21 @@ valid classifier losses. Actual behavioral evaluation still decodes real results
 without overrides. Frozen annotation payload caching preserves exact contents;
 D-dependent sources are always recomputed. Locked labels remain unopened.
 
-Active launcher/evidence: `data/receiver-learning-20261106/`, especially `run.log`,
-`exit.json` when finished, and `run/` checkpoints/reports. The detached launcher
+A bookkeeping bug was found during the run: the outer eligibility Counter sums
+live loss tensors instead of counting examples. The optimizer's own component
+counts are correct. A fix and five regression checks pass; every model/loss/
+optimizer/producer source and the update-loop AST (excluding counts) are unchanged.
+The original process stopped immediately after checkpoint 75 (intentional SIGINT,
+exit -2) and resumed exact weights/optimizer/RNG/cursor with the accounting fix.
+The continuation has executed window 76 with verified sample-order continuity;
+see [resume evidence](evidence/receiver-learning-resume-v1.json). No completed
+optimizer window was replayed; in-flight preparation may recur. Source identities
+and both segment logs are preserved. Read local `CONTINUATION-NOTES.md` first.
+
+Active launcher/evidence: `data/receiver-learning-20261106/`, especially the active `continued.log`, `continued-exit.json` when finished,
+and `continued/` checkpoints/reports. The preserved original `run.log`/`exit.json`
+belong to the intentionally interrupted prefix. Do not mistake that exit for
+completion of the experiment. The detached launcher
 runs `scripts/train_receiver.py` on the explicitly selected RTX 3090. Do not
 launch a duplicate. The run first measures the new 130-case E baseline, verifies
 actual gradients across operation/status strata, then completes **1,504 real

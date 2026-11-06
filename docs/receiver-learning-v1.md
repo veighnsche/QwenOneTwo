@@ -87,3 +87,16 @@ this observation is not a new independent review or corrected annotation.
 Reason alignment to existing targets cannot establish correct support meaning.
 Record such failures separately from status/value/selection learning and revisit
 annotation quality before claiming semantic Reason qualification.
+
+## Bookkeeping-only continuation
+
+The original outer eligibility Counter accidentally summed live loss tensors;
+Window's optimizer eligibility counts were unaffected. The fix counts component
+keys and reconstructs totals from saved episode reports. Five regression tests
+pass, including a comparison of the original and corrected update-loop AST after
+excluding only accounting. At checkpoint 75 the process was intentionally
+interrupted (exit -2) and exact weights, optimizer, RNG, sample order and cursor
+were restored. All learning-module sources and non-source identities match;
+only the launcher/accounting source migrates with explicit old/new provenance.
+The continuation begins at 76; no completed optimizer window is replayed.
+Unlogged in-flight preparation is not claimed as zero physical repeated work.

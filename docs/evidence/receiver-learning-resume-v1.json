@@ -1,0 +1,63 @@
+{
+  "assets": {
+    "data/receiver-learning-20261106/continued/first-resumed-window.json": "48bf48ef86abd6c29e0d223aa7e5d403f2df405996bea1a2c6305ed54b9cc262",
+    "data/receiver-learning-20261106/continued/resume.json": "f6aba485d85cb90bb170f860fb6c1be2795a15546f4ed5ad79c4759c7d2f5493",
+    "data/receiver-learning-20261106/continued/source-snapshot/manifest.json": "eb7e36634b9c27e9875fd6a23ca88228e7cc16b751d195b409fecaf16bbe904a",
+    "data/receiver-learning-20261106/counter-fix-tests.log": "80dbbe8c32c6200b64fa3c9314d81a0e110004b5593701183cc8a77873111d9c",
+    "data/receiver-learning-20261106/run/checkpoint-0075/manifest.json": "eb6ef96377a13532cdd2e155ebf64a4ffff5f07dd9a0fed94a74f370f000c40f",
+    "data/receiver-learning-20261106/run/training.jsonl": "86bb239b08660cb405fb61f760f3611eab3d591c0cc52c65ab21125525d35a2a"
+  },
+  "first_resumed_records": [
+    "train-receiver-0113",
+    "train-receiver-0499",
+    "train-receiver-0920",
+    "train-receiver-0117",
+    "train-receiver-1280",
+    "train-receiver-1112",
+    "train-receiver-0032",
+    "train-receiver-0861"
+  ],
+  "first_resumed_window": {
+    "eligible_examples": {
+      "feasibility": 2,
+      "noul": 3,
+      "status": 8
+    },
+    "failed_exposures": [],
+    "phase": "components",
+    "stepped": true,
+    "unclipped_norm": 83.25806427001953,
+    "window": 76
+  },
+  "format": "qot-receiver-bookkeeping-resume-v1",
+  "interruption": {
+    "all_completed_windows_saved": true,
+    "at_utc": "2026-11-06T22:58:08.332196+00:00",
+    "checkpoint": "data/receiver-learning-20261106/run/checkpoint-0075",
+    "completed_windows": 75,
+    "elapsed_process_seconds_at_signal": 3022,
+    "note": "in-flight source/request work may be repeated; no physical-compute-total claim",
+    "optimizer_updates": 75,
+    "pid": 23939,
+    "reason": "fix eligibility Counter retaining loss tensors; learning computations unchanged",
+    "signal": "SIGINT"
+  },
+  "original_exit": {
+    "exit_code": -2
+  },
+  "regression_tests_passed": 5,
+  "resume": {
+    "checkpoint": "data/receiver-learning-20261106/run/checkpoint-0075",
+    "checkpoint_manifest_sha256": "eb6ef96377a13532cdd2e155ebf64a4ffff5f07dd9a0fed94a74f370f000c40f",
+    "migration": "eligibility bookkeeping counts keys; no model/optimizer reset",
+    "new_sources": "eb7e36634b9c27e9875fd6a23ca88228e7cc16b751d195b409fecaf16bbe904a",
+    "old_sources": "ea0e30cb74b39d0eab3aad0cb0e00cd2db3fd82ca54c56ec194c10bef5e1006c",
+    "prefix_log_sha256": "86bb239b08660cb405fb61f760f3611eab3d591c0cc52c65ab21125525d35a2a",
+    "prefix_training_log": "data/receiver-learning-20261106/run/training.jsonl",
+    "prefix_windows": 75,
+    "unchanged_learning_sources": true,
+    "update_loop_AST_unchanged_except_counts": true
+  },
+  "sampling_cursor_continuity_verified": true,
+  "scope": "exact receiver continuation; no qualification claim"
+}

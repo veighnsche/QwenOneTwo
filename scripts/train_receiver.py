@@ -11,6 +11,36 @@ BUNDLE_SHA='92b0b199bd98bd56684eb4f26dbc64b146d1f57266f97faac49345749446bd9d'
 BASELINE=Path('data/reference-behavior-20261106/final/report.json')
 
 
+
+
+def learning_loop(body):
+    """Compare executable update loops while excluding the known count bug."""
+    import ast
+    tree=ast.parse(body)
+    loop=next(n for n in ast.walk(tree) if isinstance(n,ast.For)
+              and isinstance(n.target,ast.Name) and n.target.id=='window_index')
+    class Bookkeeping(ast.NodeTransformer):
+        def visit_AugAssign(self,node):
+            if (isinstance(node.target,ast.Subscript) and isinstance(node.target.value,ast.Name)
+                    and node.target.value.id=='exposures'):return None
+            return self.generic_visit(node)
+        def visit_Expr(self,node):
+            if isinstance(node.value,ast.Call):
+                f=node.value.func
+                if isinstance(f,ast.Name) and f.id=='count_report':return None
+                if (isinstance(f,ast.Attribute) and isinstance(f.value,ast.Name)
+                        and f.value.id in {'eligible','failures'} and f.attr=='update'):return None
+            return self.generic_visit(node)
+    return ast.dump(Bookkeeping().visit(loop),include_attributes=False)
+
+
+def count_report(exposures,eligible,failures,report):
+    """Count eligible examples, never sum loss values or retain loss graphs."""
+    exposures[report['record']]+=1
+    if 'failure' in report:failures[report['failure']]+=1
+    else:eligible.update(report.get('losses',{}).keys())
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--snapshot',required=True)
     p.add_argument('--output',required=True);p.add_argument('--resume');a=p.parse_args()
@@ -114,12 +144,41 @@ def main():
                 diagnostics[op]={'measured_heads':len(errors),'mean_interval_absolute_error' if op=='Score' else 'brier':
                     sum(errors)/len(errors) if errors else None,'scope':'head readout regardless of returned status; not complete success'}
             return {'operations':result,'cases':cases,'head_diagnostics':diagnostics}
-        baseline_e=None;preflight=[];first_window=None;start_window=0
+        baseline_e=None;preflight=[];first_window=None;start_window=0;prefix=[];resume_evidence=None
         if a.resume:
-            restored=restore_model(a.resume,b,c,ref,ids,window=w)
-            check(tuple(restored['sampler']['order'])==order,'resume order drift');start_window=w.scheduled_windows
             previous=Path(a.resume).parent
+            saved=json.loads((Path(a.resume)/'manifest.json').read_text())
+            old_sources=json.loads((previous/'source-snapshot/manifest.json').read_text())
+            old_ids=saved['identities']
+            check(digest(canonical(old_sources))==old_ids['sources'],'resume source manifest drift')
+            check({k:v for k,v in old_ids.items() if k!='sources'}=={k:v for k,v in ids.items() if k!='sources'},
+                  'resume data/model/protocol drift')
+            check(set(old_sources)==set(sources) and all(old_sources[k]==v for k,v in sources.items()
+                  if k!='scripts/train_receiver.py'),'resume learning implementation changed')
+            old_script=(previous/'source-snapshot/scripts/train_receiver.py').read_bytes()
+            check(digest(old_script)==old_sources['scripts/train_receiver.py'],'old launcher source drift')
+            check(learning_loop(old_script)==learning_loop(Path(__file__).read_bytes()),
+                  'resume update loop changed beyond bookkeeping')
+            # Only launcher/accounting code differs. All optimizer/loss/model,
+            # producer, sampling and numerical sources are exactly unchanged.
+            restored=restore_model(a.resume,b,c,ref,old_ids,window=w)
+            check(tuple(restored['sampler']['order'])==order,'resume order drift');start_window=w.scheduled_windows
+            check(restored['sampler']['cursor']==start_window*8,'resume cursor drift')
             baseline_e=json.loads((previous/'baseline-E-summary.json').read_text())
+            import shutil
+            for name in ('baseline-E-summary.json','preflight.json','first-window.json'):
+                shutil.copyfile(previous/name,out/name)
+            preflight=json.loads((out/'preflight.json').read_text())['cases']
+            first_window=json.loads((out/'first-window.json').read_text())
+            prefix=[json.loads(line) for line in (previous/'training.jsonl').read_text().splitlines()
+                    if json.loads(line)['window']['window']<=start_window]
+            check([v['window']['window'] for v in prefix]==list(range(1,start_window+1)),
+                  'resume prefix incomplete/reordered')
+            resume_evidence={'checkpoint':str(a.resume),'checkpoint_manifest_sha256':file_hash(Path(a.resume)/'manifest.json'),
+                'prefix_training_log':str(previous/'training.jsonl'),'prefix_log_sha256':file_hash(previous/'training.jsonl'),
+                'prefix_windows':start_window,'old_sources':old_ids['sources'],'new_sources':ids['sources'],
+                'unchanged_learning_sources':True,'update_loop_AST_unchanged_except_counts':True,'migration':'eligibility bookkeeping counts keys; no model/optimizer reset'}
+            (out/'resume.json').write_text(json.dumps(resume_evidence,indent=2)+'\n')
         else:
             baseline_e=evaluated('baseline-E',eids)
             (out/'baseline-E-summary.json').write_text(json.dumps(baseline_e,indent=2)+'\n')
@@ -147,13 +206,16 @@ def main():
             (out/'preflight.json').write_text(json.dumps({'cases':preflight,'cache_exact':cache_checks,'optimizer_updates':0},indent=2)+'\n')
             checkpoint()
         exposures=Counter();eligible=Counter();failures=Counter();history=[]
+        for entry in prefix:
+            for episode in entry['episodes']:count_report(exposures,eligible,failures,episode)
+            history.append(entry['window'])
         with (out/'training.jsonl').open('x') as log:
             for window_index in range(start_window,188):
                 reports=[];t0=time.monotonic()
                 for key in order[window_index*8:(window_index+1)*8]:
                     s,losses,exposure=producer(train.record(key));report=s.episode_report
                     collect_session(w,s,losses,exposure)
-                    exposures[key]+=1;eligible.update(losses);failures.update([report['failure']] if 'failure' in report else [])
+                    count_report(exposures,eligible,failures,report)
                     reports.append(report);del s,losses
                 result=w.step();entry={'window':result,'episodes':reports,'elapsed_seconds':time.monotonic()-t0}
                 log.write(json.dumps(entry)+'\n');log.flush();history.append(result)
@@ -187,7 +249,7 @@ def main():
             'final_interventions':summarize(dev,final_x['cases'],unchanged=True),
             'base_initial':base_initial,'base_final':final_check,'reference_unchanged':ref.fingerprint()==ref.artifact_id,
             'R_and_frozen_codec_unchanged':native()==frozen_native,'all_gradients_none':True,
-            'source_hashes':sources,'seconds':time.monotonic()-start,'peak_cuda_bytes':torch.cuda.max_memory_allocated(),
+            'source_hashes':sources,'resume':resume_evidence,'seconds':time.monotonic()-start,'peak_cuda_bytes':torch.cuda.max_memory_allocated(),
             'scope':'one receiver-only learning pass; forced reference packets; no writer/gate/reader training or full-flow promotion'}
         (out/'report.json').write_text(json.dumps(report,indent=2)+'\n');emit(event='complete',results={k:report[k] for k in ('baseline_E','final_E','baseline_X','final_X','failed_exposures')})
 

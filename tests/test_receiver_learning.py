@@ -15,6 +15,27 @@ class ReceiverLearningTests(unittest.TestCase):
         cls.dev=load_release('data/training-collections-20261105/releases/development',
             expected_hash='5b8f4cffdc4f33e255d3a34306cac03a68c50dcd9dab905ae8d8adcf89c81e77')
 
+    def test_eligibility_counts_examples_and_serializes(self):
+        import json
+        from scripts.train_receiver import count_report
+        exposures,eligible,failures=Counter(),Counter(),Counter()
+        count_report(exposures,eligible,failures,{'record':'existing-A','losses':{'status':1.3,'score':.125}})
+        count_report(exposures,eligible,failures,{'record':'existing-B','losses':{'status':2.7}})
+        count_report(exposures,eligible,failures,{'record':'existing-C','failure':'forward rejected','losses':{'status':9.}})
+        self.assertEqual(eligible,{'status':2,'score':1})
+        self.assertEqual(failures,{'forward rejected':1})
+        self.assertEqual(sum(exposures.values()),3)
+        self.assertTrue(all(type(v) is int for v in eligible.values()))
+        json.dumps(dict(eligible))
+
+    def test_resume_source_check_preserves_the_update_loop(self):
+        from scripts.train_receiver import learning_loop
+        old="for window_index in range(start_window,188):\n producer(row)\n exposures[key]+=1\n eligible.update(losses)\n failures.update(errors)\n w.step()\n"
+        fixed="for window_index in range(start_window,188):\n producer(row)\n count_report(exposures,eligible,failures,report)\n w.step()\n"
+        self.assertEqual(learning_loop(old),learning_loop(fixed))
+        self.assertNotEqual(learning_loop(old),learning_loop(fixed.replace('producer(row)','producer(other_row)')))
+        self.assertNotEqual(learning_loop(old),learning_loop(fixed.replace('188','189')))
+
     def test_complete_pass_and_explicit_real_record_wrap(self):
         order=training_order(self.train);counts=Counter(order)
         self.assertEqual(len(order),1504);self.assertEqual(len(counts),1500)
