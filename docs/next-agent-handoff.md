@@ -7,28 +7,59 @@ This handoff records measured mechanisms, not learned capability.
 
 ## Current checkpoint
 
-**Reference recovery revision is in progress. Do not launch a duplicate fit.**
-The user authorized fixing failed recovery with existing data on the RTX 3090,
-no generation, agents or capability training. Implementation slice `908d8b5` is
-committed/pushed. Read the preregistered
-[recovery revision](reference-recovery-revision-v1.md) before interpreting results.
-The job uses `data/reference-recovery-20261106/run/`, with live progress in
-`data/reference-recovery-20261106/fit.log` and `run/windows.jsonl` once prepared.
-It is a fixed 1,000-window reference-only revision, warm-starting the previous
-unqualified reference and using fresh reference AdamW moments. Earlier data
-and reference artifacts remain unchanged. Check the actual final `run/report.json`
-and process state before resuming or starting anything else.
+**The recovery revision finished and failed. There is no fit running to resume.**
+The user's requested recovery fix is **not proved**. Implementation `908d8b5`
+reuses 3,376 existing reviewed role views with source hashes/field addresses,
+exact coverage/resume and the Reason exception. A separately documented
+[revision](reference-recovery-revision-v1.md) warm-started the old reference,
+reset reference AdamW, and ablated preceding-target vectors in half the exposures.
+See the [final measured report](reference-recovery-results-2026-11-06.md) and
+[portable receipt](evidence/reference-recovery-v1.json).
 
-Read-only diagnosis measured **31/50 unique training versus 0/50 development**
-recoveries and weak swapped-prefix sensitivity in several roles. The revised
-catalogue reuses 3,376 existing reviewed role views, preserving source row hashes/
-field addresses and the Reason exception. The scheduled 8,000 exposures cover
-all views with no RF development hash overlap. Half the fitting exposures ablate
-preceding-target vectors to require stronger latent conditioning; evaluation and
-the 95%/90% final-two gate are unchanged. **68 model-free checks passed in 2.658 s;
-four GPU objective checks passed in 13.270 s.** These implementation checks do
-not establish a recovered/qualified reference. Raw diagnostic and preflight
-evidence is retained under `data/reference-recovery-20261106/`.
+Exactly **1,000 reference-only updates / 8,000 eligible exposures** completed on
+the prescribed RTX 3090. All 3,376 views were used, one to 82 times; 4,000
+exposures used each history mode. Every gate 100 through 1,000 remained
+**0/100 exact recovery, 100/100 contrasts**. Both final reports are rejected by
+the actual qualification loader. No promotion, live initialization or capability
+update occurred. Live hashes match, all 320 frozen tensors/tying pass, all
+checkpoint/export hashes and 49 archived source files verify, and all three
+release hashes remain unchanged. Mean first/last-100 losses were
+4.7712684374183665 / 1.1359519423067104; median window 3.4190447954897536 s;
+complete runtime 4916.259019798017 s; peak CUDA allocation 4276769280 bytes;
+runner exit **2/BLOCKED**. This is failed recovery, not unavailable hardware.
+
+**68 model-free checks passed in 2.658 s; four GPU objective checks passed in
+13.270 s; three focused catalogue checks passed in 0.044 s.** The final reference
+fingerprint is `d0d4aef44b4415beb19311350eb24533190e1a27406c5d6f59a15a5a57402dec`.
+Its lineage has 2,000 reference updates; total physical reference work is 2,016
+including the previous discarded 16-update setup attempt. Do not confuse those
+counts with this revision's 1,000 updates. Raw evidence is under
+`data/reference-recovery-20261106/`, final export `run/reference-1000/`.
+
+Read-only diagnosis supports conditional/template overfitting: the old reference
+recovered 31/50 unique training meanings versus 0/50 development. Revised actual
+reconstructions recover unrelated reservation/criterion/key meanings, often the
+same text for different inputs. These are substantive errors, not paraphrases.
+A 20-case attention probe does not support chat-header-only pooling. A read-only
+persistent-latent conditioning intervention worsened CE and was not installed;
+no extra fitting block followed it. Sparse Key/Midpoint training views still
+contain only five meanings each. These findings do not prove recovery impossible
+or establish that new data is necessary. Read the final report before selecting
+any further revision; retain the unchanged >=95%/90% final-two gate.
+
+The [bounded training-only isolation probe](reference-recovery-isolation-v1.md)
+completed: original pooled vectors recover **1/6**, disposable optimized payloads
+recover **6/6** by step 16 and at step 64, with W/pooler/codec/T/live weights
+unchanged. There were **384 disposable latent-variable steps and zero model
+optimizer updates**; do not add these to model-fitting counts. These are fitted
+positive controls, not a trained encoder or held-out recoveries. For these six
+training cases, the decoder/wire can express the annotations but the produced
+representations fail. Next unfinished is a causal encoder/pooling learning
+revision; held-out decoder generalization also remains unproved.
+No source generation, agents, capability training, numeric matrix rerun or
+service change was performed. Actual semantic qualification, predicted-packet
+binding, observed correction materialization and full-trainer memory remain
+unfinished.
 
 ## Prior CPU performance checkpoint
 
@@ -474,12 +505,17 @@ Exact log/test source hashes are in the
 
 ## Next unfinished slice / blockers
 
-**Reference recovery failed after the authorized fixed fit.** Use the retained
-1,000-update reference, exact 900/1,000 reports and pinned existing releases.
-Investigate held-out recovery and document a development revision before any
-new fitting. Do not generate more data, extend epochs automatically, relax the
-95%/90% gate or use locked cases to repair development results. A frozen export,
-low training loss and 100% contrast separation cannot promote this reference.
+**Reference recovery still fails after the documented recovery-v1 revision.**
+Use the retained final artifact and actual 900/1,000 reports in
+`data/reference-recovery-20261106/run/`, not the earlier artifact alone. The
+reuse/ablation implementation passed engineering checks but never passed a
+recovery gate. The bounded training-only probe now demonstrates six locally
+recoverable annotations through the fixed decoder/wire; their original pooled
+vectors recover only one. Develop a causal encoder/pooling learning revision
+using existing training views; do not rerun the failed block, relax gates or
+repair from development/locked labels. A low loss,
+exported artifact or 100% contrasts cannot promote this reference. See the
+[current result](reference-recovery-results-2026-11-06.md) for exact evidence.
 
 The dispatch performance slice is now implemented and qualified through the
 separate graph-v1 protocol above. Keep its source-bound evidence distinct from
