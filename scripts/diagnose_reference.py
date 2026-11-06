@@ -6,18 +6,20 @@ from pathlib import Path
 import time
 from qwen_one_two.training.inputs import canonical,digest,check,SLOTS
 from qwen_one_two.training.diagnostics import (PROTOCOL,BLOCKS,CONTROL_IDS,MASKS,choose_cases,
-    ranking,eligible,BlockBank,Evaluator,DiagnosticDeadline,same_bytes)
+    ranking,eligible,BlockBank,Evaluator,load_resume)
 from scripts.fit_reference import TRAIN_SHA,DEV_SHA,source_snapshot,export_reference
 
 ROOT=Path('data/reference-encoder-20261106')
-CONTRACT=Path('docs/reference-block-search-v1.md')
+CONTRACT=Path('docs/reference-block-search-resume-v1.md')
 LOCKED_SHA='d13594f18738056ee179b3498d54d8261f7f7654aad633fabb776810681aa1cf'
-SEARCH_SECONDS=600
 
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--snapshot',required=True);parser.add_argument('--output',required=True)
-    args=parser.parse_args();output=Path(args.output);output.mkdir(parents=True,exist_ok=False);started=time.monotonic()
+    parser.add_argument('--resume');parser.add_argument('--resume-receipt')
+    args=parser.parse_args();check(bool(args.resume)==bool(args.resume_receipt),'resume requires its evidence receipt')
+    output=Path(args.output);output.mkdir(parents=True,exist_ok=False);started=time.monotonic()
+    resumed=load_resume(args.resume,args.resume_receipt) if args.resume else None
     def save(name,value):(output/name).write_bytes(canonical(value))
     log=(output/'events.jsonl').open('x')
     def emit(event):
@@ -57,6 +59,13 @@ def main():
     for items in splits.values():
         for row in items:row['prior_donor_exposures']=donor_counts[row['id']]
     save('cases.json',dict(training_release=train.identity,splits=splits,scope='two disjoint search sets; both previously training data'))
+    if resumed:
+        check(resumed['cases']==json.loads((output/'cases.json').read_bytes()),'resume cases changed')
+        check(resumed['report']['parent_assets']==assets and resumed['report']['release_hashes']==release_hashes,'resume source/data changed')
+        save('resume.json',dict(path=args.resume,receipt=args.resume_receipt,receipt_sha256=resumed['receipt_sha256'],
+            report_sha256=resumed['report_sha256'],completed_masks=sorted(resumed['search']),
+            partial_recovery_counts={m:len(v) for m,v in resumed['partial'].items()},
+            previous_source_hashes=resumed['report']['source_hashes']))
     sources=source_snapshot(output)
     for name in ('scripts/diagnose_reference.py',str(CONTRACT),'tests/test_reference_diagnostics.py','tests/test_reference_diagnostics_gpu.py'):
         body=Path(name).read_bytes();sources[name]=digest(body);p=output/'source-snapshot'/name
@@ -83,7 +92,7 @@ def main():
         check(state_fingerprint(baseline)==manifests['baseline']['reference_id'] and
               state_fingerprint(donor)==manifests['donor']['reference_id'],'loaded source fingerprints')
         bank=BlockBank(baseline,donor);ref.load_state_dict(baseline);ref.freeze(manifests['baseline']['reference_id'])
-        decoder_before=ref.decoder_fingerprint();prepared={};deadline=time.monotonic()+SEARCH_SECONDS
+        decoder_before=ref.decoder_fingerprint();prepared={}
         annotation_positions=0
         for row in splits['search']+splits['screen']:
             text=annotations[row['id']].content.decode()
@@ -96,41 +105,50 @@ def main():
         save('feature-identities.json',dict(base_sha256=BASE_SHA,profile='v3/graph-v1',
             chat_template_sha256=digest(canonical(b.tokenizer.chat_template)),
             source_hashes=source_hashes(),cases={k:{n:v for n,v in p.items() if n!='states'} for k,p in prepared.items()}))
-        evaluator=Evaluator(ref,prepared,emit,deadline);search={};screen={};edits={};timed_out=False;shortlist=[]
-        fingerprints={};deduplicated=[]
+        if resumed:check(resumed['features']==json.loads((output/'feature-identities.json').read_bytes()),'resume feature/model identity changed')
+        evaluator=Evaluator(ref,prepared,emit);search={} if not resumed else dict(resumed['search']);screen={}
+        edits={} if not resumed else {int(k):v for k,v in resumed['edits'].items()}
+        fingerprints={r['reference_id']:m for m,r in search.items()};deduplicated=[]
+        reused_masks=set(search)
         def install(mask):
             change=bank.apply(ref.state_dict(),mask);ref.freeze();edits[mask]=dict(change,reference_id=ref.artifact_id)
             return ref.artifact_id
-        try:
-            for mask in MASKS:
-                evaluator.guard();identity=install(mask)
+        for mask in MASKS:
+            if mask in reused_masks:
+                (output/f'search-{mask:02d}.json').write_bytes((Path(args.resume)/f'search-{mask:02d}.json').read_bytes())
+                emit(dict(event='candidate_reused',mask=mask,stage='search',reference_id=search[mask]['reference_id'],
+                          report_sha256=digest((output/f'search-{mask:02d}.json').read_bytes())))
+            else:
+                identity=install(mask)
                 if identity in fingerprints:
                     other=fingerprints[identity];search[mask]=dict(search[other],mask=mask)
                     deduplicated.append(dict(mask=mask,duplicate_of=other));emit(dict(event='duplicate',mask=mask,duplicate_of=other))
                 else:
                     fingerprints[identity]=mask;emit(dict(event='candidate_started',mask=mask,stage='search',blocks=edits[mask]['blocks']))
-                    search[mask]=evaluator.measure(mask,'search',splits['search'])
-                save(f'search-{mask:02d}.json',search[mask]);save('edits.json',edits)
-                controls=[x for x in search[mask]['cases'] if x['id'] in CONTROL_IDS]
-                if mask==0:check(sum(x['recovery']['exact'] for x in controls)==2,'baseline six-case readback drift')
-                if mask==31:
-                    check(ref.artifact_id==manifests['donor']['reference_id'] and all(x['recovery']['exact'] for x in controls),
-                          'donor six-case positive control failed')
-            # Shortlist by search data only, preserving the full result set.
-            unique_masks=[m for m in MASKS if m and m not in {d['mask'] for d in deduplicated}]
-            shortlist=sorted(unique_masks,key=lambda m:ranking(search[m]))[:3]
-            save('shortlist.json',dict(masks=shortlist,selection='search exact, margin, swap effect, fewer blocks, mask'))
-            for mask in (0,*shortlist):
-                evaluator.guard();install(mask);emit(dict(event='candidate_started',mask=mask,stage='screen'))
-                screen[mask]=evaluator.measure(mask,'screen',splits['screen']);save(f'screen-{mask:02d}.json',screen[mask])
-        except DiagnosticDeadline as error:
-            timed_out=True;emit(dict(event='deadline',reason=str(error)))
-        complete=len(search)==32 and len(screen)==4 and not timed_out
+                    partial={} if not resumed else resumed['partial'].get(mask,{})
+                    if partial:check(identity==resumed['edits'][str(mask)]['reference_id'],'partial candidate identity changed')
+                    search[mask]=evaluator.measure(mask,'search',splits['search'],recoveries=partial)
+                save(f'search-{mask:02d}.json',search[mask])
+            save('edits.json',edits)
+            controls=[x for x in search[mask]['cases'] if x['id'] in CONTROL_IDS]
+            if mask==0:check(sum(x['recovery']['exact'] for x in controls)==2,'baseline six-case evidence drift')
+            if mask==31:
+                check(search[mask]['reference_id']==manifests['donor']['reference_id'] and all(x['recovery']['exact'] for x in controls),
+                      'donor six-case positive evidence failed')
+        # Shortlist by the complete search set only, preserving every measured result.
+        unique_masks=[m for m in MASKS if m and m not in {d['mask'] for d in deduplicated}]
+        shortlist=sorted(unique_masks,key=lambda m:ranking(search[m]))[:3]
+        save('shortlist.json',dict(masks=shortlist,selection='search exact, margin, swap effect, fewer blocks, mask'))
+        for mask in (0,*shortlist):
+            install(mask);emit(dict(event='candidate_started',mask=mask,stage='screen'))
+            screen[mask]=evaluator.measure(mask,'screen',splits['screen']);save(f'screen-{mask:02d}.json',screen[mask])
+        complete=len(search)==32 and len(screen)==4
+        check(complete,'finish the entire agreed candidate and screening set')
         eligible_masks=[m for m in shortlist if complete and eligible(search[m],screen[m],search[0],screen[0])]
         winner=min(eligible_masks,key=lambda m:ranking(screen[m])) if eligible_masks else None
         selection=dict(complete=complete,shortlist=shortlist,eligible=eligible_masks,winner=winner,
                        reason='screen gain without any baseline-recovery loss' if winner is not None else
-                              ('fixed budget exhausted; no candidate selected' if not complete else 'no shortlisted candidate met retention and strict screen-gain criteria'))
+                              'no shortlisted candidate met retention and strict screen-gain criteria')
         save('selection.json',selection);emit(dict(event='selection',**selection))
         # Export the search winner before loading development labels. No next-best retry.
         qualifications=[];export_hashes={}
@@ -159,7 +177,7 @@ def main():
                 qualifications.append(dict(window=n,status=q['status'],recovery=q['recovery'],contrast=q['contrast'],
                     loader_accepted=accepted,loader_rejection=rejection,report_sha256=digest(path.read_bytes()),reference_id=ref.artifact_id))
                 emit(dict(event='qualification',**qualifications[-1]))
-        # Finish on the exact original baseline, including after a timed-out search.
+        # Finish on the exact original baseline.
         bank.apply(ref.state_dict(),0);ref.freeze(manifests['baseline']['reference_id'])
         check(ref.decoder_fingerprint()==decoder_before,'decoder drift')
         check(state_fingerprint(bank.baseline)==manifests['baseline']['reference_id'] and
@@ -174,9 +192,12 @@ def main():
                 'QUALIFIED' if all(q['loader_accepted'] for q in qualifications) else 'QUALIFICATION_FAILED')
         result=dict(protocol=PROTOCOL,status=status,search_complete=complete,candidate_budget=32,
             unique_candidates=len(fingerprints),completed_search_candidates=len(search),completed_screen_candidates=len(screen),
+            reused_search_candidates=len(reused_masks),new_search_candidates=len(search)-len(reused_masks),
+            reused_partial_recovery_cases=evaluator.reused_recoveries,
+            prior_report_sha256=None if not resumed else resumed['report_sha256'],
             deduplicated=deduplicated,selection=selection,qualifications=qualifications,
             gpu_uuid='GPU-225509c3-d702-6c27-de03-76b5e99b33b1',profile='v3/graph-v1',
-            search_seconds_limit=SEARCH_SECONDS,source_hashes=sources,parent_assets=assets,release_hashes=release_hashes,
+            search_seconds_limit=None,source_hashes=sources,parent_assets=assets,release_hashes=release_hashes,
             annotation_W_prefills=len(prepared),annotation_positions=annotation_positions,
             diagnostic_sensitivity_prefills=evaluator.sensitivity_calls,diagnostic_recovery_prefills=evaluator.recovery_calls,
             diagnostic_decoder_positions=evaluator.positions,qualification_accounting='separate original full suites in qualification reports',

@@ -50,3 +50,33 @@ class DiagnosticMetadataTests(unittest.TestCase):
         self.assertFalse(eligible(gain,base,base,base));self.assertFalse(eligible(gain,regression,base,base))
         self.assertLess(ranking(gain),ranking(base))
         self.assertLess(ranking(self.result(1,['A'])),ranking(self.result(3,['A'])))
+
+    def test_resume_reuses_complete_and_partial_results_and_rejects_corruption(self):
+        import json,tempfile
+        from pathlib import Path
+        from qwen_one_two.training.inputs import canonical
+        from qwen_one_two.training.diagnostics import load_resume,PROTOCOL
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);rows=choose_cases(self.rows(),anchors=())['search']
+            measured=[dict(row,recovery=dict(exact=False,matched_tokens=0,target_tokens=2,
+                        first_mismatch=dict(index=0,predicted_token=1,target_token=2))) for row in rows]
+            artifacts={'report.json':dict(protocol=PROTOCOL,status='INCOMPLETE',completed_search_candidates=1,completed_screen_candidates=0),
+                'cases.json':dict(splits=dict(search=rows)), 'feature-identities.json':dict(schema_fixture_only=True),
+                'edits.json':{'0':dict(reference_id='SCHEMA-ONLY'), '20':dict(reference_id='SCHEMA-PARTIAL')},
+                'search-00.json':dict(mask=0,stage='search',reference_id='SCHEMA-ONLY',cases=measured,executed=20,exact=0)}
+            for name,value in artifacts.items():(root/name).write_bytes(canonical(value))
+            (root/'events.jsonl').write_text(json.dumps(dict(event='recovery',stage='search',mask=20,**measured[0]))+'\n')
+            receipt=root/'receipt.json';receipt.write_bytes(canonical(dict(format='qot-reference-block-search-evidence-v1',
+                assets={str(p):digest(p.read_bytes()) for p in root.iterdir()})))
+            result=load_resume(root,receipt)
+            self.assertEqual(result['search'][0],artifacts['search-00.json'])
+            self.assertEqual(result['partial'][20][rows[0]['id']]['recovery'],measured[0]['recovery'])
+            (root/'search-00.json').write_bytes(b'{}')
+            with self.assertRaisesRegex(ValueError,'artifact hash'):load_resume(root,receipt)
+
+    def test_reused_recovery_requires_same_case_and_target(self):
+        from qwen_one_two.training.diagnostics import reused_recovery
+        row=self.rows()[0];previous=dict(row,recovery=dict(target_tokens=2,exact=True,matched_tokens=2,first_mismatch=None))
+        self.assertEqual(reused_recovery(row,[2,248046],previous),previous['recovery'])
+        with self.assertRaisesRegex(ValueError,'source identity'):reused_recovery(dict(row,family='FOREIGN-SCHEMA'),[2,248046],previous)
+        with self.assertRaisesRegex(ValueError,'target identity'):reused_recovery(row,[1,2,248046],previous)

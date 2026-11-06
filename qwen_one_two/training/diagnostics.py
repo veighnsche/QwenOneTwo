@@ -123,26 +123,59 @@ class BlockBank:
                     unchanged_tensors=len(current)-len(changed),all_other_tensors_byte_identical=True)
 
 
-class DiagnosticDeadline(RuntimeError):pass
+def load_resume(path,receipt_path):
+    """Load hash-bound completed results and partial recovery records once."""
+    import json
+    from pathlib import Path
+    root=Path(path);receipt=json.loads(Path(receipt_path).read_bytes())
+    check(receipt['format']=='qot-reference-block-search-evidence-v1','resume receipt format')
+    assets={Path(k).resolve():v for k,v in receipt['assets'].items()}
+    def read(name,lines=False):
+        file=root/name;body=file.read_bytes()
+        check(digest(body)==assets.get(file.resolve()),'resume artifact hash: '+name)
+        return [json.loads(line) for line in body.splitlines()] if lines else json.loads(body)
+    report=read('report.json');check(report['protocol']==PROTOCOL and report['status']=='INCOMPLETE','resume experiment identity')
+    cases=read('cases.json');features=read('feature-identities.json');edits=read('edits.json')
+    search={}
+    for file in sorted(root.glob('search-*.json')):
+        result=read(file.name);mask=result['mask']
+        check(mask in MASKS and mask not in search and result['stage']=='search','resume candidate identity')
+        check(result['reference_id']==edits[str(mask)]['reference_id'],'resume candidate fingerprint')
+        check([c['id'] for c in result['cases']]==[c['id'] for c in cases['splits']['search']],'resume case order')
+        check(result['executed']==20 and result['exact']==sum(c['recovery']['exact'] for c in result['cases']),
+              'resume complete candidate accounting')
+        search[mask]=result
+    check(len(search)==report['completed_search_candidates'] and report['completed_screen_candidates']==0,'resume coverage')
+    partial={}
+    for event in read('events.jsonl',lines=True):
+        if event['event']=='recovery' and event['stage']=='search' and event['mask'] not in search:
+            part=partial.setdefault(event['mask'],{})
+            check(event['id'] not in part and str(event['mask']) in edits,'resume partial identity')
+            part[event['id']]=event
+    return dict(report=report,cases=cases,features=features,edits=edits,search=search,partial=partial,
+                receipt_sha256=digest(Path(receipt_path).read_bytes()),report_sha256=digest((root/'report.json').read_bytes()))
+
+
+def reused_recovery(row,targets,previous):
+    check(all(previous[k]==row[k] for k in ('id','role','family','annotation_sha256')),'reused recovery source identity')
+    check(previous['recovery']['target_tokens']==len(targets),'reused recovery target identity')
+    return previous['recovery']
 
 
 class Evaluator:
     """One loaded frozen model, cached W features, fresh decoder state per episode."""
-    def __init__(self,reference,prepared,emit,deadline):
+    def __init__(self,reference,prepared,emit):
         import torch
-        self.reference=reference;self.prepared=prepared;self.emit=emit;self.deadline=deadline
+        self.reference=reference;self.prepared=prepared;self.emit=emit
         self.positions=0;self.sensitivity_calls=0;self.recovery_calls=0
+        self.reused_recoveries=0;self.reused_positions=0
         b=reference.backbone
         check(b.compensated and b.precision_parts==2 and b.feedback_precision=='fp32' and
               b.recurrence_backend=='graph-v1','v3 graph-v1 required')
         self.indices=torch.cat((torch.arange(248044,device='cuda'),torch.tensor([248046],device='cuda')))
         self.vocabulary=b.model.model.embed_tokens.weight[self.indices]
 
-    def guard(self):
-        import time
-        if time.monotonic()>=self.deadline:raise DiagnosticDeadline('fixed diagnostic time budget exhausted')
-
-    def measure(self,mask,stage,rows):
+    def measure(self,mask,stage,rows,*,recoveries=None):
         import time
         import torch
         from .binding import wire_payload
@@ -150,7 +183,9 @@ class Evaluator:
         ref=self.reference;before=ref.fingerprint();started=time.monotonic();cases=[]
         check(ref.frozen and before==ref.artifact_id and not torch.is_grad_enabled()
               and all(not p.requires_grad for p in ref.parameters()),'frozen no-grad evaluator required')
-        start_positions=self.positions
+        start_positions=self.positions;start_reused=self.reused_positions;start_reused_cases=self.reused_recoveries
+        recoveries={} if recoveries is None else recoveries
+        check(set(recoveries)<={r['id'] for r in rows},'foreign reused recovery case')
         for role in SLOTS:
             pair=[r for r in rows if r['role']==role];check(len(pair)==2,'role pair')
             prepared=[self.prepared[r['id']] for r in pair]
@@ -158,7 +193,6 @@ class Evaluator:
             tokens=[p['targets'][index] for p in prepared];observations=[];pair_cases=[]
             check(all(0<=t<248044 for t in tokens),'ordinary diagnostic token required')
             for side,(row,p) in enumerate(zip(pair,prepared)):
-                self.guard()
                 payload=ref.pooler(p['states'],*SLOTS[role]);prefix=wire_payload(ref,payload,role)
                 # Only the identical preceding token sequence is supplied at this diagnostic position.
                 common=ref.backbone.embedding(p['targets'][:index])[0] if index else prefix.new_empty((0,1024))
@@ -171,14 +205,20 @@ class Evaluator:
                 sensitivity=dict(first_difference=index,own_token=tokens[side],foil_token=tokens[1-side],
                     own_token_text=ref.backbone.tokenizer.decode([tokens[side]]),
                     predicted_token=int(self.indices[scores.argmax()]),own_log_probability=float(selected[side]),
+                    foil_log_probability=float(selected[1-side]),
                     content_margin=float(selected[side]-selected[1-side]))
                 self.emit(dict(event='sensitivity',mask=mask,stage=stage,id=row['id'],**sensitivity))
                 del scores,lp,hidden,inputs,common
-                self.guard();recovery=ref.exact_recovery(prefix,p['targets']);self.recovery_calls+=1
-                self.positions+=len(prefix)+min(recovery['matched_tokens'],len(p['targets'])-1)
+                reuse=row['id'] in recoveries
+                if reuse:
+                    recovery=reused_recovery(row,p['targets'],recoveries[row['id']]);self.reused_recoveries+=1
+                    self.reused_positions+=len(prefix)+min(recovery['matched_tokens'],len(p['targets'])-1)
+                else:
+                    recovery=ref.exact_recovery(prefix,p['targets']);self.recovery_calls+=1
+                    self.positions+=len(prefix)+min(recovery['matched_tokens'],len(p['targets'])-1)
                 case=dict(id=row['id'],role=role,family=row['family'],annotation_sha256=row['annotation_sha256'],
                           recovery=recovery,**sensitivity)
-                self.emit(dict(event='recovery',mask=mask,stage=stage,**case));pair_cases.append(case)
+                self.emit(dict(event='recovery_reused' if reuse else 'recovery',mask=mask,stage=stage,**case));pair_cases.append(case)
             for side,case in enumerate(pair_cases):
                 case['swap_effect']=float(observations[side][side]-observations[1-side][side]);cases.append(case)
         check(ref.fingerprint()==before,'diagnostics mutated reference')
@@ -186,6 +226,8 @@ class Evaluator:
             exact=sum(c['recovery']['exact'] for c in cases),
             mean_content_margin=sum(c['content_margin'] for c in cases)/len(cases),
             mean_swap_effect=sum(c['swap_effect'] for c in cases)/len(cases),
-            positions=self.positions-start_positions,seconds=time.monotonic()-started)
+            positions=self.positions-start_positions+self.reused_positions-start_reused,
+            executed_positions=self.positions-start_positions,reused_recovery_cases=self.reused_recoveries-start_reused_cases,
+            seconds=time.monotonic()-started,timing_scope='this invocation; reused recoveries exclude historical time')
         self.emit(dict(event='candidate_finished',**{k:v for k,v in result.items() if k!='cases'}))
         return result

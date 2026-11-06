@@ -44,3 +44,9 @@ For user-authorized work in this repository, commit directly to `main` and push
 when the work is complete. Do not create feature branches, pull requests or drafts.
 This is standing authorization to commit and push that work; do not ask again.
 Deployment still requires explicit user authorization.
+
+Keep local experiment machinery simple. Finish the agreed finite work and reuse
+valid completed measurements. Do not add agent-chosen elapsed-time, token or cost
+cutoffs unless the user explicitly requests them; an efficiency preference is not
+authorization to stop an agreed experiment early. Avoid repeating equivalent
+validation when the relevant inputs and implementation have not changed.
