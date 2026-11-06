@@ -7,6 +7,68 @@ This handoff records measured mechanisms, not learned capability.
 
 ## Current checkpoint
 
+**The exposure-controlled reference comparison is complete. Extra exposure
+repairs all four tested Question/Target training failures, with no diagnostic
+regressions; development recovery remains 0/100. No job remains active.**
+Implementation/protocol `ade8246` preceded the run. Read the
+[measured report](reference-exposure-results-2026-11-06.md),
+[portable receipt](evidence/reference-exposure-comparison-v1.json) and
+[fixed comparison protocol](reference-exposure-comparison-v1.md).
+
+The completed broad control was reused. The treatment restored its exact initial
+weights, optimizer and RNG, then completed **1,000 pooler-only updates / 8,000
+eligible presentations** on the RTX 3090. Exactly **336 same-role repeat slots**
+were reallocated, preserving all **3,376 distinct views**, every original first
+occurrence and every slot's role. Questions 0000/0010 increased from 1 each to
+86 each; Targets 0001/0011 from 2 each to 85 each; Keys 0008/0018 stayed at 81.
+All **49 original computation sources** matched, and all **35 unchanged initial
+updates** reproduced control loss and gradient norm exactly.
+
+| Metric | Original control | Treatment 900 | Treatment 1,000 |
+|---|---:|---:|---:|
+| Six training controls | 2/6 | **6/6** | **6/6** |
+| Fixed first diagnostic set | 11/20 | **15/20** | **15/20** |
+| Fixed separate screening set | 10/20 | 10/20 | 10/20 |
+| Combined training diagnostics | 21/40 | **25/40** | **25/40** |
+| Original development recovery | 0/100 at both | **0/100** | **0/100** |
+| Original development contrasts | 100/100 at both | 100/100 | 100/100 |
+
+Exactly the four targeted cases improve. All 21 baseline diagnostic recoveries
+remain exact, with zero losses across the fixed 40 cases. Diagnostic baseline
+is the old final 1,000-update control; development compares the corresponding
+900/1,000 checkpoints. Both >=95%/90% development gates still fail. This is
+evidence that targeted exposure allocation contributes to these training
+failures, not qualification or a unique explanation of generalization failure.
+Most low-exposure views were not boosted; neither broader retention nor a fully
+balanced schedule was tested. Do not claim catastrophic forgetting: the old
+broad control restarted from the common initial state, not the six-case probe.
+
+**Three metadata tests passed in 0.001 s**, syntax checks passed, and the full
+metadata/serialized-byte audit passed. All **1,396 initial tensors**, optimizer
+and RNG bytes match the control. All eleven checkpoints retain **1,338 unchanged
+non-pooler tensors**, including **483 T/codec state tensors**. All **320 frozen
+base tensors/tying** pass; decoder/live identities are unchanged; all gradients
+finish None. Existing numeric matrices were reused with unchanged computation
+sources. No new source data/reviews, agents, external model calls, capability
+updates, locked-label fitting, promotion or service changes occurred.
+
+Training: **3,376 W feature prefills / 131,255 positions**, CUDA cache;
+**246,970 charged positions / 238,970 teacher-forced forward input positions**.
+Run time after metadata preparation **3,236.2155652950023 s**, median update
+**2.550225070999659 s**, peak CUDA **4,193,888,256 bytes**. No arbitrary time cap.
+Runner exit **0/COMPLETED**, `reference_qualified=false`. Raw evidence:
+`data/reference-exposure-20261106/run/`, plus `audit.py`, `audit.json`, `fit.log`
+and `command.json` in its parent. Final unqualified reference fingerprint:
+`d741b65f85ef4d381c74bf48b3bf2330de3009f8e561e20d9e3bdc389ffdeb42`.
+
+Next unfinished slice: **reference recovery/generalization under broad training
+coverage**, preserving retention and original paired qualification. A broader
+exposure schedule is supported as a next experiment to discuss; no additional
+fitting, data generation or capability training is queued. Preserve all W,
+RTX 3090, latent/cache, precision and original-tolerance constraints.
+
+## Previous completed block search
+
 **The arbitrary time cap is removed, and all 32 candidates plus all four
 screening evaluations are complete. No finalist met the original improvement/
 retention rule. No job remains active.** Implementation `0d6b1e9` adds result

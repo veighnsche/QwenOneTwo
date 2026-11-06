@@ -1,0 +1,497 @@
+{
+  "scope": "One exposure-controlled reference-pooler comparison; no capability training or promotion",
+  "implementation_commit": "ade82462f916fb2d3a024fc448316dad7f64793a",
+  "protocol": "docs/reference-exposure-comparison-v1.md",
+  "gpu_uuid": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+  "runner_exit": 0,
+  "run": "data/reference-exposure-20261106/run",
+  "result": "COMPLETED; targeted exposure recovery demonstrated; development qualification still fails",
+  "assets": {
+    "data/reference-exposure-20261106/audit.json": "fca61ce0375e02365dc2760f22e01e390b17653e457bdf906977b6fb485c6d65",
+    "data/reference-exposure-20261106/audit.log": "fca61ce0375e02365dc2760f22e01e390b17653e457bdf906977b6fb485c6d65",
+    "data/reference-exposure-20261106/audit.py": "5a6024391e89fbf1883312fcc0798ca81e7c040041ef4870c2c729f193d57fef",
+    "data/reference-exposure-20261106/command.json": "b5a079b2af8f3c5e892141568e3e8f3682618c8fc57946f6620f2bf53bb45352",
+    "data/reference-exposure-20261106/fit.log": "48a354c58aced4bf11db92d0c5a65c1b2554355432e58de21b461620f805a533",
+    "data/reference-exposure-20261106/run/checkpoint-0000/manifest.json": "c085e097d917c3d86e3365712f6b0c3a5b781f185065ecc36cd681370c56c442",
+    "data/reference-exposure-20261106/run/checkpoint-0100/manifest.json": "d153bef45780c881caf5634a6d977254e6fded20c36a6408b1e5b44c412520f9",
+    "data/reference-exposure-20261106/run/checkpoint-0200/manifest.json": "ba691f945d9cf4694a052d9419947d5d6f2e161a4b5951e0d9e45209aa3664d4",
+    "data/reference-exposure-20261106/run/checkpoint-0300/manifest.json": "2b7e5ce0927521f35780f24d43fa4ea18ad51420b97bcd2b7c9108420aa33ecd",
+    "data/reference-exposure-20261106/run/checkpoint-0400/manifest.json": "38c3c20e51756646d6b62dc4b8899e8539e0c5447e7483ce2994feb658a2447c",
+    "data/reference-exposure-20261106/run/checkpoint-0500/manifest.json": "7640b8e3eff58dc5dab8b14eeeeb775f78bea21b18e237ddd9891c19065e7318",
+    "data/reference-exposure-20261106/run/checkpoint-0600/manifest.json": "a9fe80485e84d729eb347e2c2038053ba708763400ca3936aefc34ef0e034008",
+    "data/reference-exposure-20261106/run/checkpoint-0700/manifest.json": "de71fc5a8f533b0a186045399d0c217becc1f0b6c6416eae9385a6dbb648be5d",
+    "data/reference-exposure-20261106/run/checkpoint-0800/manifest.json": "72d63b849cc8233b7a8ed6ccda7b7caf6b07102228890c0e9b1197b3524e8d74",
+    "data/reference-exposure-20261106/run/checkpoint-0900/manifest.json": "cf9d0f84d1e9c0e30de006a89047970fa389a925334057d3acd303c8fb1681a1",
+    "data/reference-exposure-20261106/run/checkpoint-1000/manifest.json": "98dcb3f5c4896ec339a3a88a5eb0e35c789d01e10dbf2c5aecc742625ce7e5e0",
+    "data/reference-exposure-20261106/run/diagnostics-0900.json": "89e7b1dfefa8f8a40fe7cd7d5bb0596065f9353b7d1482d9b368900d6b4cb139",
+    "data/reference-exposure-20261106/run/diagnostics-1000.json": "816035704392c229338c5960d01c5d9a4fbadf3e9552a5459830cd870c3a36b0",
+    "data/reference-exposure-20261106/run/exposures.json": "3a4c7dde3faca27d991d76bb52bce3e334e5e65a432124389026cc72ba16e3ae",
+    "data/reference-exposure-20261106/run/qualification-0900.json": "29aeef57cecf6a08cee2cf01dd9914abe2d0f10c1ff5d017a5a3cc409e46f80d",
+    "data/reference-exposure-20261106/run/qualification-1000.json": "f0772ffdfdff69e2ae612674cea34868b8912a4e02e1cecb4c3216d9f0efad35",
+    "data/reference-exposure-20261106/run/reference-0900/manifest.json": "3faa03eaea73511f56b6dde84461a978dad9eb99ead18e445bd762c053fe8496",
+    "data/reference-exposure-20261106/run/reference-1000/manifest.json": "ba04d4ebc6421ec262ae6b56ad2a7f9fd8284f30db8a7f0f65dc6fc07c04aa23",
+    "data/reference-exposure-20261106/run/report.json": "4bf328722d98fae9b843bf41953ea38a6353bff1a516d2f54f1a74a009792775",
+    "data/reference-exposure-20261106/run/reused-control.json": "9eaffe64093253b307d8ee143fac66233ba9fbf35ecdfdb8b25ee848bb73c363",
+    "data/reference-exposure-20261106/run/run.json": "7c5eb4922e71d1dbacf868f65b73879440de594c9bf006ceffe179a7384816b8",
+    "data/reference-exposure-20261106/run/schedule.json": "54e9dcb0ef0de6dd4ddc568c967d8b6d91a47f7c21cbdc1001c3a58b6cf31000",
+    "data/reference-exposure-20261106/run/source-snapshot/manifest.json": "8eba4058ef1c6ab7b08929f713775571c87640e33b9e6452cccf6824ffad1f42",
+    "data/reference-exposure-20261106/run/windows.jsonl": "82b523eae6cd4c410b177e878fcbab95a8b240099b1e56641bd69e586d799575"
+  },
+  "run_report": {
+    "agents": 0,
+    "all_gradients_none": true,
+    "capability_updates": 0,
+    "decoder_after_sha256": "88e34bbec1442fe798c18b4b67a87ff49df388dbcd5c8c12379602b0ad412c21",
+    "decoder_before_sha256": "88e34bbec1442fe798c18b4b67a87ff49df388dbcd5c8c12379602b0ad412c21",
+    "elapsed_seconds": 3236.2155652950023,
+    "frozen_base": {
+      "base_tied_storage": true,
+      "mismatches": [],
+      "parameters_checked": 320,
+      "pass": true
+    },
+    "live_after_sha256": "c56c8f45d11f4eca02ba4bbc1d1024c50d1b74cceeee8e1d3a5c8e7378485450",
+    "live_before_sha256": "c56c8f45d11f4eca02ba4bbc1d1024c50d1b74cceeee8e1d3a5c8e7378485450",
+    "new_data": 0,
+    "optimizer_updates": 1000,
+    "peak_allocated": 4193888256,
+    "qualifications": [
+      {
+        "contrast": {
+          "passed": 100,
+          "scheduled": 100
+        },
+        "diagnostic_exact": 25,
+        "recovery": {
+          "exact": 0,
+          "executed": 100,
+          "scheduled": 100,
+          "unresolved": 100
+        },
+        "reference_id": "fa906e8f77bec91d6c43af8afc4a8c10e31f39281ab008b18719d526f4aa9969",
+        "status": "BLOCKED",
+        "window": 900
+      },
+      {
+        "contrast": {
+          "passed": 100,
+          "scheduled": 100
+        },
+        "diagnostic_exact": 25,
+        "recovery": {
+          "exact": 0,
+          "executed": 100,
+          "scheduled": 100,
+          "unresolved": 100
+        },
+        "reference_id": "d741b65f85ef4d381c74bf48b3bf2330de3009f8e561e20d9e3bdc389ffdeb42",
+        "status": "BLOCKED",
+        "window": 1000
+      }
+    ],
+    "reference_qualified": false,
+    "scheduled_windows": 1000,
+    "status": "COMPLETED",
+    "training_exposures": 8000,
+    "training_positions": 246970,
+    "unchanged_prefix_windows_verified": 35
+  },
+  "audit": {
+    "status": "PASSED",
+    "comparisons": {
+      "900": {
+        "search": {
+          "before": 11,
+          "after": 15,
+          "gains": [
+            "train-reference-0000",
+            "train-reference-0010",
+            "train-reference-0001",
+            "train-reference-0011"
+          ],
+          "losses": []
+        },
+        "screen": {
+          "before": 10,
+          "after": 10,
+          "gains": [],
+          "losses": []
+        },
+        "controls": {
+          "train-reference-0000": {
+            "before": false,
+            "after": true,
+            "recovery": {
+              "exact": true,
+              "first_mismatch": null,
+              "matched_tokens": 40,
+              "target_tokens": 40
+            },
+            "planned_exposures": {
+              "after": 86,
+              "annotation_sha256": "c91f1c62a534f5800521cb05321f24e8a6c996ee307b6951e1b8193823cddad5",
+              "before": 1
+            },
+            "observed_presentations": 61
+          },
+          "train-reference-0010": {
+            "before": false,
+            "after": true,
+            "recovery": {
+              "exact": true,
+              "first_mismatch": null,
+              "matched_tokens": 42,
+              "target_tokens": 42
+            },
+            "planned_exposures": {
+              "after": 86,
+              "annotation_sha256": "23a76cb873c4b4f541342d2083dd7e5a3c033dcf4026f26f70d9a8fa4d560e36",
+              "before": 1
+            },
+            "observed_presentations": 60
+          },
+          "train-reference-0001": {
+            "before": false,
+            "after": true,
+            "recovery": {
+              "exact": true,
+              "first_mismatch": null,
+              "matched_tokens": 26,
+              "target_tokens": 26
+            },
+            "planned_exposures": {
+              "after": 85,
+              "annotation_sha256": "6dfea32f99d9440cfde0251d914a7d766e01f8e375901812e7512f0ff6de207b",
+              "before": 2
+            },
+            "observed_presentations": 65
+          },
+          "train-reference-0011": {
+            "before": false,
+            "after": true,
+            "recovery": {
+              "exact": true,
+              "first_mismatch": null,
+              "matched_tokens": 26,
+              "target_tokens": 26
+            },
+            "planned_exposures": {
+              "after": 85,
+              "annotation_sha256": "1b57dc245e4c8421c08e6d3c73842bc69139831c1489880f6159a5fb3a0965d8",
+              "before": 2
+            },
+            "observed_presentations": 64
+          },
+          "train-reference-0008": {
+            "before": true,
+            "after": true,
+            "recovery": {
+              "exact": true,
+              "first_mismatch": null,
+              "matched_tokens": 18,
+              "target_tokens": 18
+            },
+            "planned_exposures": {
+              "after": 81,
+              "annotation_sha256": "0d7304266006e83750d28453cc3c2874d41817fbded675025d5c7c377565d16c",
+              "before": 81
+            },
+            "observed_presentations": 73
+          },
+          "train-reference-0018": {
+            "before": true,
+            "after": true,
+            "recovery": {
+              "exact": true,
+              "first_mismatch": null,
+              "matched_tokens": 18,
+              "target_tokens": 18
+            },
+            "planned_exposures": {
+              "after": 81,
+              "annotation_sha256": "149c5b3ca720f99b105343b110ea459ded97cdc9b3dd175f77ec27da2ddff073",
+              "before": 81
+            },
+            "observed_presentations": 73
+          }
+        },
+        "development": {
+          "status": "BLOCKED",
+          "recovery": {
+            "exact": 0,
+            "executed": 100,
+            "scheduled": 100,
+            "unresolved": 100
+          },
+          "contrast": {
+            "passed": 100,
+            "scheduled": 100
+          }
+        },
+        "diagnostic_exact": 25
+      },
+      "1000": {
+        "search": {
+          "before": 11,
+          "after": 15,
+          "gains": [
+            "train-reference-0000",
+            "train-reference-0010",
+            "train-reference-0001",
+            "train-reference-0011"
+          ],
+          "losses": []
+        },
+        "screen": {
+          "before": 10,
+          "after": 10,
+          "gains": [],
+          "losses": []
+        },
+        "controls": {
+          "train-reference-0000": {
+            "before": false,
+            "after": true,
+            "recovery": {
+              "exact": true,
+              "first_mismatch": null,
+              "matched_tokens": 40,
+              "target_tokens": 40
+            },
+            "planned_exposures": {
+              "after": 86,
+              "annotation_sha256": "c91f1c62a534f5800521cb05321f24e8a6c996ee307b6951e1b8193823cddad5",
+              "before": 1
+            },
+            "observed_presentations": 86
+          },
+          "train-reference-0010": {
+            "before": false,
+            "after": true,
+            "recovery": {
+              "exact": true,
+              "first_mismatch": null,
+              "matched_tokens": 42,
+              "target_tokens": 42
+            },
+            "planned_exposures": {
+              "after": 86,
+              "annotation_sha256": "23a76cb873c4b4f541342d2083dd7e5a3c033dcf4026f26f70d9a8fa4d560e36",
+              "before": 1
+            },
+            "observed_presentations": 86
+          },
+          "train-reference-0001": {
+            "before": false,
+            "after": true,
+            "recovery": {
+              "exact": true,
+              "first_mismatch": null,
+              "matched_tokens": 26,
+              "target_tokens": 26
+            },
+            "planned_exposures": {
+              "after": 85,
+              "annotation_sha256": "6dfea32f99d9440cfde0251d914a7d766e01f8e375901812e7512f0ff6de207b",
+              "before": 2
+            },
+            "observed_presentations": 85
+          },
+          "train-reference-0011": {
+            "before": false,
+            "after": true,
+            "recovery": {
+              "exact": true,
+              "first_mismatch": null,
+              "matched_tokens": 26,
+              "target_tokens": 26
+            },
+            "planned_exposures": {
+              "after": 85,
+              "annotation_sha256": "1b57dc245e4c8421c08e6d3c73842bc69139831c1489880f6159a5fb3a0965d8",
+              "before": 2
+            },
+            "observed_presentations": 85
+          },
+          "train-reference-0008": {
+            "before": true,
+            "after": true,
+            "recovery": {
+              "exact": true,
+              "first_mismatch": null,
+              "matched_tokens": 18,
+              "target_tokens": 18
+            },
+            "planned_exposures": {
+              "after": 81,
+              "annotation_sha256": "0d7304266006e83750d28453cc3c2874d41817fbded675025d5c7c377565d16c",
+              "before": 81
+            },
+            "observed_presentations": 81
+          },
+          "train-reference-0018": {
+            "before": true,
+            "after": true,
+            "recovery": {
+              "exact": true,
+              "first_mismatch": null,
+              "matched_tokens": 18,
+              "target_tokens": 18
+            },
+            "planned_exposures": {
+              "after": 81,
+              "annotation_sha256": "149c5b3ca720f99b105343b110ea459ded97cdc9b3dd175f77ec27da2ddff073",
+              "before": 81
+            },
+            "observed_presentations": 81
+          }
+        },
+        "development": {
+          "status": "BLOCKED",
+          "recovery": {
+            "exact": 0,
+            "executed": 100,
+            "scheduled": 100,
+            "unresolved": 100
+          },
+          "contrast": {
+            "passed": 100,
+            "scheduled": 100
+          }
+        },
+        "diagnostic_exact": 25
+      }
+    },
+    "controls": {
+      "train-reference-0000": {
+        "after": 86,
+        "annotation_sha256": "c91f1c62a534f5800521cb05321f24e8a6c996ee307b6951e1b8193823cddad5",
+        "before": 1
+      },
+      "train-reference-0001": {
+        "after": 85,
+        "annotation_sha256": "6dfea32f99d9440cfde0251d914a7d766e01f8e375901812e7512f0ff6de207b",
+        "before": 2
+      },
+      "train-reference-0008": {
+        "after": 81,
+        "annotation_sha256": "0d7304266006e83750d28453cc3c2874d41817fbded675025d5c7c377565d16c",
+        "before": 81
+      },
+      "train-reference-0010": {
+        "after": 86,
+        "annotation_sha256": "23a76cb873c4b4f541342d2083dd7e5a3c033dcf4026f26f70d9a8fa4d560e36",
+        "before": 1
+      },
+      "train-reference-0011": {
+        "after": 85,
+        "annotation_sha256": "1b57dc245e4c8421c08e6d3c73842bc69139831c1489880f6159a5fb3a0965d8",
+        "before": 2
+      },
+      "train-reference-0018": {
+        "after": 81,
+        "annotation_sha256": "149c5b3ca720f99b105343b110ea459ded97cdc9b3dd175f77ec27da2ddff073",
+        "before": 81
+      }
+    },
+    "substitutions": 336,
+    "distinct_views": 3376,
+    "presentations": 8000,
+    "matched_prefix_windows": 35,
+    "original_sources_unchanged": 49,
+    "initial_tensors_byte_identical": 1396,
+    "unchanged_serialized_tensors": 1338,
+    "unchanged_reference_decoder_tensors": 483,
+    "all_eleven_checkpoints_bound": true,
+    "initial_optimizer_rng_byte_identical": true,
+    "charged_training_positions": 246970,
+    "teacher_forced_forward_positions": 238970,
+    "window_seconds_median": 2.550225070999659,
+    "first_100_mean_ce": 0.5455260183569044,
+    "final_100_mean_ce": 0.40763906668158595,
+    "run_report": {
+      "agents": 0,
+      "all_gradients_none": true,
+      "capability_updates": 0,
+      "decoder_after_sha256": "88e34bbec1442fe798c18b4b67a87ff49df388dbcd5c8c12379602b0ad412c21",
+      "decoder_before_sha256": "88e34bbec1442fe798c18b4b67a87ff49df388dbcd5c8c12379602b0ad412c21",
+      "elapsed_seconds": 3236.2155652950023,
+      "frozen_base": {
+        "base_tied_storage": true,
+        "mismatches": [],
+        "parameters_checked": 320,
+        "pass": true
+      },
+      "live_after_sha256": "c56c8f45d11f4eca02ba4bbc1d1024c50d1b74cceeee8e1d3a5c8e7378485450",
+      "live_before_sha256": "c56c8f45d11f4eca02ba4bbc1d1024c50d1b74cceeee8e1d3a5c8e7378485450",
+      "new_data": 0,
+      "optimizer_updates": 1000,
+      "peak_allocated": 4193888256,
+      "qualifications": [
+        {
+          "contrast": {
+            "passed": 100,
+            "scheduled": 100
+          },
+          "diagnostic_exact": 25,
+          "recovery": {
+            "exact": 0,
+            "executed": 100,
+            "scheduled": 100,
+            "unresolved": 100
+          },
+          "reference_id": "fa906e8f77bec91d6c43af8afc4a8c10e31f39281ab008b18719d526f4aa9969",
+          "status": "BLOCKED",
+          "window": 900
+        },
+        {
+          "contrast": {
+            "passed": 100,
+            "scheduled": 100
+          },
+          "diagnostic_exact": 25,
+          "recovery": {
+            "exact": 0,
+            "executed": 100,
+            "scheduled": 100,
+            "unresolved": 100
+          },
+          "reference_id": "d741b65f85ef4d381c74bf48b3bf2330de3009f8e561e20d9e3bdc389ffdeb42",
+          "status": "BLOCKED",
+          "window": 1000
+        }
+      ],
+      "reference_qualified": false,
+      "scheduled_windows": 1000,
+      "status": "COMPLETED",
+      "training_exposures": 8000,
+      "training_positions": 246970,
+      "unchanged_prefix_windows_verified": 35
+    }
+  },
+  "validation": {
+    "metadata_tests": {
+      "command": ".venv/bin/python -m unittest tests.test_reference_exposure -v",
+      "passed": 3,
+      "seconds": 0.001,
+      "exit": 0
+    },
+    "syntax_compile": "passed for the three new Python files",
+    "preflight": "3376 existing views, 8000 slots, 336 same-role repeat substitutions, 49 unchanged control source files",
+    "gpu_replay": "First 35 losses and gradient norms exactly equal the saved control; all 1000 active-owner lists match",
+    "post_run_audit": {
+      "command": ".venv/bin/python data/reference-exposure-20261106/audit.py",
+      "exit": 0,
+      "status": "PASSED"
+    },
+    "prior_numeric_matrices": "not rerun; computation sources unchanged"
+  },
+  "agents_spawned": 0,
+  "external_model_service_calls": 0,
+  "new_source_records": 0,
+  "human_reviews": 0,
+  "capability_optimizer_updates": 0,
+  "live_promotions": 0,
+  "arbitrary_time_cap": false,
+  "next_unfinished": "Reference recovery/generalization under broad training coverage; no additional fitting or capability training queued"
+}
