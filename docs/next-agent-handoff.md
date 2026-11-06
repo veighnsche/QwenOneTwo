@@ -7,7 +7,45 @@ This handoff records measured mechanisms, not learned capability.
 
 ## Current checkpoint
 
-**The recovery revision finished and failed. There is no fit running to resume.**
+**Target-private encoder qualification is running. Do not launch a duplicate fit.**
+The user authorized fixing encoder/pooling learning with existing data on the
+RTX 3090, no new data/agents/capability training. The implementation is committed
+and pushed as `fb920fd`, after stationary-decoder infrastructure `7b5aaed`.
+Read the [measured encoder report](reference-encoder-results-2026-11-06.md) and
+[preregistered Target-private v2](reference-encoder-target-v2.md).
+
+The accepted training-only probe recovered **6/6 exactly at window 64** with
+unchanged decoder/live/base and both directions of role-gradient isolation.
+Migration preserves all ten role outputs exactly and 30 active queries. A private
+Target branch increases small pooling weights from 2,110,720 to 4,213,760; other
+nine roles still share the original architecture. W/T/codec and actual slot/
+position counts are unchanged. **Six relevant GPU checks passed in 15.560 s;
+68 model-free checks passed in 2.811 s.** These are not held-out qualification.
+
+Five earlier 64-window mixed-role controls failed (CE 5/6, dense MSE 4/6,
+field-value memory 5/6, 5x LR 5/6, focal CE 5/6). Target-only learning recovered
+both Targets but regressed other roles (3/6 overall), motivating the private
+branch. Rejected source/patches/results remain under
+`data/reference-encoder-20261106/`; retired candidates are not active profiles.
+Seven probes completed **448 reference updates / 3,584 exposures**, separately
+from any final artifact lineage; the MSE probe also used 96 disposable latent
+steps. Do not count those as model updates or held-out recovery.
+
+The full job uses `data/reference-encoder-20261106/run/`, progress `fit.log` and
+`run/windows.jsonl`. It reset to the original parent `d0d4aef44b4415beb19311350eb24533190e1a27406c5d6f59a15a5a57402dec`,
+repeated deterministic splitting and started fresh pooler-only AdamW. Probe
+weights are discarded. It runs exactly 1,000 windows / 8,000 exposures over the
+same 3,376 reviewed views, original CE/LR/sampler and frozen decoder. All 100
+unchanged RF development cases and 100 contrasts are evaluated every 100 windows;
+**both 900 and 1,000 must pass >=95% recovery / >=90% contrasts**. No development
+or locked fitting. Check actual process state and final `run/report.json` before
+resuming; final outcome is not yet known. Prior 0/100 findings below remain
+historical evidence, not a new result for this running job. No live initialization
+or capability training is authorized or performed.
+
+## Prior recovery revision checkpoint
+
+**The earlier recovery-v1 revision finished and failed.**
 The user's requested recovery fix is **not proved**. Implementation `908d8b5`
 reuses 3,376 existing reviewed role views with source hashes/field addresses,
 exact coverage/resume and the Reason exception. A separately documented
