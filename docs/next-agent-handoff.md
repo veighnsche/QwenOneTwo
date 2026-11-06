@@ -7,6 +7,39 @@ This handoff records measured mechanisms, not learned capability.
 
 ## Current checkpoint
 
+**The one authorized weight-space repair completed and failed. No job remains
+active.** Implementation/protocol `54a171a` preceded application and all semantic
+feedback. Read the [measured report](reference-weight-repair-results-2026-11-06.md),
+[portable receipt](evidence/reference-weight-repair-v1.json) and
+[fixed protocol](reference-weight-repair-v1.md). One common-mode projection rule
+was applied to both existing final reference checkpoints, with no strength/search
+retry. Both were exported before development feedback. Calibration reused 71
+reviewed training views, 71 W prefills and 142 pooler forwards, plus four checks
+on cached states. No new records/reviews, agents, gradients, optimizer steps,
+fine-tuning, capability updates or external model calls occurred.
+
+Both repaired 900/1,000 exports remain **0/100 exact recovery and 100/100
+contrasts**, matching the hash-verified parents; the production loader rejects
+both. The original >=95%/90% paired criterion is unchanged. Only four lift
+weight/bias tensors changed per artifact; all other **537/541 tensors**, including
+**483 T/codec tensors**, are byte-identical. All **320 base tensors/tying**, live
+identity, parent exports and three release manifests are unchanged. Locked labels
+were not loaded. Projection residuals pass; recovery does not. **2 metadata tests,
+2 RTX 3090 synthetic tests and 19 related regressions pass**; all 54 archived
+source/protocol/test hashes and export hashes verify independently. Runtime
+284.00155400899894 s; peak CUDA 3,622,856,704 bytes; exit 2/FAILED.
+
+Raw evidence/exports: `data/reference-weight-repair-20261106/run/`. Repaired
+fingerprints: 900 `41bb9e035d9036cb182d16f965039d64a720c9cc85e0f6dbd7cf61235a1c0f29`;
+1,000 `e40c025b621a4c587f93811f4e22aa66c25a1fb9b0b06874212a7d2ca6c66ada`.
+These are unqualified and never promoted. This candidate is retired; no follow-up
+edit/fit is queued. Next unfinished is full-mixture reference recovery and
+retention; semantic binding, observed correction materialization and full
+participating-trainer memory remain separate. Keep W frozen and all existing
+scope restrictions. Numeric/cache/runtime code and live services were unchanged.
+
+## Previous encoder checkpoint (historical)
+
 **The Target-private encoder block finished and failed qualification. No fit is
 running. The user's requested recovery fix remains unfinished.** Implementation
 `fb920fd` (after `7b5aaed`) is committed/pushed. Read the
@@ -45,9 +78,9 @@ The lineage has 3,000 reference updates; physical reference work is 3,464 includ
 448 probes and the original discarded 16-update setup. Latent-variable steps
 are separate (96 in current probes, 384 in earlier isolation).
 
-The user subsequently asked an opinion on direct weight-space programming.
-Primary research was checked and a **read-only** RTX 3090 weight audit performed;
-no edit or external model/agent call. Projection spectra do not show obvious
+Before the bounded repair above, the user asked an opinion on direct weight-space
+programming. Primary research was checked and a **read-only** RTX 3090 weight audit performed;
+no edit or external model/agent call in that read-only audit. Projection spectra do not show obvious
 rank collapse or dominant bias. This does not rule out a targeted repair, nor
 demonstrate one. W remains frozen. No additional fitting, generation, agents,
 capability training, numeric matrix rerun or service changes are queued/performed.
