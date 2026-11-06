@@ -1,0 +1,327 @@
+{
+  "achieved_speedup": null,
+  "agents": 1,
+  "astra_reported_OS_samples": {
+    "affinity_cpus": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "autograd_cpu_percent": 61.4,
+    "cpu_quota": "unlimited",
+    "gpu_samples": 20,
+    "gpu_utilization_percent_mean": 19.85,
+    "gpu_utilization_percent_range": [
+      0,
+      40
+    ],
+    "host_idle_percent": 88.6,
+    "main_thread_cpu_percent": 37.9,
+    "nr_throttled": 0,
+    "observed_server_gpu_activity": false,
+    "raw_OS_samples_persisted": false,
+    "resident_server_MiB": 3852,
+    "resident_server_pid": 2094,
+    "sample_seconds": 40.6,
+    "second_autograd_cpu_percent": 63.5,
+    "second_combined_scheduler_wait_ms": 3.6,
+    "second_main_cpu_percent": 35.8,
+    "threads": 34,
+    "trainer_cpu_percent": 124.9,
+    "trainer_pid": 37442,
+    "wrapper_pid": 37440
+  },
+  "benchmark_performed": false,
+  "format": "qot-receiver-performance-audit-v1",
+  "reasoning_effort": "high",
+  "requested_model": "gpt-6-astra",
+  "scope": "user-requested read-only audit; no new model runs or training changes",
+  "timing_artifact": "data/receiver-learning-20261106/performance-timing-audit.json",
+  "timing_artifact_sha256": "95b82b53092da4ed8efd7cfdd144cfe11c940a58efcafa023f44b50729b2379a",
+  "timing_statistics": {
+    "count": 43,
+    "illustrative_eight_traversal_seconds": 25.228757165168645,
+    "illustrative_speedup": 1.5568767150699303,
+    "intercept_seconds": 10.930053760109438,
+    "max_component_VJPs": 25,
+    "max_seconds": 56.35626310900079,
+    "mean_component_VJPs": 15.86046511627907,
+    "mean_seconds": 39.27806458060473,
+    "min_component_VJPs": 11,
+    "min_seconds": 30.519182003000424,
+    "pearson_runtime_VJP": 0.9787398403525145,
+    "samples": [
+      {
+        "component_VJPs": 13,
+        "seconds": 36.86338662400067,
+        "window": 76
+      },
+      {
+        "component_VJPs": 14,
+        "seconds": 35.31312277100005,
+        "window": 77
+      },
+      {
+        "component_VJPs": 13,
+        "seconds": 35.47718395100037,
+        "window": 78
+      },
+      {
+        "component_VJPs": 17,
+        "seconds": 41.52986010699988,
+        "window": 79
+      },
+      {
+        "component_VJPs": 15,
+        "seconds": 38.761148540999784,
+        "window": 80
+      },
+      {
+        "component_VJPs": 17,
+        "seconds": 42.13084890200025,
+        "window": 81
+      },
+      {
+        "component_VJPs": 17,
+        "seconds": 42.21420398899954,
+        "window": 82
+      },
+      {
+        "component_VJPs": 17,
+        "seconds": 41.743747147999784,
+        "window": 83
+      },
+      {
+        "component_VJPs": 15,
+        "seconds": 38.80738254900007,
+        "window": 84
+      },
+      {
+        "component_VJPs": 14,
+        "seconds": 36.15700513499996,
+        "window": 85
+      },
+      {
+        "component_VJPs": 15,
+        "seconds": 38.07888524500049,
+        "window": 86
+      },
+      {
+        "component_VJPs": 16,
+        "seconds": 41.28637619199981,
+        "window": 87
+      },
+      {
+        "component_VJPs": 15,
+        "seconds": 36.48307473400018,
+        "window": 88
+      },
+      {
+        "component_VJPs": 19,
+        "seconds": 45.69618303799962,
+        "window": 89
+      },
+      {
+        "component_VJPs": 17,
+        "seconds": 41.14435172100002,
+        "window": 90
+      },
+      {
+        "component_VJPs": 17,
+        "seconds": 41.26127754400022,
+        "window": 91
+      },
+      {
+        "component_VJPs": 18,
+        "seconds": 43.92837904499993,
+        "window": 92
+      },
+      {
+        "component_VJPs": 13,
+        "seconds": 34.34019260599962,
+        "window": 93
+      },
+      {
+        "component_VJPs": 17,
+        "seconds": 40.248764613000276,
+        "window": 94
+      },
+      {
+        "component_VJPs": 15,
+        "seconds": 37.47341147900079,
+        "window": 95
+      },
+      {
+        "component_VJPs": 13,
+        "seconds": 34.06782615800057,
+        "window": 96
+      },
+      {
+        "component_VJPs": 15,
+        "seconds": 38.6065416069996,
+        "window": 97
+      },
+      {
+        "component_VJPs": 23,
+        "seconds": 52.08759664700028,
+        "window": 98
+      },
+      {
+        "component_VJPs": 17,
+        "seconds": 38.663665435999974,
+        "window": 99
+      },
+      {
+        "component_VJPs": 14,
+        "seconds": 36.43652694699995,
+        "window": 100
+      },
+      {
+        "component_VJPs": 13,
+        "seconds": 32.97857639999984,
+        "window": 101
+      },
+      {
+        "component_VJPs": 16,
+        "seconds": 40.06724661499993,
+        "window": 102
+      },
+      {
+        "component_VJPs": 15,
+        "seconds": 39.23255567599972,
+        "window": 103
+      },
+      {
+        "component_VJPs": 13,
+        "seconds": 33.89807391400063,
+        "window": 104
+      },
+      {
+        "component_VJPs": 11,
+        "seconds": 30.519182003000424,
+        "window": 105
+      },
+      {
+        "component_VJPs": 18,
+        "seconds": 42.33412090100046,
+        "window": 106
+      },
+      {
+        "component_VJPs": 16,
+        "seconds": 38.99562232500011,
+        "window": 107
+      },
+      {
+        "component_VJPs": 21,
+        "seconds": 47.05431835299987,
+        "window": 108
+      },
+      {
+        "component_VJPs": 13,
+        "seconds": 34.177696734000165,
+        "window": 109
+      },
+      {
+        "component_VJPs": 17,
+        "seconds": 40.201298612000755,
+        "window": 110
+      },
+      {
+        "component_VJPs": 25,
+        "seconds": 56.35626310900079,
+        "window": 111
+      },
+      {
+        "component_VJPs": 13,
+        "seconds": 33.48570803699931,
+        "window": 112
+      },
+      {
+        "component_VJPs": 19,
+        "seconds": 45.13430449899988,
+        "window": 113
+      },
+      {
+        "component_VJPs": 13,
+        "seconds": 32.11880009400011,
+        "window": 114
+      },
+      {
+        "component_VJPs": 16,
+        "seconds": 38.565172077999705,
+        "window": 115
+      },
+      {
+        "component_VJPs": 17,
+        "seconds": 41.389523304999784,
+        "window": 116
+      },
+      {
+        "component_VJPs": 14,
+        "seconds": 34.88860713400027,
+        "window": 117
+      },
+      {
+        "component_VJPs": 16,
+        "seconds": 38.758764447999965,
+        "window": 118
+      }
+    ],
+    "scope": "descriptive runtime statistics on existing logs; no model experiment or measured speedup",
+    "slope_seconds_per_VJP": 1.787337925632401,
+    "windows": [
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118
+    ]
+  }
+}

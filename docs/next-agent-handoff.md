@@ -88,6 +88,12 @@ see [training-path evidence](evidence/receiver-training-paths-v1.json). Learning
 is running through the declared pass. No component, receiver or autonomous
 capability acceptance is claimed.
 
+The user subsequently authorized **one Astra read-only performance subagent**.
+Its [audit](receiver-performance-audit-2026-11-07.md) found one trainer, low CPU
+contention and repeated VJP/synchronization costs. It changed no source, job or
+service and launched no model experiment. Suggested speedups are unmeasured;
+training continues unchanged. No other agents are authorized by that request.
+
 ## Previous checkpoint — semantic/behavioral gate replacement
 
 **Implemented and evaluated; the tested configuration is BLOCKED by actual

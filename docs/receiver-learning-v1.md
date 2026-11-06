@@ -100,3 +100,12 @@ were restored. All learning-module sources and non-source identities match;
 only the launcher/accounting source migrates with explicit old/new provenance.
 The continuation begins at 76; no completed optimizer window is replayed.
 Unlogged in-flight preparation is not claimed as zero physical repeated work.
+
+## Subsequent user-authorized audit
+
+On 2026-11-07 the user explicitly requested one Astra subagent to investigate
+CPU/performance bottlenecks. This overrides the earlier no-agent boundary only
+for that read-only audit. It changed no training source, job, service or setting
+and launched no additional model workload. See the
+[performance audit](receiver-performance-audit-2026-11-07.md). The receiver
+experiment's data, optimization method, frozen owners and endpoint are unchanged.
