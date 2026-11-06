@@ -1,0 +1,1529 @@
+{
+  "scope": "Complete-coverage reference-pooler continuation; user stops after pass 12; no capability training",
+  "implementation_commits": [
+    "caa1db5",
+    "c36d6ac"
+  ],
+  "progress_commit": "0258123",
+  "gpu_uuid": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+  "user_requested_final_pass": 12,
+  "no_pass_13": true,
+  "stop_reason": "USER_REQUESTED_FINAL_PASS",
+  "model_work_complete": true,
+  "process_exits": [
+    143,
+    143,
+    1
+  ],
+  "final_exit_note": "Exit 1 occurred only in final console emit after checkpoint, evaluations, frozen checks and COMPLETED report were saved. Logging fixed without rerunning model work.",
+  "assets": {
+    "data/reference-coverage-20261106/audit.json": "4aebb3f3b8e249464c279d5f2db27bf1a48899e26fb6e528445dc13614bd2fef",
+    "data/reference-coverage-20261106/audit.log": "4aebb3f3b8e249464c279d5f2db27bf1a48899e26fb6e528445dc13614bd2fef",
+    "data/reference-coverage-20261106/audit.py": "71e7ad856eac56e0a8307e1e2510e0070e3f03414c7bbe7ebb7cca26b1df511b",
+    "data/reference-coverage-20261106/commands.json": "9c8cc90b3ee8caea94523619124dfa804894cdc64c0e732d73a6b58019c7eb4b",
+    "data/reference-coverage-20261106/continued/checkpoint-001200/manifest.json": "30a0bbc17f74acf0ce8cced9d10035b630bdf4f0b6adae4646429f0877b2bf86",
+    "data/reference-coverage-20261106/continued/checkpoint-001300/manifest.json": "0b288090ecdadb0bbda053d83385b686052ac7f5552bf5f832605a123000c950",
+    "data/reference-coverage-20261106/continued/checkpoint-001322/manifest.json": "205bb7d80fe26b1fec7d819ca570b6ccec78fc1504449823cb6a3e109a920b35",
+    "data/reference-coverage-20261106/continued/checkpoint-001400/manifest.json": "9be04a21158195ea9d43101a1987414b182b121622df2a7c070d3ab41e2a0ba0",
+    "data/reference-coverage-20261106/continued/checkpoint-001422/manifest.json": "064e5b6d2e94f4aab39f672184c3cc8c9b7163a0075f925b9488a7d13a7b4460",
+    "data/reference-coverage-20261106/continued/checkpoint-001500/manifest.json": "cdf4d5f58068b5b986fd89087558ba290ce215e36d64acafbb845587e6e71edf",
+    "data/reference-coverage-20261106/continued/checkpoint-001600/manifest.json": "ec595b909a6bbc3cdad36153c76146ec26142a6eb4889e641be1da6d907c08cb",
+    "data/reference-coverage-20261106/continued/checkpoint-001700/manifest.json": "9a62ece9262c91dd14e1ec7d616c9e21f81045e00660cdc2c25df0b259b91dc3",
+    "data/reference-coverage-20261106/continued/checkpoint-001744/manifest.json": "20e826e3ffd459067771aac710edade1f1c95b0551e343aa0f9165cbe97ea699",
+    "data/reference-coverage-20261106/continued/checkpoint-001800/manifest.json": "bd200ac14163226cf896d9fe9a04a78c77f654db2e963edb8b6e9507d4bd5fca",
+    "data/reference-coverage-20261106/continued/checkpoint-001844/manifest.json": "3c9a205f89d20e0b4d2cf87c71aa3b51945c04cdf98723bb8a836210131f7014",
+    "data/reference-coverage-20261106/continued/checkpoint-001900/manifest.json": "61199972abf67c44ea016fcb6bee958673e713896ccd13638c8b812a0671f8f1",
+    "data/reference-coverage-20261106/continued/checkpoint-002000/manifest.json": "1bea5426814278f55c9bf98cd5100816f6d16b5e44a1d5cd14ce9ad0eb40d868",
+    "data/reference-coverage-20261106/continued/checkpoint-002100/manifest.json": "6ad8f52ec20050a871d6030c97b9936cb9b18609674d85df557ab02ba1bdb0cf",
+    "data/reference-coverage-20261106/continued/checkpoint-002166/manifest.json": "bd29c751b99e780088e30e2e3b52d600707ad8a56b8dc6409a5f046115d95304",
+    "data/reference-coverage-20261106/continued/checkpoint-002200/manifest.json": "ba12020d19e2c4094fb2500407e31dfb3abc5b119df5ada8ae417ac7f1bace65",
+    "data/reference-coverage-20261106/continued/checkpoint-002266/manifest.json": "9181724836e4094f0ef09980f583dfefad5207908332fb43b727d2d801c00407",
+    "data/reference-coverage-20261106/continued/checkpoint-002300/manifest.json": "f0568c1eb369780806d0b9f4468d14bae385b12705457f03087e16c523dac13e",
+    "data/reference-coverage-20261106/continued/checkpoint-002400/manifest.json": "3fec7b57f93e55723deadad0c0d157bff32e8fae2512050bc5cf34bfd1e4f290",
+    "data/reference-coverage-20261106/continued/checkpoint-002500/manifest.json": "9f11501eb26606350b23b9b26a7964f446c611fac431655afeab3f12c7511806",
+    "data/reference-coverage-20261106/continued/checkpoint-002588/manifest.json": "4e1e4e42859c81590dad0fd6abc9bf905969c715e70660d27cc2659d73c1153a",
+    "data/reference-coverage-20261106/continued/checkpoint-002600/manifest.json": "ca34e7d0f5868d84f6361f0e44e9b91808a25788fe706104b99620161c6b90a2",
+    "data/reference-coverage-20261106/continued/checkpoint-002688/manifest.json": "beffbd13c3e83d5bc6ba64fc668c5266cc895f253a66a1183257e72d13aeb663",
+    "data/reference-coverage-20261106/continued/checkpoint-002700/manifest.json": "6f84404fc455eb805f0e6cddd14bf2ea96d7a1bb3af1e4a38f6c83a3d94aaace",
+    "data/reference-coverage-20261106/continued/checkpoint-002800/manifest.json": "e574f20718b5368c068083d658582ed6295f7e0829573655fdd4794f0ccac469",
+    "data/reference-coverage-20261106/continued/checkpoint-002900/manifest.json": "8f663329c3db73b2a75759397c97e5fdd3a0d5a379ad26b7baa62867882f6d45",
+    "data/reference-coverage-20261106/continued/checkpoint-003000/manifest.json": "63f9c084fdd059ddfd50aca49dc0101050a90a601f68437339331df41b0bea12",
+    "data/reference-coverage-20261106/continued/checkpoint-003010/manifest.json": "4b90cecdd6c7fc0224f06134a8b7e0b514fcbcdbccdba8c07dbe83335eb9eb4b",
+    "data/reference-coverage-20261106/continued/checkpoint-003100/manifest.json": "180269ab3926d06f568296a9fdc7141757dfca9b87de86b896b02050f3b1da71",
+    "data/reference-coverage-20261106/continued/checkpoint-003110/manifest.json": "c33d05819232283a5bc35ab27fe4cc01da81e923463ca742ee204fba235d3e4d",
+    "data/reference-coverage-20261106/continued/checkpoint-003200/manifest.json": "5da5165cb4e1d7a48afa5710d1392ded1948a2c1e4a7393b478f13e190354c96",
+    "data/reference-coverage-20261106/continued/checkpoint-003300/manifest.json": "7127e42713b04f1af642c2c25f36ec57bad1af2bd7835a7be85b7cf733870da8",
+    "data/reference-coverage-20261106/continued/checkpoint-003400/manifest.json": "62283971bdefb56619b37da97fa11cc9c03ea6df2b5cd275eb60c2de94e924a5",
+    "data/reference-coverage-20261106/continued/checkpoint-003432/manifest.json": "cc4f1ed709570af4daa1568323e6d7426e64c4b1536f043ce54f3b2861133e4a",
+    "data/reference-coverage-20261106/continued/checkpoint-003500/manifest.json": "d7d8633d4e2aaf557d16157bfc22ec7f4ed33bd1c0f228dcede723adffc8fa41",
+    "data/reference-coverage-20261106/continued/checkpoint-003532/manifest.json": "ef40836234aad2e3492c473497ff5273032d593b3c845d4bd6f04b118777f897",
+    "data/reference-coverage-20261106/continued/checkpoint-003600/manifest.json": "bae4bd55747e51a37e30e62a8d9468281c1f24093547b104c4e073773db9fba4",
+    "data/reference-coverage-20261106/continued/checkpoint-003700/manifest.json": "41fd84ed818ce79d4011e0b7df65271238f67c5de3bd8b2ae1261c65abf4b2c4",
+    "data/reference-coverage-20261106/continued/checkpoint-003800/manifest.json": "76555ff8dc66cc6180fc208fb9029e724fccc310a95d506b85945fd929607092",
+    "data/reference-coverage-20261106/continued/checkpoint-003854/manifest.json": "af6978e924e99a3ac8304948cb67ca9e375f704168fc7187c86914a0f75e6361",
+    "data/reference-coverage-20261106/continued/checkpoint-003900/manifest.json": "b496704825b3cafc2dd5753751cdf82cd8f1567a36c205c50ae841cbb7240952",
+    "data/reference-coverage-20261106/continued/checkpoint-003954/manifest.json": "adbd0169960c0f808914ca7414fb041fc9328943c4ea292f5508f8e331e84011",
+    "data/reference-coverage-20261106/continued/checkpoint-004000/manifest.json": "ae57a176c04ab79a7acc24e1bcbf0c4b5e5de17ee6340afa13ba41c408a4f717",
+    "data/reference-coverage-20261106/continued/checkpoint-004100/manifest.json": "504993a4552a2d897df783a939f3003fcfcd5f844ee37949c6655c622cb4d051",
+    "data/reference-coverage-20261106/continued/checkpoint-004200/manifest.json": "26db5f871c883c82d0416dc0976e91a47b9406b0a3328878d6e7923c8775e782",
+    "data/reference-coverage-20261106/continued/checkpoint-004276/manifest.json": "f5b57f0ec9fcccd46ab683db24d1bd3885f684fe891b92b02cbfb3443a10e28d",
+    "data/reference-coverage-20261106/continued/checkpoint-004300/manifest.json": "0f4547dac84da2e6ca20b25b473f04a0c4996f7d275827db4d0913897af5164e",
+    "data/reference-coverage-20261106/continued/checkpoint-004376/manifest.json": "af19f82d39bdcd4fd03a0643108cd5fab9add2107bafd31d49cfb6edbbcb7351",
+    "data/reference-coverage-20261106/continued/checkpoint-004400/manifest.json": "2899a02478396ff45c7e6c5ce15601cba4817d32664f1f774428cd01ebe52793",
+    "data/reference-coverage-20261106/continued/checkpoint-004500/manifest.json": "5bc2bc61ba342cc5acc203869df81957420f2711e5e70e7c84eac7ea4b28e58f",
+    "data/reference-coverage-20261106/continued/checkpoint-004600/manifest.json": "d44618f9b763a186986d24bde97822d117407e7f56dc72c012900bf11c07d526",
+    "data/reference-coverage-20261106/continued/checkpoint-004698/manifest.json": "f630c6d04166fd961a59dd205ffdd6859411e56e626bc6ca99bb957a617e2b99",
+    "data/reference-coverage-20261106/continued/checkpoint-004700/manifest.json": "e489da85a37cca152383f674fb2a4a52ca58611f4265c70fc218bdd214704092",
+    "data/reference-coverage-20261106/continued/checkpoint-004798/manifest.json": "0ef20b347869ff73bd2077296b4ce6941a7044e190cc1a3484b3deef79e04252",
+    "data/reference-coverage-20261106/continued/checkpoint-004800/manifest.json": "7af3d7b451cebf942cef8f272f2d6a40db73bb33160f45ef7a17ff08ed31e97b",
+    "data/reference-coverage-20261106/continued/checkpoint-004900/manifest.json": "d4afd92080814614c0d77b276f4da1c5bee4be5c3ba033299b96b7e83d99200b",
+    "data/reference-coverage-20261106/continued/checkpoint-005000/manifest.json": "f43043b2b9569a6807b61a1dfe0f1ec80d2b58794f6b460d112dd8fead5f2073",
+    "data/reference-coverage-20261106/continued/checkpoint-005100/manifest.json": "b06eb37cb77165ffb7bd7cf1def1de407a569632a1cd852b7ff42559557b2b7c",
+    "data/reference-coverage-20261106/continued/checkpoint-005120/manifest.json": "0e94c23d074b6247e60c0c2700c7d7c36fbdd942eb2c292618367c36b0210d8a",
+    "data/reference-coverage-20261106/continued/checkpoint-005200/manifest.json": "27e4142f782e7a4ffc692b2923f02e338eb1327545eebde99cbc8c2af1ba9df1",
+    "data/reference-coverage-20261106/continued/checkpoint-005220/manifest.json": "2fa4fdc5a688ce98af925ede38d4d31e9d4321e52ea2883195b4d33efa1fe97c",
+    "data/reference-coverage-20261106/continued/checkpoint-005300/manifest.json": "c92e467e8e4ac85cdfb6772d014b9584c58cc5c1761afc29c5ab8932c75ffc30",
+    "data/reference-coverage-20261106/continued/checkpoint-005400/manifest.json": "8285a3fa2118d8dd8e121604e6c1cd9768a49b0b99b81d133f68ab642c2ca3bc",
+    "data/reference-coverage-20261106/continued/checkpoint-005500/manifest.json": "2ae68492006e3dcf29d83d2529ce9b968a71845ce2729c88d54d73af9e0f496b",
+    "data/reference-coverage-20261106/continued/checkpoint-005542/manifest.json": "a7814ec6318eedfde4a15f77cd31501ad51df0b9ad6576caaf59c3de7ddb13a6",
+    "data/reference-coverage-20261106/continued/checkpoint-005600/manifest.json": "d74261220c803e7d09c1802476d44ef3024f6f2e779987dd494ed7d97d9194de",
+    "data/reference-coverage-20261106/continued/checkpoint-005642/manifest.json": "80f53b1d197da658fda9e06e1717730407743cb6ac1501ed76b216c7f2709ed9",
+    "data/reference-coverage-20261106/continued/checkpoint-005700/manifest.json": "4cd922b4e672c8002a1e4b0174eea93a464c556061a36f4d6d8a8fc72ae8907d",
+    "data/reference-coverage-20261106/continued/checkpoint-005800/manifest.json": "d921209f3294bf4ef5da15287198520210de70c9349d4f4c4d16c146831883ab",
+    "data/reference-coverage-20261106/continued/curves.jsonl": "87ee0a20dbf7746c9f71584e193ef038cc8aceac75917cd73aae8bbcb3855511",
+    "data/reference-coverage-20261106/continued/panel-001422.json": "8ff8fde19f02ce9144330ed642d5a3336e346bc7316de7a0836343c7bb8b9967",
+    "data/reference-coverage-20261106/continued/panel-001844.json": "aaddcf1ce0847275ceb40f888cf33de11e100dd7e4f480b011e1b2527501e6c1",
+    "data/reference-coverage-20261106/continued/panel-002266.json": "d94408b29fbd84da3f39de75f39a047bd1dfed3ba2462e4d269033f4e352f2f6",
+    "data/reference-coverage-20261106/continued/panel-002688.json": "6dad95b9fae005dadc4e2171f6d342341dd2d73209bdeeddaaceba178c9698b6",
+    "data/reference-coverage-20261106/continued/panel-003110.json": "5666f688428dfb96a2b472ee0a53d7c4ba8b762ce382fdf5cbc0195904980009",
+    "data/reference-coverage-20261106/continued/panel-003532.json": "1ccddba3ecb0af836a43011ca7a1ce5bc7d24b60a738e1b40538a53dc863f02a",
+    "data/reference-coverage-20261106/continued/panel-003954.json": "8f4216242cb73e74fc12fc6196eb7802417d5e41a2a5d3e702c48161ff0b19eb",
+    "data/reference-coverage-20261106/continued/panel-004376.json": "8fff038aded9c20ae2a3497aecf577a53c497ce28883f3bb473f57c7a3ae1133",
+    "data/reference-coverage-20261106/continued/panel-004798.json": "0169fe598658de3491a855633399cbdac82ffae3224ca9036b8ee923a872e1ac",
+    "data/reference-coverage-20261106/continued/panel-005220.json": "a2d3aef012da3832798f422e83c21eb5615e3c55a0c9b4ccdd5703103b9091c7",
+    "data/reference-coverage-20261106/continued/panel-005642.json": "f4179dcd6f37e5b16616852c70c8ce55cda3b9b961a194c2edb94ca69887a3be",
+    "data/reference-coverage-20261106/continued/panel.json": "bf2cef79e0dc98141a40bbe50e74dada9659854209fce90a2fb76fd1280300e7",
+    "data/reference-coverage-20261106/continued/qualification-001322.json": "b5d70408184273625b2b24232ef980c0147b051a167e69faca8a8697a7ace68d",
+    "data/reference-coverage-20261106/continued/qualification-001422.json": "f2f60c519b6d71d01c001809f614fb62f0323850ed33867472d5ad9389be97e1",
+    "data/reference-coverage-20261106/continued/qualification-001744.json": "a2ad32d4e0625cb64ea482cd1f78a97578c581738f53075ed35972c6cd6496a5",
+    "data/reference-coverage-20261106/continued/qualification-001844.json": "a6003b5b9bf8b6df86dfc66e60156448684f10f246006d66ac4f930c1122788f",
+    "data/reference-coverage-20261106/continued/qualification-002166.json": "401392489e171fa18278c0aac4251646b56d28ad6da612407eaabf629c75b46c",
+    "data/reference-coverage-20261106/continued/qualification-002266.json": "b6f6f086a6556ca7a8b8d2bf30d36d82e948498d66476d6aa8d190afd8151f95",
+    "data/reference-coverage-20261106/continued/qualification-002588.json": "5d7a01a5b790bf99e1319819eb5740c655d2b6479354e5e68e11c2818d7e493e",
+    "data/reference-coverage-20261106/continued/qualification-002688.json": "b69fc7147fa3b1c7b58003c51e6b8ed446682bdeb33200d75d6c8f1973de036a",
+    "data/reference-coverage-20261106/continued/qualification-003010.json": "ee86d735b5f17e05bb9d3ff65b47a0a22c6250ff53dd13b34e1a1525465c8ad7",
+    "data/reference-coverage-20261106/continued/qualification-003110.json": "ef6cd0eae5540574f914af92bc0861199ba5b2db2d0422eebdaa86a7c4863f7b",
+    "data/reference-coverage-20261106/continued/qualification-003432.json": "acdaffb3a1f4e066490c1b50e58f08434bb5d2e96be35b8a6faa7a9e4d746beb",
+    "data/reference-coverage-20261106/continued/qualification-003532.json": "d5be73a5fc1e1c31b7844fbb58b3c47420bd20b7e5bc562fb0a09de11fcb8943",
+    "data/reference-coverage-20261106/continued/qualification-003854.json": "687b2ad7d0418529549588c4af6181f6bd23a7c4bde4c8b47896786a6bae579d",
+    "data/reference-coverage-20261106/continued/qualification-003954.json": "13890604ab4bb32a827fde5f9d129577dd72db4cfe3690c71be33bf2a2d0420d",
+    "data/reference-coverage-20261106/continued/qualification-004276.json": "246e3e7f0402cc7840e49d89c80ed9fa23b9f1a263ce91fb33e4f5bbbf4b0eaa",
+    "data/reference-coverage-20261106/continued/qualification-004376.json": "ea380e0e814095ee13897c3cc33341667bab071f8965697af65d91ac94478229",
+    "data/reference-coverage-20261106/continued/qualification-004698.json": "495ff298cdb20496b9702f65d5a581325bf7399d3a64a7e1352beb4813f97c83",
+    "data/reference-coverage-20261106/continued/qualification-004798.json": "5195a7ba9cb1a1d75d09b4367dbf0333c78fec07532e906f371ecfa7cdd96ad0",
+    "data/reference-coverage-20261106/continued/qualification-005120.json": "b0395439d564aba39de7a3539e936b9fe8f0f45333295606d1d239e20d1d60e4",
+    "data/reference-coverage-20261106/continued/qualification-005220.json": "664624a50111a726d3a903b7a272ca1302b14a5ada7ad1c6488326aff2159905",
+    "data/reference-coverage-20261106/continued/qualification-005542.json": "98c794b09dd93c57c1ad50c7ba21e13977ad4b43b2d0439426e12db14f17782f",
+    "data/reference-coverage-20261106/continued/qualification-005642.json": "3e37d40b19bb445a266371d9546b62a05aed3ce90edd0e4094cdb383563d26a8",
+    "data/reference-coverage-20261106/continued/reference-001322/manifest.json": "aab0207d3a34ddc11927cedd647e49bbda6dbda01e615b586b0d15432959493f",
+    "data/reference-coverage-20261106/continued/reference-001422/manifest.json": "057c352ec2173b74de6d5fc6d90e7c78297149b870cf5e988b41bb8f27f98e11",
+    "data/reference-coverage-20261106/continued/reference-001744/manifest.json": "ccee96f74a1e14a54d5b749e4cdc302f3a25e75caaca8cf1b6b9011194456d93",
+    "data/reference-coverage-20261106/continued/reference-001844/manifest.json": "b337147ebb694dac7d372b69188f322e7e9cc419416330616dc7497888b8ae31",
+    "data/reference-coverage-20261106/continued/reference-002166/manifest.json": "5ee83dbce74522ab7c46ff76f393614a0ac462806d882dd797b4062f2b130ad5",
+    "data/reference-coverage-20261106/continued/reference-002266/manifest.json": "f274c9c586b41819e901d4aec3befb715ff335687c7b55d4979207b29abab8a7",
+    "data/reference-coverage-20261106/continued/reference-002588/manifest.json": "2b1dca220569da3c31b5623942c4265661936b316653df184167de53ceb2c525",
+    "data/reference-coverage-20261106/continued/reference-002688/manifest.json": "8ff961f9d987a026d3fcc5e2b99e7070f1494e19cfbda4a770f908c032a3f27a",
+    "data/reference-coverage-20261106/continued/reference-003010/manifest.json": "96b790662f1bf588588b57f71845dc551391753f7dba0fe1b834f150a92a6576",
+    "data/reference-coverage-20261106/continued/reference-003110/manifest.json": "174cf6fe680e8a2ea2bcbbb7301e7e978d5f490fc78ba7f0c16d259ae1de4dd3",
+    "data/reference-coverage-20261106/continued/reference-003432/manifest.json": "cd90d010c818941ffd64f379659a10d550c6d6321ac2ce018f3417a1c981037e",
+    "data/reference-coverage-20261106/continued/reference-003532/manifest.json": "2bbc4c0e02ee3b18733b83af741f27dd2b745acde0c0095b5524ee37a5c096af",
+    "data/reference-coverage-20261106/continued/reference-003854/manifest.json": "a9211494bd06478984ef29927bfea39e6bf74b0605cd5e68a9f11ad48ab273d3",
+    "data/reference-coverage-20261106/continued/reference-003954/manifest.json": "780b54b0e8486691e8902cb259a06ae714e57d0819958137cb8dbbffd196a7ec",
+    "data/reference-coverage-20261106/continued/reference-004276/manifest.json": "562d264d6c2689ebb0cd7d5d17f98b67ba88494a3cac2a8226a3c26e39cd4c82",
+    "data/reference-coverage-20261106/continued/reference-004376/manifest.json": "f39d5b0a264afa18ffb99df38450c9fc77b05343552a0fdd0ec86dd3b607251e",
+    "data/reference-coverage-20261106/continued/reference-004698/manifest.json": "dad7488de7298478e2a893165eb8e454f1c6a14de0fda4c192da8502b32809be",
+    "data/reference-coverage-20261106/continued/reference-004798/manifest.json": "57304b4a4d665067e90dcad82d948a302725452f96d411469ba4d1a25e9d021e",
+    "data/reference-coverage-20261106/continued/reference-005120/manifest.json": "a03cdf392b3b35b251cd0c6bddcd49117ba3e794b6e635a12c0852a26bf21846",
+    "data/reference-coverage-20261106/continued/reference-005220/manifest.json": "6f56475b417c2f14faae8d8899c1b18954317cad90dbe3702a668b06e112a575",
+    "data/reference-coverage-20261106/continued/reference-005542/manifest.json": "cbb84e030bf86b816bbf0dc451228ac7493c1d59206ad1741787e33895c12206",
+    "data/reference-coverage-20261106/continued/reference-005642/manifest.json": "63b13b5d23aa27aab554715f77c28f376e04499ffb7c18aec9f0ccddec3e07a2",
+    "data/reference-coverage-20261106/continued/run.json": "7b213c1d2401cdfa1b1ae2a3347960f7b95f5882e5a635f9bf3829c2d83b875b",
+    "data/reference-coverage-20261106/continued/source-snapshot/manifest.json": "be1a15f36e9d0e28daa221258571861ad9743df24decc16354e7f4706e85e8d3",
+    "data/reference-coverage-20261106/continued/views.json": "df9e37322039302695de78828a81e402e8570931233075df4f869ead286822ad",
+    "data/reference-coverage-20261106/continued/windows.jsonl": "a1ceada55f47e6b222056fe106a7813fb9edd2125c20ed6e0e52e9b4cde68dc1",
+    "data/reference-coverage-20261106/continued.log": "af394ec3d648d937a1b5a936bbbae9881404d3cbc78467c0a4f7aa38dab080d4",
+    "data/reference-coverage-20261106/final-pass/checkpoint-005900/manifest.json": "8ee7d648c742ddd9a5dd8808635f1ac022255d47d432655ba1f23f0955ab1c45",
+    "data/reference-coverage-20261106/final-pass/checkpoint-005964/manifest.json": "a7e99da01e4c5a38564e804c2de3ecc445fe0d9662e0dd5d0ef7cdd9e7142685",
+    "data/reference-coverage-20261106/final-pass/checkpoint-006000/manifest.json": "ef3664ac09d21018317c6fcb84289a2a76793687218b2cb255ee99976e06c755",
+    "data/reference-coverage-20261106/final-pass/checkpoint-006064/manifest.json": "f5bcbfa1470554f08de6c684c9284f69d6358e62807918702de2d953089b69f8",
+    "data/reference-coverage-20261106/final-pass/curves.jsonl": "4885c0f9627728d3d51d846a898b50b6fa75f9888160e325b973ab380cab3c97",
+    "data/reference-coverage-20261106/final-pass/panel-006064.json": "a09e61dd689970b8091cfa353d4fde2f5fff2ce40875fc385934fbfe2d850392",
+    "data/reference-coverage-20261106/final-pass/panel.json": "bf2cef79e0dc98141a40bbe50e74dada9659854209fce90a2fb76fd1280300e7",
+    "data/reference-coverage-20261106/final-pass/qualification-005964.json": "c91a2c260773d5f193cba774e9150ec458a4b0c8d6266ae0f240d46955aac61f",
+    "data/reference-coverage-20261106/final-pass/qualification-006064.json": "f63130e38fc8467b63a8ea37cbe0795f2e1172e09a6a0d97d7eec1eedf36c54e",
+    "data/reference-coverage-20261106/final-pass/reference-005964/manifest.json": "e335b056370b80100b0764bb15a8f68467a1dbc580c903944fbbe45b62c4da37",
+    "data/reference-coverage-20261106/final-pass/reference-006064/manifest.json": "92b0b199bd98bd56684eb4f26dbc64b146d1f57266f97faac49345749446bd9d",
+    "data/reference-coverage-20261106/final-pass/report.json": "8b055ff76b940bc8c62eb264768412aafca93223f8aeaf5f4632e596fb3021f3",
+    "data/reference-coverage-20261106/final-pass/run.json": "65745faab252f34cdf5453414aea11489a5cb568bdb27a23da3cec2d5ac2d720",
+    "data/reference-coverage-20261106/final-pass/source-snapshot/manifest.json": "3e66a1464d9d210e3e67926609347a8ed6c3da83cb65570d83a2373b3875ef76",
+    "data/reference-coverage-20261106/final-pass/views.json": "df9e37322039302695de78828a81e402e8570931233075df4f869ead286822ad",
+    "data/reference-coverage-20261106/final-pass/windows.jsonl": "1bcdadcede27a31033a3a9301c407cc4e3962b43a6669f6bc259ad497cc7b5aa",
+    "data/reference-coverage-20261106/final-pass.log": "c80a30359f186c2c0f7c0c76ab5ca73bfe3e4d01d61930c472d04c38ffeb58c3",
+    "data/reference-coverage-20261106/fit.log": "e3b2ac930380cbdef897ebecb3ebfdd458042a4dcdadbf696b2d9acfca4a6579",
+    "data/reference-coverage-20261106/gpu-tests.log": "b489fef8e2d94157f1b490373d781b72f68ced1c48d534692bb6cf81c0e1f808",
+    "data/reference-coverage-20261106/inspect_meaning.py": "62c14439ec5d0929f80242297f420de4cfb1824a273bda46c73dc0db1461b397",
+    "data/reference-coverage-20261106/interruption.json": "dcdc1541e64552d4e646f1e87cd5dc49f73cb1cc0d0e3e652ea405227cd7ae67",
+    "data/reference-coverage-20261106/log-fix-readback.json": "eb74c00ed4379621e617bc0a4940c44e676b0b2bd1d1f8bc627b8b0fcf8f7236",
+    "data/reference-coverage-20261106/meaning-inspection.log": "86564466a785d6ba94b90819da63c1ee3a41ccc7f8f1185841097b4e09ffd470",
+    "data/reference-coverage-20261106/meaning-readback-report.json": "5f851c4b4c5c2cb40932d7400a4a83a8316db4f376a34f6118f65df54aa3e8bf",
+    "data/reference-coverage-20261106/meaning-readbacks.jsonl": "6bdc92278de4056e73f8b293071af8a5af1da0263d3d4e8237cc65294eb856cc",
+    "data/reference-coverage-20261106/run/checkpoint-001000/manifest.json": "cd4ff720fc839d5f52533e3bba99bd4a87e5f3bd85b1bcfdb18c4c4c075405be",
+    "data/reference-coverage-20261106/run/checkpoint-001100/manifest.json": "e673d9bdf13d8138fc2117ab3bf2e7dfc90c15c5b31fd515b2577e93d30cffc6",
+    "data/reference-coverage-20261106/run/curves.jsonl": "1f541090770471cd39fc25b17f6febbc00987a221a9b9d8da1f1a3a1e858d5ad",
+    "data/reference-coverage-20261106/run/panel-001000.json": "c95028ffc9c248ff6ef1c8696370e92bdd3e63b17ba049df0fcd1ce96dd5c549",
+    "data/reference-coverage-20261106/run/panel.json": "bf2cef79e0dc98141a40bbe50e74dada9659854209fce90a2fb76fd1280300e7",
+    "data/reference-coverage-20261106/run/run.json": "210045ec3cfb82542163b6bd353b2896ddc6873331b15f3e78b7fc686c2a141f",
+    "data/reference-coverage-20261106/run/source-snapshot/manifest.json": "be1a15f36e9d0e28daa221258571861ad9743df24decc16354e7f4706e85e8d3",
+    "data/reference-coverage-20261106/run/views.json": "df9e37322039302695de78828a81e402e8570931233075df4f869ead286822ad",
+    "data/reference-coverage-20261106/run/windows.jsonl": "28543e889ef5eb1812780297303417d8775651b7e9874c883686232deeaf1840",
+    "data/reference-coverage-20261106/user-stop.json": "142e93f785258166eda3fe3af215c20a1da792446053acf875321541da5e5e35"
+  },
+  "run_report": {
+    "agents": 0,
+    "capability_updates": 0,
+    "coverage_windows": 5064,
+    "cumulative_optimizer_updates": 6064,
+    "decoder_after_sha256": "88e34bbec1442fe798c18b4b67a87ff49df388dbcd5c8c12379602b0ad412c21",
+    "decoder_before_sha256": "88e34bbec1442fe798c18b4b67a87ff49df388dbcd5c8c12379602b0ad412c21",
+    "elapsed_seconds": 1515.7522246669978,
+    "final_panel": {
+      "by_role": {
+        "alternative": {
+          "exact": 25,
+          "total": 32
+        },
+        "conditions": {
+          "exact": 6,
+          "total": 32
+        },
+        "dimension": {
+          "exact": 7,
+          "total": 7
+        },
+        "key": {
+          "exact": 5,
+          "total": 5
+        },
+        "midpoint": {
+          "exact": 5,
+          "total": 5
+        },
+        "one": {
+          "exact": 7,
+          "total": 7
+        },
+        "question": {
+          "exact": 4,
+          "total": 32
+        },
+        "reason": {
+          "exact": 2,
+          "total": 32
+        },
+        "target": {
+          "exact": 3,
+          "total": 32
+        },
+        "zero": {
+          "exact": 7,
+          "total": 7
+        }
+      },
+      "development": {
+        "contrast": {
+          "passed": 100,
+          "scheduled": 100
+        },
+        "path": "data/reference-coverage-20261106/final-pass/qualification-006064.json",
+        "recovery": {
+          "exact": 0,
+          "executed": 100,
+          "scheduled": 100,
+          "unresolved": 100
+        },
+        "reference_id": "5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f",
+        "sha256": "f63130e38fc8467b63a8ea37cbe0795f2e1172e09a6a0d97d7eec1eedf36c54e",
+        "status": "BLOCKED",
+        "window": 6064
+      },
+      "first_development": {
+        "contrast": {
+          "passed": 100,
+          "scheduled": 100
+        },
+        "path": "data/reference-coverage-20261106/final-pass/qualification-005964.json",
+        "recovery": {
+          "exact": 0,
+          "executed": 100,
+          "scheduled": 100,
+          "unresolved": 100
+        },
+        "reference_id": "b4005dbaaf18a3f9d2b74bbc5df0838b7574770aeef4ab4ec7418c981dc30946",
+        "sha256": "c91a2c260773d5f193cba774e9150ec458a4b0c8d6266ae0f240d46955aac61f",
+        "status": "BLOCKED",
+        "window": 5964
+      },
+      "full_training": null,
+      "legacy40": {
+        "after": 26,
+        "before": 25,
+        "gains": [
+          "train-reference-0019",
+          "train-reference-0041",
+          "train-reference-0039"
+        ],
+        "losses": [
+          "train-reference-0010",
+          "train-reference-0001"
+        ]
+      },
+      "mean_reconstruction": 0.3984135712201553,
+      "panel_exact": 71,
+      "panel_total": 191,
+      "pass_number": 12,
+      "plateau": false,
+      "stop_reason": "USER_REQUESTED_FINAL_PASS",
+      "window": 6064
+    },
+    "frozen_base": {
+      "base_tied_storage": true,
+      "mismatches": [],
+      "parameters_checked": 320,
+      "pass": true
+    },
+    "full_training": null,
+    "gradients_none": true,
+    "initial_panel": {
+      "by_role": {
+        "alternative": {
+          "exact": 0,
+          "total": 32
+        },
+        "conditions": {
+          "exact": 1,
+          "total": 32
+        },
+        "dimension": {
+          "exact": 7,
+          "total": 7
+        },
+        "key": {
+          "exact": 5,
+          "total": 5
+        },
+        "midpoint": {
+          "exact": 5,
+          "total": 5
+        },
+        "one": {
+          "exact": 7,
+          "total": 7
+        },
+        "question": {
+          "exact": 2,
+          "total": 32
+        },
+        "reason": {
+          "exact": 0,
+          "total": 32
+        },
+        "target": {
+          "exact": 2,
+          "total": 32
+        },
+        "zero": {
+          "exact": 7,
+          "total": 7
+        }
+      },
+      "legacy40": {
+        "after": 25,
+        "before": 25,
+        "gains": [],
+        "losses": []
+      },
+      "mean_reconstruction": null,
+      "panel_exact": 36,
+      "panel_total": 191,
+      "pass_number": 0,
+      "window": 1000
+    },
+    "live_after_sha256": "c56c8f45d11f4eca02ba4bbc1d1024c50d1b74cceeee8e1d3a5c8e7378485450",
+    "live_before_sha256": "c56c8f45d11f4eca02ba4bbc1d1024c50d1b74cceeee8e1d3a5c8e7378485450",
+    "new_data": 0,
+    "passes": 12,
+    "peak_allocated": 4194480128,
+    "qualifications": [
+      {
+        "contrast": {
+          "passed": 100,
+          "scheduled": 100
+        },
+        "path": "data/reference-coverage-20261106/final-pass/qualification-005964.json",
+        "recovery": {
+          "exact": 0,
+          "executed": 100,
+          "scheduled": 100,
+          "unresolved": 100
+        },
+        "reference_id": "b4005dbaaf18a3f9d2b74bbc5df0838b7574770aeef4ab4ec7418c981dc30946",
+        "sha256": "c91a2c260773d5f193cba774e9150ec458a4b0c8d6266ae0f240d46955aac61f",
+        "status": "BLOCKED",
+        "window": 5964
+      },
+      {
+        "contrast": {
+          "passed": 100,
+          "scheduled": 100
+        },
+        "path": "data/reference-coverage-20261106/final-pass/qualification-006064.json",
+        "recovery": {
+          "exact": 0,
+          "executed": 100,
+          "scheduled": 100,
+          "unresolved": 100
+        },
+        "reference_id": "5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f",
+        "sha256": "f63130e38fc8467b63a8ea37cbe0795f2e1172e09a6a0d97d7eec1eedf36c54e",
+        "status": "BLOCKED",
+        "window": 6064
+      }
+    ],
+    "recovery_forward_positions_this_process": 3751,
+    "reference_qualified": false,
+    "requested_final_pass": 12,
+    "status": "COMPLETED",
+    "stop_reason": "USER_REQUESTED_FINAL_PASS",
+    "teacher_forced_forward_positions_this_process": 71115,
+    "training_positions_this_process": 73227
+  },
+  "audit": {
+    "status": "PASSED",
+    "passes": 12,
+    "new_presentations": 40512,
+    "per_view_new_presentations": 12,
+    "unique_views": 3376,
+    "checkpoint_count": 75,
+    "user_requested_final_pass": 12,
+    "no_pass_13": true,
+    "physical_work_excludes_possible_unlogged_inflight_at_interruptions": true,
+    "initial_tensors_identical": 1396,
+    "fixed_tensors_identical": 1338,
+    "reference_decoder_tensors_unchanged": 483,
+    "initial_optimizer_rng_identical": true,
+    "all_passes_exactly_once": true,
+    "retention": [
+      {
+        "window": 1422,
+        "before": 25,
+        "after": 20,
+        "gains": [],
+        "losses": [
+          "train-reference-0025",
+          "train-reference-0018",
+          "train-reference-0010",
+          "train-reference-0005",
+          "train-reference-0000"
+        ]
+      },
+      {
+        "window": 1844,
+        "before": 25,
+        "after": 20,
+        "gains": [],
+        "losses": [
+          "train-reference-0011",
+          "train-reference-0010",
+          "train-reference-0001",
+          "train-reference-0028",
+          "train-reference-0000"
+        ]
+      },
+      {
+        "window": 2266,
+        "before": 25,
+        "after": 18,
+        "gains": [],
+        "losses": [
+          "train-reference-0025",
+          "train-reference-0010",
+          "train-reference-0001",
+          "train-reference-0013",
+          "train-reference-0048",
+          "train-reference-0005",
+          "train-reference-0000"
+        ]
+      },
+      {
+        "window": 2688,
+        "before": 25,
+        "after": 22,
+        "gains": [
+          "train-reference-0019"
+        ],
+        "losses": [
+          "train-reference-0010",
+          "train-reference-0048",
+          "train-reference-0028",
+          "train-reference-0000"
+        ]
+      },
+      {
+        "window": 3110,
+        "before": 25,
+        "after": 24,
+        "gains": [
+          "train-reference-0019",
+          "train-reference-0041"
+        ],
+        "losses": [
+          "train-reference-0010",
+          "train-reference-0001",
+          "train-reference-0000"
+        ]
+      },
+      {
+        "window": 3532,
+        "before": 25,
+        "after": 24,
+        "gains": [
+          "train-reference-0019",
+          "train-reference-0041"
+        ],
+        "losses": [
+          "train-reference-0010",
+          "train-reference-0005",
+          "train-reference-0000"
+        ]
+      },
+      {
+        "window": 3954,
+        "before": 25,
+        "after": 23,
+        "gains": [
+          "train-reference-0041"
+        ],
+        "losses": [
+          "train-reference-0010",
+          "train-reference-0001",
+          "train-reference-0000"
+        ]
+      },
+      {
+        "window": 4376,
+        "before": 25,
+        "after": 23,
+        "gains": [
+          "train-reference-0019",
+          "train-reference-0041"
+        ],
+        "losses": [
+          "train-reference-0010",
+          "train-reference-0001",
+          "train-reference-0028",
+          "train-reference-0000"
+        ]
+      },
+      {
+        "window": 4798,
+        "before": 25,
+        "after": 25,
+        "gains": [
+          "train-reference-0019",
+          "train-reference-0041"
+        ],
+        "losses": [
+          "train-reference-0010",
+          "train-reference-0001"
+        ]
+      },
+      {
+        "window": 5220,
+        "before": 25,
+        "after": 24,
+        "gains": [
+          "train-reference-0019",
+          "train-reference-0041"
+        ],
+        "losses": [
+          "train-reference-0010",
+          "train-reference-0001",
+          "train-reference-0000"
+        ]
+      },
+      {
+        "window": 5642,
+        "before": 25,
+        "after": 27,
+        "gains": [
+          "train-reference-0012",
+          "train-reference-0019",
+          "train-reference-0041"
+        ],
+        "losses": [
+          "train-reference-0010"
+        ]
+      },
+      {
+        "window": 6064,
+        "before": 25,
+        "after": 26,
+        "gains": [
+          "train-reference-0019",
+          "train-reference-0041",
+          "train-reference-0039"
+        ],
+        "losses": [
+          "train-reference-0010",
+          "train-reference-0001"
+        ]
+      },
+      {
+        "window": 1000,
+        "before": 25,
+        "after": 25,
+        "gains": [],
+        "losses": []
+      }
+    ],
+    "panel_curve": [
+      {
+        "by_role": {
+          "alternative": {
+            "exact": 0,
+            "total": 32
+          },
+          "conditions": {
+            "exact": 1,
+            "total": 32
+          },
+          "dimension": {
+            "exact": 7,
+            "total": 7
+          },
+          "key": {
+            "exact": 5,
+            "total": 5
+          },
+          "midpoint": {
+            "exact": 5,
+            "total": 5
+          },
+          "one": {
+            "exact": 7,
+            "total": 7
+          },
+          "question": {
+            "exact": 2,
+            "total": 32
+          },
+          "reason": {
+            "exact": 0,
+            "total": 32
+          },
+          "target": {
+            "exact": 2,
+            "total": 32
+          },
+          "zero": {
+            "exact": 7,
+            "total": 7
+          }
+        },
+        "legacy40": {
+          "after": 25,
+          "before": 25,
+          "gains": [],
+          "losses": []
+        },
+        "mean_reconstruction": null,
+        "panel_exact": 36,
+        "panel_total": 191,
+        "pass_number": 0,
+        "window": 1000
+      },
+      {
+        "by_role": {
+          "alternative": {
+            "exact": 1,
+            "total": 32
+          },
+          "conditions": {
+            "exact": 1,
+            "total": 32
+          },
+          "dimension": {
+            "exact": 7,
+            "total": 7
+          },
+          "key": {
+            "exact": 4,
+            "total": 5
+          },
+          "midpoint": {
+            "exact": 5,
+            "total": 5
+          },
+          "one": {
+            "exact": 7,
+            "total": 7
+          },
+          "question": {
+            "exact": 0,
+            "total": 32
+          },
+          "reason": {
+            "exact": 0,
+            "total": 32
+          },
+          "target": {
+            "exact": 2,
+            "total": 32
+          },
+          "zero": {
+            "exact": 5,
+            "total": 7
+          }
+        },
+        "full_training": null,
+        "legacy40": {
+          "after": 20,
+          "before": 25,
+          "gains": [],
+          "losses": [
+            "train-reference-0025",
+            "train-reference-0018",
+            "train-reference-0010",
+            "train-reference-0005",
+            "train-reference-0000"
+          ]
+        },
+        "mean_reconstruction": 0.6830126312468918,
+        "panel_exact": 32,
+        "panel_total": 191,
+        "pass_number": 1,
+        "plateau": false,
+        "stop_reason": null,
+        "window": 1422
+      },
+      {
+        "by_role": {
+          "alternative": {
+            "exact": 4,
+            "total": 32
+          },
+          "conditions": {
+            "exact": 1,
+            "total": 32
+          },
+          "dimension": {
+            "exact": 7,
+            "total": 7
+          },
+          "key": {
+            "exact": 4,
+            "total": 5
+          },
+          "midpoint": {
+            "exact": 5,
+            "total": 5
+          },
+          "one": {
+            "exact": 7,
+            "total": 7
+          },
+          "question": {
+            "exact": 0,
+            "total": 32
+          },
+          "reason": {
+            "exact": 0,
+            "total": 32
+          },
+          "target": {
+            "exact": 0,
+            "total": 32
+          },
+          "zero": {
+            "exact": 7,
+            "total": 7
+          }
+        },
+        "full_training": null,
+        "legacy40": {
+          "after": 20,
+          "before": 25,
+          "gains": [],
+          "losses": [
+            "train-reference-0011",
+            "train-reference-0010",
+            "train-reference-0001",
+            "train-reference-0028",
+            "train-reference-0000"
+          ]
+        },
+        "mean_reconstruction": 0.6577781269153562,
+        "panel_exact": 35,
+        "panel_total": 191,
+        "pass_number": 2,
+        "plateau": false,
+        "stop_reason": null,
+        "window": 1844
+      },
+      {
+        "by_role": {
+          "alternative": {
+            "exact": 10,
+            "total": 32
+          },
+          "conditions": {
+            "exact": 1,
+            "total": 32
+          },
+          "dimension": {
+            "exact": 6,
+            "total": 7
+          },
+          "key": {
+            "exact": 4,
+            "total": 5
+          },
+          "midpoint": {
+            "exact": 5,
+            "total": 5
+          },
+          "one": {
+            "exact": 7,
+            "total": 7
+          },
+          "question": {
+            "exact": 0,
+            "total": 32
+          },
+          "reason": {
+            "exact": 0,
+            "total": 32
+          },
+          "target": {
+            "exact": 1,
+            "total": 32
+          },
+          "zero": {
+            "exact": 5,
+            "total": 7
+          }
+        },
+        "full_training": null,
+        "legacy40": {
+          "after": 18,
+          "before": 25,
+          "gains": [],
+          "losses": [
+            "train-reference-0025",
+            "train-reference-0010",
+            "train-reference-0001",
+            "train-reference-0013",
+            "train-reference-0048",
+            "train-reference-0005",
+            "train-reference-0000"
+          ]
+        },
+        "mean_reconstruction": 0.6274525780851182,
+        "panel_exact": 39,
+        "panel_total": 191,
+        "pass_number": 3,
+        "plateau": false,
+        "stop_reason": null,
+        "window": 2266
+      },
+      {
+        "by_role": {
+          "alternative": {
+            "exact": 11,
+            "total": 32
+          },
+          "conditions": {
+            "exact": 4,
+            "total": 32
+          },
+          "dimension": {
+            "exact": 7,
+            "total": 7
+          },
+          "key": {
+            "exact": 3,
+            "total": 5
+          },
+          "midpoint": {
+            "exact": 5,
+            "total": 5
+          },
+          "one": {
+            "exact": 7,
+            "total": 7
+          },
+          "question": {
+            "exact": 0,
+            "total": 32
+          },
+          "reason": {
+            "exact": 1,
+            "total": 32
+          },
+          "target": {
+            "exact": 2,
+            "total": 32
+          },
+          "zero": {
+            "exact": 7,
+            "total": 7
+          }
+        },
+        "full_training": null,
+        "legacy40": {
+          "after": 22,
+          "before": 25,
+          "gains": [
+            "train-reference-0019"
+          ],
+          "losses": [
+            "train-reference-0010",
+            "train-reference-0048",
+            "train-reference-0028",
+            "train-reference-0000"
+          ]
+        },
+        "mean_reconstruction": 0.5968113103925616,
+        "panel_exact": 47,
+        "panel_total": 191,
+        "pass_number": 4,
+        "plateau": false,
+        "stop_reason": null,
+        "window": 2688
+      },
+      {
+        "by_role": {
+          "alternative": {
+            "exact": 19,
+            "total": 32
+          },
+          "conditions": {
+            "exact": 2,
+            "total": 32
+          },
+          "dimension": {
+            "exact": 7,
+            "total": 7
+          },
+          "key": {
+            "exact": 5,
+            "total": 5
+          },
+          "midpoint": {
+            "exact": 5,
+            "total": 5
+          },
+          "one": {
+            "exact": 7,
+            "total": 7
+          },
+          "question": {
+            "exact": 0,
+            "total": 32
+          },
+          "reason": {
+            "exact": 1,
+            "total": 32
+          },
+          "target": {
+            "exact": 2,
+            "total": 32
+          },
+          "zero": {
+            "exact": 7,
+            "total": 7
+          }
+        },
+        "full_training": null,
+        "legacy40": {
+          "after": 24,
+          "before": 25,
+          "gains": [
+            "train-reference-0019",
+            "train-reference-0041"
+          ],
+          "losses": [
+            "train-reference-0010",
+            "train-reference-0001",
+            "train-reference-0000"
+          ]
+        },
+        "mean_reconstruction": 0.567778770770338,
+        "panel_exact": 55,
+        "panel_total": 191,
+        "pass_number": 5,
+        "plateau": false,
+        "stop_reason": null,
+        "window": 3110
+      },
+      {
+        "by_role": {
+          "alternative": {
+            "exact": 23,
+            "total": 32
+          },
+          "conditions": {
+            "exact": 2,
+            "total": 32
+          },
+          "dimension": {
+            "exact": 7,
+            "total": 7
+          },
+          "key": {
+            "exact": 5,
+            "total": 5
+          },
+          "midpoint": {
+            "exact": 5,
+            "total": 5
+          },
+          "one": {
+            "exact": 7,
+            "total": 7
+          },
+          "question": {
+            "exact": 1,
+            "total": 32
+          },
+          "reason": {
+            "exact": 1,
+            "total": 32
+          },
+          "target": {
+            "exact": 3,
+            "total": 32
+          },
+          "zero": {
+            "exact": 6,
+            "total": 7
+          }
+        },
+        "full_training": null,
+        "legacy40": {
+          "after": 24,
+          "before": 25,
+          "gains": [
+            "train-reference-0019",
+            "train-reference-0041"
+          ],
+          "losses": [
+            "train-reference-0010",
+            "train-reference-0005",
+            "train-reference-0000"
+          ]
+        },
+        "mean_reconstruction": 0.5418208346832367,
+        "panel_exact": 60,
+        "panel_total": 191,
+        "pass_number": 6,
+        "plateau": false,
+        "stop_reason": null,
+        "window": 3532
+      },
+      {
+        "by_role": {
+          "alternative": {
+            "exact": 24,
+            "total": 32
+          },
+          "conditions": {
+            "exact": 4,
+            "total": 32
+          },
+          "dimension": {
+            "exact": 7,
+            "total": 7
+          },
+          "key": {
+            "exact": 5,
+            "total": 5
+          },
+          "midpoint": {
+            "exact": 5,
+            "total": 5
+          },
+          "one": {
+            "exact": 6,
+            "total": 7
+          },
+          "question": {
+            "exact": 1,
+            "total": 32
+          },
+          "reason": {
+            "exact": 0,
+            "total": 32
+          },
+          "target": {
+            "exact": 2,
+            "total": 32
+          },
+          "zero": {
+            "exact": 7,
+            "total": 7
+          }
+        },
+        "full_training": null,
+        "legacy40": {
+          "after": 23,
+          "before": 25,
+          "gains": [
+            "train-reference-0041"
+          ],
+          "losses": [
+            "train-reference-0010",
+            "train-reference-0001",
+            "train-reference-0000"
+          ]
+        },
+        "mean_reconstruction": 0.5159581124615525,
+        "panel_exact": 61,
+        "panel_total": 191,
+        "pass_number": 7,
+        "plateau": false,
+        "stop_reason": null,
+        "window": 3954
+      },
+      {
+        "by_role": {
+          "alternative": {
+            "exact": 23,
+            "total": 32
+          },
+          "conditions": {
+            "exact": 4,
+            "total": 32
+          },
+          "dimension": {
+            "exact": 7,
+            "total": 7
+          },
+          "key": {
+            "exact": 4,
+            "total": 5
+          },
+          "midpoint": {
+            "exact": 5,
+            "total": 5
+          },
+          "one": {
+            "exact": 6,
+            "total": 7
+          },
+          "question": {
+            "exact": 1,
+            "total": 32
+          },
+          "reason": {
+            "exact": 1,
+            "total": 32
+          },
+          "target": {
+            "exact": 2,
+            "total": 32
+          },
+          "zero": {
+            "exact": 7,
+            "total": 7
+          }
+        },
+        "full_training": null,
+        "legacy40": {
+          "after": 23,
+          "before": 25,
+          "gains": [
+            "train-reference-0019",
+            "train-reference-0041"
+          ],
+          "losses": [
+            "train-reference-0010",
+            "train-reference-0001",
+            "train-reference-0028",
+            "train-reference-0000"
+          ]
+        },
+        "mean_reconstruction": 0.4927514141178729,
+        "panel_exact": 60,
+        "panel_total": 191,
+        "pass_number": 8,
+        "plateau": false,
+        "stop_reason": null,
+        "window": 4376
+      },
+      {
+        "by_role": {
+          "alternative": {
+            "exact": 23,
+            "total": 32
+          },
+          "conditions": {
+            "exact": 7,
+            "total": 32
+          },
+          "dimension": {
+            "exact": 7,
+            "total": 7
+          },
+          "key": {
+            "exact": 5,
+            "total": 5
+          },
+          "midpoint": {
+            "exact": 5,
+            "total": 5
+          },
+          "one": {
+            "exact": 7,
+            "total": 7
+          },
+          "question": {
+            "exact": 3,
+            "total": 32
+          },
+          "reason": {
+            "exact": 1,
+            "total": 32
+          },
+          "target": {
+            "exact": 2,
+            "total": 32
+          },
+          "zero": {
+            "exact": 7,
+            "total": 7
+          }
+        },
+        "full_training": null,
+        "legacy40": {
+          "after": 25,
+          "before": 25,
+          "gains": [
+            "train-reference-0019",
+            "train-reference-0041"
+          ],
+          "losses": [
+            "train-reference-0010",
+            "train-reference-0001"
+          ]
+        },
+        "mean_reconstruction": 0.46705789588887237,
+        "panel_exact": 67,
+        "panel_total": 191,
+        "pass_number": 9,
+        "plateau": false,
+        "stop_reason": null,
+        "window": 4798
+      },
+      {
+        "by_role": {
+          "alternative": {
+            "exact": 25,
+            "total": 32
+          },
+          "conditions": {
+            "exact": 8,
+            "total": 32
+          },
+          "dimension": {
+            "exact": 7,
+            "total": 7
+          },
+          "key": {
+            "exact": 5,
+            "total": 5
+          },
+          "midpoint": {
+            "exact": 5,
+            "total": 5
+          },
+          "one": {
+            "exact": 7,
+            "total": 7
+          },
+          "question": {
+            "exact": 2,
+            "total": 32
+          },
+          "reason": {
+            "exact": 1,
+            "total": 32
+          },
+          "target": {
+            "exact": 2,
+            "total": 32
+          },
+          "zero": {
+            "exact": 7,
+            "total": 7
+          }
+        },
+        "full_training": null,
+        "legacy40": {
+          "after": 24,
+          "before": 25,
+          "gains": [
+            "train-reference-0019",
+            "train-reference-0041"
+          ],
+          "losses": [
+            "train-reference-0010",
+            "train-reference-0001",
+            "train-reference-0000"
+          ]
+        },
+        "mean_reconstruction": 0.443685411430081,
+        "panel_exact": 69,
+        "panel_total": 191,
+        "pass_number": 10,
+        "plateau": false,
+        "stop_reason": null,
+        "window": 5220
+      },
+      {
+        "by_role": {
+          "alternative": {
+            "exact": 26,
+            "total": 32
+          },
+          "conditions": {
+            "exact": 8,
+            "total": 32
+          },
+          "dimension": {
+            "exact": 7,
+            "total": 7
+          },
+          "key": {
+            "exact": 5,
+            "total": 5
+          },
+          "midpoint": {
+            "exact": 5,
+            "total": 5
+          },
+          "one": {
+            "exact": 7,
+            "total": 7
+          },
+          "question": {
+            "exact": 3,
+            "total": 32
+          },
+          "reason": {
+            "exact": 1,
+            "total": 32
+          },
+          "target": {
+            "exact": 4,
+            "total": 32
+          },
+          "zero": {
+            "exact": 7,
+            "total": 7
+          }
+        },
+        "full_training": null,
+        "legacy40": {
+          "after": 27,
+          "before": 25,
+          "gains": [
+            "train-reference-0012",
+            "train-reference-0019",
+            "train-reference-0041"
+          ],
+          "losses": [
+            "train-reference-0010"
+          ]
+        },
+        "mean_reconstruction": 0.42222010028248946,
+        "panel_exact": 73,
+        "panel_total": 191,
+        "pass_number": 11,
+        "plateau": false,
+        "stop_reason": null,
+        "window": 5642
+      },
+      {
+        "pass_number": 12,
+        "window": 6064,
+        "panel_exact": 71,
+        "panel_total": 191,
+        "by_role": {
+          "question": {
+            "exact": 4,
+            "total": 32
+          },
+          "target": {
+            "exact": 3,
+            "total": 32
+          },
+          "alternative": {
+            "exact": 25,
+            "total": 32
+          },
+          "dimension": {
+            "exact": 7,
+            "total": 7
+          },
+          "conditions": {
+            "exact": 6,
+            "total": 32
+          },
+          "zero": {
+            "exact": 7,
+            "total": 7
+          },
+          "one": {
+            "exact": 7,
+            "total": 7
+          },
+          "midpoint": {
+            "exact": 5,
+            "total": 5
+          },
+          "key": {
+            "exact": 5,
+            "total": 5
+          },
+          "reason": {
+            "exact": 2,
+            "total": 32
+          }
+        },
+        "legacy40": {
+          "before": 25,
+          "after": 26,
+          "gains": [
+            "train-reference-0019",
+            "train-reference-0041",
+            "train-reference-0039"
+          ],
+          "losses": [
+            "train-reference-0010",
+            "train-reference-0001"
+          ]
+        },
+        "mean_reconstruction": 0.3984135712201553,
+        "plateau": false,
+        "full_training": null,
+        "stop_reason": "USER_REQUESTED_FINAL_PASS"
+      }
+    ],
+    "full_training": null,
+    "qualifications": [
+      {
+        "contrast": {
+          "passed": 100,
+          "scheduled": 100
+        },
+        "path": "data/reference-coverage-20261106/final-pass/qualification-005964.json",
+        "recovery": {
+          "exact": 0,
+          "executed": 100,
+          "scheduled": 100,
+          "unresolved": 100
+        },
+        "reference_id": "b4005dbaaf18a3f9d2b74bbc5df0838b7574770aeef4ab4ec7418c981dc30946",
+        "sha256": "c91a2c260773d5f193cba774e9150ec458a4b0c8d6266ae0f240d46955aac61f",
+        "status": "BLOCKED",
+        "window": 5964
+      },
+      {
+        "contrast": {
+          "passed": 100,
+          "scheduled": 100
+        },
+        "path": "data/reference-coverage-20261106/final-pass/qualification-006064.json",
+        "recovery": {
+          "exact": 0,
+          "executed": 100,
+          "scheduled": 100,
+          "unresolved": 100
+        },
+        "reference_id": "5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f",
+        "sha256": "f63130e38fc8467b63a8ea37cbe0795f2e1172e09a6a0d97d7eec1eedf36c54e",
+        "status": "BLOCKED",
+        "window": 6064
+      }
+    ],
+    "stop_reason": "USER_REQUESTED_FINAL_PASS",
+    "charged_training_positions": 1401924,
+    "training_forward_positions": 1361412,
+    "new_recovery_forward_positions": 44003,
+    "exact_resume_without_repeated_updates": true,
+    "median_window_seconds": 2.452649227998336,
+    "frozen_base": {
+      "base_tied_storage": true,
+      "mismatches": [],
+      "parameters_checked": 320,
+      "pass": true
+    },
+    "reference_qualified": false
+  },
+  "validation": {
+    "metadata_tests": {
+      "passed": 3,
+      "seconds": 0.005,
+      "exit": 0
+    },
+    "cuda_optimizer_checkpoint_tests": {
+      "passed": 11,
+      "seconds": 0.587,
+      "exit": 0
+    },
+    "stop_control": "Actual run stops at 5064 coverage windows / cumulative update 6064; final checkpoint persists limit 12; no pass-13 episode",
+    "logging_fix": "Actual emit helper tested against saved report containing elapsed_seconds; output and time preserved; syntax compiled",
+    "post_run_audit": {
+      "command": ".venv/bin/python data/reference-coverage-20261106/audit.py",
+      "status": "PASSED",
+      "exit": 0
+    },
+    "numeric_matrices": "Unchanged model arithmetic; completed matrices not rerun"
+  },
+  "source_note": "Executed snapshots retained. Only runner/control document migrated for explicit user stop; subsequent runner edit fixes console formatting only. Model, optimizer and numeric implementation sources remain unchanged.",
+  "meaning_inspection": {
+    "cases": 20,
+    "development": "5b8f4cffdc4f33e255d3a34306cac03a68c50dcd9dab905ae8d8adcf89c81e77",
+    "elapsed_seconds": 39.90727814300044,
+    "ended": 20,
+    "exact": 0,
+    "gpu_uuid": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+    "optimizer_updates": 0,
+    "reference_id": "d741b65f85ef4d381c74bf48b3bf2330de3009f8e561e20d9e3bdc389ffdeb42",
+    "scope": "20 existing development annotations; full latent-only decoder readback; no semantic pass assigned",
+    "source_sha256": "62c14439ec5d0929f80242297f420de4cfb1824a273bda46c73dc0db1461b397"
+  },
+  "meaning_inspection_note": "Codex inspection of ORIGINAL update-1000 parent: 14 clear material substitutions/omissions, 6 scale-anchor cases unresolved. Not independent review, a semantic pass rate, or final-weight readback.",
+  "full_catalogue_recovery_measured": false,
+  "arbitrary_agent_time_cap": false,
+  "physical_work_note": "Completed update/presentation/forward-input accounting is exact. Two checkpoint interruptions may include unlogged in-flight GPU work; no exhaustive physical-compute total is claimed.",
+  "agents_spawned": 0,
+  "new_source_records": 0,
+  "new_annotations_or_reviews": 0,
+  "external_model_service_calls": 0,
+  "capability_optimizer_updates": 0,
+  "live_promotions": 0,
+  "next_unfinished": "Reference meaning/recovery transfer, particularly Question/Target/Reason; no further fitting, pass 13 or capability training queued",
+  "current_logging_fix_source_sha256": "a906bf5fe61972bb1260939309214acd9edbe8aa7b76886483a55459a7c28ec1"
+}

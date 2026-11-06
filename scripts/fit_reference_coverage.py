@@ -60,7 +60,7 @@ def main():
     write('views.json', [dict(id=v.identity, role=v.role, annotation_sha256=v.sha256, sources=v.sources) for v in views])
     write('panel.json', dict(ids=panel, prior_cases=previous, selection='fixed hash order, up to 32 per role; includes all prior 40'))
     started = time.monotonic()
-    def emit(event, **values):print(json.dumps(dict(event=event, elapsed_seconds=time.monotonic()-started, **values)), flush=True)
+    def emit(event, **values):print(json.dumps({'event':event, 'elapsed_seconds':time.monotonic()-started, **values}), flush=True)
     emit('metadata_ready', panel=len(panel), views=len(views), windows_per_pass=422)
     import torch
     from torch.nn.attention import sdpa_kernel, SDPBackend

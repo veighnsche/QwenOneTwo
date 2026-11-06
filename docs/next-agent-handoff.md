@@ -43,75 +43,91 @@ training, promote weights, or authorize deployment.
 
 ## Current checkpoint
 
-**A complete-coverage reference experiment is ACTIVE. Do not launch another
-training run or treat the older "no job active" statements below as current.**
-**The user has now explicitly made pass 12 the FINAL pass: do not start pass
-13.** This overrides the automatic stopping rule below. Checkpoint 5,800 has
-been preserved for a narrow stop-control revision; resume only with
-`--stop-after-pass 12`. The new limit persists in checkpoints and is checked
-before any next-pass episode. This is a user stop, not a convergence claim.
-Implementation `caa1db5` and
-[protocol](reference-complete-coverage-v1.md) preceded execution. The user
-authorized shuffled complete passes, existing data, reference-pooler fitting
-only, W/T/codec/live frozen, RTX 3090 only, no agents or capability training,
-and no arbitrary time or maximum-pass cap.
+**The complete-coverage reference experiment is STOPPED after pass 12, exactly
+as the user requested. Pass 13 never started. No experiment job remains active.**
+Read the [measured report](reference-coverage-results-2026-11-06.md),
+[portable receipt](evidence/reference-complete-coverage-v1.json),
+[protocol and explicit user stop](reference-complete-coverage-v1.md), and
+[parent-weight meaning inspection](reference-meaning-inspection-2026-11-06.md).
 
-Current process command is `python -u -m scripts.fit_reference_coverage` with
-`--resume data/reference-coverage-20261106/run/checkpoint-001100`
-and `--output data/reference-coverage-20261106/continued`. It explicitly selects
-GPU UUID `GPU-225509c3-d702-6c27-de03-76b5e99b33b1`. Raw progress and curves:
-`data/reference-coverage-20261106/continued.log` and
-`data/reference-coverage-20261106/continued/curves.jsonl`.
+Implementation `caa1db5` adds complete shuffled passes and a reference-only
+continuation schedule. User-stop implementation `c36d6ac` adds
+`--stop-after-pass 12`, persists it in checkpoints and guards before another
+iteration. It was installed via checkpoint 5,800 with unchanged model/optimizer
+arithmetic. The original automatic loop had no fixed pass count; it continued
+while recovery or loss improved. The user-selected endpoint overrides that
+rule. **This is not a plateau or convergence claim.**
 
-As of completed **pass 7 / cumulative update 3,954**, fixed-panel exact recovery
-is **61/191** versus starting **36/191**. Per-pass scores are **32, 35, 39, 47,
-55, 60, 61**. Whole-pass mean CE is **0.6830126312468918,
-0.6577781269153562, 0.6274525780851182, 0.5968113103925616,
-0.567778770770338, 0.5418208346832367, 0.5159581124615525**.
-Both recovery and loss continue reaching new bests; the predeclared stopping
-condition has not been met. Development exact recovery remains **0/100** and
-contrasts **100/100** through these observations. Pass 8 has started.
+The experiment completed **12 passes / 5,064 new pooler updates / 40,512 eligible
+presentations**, exactly **12 new presentations per each of 3,376 unique views**.
+Cumulative optimizer update is **6,064**. W, reference T/codec and live weights
+stay frozen; all model workloads used the specified RTX 3090, with no agents,
+new source records/reviews, capability training, promotion or service changes.
 
-Every pass has 422 eight-example updates over all 3,376 unique existing views.
-Only the explicit reference continuation profile extends past A4's 1,000-update
-limit and holds peak LR 2e-4; capability/default schedules remain unchanged.
-This changes sampling AND the learning schedule, so it is not a sampler-only
-causal comparison. The panel includes all prior 40 cases plus fixed hash-selected
-views up to 32 per role. Retention regressions are recorded, not hidden by gains
-in other cases. Full-catalogue readback and final frozen-byte audit remain pending.
+| Diagnostic | Start | Final pass 12 |
+|---|---:|---:|
+| Fixed role-stratified training panel | 36/191 | **71/191** |
+| Prior training diagnostic cases | 25/40 | **26/40** |
+| Six exposure controls | 6/6 | **4/6** |
+| Original development exact recovery | 0/100 | **0/100 at both final observations** |
+| Original development contrasts | 100/100 | **100/100 at both final observations** |
 
-Stop at >=95% ENTIRE-catalogue training recovery, or three complete passes with
-neither a new best panel recovery count nor a new best whole-pass mean CE.
-When panel recovery reaches 95%, or a plateau is observed, perform the planned
-full-catalogue evaluation (reusing same-checkpoint panel recoveries). Preserve
-all failed historical qualifications. These are research criteria, not proof
-of MVP readiness or a new exact-English product requirement.
+Per-pass panel scores: **32, 35, 39, 47, 55, 60, 61, 60, 67, 69, 73, 71**.
+Mean whole-pass CE declines from **0.6830126312468918** to
+**0.3984135712201553**. Pass 11 is the highest panel observation (73/191), but
+final pass-12 weights are retained without substituting an earlier checkpoint.
+Final role scores: Question **4/32**, Target **3/32**, Alternative **25/32**,
+Conditions **6/32**, Reason **2/32**; all 31 views in the five smaller roles
+recover. The original 40 cases have three gains (`0019`, `0041`, `0039`) and two
+losses (`0010`, `0001`), so retention is incomplete. This run genuinely continues
+the six-success reference and regresses two controls; the older reset-to-common-
+initial-state warning applies to the earlier broad control, not this continuation.
 
-The original process in `data/reference-coverage-20261106/run/` was intentionally
-checkpointed at update 1,100 / 100 new updates, then terminated (exit 143) for a
-metric/meaning inspection. Resume starts at update 1,101, with exact optimizer,
-RNG, sampler cursor and in-pass loss totals; no completed updates were repeated.
-The frozen feature cache was regenerated on the GPU. There may be unlogged
-in-flight GPU work at the interruption; do not claim an exact total physical
-compute across it. See `interruption.json` in the parent evidence directory.
+All **24 development observations** remain 0/100 exact and 100/100 contrasts.
+Final required original-certificate observations are **5,964 / 6,064**. They
+fail that conservative certificate. Exact wording and that checkpoint spacing
+are not, by themselves, declarations of MVP failure; preserve the user's gate
+policy above. No final-weight semantic equivalence score or full-catalogue
+training recovery is claimed. The separate 20-case meaning inspection used the
+original update-1,000 parent: 14 clear material substitutions/omissions, six
+scale-anchor cases unresolved, not independent review or approval.
 
-The [meaning inspection](reference-meaning-inspection-2026-11-06.md) records full
-latent-only readbacks of 20 existing development annotations from the ORIGINAL
-update-1,000 parent, not the continued weights. Fourteen have clear material
-content substitutions/omissions; six scale anchors preserve none/all/half but
-substitute concepts and remain semantically unresolved. This was Codex diagnostic
-inspection, not independent review or a semantic approval. No new source data,
-annotations, human reviews or external model calls were made.
+**The post-run audit PASSES all 75 checkpoints**, complete-pass counts, exact
+resume, the persisted final-pass limit and no pass-13 update. Initial 1,396
+saved tensors, optimizer and RNG bytes match the parent; **1,338 non-pooler
+state tensors remain byte-identical**, including **483 T/codec tensors**.
+All **320 frozen base tensors/physical tying** pass; decoder/live hashes remain
+unchanged; gradients finish None. **Three metadata tests pass in 0.005 s;
+eleven CUDA optimizer/checkpoint tests pass in 0.587 s.** Unchanged numeric
+matrices were reused. The stop control is additionally proven by the actual
+endpoint/ledger. Only a final logging statement failed after all artifacts and
+checks were saved; the one-line fix was verified against the saved report,
+without rerunning any model workload. Actual process exits remain **143, 143, 1**.
+The final `report.json` is `COMPLETED` with `USER_REQUESTED_FINAL_PASS`.
 
-**Three metadata tests passed in 0.005 s; eleven CUDA optimizer/checkpoint tests
-passed in 0.587 s**, including continuation beyond 1,000 and exact next-update
-resume. Existing numeric matrices are reused with unchanged model arithmetic.
-Runtime guards enforce eligible finite losses, role-local owners and frozen
-reference versions; final serialized/base validation is still outstanding.
-At completion, audit both prefix and continued logs/checkpoints, document the
-actual stop/results, commit and push. Local post-run audit draft:
-`data/reference-coverage-20261106/audit.py`. Do not silently change the active
-run's snapshotted sources or start another architecture/fitting experiment.
+Raw evidence roots: `data/reference-coverage-20261106/{run,continued,final-pass}`.
+The prefix preserves updates 1–100; the continuation preserves 101–4,800; the
+final segment preserves 4,801–5,064, with no repeated completed updates.
+Two intentional checkpoint interruptions may contain unlogged in-flight GPU
+work; do not claim an exhaustive physical-compute total. Completed-window
+accounting is **1,401,924 charged / 1,361,412 teacher-forced forward input
+positions**. Three frozen feature-cache preparations total **10,128 W prefills /
+393,765 input positions**; the 20-case meaning inspection is separate.
+Median completed update: **2.452649227998336 s**. Final process time:
+**1,515.7522246669978 s**; final-process peak CUDA: **4,194,480,128 bytes**.
+
+Final unqualified frozen reference:
+`data/reference-coverage-20261106/final-pass/reference-006064`, fingerprint
+`5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f`.
+Final complete resume bundle: `final-pass/checkpoint-006064` in the same parent.
+It stores the user final-pass limit. **Do not start pass 13 or additional fitting.**
+
+Next unfinished work is reference meaning/recovery transfer, particularly the
+weak Question/Target/Reason roles, and distinguishing encoder/readout limitations
+from actual receiver use. Coverage improves training recovery but has not
+established held-out transfer, a unique cause, or connected Noul/Choice/Score
+competence. No additional training, generation, deployment or live promotion is
+queued. Preserve all raw evidence and the original failed reports.
 
 ## Previous completed exposure comparison
 
