@@ -16,7 +16,7 @@ def source_snapshot(output):
     paths=sorted(set((root/'qwen_one_two/training').glob('*.py'))|
                  set((root/'qwen_one_two/codec').glob('*.py'))|
                  set((root/'qwen_one_two').glob('g1_*.py'))|
-                 {root/'scripts/fit_reference.py',root/'scripts/qualify_reference.py'})
+                 {root/'scripts/fit_reference.py',root/'scripts/qualify_reference.py',root/'scripts/qualify_recurrence.py'})
     hashes={}
     for path in paths:
         name=str(path.relative_to(root));body=path.read_bytes();hashes[name]=digest(body)
@@ -111,6 +111,7 @@ def main():
             restored=restore_model(initial,b,c,ref,identities,window=window)
             sampler.load_state_dict(restored['sampler'])
         run={'scope':'reference only; no capability training','train_release':train.identity,'development_release':dev.identity,
+             'recurrence_backend':b.recurrence_backend,
              'scheduled_windows':1000,'examples_per_window':8,'training_seed':17,'reference_records':len(prepared),
              'frozen_W_feature_cache_entries':len(feature_cache),'cache_device':'cuda',
              'contrast_training':'masked: no explicit reviewed training reference contrast relations supplied',

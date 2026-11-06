@@ -7,6 +7,57 @@ This handoff records measured mechanisms, not learned capability.
 
 ## Current checkpoint
 
+The user authorized fixing CPU dispatch overhead with **no generation, agents
+or extra training**. Implemented the separately versioned
+[graph-v1 recurrence](codec-recurrence-graph-v1.md), now the expanded backbone
+default. It replays the original token-ordered CUDA operations and PyTorch VJP;
+it preserves v3 BF16 storage / FP32 transformer / compensated BF16 vocabulary
+arithmetic. Eager remains explicit and supplies the genuine reference. See the
+[measured report](recurrence-graph-results-2026-11-06.md) and
+[portable receipt](evidence/recurrence-graph-v1.json).
+
+**45/45 focused full-model traces passed in 944.7234295289963 s**:
+128/512/1024 positions × Noul/Choice/Score × eager/graph functional/graph
+checkpoint/graph serving/genuine FP32. Graph states, logits, scalars, budgets,
+discrete decisions and functional/checkpoint gradients were exact against eager.
+All thirteen status cells occur. Genuine FP32 comparison worst logit/gradient
+RMS errors were 4.169371270284753e-6 / 8.316676446703025e-6, within existing
+tolerances. Live weights were unchanged; all 320 frozen tensors and physical
+tying passed. This focused protocol does not claim a repeat of the entire
+original 432-case matrix, full-trainer memory or learned semantic qualification.
+
+**Eight operator tests passed in 3.745 s**, including 32 output/all-input-gradient
+comparisons, 512/1024 connected compositions, cold checkpoint capture, LRU
+eviction, stream isolation, three repeats, nonfinite guards and four small GPU
+FP64 directional checks. **65 model-free regressions passed in 2.801 s.**
+**Eight affected integration checks passed in 42.783 s**, covering teacher-forcing
+parity, frozen projection/vocabulary derivatives, scoped T checkpoint replay,
+export/tying and frozen-reference input gradients without live-owner gradients.
+
+Measured existing trained-reference forward/VJP median: **1.4445 → 0.3463 s
+(4.17×)**. Host `cudaLaunchKernel` calls fell **52,243 → 9,007**; graph replays
+are separate submissions. Device kernels increased **52,497 → 58,905**.
+The graph path added 72 replay submissions (9,079 total launch API calls).
+The fix reduces host dispatch, not device kernel count. Two actual scheduled
+eight-exposure windows with real finite guards/accumulation improved
+**18.7282 → 5.8341 s (3.21×)** warm median. Buffers were discarded; optimizer
+updates stayed zero and reference weights were unchanged. Cold/capture times
+and all samples are retained. No full optimizer-step throughput is claimed.
+
+An initial fused Triton candidate passed local tests but failed 512-position
+serial-feedback FP32 tolerances. It was rejected; its source/logs remain under
+`data/recurrence-fused-20261106/`. Accepted graph evidence is under
+`data/recurrence-graph-20261106/`. No tolerances were widened, extra fitting was
+performed, existing data changed or live service touched.
+
+**Next unfinished remains reference generalization:** the previous fitted
+reference still failed recovery. Performance is improved; no semantic promotion
+was granted. Investigate the retained fit/existing data and document a development
+revision before another fitting run. Full participating-trainer memory, actual
+correction bindings and later semantic/promotion checks remain outstanding.
+
+## Prior reference fit checkpoint
+
 The user subsequently authorized **reference fitting and qualification with the
 existing data on the RTX 3090**, no generation, agents or capability training.
 The fixed fit is complete, but **qualification failed**. See the
@@ -405,11 +456,12 @@ new fitting. Do not generate more data, extend epochs automatically, relax the
 95%/90% gate or use locked cases to repair development results. A frozen export,
 low training loss and 100% contrast separation cannot promote this reference.
 
-An independent performance slice can reduce the measured eager recurrent/
-backward dispatch overhead. Preserve FP32 transformer computation, compensated
-BF16 vocabulary projection, cache continuity, connected gradients, accounting
-and existing tolerances. Qualify affected arithmetic before relying on it; do
-not repeat the completed 324/108 matrices for unrelated changes.
+The dispatch performance slice is now implemented and qualified through the
+separate graph-v1 protocol above. Keep its source-bound evidence distinct from
+the historical eager 324/108 matrices. Capture overhead, dynamic shapes, full
+optimizer-step throughput and full participating-trainer memory are not waived
+by the reported warm speedups. Preserve all original tolerances and exact
+cache/accounting/gradient invariants in subsequent changes.
 
 The read-only qualification runner, reference formation objectives, actual-content
 and compatible-return gates, and native/clean complete-episode producers exist.

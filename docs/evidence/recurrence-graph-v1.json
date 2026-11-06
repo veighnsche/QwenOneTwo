@@ -1,0 +1,671 @@
+{
+  "archived_sources_match_current": true,
+  "assets": {
+    "data/recurrence-fused-20261106/preflight.log": "4cb62d06232e87bfed3a1525a7db176942eaacead6ab0f80166350c1eba11a1e",
+    "data/recurrence-fused-20261106/preflight/report.json": "4470d1306afa4a93159d5c15afc5f7c6282a218f958c7a0a0745853378cc494c",
+    "data/recurrence-fused-20261106/preflight/source-snapshot/manifest.json": "e4d846db48e12d434d3d03ecdc0eb69266bb1092a00af482e8c33bc667736de8",
+    "data/recurrence-fused-20261106/rejected-fused-source/recurrence.py": "70b3d0e67b5ad5956534dfa5be91156b1fe756e52bd2e1e4f232c9c8039ed9c5",
+    "data/recurrence-fused-20261106/rejected-fused-source/scripts/qualify_recurrence.py": "dd2da35d6e3549c9f730a17cb5edcf84adbd2f3752217114c589fae4356fe2d8",
+    "data/recurrence-fused-20261106/rejected-fused-source/tests/test_recurrence_gpu.py": "3aea0368d47cbee8e260e6f23c2db27517873b4055dc050cc6958000011be982",
+    "data/recurrence-fused-20261106/unit.log": "bc9c8a1ff43c299e833598a1775b9a3f3d1619188b708fbf83d47b2f24f7bd97",
+    "data/recurrence-graph-20261106/benchmark_windows.py": "8cf371795c03f1aa5b604c01dd12c660ebd30656b612251024f07f523c423963",
+    "data/recurrence-graph-20261106/commands.json": "fdb47f312aa4a4037d45083d41e751e4504f88a62c2cde530e8cec88493c3241",
+    "data/recurrence-graph-20261106/integration-tests.log": "db0f5f12cf5fe2555a4603d1b1498678171698dab9039ed8e49e11e70ba2fe37",
+    "data/recurrence-graph-20261106/launch-analysis.json": "32a5cd2864aab1a419cc92f6d6fa1e7cf948acb232f0ec9375abcfae50cb7088",
+    "data/recurrence-graph-20261106/metadata-tests.log": "717e323091f4a95080b817a063d028c35eb580b78c478724e00a1c2a680177f8",
+    "data/recurrence-graph-20261106/model-summary.json": "4b8d72e8634ee7a20163c4b67161359b0c4df172b594399904ff68f53a45d842",
+    "data/recurrence-graph-20261106/model.log": "4002065ace5b62cb2249ddc80f70b3ba790425fa2cf123bb7fc14345c827ecd9",
+    "data/recurrence-graph-20261106/model/eager-trace.json": "cb28ed06cc86870da9573bb2ac7391316497f08b4048aa52709bf36aeb0ca9b6",
+    "data/recurrence-graph-20261106/model/graph-v1-trace.json": "25e1a62ba1849f34c322b290c29a00be225ab3763a6af6c53dad737bec617fdd",
+    "data/recurrence-graph-20261106/model/report.json": "9183cbbe641fcec0a1786eb598d1d76ea2e29d0b24b7fa69b2d5ea21a0e732fb",
+    "data/recurrence-graph-20261106/model/source-snapshot/manifest.json": "b4ece79860cd75d2b7afebadd6bff6024f3f94c9ae27912fd1081541f80381a6",
+    "data/recurrence-graph-20261106/unit-summary.json": "e7f33df7bdb7b83f6db060d3fb024bde4d06d5575aaea069d72444a9ba7f3179",
+    "data/recurrence-graph-20261106/unit.log": "14fef8d59a639e76d20e7f8d3315de79c09a6024be07ea92f7ce664d555ace60",
+    "data/recurrence-graph-20261106/window-benchmark.json": "9c4775503079fd47b6f2a844b9a0136395095969495b7089075136c41745c6d2",
+    "data/recurrence-graph-20261106/window-benchmark.log": "8397554fd1b069528a9ab0fd5615cf30e0618b009168636cb6b2a3c61200f97b"
+  },
+  "benchmark": {
+    "gradient_parity": [
+      {
+        "gradient": {
+          "active": 7899904,
+          "cosine": 1.0,
+          "normalized_rms": 0.0,
+          "pass": true
+        },
+        "loss_absolute": 0.0,
+        "repeat": 0
+      },
+      {
+        "gradient": {
+          "active": 7899904,
+          "cosine": 1.0,
+          "normalized_rms": 0.0,
+          "pass": true
+        },
+        "loss_absolute": 0.0,
+        "repeat": 1
+      },
+      {
+        "gradient": {
+          "active": 7899904,
+          "cosine": 1.0,
+          "normalized_rms": 0.0,
+          "pass": true
+        },
+        "loss_absolute": 0.0,
+        "repeat": 2
+      }
+    ],
+    "kernels": {
+      "eager": {
+        "cuda_kernels": 52497,
+        "launch_calls": 52243,
+        "trace_sha256": "cb28ed06cc86870da9573bb2ac7391316497f08b4048aa52709bf36aeb0ca9b6"
+      },
+      "graph-v1": {
+        "cuda_kernels": 58905,
+        "launch_calls": 9007,
+        "trace_sha256": "25e1a62ba1849f34c322b290c29a00be225ab3763a6af6c53dad737bec617fdd"
+      }
+    },
+    "reference_sha256": "fb38a31359a4ff367780bb8729695894e663810efd124c016bc2d5ba3fdbf7de",
+    "reference_unchanged": true,
+    "sample": "train-reference-0000",
+    "scope": "warm forward/VJP only; excludes accumulation/optimizer; no optimizer object or step",
+    "speedup": 4.1715711240279845,
+    "timings": {
+      "eager": {
+        "median_seconds": 1.4445074120012578,
+        "samples_seconds": [
+          1.4445074120012578,
+          1.6177119560015853,
+          1.440020170994103
+        ]
+      },
+      "graph-v1": {
+        "median_seconds": 0.3462741900002584,
+        "samples_seconds": [
+          0.9126432990015019,
+          0.3462741900002584,
+          0.3461874469940085
+        ]
+      }
+    }
+  },
+  "capability_optimizer_updates": 0,
+  "commands": {
+    "integration": {
+      "argv": [
+        ".venv/bin/python",
+        "-m",
+        "unittest",
+        "test_reference_fit_gpu",
+        "test_codec_precision_gpu",
+        "test_training_clean_gpu.CleanGPU.test_reference_checkpoint_replay_retains_T_mapping",
+        "test_training_clean_gpu.CleanGPU.test_full_bundle_export_preserves_rows_tying_and_forward",
+        "test_semantic_binding_gpu.SemanticBindingGPU.test_frozen_auxiliary_decoder_has_input_gradient_and_no_live_owner_gradient",
+        "-v"
+      ],
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+        "PYTHONPATH": "tests",
+        "QOT_QUALIFY_SNAPSHOT": "/home/vince/the-operating-table/data/huggingface/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17"
+      },
+      "log": "data/recurrence-graph-20261106/integration-tests.log"
+    },
+    "metadata": {
+      "argv": [
+        ".venv/bin/python",
+        "-m",
+        "unittest",
+        "test_reference_qualification",
+        "test_episode_producer",
+        "test_training_inputs",
+        "test_training_driver",
+        "test_training_release",
+        "test_training_schedule",
+        "test_data_production",
+        "test_qualification_protocol",
+        "-q"
+      ],
+      "environment": {
+        "PYTHONPATH": "tests"
+      },
+      "log": "data/recurrence-graph-20261106/metadata-tests.log"
+    },
+    "mixed_window": {
+      "argv": [
+        ".venv/bin/python",
+        "data/recurrence-graph-20261106/benchmark_windows.py"
+      ],
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+        "PYTHONPATH": "."
+      },
+      "log": "data/recurrence-graph-20261106/window-benchmark.log"
+    },
+    "model": {
+      "argv": [
+        ".venv/bin/python",
+        "-m",
+        "scripts.qualify_recurrence",
+        "--snapshot",
+        "/home/vince/the-operating-table/data/huggingface/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+        "--output",
+        "data/recurrence-graph-20261106/model",
+        "--benchmark"
+      ],
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1"
+      },
+      "log": "data/recurrence-graph-20261106/model.log"
+    },
+    "unit": {
+      "argv": [
+        ".venv/bin/python",
+        "-m",
+        "unittest",
+        "test_recurrence_gpu",
+        "-v"
+      ],
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+        "PYTHONPATH": "tests"
+      },
+      "original_log": "data/recurrence-fused-20261106/graph-unit-final.log",
+      "retained_identical_copy": "data/recurrence-graph-20261106/unit.log"
+    }
+  },
+  "contract_hashes": {
+    "codec-feedback-precision-v3.md": "632f8ddde69df4ab188d7688c6c2d6d74819a61834e9dc3dbe4efa2fc2e1f247",
+    "codec-recurrence-graph-v1.md": "177691d51278c91471ddf930b962bd299fe7ec8b46fa511728708654cbb2d303",
+    "numeric-profile-v1.md": "6344ab3cb0ddee33aa0b4b8f93151679aa206b5ec14849ec4f92ee6d2492d53b"
+  },
+  "date": "2026-11-06",
+  "environment": {
+    "cuda": "13.2",
+    "cudnn_version": 92600,
+    "driver": "615.71.10",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "gpu_uuid": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+    "packages": {
+      "safetensors": "0.8.0",
+      "torch": "2.15.0",
+      "transformers": "5.22.1",
+      "triton": "3.9.0"
+    },
+    "torch": "2.15.0+cu132",
+    "triton": "3.9.0"
+  },
+  "full_432_case_matrix_repeated": false,
+  "integration_tests": {
+    "optimizer_updates": 0,
+    "passed": 8,
+    "seconds": 42.783
+  },
+  "launch_analysis": {
+    "eager": {
+      "cudaGraphLaunch": 0,
+      "cudaLaunchKernel": 52243,
+      "cudaMemcpyAsync": 5512
+    },
+    "graph-v1": {
+      "cudaGraphLaunch": 72,
+      "cudaLaunchKernel": 9007,
+      "cudaMemcpyAsync": 1210
+    }
+  },
+  "limitations": [
+    "Focused 45-case full-model protocol, not a repeat of the entire 432-case Cartesian matrix.",
+    "Performance timings are warm local measurements; all samples and cold mixed-shape times retained.",
+    "Device kernel count increases; host dispatch API submissions decrease.",
+    "Mixed-window benchmark uses actual accumulation/guards but discards buffers, never steps AdamW and allocates no moments.",
+    "Graph cache holds at most eight device/stream/shape/dtype entries; dynamic shapes may require recapture.",
+    "First derivatives only; nested graph capture and unsupported inputs reject without fallback.",
+    "Original semantic recovery remains failed; full-trainer memory, full optimizer-step throughput and learned flow are not certified."
+  ],
+  "metadata_tests": {
+    "passed": 65,
+    "seconds": 2.801
+  },
+  "mixed_window_benchmark": {
+    "optimizer_updates": 0,
+    "positions": {
+      "train-reference-0011": 28,
+      "train-reference-0019": 46,
+      "train-reference-0021": 27,
+      "train-reference-0087": 25,
+      "train-reference-0091": 28,
+      "train-reference-0102": 40,
+      "train-reference-0124": 39,
+      "train-reference-0140": 49,
+      "train-reference-0203": 21,
+      "train-reference-0248": 22,
+      "train-reference-0289": 45,
+      "train-reference-0306": 24,
+      "train-reference-0355": 23,
+      "train-reference-0380": 45,
+      "train-reference-0424": 39,
+      "train-reference-0471": 27
+    },
+    "reference_sha256": "fb38a31359a4ff367780bb8729695894e663810efd124c016bc2d5ba3fdbf7de",
+    "reference_unchanged": true,
+    "results": {
+      "eager": {
+        "observations": [
+          {
+            "mean_loss": 0.042331128042860655,
+            "peak_allocated": 3554264064,
+            "peak_reserved": 4324327424,
+            "repeat": 0,
+            "seconds": 18.84284500402282
+          },
+          {
+            "mean_loss": 0.042331128042860655,
+            "peak_allocated": 3554264064,
+            "peak_reserved": 4324327424,
+            "repeat": 1,
+            "seconds": 18.71743035700638
+          },
+          {
+            "mean_loss": 0.042331128042860655,
+            "peak_allocated": 3554264064,
+            "peak_reserved": 4324327424,
+            "repeat": 2,
+            "seconds": 18.728185287007364
+          },
+          {
+            "mean_loss": 0.042331128042860655,
+            "peak_allocated": 3554264064,
+            "peak_reserved": 4324327424,
+            "repeat": 3,
+            "seconds": 18.73825809499249
+          }
+        ],
+        "warm_median_seconds": 18.728185287007364
+      },
+      "graph-v1": {
+        "observations": [
+          {
+            "mean_loss": 0.042331128042860655,
+            "peak_allocated": 3592995840,
+            "peak_reserved": 4328521728,
+            "repeat": 0,
+            "seconds": 5.99536470399471
+          },
+          {
+            "mean_loss": 0.042331128042860655,
+            "peak_allocated": 3602701312,
+            "peak_reserved": 4196401152,
+            "repeat": 1,
+            "seconds": 5.846570670983056
+          },
+          {
+            "mean_loss": 0.042331128042860655,
+            "peak_allocated": 3602701312,
+            "peak_reserved": 4198498304,
+            "repeat": 2,
+            "seconds": 5.821898664988112
+          },
+          {
+            "mean_loss": 0.042331128042860655,
+            "peak_allocated": 3602701312,
+            "peak_reserved": 4198498304,
+            "repeat": 3,
+            "seconds": 5.83407481998438
+          }
+        ],
+        "warm_median_seconds": 5.83407481998438
+      }
+    },
+    "sample_windows": [
+      [
+        "train-reference-0087",
+        "train-reference-0306",
+        "train-reference-0380",
+        "train-reference-0355",
+        "train-reference-0140",
+        "train-reference-0203",
+        "train-reference-0289",
+        "train-reference-0091"
+      ],
+      [
+        "train-reference-0424",
+        "train-reference-0124",
+        "train-reference-0021",
+        "train-reference-0471",
+        "train-reference-0248",
+        "train-reference-0011",
+        "train-reference-0102",
+        "train-reference-0019"
+      ]
+    ],
+    "scope": "two actual scheduled eight-exposure reference windows per timing; real accumulation/finite guards; buffers discarded; no optimizer step",
+    "speedup": 3.210138002148129
+  },
+  "model": {
+    "by_mode": {
+      "checkpoint": {
+        "minimum_gradient_cosine": 1.0,
+        "worst_budget_raw_absolute": 0.0,
+        "worst_gradient_rms": 0.0,
+        "worst_logit_rms": 0.0,
+        "worst_scalar_absolute": 0.0,
+        "worst_state_rms": 0.0
+      },
+      "fp32": {
+        "minimum_gradient_cosine": 0.9999999999901952,
+        "worst_budget_raw_absolute": 0.0,
+        "worst_gradient_rms": 8.316676446703025e-06,
+        "worst_logit_rms": 4.169371270284753e-06,
+        "worst_scalar_absolute": 0.0,
+        "worst_state_rms": 0.0
+      },
+      "functional": {
+        "minimum_gradient_cosine": 1.0,
+        "worst_budget_raw_absolute": 0.0,
+        "worst_gradient_rms": 0.0,
+        "worst_logit_rms": 0.0,
+        "worst_scalar_absolute": 0.0,
+        "worst_state_rms": 0.0
+      },
+      "serving": {
+        "minimum_gradient_cosine": null,
+        "worst_budget_raw_absolute": 0.0,
+        "worst_gradient_rms": 0,
+        "worst_logit_rms": 0.0,
+        "worst_scalar_absolute": 0.0,
+        "worst_state_rms": 0.0
+      }
+    },
+    "cases": 45,
+    "comparisons": 36,
+    "elapsed_seconds": 944.7234295289963,
+    "frozen_base": {
+      "base_tied_storage": true,
+      "mismatches": [],
+      "parameters_checked": 320,
+      "pass": true
+    },
+    "live_unchanged": true,
+    "max_peak_allocated": 12591312384,
+    "profile_cases": {
+      "checkpoint": 9,
+      "eager": 9,
+      "fp32": 9,
+      "functional": 9,
+      "serving": 9
+    },
+    "runner_exit": 0,
+    "status_cells": [
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        3,
+        1
+      ],
+      [
+        3,
+        2
+      ],
+      [
+        3,
+        3
+      ],
+      [
+        3,
+        4
+      ]
+    ]
+  },
+  "optimizer_updates": 0,
+  "protocol": "graph-recurrence-v1",
+  "reference_export": {
+    "files": {
+      "weights.safetensors": "47dadcadb3f514eb4bbe92cf87669400ce92a0063843e2c7a3c9e87fde72d19b"
+    },
+    "manifest_sha256": "6fe8a3a8af9288ea02e0f82110607fb17ff6bd73baa244fc6f821a5d21b2d67c",
+    "reference_id": "fb38a31359a4ff367780bb8729695894e663810efd124c016bc2d5ba3fdbf7de",
+    "semantic_qualification": "still failed previous recovery gate",
+    "unchanged": true
+  },
+  "rejected_fused_candidate": {
+    "comparisons": [
+      {
+        "comparison": {
+          "pass": true
+        },
+        "mode": "eager"
+      },
+      {
+        "comparison": {
+          "boundaries": [
+            {
+              "label": "prefill",
+              "worst_state_rms": 9.528291165976938e-07
+            },
+            {
+              "label": "startup",
+              "worst_state_rms": 9.351325110653585e-07
+            },
+            {
+              "label": "request",
+              "worst_state_rms": 2.783411052440435e-06
+            },
+            {
+              "label": "return",
+              "worst_state_rms": 3.648503027038517e-06
+            },
+            {
+              "label": "request",
+              "worst_state_rms": 7.634959000823707e-06
+            },
+            {
+              "label": "return",
+              "worst_state_rms": 8.471535152303649e-05
+            },
+            {
+              "label": "thinking_close",
+              "worst_state_rms": 5.832622124048941e-05
+            },
+            {
+              "label": "request",
+              "worst_state_rms": 2.8531524141744576e-05
+            },
+            {
+              "label": "return",
+              "worst_state_rms": 4.015332911731211e-05
+            },
+            {
+              "label": "request",
+              "worst_state_rms": 3.391780920300353e-05
+            },
+            {
+              "label": "return",
+              "worst_state_rms": 3.0015197041209368e-05
+            },
+            {
+              "label": "filler",
+              "worst_state_rms": 2.570136978902012e-05
+            },
+            {
+              "label": "end",
+              "worst_state_rms": 2.1270082152887494e-05
+            }
+          ],
+          "budget_raw_absolute": 0.0,
+          "errors": [
+            "gradient:R",
+            "gradient:D",
+            "gradient:wire",
+            "gradient:emitter"
+          ],
+          "gradients": {
+            "D": {
+              "active": 10822656,
+              "cosine": 0.9999999881929417,
+              "normalized_rms": 0.0003342506376788733,
+              "pass": false
+            },
+            "R": {
+              "active": 5411328,
+              "cosine": 0.9999999817972435,
+              "normalized_rms": 0.00032915670108003776,
+              "pass": false
+            },
+            "emitter": {
+              "active": 526080,
+              "cosine": 0.999999985912425,
+              "normalized_rms": 0.0003088936766681992,
+              "pass": false
+            },
+            "wire": {
+              "active": 972544,
+              "cosine": 0.999999969325848,
+              "normalized_rms": 0.00043080439594012614,
+              "pass": false
+            }
+          },
+          "pass": false,
+          "strict_FP32_forward_maximum_absolute": 0.0014543533325195312,
+          "strict_FP32_forward_pass": false,
+          "strict_FP32_forward_worst_rms": 8.471535152303649e-05,
+          "worst_logit_rms": 8.822909123800616e-06,
+          "worst_scalar_absolute": 1.1920928955078125e-07,
+          "worst_state_rms": 8.471535152303649e-05
+        },
+        "mode": "functional"
+      }
+    ],
+    "error": "ValueError('whole-model numeric/discrete qualification failed')",
+    "local_tests_passed": 6,
+    "local_tests_seconds": 15.074,
+    "qualification_granted": false,
+    "source_retained": "data/recurrence-fused-20261106",
+    "status": "FAILED"
+  },
+  "releases_unchanged": {
+    "development": "5b8f4cffdc4f33e255d3a34306cac03a68c50dcd9dab905ae8d8adcf89c81e77",
+    "locked": "d13594f18738056ee179b3498d54d8261f7f7654aad633fabb776810681aa1cf",
+    "train": "c70d4f44135a34c00e7fa0348833b1ec56613def15f5753231589492ed35478f"
+  },
+  "scope": "CPU dispatch performance and numeric qualification; no data generation, agents, training, deployment or service changes",
+  "source_hashes": {
+    "qwen_one_two/codec/__init__.py": "9b577482d1138d4d449fcc2bc9aa493538658afefe0bffb2a72828ab12e7ea38",
+    "qwen_one_two/codec/backbone.py": "b76c85e94dc99c7588992459b5691ec2a97f518ecba6191f19df1cc7461326b3",
+    "qwen_one_two/codec/diagnose_precision.py": "4edc64ec7af6525493e57c33f5fe4866e9ec0c0709086ae1fa99898d75fb23f3",
+    "qwen_one_two/codec/fixtures.py": "36c91e9d949d2d03d4aaaafa709853eaeb7796465b02f6a9853f109f95221bc3",
+    "qwen_one_two/codec/neural.py": "1b666b6829e55123341ee5f2ec6a458e268c4721155b94801ebf1a82388f03b1",
+    "qwen_one_two/codec/ownership.py": "d9f10f5f6f8a8233b208110820f4e620253e668463042a30ad2dbbce0357f8dc",
+    "qwen_one_two/codec/precision.py": "9eb775efc303ce6d9eb8bbec26ffdcd6422f37ad0732e03ef0885ae9433c8e5b",
+    "qwen_one_two/codec/qualify.py": "d1204bd1e1ce70721d03e936ec92c8e30cd9b54ce0d79e50bbab46e3fd540851",
+    "qwen_one_two/codec/qualify_matrix.py": "07e25deee4eb930d498d5ca071f76c9022ee27823d62d90fcad45f59efb5a1ff",
+    "qwen_one_two/codec/records.py": "089eb06d1fd55e9a1629297759c942f046dc570058cf9cb304c8d88069287b04",
+    "qwen_one_two/codec/recurrence.py": "d95f735811ff4bc304c7625cdff65b8eaf40ba1beb032736132b9eff78d8ad82",
+    "qwen_one_two/codec/render.py": "9e16fb579268e4261cd134883e698f6ae3c69a2802f1dbc2502855062920b82b",
+    "qwen_one_two/codec/runtime.py": "350c79f141e6898c5f762bf9b9c1708bd11297bdd01227c93a39abec2bd61d3a",
+    "qwen_one_two/codec/schema.py": "5a2ff9f2f38b7338da5cf6d7f605bed953e136c37445983f0cf965f1e17dbe23",
+    "qwen_one_two/codec/session.py": "3ebce62feb3f0d18b55a893fb2db18e88aeb00fc8dba0808877ce684e3a3534e",
+    "qwen_one_two/codec/writer.py": "187d0a07a4f29c1c4da560f84f361e0099be49c588933d25c8bb35b51ddca1a0",
+    "qwen_one_two/g1_accounting.py": "6d6d872a7337dd026da0354c9526e7eee012576cf518e19397832896cc3a4dd2",
+    "qwen_one_two/g1_backbone.py": "e381ad6a8d169c514de7f6e036394b902bfadbc652249b3ac14b96996f59db99",
+    "qwen_one_two/g1_checks.py": "7c32e89b246a6e26235e48e041f6ff5923b589cdf48df073a17bf253ed470950",
+    "qwen_one_two/g1_evidence.py": "2f882bed4c0ac93dcf0015d6083b471764a8a8fe3d586d337759da1117bb7aba",
+    "qwen_one_two/g1_gate_diagnosis.py": "d38c6a40d66ccf41195ccbdefd77f1bccda632492ecdbbd6841049f26874a3e3",
+    "qwen_one_two/g1_gate_repair.py": "18c25a33ccf05a16630960df40f29d309d19af0a12b23b6e99c3c2341e732b91",
+    "qwen_one_two/g1_precision_diagnosis.py": "acdc5008e7e02c13a24eda2f64a40f7f30176cdfb09e95bb637b20c0126ce3d9",
+    "qwen_one_two/g1_precision_math.py": "bc2e5a6393012079684734de386ad71afd5cbd26b2423a24f22f33ed6b9aedcf",
+    "qwen_one_two/g1_proof.py": "8d43441fd215fc771180cfd1cc13754a77f8f181df4a925a5adfecdfa6e0d8d6",
+    "qwen_one_two/g1_protocol.py": "156ba44aa27b459279404d404e2a16da35e443717fca4d15851627e80cfeaba4",
+    "qwen_one_two/training/__init__.py": "0a5bc5745bdcb26cbf81df3d10f5363d39539d811fd869326cb37ecb4a29a47e",
+    "qwen_one_two/training/binding.py": "a94fd01f32346cc35f95c1c3053743c3694d75cc2f958aaabfe4f211d038f28f",
+    "qwen_one_two/training/checkpoint.py": "0bb45930e6726ca4caf8690f46075960367f16e4e430ab1188aa17c07ac1cd26",
+    "qwen_one_two/training/clean.py": "c1da2c70d7b22b1357c28cd941e949ec4ea4341acd76f596d7e88b4346881265",
+    "qwen_one_two/training/clean_packets.py": "7f0d846319a3b9fa391524f73894b8f13baa4f6632b3b127f094f60ba3d2a028",
+    "qwen_one_two/training/component_producer.py": "7f3bd6fe5522eb5311e67365f1daa37112ce297d76dc1ef1ebd7d9de314b81b1",
+    "qwen_one_two/training/driver.py": "c46128c8d9e0de5288717f4a2c6a78b6bb3fed5e4fa2a245b6123c267a587bc2",
+    "qwen_one_two/training/engine.py": "658d2c5c40788af4c75d8211e091fa338f0cc128160f0676875156c5483075ec",
+    "qwen_one_two/training/episodes.py": "0181ca87dff0f2cf4c3f7552aa197b9b67cd3bc0f1ad0b73e84ddcf284a7a5a5",
+    "qwen_one_two/training/inputs.py": "8a96776ac2ab7a65f2cc51c3baaee12a333e76278775cc3d6b37b68cee99e332",
+    "qwen_one_two/training/losses.py": "a91938757131b177d38cba6e5275c0db7f7a053389a1a97c1bf173a82ae99041",
+    "qwen_one_two/training/manifest.py": "468257734527ceb5ec8656b6155388c2b3e92298f457cfa1764fd87cd58cbf5d",
+    "qwen_one_two/training/producer.py": "72c3838cd429b7d55a51aa225e4c03e05ce0d9a581e5447fdb7d17238b1e2184",
+    "qwen_one_two/training/profile.py": "a40a1317834cec9ffcd7b07a3c44323cc599bea485b41de2ccc40fbe392ae8d9",
+    "qwen_one_two/training/qualification.py": "22d1de030bc85361a2366d03eb4c1c6c47a69f72e87fdcf59d6a9f8e04da72a9",
+    "qwen_one_two/training/reference.py": "7aa3948140259cf0459422e89b93956511101b2dfd8f5a4b2d4a10f4f24672b9",
+    "qwen_one_two/training/reference_qualification.py": "40c851c180f2dcd95985a835ac57923cb1f9462f455609311be2bf4bac2990c7",
+    "qwen_one_two/training/release.py": "2d9e0d216cf13bac3e57c652bb486dfea6880b6a5e1ff51e3d0ac5c699af9da3",
+    "qwen_one_two/training/sampler.py": "aeee24107468a9a27657efa3ba5c053d36101aee982fad069af8411762e28950",
+    "scripts/fit_reference.py": "bd0bb4c68f8cb28e5705d791bf97f2d077054b053f1b8ffbe059eaab4518370d",
+    "scripts/qualify_recurrence.py": "906aaaaa01de64ffafbcb02a139934226feae91583804f0ec7aa1625617d6784",
+    "scripts/qualify_reference.py": "2e2c1eba7a483a4f6b586d4a466610ee5003207216c81db3dcf5e4a7dd660915"
+  },
+  "status": "PASSED",
+  "unit": {
+    "compared_operator_cases": 32,
+    "fp64_directional_checks": [
+      {
+        "absolute_error": 1.1360797719239812e-11,
+        "fp64_steps": 1
+      },
+      {
+        "absolute_error": 5.452333029509759e-12,
+        "fp64_steps": 2
+      },
+      {
+        "absolute_error": 4.248507101678456e-11,
+        "fp64_steps": 8
+      },
+      {
+        "absolute_error": 2.674394039559047e-11,
+        "fp64_steps": 16
+      }
+    ],
+    "maximum_forward_normalized_rms": 0.0,
+    "maximum_gradient_normalized_rms": 0.0,
+    "seconds": 3.745,
+    "test_count": 8
+  },
+  "validation_source_hashes": {
+    "tests/test_codec_precision_gpu.py": "4081cfc0c8ce69db74d23a16e7942c2977d8194cae305182a500485ab1b936fe",
+    "tests/test_recurrence_gpu.py": "06850ba7b3997c4bd6c709deebebceec51cdd714da573dcc756a3c082b843574",
+    "tests/test_reference_fit_gpu.py": "ee0b9a9783fbb3cedde2c6a820e193fff7f191bde9e191db1f96dcb4f0c83c48",
+    "tests/test_semantic_binding_gpu.py": "a9e7e596cdab6b42ed11e25a68f2cd7428c3d769b978c1b232f2d3de6004e3a2",
+    "tests/test_training_clean_gpu.py": "61294464a49819bc29bc409ef0ecbe08e52a2f006155883a5b05444f9c11513b"
+  }
+}
