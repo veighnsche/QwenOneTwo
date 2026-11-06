@@ -43,6 +43,73 @@ training, promote weights, or authorize deployment.
 
 ## Current checkpoint
 
+**A complete-coverage reference experiment is ACTIVE. Do not launch another
+training run or treat the older "no job active" statements below as current.**
+Implementation `caa1db5` and
+[protocol](reference-complete-coverage-v1.md) preceded execution. The user
+authorized shuffled complete passes, existing data, reference-pooler fitting
+only, W/T/codec/live frozen, RTX 3090 only, no agents or capability training,
+and no arbitrary time or maximum-pass cap.
+
+Current process command is `python -u -m scripts.fit_reference_coverage` with
+`--resume data/reference-coverage-20261106/run/checkpoint-001100`
+and `--output data/reference-coverage-20261106/continued`. It explicitly selects
+GPU UUID `GPU-225509c3-d702-6c27-de03-76b5e99b33b1`. Raw progress and curves:
+`data/reference-coverage-20261106/continued.log` and
+`data/reference-coverage-20261106/continued/curves.jsonl`.
+
+As of completed **pass 7 / cumulative update 3,954**, fixed-panel exact recovery
+is **61/191** versus starting **36/191**. Per-pass scores are **32, 35, 39, 47,
+55, 60, 61**. Whole-pass mean CE is **0.6830126312468918,
+0.6577781269153562, 0.6274525780851182, 0.5968113103925616,
+0.567778770770338, 0.5418208346832367, 0.5159581124615525**.
+Both recovery and loss continue reaching new bests; the predeclared stopping
+condition has not been met. Development exact recovery remains **0/100** and
+contrasts **100/100** through these observations. Pass 8 has started.
+
+Every pass has 422 eight-example updates over all 3,376 unique existing views.
+Only the explicit reference continuation profile extends past A4's 1,000-update
+limit and holds peak LR 2e-4; capability/default schedules remain unchanged.
+This changes sampling AND the learning schedule, so it is not a sampler-only
+causal comparison. The panel includes all prior 40 cases plus fixed hash-selected
+views up to 32 per role. Retention regressions are recorded, not hidden by gains
+in other cases. Full-catalogue readback and final frozen-byte audit remain pending.
+
+Stop at >=95% ENTIRE-catalogue training recovery, or three complete passes with
+neither a new best panel recovery count nor a new best whole-pass mean CE.
+When panel recovery reaches 95%, or a plateau is observed, perform the planned
+full-catalogue evaluation (reusing same-checkpoint panel recoveries). Preserve
+all failed historical qualifications. These are research criteria, not proof
+of MVP readiness or a new exact-English product requirement.
+
+The original process in `data/reference-coverage-20261106/run/` was intentionally
+checkpointed at update 1,100 / 100 new updates, then terminated (exit 143) for a
+metric/meaning inspection. Resume starts at update 1,101, with exact optimizer,
+RNG, sampler cursor and in-pass loss totals; no completed updates were repeated.
+The frozen feature cache was regenerated on the GPU. There may be unlogged
+in-flight GPU work at the interruption; do not claim an exact total physical
+compute across it. See `interruption.json` in the parent evidence directory.
+
+The [meaning inspection](reference-meaning-inspection-2026-11-06.md) records full
+latent-only readbacks of 20 existing development annotations from the ORIGINAL
+update-1,000 parent, not the continued weights. Fourteen have clear material
+content substitutions/omissions; six scale anchors preserve none/all/half but
+substitute concepts and remain semantically unresolved. This was Codex diagnostic
+inspection, not independent review or a semantic approval. No new source data,
+annotations, human reviews or external model calls were made.
+
+**Three metadata tests passed in 0.005 s; eleven CUDA optimizer/checkpoint tests
+passed in 0.587 s**, including continuation beyond 1,000 and exact next-update
+resume. Existing numeric matrices are reused with unchanged model arithmetic.
+Runtime guards enforce eligible finite losses, role-local owners and frozen
+reference versions; final serialized/base validation is still outstanding.
+At completion, audit both prefix and continued logs/checkpoints, document the
+actual stop/results, commit and push. Local post-run audit draft:
+`data/reference-coverage-20261106/audit.py`. Do not silently change the active
+run's snapshotted sources or start another architecture/fitting experiment.
+
+## Previous completed exposure comparison
+
 **The exposure-controlled reference comparison is complete. Extra exposure
 repairs all four tested Question/Target training failures, with no diagnostic
 regressions; development recovery remains 0/100. No job remains active.**
