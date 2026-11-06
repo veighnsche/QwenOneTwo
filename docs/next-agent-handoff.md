@@ -7,6 +7,60 @@ This handoff records measured mechanisms, not learned capability.
 
 ## Current checkpoint
 
+The user subsequently authorized **reference fitting and qualification with the
+existing data on the RTX 3090**, no generation, agents or capability training.
+The fixed fit is complete, but **qualification failed**. See the
+[fit/performance report](reference-fit-results-2026-11-06.md) and
+[portable receipt](evidence/reference-fit-v1.json).
+
+`scripts/fit_reference.py` completed **1,000 reference-only updates / 8,000
+eligible exposures**, every one of 500 IDs exactly 16 times, with zero failed
+exposures. Those rows contain 50 unique training meanings. Both final checkpoints
+900/1,000 achieved **0/100 exact recovery (100 unresolved), 100/100 contrast**;
+all ten scheduled gates had those counts. The actual qualification loader rejects
+both final reports. No reference promotion or live initialization occurred.
+The blocker is now **failed held-out recovery, not a missing trained artifact**.
+Mean loss over the first/last 100 windows was 2.658715932392515 /
+0.046998847847844444. Live parameters remained byte-identical; frozen W passed
+320-tensor equality and physical tying. Peak CUDA allocation was 3,627,365,888
+bytes; elapsed 10,568.742410472012 s; runner exit 2/BLOCKED.
+
+The causal teacher-forcing optimization passed **2/2 RTX 3090 checks in 12.574 s**
+for serial/parallel loss and connected input/T gradients plus suffix causality.
+Existing tolerances/arithmetic are unchanged. **63/63 model-free checks passed
+in 2.799 s.** Checkpoint 0000 saved/restored before the corrected fit; all periodic
+full checkpoints and frozen reference-only exports are retained. Final export
+readback verified fingerprint
+`fb38a31359a4ff367780bb8729695894e663810efd124c016bc2d5ba3fdbf7de`.
+The first attempt's 16 updates were discarded after a checkpoint owner-name bug;
+its log/evidence remains. They are additional physical work, not part of the
+final artifact's 1,000-update lineage. No automatic extra epoch followed failure.
+
+The user's suspected CPU bottleneck is supported by measurement: **99.39% of one
+CPU core / 16% mean GPU use** during the fit. A subsequent derivative-only trace
+of one existing episode counted **52,497 CUDA kernels**, 172.78 ms kernel union
+within a 3.07 s instrumented episode (profiler overhead applies). Weights,
+features and gradients were CUDA; no CPU model fallback occurred. Two warm VJPs
+and one traced VJP added **zero optimizer updates**. Eager recurrent/backward
+dispatch is the first performance target; accumulation/optimizer costs were not
+included in that trace. No performance kernel/arithmetic change was made.
+
+Raw evidence: `data/reference-fit-20261106/`; final export
+`run/reference-1000/`; checkpoints/reports/source snapshot in `run/`.
+Data hashes and live services remain unchanged. No capability training, new
+data, agents or completed numeric matrix reruns occurred.
+
+**Next unfinished:** investigate failed reference generalization from the retained
+run/existing data, document a development revision before another fitting run,
+and obtain a real passing final-two-checkpoint gate. Independently, reduce CPU
+kernel-launch overhead only with appropriate numeric/gradient qualification.
+Do not extend epochs, relax gates, tune on locked tests or start capability
+training automatically. Full-trainer memory and later semantic/promotion checks
+remain outstanding. Earlier missing-artifact/no-fitting statements below record
+their historical checkpoint, not the current state.
+
+## Previous checkpoints (historical)
+
 The user requested the remaining reference qualification/binding work with
 existing data, **no generation, agents or training**. The read-only runner,
 qualification-evidence gate and conservative actual-content binding are now
@@ -344,50 +398,33 @@ Exact log/test source hashes are in the
 
 ## Next unfinished slice / blockers
 
-The 120-case model-reviewed pilot now exists and passes release ingestion. Use
-the exact local release and pinned hash above; preserve model-proposal origin
-and development split. Its 13-cell coverage is pilot coverage, not completion
-of the separate training or promotion collections. No new generation is queued.
+**Reference recovery failed after the authorized fixed fit.** Use the retained
+1,000-update reference, exact 900/1,000 reports and pinned existing releases.
+Investigate held-out recovery and document a development revision before any
+new fitting. Do not generate more data, extend epochs automatically, relax the
+95%/90% gate or use locked cases to repair development results. A frozen export,
+low training loss and 100% contrast separation cannot promote this reference.
 
-**Obtain a trained reference artifact under later authorization and run its gate.**
-The runner, formation objectives, exact actual-packet binding and compatible-return
-gates are now implemented as recorded above. No actual learned reference pass
-exists; diagnostic fixtures cannot enter optimizer accumulation.
-The producer slice above supplies task-specific native and clean component
-callbacks. It does not establish reference recovery, writer meaning, compatible
-multi-call continuations, observed correction materialization or promotion.
-The driver accepts a complete-episode
-producer; it is not a source of reviewed annotations or a complete trained flow.
-The [release format](reviewed-release-format-v1.md) and read-only preflight now
-exist and the pilot and training annotation files are now supplied. Actual
-semantic/promotion fixtures and verified predicted-packet loss binding remain unfinished. Load both releases with
-`load_release`; construct the sampler using
-`Sampler.from_release`. Joint `Driver` construction requires a loaded
-`NumericEvidence`, supplied via `numeric=`, rather than a pass dictionary.
-The G1 prerequisite remains an explicit caller attestation. Content hashes
-establish bytes, not the identity/honesty of reviewers or semantic correctness.
-No approved pilot, independent semantic reviews, subjective gold labels, trained
-reference artifact or promotion evidence was fabricated. Follow data operations:
-120 fictional scenarios, 20 in each of six domains, actual independent reviews
-and adjudication, family splits before variants, no locked/design-exposed leakage.
-Bulk generation and capability fitting require appropriate later authorization.
+An independent performance slice can reduce the measured eager recurrent/
+backward dispatch overhead. Preserve FP32 transformer computation, compensated
+BF16 vocabulary projection, cache continuity, connected gradients, accounting
+and existing tolerances. Qualify affected arithmetic before relying on it; do
+not repeat the completed 324/108 matrices for unrelated changes.
 
-Independent implementation/interoperability review remains distinct from this
-agent's direct review. Real reviewed clean Choice/Score/Reason semantic fixtures,
-F8 coverage/denominators and reference recovery/contrast exits remain outstanding.
-The new clean tests establish construction, not semantic correctness.
+The read-only qualification runner, reference formation objectives, actual-content
+and compatible-return gates, and native/clean complete-episode producers exist.
+Qualified reference evidence is still required to initialize live weights and
+supervise actual learned deviations. Supported exact fixtures are construction
+proofs, not learned semantic flow. Arbitrary predicted slots, observed correction
+materialization, full-trainer memory and semantic/promotion evidence remain
+unfinished. No capability training is authorized by the reference-fitting request.
 
-Before capability training, qualify the full A4 mix of actual participating
-component buffers, optimizer moments and auxiliary graphs at applicable lengths.
-The 1024 numeric matrix uses conservative memory envelopes, not a full trainer
-memory/promotion certification. Run no automatic extra epochs, gold joint returns
-or repairs based on locked-test outcomes. Keep frozen reference state independent
-and carry live optimizer moments through later live phases.
-
-Later work remains reference/components/guided/transition/free training in A4
-order, final-two-checkpoint promotion, learned backend/frontend integration,
-locked evaluation and separately authorized deployment. None is certified by
-passing these engineering slices. Full context/maximum budget remain unqualified.
+Before capability training, qualify the full A4 mix of participating component
+buffers, optimizer moments and auxiliary graphs at applicable lengths. The 1024
+numeric matrix's conservative memory envelope is not that qualification.
+Later phases must retain live optimizer moments, preserve final-two-checkpoint
+promotion, and use actual returns without gold repairs. Deployment and live
+service changes require separate authorization. No data generation is queued.
 
 ## Entry points and artifacts
 

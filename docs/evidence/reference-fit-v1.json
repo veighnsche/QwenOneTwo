@@ -1,0 +1,458 @@
+{
+  "accounting": {
+    "canonical_train_development_overlap": 0,
+    "eligible_all_eight": true,
+    "exposures": 8000,
+    "failed_exposures": 0,
+    "mean_first_100_loss": 2.658715932392515,
+    "mean_last_100_loss": 0.046998847847844444,
+    "median_window_seconds": 9.316831011499744,
+    "optimizer_updates": 1000,
+    "per_id_exposures": [
+      16
+    ],
+    "reference_only_active_owners": true,
+    "unique_development_meanings": 50,
+    "unique_ids": 500,
+    "unique_train_meanings": 50,
+    "windows": 1000
+  },
+  "assets": {
+    "data/reference-fit-20261106/accounting-audit.json": "f47040089470b50bacde043698b9dc374c225c15291d75dde9cec0761cc0b31a",
+    "data/reference-fit-20261106/attempt-1-summary.json": "38742ea88bf22efa2a45b0461acaa3eaaa2356326331997079b7d0cd8afc5772",
+    "data/reference-fit-20261106/attempt-1.log": "9c4ed3b002247c319a5ddb194aeb16cc31f48c93bf3ca874dcb323ed71af3771",
+    "data/reference-fit-20261106/cpu-utilization.json": "263abcc0cc2ad219ce8993ff85f715870dcecb0d445dd1850538dfe592c33ea9",
+    "data/reference-fit-20261106/fit.log": "5878b121d869dbb03f1899df40f2ce5dbda17efcfc680ceb4ef6e9dca3f33adb",
+    "data/reference-fit-20261106/gate-rejections.json": "d766604b04fa27638e24e6f108592a216ddb70c55a47eb1d19025a8737ad0e49",
+    "data/reference-fit-20261106/metadata-tests.log": "cb5f94041fa7f5ab1c58e9f4453e699ff5d7d4843a57bfab24c6465fc35a9163",
+    "data/reference-fit-20261106/parity.log": "9e1c5fde709a2de72f4205cf09bfa59a1f66f1164f396d01fece509243731a4c",
+    "data/reference-fit-20261106/profile-cpu.txt": "be30aa1124545cfcf4d66c45d3d54782b1532b07e8c95888e8a9eb2b14d8e074",
+    "data/reference-fit-20261106/profile-cuda.txt": "13b582a42edff7d603fcd46d8be6092524623dc97ec779d05b62d25f7b76dc9f",
+    "data/reference-fit-20261106/profile-summary.json": "7debcaec86c5a0a80767a5685f142eca04c95eec260c6eea8ac505bc1ef84211",
+    "data/reference-fit-20261106/profile.log": "d9b57ceb1a2bc32fcaa807f955080785c2633d9045a2416781c29f20f1f1c568",
+    "data/reference-fit-20261106/profile_reference.py": "6b5bc1125aaa15a0295da664abac8f02e8bb293b5f772425c3a6884296716d17",
+    "data/reference-fit-20261106/reference-trace.json": "ee852e3f80ed115a3e94d13fdc7f5feb60ebe3757ea7b6fa7c6c8ec0cfd4cf4b",
+    "data/reference-fit-20261106/run/checkpoint-0000/manifest.json": "b27670d8685bc6fe213046ecd560cb66b7338915f72b73cd2e329daabad65a59",
+    "data/reference-fit-20261106/run/checkpoint-0100/manifest.json": "55b4eadb965113af131ab4597da0a948225d4b77b7103c445ed0b7ea331964a5",
+    "data/reference-fit-20261106/run/checkpoint-0200/manifest.json": "7c8ac33b12e6b9c74b7be1adcab6261dbd8354015bef087d6f2aef97e65363fd",
+    "data/reference-fit-20261106/run/checkpoint-0300/manifest.json": "ce5eb8a4f0cd8c8bb3a680ad6f6e5263193c4046efa350f2c9c37b344bc3ab72",
+    "data/reference-fit-20261106/run/checkpoint-0400/manifest.json": "89ed2d4d39fcfb70014c3d6997a595459948f8cb702a1c5160d38bc6a942744c",
+    "data/reference-fit-20261106/run/checkpoint-0500/manifest.json": "2c62a9e32129e025fb9dfa4b5fb1d89365d341687e160b677bddb44a2e696f4e",
+    "data/reference-fit-20261106/run/checkpoint-0600/manifest.json": "2e035e0a8618ba453fbb3769b8f2cae52ed038fef999a730acf52b8b7015cbeb",
+    "data/reference-fit-20261106/run/checkpoint-0700/manifest.json": "2ced7f03e330c30f4b745c9fd6e1a044f12299be1e5ae55b870739f57a8f7f2d",
+    "data/reference-fit-20261106/run/checkpoint-0800/manifest.json": "56f9892347c22f4d22fd76cbde72783ecda0e258f2840f5e91303ddc7d273704",
+    "data/reference-fit-20261106/run/checkpoint-0900/manifest.json": "bb48e08992045ee1afd3fc2fb509d009d78aab8585a30fe7eb151869cf7ba334",
+    "data/reference-fit-20261106/run/checkpoint-1000/manifest.json": "717763aab379eb054ec3f22397deca6f43de4cd5d16bf9022cd959839bcd879c",
+    "data/reference-fit-20261106/run/qualification-0100.json": "bd940d55fc489258f5ba4cd47336b078e2aae823f2d4e4b8f1e27a342ccc4c85",
+    "data/reference-fit-20261106/run/qualification-0200.json": "9e0a0a78894b5b2930699d4add27418fdfddace994d4e4770ce0eb73c1f42693",
+    "data/reference-fit-20261106/run/qualification-0300.json": "71eb4e38745664a140645f74c25f2db6ef4d270e29e5c3e005b8c159e2e8b308",
+    "data/reference-fit-20261106/run/qualification-0400.json": "d1a1587e23b844b10cf7cb6afda5f43e32ac62d5f68c707a66de9d7c9892b91c",
+    "data/reference-fit-20261106/run/qualification-0500.json": "cab978307f97a7c40d5134db6ac97464733c2c719c34652a21a8d5ea6e35291b",
+    "data/reference-fit-20261106/run/qualification-0600.json": "ea3882eab585a6f0e65f8e5e7064d72cc486cd4a71c1109e4947f439d2b2ccd3",
+    "data/reference-fit-20261106/run/qualification-0700.json": "06ff6024fdf05a94594dea77b488dd072ad78f0e07ca0472df8b42017100b58f",
+    "data/reference-fit-20261106/run/qualification-0800.json": "06cd7106518f0f028ef56f0965a2a33f6fccf8dcac3dc0275a91f9ca47b64ad5",
+    "data/reference-fit-20261106/run/qualification-0900.json": "227cd8ec74cc18759043b9fbbaaab05be1cfc5045a04d6bea231608596947c7d",
+    "data/reference-fit-20261106/run/qualification-1000.json": "e68ee72f56e516850cd284f16827a6bbd0e8338e67b6641bcb9bf243879629be",
+    "data/reference-fit-20261106/run/reference-0100/manifest.json": "abbfd473ee817f888a2899ec30998ae7d99464bb14978930fec038384abe9206",
+    "data/reference-fit-20261106/run/reference-0200/manifest.json": "341d54a664bcd4f60b9148aa09971595dec53b26d1ca61523cff086f8143f4ef",
+    "data/reference-fit-20261106/run/reference-0300/manifest.json": "872b0b9b388bc6e2565110a66ff0661e58df49c0b33543b321e58ea5cc117518",
+    "data/reference-fit-20261106/run/reference-0400/manifest.json": "067198a62d7ae0c539e331f6be2976be40be29c0119406ed8b1a76db788005b5",
+    "data/reference-fit-20261106/run/reference-0500/manifest.json": "f10445a17411337dd31072b78666b35b8b5131a4bf05ede4ab892c0c69c7dd8a",
+    "data/reference-fit-20261106/run/reference-0600/manifest.json": "73ec25e90d8f17230b7ab1b764274979f665b3e48c2f7728b54d512fad44fd15",
+    "data/reference-fit-20261106/run/reference-0700/manifest.json": "02e665778a6574153fac53a176a1c704ea80e5b4e10636a72bd9ce29b9f500a0",
+    "data/reference-fit-20261106/run/reference-0800/manifest.json": "0dd8b14e5597b8427c4a8ab603a9f4abce45f2feea1238e5f4ff7f7e65f0a792",
+    "data/reference-fit-20261106/run/reference-0900/manifest.json": "126e4f5cee8a0e6ebe759dfb464f75650a62caff844cdfbb7c71abd45061dd9c",
+    "data/reference-fit-20261106/run/reference-1000/manifest.json": "6fe8a3a8af9288ea02e0f82110607fb17ff6bd73baa244fc6f821a5d21b2d67c",
+    "data/reference-fit-20261106/run/report.json": "55d8fa5ec8ba1af2af5aaa9fa2cbba7768e411a3df2c602682c74e51d4529c1c",
+    "data/reference-fit-20261106/run/run.json": "e42f0eda7cf35e55d7c63b7cb6f48402bf9067d0de3e6e7f562770174d773d3f",
+    "data/reference-fit-20261106/run/source-snapshot/manifest.json": "f92fc7897a8d22765b2914b639940ac48dc6e273a1dc842da29363d1a666bea6",
+    "data/reference-fit-20261106/run/windows.jsonl": "5dfb7e74c9b6baca4369b4bd7c7af13b262a2797cd1679f31ab945958fb9ac4c",
+    "data/reference-fit-20261106/trace-analysis.json": "7fa23ad466b43858b38fb90fda942eb1a78a56f2b844124cc1d1955e8090675b",
+    "data/reference-fit-20261106/utilization-summary.json": "0ddcc0704fb2b2d34df0bfd9e4795feecb1c49908f41a202580c989339b7f3a9"
+  },
+  "date": "2026-11-06",
+  "discarded_attempt": {
+    "capability_updates": 0,
+    "completed_reference_updates": 16,
+    "reason": "reference optimizer names lacked the checkpoint reference. prefix; stopped before first periodic checkpoint",
+    "status": "STOPPED",
+    "weights_disposition": "transient fitted weights discarded; corrected run restarts from the original seed and artifacts"
+  },
+  "final_checkpoint_verified_files": {
+    "effective-rows.safetensors": "42f512ff8004e5551c59deb1acd2a51d659b92118d68440f5dc37e981a54fd34",
+    "optimizer.pt": "5a941fc7003c752ded1fe5a2aa20c2f95403017f49af935bfda8f4783dd33baf",
+    "rng.pt": "c7e802c52b583f6303a09b52f16c70bc8b09be5b0e1bdc644cd3d400e8d0c0f3",
+    "weights.safetensors": "b95774976321361c3072fd7e1b4dca6bf0d9b309cafc5d010c6c1efba9ec0853"
+  },
+  "final_reference_export": {
+    "capability_training": false,
+    "development_release": "5b8f4cffdc4f33e255d3a34306cac03a68c50dcd9dab905ae8d8adcf89c81e77",
+    "files": {
+      "weights.safetensors": "47dadcadb3f514eb4bbe92cf87669400ce92a0063843e2c7a3c9e87fde72d19b"
+    },
+    "format": "qot-frozen-reference-v1",
+    "optimizer_updates": 1000,
+    "reference_frozen": true,
+    "reference_id": "fb38a31359a4ff367780bb8729695894e663810efd124c016bc2d5ba3fdbf7de",
+    "sources": "f92fc7897a8d22765b2914b639940ac48dc6e273a1dc842da29363d1a666bea6",
+    "training_release": "c70d4f44135a34c00e7fa0348833b1ec56613def15f5753231589492ed35478f",
+    "window": 1000
+  },
+  "gate_rejections": [
+    {
+      "reason": "reference qualification did not pass",
+      "rejected": true,
+      "window": 900
+    },
+    {
+      "reason": "reference qualification did not pass",
+      "rejected": true,
+      "window": 1000
+    }
+  ],
+  "gpu_uuid": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+  "limitations": [
+    "Exact canonical readback is conservative; nonexact paraphrases remain unresolved.",
+    "500 training reference rows contain 50 distinct canonical meanings; development RF contains 50 other meanings in 100 rows.",
+    "No reviewed training-reference contrast relations supplied; contrast training masked.",
+    "Profiler has overhead and excludes optimizer/accumulation; kernel gaps are not precise attribution of each synchronization.",
+    "Final populated checkpoint retained; this run exercised checkpoint restore before first update, not a mid-fit continuation.",
+    "Resume into a fresh output directory does not import previous qualification history; promotion remains conservative.",
+    "Reference is not qualified; full trainer-memory and learned-flow readiness remain outstanding."
+  ],
+  "physical_completed_reference_updates": 1016,
+  "profile": {
+    "all_gradients_cuda": true,
+    "capability_updates": 0,
+    "finite_gradients": true,
+    "loss": 0.039316240698099136,
+    "optimizer_updates": 0,
+    "reference_export_readback": true,
+    "reference_id": "fb38a31359a4ff367780bb8729695894e663810efd124c016bc2d5ba3fdbf7de",
+    "reference_unchanged": true,
+    "role": "question",
+    "sample": "train-reference-0000",
+    "scope": "one existing training reference episode; two warm VJPs plus one traced VJP; zero optimizer updates",
+    "targets": 40,
+    "trace_sha256": "ee852e3f80ed115a3e94d13fdc7f5feb60ebe3757ea7b6fa7c6c8ec0cfd4cf4b",
+    "unprofiled_seconds": 1.596983863011701
+  },
+  "protocol": "reference-fit-v1",
+  "raw_root": "data/reference-fit-20261106",
+  "releases": {
+    "development": "5b8f4cffdc4f33e255d3a34306cac03a68c50dcd9dab905ae8d8adcf89c81e77",
+    "locked": "d13594f18738056ee179b3498d54d8261f7f7654aad633fabb776810681aa1cf",
+    "train": "c70d4f44135a34c00e7fa0348833b1ec56613def15f5753231589492ed35478f"
+  },
+  "result": {
+    "capability_optimizer_updates": 0,
+    "elapsed_seconds": 10568.742410472012,
+    "final_two_passed": false,
+    "frozen_base": {
+      "base_tied_storage": true,
+      "mismatches": [],
+      "parameters_checked": 320,
+      "pass": true
+    },
+    "live_after_sha256": "c56c8f45d11f4eca02ba4bbc1d1024c50d1b74cceeee8e1d3a5c8e7378485450",
+    "live_before_sha256": "c56c8f45d11f4eca02ba4bbc1d1024c50d1b74cceeee8e1d3a5c8e7378485450",
+    "live_parameters_unchanged": true,
+    "optimizer_updates": 1000,
+    "peak_allocated": 3627365888,
+    "phase": "reference",
+    "qualifications": [
+      {
+        "contrast": {
+          "passed": 100,
+          "scheduled": 100
+        },
+        "recovery": {
+          "exact": 0,
+          "executed": 100,
+          "scheduled": 100,
+          "unresolved": 100
+        },
+        "reference_sha256": "c082e2b882aee992122f43515fb35fdde719703c575d4630c5b7f71866964806",
+        "report_sha256": "bd940d55fc489258f5ba4cd47336b078e2aae823f2d4e4b8f1e27a342ccc4c85",
+        "status": "BLOCKED",
+        "window": 100
+      },
+      {
+        "contrast": {
+          "passed": 100,
+          "scheduled": 100
+        },
+        "recovery": {
+          "exact": 0,
+          "executed": 100,
+          "scheduled": 100,
+          "unresolved": 100
+        },
+        "reference_sha256": "1a800bed2ffbdc3bfdf778469ef7540972fda0bcc22d8cc75196092aaa3a2a1d",
+        "report_sha256": "9e0a0a78894b5b2930699d4add27418fdfddace994d4e4770ce0eb73c1f42693",
+        "status": "BLOCKED",
+        "window": 200
+      },
+      {
+        "contrast": {
+          "passed": 100,
+          "scheduled": 100
+        },
+        "recovery": {
+          "exact": 0,
+          "executed": 100,
+          "scheduled": 100,
+          "unresolved": 100
+        },
+        "reference_sha256": "8d6692e3fb139939e8b036a769d1a399b8718c903a29df862a5d9450c125a190",
+        "report_sha256": "71eb4e38745664a140645f74c25f2db6ef4d270e29e5c3e005b8c159e2e8b308",
+        "status": "BLOCKED",
+        "window": 300
+      },
+      {
+        "contrast": {
+          "passed": 100,
+          "scheduled": 100
+        },
+        "recovery": {
+          "exact": 0,
+          "executed": 100,
+          "scheduled": 100,
+          "unresolved": 100
+        },
+        "reference_sha256": "d7c5ab81699b5fd08180247d881168be25f8e146d3a1d1bfb0020c2bc733c39b",
+        "report_sha256": "d1a1587e23b844b10cf7cb6afda5f43e32ac62d5f68c707a66de9d7c9892b91c",
+        "status": "BLOCKED",
+        "window": 400
+      },
+      {
+        "contrast": {
+          "passed": 100,
+          "scheduled": 100
+        },
+        "recovery": {
+          "exact": 0,
+          "executed": 100,
+          "scheduled": 100,
+          "unresolved": 100
+        },
+        "reference_sha256": "4356cb2639bdaadacd1f5039a97f9a230355132f754268ade18f7fd95bb1f736",
+        "report_sha256": "cab978307f97a7c40d5134db6ac97464733c2c719c34652a21a8d5ea6e35291b",
+        "status": "BLOCKED",
+        "window": 500
+      },
+      {
+        "contrast": {
+          "passed": 100,
+          "scheduled": 100
+        },
+        "recovery": {
+          "exact": 0,
+          "executed": 100,
+          "scheduled": 100,
+          "unresolved": 100
+        },
+        "reference_sha256": "6fa1b2de2ca2f487d098979b289eb63687e9375ee2dc7991ef1d69a654063839",
+        "report_sha256": "ea3882eab585a6f0e65f8e5e7064d72cc486cd4a71c1109e4947f439d2b2ccd3",
+        "status": "BLOCKED",
+        "window": 600
+      },
+      {
+        "contrast": {
+          "passed": 100,
+          "scheduled": 100
+        },
+        "recovery": {
+          "exact": 0,
+          "executed": 100,
+          "scheduled": 100,
+          "unresolved": 100
+        },
+        "reference_sha256": "a1eac1a62e3cdab9349121a2ed97d45c5c1087ef4e663ea04be108c414c5dec0",
+        "report_sha256": "06ff6024fdf05a94594dea77b488dd072ad78f0e07ca0472df8b42017100b58f",
+        "status": "BLOCKED",
+        "window": 700
+      },
+      {
+        "contrast": {
+          "passed": 100,
+          "scheduled": 100
+        },
+        "recovery": {
+          "exact": 0,
+          "executed": 100,
+          "scheduled": 100,
+          "unresolved": 100
+        },
+        "reference_sha256": "0b29c801ab60d60be4eb79d29d6afe4e05d629b9d82e4b8ea83e3b5e9150207c",
+        "report_sha256": "06cd7106518f0f028ef56f0965a2a33f6fccf8dcac3dc0275a91f9ca47b64ad5",
+        "status": "BLOCKED",
+        "window": 800
+      },
+      {
+        "contrast": {
+          "passed": 100,
+          "scheduled": 100
+        },
+        "recovery": {
+          "exact": 0,
+          "executed": 100,
+          "scheduled": 100,
+          "unresolved": 100
+        },
+        "reference_sha256": "c8407bd776ea31246fe57d885a43b79d9b57eca974dede196e22c27c08b6fe98",
+        "report_sha256": "227cd8ec74cc18759043b9fbbaaab05be1cfc5045a04d6bea231608596947c7d",
+        "status": "BLOCKED",
+        "window": 900
+      },
+      {
+        "contrast": {
+          "passed": 100,
+          "scheduled": 100
+        },
+        "recovery": {
+          "exact": 0,
+          "executed": 100,
+          "scheduled": 100,
+          "unresolved": 100
+        },
+        "reference_sha256": "fb38a31359a4ff367780bb8729695894e663810efd124c016bc2d5ba3fdbf7de",
+        "report_sha256": "e68ee72f56e516850cd284f16827a6bbd0e8338e67b6641bcb9bf243879629be",
+        "status": "BLOCKED",
+        "window": 1000
+      }
+    ],
+    "reference_fitting_only": true,
+    "scheduled_windows": 1000,
+    "status": "BLOCKED"
+  },
+  "runner_exit": 2,
+  "scope": "authorized reference fitting and read-only qualification; no capability training, generation, agents or service changes",
+  "trace": {
+    "cuda_kernel_count": 52497,
+    "cuda_kernel_sum_ms": 172.778305,
+    "cuda_kernel_union_ms": 172.77820751953124,
+    "cuda_launch_calls": 52243,
+    "instrumented_episode_ms": 3071.649952,
+    "instrumented_kernel_busy_fraction": 0.05624931558592235,
+    "note": "Profiler overhead affects host duration; use the separate unprofiled warm timing for throughput.",
+    "scopes": [
+      {
+        "dur": 3071649.952,
+        "name": "reference_episode",
+        "ts": 3074331093678.879
+      },
+      {
+        "dur": 29899.249,
+        "name": "pool_and_wire",
+        "ts": 3074331093709.074
+      },
+      {
+        "dur": 834582.274,
+        "name": "teacher_forced_forward",
+        "ts": 3074331123630.89
+      },
+      {
+        "dur": 2201179.209,
+        "name": "reference_vjp",
+        "ts": 3074331958254.654
+      },
+      {
+        "dur": 17.955,
+        "name": "reference_vjp",
+        "ts": 3074331958422.888
+      },
+      {
+        "dur": 834481.177,
+        "name": "teacher_forced_forward",
+        "ts": 3074331123741.359
+      },
+      {
+        "dur": 28297.854,
+        "name": "pool_and_wire",
+        "ts": 3074331095259.281
+      }
+    ],
+    "trace_scope": "one instrumented forward/VJP; excludes accumulation checks and optimizer"
+  },
+  "utilization": {
+    "cpu_percent": 99.3901531025354,
+    "gpu_max_percent": 17.0,
+    "gpu_mean_percent": 16.0,
+    "gpu_min_percent": 15.0,
+    "pid": 710364,
+    "samples": [
+      {
+        "elapsed_seconds": 0.039444174006348476,
+        "gpu_percent": 16.0,
+        "memory_utilization_percent": 1.0,
+        "power_watts": 148.27
+      },
+      {
+        "elapsed_seconds": 1.0784659789933357,
+        "gpu_percent": 16.0,
+        "memory_utilization_percent": 3.0,
+        "power_watts": 149.81
+      },
+      {
+        "elapsed_seconds": 2.1171857280132826,
+        "gpu_percent": 17.0,
+        "memory_utilization_percent": 3.0,
+        "power_watts": 149.63
+      },
+      {
+        "elapsed_seconds": 3.155679007002618,
+        "gpu_percent": 15.0,
+        "memory_utilization_percent": 2.0,
+        "power_watts": 150.05
+      },
+      {
+        "elapsed_seconds": 4.19433736501378,
+        "gpu_percent": 16.0,
+        "memory_utilization_percent": 4.0,
+        "power_watts": 146.52
+      },
+      {
+        "elapsed_seconds": 5.232335793989478,
+        "gpu_percent": 16.0,
+        "memory_utilization_percent": 3.0,
+        "power_watts": 149.86
+      },
+      {
+        "elapsed_seconds": 6.272781070991186,
+        "gpu_percent": 15.0,
+        "memory_utilization_percent": 3.0,
+        "power_watts": 149.65
+      },
+      {
+        "elapsed_seconds": 7.310597867995966,
+        "gpu_percent": 17.0,
+        "memory_utilization_percent": 3.0,
+        "power_watts": 149.24
+      }
+    ],
+    "scope": "OS/driver sampling of the running reference fit; no model work on CPU",
+    "seconds": 8.310682439012453
+  },
+  "validation": {
+    "archived_sources_match_current": true,
+    "final_checkpoint_file_hashes_verified": true,
+    "gpu_parity": {
+      "T_B_gradient_cosine": 0.9999999999561513,
+      "T_B_gradient_normalized_rms": 9.425605138275557e-06,
+      "future_suffix_first_prediction_exact": true,
+      "gradient_cosine_minimum": 0.995,
+      "gradient_rms_tolerance": 0.05,
+      "input_gradient_cosine": 0.9999999999574449,
+      "input_gradient_normalized_rms": 9.231887907816762e-06,
+      "parallel_loss": 6.0068769454956055,
+      "passed": 2,
+      "seconds": 12.574,
+      "serial_loss": 6.006882667541504
+    },
+    "model_free": {
+      "passed": 63,
+      "seconds": 2.799
+    }
+  }
+}
