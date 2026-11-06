@@ -59,3 +59,18 @@ Record exact view counts, charged and executed forward positions, time/memory,
 finite eligibility, role-local ownership, frozen identities and source/data hashes.
 Do not rerun unchanged numeric matrices. Retain raw evidence locally; commit the
 implementation, measured results and handoff, then push main.
+
+## Explicit user conclusion: pass 12
+
+During pass 12 the user instructed: "this is the last pass... do not start
+pass 13". This overrides the automatic recovery/plateau stopping rule for this
+run. Preserve progress at a checkpoint and resume with `--stop-after-pass 12`.
+The explicit limit is stored in subsequent checkpoints. A loop guard rejects
+any next-pass episode once pass 12 is complete. No pass-13 training is allowed.
+
+Complete pass-12 panel/development measurements and frozen-state checks, then
+stop with `USER_REQUESTED_FINAL_PASS`. Do not call this convergence or a plateau.
+No full-catalogue sweep is required at this user stop; do not infer full-training
+recovery from the panel. A narrowly validated source migration permits only the
+runner/control-document changes needed for this stop; all model/optimizer/math
+sources, saved weights, moments, RNG and sampler continuity must remain unchanged.

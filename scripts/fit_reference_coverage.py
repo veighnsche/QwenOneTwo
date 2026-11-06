@@ -18,7 +18,9 @@ def main():
     parser.add_argument('--snapshot', required=True)
     parser.add_argument('--output', required=True)
     parser.add_argument('--resume', help='Exact coverage checkpoint; write a new output directory')
+    parser.add_argument('--stop-after-pass', type=int, help='Explicit user-requested final complete pass; persisted on resume')
     args = parser.parse_args()
+    check(args.stop_after_pass is None or args.stop_after_pass > 0, 'positive final pass required')
     from qwen_one_two.training.release import load_release
     from qwen_one_two.training.reference_data import catalogue, CompleteViewSampler, coverage_panel, coverage_plateau
     receipt = json.loads(RECEIPT.read_bytes())
@@ -91,8 +93,16 @@ def main():
             if len(prepared)%500 == 0:emit('features', completed=len(prepared), total=3376)
         parent = Path(args.resume) if args.resume else PARENT
         manifest = json.loads((parent/'manifest.json').read_bytes()) if args.resume else original_parent
+        source_migration = None
         if args.resume:
-            check(manifest['identities']['sources'] == digest(canonical(sources)), 'resume source profile changed')
+            prior_sources = json.loads((parent.parent/'source-snapshot/manifest.json').read_bytes())
+            check(digest(canonical(prior_sources)) == manifest['identities']['sources'], 'resume source snapshot identity')
+            changed = sorted(n for n in set(prior_sources)|set(sources) if prior_sources.get(n) != sources.get(n))
+            if changed:
+                check(args.stop_after_pass is not None and set(changed) <= {
+                    'scripts/fit_reference_coverage.py', 'docs/reference-complete-coverage-v1.md'}, 'resume model/profile source changed')
+                source_migration = dict(reason='explicit user final-pass control; model/training arithmetic unchanged',
+                    previous_sources=manifest['identities']['sources'], current_sources=digest(canonical(sources)), changed=changed)
         restore_model(parent, b, c, ref, manifest['identities'], window=window)
         if not args.resume:
             check(window.scheduled_windows == window.optimizer_updates == 1000
@@ -111,13 +121,22 @@ def main():
             curves = state['curves']; loss_sum = state['loss_sum']; pass_examples = state['pass_examples']
             paired_first = state['paired_first']; stop_reason = state['stop_reason']; full = state['full_training']
             check(window.scheduled_windows == 1000+sampler.windows, 'resume window/sampler continuity')
+            saved_stop = state.get('stop_after_pass')
+            if saved_stop is not None:
+                check(args.stop_after_pass in (None, saved_stop), 'saved final-pass limit differs')
+                args.stop_after_pass = saved_stop
+        if args.stop_after_pass is not None:
+            check(sampler.windows <= args.stop_after_pass*422, 'requested final pass already exceeded')
+            if sampler.windows == args.stop_after_pass*422:
+                stop_reason = 'USER_REQUESTED_FINAL_PASS'
         run = dict(protocol='reference-complete-coverage-v1', parent=str(parent), parent_manifest_sha256=digest((parent/'manifest.json').read_bytes()),
                    source_hashes=sources, identities=identities, assets=assets, gpu_uuid='GPU-225509c3-d702-6c27-de03-76b5e99b33b1',
                    initial_reference=ref.fingerprint(), decoder_before_sha256=decoder_before, live_before_sha256=live_before,
                    schedule_profile=window.schedule_profile, optimizer_ownership=window.ownership,
                    feature_prefills=len(prepared), feature_positions=feature_positions, cache_device='cuda',
                    recurrence_backend=b.recurrence_backend, base_updates=1000, windows_per_pass=422,
-                   panel_size=len(panel), resume=args.resume, new_data=0, agents=0, capability_updates=0)
+                   panel_size=len(panel), resume=args.resume, stop_after_pass=args.stop_after_pass,
+                   source_migration=source_migration, new_data=0, agents=0, capability_updates=0)
         write('run.json', run)
         training_positions = 0; eval_positions = 0
 
@@ -180,7 +199,7 @@ def main():
 
         def checkpoint():
             state = dict(coverage=sampler.state_dict(), curves=curves, loss_sum=loss_sum, pass_examples=pass_examples,
-                         paired_first=paired_first, stop_reason=stop_reason, full_training=full)
+                         paired_first=paired_first, stop_reason=stop_reason, full_training=full, stop_after_pass=args.stop_after_pass)
             path = output/f'checkpoint-{window.scheduled_windows:06d}'
             save(path, window, bundle_tensors(b, c, ref), identities, state, reference_frozen=False, reference_id=None)
 
@@ -197,6 +216,8 @@ def main():
             for row in curves:curve_log.write(json.dumps(row)+'\n')
             curve_log.flush()
             while stop_reason is None:
+                check(args.stop_after_pass is None or sampler.windows < args.stop_after_pass*422,
+                      'user final-pass limit: no next-pass episode permitted')
                 ids = sampler.next_window(); losses = []; positions = 0; step_started = time.monotonic()
                 for key in ids:
                     view, targets, states, version = prepared[key]
@@ -232,12 +253,14 @@ def main():
                                  legacy40=p['legacy40'], mean_reconstruction=loss_sum/pass_examples,
                                  first_development=paired_first, development=q)
                     curves.append(curve); plateau = coverage_plateau(curves)
-                    if p['exact']/p['total'] >= .95 or plateau:
+                    user_final = args.stop_after_pass is not None and sampler.windows == args.stop_after_pass*422
+                    if not user_final and (p['exact']/p['total'] >= .95 or plateau):
                         measured = evaluate_frozen(full_check=True, reused=p)['full']
                         full = dict(exact=measured['exact'], total=measured['total'], by_role=measured['by_role'],
                                     path=str(output/f'full-training-{window.scheduled_windows:06d}.json'))
                         if full['exact']/full['total'] >= .95:stop_reason = 'FULL_TRAINING_RECOVERY_TARGET'
                         elif plateau:stop_reason = 'OBSERVED_LEARNING_PLATEAU'
+                    if user_final:stop_reason = 'USER_REQUESTED_FINAL_PASS'
                     curve['plateau'] = plateau; curve['full_training'] = full; curve['stop_reason'] = stop_reason
                     curve_log.write(json.dumps(curve)+'\n'); curve_log.flush(); emit('pass_complete', **curve)
                     loss_sum = 0.; pass_examples = 0
@@ -251,6 +274,7 @@ def main():
         for name, sha in sources.items():check(digest(Path(name).read_bytes()) == sha, 'source changed during run')
         for name, sha in assets.items():check(digest(Path(name).read_bytes()) == sha, 'prior evidence changed')
         result = dict(status='COMPLETED', stop_reason=stop_reason, passes=sampler.windows//422,
+                      requested_final_pass=args.stop_after_pass,
                       coverage_windows=sampler.windows, cumulative_optimizer_updates=window.optimizer_updates,
                       reference_qualified=all(q['status'] == 'PASSED' for q in pair), qualifications=pair,
                       initial_panel=curves[0], final_panel=final, full_training=full,

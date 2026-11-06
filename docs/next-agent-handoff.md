@@ -45,6 +45,11 @@ training, promote weights, or authorize deployment.
 
 **A complete-coverage reference experiment is ACTIVE. Do not launch another
 training run or treat the older "no job active" statements below as current.**
+**The user has now explicitly made pass 12 the FINAL pass: do not start pass
+13.** This overrides the automatic stopping rule below. Checkpoint 5,800 has
+been preserved for a narrow stop-control revision; resume only with
+`--stop-after-pass 12`. The new limit persists in checkpoints and is checked
+before any next-pass episode. This is a user stop, not a convergence claim.
 Implementation `caa1db5` and
 [protocol](reference-complete-coverage-v1.md) preceded execution. The user
 authorized shuffled complete passes, existing data, reference-pooler fitting
