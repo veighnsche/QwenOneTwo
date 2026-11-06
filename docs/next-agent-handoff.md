@@ -41,7 +41,41 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — semantic/behavioral gate replacement
+## Current checkpoint — receiver-learning experiment active
+
+The user explicitly authorized receiver-path verification and a receiver-learning
+experiment, superseding the earlier no-capability-training boundary for this
+receiver-only run. No agents or new data are authorized. W and the entire
+pass-12 reference stay frozen; native R, gate/writer/reader objectives and the
+budget row also remain frozen. Do not start reference pass 13.
+
+Read the [fixed receiver experiment](receiver-learning-v1.md). Implementation
+`training/receiver_learning.py` completes isolated request-to-heads objectives
+before result decoding; malformed untrained Reason decodes no longer discard
+valid classifier losses. Actual behavioral evaluation still decodes real results
+without overrides. Frozen annotation payload caching preserves exact contents;
+D-dependent sources are always recomputed. Locked labels remain unopened.
+
+Active launcher/evidence: `data/receiver-learning-20261106/`, especially `run.log`,
+`exit.json` when finished, and `run/` checkpoints/reports. The detached launcher
+runs `scripts/train_receiver.py` on the explicitly selected RTX 3090. Do not
+launch a duplicate. The run first measures the new 130-case E baseline, verifies
+actual gradients across operation/status strata, then completes **1,504 real
+presentations / 188 windows**: all 1,500 receiver records once, with four explicit
+wraparound records. It finishes with 130 E and 180 X development evaluations.
+The original 180 X baseline is reused with pinned weights/source/view/cache
+compatibility checks. There is no elapsed-time cap or automatic extension.
+
+Already passed: three actual-release schedule/answer-blindness tests, ten
+behavioral-grading tests, ten training-input tests, and ten CUDA loss/eligibility/
+accumulation tests. All 13 real-model operation/status preflight strata now pass finite connected
+D-gradient checks, with no R/reference gradients or preflight optimizer updates.
+The first actual update and exact model/optimizer checkpoint roundtrip pass;
+see [training-path evidence](evidence/receiver-training-paths-v1.json). Learning
+is running through the declared pass. No component, receiver or autonomous
+capability acceptance is claimed.
+
+## Previous checkpoint — semantic/behavioral gate replacement
 
 **Implemented and evaluated; the tested configuration is BLOCKED by actual
 receiver behavior, not by exact text reconstruction. No job remains active.**

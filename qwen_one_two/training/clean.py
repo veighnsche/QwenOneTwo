@@ -81,13 +81,15 @@ class CleanEncoder:
     are constructed separately; returned registries contain only derived sources.
     No fitting, detached-contamination repair, or locked-case updates occur.
     """
-    def __init__(self, backbone, reference, *, checkpoint_hash, profile_hash):
+    def __init__(self, backbone, reference, *, checkpoint_hash, profile_hash, cache_references=False):
         from ..codec.neural import cuda_only
         cuda_only()
         check(len(checkpoint_hash) == len(profile_hash) == 64, 'encoder artifact identities')
         check(reference.frozen and all(not p.requires_grad for p in reference.parameters()), 'reference must be frozen')
         check(reference.artifact_id == reference.fingerprint(), 'frozen reference state changed')
         self.backbone, self.reference = backbone, reference
+        self.reference_cache={} if cache_references else None
+        self.reference_cache_hits=0
         self.identity = {'checkpoint': checkpoint_hash, 'profile': profile_hash,
                          'source_mode': 'D', 'reference': reference.artifact_id, 'fresh_state': True, 'kind': 'clean_component'}
 
@@ -123,16 +125,26 @@ class CleanEncoder:
                               tokens=len(ids), offsets=offsets, transformations=['fresh_tokenize', 'W+D', 'body_states'],
                               tensor_hash=digest(body_states.contiguous().cpu().numpy().tobytes())))
         for ref in view.references:
-            text = ref.content.decode()
-            rendered = self.backbone.tokenizer.apply_chat_template([{'role': 'user', 'content': text}],
-                tokenize=False, add_generation_prompt=True, enable_thinking=True)
-            ids = self.backbone.tokenizer.encode(rendered, add_special_tokens=False)
-            states = self.reference.annotation_states(ids)
-            with torch.no_grad():
-                payload = self.reference.pooler(states, *SLOTS[ref.role])
+            payload=self.reference_payload(ref)
             slots.append(payload)
             audit.append(dict(self.identity, role=ref.role, input_hash=ref.sha256, bindings=ref.bindings, dependencies=ref.dependencies,
                               transformations=['role_whitelist', 'fresh_tokenize', 'frozen_W', 'frozen_pooler'],
                               tensor_hash=digest(payload.contiguous().cpu().numpy().tobytes())))
         return {'registry': registry, 'sources': tuple(refs), 'slots': tuple(slots),
                 'input_hash': digest(model_bytes), 'audit': audit}
+
+    def reference_payload(self,ref):
+        """Cache only frozen W/reference outputs; D-dependent sources stay fresh."""
+        import torch
+        check(self.reference.frozen and self.reference.artifact_id==self.identity['reference']
+              and all(not p.requires_grad for p in self.reference.parameters()),'reference cache identity/freeze')
+        if self.reference_cache is not None and ref.sha256 in self.reference_cache:
+            self.reference_cache_hits+=1
+            return self.reference_cache[ref.sha256].clone()
+        rendered=self.backbone.tokenizer.apply_chat_template([{'role':'user','content':ref.content.decode()}],
+            tokenize=False,add_generation_prompt=True,enable_thinking=True)
+        ids=self.backbone.tokenizer.encode(rendered,add_special_tokens=False)
+        states=self.reference.annotation_states(ids)
+        with torch.no_grad():payload=self.reference.pooler(states,*SLOTS[ref.role])
+        if self.reference_cache is not None:self.reference_cache[ref.sha256]=payload.detach().clone()
+        return payload

@@ -16,7 +16,7 @@ def component_view(release,row,*,intervention=False):
     check(any(e['id']==row['id'] and e['selected'] for e in release.manifest['records']),'unselected component record')
     category=row['training_category']
     if intervention:
-        check(row.get('evaluation_slice')=='X' and category is None,'reviewed intervention view')
+        check(row.get('evaluation_slice') in {'E','X'} and category is None,'reviewed receiver evaluation view')
         category='intervention'
     check(category in {'receiver','reader','decision_replay','intervention'},'isolated component category')
     reading=category=='reader'
