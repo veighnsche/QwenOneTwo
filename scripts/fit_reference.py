@@ -34,6 +34,7 @@ def export_reference(path,reference,provenance):
     save_file(state,str(path/'weights.safetensors'))
     manifest=dict(provenance,format='qot-frozen-reference-v1',reference_frozen=True,
                   reference_id=reference.artifact_id,capability_training=False,
+                  pooler_kind=reference.pooler_kind,
                   files={'weights.safetensors':digest((path/'weights.safetensors').read_bytes())})
     (path/'manifest.json').write_bytes(canonical(manifest))
     return digest((path/'manifest.json').read_bytes())
@@ -44,7 +45,7 @@ def main():
     parser.add_argument('--snapshot',required=True)
     parser.add_argument('--output',required=True)
     parser.add_argument('--resume')
-    parser.add_argument('--profile',choices=('legacy-v1','recovery-v1','encoder-v1'),default='recovery-v1')
+    parser.add_argument('--profile',choices=('legacy-v1','recovery-v1','encoder-v1','encoder-target-v2'),default='recovery-v1')
     parser.add_argument('--initial-reference',help='Explicit unqualified reference-only warm start; fresh optimizer')
     args=parser.parse_args()
     output=Path(args.output);output.mkdir(parents=True,exist_ok=False)
@@ -75,17 +76,23 @@ def main():
             from safetensors.torch import load_file
             path=Path(args.initial_reference);manifest=json.loads((path/'manifest.json').read_bytes())
             check(manifest['format']=='qot-frozen-reference-v1','reference-only warm start required')
+            check(manifest.get('pooler_kind','shared-v1') in {'shared-v1','target-v2'},'unknown reference pooler kind')
             check(digest((path/'weights.safetensors').read_bytes())==manifest['files']['weights.safetensors'],'warm-start file hash')
+            if manifest.get('pooler_kind','shared-v1')=='target-v2':ref=Reference(b,c,pooler_kind='target-v2')
             ref.load_state_dict({k.removeprefix('reference.'):v for k,v in load_file(str(path/'weights.safetensors'),device='cuda').items()})
             check(ref.fingerprint()==manifest['reference_id'],'warm-start tensor identity')
             warm_start={'manifest_sha256':digest((path/'manifest.json').read_bytes()),'reference_id':ref.fingerprint(),
                         'prior_optimizer_updates':manifest['optimizer_updates'],'optimizer_reset':True}
-        encoder_only=args.profile=='encoder-v1'
+        encoder_only=args.profile in {'encoder-v1','encoder-target-v2'}
+        if args.profile=='encoder-target-v2' and ref.pooler_kind=='shared-v1':ref.split_pooler()
+        check(ref.pooler_kind==('target-v2' if args.profile=='encoder-target-v2' else 'shared-v1'),'profile/pooler kind mismatch')
+        ref.assert_isolated(c)
         if encoder_only:
             check(args.initial_reference or args.resume,'encoder revision requires an existing decoder')
             ref.train_pooler_only()
         decoder_before=ref.decoder_fingerprint()
-        revision_path=(Path('docs/reference-encoder-revision-v1.md') if encoder_only else
+        revision_path=(Path('docs/reference-encoder-target-v2.md') if args.profile=='encoder-target-v2' else
+                       Path('docs/reference-encoder-revision-v1.md') if encoder_only else
                        Path('docs/reference-recovery-revision-v1.md') if args.profile=='recovery-v1' else None)
         revision_hash=digest(revision_path.read_bytes()) if revision_path is not None else None
         live_before=state_fingerprint({**dict(b.named_parameters()),**{'codec.'+n:p for n,p in c.state_dict().items()}})
@@ -105,8 +112,8 @@ def main():
                     'sources':digest(canonical({'files':sources,'profile':args.profile,'catalogue':sampler.catalogue_hash,
                         'revision':revision_hash}))}
         prepared={};feature_cache={}
-        # Frozen-W feature extraction only; pooler/T remain live and are never
-        # cached. Duplicate canonical meanings still retain all scheduled IDs.
+        # Cache frozen-W features only; each profile's trainable work is
+        # recomputed. Duplicate meanings still retain all scheduled IDs.
         if views is not None:
             entries=[(view.identity,view) for view in views]
             (output/'reference-views.json').write_bytes(canonical([dict(id=v.identity,role=v.role,operation=v.operation,
@@ -142,7 +149,8 @@ def main():
             restored=restore_model(initial,b,c,ref,identities,window=window)
             sampler.load_state_dict(restored['sampler'])
         run={'scope':'reference only; no capability training','train_release':train.identity,'development_release':dev.identity,
-             'profile':args.profile,'warm_start':warm_start,'catalogue_hash':sampler.catalogue_hash,
+             'profile':args.profile,'pooler_kind':ref.pooler_kind,'warm_start':warm_start,'catalogue_hash':sampler.catalogue_hash,
+             'pooler_parameters':sum(p.numel() for p in ref.pooler.parameters()),
              'target_history':'alternate full preceding targets / zero preceding-target vectors' if args.profile=='recovery-v1' else 'full teacher forcing',
              'reference_revision_contract':revision_hash,'encoder_only':encoder_only,
              'decoder_before_sha256':decoder_before,
@@ -187,7 +195,7 @@ def main():
                      reference_frozen=False,reference_id=None)
                 # Independent frozen evaluation copy; preserve the next update's RNG.
                 with torch.random.fork_rng(devices=[0]):
-                    evaluated=Reference(b,c);evaluated.load_state_dict(ref.state_dict());evaluated.freeze()
+                    evaluated=Reference(b,c,pooler_kind=ref.pooler_kind);evaluated.load_state_dict(ref.state_dict());evaluated.freeze()
                     export_hash=export_reference(output/f'reference-{number:04d}',evaluated,
                         dict(window=number,optimizer_updates=window.optimizer_updates,training_release=train.identity,
                              development_release=dev.identity,sources=identities['sources']))
@@ -214,7 +222,7 @@ def main():
             final_two_passed=promoted,optimizer_updates=window.optimizer_updates,scheduled_windows=window.scheduled_windows,
             live_parameters_unchanged=live_before==live_after,live_before_sha256=live_before,live_after_sha256=live_after,
             frozen_base=frozen,capability_optimizer_updates=0,reference_fitting_only=True,
-            encoder_only=encoder_only,decoder_before_sha256=decoder_before,decoder_after_sha256=decoder_after,
+            encoder_only=encoder_only,pooler_kind=ref.pooler_kind,decoder_before_sha256=decoder_before,decoder_after_sha256=decoder_after,
             peak_allocated=torch.cuda.max_memory_allocated(),elapsed_seconds=time.monotonic()-started)
         (output/'report.json').write_bytes(canonical(result));print(json.dumps(result),flush=True)
         return 0 if promoted else 2

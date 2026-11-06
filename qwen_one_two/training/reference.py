@@ -1,18 +1,43 @@
 """Independent small reference weights sharing the frozen W, never a second W."""
 import math
 import hashlib
+import copy
 import torch
 from torch import nn
 from torch.func import functional_call
 from torch.utils.checkpoint import checkpoint
 from ..codec.neural import Codec, ReferencePooler, cuda_only
-from .inputs import check
+from .inputs import check,SLOTS
+
+
+class TargetPooler(nn.Module):
+    """Isolate Target learning from the other roles without duplicating W/T."""
+    def __init__(self, source=None):
+        super().__init__()
+        source=ReferencePooler() if source is None else source
+        self.shared=copy.deepcopy(source)
+        self.target=copy.deepcopy(source)
+        start,count=SLOTS['target']
+        self.shared.queries=nn.Parameter(torch.cat((source.queries[:start],source.queries[start+count:])).detach().clone(),
+                                         requires_grad=source.queries.requires_grad)
+        self.target.queries=nn.Parameter(source.queries[start:start+count].detach().clone(),
+                                         requires_grad=source.queries.requires_grad)
+        pointers=[p.untyped_storage().data_ptr() for p in self.parameters()]
+        check(len(pointers)==len(set(pointers)),'Target/shared pooler storage alias')
+
+    def forward(self,states,start,count):
+        check(type(start) is int and type(count) is int and (start,count) in SLOTS.values(),
+              'canonical role/slot range required')
+        target_start,target_count=SLOTS['target']
+        if (start,count)==SLOTS['target']:return self.target(states,0,count)
+        return self.shared(states,start if start<target_start else start-target_count,count)
 
 
 class Reference(nn.Module):
-    def __init__(self, backbone, live_codec):
+    def __init__(self, backbone, live_codec, *, pooler_kind='shared-v1'):
         super().__init__()
         cuda_only()
+        check(pooler_kind in {'shared-v1','target-v2'},'unknown reference pooler kind')
         # Deliberately not registered: W/R/D belong to the live backbone owner.
         object.__setattr__(self, 'backbone', backbone)
         self.names = tuple(n for n, p in backbone.named_parameters() if n.endswith(('.R_A', '.R_B')))
@@ -26,7 +51,7 @@ class Reference(nn.Module):
                 nn.init.zeros_(p)
             self.T.append(nn.Parameter(p))
         with torch.device('cuda'):
-            self.pooler = ReferencePooler()
+            self.pooler = ReferencePooler() if pooler_kind=='shared-v1' else TargetPooler()
             self.codec = Codec(backbone.sigma, backbone.model.model.embed_tokens.weight,
                                {'q.weight': live_codec.qev_q.weight.detach(), 'k.weight': live_codec.qev_k.weight.detach()})
         # Reference codec starts compatible, owns no aliases to live weights.
@@ -34,6 +59,14 @@ class Reference(nn.Module):
         self.frozen = False
         self.artifact_id = None
         self.assert_isolated(live_codec)
+
+    @property
+    def pooler_kind(self):
+        return 'target-v2' if isinstance(self.pooler,TargetPooler) else 'shared-v1'
+
+    def split_pooler(self):
+        check(not self.frozen and self.pooler_kind=='shared-v1','split an unfrozen shared pooler only')
+        self.pooler=TargetPooler(self.pooler)
 
     def assert_isolated(self, live_codec):
         live = {p.untyped_storage().data_ptr() for p in live_codec.parameters()}

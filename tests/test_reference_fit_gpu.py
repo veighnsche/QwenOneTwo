@@ -85,5 +85,42 @@ class ReferenceFitGPU(unittest.TestCase):
         self.assertTrue(all(p.grad is None for p in list(ref.T.parameters())+list(ref.codec.parameters())+list(self.b.parameters())+list(self.c.parameters())))
         self.assertEqual(before,ref.decoder_fingerprint())
 
+    def test_target_partition_preserves_outputs_isolates_gradients_and_exports(self):
+        import tempfile
+        from pathlib import Path
+        from safetensors.torch import load_file
+        from scripts.fit_reference import export_reference
+        from qwen_one_two.training.inputs import SLOTS
+        from qwen_one_two.training.binding import wire_payload
+        ref=Reference(self.b,self.c);states=torch.randn(20,1024,device='cuda')
+        with torch.no_grad():original={role:ref.pooler(states,*slots) for role,slots in SLOTS.items()}
+        decoder=ref.decoder_fingerprint();ref.split_pooler()
+        self.assertEqual(ref.pooler_kind,'target-v2')
+        self.assertEqual(sum(m.queries.shape[0] for m in (ref.pooler.shared,ref.pooler.target)),30)
+        with torch.no_grad():
+            for role,slots in SLOTS.items():self.assertTrue(torch.equal(original[role],ref.pooler(states,*slots)),role)
+        pointers=[p.untyped_storage().data_ptr() for p in ref.pooler.parameters()]
+        self.assertEqual(len(pointers),len(set(pointers)))
+        ref.train_pooler_only()
+        target=wire_payload(ref,ref.pooler(states,*SLOTS['target']),'target')
+        loss=ref.reconstruct_teacher_forced(target,[10,11,248046])
+        named=list(ref.pooler.named_parameters())
+        grads=torch.autograd.grad(loss,[p for _,p in named],allow_unused=True)
+        for (name,_),gradient in zip(named,grads):
+            if name.startswith('target.'):
+                self.assertIsNotNone(gradient);self.assertTrue(bool(gradient.isfinite().all()))
+            else:self.assertIsNone(gradient,name)
+        self.assertGreater(sum(float(g.norm()) for g in grads if g is not None),1e-10)
+        self.assertEqual(ref.decoder_fingerprint(),decoder)
+        ref.freeze()
+        with tempfile.TemporaryDirectory() as temp:
+            path=Path(temp)/'reference';export_reference(path,ref,{'scope':'GPU schema fixture; never semantic qualification'})
+            restored=Reference(self.b,self.c,pooler_kind='target-v2')
+            restored.load_state_dict({k.removeprefix('reference.'):v for k,v in load_file(str(path/'weights.safetensors'),device='cuda').items()})
+            restored.freeze(ref.artifact_id)
+            with torch.no_grad():
+                for role,slots in SLOTS.items():self.assertTrue(torch.equal(restored.pooler(states,*slots),ref.pooler(states,*slots)),role)
+        self.assertTrue(all(p.grad is None for p in list(self.b.parameters())+list(self.c.parameters())))
+
 
 if __name__=='__main__':unittest.main()
