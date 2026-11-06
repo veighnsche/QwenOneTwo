@@ -7,6 +7,65 @@ This handoff records measured mechanisms, not learned capability.
 
 ## Current checkpoint
 
+**The arbitrary time cap is removed, and all 32 candidates plus all four
+screening evaluations are complete. No finalist met the original improvement/
+retention rule. No job remains active.** Implementation `0d6b1e9` adds result
+resume and removes the deadline. `AGENTS.md` records the user's instruction to
+keep local machinery simple, finish agreed finite work, reuse valid measurements
+and avoid unrequested agent-chosen time/token/cost cutoffs.
+
+Read the [completion report](reference-block-search-completion-results-2026-11-06.md),
+[portable receipt](evidence/reference-block-search-completion-v1.json) and
+[resume protocol](reference-block-search-resume-v1.md). The old timeout report
+below remains historical evidence and no longer describes current coverage.
+
+All **21 complete reports were reused byte-for-byte**, and mask 20 reused its
+**nine completed greedy recoveries**. Its nine sensitivity forwards had to be
+reconstructed because the old partial log omitted foil log probabilities; these
+are now recorded. The remaining 11 candidate reports completed. Ranking over
+all 32 selects **20, 1, 4**, and all received the original separate screening.
+
+| Mask | Components | First set | Screening |
+|---|---|---:|---:|
+| 0 | Baseline | 11/20 | 10/20 |
+| 20 | First attention block + lift | 12/20 | 7/20 |
+| 1 | Queries | 11/20 | 10/20 |
+| 4 | First attention block | 11/20 | 9/20 |
+
+Mask 20 gains two first-set examples while losing one; it gains none on screening
+and loses three. Mask 1 preserves but does not improve screening; mask 4 loses
+one. None meets strict screening gain with preservation of every baseline
+recovery in both sets. **NO_FINALIST** is a completed experimental outcome.
+No development qualification was warranted, and no new development score,
+locked-label use or live promotion occurred. Both diagnostic sets are historical
+training data; they are not unseen during prior model training.
+
+New work: **40 W prefills / 1,514 annotation positions**, **300 sensitivity
+prefills**, **291 recovery episodes**, **7,807 decoder positions**. Two-run physical
+totals: **729 sensitivity prefills**, **720 recovery episodes**, **19,346 decoder
+positions**; logical complete coverage is **720 cases per metric / 19,252 decoder
+positions**. The 94-position difference is the nine necessary sensitivity
+reconstructions. No greedy recovery was repeated. Runtime **511.3701073270022 s**;
+peak CUDA **3,622,856,704 bytes**; exit **2/NO_FINALIST**, `search_complete=true`.
+
+**Seven metadata tests passed in 0.016 s** for resume/corruption/case identity and
+existing selection rules. Unchanged prior GPU block checks were reused. All
+320 frozen base tensors/tying, 483 T/codec tensors, live identity, source artifacts
+and release manifests remain unchanged. Baseline restored; all gradients None;
+zero agents, gradient/optimizer/capability updates or new source records. The
+metadata audit verifies reuse, complete coverage, actual work and selection.
+Raw evidence: `data/reference-block-search-completion-20261106/run/`; older run
+and all evidence retained unchanged.
+
+This block-replacement family and its screening are finished. Next unresolved
+work is reference recovery/generalization and retention, including a causal
+exposure-controlled comparison for the documented imbalance. No further search,
+data generation, gradient fitting or capability training is queued. Preserve
+W freezing, the RTX 3090-only rule, original >=95%/90% paired qualification and
+latent/cache contracts. Runtime is an observation, not a stopping condition.
+
+## Previous interrupted block search (historical; completed above)
+
 **The diagnostic runner is implemented; the bounded block search stopped
 INCOMPLETE at its fixed 600-second search limit. No job remains active.**
 Implementation/protocol `87b01c0` preceded measurements. Read the
