@@ -7,6 +7,57 @@ This handoff records measured mechanisms, not learned capability.
 
 ## Current checkpoint
 
+**The diagnostic runner is implemented; the bounded block search stopped
+INCOMPLETE at its fixed 600-second search limit. No job remains active.**
+Implementation/protocol `87b01c0` preceded measurements. Read the
+[measured report](reference-block-search-results-2026-11-06.md),
+[portable receipt](evidence/reference-block-search-v1.json) and
+[fixed protocol](reference-block-search-v1.md).
+
+The runner tests five-component replacements from the saved 6/6 pooler into
+original checkpoint 1,000, always restoring from immutable source tensors.
+There are 32 masks including baseline/full donor; **21 completed**, mask 20
+completed **9/20 cases**, and masks 21–30 were never started. No completed
+configuration exceeded baseline **11/20** on the fixed training search set.
+Full donor reproduces 6/6 controls but only **7/20** overall. Masks 18/19 gain
+one Target while losing three other recoveries, finishing **9/20**. No shortlist,
+second-set evaluation, finalist, new development qualification or live promotion
+occurred. Do not call this complete search coverage or a recovery fix.
+
+The two prepared 20-case sets cover all ten roles with disjoint annotation hashes
+and families; both are historical training data. Prior exposures are a concrete
+finding: control Questions **1 each** in the broad run vs **86 each** in the donor;
+Targets **2 each** vs **85 each**; Keys **81 each** vs **85 each**. The broad run
+restarted from the original parent, so this is not evidence of forgetting the
+6/6 checkpoint. Baseline correct packets improve the desired token probability
+in **15/20** paired checks; the first differing token is predicted correctly in
+**14/20**. This supports partial packet use, not semantic competence.
+
+**26 checks passed** (5 metadata, 2 CUDA exhaustive apply/restore, 19 related
+regressions). All **320 base tensors/tying**, live identity, **483 T/codec tensors**,
+parent artifacts and release manifests remain unchanged; original baseline was
+restored. All owner gradients are None. Independent byte audit reconstructs all
+**22 applied fingerprints**, verifies **55 source/protocol/test files**, case
+separation and exact counters: **40 W prefills / 1,514 annotation positions**,
+**429 sensitivity prefills**, **429 recovery episodes**, **11,539 decoder positions**.
+Zero gradient/optimizer/capability updates, agents, external calls or new records.
+Development and locked record labels were not loaded. Selection on labels is
+explicitly data-driven weight optimization despite having no gradients.
+
+Total runtime **691.9866396940015 s** including setup/final integrity checks;
+median completed configuration **27.0861807830006 s**; peak CUDA **3,622,856,704
+bytes**; exit **2/INCOMPLETE**. Raw evidence is
+`data/reference-block-search-20261106/run/`, including all complete and partial
+measurements and exact reproducible edit recipes. No further run is queued.
+Next unfinished machinery is a cheaper initial screen, reserving full recovery
+for shortlisted candidates, with a measured budget before another bounded run.
+Partial mask 20, ten unstarted masks and second-set checks remain unmeasured.
+Reference recovery/generalization, semantic binding and the full learned flow
+remain unresolved. Preserve original >=95%/90% paired qualification, W freezing,
+RTX 3090-only workloads and all existing scope restrictions.
+
+## Previous single weight repair (historical)
+
 **The one authorized weight-space repair completed and failed. No job remains
 active.** Implementation/protocol `54a171a` preceded application and all semantic
 feedback. Read the [measured report](reference-weight-repair-results-2026-11-06.md),
