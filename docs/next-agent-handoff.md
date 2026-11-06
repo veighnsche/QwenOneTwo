@@ -5,6 +5,42 @@ Read this first for current status, then the
 topic contracts. Historical reports describe their recorded sources and runs.
 This handoff records measured mechanisms, not learned capability.
 
+## User direction: MVP gates — 2026-11-06
+
+Keep the following tests and their recorded results, but reconsider their role
+as mandatory blockers for MVP progress. Do not spend further work satisfying a
+diagnostic merely because the current pipeline makes it a prerequisite; first
+establish how it demonstrates a necessary product behavior.
+
+- **Exact text reconstruction from internal vectors:** retain as a diagnostic.
+  Identical wording has not been established as essential to the MVP. The
+  architecture asks for semantic recovery; the current evaluator uses exact
+  canonical reconstruction as a stricter sufficient criterion. Evaluate whether
+  relevant meaning survives and is correctly used downstream. Preserve exact
+  values, identities and bindings where the task requires them.
+- **Broad domain/status coverage quotas:** retain as coverage reporting and
+  broader qualification goals; justify any quota made a prerequisite for an MVP
+  demonstration. This does not remove supported operations or status handling.
+- **Tight thinking-budget prediction targets:** retain as quality measurements;
+  justify blocking the MVP on their precision. Preserve the budget mechanism,
+  numerical contract, separate limits and accounting.
+- **Passing two checkpoints exactly 100 updates apart:** retain as an
+  experimental stability protocol; justify requiring that specific spacing for
+  MVP acceptance rather than treating it as an inherent product requirement.
+
+The intended MVP still includes **Noul, Choice and Score**, learned invocation,
+internal vector communication, and correct use of actual results in a normal
+answer. Assess that complete behavior on examples outside training, including
+meaningful input changes. Correctness, valid binding, numerical stability,
+single-prefill/cache behavior and cancellation remain necessary.
+
+This records a requested change in acceptance policy, not an implemented gate
+bypass or a declaration that the model works. Before changing enforced gates,
+document their product justification or an appropriate replacement check.
+Existing failed reports remain failures under their original protocols. This
+documentation change does not interrupt or extend an active experiment, launch
+training, promote weights, or authorize deployment.
+
 ## Current checkpoint
 
 **The exposure-controlled reference comparison is complete. Extra exposure
