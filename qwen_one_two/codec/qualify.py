@@ -211,10 +211,13 @@ def main():
     ap.add_argument('--repeats',type=int,default=3);ap.add_argument('--profiles',nargs='+',default=['functional','checkpoint','serving','fp32'])
     ap.add_argument('--precision-parts',type=int,choices=(2,3),default=2)
     ap.add_argument('--feedback-precision',choices=('fp32','compensated'),default='fp32')
+    ap.add_argument('--recurrence-backend',choices=('eager','graph-v1'),default='eager',
+                    help='Historical v3 matrices use eager; graph-v1 is a separate kernel profile')
     ap.add_argument('--reserve-state-memory',action='store_true',help='Allocate CUDA moment/component-buffer envelopes; never step an optimizer')
     args=ap.parse_args();out=Path(args.output);out.mkdir(parents=True,exist_ok=False)
     report={'status':'RUNNING','scope':'full-codec prescribed runtime qualification; no training/frontend',
-            'profile':f'b1-full-v3-feedback-{args.feedback_precision}-vocab-compensated{args.precision_parts}-temporal32','cases':[],
+            'profile':f'b1-full-v3-feedback-{args.feedback_precision}-vocab-compensated{args.precision_parts}-temporal32'+
+                      ('-recurrence-graph-v1' if args.recurrence_backend=='graph-v1' else ''),'cases':[],
             'precision':{'frozen_candidate_storage':'BF16','feedback_dense_arithmetic':args.feedback_precision,
                          'native_vocabulary_arithmetic':f'{args.precision_parts}-part BF16 products, FP32 output',
                          'reference':'genuine FP32 PyTorch projections; no reference rounding'},
@@ -256,6 +259,7 @@ def main():
                             for repeat in range(args.repeats):
                                 torch.manual_seed(seed);b.checkpointing=profile=='checkpoint'
                                 b.set_precision(torch.float32 if profile=='fp32' else torch.bfloat16)
+                                b.recurrence_backend='eager' if profile=='fp32' else args.recurrence_backend
                                 torch.cuda.reset_peak_memory_stats();t=time.time()
                                 counts_before={**FEEDBACK_COUNTS,**COMPENSATED_COUNTS}
                                 with torch.set_grad_enabled(profile!='serving'):
@@ -263,6 +267,7 @@ def main():
                                 comparison={'pass':True} if base is None else compare(current,base,profile=='fp32')
                                 row={k:current[k] for k in ('summary','calls','probe','loss','budget_raw')}
                                 row.update(length=total,port=port,profile=profile,seed=seed,repeat=repeat,
+                                           recurrence_backend=b.recurrence_backend,
                                            arithmetic_counts={k:v-counts_before[k] for k,v in {**FEEDBACK_COUNTS,**COMPENSATED_COUNTS}.items()},
                                            comparison=comparison,seconds=time.time()-t,
                                            allocated=torch.cuda.max_memory_allocated(),reserved=torch.cuda.max_memory_reserved())

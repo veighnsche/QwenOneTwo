@@ -5,7 +5,7 @@ from .inputs import canonical,check,digest,SLOTS
 from .release import decode,sha256,ReviewedRelease
 
 PROTOCOL='reference-recovery-v1'
-PROFILE='b1-full-v3-feedback-fp32-vocab-compensated2-temporal32'
+PROFILE='b1-full-v3-feedback-fp32-vocab-compensated2-temporal32-recurrence-graph-v1'
 _TOKEN=object()
 
 
@@ -90,7 +90,8 @@ def evaluate_contrasts(reference,release):
     from ..codec.neural import norm
     check(reference.frozen and reference.artifact_id==reference.fingerprint(),'frozen unchanged reference required')
     check(reference.backbone.compensated and reference.backbone.precision_parts==2
-          and reference.backbone.feedback_precision=='fp32','qualified v3 arithmetic required')
+          and reference.backbone.feedback_precision=='fp32'
+          and reference.backbone.recurrence_backend=='graph-v1','declared v3/graph-v1 arithmetic required')
     records=release.records;payloads={};scored=[]
     before=reference.fingerprint()
     with torch.no_grad():
@@ -132,7 +133,8 @@ def evaluate(reference,release):
     cuda_only()
     check(reference.frozen and all(not p.requires_grad for p in reference.parameters()),'frozen reference required')
     check(reference.backbone.compensated and reference.backbone.precision_parts==2
-          and reference.backbone.feedback_precision=='fp32','qualified v3 arithmetic required')
+          and reference.backbone.feedback_precision=='fp32'
+          and reference.backbone.recurrence_backend=='graph-v1','declared v3/graph-v1 arithmetic required')
     before=reference.fingerprint();check(before==reference.artifact_id,'reference identity drift')
     ids=suite(release);cases=[]
     with torch.no_grad():
@@ -156,7 +158,7 @@ def source_hashes():
     root=Path(__file__).resolve().parents[2]
     names=('training/reference.py','training/reference_qualification.py','training/binding.py',
            'training/inputs.py','training/clean.py','training/component_producer.py',
-           'codec/neural.py','codec/precision.py','codec/backbone.py','g1_precision_math.py','g1_backbone.py')
+           'codec/neural.py','codec/precision.py','codec/backbone.py','codec/recurrence.py','g1_precision_math.py','g1_backbone.py')
     return {name:digest((root/'qwen_one_two'/name).read_bytes()) for name in names}
 
 

@@ -69,6 +69,10 @@ recomputed request or permanent duplicate FP32 backbone. Kernel/backend flags
 remain those in [A3](numeric-profile-v1.md), including IEEE FP32, no TF32 and
 deterministic math SDPA.
 
+The separately versioned [recurrence graph profile v1](codec-recurrence-graph-v1.md)
+retains these arithmetic zones and reductions while replaying the pure recurrence
+through CUDA graphs. Its execution evidence is separate from the eager v3 matrix.
+
 The actual forward profile is explicit in every qualification report. Arithmetic
 counters require both FP32 feedback products and BF16 vocabulary products in
 each candidate case, and check frozen projection storage. GPU regressions

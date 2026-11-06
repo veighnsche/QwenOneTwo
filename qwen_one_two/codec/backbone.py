@@ -11,6 +11,7 @@ from torch.nn import functional as F
 from torch.utils.checkpoint import checkpoint
 from ..g1_backbone import Backbone as CoreBackbone,DualLinear,EffectiveTable,MODE
 from .precision import linear,feedback_linear,COUNTS
+from .recurrence import eager_recurrence as recurrence,graph_recurrence
 
 
 def expanded_dual(self,x):
@@ -40,18 +41,9 @@ class Table(EffectiveTable):
         return super().project(hidden,indices)
 
 
-def recurrence(q,k,v,beta,g,memory):
-    outputs=[]
-    for t in range(q.shape[1]):
-        memory=memory*g[:,t].exp()[...,None,None]
-        delta=(v[:,t]-(memory*k[:,t].unsqueeze(-1)).sum(-2))*beta[:,t].unsqueeze(-1)
-        memory=memory+k[:,t].unsqueeze(-1)*delta.unsqueeze(-2)
-        outputs.append((memory*q[:,t].unsqueeze(-1)).sum(-2))
-    return torch.stack(outputs,1),memory
-
-
 class Backbone(CoreBackbone):
     temporal_chunk=32
+    recurrence_backend='graph-v1'
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
@@ -91,10 +83,14 @@ class Backbone(CoreBackbone):
         beta=a.in_proj_b(x).sigmoid().float()
         g=-a.A_log.float().exp()*F.softplus(a.in_proj_a(x).float()+a.dt_bias.float())
         pieces=[]
+        if self.recurrence_backend not in {'eager','graph-v1'}:
+            raise ValueError('unknown recurrence backend')
         for i in range(0,x.shape[1],self.temporal_chunk):
             args=(q[:,i:i+self.temporal_chunk],k[:,i:i+self.temporal_chunk],v[:,i:i+self.temporal_chunk],
                   beta[:,i:i+self.temporal_chunk],g[:,i:i+self.temporal_chunk],memory)
-            if torch.is_grad_enabled():
+            if self.recurrence_backend=='graph-v1':
+                out,memory=graph_recurrence(*args)
+            elif torch.is_grad_enabled():
                 out,memory=checkpoint(recurrence,*args,use_reentrant=False,determinism_check='default')
             else:out,memory=recurrence(*args)
             pieces.append(out)

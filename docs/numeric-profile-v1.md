@@ -135,6 +135,11 @@ Training retains functional transitions without mutating autograd-saved tensors.
 Serving may replace cache-container entries using the same equations. Faster
 kernels require a separately versioned profile passing all applicable checks.
 
+The subsequent [recurrence graph profile v1](codec-recurrence-graph-v1.md)
+replays the same eager operations inside bounded pure recurrence CUDA graphs.
+It is an explicit, separately measured exception to the disabled-graphs row
+above; it does not change precision zones, tolerances or historical results.
+
 ## 4. Fixture manifest
 
 Use seeds 17/29/43 and immutable manifests recording inputs, weight/config
