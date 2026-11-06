@@ -7,6 +7,31 @@ This handoff records measured mechanisms, not learned capability.
 
 ## Current checkpoint
 
+**Reference recovery revision is in progress. Do not launch a duplicate fit.**
+The user authorized fixing failed recovery with existing data on the RTX 3090,
+no generation, agents or capability training. Implementation slice `908d8b5` is
+committed/pushed. Read the preregistered
+[recovery revision](reference-recovery-revision-v1.md) before interpreting results.
+The job uses `data/reference-recovery-20261106/run/`, with live progress in
+`data/reference-recovery-20261106/fit.log` and `run/windows.jsonl` once prepared.
+It is a fixed 1,000-window reference-only revision, warm-starting the previous
+unqualified reference and using fresh reference AdamW moments. Earlier data
+and reference artifacts remain unchanged. Check the actual final `run/report.json`
+and process state before resuming or starting anything else.
+
+Read-only diagnosis measured **31/50 unique training versus 0/50 development**
+recoveries and weak swapped-prefix sensitivity in several roles. The revised
+catalogue reuses 3,376 existing reviewed role views, preserving source row hashes/
+field addresses and the Reason exception. The scheduled 8,000 exposures cover
+all views with no RF development hash overlap. Half the fitting exposures ablate
+preceding-target vectors to require stronger latent conditioning; evaluation and
+the 95%/90% final-two gate are unchanged. **68 model-free checks passed in 2.658 s;
+four GPU objective checks passed in 13.270 s.** These implementation checks do
+not establish a recovered/qualified reference. Raw diagnostic and preflight
+evidence is retained under `data/reference-recovery-20261106/`.
+
+## Prior CPU performance checkpoint
+
 The user authorized fixing CPU dispatch overhead with **no generation, agents
 or extra training**. Implemented the separately versioned
 [graph-v1 recurrence](codec-recurrence-graph-v1.md), now the expanded backbone
