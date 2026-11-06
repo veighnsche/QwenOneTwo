@@ -70,7 +70,7 @@ class Reference(nn.Module):
             states, _ = self(self.backbone.initial(), 'base', self.backbone.embedding(ids))
         return states[0]
 
-    def reconstruct(self, prefix, targets):
+    def reconstruct(self, prefix, targets, *, target_history=True):
         """Role/slot/presence wire prefix only, followed by preceding targets.
 
         No source annotation prefix. Targets include the annotated end token.
@@ -100,10 +100,11 @@ class Reference(nn.Module):
             target = (indices == token).nonzero().flatten()
             check(len(target) == 1, 'masked reconstruction target')
             losses.append(torch.nn.functional.cross_entropy(scores[None], target))
-            hidden, state = self(state, 'T', self.backbone.embedding([token])[0])
+            preceding=self.backbone.embedding([token])[0] if target_history else prefix.new_zeros((1,1024))
+            hidden, state = self(state, 'T', preceding)
         return torch.stack(losses).mean()
 
-    def reconstruct_teacher_forced(self,prefix,targets):
+    def reconstruct_teacher_forced(self,prefix,targets,*,target_history=True):
         """Same causal objective in one transformer sequence, microbatch one.
 
         Position n predicts target n from preceding targets only. The source
@@ -114,7 +115,8 @@ class Reference(nn.Module):
         check(prefix.ndim==2 and prefix.shape[1]==1024 and len(prefix)>0,'latent prefix shape')
         check(targets and targets[-1]==248046 and len(prefix)+len(targets)<=512,'reconstruction length/end')
         check(all(type(t) is int and (0<=t<248044 or t==248046) for t in targets),'masked reconstruction target')
-        preceding=self.backbone.embedding(targets[:-1])[0] if len(targets)>1 else prefix.new_empty((0,1024))
+        check(type(target_history) is bool,'target-history exposure flag')
+        preceding=(self.backbone.embedding(targets[:-1])[0] if target_history else prefix.new_zeros((len(targets)-1,1024))) if len(targets)>1 else prefix.new_empty((0,1024))
         hidden,_=self(self.backbone.initial(),'T',torch.cat((prefix,preceding)))
         hidden=hidden[0,len(prefix)-1:]
         indices=torch.cat((torch.arange(248044,device='cuda'),torch.tensor([248046],device='cuda')))

@@ -44,6 +44,8 @@ def main():
     parser.add_argument('--snapshot',required=True)
     parser.add_argument('--output',required=True)
     parser.add_argument('--resume')
+    parser.add_argument('--profile',choices=('legacy-v1','recovery-v1'),default='recovery-v1')
+    parser.add_argument('--initial-reference',help='Explicit unqualified reference-only warm start; fresh optimizer')
     args=parser.parse_args()
     output=Path(args.output);output.mkdir(parents=True,exist_ok=False)
     train=load_release('data/training-collections-20261105/releases/train',expected_hash=TRAIN_SHA)
@@ -58,6 +60,7 @@ def main():
     from qwen_one_two.training.component_producer import reference_record
     from qwen_one_two.training.engine import Window,reference_groups
     from qwen_one_two.training.sampler import Sampler
+    from qwen_one_two.training.reference_data import catalogue,ViewSampler
     from qwen_one_two.training.checkpoint import save,bundle_tensors,restore_model
     from qwen_one_two.training.reference_qualification import evaluate,load_reference_evidence
     from qwen_one_two.training.manifest import BASE_SHA,file_hash
@@ -66,9 +69,21 @@ def main():
     with sdpa_kernel(SDPBackend.MATH):
         b,c,_=load(args.snapshot,'data/g1-proof/gate-repair-v2-20261105/diagnostic.safetensors')
         ref=Reference(b,c);ref.assert_isolated(c)
+        warm_start=None
+        if args.initial_reference:
+            check(not args.resume,'warm start and exact resume are distinct')
+            from safetensors.torch import load_file
+            path=Path(args.initial_reference);manifest=json.loads((path/'manifest.json').read_bytes())
+            check(manifest['format']=='qot-frozen-reference-v1','reference-only warm start required')
+            check(digest((path/'weights.safetensors').read_bytes())==manifest['files']['weights.safetensors'],'warm-start file hash')
+            ref.load_state_dict({k.removeprefix('reference.'):v for k,v in load_file(str(path/'weights.safetensors'),device='cuda').items()})
+            check(ref.fingerprint()==manifest['reference_id'],'warm-start tensor identity')
+            warm_start={'manifest_sha256':digest((path/'manifest.json').read_bytes()),'reference_id':ref.fingerprint(),
+                        'prior_optimizer_updates':manifest['optimizer_updates'],'optimizer_reset':True}
         live_before=state_fingerprint({**dict(b.named_parameters()),**{'codec.'+n:p for n,p in c.state_dict().items()}})
         sources=source_snapshot(output)
-        sampler=Sampler.from_release(train,'reference')
+        views=catalogue(train) if args.profile=='recovery-v1' else None
+        sampler=ViewSampler(views,train.identity) if views is not None else Sampler.from_release(train,'reference')
         groups=reference_groups(ref)
         for group in groups:
             group['named_parameters']=[('reference.'+name,p) for name,p in group['named_parameters']]
@@ -78,13 +93,20 @@ def main():
         identities={'base':BASE_SHA,'qev':digest(Path('data/qev/release_manifest.json').read_bytes()),
                     'protocol':digest(Path('docs/neural-input-encoding-v1.md').read_bytes()),
                     'precision':digest(Path('docs/codec-feedback-precision-v3.md').read_bytes()),
-                    'reference':ref.fingerprint(),'dataset':train.identity,'sources':digest(canonical(sources))}
+                    'reference':ref.fingerprint(),'dataset':train.identity,
+                    'sources':digest(canonical({'files':sources,'profile':args.profile,'catalogue':sampler.catalogue_hash,
+                        'revision':digest(Path('docs/reference-recovery-revision-v1.md').read_bytes()) if views is not None else None}))}
         prepared={};feature_cache={}
         # Frozen-W feature extraction only; pooler/T remain live and are never
         # cached. Duplicate canonical meanings still retain all scheduled IDs.
-        for entry in train.sampler_rows():
-            if entry['category']!='reference':continue
-            row=train.record(entry['id']);annotation,_=reference_record(train,row)
+        if views is not None:
+            entries=[(view.identity,view) for view in views]
+            (output/'reference-views.json').write_bytes(canonical([dict(id=v.identity,role=v.role,operation=v.operation,
+                annotation_sha256=digest(v.content),sources=v.sources) for v in views]))
+        else:
+            entries=[(entry['id'],reference_record(train,train.record(entry['id']))[0])
+                     for entry in train.sampler_rows() if entry['category']=='reference']
+        for key,annotation in entries:
             text=annotation.content.decode()
             targets=b.tokenizer.encode(text,add_special_tokens=False)+[248046]
             if annotation.sha256 not in feature_cache:
@@ -94,8 +116,8 @@ def main():
                 feature_cache[annotation.sha256]=ref.annotation_states(ids)
             states=feature_cache[annotation.sha256]
             check(len(targets)+SLOTS[annotation.role][1]<=512,'reference reconstruction exceeds ceiling')
-            prepared[entry['id']]=(annotation,targets,states,states._version)
-        check(len(prepared)==500,'all 500 existing reference records required')
+            prepared[key]=(annotation,targets,states,states._version)
+        check(len(prepared)==(3376 if views is not None else 500),'pinned reference catalogue size drift')
         if args.resume:
             old=json.loads((Path(args.resume)/'manifest.json').read_bytes())
             # Initial reference identity is run lineage, not current tensor hash.
@@ -111,6 +133,9 @@ def main():
             restored=restore_model(initial,b,c,ref,identities,window=window)
             sampler.load_state_dict(restored['sampler'])
         run={'scope':'reference only; no capability training','train_release':train.identity,'development_release':dev.identity,
+             'profile':args.profile,'warm_start':warm_start,'catalogue_hash':sampler.catalogue_hash,
+             'target_history':'alternate full preceding targets / zero preceding-target vectors' if views is not None else 'full teacher forcing',
+             'reference_revision_contract':digest(Path('docs/reference-recovery-revision-v1.md').read_bytes()) if views is not None else None,
              'recurrence_backend':b.recurrence_backend,
              'scheduled_windows':1000,'examples_per_window':8,'training_seed':17,'reference_records':len(prepared),
              'frozen_W_feature_cache_entries':len(feature_cache),'cache_device':'cuda',
@@ -122,20 +147,23 @@ def main():
         torch.cuda.reset_peak_memory_stats()
         with (output/'windows.jsonl').open('x') as log:
             while window.scheduled_windows<1000:
-                ids=sampler.next_window();loss_values=[];step_start=time.monotonic()
-                for key in ids:
+                ids=sampler.next_window();loss_values=[];histories=[];step_start=time.monotonic()
+                for ordinal,key in enumerate(ids):
                     annotation,targets,states,version=prepared[key]
                     check(states._version==version,'mutated frozen feature cache')
                     payload=ref.pooler(states,*SLOTS[annotation.role])
                     prefix=wire_payload(ref,payload,annotation.role)
-                    loss=ref.reconstruct_teacher_forced(prefix,targets)
+                    use_history=views is None or (ordinal+window.scheduled_windows)%2==0
+                    histories.append(use_history)
+                    loss=ref.reconstruct_teacher_forced(prefix,targets,target_history=use_history)
                     loss_values.append(float(loss.detach()))
                     window.add_episode({'reconstruction':loss},complete=True,positions=len(prefix)+len(targets))
                     del loss,prefix,payload
                 report=window.step()
                 check(not report['failed_exposures'] and report['eligible_examples']=={'reconstruction':8},'reference exposure eligibility')
                 check(all(p.grad is None for p in b.parameters()) and all(p.grad is None for p in c.parameters()),'live gradient contamination')
-                record=dict(report,samples=ids,mean_reconstruction=sum(loss_values)/8,seconds=time.monotonic()-step_start,
+                record=dict(report,samples=ids,target_history=histories,ablated_history_exposures=histories.count(False),
+                            mean_reconstruction=sum(loss_values)/8,seconds=time.monotonic()-step_start,
                             elapsed_seconds=time.monotonic()-started,peak_allocated=torch.cuda.max_memory_allocated(),
                             optimizer_updates=window.optimizer_updates)
                 log.write(json.dumps(record)+'\n');log.flush()

@@ -46,5 +46,28 @@ class ReferenceFitGPU(unittest.TestCase):
             b,_=self.reference(self.b.initial(),'T',torch.cat((prefix,self.b.embedding([12,13])[0])))
         self.assertTrue(torch.equal(a[0,1],b[0,1]))
 
+    def test_target_history_ablation_matches_serial_loss_and_gradients(self):
+        targets=self.b.tokenizer.encode('Property meaning in the existing reference record.',add_special_tokens=False)+[248046]
+        prefix=torch.randn(2,1024,device='cuda',requires_grad=True)
+        params=(prefix,self.reference.T[1])
+        expected=self.reference.reconstruct(prefix,targets,target_history=False)
+        eg=torch.autograd.grad(expected,params)
+        actual=self.reference.reconstruct_teacher_forced(prefix,targets,target_history=False)
+        ag=torch.autograd.grad(actual,params)
+        self.assertLess(abs(float(actual.detach()-expected.detach())),1e-4)
+        for a,e in zip(ag,eg):self.assertTrue(grad_error(a,e,.05,.995)['pass'])
+        self.assertGreater(float(ag[0].norm()),1e-10)
+
+    def test_ablated_history_never_embeds_target_tokens(self):
+        prefix=torch.randn(2,1024,device='cuda',requires_grad=True)
+        original=self.b.embedding
+        def reject(ids):raise AssertionError('target content entered ablated decoder input')
+        self.b.embedding=reject
+        try:
+            loss=self.reference.reconstruct_teacher_forced(prefix,[10,11,248046],target_history=False)
+            gradient=torch.autograd.grad(loss,prefix)[0]
+        finally:self.b.embedding=original
+        self.assertTrue(bool(gradient.isfinite().all()));self.assertGreater(float(gradient.norm()),1e-10)
+
 
 if __name__=='__main__':unittest.main()
