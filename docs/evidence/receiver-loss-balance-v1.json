@@ -1,0 +1,2914 @@
+{
+  "baseline_initial_gradient_norms_match": true,
+  "baseline_initial_panel_exact": true,
+  "capability_promoted": false,
+  "checkpoints": [
+    {
+      "manifest_sha256": "7d89b06bef0d6ab62793510b23926e81729c4a8d2718c0004a3b78fa1863fcc6",
+      "optimizer_updates": 188,
+      "path": "data/receiver-loss-balance-20261107/run/checkpoint-0188",
+      "window": 188
+    },
+    {
+      "manifest_sha256": "8f47b32e2d1d125d73e1d058534b5e4c2e9c61f54e8c405371a80c79832fea4d",
+      "optimizer_updates": 189,
+      "path": "data/receiver-loss-balance-20261107/run/checkpoint-0189",
+      "window": 189
+    },
+    {
+      "manifest_sha256": "7c784b6027606272f4b027eec186c8b1dcee386902add7d408c2002983a8d4ef",
+      "optimizer_updates": 192,
+      "path": "data/receiver-loss-balance-20261107/run/checkpoint-0192",
+      "window": 192
+    },
+    {
+      "manifest_sha256": "900d2ee0a85337af59da31b59fdec72057f07dd2f62d8017605b0640eb48afac",
+      "optimizer_updates": 196,
+      "path": "data/receiver-loss-balance-20261107/run/checkpoint-0196",
+      "window": 196
+    },
+    {
+      "manifest_sha256": "09499605d5f703163a9efd00fe32522d87659b1b5ba6882f3b9e0133cbd69449",
+      "optimizer_updates": 204,
+      "path": "data/receiver-loss-balance-20261107/run/checkpoint-0204",
+      "window": 204
+    },
+    {
+      "manifest_sha256": "ee4421e60f0b788014ea733dd147c5c478d8d524f2327142a6ad37c890c22977",
+      "optimizer_updates": 220,
+      "path": "data/receiver-loss-balance-20261107/run/checkpoint-0220",
+      "window": 220
+    }
+  ],
+  "comparison": {
+    "baseline": "data/receiver-probe-20261107/run",
+    "changed_sources": [
+      "scripts/train_receiver_probe.py"
+    ],
+    "overrides": {
+      "feasibility": 0.05,
+      "status": 0.1
+    },
+    "plan_sha256": "a924e2bbaace32e73eb2dd822ace03c19ce8ac9bd4f38f6cce74b23e7d07738c",
+    "protocol": "receiver-loss-balance-v1",
+    "report_sha256": "8814694f47246e574499539abd9b7b7e587995d33672d98cecbfaa2b57cfd11b",
+    "scale": 0.1
+  },
+  "control_evidence_sha256": "09977698f3c98d5c568bdde36cdac89999856c151e23d054bb06d66caf0d3473",
+  "control_panel_measurements": [
+    {
+      "receiver": "94218aae6ec62a7745c349af8e9975fd4987520cf9f1345f38e44586e5e7742c",
+      "repeat": 0,
+      "report": {
+        "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+        "kind": "heads",
+        "operations": {
+          "Choice": {
+            "counts": {
+              "assessed_head_correct": 4,
+              "assessed_head_status_correct": 4,
+              "assessed_scheduled": 4,
+              "assessed_selection_measured": 4,
+              "assessed_status_correct": 4,
+              "complete_head_objective": 8,
+              "failed": 0,
+              "head_status_correct": 6,
+              "scheduled": 8,
+              "status_correct": 6
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 2,
+                "mean": 0.45334048569202423
+              },
+              "choice": {
+                "eligible": 4,
+                "mean": 0.0001690685749053955
+              },
+              "feasibility": {
+                "eligible": 8,
+                "mean": 0.18172385694566628
+              },
+              "status": {
+                "eligible": 8,
+                "mean": 0.6586816572817042
+              },
+              "structure": {
+                "eligible": 2,
+                "mean": 0.007355785113759339
+              }
+            },
+            "noul_brier": {
+              "mean": null,
+              "measured": 0
+            },
+            "raw_readout": {
+              "maximum": null,
+              "mean": null,
+              "measured": 0,
+              "minimum": null
+            },
+            "score_interval_distance": {
+              "mean": null,
+              "measured": 0
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 4,
+              "Conflicting -> Assessed": 1,
+              "Insufficient -> Insufficient": 1,
+              "NoFeasibleChoice -> Assessed": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          },
+          "Noul": {
+            "counts": {
+              "assessed_head_correct": 4,
+              "assessed_head_status_correct": 4,
+              "assessed_probability_ties": 0,
+              "assessed_scheduled": 8,
+              "assessed_status_correct": 7,
+              "complete_head_objective": 11,
+              "failed": 0,
+              "head_status_correct": 10,
+              "scheduled": 11,
+              "status_correct": 10
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 3,
+                "mean": 0.6326557397842407
+              },
+              "noul": {
+                "eligible": 8,
+                "mean": 0.7060766071081161
+              },
+              "status": {
+                "eligible": 11,
+                "mean": 0.45494500242851
+              },
+              "structure": {
+                "eligible": 3,
+                "mean": 0.0032384293929984174
+              }
+            },
+            "noul_brier": {
+              "mean": 0.25638137441537934,
+              "measured": 8
+            },
+            "raw_readout": {
+              "maximum": -0.2736365795135498,
+              "mean": -0.31337895718487824,
+              "measured": 11,
+              "minimum": -0.33303284645080566
+            },
+            "score_interval_distance": {
+              "mean": null,
+              "measured": 0
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 7,
+              "Assessed -> Unresolved": 1,
+              "Conflicting -> Conflicting": 1,
+              "Insufficient -> Insufficient": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          },
+          "Score": {
+            "counts": {
+              "assessed_clipped_readouts": 0,
+              "assessed_head_correct": 0,
+              "assessed_head_status_correct": 0,
+              "assessed_scheduled": 10,
+              "assessed_status_correct": 10,
+              "complete_head_objective": 13,
+              "failed": 0,
+              "head_status_correct": 12,
+              "scheduled": 13,
+              "status_correct": 12
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 2,
+                "mean": 0.45446616411209106
+              },
+              "score": {
+                "eligible": 10,
+                "mean": 0.20648056000936776
+              },
+              "status": {
+                "eligible": 13,
+                "mean": 0.3025841464360173
+              },
+              "structure": {
+                "eligible": 2,
+                "mean": 0.005836635071318597
+              }
+            },
+            "noul_brier": {
+              "mean": null,
+              "measured": 0
+            },
+            "raw_readout": {
+              "maximum": 0.472232848405838,
+              "mean": 0.3895678107555096,
+              "measured": 13,
+              "minimum": 0.3349776566028595
+            },
+            "score_interval_distance": {
+              "mean": 0.4115278128534555,
+              "measured": 10
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 10,
+              "Conflicting -> Assessed": 1,
+              "Insufficient -> Insufficient": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          }
+        },
+        "scheduled": 32,
+        "scope": "head objectives without return delivery"
+      }
+    },
+    {
+      "receiver": "2fab788ad0aa5a9a71cec4067f3a8c24fde6e843b70730635666211b2fe4a911",
+      "repeat": 1,
+      "report": {
+        "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+        "kind": "heads",
+        "operations": {
+          "Choice": {
+            "counts": {
+              "assessed_head_correct": 4,
+              "assessed_head_status_correct": 4,
+              "assessed_scheduled": 4,
+              "assessed_selection_measured": 4,
+              "assessed_status_correct": 4,
+              "complete_head_objective": 8,
+              "failed": 0,
+              "head_status_correct": 6,
+              "scheduled": 8,
+              "status_correct": 6
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 2,
+                "mean": 0.4487883746623993
+              },
+              "choice": {
+                "eligible": 4,
+                "mean": 4.374980926513672e-05
+              },
+              "feasibility": {
+                "eligible": 8,
+                "mean": 0.005133162066154995
+              },
+              "status": {
+                "eligible": 8,
+                "mean": 0.5184758114628494
+              },
+              "structure": {
+                "eligible": 2,
+                "mean": 0.008496011781971902
+              }
+            },
+            "noul_brier": {
+              "mean": null,
+              "measured": 0
+            },
+            "raw_readout": {
+              "maximum": null,
+              "mean": null,
+              "measured": 0,
+              "minimum": null
+            },
+            "score_interval_distance": {
+              "mean": null,
+              "measured": 0
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 4,
+              "Conflicting -> Assessed": 1,
+              "Insufficient -> Insufficient": 1,
+              "NoFeasibleChoice -> Assessed": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          },
+          "Noul": {
+            "counts": {
+              "assessed_head_correct": 4,
+              "assessed_head_status_correct": 4,
+              "assessed_probability_ties": 0,
+              "assessed_scheduled": 8,
+              "assessed_status_correct": 8,
+              "complete_head_objective": 11,
+              "failed": 0,
+              "head_status_correct": 11,
+              "scheduled": 11,
+              "status_correct": 11
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 3,
+                "mean": 0.6361341675122579
+              },
+              "noul": {
+                "eligible": 8,
+                "mean": 0.7084715738892555
+              },
+              "status": {
+                "eligible": 11,
+                "mean": 0.24438896402716637
+              },
+              "structure": {
+                "eligible": 3,
+                "mean": 0.0017113328212872148
+              }
+            },
+            "noul_brier": {
+              "mean": 0.25754572018176225,
+              "measured": 8
+            },
+            "raw_readout": {
+              "maximum": -0.2827853560447693,
+              "mean": -0.34582991762594745,
+              "measured": 11,
+              "minimum": -0.36416155099868774
+            },
+            "score_interval_distance": {
+              "mean": null,
+              "measured": 0
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 8,
+              "Conflicting -> Conflicting": 1,
+              "Insufficient -> Insufficient": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          },
+          "Score": {
+            "counts": {
+              "assessed_clipped_readouts": 0,
+              "assessed_head_correct": 0,
+              "assessed_head_status_correct": 0,
+              "assessed_scheduled": 10,
+              "assessed_status_correct": 10,
+              "complete_head_objective": 13,
+              "failed": 0,
+              "head_status_correct": 12,
+              "scheduled": 13,
+              "status_correct": 12
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 2,
+                "mean": 0.42794522643089294
+              },
+              "score": {
+                "eligible": 10,
+                "mean": 0.18901001426856964
+              },
+              "status": {
+                "eligible": 13,
+                "mean": 0.2760108343970317
+              },
+              "structure": {
+                "eligible": 2,
+                "mean": 0.0033875778317451477
+              }
+            },
+            "noul_brier": {
+              "mean": null,
+              "measured": 0
+            },
+            "raw_readout": {
+              "maximum": 0.516253650188446,
+              "mean": 0.46705122406666094,
+              "measured": 13,
+              "minimum": 0.4070149064064026
+            },
+            "score_interval_distance": {
+              "mean": 0.39902524687349794,
+              "measured": 10
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 10,
+              "Conflicting -> Assessed": 1,
+              "Insufficient -> Insufficient": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          }
+        },
+        "scheduled": 32,
+        "scope": "head objectives without return delivery"
+      }
+    },
+    {
+      "receiver": "92a0f8dfbbb3403806d5452a936fb8f027b8dd693bf0388d34affddcfcc202c3",
+      "repeat": 2,
+      "report": {
+        "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+        "kind": "heads",
+        "operations": {
+          "Choice": {
+            "counts": {
+              "assessed_head_correct": 4,
+              "assessed_head_status_correct": 4,
+              "assessed_scheduled": 4,
+              "assessed_selection_measured": 4,
+              "assessed_status_correct": 4,
+              "complete_head_objective": 8,
+              "failed": 0,
+              "head_status_correct": 8,
+              "scheduled": 8,
+              "status_correct": 8
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 4,
+                "mean": 0.484568327665329
+              },
+              "choice": {
+                "eligible": 4,
+                "mean": 7.152557373046875e-07
+              },
+              "feasibility": {
+                "eligible": 8,
+                "mean": 0.0014119963770973243
+              },
+              "status": {
+                "eligible": 8,
+                "mean": 0.3001204915344715
+              },
+              "structure": {
+                "eligible": 4,
+                "mean": 0.006106049346271902
+              }
+            },
+            "noul_brier": {
+              "mean": null,
+              "measured": 0
+            },
+            "raw_readout": {
+              "maximum": null,
+              "mean": null,
+              "measured": 0,
+              "minimum": null
+            },
+            "score_interval_distance": {
+              "mean": null,
+              "measured": 0
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 4,
+              "Conflicting -> Conflicting": 1,
+              "Insufficient -> Insufficient": 1,
+              "NoFeasibleChoice -> NoFeasibleChoice": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          },
+          "Noul": {
+            "counts": {
+              "assessed_head_correct": 4,
+              "assessed_head_status_correct": 4,
+              "assessed_probability_ties": 0,
+              "assessed_scheduled": 8,
+              "assessed_status_correct": 8,
+              "complete_head_objective": 11,
+              "failed": 0,
+              "head_status_correct": 11,
+              "scheduled": 11,
+              "status_correct": 11
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 3,
+                "mean": 0.618307371934255
+              },
+              "noul": {
+                "eligible": 8,
+                "mean": 0.7087249383330345
+              },
+              "status": {
+                "eligible": 11,
+                "mean": 0.08391510729085315
+              },
+              "structure": {
+                "eligible": 3,
+                "mean": 0.0020960920955985785
+              }
+            },
+            "noul_brier": {
+              "mean": 0.25766839161765676,
+              "measured": 8
+            },
+            "raw_readout": {
+              "maximum": -0.2805136442184448,
+              "mean": -0.344416160475124,
+              "measured": 11,
+              "minimum": -0.36178600788116455
+            },
+            "score_interval_distance": {
+              "mean": null,
+              "measured": 0
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 8,
+              "Conflicting -> Conflicting": 1,
+              "Insufficient -> Insufficient": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          },
+          "Score": {
+            "counts": {
+              "assessed_clipped_readouts": 0,
+              "assessed_head_correct": 0,
+              "assessed_head_status_correct": 0,
+              "assessed_scheduled": 10,
+              "assessed_status_correct": 10,
+              "complete_head_objective": 13,
+              "failed": 0,
+              "head_status_correct": 13,
+              "scheduled": 13,
+              "status_correct": 13
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 3,
+                "mean": 0.44383035103480023
+              },
+              "score": {
+                "eligible": 10,
+                "mean": 0.18239837663713843
+              },
+              "status": {
+                "eligible": 13,
+                "mean": 0.12860404456464145
+              },
+              "structure": {
+                "eligible": 3,
+                "mean": 0.0033512885371843972
+              }
+            },
+            "noul_brier": {
+              "mean": null,
+              "measured": 0
+            },
+            "raw_readout": {
+              "maximum": 0.6532037258148193,
+              "mean": 0.5842571075146015,
+              "measured": 13,
+              "minimum": 0.5292877554893494
+            },
+            "score_interval_distance": {
+              "mean": 0.39475660063326357,
+              "measured": 10
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 10,
+              "Conflicting -> Conflicting": 1,
+              "Insufficient -> Insufficient": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          }
+        },
+        "scheduled": 32,
+        "scope": "head objectives without return delivery"
+      }
+    },
+    {
+      "receiver": "fe9824f0667a54779ac219826eaf0b19be713a43f826e8fd500c8595b97acfbc",
+      "repeat": 4,
+      "report": {
+        "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+        "kind": "heads",
+        "operations": {
+          "Choice": {
+            "counts": {
+              "assessed_head_correct": 4,
+              "assessed_head_status_correct": 4,
+              "assessed_scheduled": 4,
+              "assessed_selection_measured": 4,
+              "assessed_status_correct": 4,
+              "complete_head_objective": 8,
+              "failed": 0,
+              "head_status_correct": 8,
+              "scheduled": 8,
+              "status_correct": 8
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 4,
+                "mean": 0.4664461091160774
+              },
+              "choice": {
+                "eligible": 4,
+                "mean": 7.748603820800781e-07
+              },
+              "feasibility": {
+                "eligible": 8,
+                "mean": 0.00011645365111334627
+              },
+              "status": {
+                "eligible": 8,
+                "mean": 0.029150309041142464
+              },
+              "structure": {
+                "eligible": 4,
+                "mean": 0.006244351621717215
+              }
+            },
+            "noul_brier": {
+              "mean": null,
+              "measured": 0
+            },
+            "raw_readout": {
+              "maximum": null,
+              "mean": null,
+              "measured": 0,
+              "minimum": null
+            },
+            "score_interval_distance": {
+              "mean": null,
+              "measured": 0
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 4,
+              "Conflicting -> Conflicting": 1,
+              "Insufficient -> Insufficient": 1,
+              "NoFeasibleChoice -> NoFeasibleChoice": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          },
+          "Noul": {
+            "counts": {
+              "assessed_head_correct": 4,
+              "assessed_head_status_correct": 4,
+              "assessed_probability_ties": 0,
+              "assessed_scheduled": 8,
+              "assessed_status_correct": 8,
+              "complete_head_objective": 11,
+              "failed": 0,
+              "head_status_correct": 11,
+              "scheduled": 11,
+              "status_correct": 11
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 3,
+                "mean": 0.590253988901774
+              },
+              "noul": {
+                "eligible": 8,
+                "mean": 0.7027019187808037
+              },
+              "status": {
+                "eligible": 11,
+                "mean": 0.04063694145191799
+              },
+              "structure": {
+                "eligible": 3,
+                "mean": 0.005305763295230766
+              }
+            },
+            "noul_brier": {
+              "mean": 0.2547356033622923,
+              "measured": 8
+            },
+            "raw_readout": {
+              "maximum": -0.24424931406974792,
+              "mean": -0.301057983528484,
+              "measured": 11,
+              "minimum": -0.3307230770587921
+            },
+            "score_interval_distance": {
+              "mean": null,
+              "measured": 0
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 8,
+              "Conflicting -> Conflicting": 1,
+              "Insufficient -> Insufficient": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          },
+          "Score": {
+            "counts": {
+              "assessed_clipped_readouts": 0,
+              "assessed_head_correct": 0,
+              "assessed_head_status_correct": 0,
+              "assessed_scheduled": 10,
+              "assessed_status_correct": 10,
+              "complete_head_objective": 13,
+              "failed": 0,
+              "head_status_correct": 13,
+              "scheduled": 13,
+              "status_correct": 13
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 3,
+                "mean": 0.4058319727579753
+              },
+              "score": {
+                "eligible": 10,
+                "mean": 0.11964928016532213
+              },
+              "status": {
+                "eligible": 13,
+                "mean": 0.018442507224300735
+              },
+              "structure": {
+                "eligible": 3,
+                "mean": 0.002991044040148457
+              }
+            },
+            "noul_brier": {
+              "mean": null,
+              "measured": 0
+            },
+            "raw_readout": {
+              "maximum": 0.6549618244171143,
+              "mean": 0.48837119799393874,
+              "measured": 13,
+              "minimum": 0.3065411448478699
+            },
+            "score_interval_distance": {
+              "mean": 0.3166545782238245,
+              "measured": 10
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 10,
+              "Conflicting -> Conflicting": 1,
+              "Insufficient -> Insufficient": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          }
+        },
+        "scheduled": 32,
+        "scope": "head objectives without return delivery"
+      }
+    },
+    {
+      "receiver": "5eabb8e580144bf0829a5311528a307671bc6568141e489d7277ae5e7fcd329d",
+      "repeat": 8,
+      "report": {
+        "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+        "kind": "heads",
+        "operations": {
+          "Choice": {
+            "counts": {
+              "assessed_head_correct": 4,
+              "assessed_head_status_correct": 4,
+              "assessed_scheduled": 4,
+              "assessed_selection_measured": 4,
+              "assessed_status_correct": 4,
+              "complete_head_objective": 8,
+              "failed": 0,
+              "head_status_correct": 8,
+              "scheduled": 8,
+              "status_correct": 8
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 4,
+                "mean": 0.406876377761364
+              },
+              "choice": {
+                "eligible": 4,
+                "mean": 8.484721183776855e-05
+              },
+              "feasibility": {
+                "eligible": 8,
+                "mean": 0.0009652122116676765
+              },
+              "status": {
+                "eligible": 8,
+                "mean": 0.006110828602686524
+              },
+              "structure": {
+                "eligible": 4,
+                "mean": 0.0019621664978330955
+              }
+            },
+            "noul_brier": {
+              "mean": null,
+              "measured": 0
+            },
+            "raw_readout": {
+              "maximum": null,
+              "mean": null,
+              "measured": 0,
+              "minimum": null
+            },
+            "score_interval_distance": {
+              "mean": null,
+              "measured": 0
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 4,
+              "Conflicting -> Conflicting": 1,
+              "Insufficient -> Insufficient": 1,
+              "NoFeasibleChoice -> NoFeasibleChoice": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          },
+          "Noul": {
+            "counts": {
+              "assessed_head_correct": 4,
+              "assessed_head_status_correct": 4,
+              "assessed_probability_ties": 0,
+              "assessed_scheduled": 8,
+              "assessed_status_correct": 8,
+              "complete_head_objective": 11,
+              "failed": 0,
+              "head_status_correct": 11,
+              "scheduled": 11,
+              "status_correct": 11
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 3,
+                "mean": 0.5334477424621582
+              },
+              "noul": {
+                "eligible": 8,
+                "mean": 0.6882314011454582
+              },
+              "status": {
+                "eligible": 11,
+                "mean": 0.0040274345347742465
+              },
+              "structure": {
+                "eligible": 3,
+                "mean": 0.002056570607237518
+              }
+            },
+            "noul_brier": {
+              "mean": 0.24758421552700127,
+              "measured": 8
+            },
+            "raw_readout": {
+              "maximum": -0.16638997197151184,
+              "mean": -0.21564206345514816,
+              "measured": 11,
+              "minimum": -0.24905359745025635
+            },
+            "score_interval_distance": {
+              "mean": null,
+              "measured": 0
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 8,
+              "Conflicting -> Conflicting": 1,
+              "Insufficient -> Insufficient": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          },
+          "Score": {
+            "counts": {
+              "assessed_clipped_readouts": 0,
+              "assessed_head_correct": 0,
+              "assessed_head_status_correct": 0,
+              "assessed_scheduled": 10,
+              "assessed_status_correct": 10,
+              "complete_head_objective": 13,
+              "failed": 0,
+              "head_status_correct": 12,
+              "scheduled": 13,
+              "status_correct": 12
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 2,
+                "mean": 0.3634621500968933
+              },
+              "score": {
+                "eligible": 10,
+                "mean": 0.053827383036468744
+              },
+              "status": {
+                "eligible": 13,
+                "mean": 0.0951342275315815
+              },
+              "structure": {
+                "eligible": 2,
+                "mean": 0.000965283892583102
+              }
+            },
+            "noul_brier": {
+              "mean": null,
+              "measured": 0
+            },
+            "raw_readout": {
+              "maximum": 0.7637577652931213,
+              "mean": 0.3844694755971432,
+              "measured": 13,
+              "minimum": 0.009609848260879517
+            },
+            "score_interval_distance": {
+              "mean": 0.16675930470228195,
+              "measured": 10
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 10,
+              "Conflicting -> Assessed": 1,
+              "Insufficient -> Insufficient": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          }
+        },
+        "scheduled": 32,
+        "scope": "head objectives without return delivery"
+      }
+    }
+  ],
+  "cpu_tests": {
+    "errors": 0,
+    "failures": 0,
+    "model_runtimes_loaded": [],
+    "passed": true,
+    "tests": 24
+  },
+  "final_development": {
+    "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+    "kind": "behavior",
+    "operations": {
+      "Choice": {
+        "counts": {
+          "assessed_behavior_passed": 47,
+          "assessed_head_correct": 47,
+          "assessed_head_status_correct": 47,
+          "assessed_scheduled": 50,
+          "assessed_selection_measured": 49,
+          "assessed_status_correct": 49,
+          "behavior_passed": 51,
+          "failed": 0,
+          "nonassessed_behavior_passed": 4,
+          "scheduled": 90,
+          "status_correct": 53,
+          "transport_valid": 90
+        },
+        "losses": {},
+        "noul_brier": {
+          "mean": null,
+          "measured": 0
+        },
+        "raw_readout": {
+          "maximum": null,
+          "mean": null,
+          "measured": 0,
+          "minimum": null
+        },
+        "score_interval_distance": {
+          "mean": null,
+          "measured": 0
+        },
+        "status_confusion": {
+          "Assessed -> Assessed": 49,
+          "Assessed -> Unresolved": 1,
+          "Conflicting -> Assessed": 9,
+          "Conflicting -> Unresolved": 1,
+          "Insufficient -> Assessed": 10,
+          "NoFeasibleChoice -> Assessed": 8,
+          "NoFeasibleChoice -> Unresolved": 2,
+          "Unresolved -> Assessed": 6,
+          "Unresolved -> Unresolved": 4
+        }
+      },
+      "Noul": {
+        "counts": {
+          "assessed_behavior_passed": 22,
+          "assessed_head_correct": 25,
+          "assessed_head_status_correct": 22,
+          "assessed_probability_ties": 0,
+          "assessed_scheduled": 80,
+          "assessed_status_correct": 75,
+          "behavior_passed": 67,
+          "failed": 0,
+          "nonassessed_behavior_passed": 45,
+          "scheduled": 140,
+          "status_correct": 120,
+          "transport_valid": 140
+        },
+        "losses": {},
+        "noul_brier": {
+          "mean": 0.2848613576284674,
+          "measured": 80
+        },
+        "raw_readout": {
+          "maximum": null,
+          "mean": null,
+          "measured": 0,
+          "minimum": null
+        },
+        "score_interval_distance": {
+          "mean": null,
+          "measured": 0
+        },
+        "status_confusion": {
+          "Assessed -> Assessed": 75,
+          "Assessed -> Conflicting": 2,
+          "Assessed -> Insufficient": 2,
+          "Assessed -> Unresolved": 1,
+          "Conflicting -> Assessed": 5,
+          "Conflicting -> Conflicting": 3,
+          "Conflicting -> Unresolved": 2,
+          "Insufficient -> Assessed": 4,
+          "Insufficient -> Insufficient": 36,
+          "Unresolved -> Assessed": 4,
+          "Unresolved -> Unresolved": 6
+        }
+      },
+      "Score": {
+        "counts": {
+          "assessed_behavior_passed": 0,
+          "assessed_head_correct": 0,
+          "assessed_head_status_correct": 0,
+          "assessed_scheduled": 50,
+          "assessed_status_correct": 48,
+          "behavior_passed": 5,
+          "failed": 0,
+          "nonassessed_behavior_passed": 5,
+          "scheduled": 80,
+          "status_correct": 53,
+          "transport_valid": 80
+        },
+        "losses": {},
+        "noul_brier": {
+          "mean": null,
+          "measured": 0
+        },
+        "raw_readout": {
+          "maximum": null,
+          "mean": null,
+          "measured": 0,
+          "minimum": null
+        },
+        "score_interval_distance": {
+          "mean": 0.2723874439485371,
+          "measured": 50
+        },
+        "status_confusion": {
+          "Assessed -> Assessed": 48,
+          "Assessed -> Unresolved": 2,
+          "Conflicting -> Assessed": 10,
+          "Insufficient -> Assessed": 9,
+          "Insufficient -> Unresolved": 1,
+          "Unresolved -> Assessed": 4,
+          "Unresolved -> Insufficient": 1,
+          "Unresolved -> Unresolved": 5
+        }
+      }
+    },
+    "scheduled": 310,
+    "scope": "actual decoded/delivered receiver behavior; not learned invocation"
+  },
+  "full_training_phase": false,
+  "gpu_uuid": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+  "gradient_diagnostics": [
+    {
+      "D_cosine_with_status": {
+        "alignment": 0.29611965720671724,
+        "choice": -0.00309657729626002,
+        "noul": -0.18070569036695946,
+        "score": -0.00923977707258368
+      },
+      "combined_unclipped_norm": 26.83734893798828,
+      "components": {
+        "alignment": {
+          "coefficient": 1.0,
+          "eligible": 1,
+          "weighted_D_norm": 1.53909689284271,
+          "weighted_norm": 3.0132763585711
+        },
+        "choice": {
+          "coefficient": 1.0,
+          "eligible": 1,
+          "weighted_D_norm": 0.005056136795112242,
+          "weighted_norm": 0.010022964696059048
+        },
+        "feasibility": {
+          "coefficient": 0.05,
+          "eligible": 1,
+          "weighted_D_norm": 1.3039667968364768,
+          "weighted_norm": 2.5082289966057765
+        },
+        "noul": {
+          "coefficient": 1.0,
+          "eligible": 2,
+          "weighted_D_norm": 0.21725619214925018,
+          "weighted_norm": 0.4640294562825357
+        },
+        "score": {
+          "coefficient": 1.0,
+          "eligible": 3,
+          "weighted_D_norm": 1.9021980812020574,
+          "weighted_norm": 26.248955730079444
+        },
+        "status": {
+          "coefficient": 0.1,
+          "eligible": 8,
+          "weighted_D_norm": 1.7557518900883988,
+          "weighted_norm": 3.7873236454326817
+        },
+        "structure": {
+          "coefficient": 0.5,
+          "eligible": 1,
+          "weighted_D_norm": 0.06010715753062144,
+          "weighted_norm": 0.10911492962112895
+        }
+      },
+      "scope": "window-aggregate eligible-mean gradients before shared clipping; observational, not causal attribution",
+      "window": 189
+    },
+    {
+      "D_cosine_with_status": {
+        "alignment": 0.2624073298959159,
+        "choice": null,
+        "noul": 0.04128887556210331,
+        "score": -0.0033740607912139463
+      },
+      "combined_unclipped_norm": 20.01925277709961,
+      "components": {
+        "alignment": {
+          "coefficient": 1.0,
+          "eligible": 3,
+          "weighted_D_norm": 0.35841220127648327,
+          "weighted_norm": 0.6715760152132191
+        },
+        "feasibility": {
+          "coefficient": 0.05,
+          "eligible": 2,
+          "weighted_D_norm": 2.7373343339026235,
+          "weighted_norm": 5.96792934047841
+        },
+        "noul": {
+          "coefficient": 1.0,
+          "eligible": 1,
+          "weighted_D_norm": 0.685382127573701,
+          "weighted_norm": 1.4276025032393413
+        },
+        "score": {
+          "coefficient": 1.0,
+          "eligible": 3,
+          "weighted_D_norm": 1.3662854421229103,
+          "weighted_norm": 18.895462670451685
+        },
+        "status": {
+          "coefficient": 0.1,
+          "eligible": 8,
+          "weighted_D_norm": 1.2643252844820607,
+          "weighted_norm": 2.31653497014684
+        },
+        "structure": {
+          "coefficient": 0.5,
+          "eligible": 3,
+          "weighted_D_norm": 0.1701446936468678,
+          "weighted_norm": 0.2710869619195331
+        }
+      },
+      "scope": "window-aggregate eligible-mean gradients before shared clipping; observational, not causal attribution",
+      "window": 190
+    },
+    {
+      "D_cosine_with_status": {
+        "alignment": 0.05078833613069814,
+        "choice": 0.00982830659909587,
+        "noul": 0.10030389322102261,
+        "score": -0.022964505224041813
+      },
+      "combined_unclipped_norm": 22.573944091796875,
+      "components": {
+        "alignment": {
+          "coefficient": 1.0,
+          "eligible": 1,
+          "weighted_D_norm": 1.1519219871212345,
+          "weighted_norm": 2.660236190400482
+        },
+        "choice": {
+          "coefficient": 1.0,
+          "eligible": 2,
+          "weighted_D_norm": 0.05909684110657332,
+          "weighted_norm": 0.10711304683345177
+        },
+        "feasibility": {
+          "coefficient": 0.05,
+          "eligible": 2,
+          "weighted_D_norm": 1.79431769461584,
+          "weighted_norm": 3.5296345567713825
+        },
+        "noul": {
+          "coefficient": 1.0,
+          "eligible": 3,
+          "weighted_D_norm": 0.1787970323231737,
+          "weighted_norm": 0.47955073036736595
+        },
+        "score": {
+          "coefficient": 1.0,
+          "eligible": 2,
+          "weighted_D_norm": 2.0161493748502854,
+          "weighted_norm": 21.903472354292802
+        },
+        "status": {
+          "coefficient": 0.1,
+          "eligible": 8,
+          "weighted_D_norm": 2.0174676954692172,
+          "weighted_norm": 3.3060018888623874
+        },
+        "structure": {
+          "coefficient": 0.5,
+          "eligible": 1,
+          "weighted_D_norm": 0.49964296547436565,
+          "weighted_norm": 1.0411974730817666
+        }
+      },
+      "scope": "window-aggregate eligible-mean gradients before shared clipping; observational, not causal attribution",
+      "window": 191
+    },
+    {
+      "D_cosine_with_status": {
+        "alignment": 0.1399999014249815,
+        "choice": 0.056817003814313656,
+        "noul": -0.21292816851389954,
+        "score": 0.03491285659387041
+      },
+      "combined_unclipped_norm": 18.884822845458984,
+      "components": {
+        "alignment": {
+          "coefficient": 1.0,
+          "eligible": 2,
+          "weighted_D_norm": 0.5089585184856106,
+          "weighted_norm": 1.2145046166030233
+        },
+        "choice": {
+          "coefficient": 1.0,
+          "eligible": 1,
+          "weighted_D_norm": 0.002013221403614793,
+          "weighted_norm": 0.004462656563620201
+        },
+        "feasibility": {
+          "coefficient": 0.05,
+          "eligible": 3,
+          "weighted_D_norm": 1.7579342416917871,
+          "weighted_norm": 3.408957230538277
+        },
+        "noul": {
+          "coefficient": 1.0,
+          "eligible": 2,
+          "weighted_D_norm": 0.9649037352583806,
+          "weighted_norm": 1.9736653135423152
+        },
+        "score": {
+          "coefficient": 1.0,
+          "eligible": 2,
+          "weighted_D_norm": 2.1094444984654928,
+          "weighted_norm": 18.35163946040012
+        },
+        "status": {
+          "coefficient": 0.1,
+          "eligible": 8,
+          "weighted_D_norm": 1.3907528007177032,
+          "weighted_norm": 2.3895637352173993
+        },
+        "structure": {
+          "coefficient": 0.5,
+          "eligible": 2,
+          "weighted_D_norm": 0.04806415823366727,
+          "weighted_norm": 0.08416356436797104
+        }
+      },
+      "scope": "window-aggregate eligible-mean gradients before shared clipping; observational, not causal attribution",
+      "window": 192
+    },
+    {
+      "D_cosine_with_status": {
+        "alignment": null,
+        "choice": -0.019203075322829954,
+        "noul": -0.078554267442469,
+        "score": -0.05324714623530501
+      },
+      "combined_unclipped_norm": 32.08705139160156,
+      "components": {
+        "choice": {
+          "coefficient": 1.0,
+          "eligible": 1,
+          "weighted_D_norm": 0.00013561724459149548,
+          "weighted_norm": 0.00027297078826122966
+        },
+        "feasibility": {
+          "coefficient": 0.05,
+          "eligible": 1,
+          "weighted_D_norm": 0.020593600404691492,
+          "weighted_norm": 0.05151043571709316
+        },
+        "noul": {
+          "coefficient": 1.0,
+          "eligible": 2,
+          "weighted_D_norm": 2.142128632014307,
+          "weighted_norm": 5.149487496800068
+        },
+        "score": {
+          "coefficient": 1.0,
+          "eligible": 3,
+          "weighted_D_norm": 4.85581537256957,
+          "weighted_norm": 31.214523945634518
+        },
+        "status": {
+          "coefficient": 0.1,
+          "eligible": 8,
+          "weighted_D_norm": 2.220929786001571,
+          "weighted_norm": 4.682550930043863
+        }
+      },
+      "scope": "window-aggregate eligible-mean gradients before shared clipping; observational, not causal attribution",
+      "window": 217
+    },
+    {
+      "D_cosine_with_status": {
+        "alignment": 0.12442024984386164,
+        "choice": null,
+        "noul": 0.1292581987622413,
+        "score": -0.009929618667910162
+      },
+      "combined_unclipped_norm": 34.57349395751953,
+      "components": {
+        "alignment": {
+          "coefficient": 1.0,
+          "eligible": 4,
+          "weighted_D_norm": 0.7118300719678224,
+          "weighted_norm": 2.464746037450359
+        },
+        "feasibility": {
+          "coefficient": 0.05,
+          "eligible": 2,
+          "weighted_D_norm": 0.001173903864473122,
+          "weighted_norm": 0.0023214295042331477
+        },
+        "noul": {
+          "coefficient": 1.0,
+          "eligible": 1,
+          "weighted_D_norm": 2.1072660776629535,
+          "weighted_norm": 4.563768225707114
+        },
+        "score": {
+          "coefficient": 1.0,
+          "eligible": 3,
+          "weighted_D_norm": 5.713069585755072,
+          "weighted_norm": 34.27489941868496
+        },
+        "status": {
+          "coefficient": 0.1,
+          "eligible": 8,
+          "weighted_D_norm": 0.5008009616566227,
+          "weighted_norm": 0.9065905721251766
+        },
+        "structure": {
+          "coefficient": 0.5,
+          "eligible": 4,
+          "weighted_D_norm": 0.036723705403472785,
+          "weighted_norm": 0.06144800955389328
+        }
+      },
+      "scope": "window-aggregate eligible-mean gradients before shared clipping; observational, not causal attribution",
+      "window": 218
+    },
+    {
+      "D_cosine_with_status": {
+        "alignment": 0.13650978582258042,
+        "choice": -0.018858552667441603,
+        "noul": -0.0901151394474922,
+        "score": -0.006220541583072427
+      },
+      "combined_unclipped_norm": 21.70375633239746,
+      "components": {
+        "alignment": {
+          "coefficient": 1.0,
+          "eligible": 1,
+          "weighted_D_norm": 0.8512598656749383,
+          "weighted_norm": 1.7368607387063328
+        },
+        "choice": {
+          "coefficient": 1.0,
+          "eligible": 2,
+          "weighted_D_norm": 0.00014262350015394558,
+          "weighted_norm": 0.00025324358467856793
+        },
+        "feasibility": {
+          "coefficient": 0.05,
+          "eligible": 2,
+          "weighted_D_norm": 0.16495155282503213,
+          "weighted_norm": 0.31851649603291504
+        },
+        "noul": {
+          "coefficient": 1.0,
+          "eligible": 3,
+          "weighted_D_norm": 0.9699833440862691,
+          "weighted_norm": 2.5411178622499286
+        },
+        "score": {
+          "coefficient": 1.0,
+          "eligible": 2,
+          "weighted_D_norm": 5.464392696967958,
+          "weighted_norm": 21.05082611901133
+        },
+        "status": {
+          "coefficient": 0.1,
+          "eligible": 8,
+          "weighted_D_norm": 0.19403670205471124,
+          "weighted_norm": 0.3880451653601352
+        },
+        "structure": {
+          "coefficient": 0.5,
+          "eligible": 1,
+          "weighted_D_norm": 0.03151646879233977,
+          "weighted_norm": 0.05889306378564342
+        }
+      },
+      "scope": "window-aggregate eligible-mean gradients before shared clipping; observational, not causal attribution",
+      "window": 219
+    },
+    {
+      "D_cosine_with_status": {
+        "alignment": 0.34049777946151205,
+        "choice": 0.04920102807542786,
+        "noul": -0.11314831749880669,
+        "score": 0.015881140045699835
+      },
+      "combined_unclipped_norm": 45.68992614746094,
+      "components": {
+        "alignment": {
+          "coefficient": 1.0,
+          "eligible": 3,
+          "weighted_D_norm": 0.6157249856571272,
+          "weighted_norm": 1.4364005106583024
+        },
+        "choice": {
+          "coefficient": 1.0,
+          "eligible": 1,
+          "weighted_D_norm": 0.00018288943839653497,
+          "weighted_norm": 0.00034925798872276074
+        },
+        "feasibility": {
+          "coefficient": 0.05,
+          "eligible": 3,
+          "weighted_D_norm": 0.015018416082721026,
+          "weighted_norm": 0.03158834104220576
+        },
+        "noul": {
+          "coefficient": 1.0,
+          "eligible": 2,
+          "weighted_D_norm": 4.316969538884169,
+          "weighted_norm": 9.199540403307113
+        },
+        "score": {
+          "coefficient": 1.0,
+          "eligible": 2,
+          "weighted_D_norm": 6.859462558526378,
+          "weighted_norm": 42.752771310700496
+        },
+        "status": {
+          "coefficient": 0.1,
+          "eligible": 8,
+          "weighted_D_norm": 0.5774770041371061,
+          "weighted_norm": 1.1168757609586837
+        },
+        "structure": {
+          "coefficient": 0.5,
+          "eligible": 3,
+          "weighted_D_norm": 0.02735292558814998,
+          "weighted_norm": 0.046844439908950826
+        }
+      },
+      "scope": "window-aggregate eligible-mean gradients before shared clipping; observational, not causal attribution",
+      "window": 220
+    }
+  ],
+  "heldout_receiver_unchanged": true,
+  "historical_development": {
+    "historical": true,
+    "new_model_evaluation": false,
+    "report": {
+      "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+      "kind": "behavior",
+      "operations": {
+        "Choice": {
+          "counts": {
+            "assessed_behavior_passed": 47,
+            "assessed_head_correct": 47,
+            "assessed_head_status_correct": 47,
+            "assessed_scheduled": 50,
+            "assessed_selection_measured": 49,
+            "assessed_status_correct": 49,
+            "behavior_passed": 54,
+            "failed": 0,
+            "nonassessed_behavior_passed": 7,
+            "scheduled": 90,
+            "status_correct": 56,
+            "transport_valid": 90
+          },
+          "losses": {},
+          "noul_brier": {
+            "mean": null,
+            "measured": 0
+          },
+          "raw_readout": {
+            "maximum": null,
+            "mean": null,
+            "measured": 0,
+            "minimum": null
+          },
+          "score_interval_distance": {
+            "mean": null,
+            "measured": 0
+          },
+          "status_confusion": {
+            "Assessed -> Assessed": 49,
+            "Assessed -> Unresolved": 1,
+            "Conflicting -> Assessed": 8,
+            "Conflicting -> Insufficient": 1,
+            "Conflicting -> Unresolved": 1,
+            "Insufficient -> Assessed": 7,
+            "Insufficient -> Insufficient": 3,
+            "NoFeasibleChoice -> Assessed": 8,
+            "NoFeasibleChoice -> Unresolved": 2,
+            "Unresolved -> Assessed": 5,
+            "Unresolved -> NoFeasibleChoice": 1,
+            "Unresolved -> Unresolved": 4
+          }
+        },
+        "Noul": {
+          "counts": {
+            "assessed_behavior_passed": 23,
+            "assessed_head_correct": 25,
+            "assessed_head_status_correct": 23,
+            "assessed_probability_ties": 0,
+            "assessed_scheduled": 80,
+            "assessed_status_correct": 76,
+            "behavior_passed": 68,
+            "failed": 0,
+            "nonassessed_behavior_passed": 45,
+            "scheduled": 140,
+            "status_correct": 121,
+            "transport_valid": 140
+          },
+          "losses": {},
+          "noul_brier": {
+            "mean": 0.27347878967868927,
+            "measured": 80
+          },
+          "raw_readout": {
+            "maximum": null,
+            "mean": null,
+            "measured": 0,
+            "minimum": null
+          },
+          "score_interval_distance": {
+            "mean": null,
+            "measured": 0
+          },
+          "status_confusion": {
+            "Assessed -> Assessed": 76,
+            "Assessed -> Conflicting": 2,
+            "Assessed -> Insufficient": 2,
+            "Conflicting -> Assessed": 4,
+            "Conflicting -> Conflicting": 2,
+            "Conflicting -> Insufficient": 1,
+            "Conflicting -> Unresolved": 3,
+            "Insufficient -> Assessed": 3,
+            "Insufficient -> Insufficient": 36,
+            "Insufficient -> Unresolved": 1,
+            "Unresolved -> Assessed": 3,
+            "Unresolved -> Unresolved": 7
+          }
+        },
+        "Score": {
+          "counts": {
+            "assessed_behavior_passed": 0,
+            "assessed_head_correct": 0,
+            "assessed_head_status_correct": 0,
+            "assessed_scheduled": 50,
+            "assessed_status_correct": 48,
+            "behavior_passed": 5,
+            "failed": 0,
+            "nonassessed_behavior_passed": 5,
+            "scheduled": 80,
+            "status_correct": 53,
+            "transport_valid": 80
+          },
+          "losses": {},
+          "noul_brier": {
+            "mean": null,
+            "measured": 0
+          },
+          "raw_readout": {
+            "maximum": null,
+            "mean": null,
+            "measured": 0,
+            "minimum": null
+          },
+          "score_interval_distance": {
+            "mean": 0.26108057068660856,
+            "measured": 50
+          },
+          "status_confusion": {
+            "Assessed -> Assessed": 48,
+            "Assessed -> Insufficient": 1,
+            "Assessed -> Unresolved": 1,
+            "Conflicting -> Assessed": 10,
+            "Insufficient -> Assessed": 7,
+            "Insufficient -> Insufficient": 2,
+            "Insufficient -> Unresolved": 1,
+            "Unresolved -> Assessed": 6,
+            "Unresolved -> Insufficient": 1,
+            "Unresolved -> Unresolved": 3
+          }
+        }
+      },
+      "scheduled": 310,
+      "scope": "actual decoded/delivered receiver behavior; not learned invocation"
+    },
+    "source_hashes": {
+      "data/receiver-probe-20261107/audit.log": "77021aeeadb75e153310f694a21bea927967c21a4e80c509422eee47561105c2",
+      "data/receiver-probe-20261107/audit.py": "9d6917926fda26ff6b90adc948d5b0ba4c306d118b920f6037fc931e16ad7855",
+      "data/receiver-probe-20261107/cpu-tests.json": "542b408680e395e9bbb63cb283ba0b86be71941578fa76794bb0109611d9c9c1",
+      "data/receiver-probe-20261107/cpu-tests.log": "b1fac00ba92f66d1d8caceb710ffdc30b27db080880a71fdaa161f5da8cf2c5a",
+      "data/receiver-probe-20261107/cpu_tests.py": "6b1ebb14538c21439cb0d816853318701c702b5d0ae7825cc8edf88b05ba0a4f",
+      "data/receiver-probe-20261107/historical-baseline.json": "65a499a2788c157efe3dd20b5b8a356968cd43d3a672340a90bf2e1dd8d06640",
+      "data/receiver-probe-20261107/run.log": "454267afb07ce57cee937dfba87262bbb3453de9742e8a65f322df9a8a44badf",
+      "data/receiver-probe-20261107/run/development-E.jsonl": "f53fe301e85e469623bc1b2463adc5a3437b3e1402c9269ae55eef06de7c43e8",
+      "data/receiver-probe-20261107/run/development-X.jsonl": "6b3a0ba01020d8f0c07b430cb459d386ac9903b6ec261ef2244eba8390cacd54",
+      "data/receiver-probe-20261107/run/panel-00.jsonl": "91f39a9e81ac882e3cfb1526e2289ae2ed63977584127c1b4a96423d72e55812",
+      "data/receiver-probe-20261107/run/panel-01.jsonl": "d2529ad2dc640ba29290a584b819b68d78d97ad6e910eda78fe40755d65077ae",
+      "data/receiver-probe-20261107/run/panel-02.jsonl": "17db65f523f4e2fcbefa2a050d4eef2c06f3f653bf2a473ecb72dd05719adb2a",
+      "data/receiver-probe-20261107/run/panel-04.jsonl": "9612ffde9e976ef8b007746d228f24d370c8ae48be5f3316c3804939bdad938e",
+      "data/receiver-probe-20261107/run/panel-08.jsonl": "f74ce88e6af0f92e7a278c30239903c1398deff55b79058034446690ce8da753",
+      "data/receiver-probe-20261107/run/plan.json": "a924e2bbaace32e73eb2dd822ace03c19ce8ac9bd4f38f6cce74b23e7d07738c",
+      "data/receiver-probe-20261107/run/report.json": "8814694f47246e574499539abd9b7b7e587995d33672d98cecbfaa2b57cfd11b",
+      "data/receiver-probe-20261107/run/training.jsonl": "a483942f110caf4a329d0e62a4e30ec0811507a26e8ce6a0fe7fba332900fff8"
+    }
+  },
+  "initial_checkpoint_files_and_ownership_exact": true,
+  "integrity": {
+    "final_base": {
+      "base_tied_storage": true,
+      "mismatches": [],
+      "parameters_checked": 320,
+      "pass": true
+    },
+    "first_update_roundtrip_exact": true,
+    "frozen_native_unchanged": true,
+    "gradients_none": true,
+    "initial_base": {
+      "base_tied_storage": true,
+      "mismatches": [],
+      "parameters_checked": 320,
+      "pass": true
+    },
+    "reference_unchanged": true
+  },
+  "interventions": {
+    "blockers": [
+      "receiver semantic/behavior success below 90%",
+      "per-operation success below 85%",
+      "reviewed Score agreement below 90%",
+      "paired intervention success below 90%"
+    ],
+    "categories": {
+      "1": {
+        "pairs": 10,
+        "passed": 0
+      },
+      "10": {
+        "pairs": 10,
+        "passed": 0
+      },
+      "2": {
+        "pairs": 10,
+        "passed": 0
+      },
+      "3": {
+        "pairs": 10,
+        "passed": 0
+      },
+      "4": {
+        "pairs": 10,
+        "passed": 10
+      },
+      "5": {
+        "pairs": 10,
+        "passed": 10
+      },
+      "6": {
+        "pairs": 10,
+        "passed": 10
+      },
+      "7": {
+        "pairs": 10,
+        "passed": 0
+      },
+      "8": {
+        "pairs": 10,
+        "passed": 0
+      }
+    },
+    "omitted_reader_ids": [
+      "development-X-09-000-0",
+      "development-X-09-000-1",
+      "development-X-09-001-0",
+      "development-X-09-001-1",
+      "development-X-09-002-0",
+      "development-X-09-002-1",
+      "development-X-09-003-0",
+      "development-X-09-003-1",
+      "development-X-09-004-0",
+      "development-X-09-004-1",
+      "development-X-09-005-0",
+      "development-X-09-005-1",
+      "development-X-09-006-0",
+      "development-X-09-006-1",
+      "development-X-09-007-0",
+      "development-X-09-007-1",
+      "development-X-09-008-0",
+      "development-X-09-008-1",
+      "development-X-09-009-0",
+      "development-X-09-009-1"
+    ],
+    "operations": {
+      "Choice": {
+        "passed": 40,
+        "scheduled": 40,
+        "status_correct": 40
+      },
+      "Noul": {
+        "passed": 50,
+        "scheduled": 100,
+        "status_correct": 100
+      },
+      "Score": {
+        "passed": 0,
+        "scheduled": 40,
+        "status_correct": 40
+      }
+    },
+    "pairs_passed": 30,
+    "pairs_scheduled": 90,
+    "passed": 90,
+    "per_case_and_pair_results": "Retained in hash-bound raw report.json and development-X.jsonl",
+    "scheduled": 180,
+    "status": "BLOCKED",
+    "status_correct": 180,
+    "transport_valid": 180
+  },
+  "loss_coefficients": {
+    "alignment": 1.0,
+    "choice": 1.0,
+    "contrast": 0.1,
+    "effort": 0.5,
+    "exact": 1.0,
+    "feasibility": 0.05,
+    "gate": 1.0,
+    "native": 1.0,
+    "noul": 1.0,
+    "pointer": 1.0,
+    "reconstruction": 0.5,
+    "score": 1.0,
+    "status": 0.1,
+    "structure": 0.5,
+    "writer": 1.0
+  },
+  "migration": "new explicitly declared probe fork; original identities validated on restore; moments/RNG/counters retained; original sampler is not relabeled as probe history",
+  "noul_class_probabilities": {
+    "candidate": [
+      {
+        "classes": {
+          "False": {
+            "count": 4,
+            "maximum": 0.4221515357494354,
+            "mean": 0.4197390526533127,
+            "minimum": 0.4178486764431
+          },
+          "True": {
+            "count": 4,
+            "maximum": 0.42304763197898865,
+            "mean": 0.41984887421131134,
+            "minimum": 0.41750288009643555
+          }
+        },
+        "mean_true_minus_false": 0.00010982155799865723,
+        "repeat": 0
+      },
+      {
+        "classes": {
+          "False": {
+            "count": 4,
+            "maximum": 0.4120141565799713,
+            "mean": 0.41123098880052567,
+            "minimum": 0.4103728234767914
+          },
+          "True": {
+            "count": 4,
+            "maximum": 0.4147200882434845,
+            "mean": 0.41189131140708923,
+            "minimum": 0.40957093238830566
+          }
+        },
+        "mean_true_minus_false": 0.0006603226065635681,
+        "repeat": 1
+      },
+      {
+        "classes": {
+          "False": {
+            "count": 4,
+            "maximum": 0.4101775288581848,
+            "mean": 0.4097115993499756,
+            "minimum": 0.4089403450489044
+          },
+          "True": {
+            "count": 4,
+            "maximum": 0.41163551807403564,
+            "mean": 0.4103489816188812,
+            "minimum": 0.4086885154247284
+          }
+        },
+        "mean_true_minus_false": 0.0006373822689056396,
+        "repeat": 2
+      },
+      {
+        "classes": {
+          "False": {
+            "count": 4,
+            "maximum": 0.420154333114624,
+            "mean": 0.41720566153526306,
+            "minimum": 0.4143650233745575
+          },
+          "True": {
+            "count": 4,
+            "maximum": 0.42689013481140137,
+            "mean": 0.42194056510925293,
+            "minimum": 0.4194325804710388
+          }
+        },
+        "mean_true_minus_false": 0.004734903573989868,
+        "repeat": 4
+      },
+      {
+        "classes": {
+          "False": {
+            "count": 4,
+            "maximum": 0.4151853919029236,
+            "mean": 0.41156600415706635,
+            "minimum": 0.405392050743103
+          },
+          "True": {
+            "count": 4,
+            "maximum": 0.4581313729286194,
+            "mean": 0.4452100545167923,
+            "minimum": 0.434122234582901
+          }
+        },
+        "mean_true_minus_false": 0.03364405035972595,
+        "repeat": 8
+      }
+    ],
+    "control": [
+      {
+        "classes": {
+          "False": {
+            "count": 4,
+            "maximum": 0.4221515357494354,
+            "mean": 0.4197390526533127,
+            "minimum": 0.4178486764431
+          },
+          "True": {
+            "count": 4,
+            "maximum": 0.42304763197898865,
+            "mean": 0.41984887421131134,
+            "minimum": 0.41750288009643555
+          }
+        },
+        "mean_true_minus_false": 0.00010982155799865723,
+        "repeat": 0
+      },
+      {
+        "classes": {
+          "False": {
+            "count": 4,
+            "maximum": 0.41134658455848694,
+            "mean": 0.41113484650850296,
+            "minimum": 0.4109087288379669
+          },
+          "True": {
+            "count": 4,
+            "maximum": 0.41382089257240295,
+            "mean": 0.4117334187030792,
+            "minimum": 0.4099525511264801
+          }
+        },
+        "mean_true_minus_false": 0.0005985721945762634,
+        "repeat": 1
+      },
+      {
+        "classes": {
+          "False": {
+            "count": 4,
+            "maximum": 0.4120887219905853,
+            "mean": 0.41193269938230515,
+            "minimum": 0.41156941652297974
+          },
+          "True": {
+            "count": 4,
+            "maximum": 0.41432860493659973,
+            "mean": 0.41208314150571823,
+            "minimum": 0.4105272889137268
+          }
+        },
+        "mean_true_minus_false": 0.00015044212341308594,
+        "repeat": 2
+      },
+      {
+        "classes": {
+          "False": {
+            "count": 4,
+            "maximum": 0.42376071214675903,
+            "mean": 0.42030929028987885,
+            "minimum": 0.4180647134780884
+          },
+          "True": {
+            "count": 4,
+            "maximum": 0.42696613073349,
+            "mean": 0.4231106638908386,
+            "minimum": 0.42113736271858215
+          }
+        },
+        "mean_true_minus_false": 0.002801373600959778,
+        "repeat": 4
+      },
+      {
+        "classes": {
+          "False": {
+            "count": 4,
+            "maximum": 0.44327712059020996,
+            "mean": 0.44166427105665207,
+            "minimum": 0.43805646896362305
+          },
+          "True": {
+            "count": 4,
+            "maximum": 0.4584982097148895,
+            "mean": 0.4522029310464859,
+            "minimum": 0.448067843914032
+          }
+        },
+        "mean_true_minus_false": 0.010538659989833832,
+        "repeat": 8
+      }
+    ]
+  },
+  "panel_measurements": [
+    {
+      "receiver": "94218aae6ec62a7745c349af8e9975fd4987520cf9f1345f38e44586e5e7742c",
+      "repeat": 0,
+      "report": {
+        "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+        "kind": "heads",
+        "operations": {
+          "Choice": {
+            "counts": {
+              "assessed_head_correct": 4,
+              "assessed_head_status_correct": 4,
+              "assessed_scheduled": 4,
+              "assessed_selection_measured": 4,
+              "assessed_status_correct": 4,
+              "complete_head_objective": 8,
+              "failed": 0,
+              "head_status_correct": 6,
+              "scheduled": 8,
+              "status_correct": 6
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 2,
+                "mean": 0.45334048569202423
+              },
+              "choice": {
+                "eligible": 4,
+                "mean": 0.0001690685749053955
+              },
+              "feasibility": {
+                "eligible": 8,
+                "mean": 0.18172385694566628
+              },
+              "status": {
+                "eligible": 8,
+                "mean": 0.6586816572817042
+              },
+              "structure": {
+                "eligible": 2,
+                "mean": 0.007355785113759339
+              }
+            },
+            "noul_brier": {
+              "mean": null,
+              "measured": 0
+            },
+            "raw_readout": {
+              "maximum": null,
+              "mean": null,
+              "measured": 0,
+              "minimum": null
+            },
+            "score_interval_distance": {
+              "mean": null,
+              "measured": 0
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 4,
+              "Conflicting -> Assessed": 1,
+              "Insufficient -> Insufficient": 1,
+              "NoFeasibleChoice -> Assessed": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          },
+          "Noul": {
+            "counts": {
+              "assessed_head_correct": 4,
+              "assessed_head_status_correct": 4,
+              "assessed_probability_ties": 0,
+              "assessed_scheduled": 8,
+              "assessed_status_correct": 7,
+              "complete_head_objective": 11,
+              "failed": 0,
+              "head_status_correct": 10,
+              "scheduled": 11,
+              "status_correct": 10
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 3,
+                "mean": 0.6326557397842407
+              },
+              "noul": {
+                "eligible": 8,
+                "mean": 0.7060766071081161
+              },
+              "status": {
+                "eligible": 11,
+                "mean": 0.45494500242851
+              },
+              "structure": {
+                "eligible": 3,
+                "mean": 0.0032384293929984174
+              }
+            },
+            "noul_brier": {
+              "mean": 0.25638137441537934,
+              "measured": 8
+            },
+            "raw_readout": {
+              "maximum": -0.2736365795135498,
+              "mean": -0.31337895718487824,
+              "measured": 11,
+              "minimum": -0.33303284645080566
+            },
+            "score_interval_distance": {
+              "mean": null,
+              "measured": 0
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 7,
+              "Assessed -> Unresolved": 1,
+              "Conflicting -> Conflicting": 1,
+              "Insufficient -> Insufficient": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          },
+          "Score": {
+            "counts": {
+              "assessed_clipped_readouts": 0,
+              "assessed_head_correct": 0,
+              "assessed_head_status_correct": 0,
+              "assessed_scheduled": 10,
+              "assessed_status_correct": 10,
+              "complete_head_objective": 13,
+              "failed": 0,
+              "head_status_correct": 12,
+              "scheduled": 13,
+              "status_correct": 12
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 2,
+                "mean": 0.45446616411209106
+              },
+              "score": {
+                "eligible": 10,
+                "mean": 0.20648056000936776
+              },
+              "status": {
+                "eligible": 13,
+                "mean": 0.3025841464360173
+              },
+              "structure": {
+                "eligible": 2,
+                "mean": 0.005836635071318597
+              }
+            },
+            "noul_brier": {
+              "mean": null,
+              "measured": 0
+            },
+            "raw_readout": {
+              "maximum": 0.472232848405838,
+              "mean": 0.3895678107555096,
+              "measured": 13,
+              "minimum": 0.3349776566028595
+            },
+            "score_interval_distance": {
+              "mean": 0.4115278128534555,
+              "measured": 10
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 10,
+              "Conflicting -> Assessed": 1,
+              "Insufficient -> Insufficient": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          }
+        },
+        "scheduled": 32,
+        "scope": "head objectives without return delivery"
+      }
+    },
+    {
+      "receiver": "c806df74031440cb2e9d06b467d0aa0f21ff92fbc6ba60deecd92e77108ba5bc",
+      "repeat": 1,
+      "report": {
+        "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+        "kind": "heads",
+        "operations": {
+          "Choice": {
+            "counts": {
+              "assessed_head_correct": 4,
+              "assessed_head_status_correct": 4,
+              "assessed_scheduled": 4,
+              "assessed_selection_measured": 4,
+              "assessed_status_correct": 4,
+              "complete_head_objective": 8,
+              "failed": 0,
+              "head_status_correct": 6,
+              "scheduled": 8,
+              "status_correct": 6
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 2,
+                "mean": 0.4496367573738098
+              },
+              "choice": {
+                "eligible": 4,
+                "mean": 3.758072853088379e-05
+              },
+              "feasibility": {
+                "eligible": 8,
+                "mean": 0.09545715648727082
+              },
+              "status": {
+                "eligible": 8,
+                "mean": 0.5973899876698852
+              },
+              "structure": {
+                "eligible": 2,
+                "mean": 0.008055122219957411
+              }
+            },
+            "noul_brier": {
+              "mean": null,
+              "measured": 0
+            },
+            "raw_readout": {
+              "maximum": null,
+              "mean": null,
+              "measured": 0,
+              "minimum": null
+            },
+            "score_interval_distance": {
+              "mean": null,
+              "measured": 0
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 4,
+              "Conflicting -> Assessed": 1,
+              "Insufficient -> Insufficient": 1,
+              "NoFeasibleChoice -> Assessed": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          },
+          "Noul": {
+            "counts": {
+              "assessed_head_correct": 4,
+              "assessed_head_status_correct": 2,
+              "assessed_probability_ties": 0,
+              "assessed_scheduled": 8,
+              "assessed_status_correct": 2,
+              "complete_head_objective": 11,
+              "failed": 0,
+              "head_status_correct": 5,
+              "scheduled": 11,
+              "status_correct": 5
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 3,
+                "mean": 0.633031447728475
+              },
+              "noul": {
+                "eligible": 8,
+                "mean": 0.7083639875054359
+              },
+              "status": {
+                "eligible": 11,
+                "mean": 0.8286987868222323
+              },
+              "structure": {
+                "eligible": 3,
+                "mean": 0.002178001139933864
+              }
+            },
+            "noul_brier": {
+              "mean": 0.25749331027872435,
+              "measured": 8
+            },
+            "raw_readout": {
+              "maximum": -0.29026365280151367,
+              "mean": -0.34481677412986755,
+              "measured": 11,
+              "minimum": -0.3657393753528595
+            },
+            "score_interval_distance": {
+              "mean": null,
+              "measured": 0
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 2,
+              "Assessed -> Insufficient": 6,
+              "Conflicting -> Conflicting": 1,
+              "Insufficient -> Insufficient": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          },
+          "Score": {
+            "counts": {
+              "assessed_clipped_readouts": 0,
+              "assessed_head_correct": 0,
+              "assessed_head_status_correct": 0,
+              "assessed_scheduled": 10,
+              "assessed_status_correct": 10,
+              "complete_head_objective": 13,
+              "failed": 0,
+              "head_status_correct": 12,
+              "scheduled": 13,
+              "status_correct": 12
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 2,
+                "mean": 0.422203928232193
+              },
+              "score": {
+                "eligible": 10,
+                "mean": 0.18030571010003768
+              },
+              "status": {
+                "eligible": 13,
+                "mean": 0.24192124490554517
+              },
+              "structure": {
+                "eligible": 2,
+                "mean": 0.003521278384141624
+              }
+            },
+            "noul_brier": {
+              "mean": null,
+              "measured": 0
+            },
+            "raw_readout": {
+              "maximum": 0.5954191088676453,
+              "mean": 0.5379773332522466,
+              "measured": 13,
+              "minimum": 0.49642300605773926
+            },
+            "score_interval_distance": {
+              "mean": 0.38739236928522586,
+              "measured": 10
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 10,
+              "Conflicting -> Assessed": 1,
+              "Insufficient -> Insufficient": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          }
+        },
+        "scheduled": 32,
+        "scope": "head objectives without return delivery"
+      }
+    },
+    {
+      "receiver": "43f837b4ab91ca172358878f1b8b5879189a128d890b23181a6766f002ec03d5",
+      "repeat": 2,
+      "report": {
+        "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+        "kind": "heads",
+        "operations": {
+          "Choice": {
+            "counts": {
+              "assessed_head_correct": 4,
+              "assessed_head_status_correct": 4,
+              "assessed_scheduled": 4,
+              "assessed_selection_measured": 4,
+              "assessed_status_correct": 4,
+              "complete_head_objective": 8,
+              "failed": 0,
+              "head_status_correct": 6,
+              "scheduled": 8,
+              "status_correct": 6
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 2,
+                "mean": 0.44987887144088745
+              },
+              "choice": {
+                "eligible": 4,
+                "mean": 3.5762786865234375e-06
+              },
+              "feasibility": {
+                "eligible": 8,
+                "mean": 0.0031468125150695414
+              },
+              "status": {
+                "eligible": 8,
+                "mean": 0.47677606996148825
+              },
+              "structure": {
+                "eligible": 2,
+                "mean": 0.005684585485141724
+              }
+            },
+            "noul_brier": {
+              "mean": null,
+              "measured": 0
+            },
+            "raw_readout": {
+              "maximum": null,
+              "mean": null,
+              "measured": 0,
+              "minimum": null
+            },
+            "score_interval_distance": {
+              "mean": null,
+              "measured": 0
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 4,
+              "Conflicting -> Assessed": 1,
+              "Insufficient -> Insufficient": 1,
+              "NoFeasibleChoice -> Assessed": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          },
+          "Noul": {
+            "counts": {
+              "assessed_head_correct": 4,
+              "assessed_head_status_correct": 4,
+              "assessed_probability_ties": 0,
+              "assessed_scheduled": 8,
+              "assessed_status_correct": 8,
+              "complete_head_objective": 11,
+              "failed": 0,
+              "head_status_correct": 10,
+              "scheduled": 11,
+              "status_correct": 10
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 2,
+                "mean": 0.6493057608604431
+              },
+              "noul": {
+                "eligible": 8,
+                "mean": 0.7089477777481079
+              },
+              "status": {
+                "eligible": 11,
+                "mean": 0.47676271945238113
+              },
+              "structure": {
+                "eligible": 2,
+                "mean": 0.002643018029630184
+              }
+            },
+            "noul_brier": {
+              "mean": 0.2577767200821759,
+              "measured": 8
+            },
+            "raw_readout": {
+              "maximum": -0.29552939534187317,
+              "mean": -0.35241931676864624,
+              "measured": 11,
+              "minimum": -0.36938974261283875
+            },
+            "score_interval_distance": {
+              "mean": null,
+              "measured": 0
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 8,
+              "Conflicting -> Conflicting": 1,
+              "Insufficient -> Insufficient": 1,
+              "Unresolved -> Assessed": 1
+            }
+          },
+          "Score": {
+            "counts": {
+              "assessed_clipped_readouts": 0,
+              "assessed_head_correct": 0,
+              "assessed_head_status_correct": 0,
+              "assessed_scheduled": 10,
+              "assessed_status_correct": 10,
+              "complete_head_objective": 13,
+              "failed": 0,
+              "head_status_correct": 12,
+              "scheduled": 13,
+              "status_correct": 12
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 2,
+                "mean": 0.38683973252773285
+              },
+              "score": {
+                "eligible": 10,
+                "mean": 0.1517219283239683
+              },
+              "status": {
+                "eligible": 13,
+                "mean": 0.2184506802318188
+              },
+              "structure": {
+                "eligible": 2,
+                "mean": 0.003035579458810389
+              }
+            },
+            "noul_brier": {
+              "mean": null,
+              "measured": 0
+            },
+            "raw_readout": {
+              "maximum": 0.6133825778961182,
+              "mean": 0.5187833744745988,
+              "measured": 13,
+              "minimum": 0.43165382742881775
+            },
+            "score_interval_distance": {
+              "mean": 0.35662717260420324,
+              "measured": 10
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 10,
+              "Conflicting -> Assessed": 1,
+              "Insufficient -> Insufficient": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          }
+        },
+        "scheduled": 32,
+        "scope": "head objectives without return delivery"
+      }
+    },
+    {
+      "receiver": "0c3657a2d7fb6c9d5714df789da57f0d9993414a1dd5ab6921b298e1821746ab",
+      "repeat": 4,
+      "report": {
+        "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+        "kind": "heads",
+        "operations": {
+          "Choice": {
+            "counts": {
+              "assessed_head_correct": 4,
+              "assessed_head_status_correct": 4,
+              "assessed_scheduled": 4,
+              "assessed_selection_measured": 4,
+              "assessed_status_correct": 4,
+              "complete_head_objective": 8,
+              "failed": 0,
+              "head_status_correct": 8,
+              "scheduled": 8,
+              "status_correct": 8
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 4,
+                "mean": 0.4970206245779991
+              },
+              "choice": {
+                "eligible": 4,
+                "mean": 4.76837158203125e-07
+              },
+              "feasibility": {
+                "eligible": 8,
+                "mean": 0.0075532429864182404
+              },
+              "status": {
+                "eligible": 8,
+                "mean": 0.3037557601928711
+              },
+              "structure": {
+                "eligible": 4,
+                "mean": 0.002572706376668066
+              }
+            },
+            "noul_brier": {
+              "mean": null,
+              "measured": 0
+            },
+            "raw_readout": {
+              "maximum": null,
+              "mean": null,
+              "measured": 0,
+              "minimum": null
+            },
+            "score_interval_distance": {
+              "mean": null,
+              "measured": 0
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 4,
+              "Conflicting -> Conflicting": 1,
+              "Insufficient -> Insufficient": 1,
+              "NoFeasibleChoice -> NoFeasibleChoice": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          },
+          "Noul": {
+            "counts": {
+              "assessed_head_correct": 4,
+              "assessed_head_status_correct": 4,
+              "assessed_probability_ties": 0,
+              "assessed_scheduled": 8,
+              "assessed_status_correct": 8,
+              "complete_head_objective": 11,
+              "failed": 0,
+              "head_status_correct": 10,
+              "scheduled": 11,
+              "status_correct": 10
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 2,
+                "mean": 0.586699366569519
+              },
+              "noul": {
+                "eligible": 8,
+                "mean": 0.701421283185482
+              },
+              "status": {
+                "eligible": 11,
+                "mean": 0.2717336407777938
+              },
+              "structure": {
+                "eligible": 2,
+                "mean": 0.003322566917631775
+              }
+            },
+            "noul_brier": {
+              "mean": 0.25411317082210494,
+              "measured": 8
+            },
+            "raw_readout": {
+              "maximum": -0.27094513177871704,
+              "mean": -0.3225288391113281,
+              "measured": 11,
+              "minimum": -0.34656304121017456
+            },
+            "score_interval_distance": {
+              "mean": null,
+              "measured": 0
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 8,
+              "Conflicting -> Conflicting": 1,
+              "Insufficient -> Insufficient": 1,
+              "Unresolved -> Assessed": 1
+            }
+          },
+          "Score": {
+            "counts": {
+              "assessed_clipped_readouts": 0,
+              "assessed_head_correct": 0,
+              "assessed_head_status_correct": 0,
+              "assessed_scheduled": 10,
+              "assessed_status_correct": 10,
+              "complete_head_objective": 13,
+              "failed": 0,
+              "head_status_correct": 13,
+              "scheduled": 13,
+              "status_correct": 13
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 3,
+                "mean": 0.43526697158813477
+              },
+              "score": {
+                "eligible": 10,
+                "mean": 0.06745182257145643
+              },
+              "status": {
+                "eligible": 13,
+                "mean": 0.15869910456240177
+              },
+              "structure": {
+                "eligible": 3,
+                "mean": 0.006472722472002109
+              }
+            },
+            "noul_brier": {
+              "mean": null,
+              "measured": 0
+            },
+            "raw_readout": {
+              "maximum": 0.9254294633865356,
+              "mean": 0.6258402661635325,
+              "measured": 13,
+              "minimum": 0.10643388330936432
+            },
+            "score_interval_distance": {
+              "mean": 0.21095721013844013,
+              "measured": 10
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 10,
+              "Conflicting -> Conflicting": 1,
+              "Insufficient -> Insufficient": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          }
+        },
+        "scheduled": 32,
+        "scope": "head objectives without return delivery"
+      }
+    },
+    {
+      "receiver": "84ed1802cae0ecf011a3580baa22c7155409f7860e511a3e16d56df24338bab7",
+      "repeat": 8,
+      "report": {
+        "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+        "kind": "heads",
+        "operations": {
+          "Choice": {
+            "counts": {
+              "assessed_head_correct": 4,
+              "assessed_head_status_correct": 4,
+              "assessed_scheduled": 4,
+              "assessed_selection_measured": 4,
+              "assessed_status_correct": 4,
+              "complete_head_objective": 8,
+              "failed": 0,
+              "head_status_correct": 8,
+              "scheduled": 8,
+              "status_correct": 8
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 4,
+                "mean": 0.4572114273905754
+              },
+              "choice": {
+                "eligible": 4,
+                "mean": 5.960464477539063e-08
+              },
+              "feasibility": {
+                "eligible": 8,
+                "mean": 0.0016543740839267684
+              },
+              "status": {
+                "eligible": 8,
+                "mean": 0.14464863890316337
+              },
+              "structure": {
+                "eligible": 4,
+                "mean": 0.001197018544189632
+              }
+            },
+            "noul_brier": {
+              "mean": null,
+              "measured": 0
+            },
+            "raw_readout": {
+              "maximum": null,
+              "mean": null,
+              "measured": 0,
+              "minimum": null
+            },
+            "score_interval_distance": {
+              "mean": null,
+              "measured": 0
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 4,
+              "Conflicting -> Conflicting": 1,
+              "Insufficient -> Insufficient": 1,
+              "NoFeasibleChoice -> NoFeasibleChoice": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          },
+          "Noul": {
+            "counts": {
+              "assessed_head_correct": 4,
+              "assessed_head_status_correct": 4,
+              "assessed_probability_ties": 0,
+              "assessed_scheduled": 8,
+              "assessed_status_correct": 8,
+              "complete_head_objective": 11,
+              "failed": 0,
+              "head_status_correct": 11,
+              "scheduled": 11,
+              "status_correct": 11
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 3,
+                "mean": 0.5764989455540975
+              },
+              "noul": {
+                "eligible": 8,
+                "mean": 0.6698536053299904
+              },
+              "status": {
+                "eligible": 11,
+                "mean": 0.05969071388244629
+              },
+              "structure": {
+                "eligible": 3,
+                "mean": 0.0009936469529444973
+              }
+            },
+            "noul_brier": {
+              "mean": 0.23863385306490814,
+              "measured": 8
+            },
+            "raw_readout": {
+              "maximum": -0.16786763072013855,
+              "mean": -0.28840414773334155,
+              "measured": 11,
+              "minimum": -0.38304775953292847
+            },
+            "score_interval_distance": {
+              "mean": null,
+              "measured": 0
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 8,
+              "Conflicting -> Conflicting": 1,
+              "Insufficient -> Insufficient": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          },
+          "Score": {
+            "counts": {
+              "assessed_clipped_readouts": 0,
+              "assessed_head_correct": 0,
+              "assessed_head_status_correct": 0,
+              "assessed_scheduled": 10,
+              "assessed_status_correct": 10,
+              "complete_head_objective": 13,
+              "failed": 0,
+              "head_status_correct": 11,
+              "scheduled": 13,
+              "status_correct": 11
+            },
+            "losses": {
+              "alignment": {
+                "eligible": 1,
+                "mean": 0.324637234210968
+              },
+              "score": {
+                "eligible": 10,
+                "mean": 0.09691060547484084
+              },
+              "status": {
+                "eligible": 13,
+                "mean": 0.2642519906019935
+              },
+              "structure": {
+                "eligible": 1,
+                "mean": 0.0008088654140010476
+              }
+            },
+            "noul_brier": {
+              "mean": null,
+              "measured": 0
+            },
+            "raw_readout": {
+              "maximum": 0.6533061265945435,
+              "mean": 0.38841274409339976,
+              "measured": 13,
+              "minimum": 0.032829511910676956
+            },
+            "score_interval_distance": {
+              "mean": 0.2487279899418354,
+              "measured": 10
+            },
+            "status_confusion": {
+              "Assessed -> Assessed": 10,
+              "Conflicting -> Assessed": 1,
+              "Insufficient -> Assessed": 1,
+              "Unresolved -> Unresolved": 1
+            }
+          }
+        },
+        "scheduled": 32,
+        "scope": "head objectives without return delivery"
+      }
+    }
+  ],
+  "peak_cuda_bytes": 3622856704,
+  "plan_sha256": "2ba18e7ae986132ac19e2238187d027266cf793ffa800ba85f8b43a8c736b68d",
+  "producer_objective_ast_unchanged_after_removing_head_telemetry": true,
+  "protocol": "receiver-loss-balance-v1",
+  "raw_file_sha256": {
+    "data/receiver-loss-balance-20261107/audit.log": "a5103ce967419ea84ea0f1f313e3ce18315e12a8d8ed3a2b5e4df601ef71fc4f",
+    "data/receiver-loss-balance-20261107/audit.py": "ed20410710a5cedc33d838bef9f4a97a6342fe85af9fb3324e0a70805dc419a4",
+    "data/receiver-loss-balance-20261107/cpu-tests.json": "3cf83a9a6a6f85e0f9119b3a9146fd7d171c871e77c1ba856dd2a68f8ce6b058",
+    "data/receiver-loss-balance-20261107/cpu-tests.log": "782d43d8a66d9415a85599ce77678bfcf15447949ff682aafe0f298f022eaee5",
+    "data/receiver-loss-balance-20261107/cpu_tests.py": "d8809d7a88dd5da32632704030b4e4fd03533ec4a4f1d93b75b4b395792ee621",
+    "data/receiver-loss-balance-20261107/finalize_evidence.py": "2340c6f6cd34673b6971d3d2073c3b898e206072da5d2c63e2c045d22448a077",
+    "data/receiver-loss-balance-20261107/run.log": "78683bbd23bc07cb3d82e4d40346eb31ef9491334a71fa183aada6da8a758c3d",
+    "data/receiver-loss-balance-20261107/run/development-E.jsonl": "0908ef459a0a1c4249adb9173cca2237667db7d4c10f7a37d1c7f21dd0fae476",
+    "data/receiver-loss-balance-20261107/run/development-X.jsonl": "96ab1d2aa5b4e62331569c06e4dcb961aff0235e348af48921efa7ef27ee29b9",
+    "data/receiver-loss-balance-20261107/run/panel-00.jsonl": "91f39a9e81ac882e3cfb1526e2289ae2ed63977584127c1b4a96423d72e55812",
+    "data/receiver-loss-balance-20261107/run/panel-01.jsonl": "f83314e64ec488759771638e5a413a83ab8e7a43935954b91acfd26cd10d7115",
+    "data/receiver-loss-balance-20261107/run/panel-02.jsonl": "6f4e072c6f1b838314791fd111be10d13cd5172ead8e0bbd5687e5c19fa4cccf",
+    "data/receiver-loss-balance-20261107/run/panel-04.jsonl": "2866dd632105d4939fc2e17d12a674419adda01beea9db642325a03d1ce5d673",
+    "data/receiver-loss-balance-20261107/run/panel-08.jsonl": "117e8f6f918aaa533f0350d17b3586c8db77b4aee2a429450e328515c8db4878",
+    "data/receiver-loss-balance-20261107/run/training.jsonl": "a39cffd823b61ffa5c3ab21a3607876fbe9b1bf50afde4ed370a075b7b0b1efc"
+  },
+  "raw_root": "data/receiver-loss-balance-20261107",
+  "receiver_after": "84ed1802cae0ecf011a3580baa22c7155409f7860e511a3e16d56df24338bab7",
+  "receiver_before": "94218aae6ec62a7745c349af8e9975fd4987520cf9f1345f38e44586e5e7742c",
+  "reference": "5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f",
+  "report_sha256": "3f0a1de1b52e137877dfdc468ec784346799525b07dd030d1ef4032680e555c1",
+  "scope": "controlled loss-balance comparison; selected training-panel learnability and held-out receiver behavior; no learned invocation, native answer use or Reason meaning qualification",
+  "seconds": 1851.6556362970005,
+  "source_changes_since_parent": [
+    "qwen_one_two/codec/backbone.py",
+    "qwen_one_two/codec/neural.py",
+    "qwen_one_two/codec/recurrence.py",
+    "qwen_one_two/codec/session.py",
+    "qwen_one_two/g1_backbone.py",
+    "qwen_one_two/g1_proof.py",
+    "qwen_one_two/training/binding.py",
+    "qwen_one_two/training/clean.py",
+    "qwen_one_two/training/component_producer.py",
+    "qwen_one_two/training/engine.py",
+    "qwen_one_two/training/producer.py",
+    "qwen_one_two/training/receiver_learning.py",
+    "qwen_one_two/training/reference.py",
+    "qwen_one_two/training/release.py",
+    "scripts/qualify_behavior.py",
+    "scripts/train_receiver.py"
+  ],
+  "status": "COMPLETED_PROBE_NOT_PROMOTED",
+  "test_sources": {
+    "tests/test_behavior_qualification.py": "15e69aba19cf4141eaa76e86d733452318fcd2130a72917767638348a739b5b4",
+    "tests/test_learning_report.py": "af26b51f14334bf5a33b86c0373cc267eae396956b613c46e453a36be55d4764",
+    "tests/test_loss_balance.py": "b8b9731ef661f028ee69ebc59def619964c10f7e70bd4ad50be13eba19986f83",
+    "tests/test_receiver_learning.py": "a29b7cf9e9143ef53fb9f26b7586f24851c7fb50ff8386e172fe7718a302a7c0"
+  },
+  "training": {
+    "counts_exclude_offline_encoding_and_rematerialization": true,
+    "cumulative_window_range": [
+      189,
+      220
+    ],
+    "distinct_families": 32,
+    "eligible_examples": {
+      "alignment": 59,
+      "choice": 32,
+      "feasibility": 64,
+      "noul": 64,
+      "score": 80,
+      "status": 256,
+      "structure": 59
+    },
+    "failed_exposures": {},
+    "optimizer_updates": 32,
+    "presentations": 256,
+    "records": 32,
+    "repeats": 8,
+    "scheduled_windows": 32,
+    "session_positions": 26656
+  },
+  "training_performed": true
+}

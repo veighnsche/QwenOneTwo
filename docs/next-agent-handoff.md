@@ -41,7 +41,78 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — learning report and 32-update receiver probe complete
+## Current checkpoint — controlled loss-balance comparison complete; candidate rejected
+
+The user authorized one existing-data loss-balance comparison on the 3090 with
+W/reference frozen, no agents or new data. Read the
+[predeclared comparison](receiver-loss-balance-v1.md),
+[measured results](receiver-loss-balance-results-2026-11-07.md) and
+[portable evidence](evidence/receiver-loss-balance-v1.json).
+
+The completed 32-update probe below is reused as the control, **not rerun**.
+The candidate independently restores checkpoint-0188, with byte-identical initial
+weights, optimizer/RNG/private-row files and identical ownership. All executable
+source hashes match the control except the experiment runner. Only **status
+1 → 0.1 and feasibility 0.5 → 0.05** change through an opt-in local Window
+subclass; production defaults, loss primitives, eligible division, AdamW settings/
+schedule, clipping and numeric model paths remain unchanged.
+
+All **32 updates at 189..220**, **256 presentations /32 records /eight repeats**
+complete with **zero failed exposures**. Initial heads/losses/input hashes match
+exactly; first-window component gradient norms match after the declared scaling
+and D cosines match exactly. Training session positions total **26,656**, with
+exact accounting, one prefill/lineage, zero held positions/text invocation tokens,
+and no gold returns. Eligibility: status 256, Noul 64, Choice 32, Score 80,
+feasibility 64, Reason alignment/structure 59 each (control 74; predicted-status
+eligibility changes). First-update checkpoint restore reproduces receiver,
+optimizer tensors and CPU/CUDA/Python RNG exactly; all six checkpoints audit.
+
+This candidate **does not improve overall behavior**:
+
+- Training assessed accuracy stays Noul **4/8**, Choice **4/4**, Score **0/10**.
+  Final Noul Brier improves control **0.247584 → 0.238634**, but all logits remain
+  negative. Training true/false probability separation grows, with both classes
+  below 0.5. Score distance initially improves at repeat four
+  **0.316655 → 0.210957**, then regresses at repeat eight
+  **0.166759 → 0.248728**. Do not claim convergence or threshold qualification.
+- Held-out assessed Noul **23 → 22 /80**, Choice **47 → 47 /50**, Score **0 → 0 /50**.
+  Raw Noul truth remains 25/80; Brier worsens **0.273479 → 0.284861**.
+  Score interval distance worsens **0.261081 → 0.272387**.
+- All-case behavior **127 → 123 /310**, status **230 → 226 /310**.
+  E: Noul **18 → 17 /40**, Choice **14 → 11 /50**, Score **5 → 5 /40**.
+  X: unchanged **50/100 Noul, 40/40 Choice, 0/40 Score**, pairs **30/90**.
+  All **310/310** transports pass, zero failed evaluations. Existing X semantic/
+  behavior qualifier remains **BLOCKED** on correctness/Score/interventions;
+  the experiment itself completed, with no execution blocker.
+
+**24 CPU tests pass in 28.838 s**, model imports blocked; independent control/
+source/receipt/checkpoint/report audit passes. All **320 W tensors/tying**,
+reference, R, budget/nonreceiver codec and grad=None boundary checks pass.
+Backbone/loss-primitive sources and tolerances stay unchanged; numeric matrices
+are reused. Only the original GPU service PID 2094 remains after exit, 3852 MiB.
+No agents, new data/reviews, service/deployment changes or Operating Table changes.
+No additional updates or coefficient candidates were launched.
+
+Raw: `data/receiver-loss-balance-20261107/`. Unpromoted final checkpoint:
+`run/checkpoint-0220`, manifest
+`ee4421e60f0b788014ea733dd147c5c478d8d524f2327142a6ad37c890c22977`;
+receiver `84ed1802cae0ecf011a3580baa22c7155409f7860e511a3e16d56df24338bab7`.
+Reference remains
+`5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f`.
+Status **COMPLETED_PROBE_NOT_PROMOTED**. Keep coefficient defaults/live weights
+unchanged. This rejects this pair at fixed exposures, not other schedules or
+the architecture's learnability.
+
+**Next unfinished slice:** define a head-only learnability comparison with fixed
+D/input encoders, training only existing Noul prototypes and Score row on frozen
+features, using existing records and independent held-out head checks. This can
+separate readout learning from representation changes; it is a proposal, not
+another authorized run or a proven fix. Preserve the 0.5 threshold, Score
+intervals and exact binding. Full training, learned invocation/native result use
+and Reason meaning remain unqualified. Do not continue coefficient sweeps or
+extend this completed comparison automatically.
+
+## Previous checkpoint — learning report and 32-update receiver probe complete
 
 The user authorized this existing-data probe on the 3090, with W/reference frozen,
 no agents or new data. Read the [fixed protocol](receiver-training-probe-v1.md),
