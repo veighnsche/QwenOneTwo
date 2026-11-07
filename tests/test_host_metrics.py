@@ -149,3 +149,13 @@ class ProfilingPlanTests(unittest.TestCase):
         from qwen_one_two.training.two_gpu import plan
         for kwargs in ({'selection':'unknown'},{'trace_cuda':True}):
             with self.assertRaisesRegex(ValueError,'profiling selection'):plan('/never-opened',**kwargs)
+
+    def test_single_device_selection_preserves_cases_and_declares_presentations(self):
+        from qwen_one_two.training.two_gpu import plan
+        from qwen_one_two.g1_device import PRIMARY,SECONDARY
+        for uuid in (PRIMARY,SECONDARY):
+            p=plan('/TEST_ONLY_NOT_OPENED',selection='cpu-profile',devices=(uuid,))
+            self.assertEqual(p['cases'],self.prepared['cases']);self.assertEqual(p['jobs'],self.prepared['jobs'])
+            self.assertEqual([d['uuid'] for d in p['devices']],[uuid]);self.assertEqual(p['presentations']['startup_anchors'],3)
+        for devices in ((),(PRIMARY,PRIMARY),('arbitrary',)):
+            with self.assertRaisesRegex(ValueError,'explicit diagnostic devices'):plan('/never-opened',devices=devices)

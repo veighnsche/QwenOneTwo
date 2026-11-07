@@ -17,13 +17,14 @@ def output_directory(path):
 
 
 def run(path, *, execute_gpu=False):
-    check(execute_gpu is True,'GPUs stay off: run requires --execute-gpu after the user lifts the hold')
+    check(execute_gpu is True,'run requires explicit --execute-gpu authorization')
     parent_start=stamp();parent_metrics=Recorder()
     path=Path(path).resolve();out=output_directory(path.parent)
     prepared=decode(path.read_bytes())
     check({'selection','profiling','anchor_cases'}<=set(prepared),'old measurement plan; prepare a new source-bound plan')
     check(prepared==plan(prepared['snapshot'],selection=prepared['selection'],
-        profile_host=prepared['profiling']['host'],trace_cuda=prepared['profiling']['cuda_trace_first_job_per_worker']),
+        profile_host=prepared['profiling']['host'],trace_cuda=prepared['profiling']['cuda_trace_first_job_per_worker'],
+        devices=tuple(d['uuid'] for d in prepared['devices'])),
         'plan/source/data/checkpoint metadata drift')
     # An existing journal/lock is never overwritten or silently replayed. Partial
     # receipts are forensic evidence, not admitted accelerator qualification.
@@ -65,11 +66,12 @@ def run(path, *, execute_gpu=False):
         try:
             from qwen_one_two.training.two_gpu_worker import worker
             worker_plan=dict(prepared,output_directory=str(out))
-            timing=dispatch(prepared['jobs'],[PRIMARY,SECONDARY],worker,(worker_plan,True),
+            devices=[d['uuid'] for d in prepared['devices']]
+            timing=dispatch(prepared['jobs'],devices,worker,(worker_plan,True),
                 on_ready=lambda m:parent_metrics.call('ready_validate',ready,m),
                 on_result=lambda u,i,m:parent_metrics.call('result_validate',result,u,i,m),
                 on_final=lambda u,m:parent_metrics.call('final_validate',final,u,m))
-            check(set(received)==set(expected) and set(finals)=={PRIMARY,SECONDARY},'incomplete diagnostic run')
+            check(set(received)==set(expected) and set(finals)==set(devices),'incomplete diagnostic run')
             cases=[received[c['id']][1] for c in prepared['cases']]
             from qwen_one_two.training.behavior_qualification import summarize,grade
             x=[c for c in cases if expected[c['id']]['panel']=='X']
@@ -107,10 +109,12 @@ def main():
     prepare.add_argument('--selection',choices=('full','cpu-profile'),default='full')
     prepare.add_argument('--profile-host',action='store_true')
     prepare.add_argument('--trace-cuda',action='store_true',help='future execution only: trace first main job per worker; implies host profiling')
+    prepare.add_argument('--device',choices=('3090','3060','both'),default='both')
     execute=sub.add_parser('run');execute.add_argument('--plan',required=True);execute.add_argument('--execute-gpu',action='store_true')
     a=p.parse_args()
     if a.command=='prepare':
-        prepared=plan(a.snapshot,selection=a.selection,profile_host=a.profile_host or a.trace_cuda,trace_cuda=a.trace_cuda)
+        devices={'3090':(PRIMARY,),'3060':(SECONDARY,),'both':(PRIMARY,SECONDARY)}[a.device]
+        prepared=plan(a.snapshot,selection=a.selection,profile_host=a.profile_host or a.trace_cuda,trace_cuda=a.trace_cuda,devices=devices)
         out=output_directory(a.output);out.mkdir(parents=True,exist_ok=False)
         (out/'plan.json').write_bytes(canonical(prepared))
         print(json.dumps({'status':prepared['status'],'jobs':len(prepared['jobs']),'cases':len(prepared['cases']),

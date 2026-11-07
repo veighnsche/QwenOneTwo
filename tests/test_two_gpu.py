@@ -1,6 +1,7 @@
 """CPU transport/device-policy fixtures only. No model or GPU results."""
 import copy
 import os
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from types import SimpleNamespace
 import unittest
@@ -39,6 +40,15 @@ def anchor():
 
 
 class DevicePolicyTests(unittest.TestCase):
+    def test_diagnostic_admission_and_optimizer_prohibition_cover_engine_threads(self):
+        with patch.dict(os.environ,CUDA_VISIBLE_DEVICES=SECONDARY):
+            with diagnostic_device(SECONDARY,execute_gpu=True),ThreadPoolExecutor(max_workers=1) as pool:
+                self.assertEqual(pool.submit(require_visibility).result(),SECONDARY)
+                with self.assertRaises(ValueError):pool.submit(require_training_context).result()
+                with self.assertRaises(RuntimeError):
+                    pool.submit(lambda:diagnostic_device(PRIMARY,execute_gpu=True).__enter__()).result()
+            with self.assertRaises(RuntimeError):require_visibility()
+        require_training_context()
     def cuda(self,name):return Mock(is_available=Mock(return_value=True),get_device_name=Mock(return_value='NVIDIA GeForce '+name))
 
     def test_default_rejects_secondary_multiple_and_unknown_before_any_query(self):
@@ -76,6 +86,14 @@ class DevicePolicyTests(unittest.TestCase):
 
 
 class DispatchTests(unittest.TestCase):
+    def test_single_resident_worker_covers_jobs_without_cross_device_claim(self):
+        jobs=[{'ids':['TEST_ONLY-'+str(i)]} for i in range(3)];received=[];finals=[]
+        result=dispatch(jobs,['fixture-a'],fixture_worker,(),on_ready=lambda m:self.assertEqual(set(m),{'fixture-a'}),
+            on_result=lambda u,i,m:received.append((i,m['echo'])),on_final=lambda u,m:finals.append(u))
+        self.assertEqual([j for i,j in sorted(received)],jobs)
+        self.assertEqual(finals,['fixture-a']);self.assertEqual(result['ipc_sends'],4)
+        self.assertEqual(result['ipc_receives'],5)
+
     def exercise(self,mode='normal',ready=None):
         jobs=[{'ids':['TEST_ONLY-'+str(i)]} for i in range(12)];results=[];finals={}
         result=dispatch(jobs,['fixture-a','fixture-b'],fixture_worker,(mode,),

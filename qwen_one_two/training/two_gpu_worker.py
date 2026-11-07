@@ -65,16 +65,26 @@ def worker(connection, uuid, prepared, execute_gpu=False):
                     from .host_profile import model_hooks
                     stack.enter_context(model_hooks(detail,b,c,ref,encoder))
                 initial_integrity=integrity()
+                torch.cuda.synchronize()
+                setup_memory={'allocated_bytes':torch.cuda.memory_allocated(),'reserved_bytes':torch.cuda.memory_reserved(),
+                    'peak_allocated_bytes':torch.cuda.max_memory_allocated(),'peak_reserved_bytes':torch.cuda.max_memory_reserved()}
             def evaluated(key,phase,ordinal):
+                torch.cuda.synchronize();torch.cuda.reset_peak_memory_stats()
                 before=detail.snapshot() if detail else None;start=stamp()
                 with basic.span(phase):case=evaluate_case(b,c,ref,release,release.record(key),encoder)
+                torch.cuda.synchronize()
                 measurement={'id':key,'phase':phase,'worker_case_ordinal':ordinal,**elapsed(start)}
+                measurement['memory']={'allocated_bytes':torch.cuda.memory_allocated(),
+                    'reserved_bytes':torch.cuda.memory_reserved(),'peak_allocated_bytes':torch.cuda.max_memory_allocated(),
+                    'peak_reserved_bytes':torch.cuda.max_memory_reserved()}
                 if detail:measurement['details']=Recorder.difference(before,detail.snapshot())
                 return case,measurement
             anchors=[evaluated(k,'startup_anchors',i) for i,k in enumerate(prepared['anchors'])]
             with basic.span('ipc_send'):
                 connection.send({'kind':'ready',**initial_integrity,'anchors':[v[0] for v in anchors],
-                    'anchor_measurements':[v[1] for v in anchors],'setup_measurements':basic.snapshot()})
+                    'anchor_measurements':[v[1] for v in anchors],'setup_measurements':basic.snapshot(),
+                    'setup_memory':setup_memory,'host_threads':{'torch_intraop':torch.get_num_threads(),
+                    'torch_interop':torch.get_num_interop_threads()}})
             ordinal=0;traced=False
             while True:
                 with basic.span('ipc_wait'):message=connection.recv()

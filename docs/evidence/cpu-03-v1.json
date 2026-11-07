@@ -1,0 +1,712 @@
+{
+  "protocol": "cpu-03-baselines-v1",
+  "date": "2026-11-07",
+  "base_commit": "818f503321298331718ebc1e5e18ad9a78d522ac",
+  "status": "MEASURED_READ_ONLY_UNQUALIFIED",
+  "source_hashes": {
+    "qwen_one_two/__init__.py": "b6236192beea05d03b8d7c828e63761bca002cbd4ca967ecbc2fea0f7c02caad",
+    "qwen_one_two/codec/__init__.py": "9b577482d1138d4d449fcc2bc9aa493538658afefe0bffb2a72828ab12e7ea38",
+    "qwen_one_two/codec/backbone.py": "b76c85e94dc99c7588992459b5691ec2a97f518ecba6191f19df1cc7461326b3",
+    "qwen_one_two/codec/diagnose_precision.py": "4edc64ec7af6525493e57c33f5fe4866e9ec0c0709086ae1fa99898d75fb23f3",
+    "qwen_one_two/codec/finite.py": "031cd3714a070650619284a83205d48af5aa08f04865028f3a29076d13c98f70",
+    "qwen_one_two/codec/fixtures.py": "36c91e9d949d2d03d4aaaafa709853eaeb7796465b02f6a9853f109f95221bc3",
+    "qwen_one_two/codec/neural.py": "1ac72b7a37bc90639d1e25d0dbcd1375bc6c6e090e0306d0ef2a96c8620a4fec",
+    "qwen_one_two/codec/ownership.py": "d9f10f5f6f8a8233b208110820f4e620253e668463042a30ad2dbbce0357f8dc",
+    "qwen_one_two/codec/precision.py": "9eb775efc303ce6d9eb8bbec26ffdcd6422f37ad0732e03ef0885ae9433c8e5b",
+    "qwen_one_two/codec/qualify.py": "d1204bd1e1ce70721d03e936ec92c8e30cd9b54ce0d79e50bbab46e3fd540851",
+    "qwen_one_two/codec/qualify_matrix.py": "07e25deee4eb930d498d5ca071f76c9022ee27823d62d90fcad45f59efb5a1ff",
+    "qwen_one_two/codec/records.py": "089eb06d1fd55e9a1629297759c942f046dc570058cf9cb304c8d88069287b04",
+    "qwen_one_two/codec/recurrence.py": "c96bff0e7f56dd3ffcdde576d6d0a9a85bffe1aa7352262e41ee6560aa1f7ebc",
+    "qwen_one_two/codec/render.py": "9e16fb579268e4261cd134883e698f6ae3c69a2802f1dbc2502855062920b82b",
+    "qwen_one_two/codec/runtime.py": "350c79f141e6898c5f762bf9b9c1708bd11297bdd01227c93a39abec2bd61d3a",
+    "qwen_one_two/codec/schema.py": "5a2ff9f2f38b7338da5cf6d7f605bed953e136c37445983f0cf965f1e17dbe23",
+    "qwen_one_two/codec/session.py": "2992225ccc68128680dec23bd64d3273ca950362e35eac6a5430ad00bf45ae3b",
+    "qwen_one_two/codec/writer.py": "187d0a07a4f29c1c4da560f84f361e0099be49c588933d25c8bb35b51ddca1a0",
+    "qwen_one_two/curriculum.py": "7d4f4172e4a1b733ba38721224b58079c0b6196dc914cfb30e783d308328a2cf",
+    "qwen_one_two/decision.py": "0ef4605594a83668996abc0546f89ecf0faa67afd1c383acbc333b73b889864a",
+    "qwen_one_two/download.py": "eb3e8ca5009302d43abe5cbf2e4ec3b53c28ffc2ec6a786440ee40099fee53d4",
+    "qwen_one_two/g1_accounting.py": "6d6d872a7337dd026da0354c9526e7eee012576cf518e19397832896cc3a4dd2",
+    "qwen_one_two/g1_backbone.py": "e179c2c4550285de40d8babc30f4ee300eb340c23441b364e0ff8c641ba6865d",
+    "qwen_one_two/g1_checks.py": "7c32e89b246a6e26235e48e041f6ff5923b589cdf48df073a17bf253ed470950",
+    "qwen_one_two/g1_device.py": "e4a550b80ac3f1de35be7c6057cca65b0e46ec2ba2248ca72e0d67b6451b5f2e",
+    "qwen_one_two/g1_evidence.py": "2f882bed4c0ac93dcf0015d6083b471764a8a8fe3d586d337759da1117bb7aba",
+    "qwen_one_two/g1_gate_diagnosis.py": "d38c6a40d66ccf41195ccbdefd77f1bccda632492ecdbbd6841049f26874a3e3",
+    "qwen_one_two/g1_gate_repair.py": "18c25a33ccf05a16630960df40f29d309d19af0a12b23b6e99c3c2341e732b91",
+    "qwen_one_two/g1_precision_diagnosis.py": "acdc5008e7e02c13a24eda2f64a40f7f30176cdfb09e95bb637b20c0126ce3d9",
+    "qwen_one_two/g1_precision_math.py": "bc2e5a6393012079684734de386ad71afd5cbd26b2423a24f22f33ed6b9aedcf",
+    "qwen_one_two/g1_proof.py": "5a0d9991cffff111b12d23df1a5ad46be7cb77f1f67ba16c4038dbfa60ac9cb9",
+    "qwen_one_two/g1_protocol.py": "156ba44aa27b459279404d404e2a16da35e443717fca4d15851627e80cfeaba4",
+    "qwen_one_two/model.py": "65361404f081a2933830acc65453ee147098e6b12a000918c00dc83d991bfb00",
+    "qwen_one_two/policy.py": "a1b43898e6a695536276b44d6bb713b45c3ae5f56a363e586b6c4e3ff2afe978",
+    "qwen_one_two/refine_routes.py": "2a9ed2e1999290d985f5cdced7bfa83e00ec4c56247349848f7b205e7235db5c",
+    "qwen_one_two/server.py": "d83a9dc6764fb0d02ccfd87b40d2c5ba4bd69167a3733e27686b17d52d45139d",
+    "qwen_one_two/thinking.py": "47bfaf4c91e33f8587f4bad856f0d2b36c0e31705132b11f5e1d7f22a504e36b",
+    "qwen_one_two/train.py": "1d316c57efb6db71810ae6a43ba491832d0d7e66e91bc065de8e208c5dc38538",
+    "qwen_one_two/train_feedback.py": "234b516d33e7b070b44b47a1b0b5738917af0cc33bb4df67ad88fc7bf17af952",
+    "qwen_one_two/training/__init__.py": "0a5bc5745bdcb26cbf81df3d10f5363d39539d811fd869326cb37ecb4a29a47e",
+    "qwen_one_two/training/behavior_qualification.py": "e620f747834a8fc336150588d2fac3f5b33d59a16390fda7fdadf6b40c9eee4b",
+    "qwen_one_two/training/binding.py": "6888c1a6f3597b9763f875242b34dea6f9f0abbe5f47b9529488e3aec30ddeae",
+    "qwen_one_two/training/checkpoint.py": "f94b519fe21933e5d121747d299f9005e89484fc0523047598d12be60a19f337",
+    "qwen_one_two/training/clean.py": "f9acc1c08507302b0d224be4f382e6b263ea4a12fabd138383167839185f148f",
+    "qwen_one_two/training/clean_packets.py": "7f0d846319a3b9fa391524f73894b8f13baa4f6632b3b127f094f60ba3d2a028",
+    "qwen_one_two/training/component_producer.py": "9cf2f2aea9e4e3bab4230d2fa17cc415e94ffdb6a6522075af86ef7fe2cc2aa8",
+    "qwen_one_two/training/diagnostics.py": "0e5ec6271090c034744a182c2bd4a86d421ee099be0b056da4b29438120b3060",
+    "qwen_one_two/training/driver.py": "c46128c8d9e0de5288717f4a2c6a78b6bb3fed5e4fa2a245b6123c267a587bc2",
+    "qwen_one_two/training/engine.py": "2500a47211fc13a41c3e646d2f315d2233b4304d1f67c71fb73b3eebc57aee4d",
+    "qwen_one_two/training/episodes.py": "0181ca87dff0f2cf4c3f7552aa197b9b67cd3bc0f1ad0b73e84ddcf284a7a5a5",
+    "qwen_one_two/training/host_metrics.py": "6027ae171e86d6fcf4b5eea4bdeb247ab6ad99349a9b4cdbd9b1b9ad61b9b86d",
+    "qwen_one_two/training/host_profile.py": "31d52a713e33de61e5b802a26c63f24e6dbcb476325d01afea788097e97d23e0",
+    "qwen_one_two/training/inputs.py": "8a96776ac2ab7a65f2cc51c3baaee12a333e76278775cc3d6b37b68cee99e332",
+    "qwen_one_two/training/losses.py": "a91938757131b177d38cba6e5275c0db7f7a053389a1a97c1bf173a82ae99041",
+    "qwen_one_two/training/manifest.py": "468257734527ceb5ec8656b6155388c2b3e92298f457cfa1764fd87cd58cbf5d",
+    "qwen_one_two/training/producer.py": "6827978aa735839a691f4f04f2d5cb6b2471d5c3c54c8604a76ac2ea7619e40f",
+    "qwen_one_two/training/profile.py": "3369e8e23579454fa3e71408fcb6196443cb86ed1c7e0f1f95974b91c9cc9cdb",
+    "qwen_one_two/training/qualification.py": "22d1de030bc85361a2366d03eb4c1c6c47a69f72e87fdcf59d6a9f8e04da72a9",
+    "qwen_one_two/training/receiver_learning.py": "60e5fc7eb79ac7c5374caaa72c19e3a5b2c6bea4cc6854fd9568420dd7dc7034",
+    "qwen_one_two/training/reference.py": "44cbd6da4b3374d3de7082cac633f9b63fd91cef768bd8462a01fcb17c0f2aec",
+    "qwen_one_two/training/reference_data.py": "5855ecf472ac6d553bf16372af54cc640c48deb704014e7f26eb652387a01e70",
+    "qwen_one_two/training/reference_exposure.py": "f6e576cb0ce1cd8c48275047d7c0360cf23d4b20f0bcf20eaafc3433971e1a3c",
+    "qwen_one_two/training/reference_qualification.py": "9e02394240fb88b2e4e77b604b020300d200cfae5bb217e3717247da27505db0",
+    "qwen_one_two/training/release.py": "906d6bf7fefaa9b251338e46b13dac289365f5347b73cd03b680e593578888c3",
+    "qwen_one_two/training/sampler.py": "aeee24107468a9a27657efa3ba5c053d36101aee982fad069af8411762e28950",
+    "qwen_one_two/training/two_gpu.py": "dcef17a8a6b25f2dc5af891cb893d3abc51e0bf052c5cb2177a2ef3b0f025bcf",
+    "qwen_one_two/training/two_gpu_worker.py": "fa607fe8056526b12eafa8489504fe89e911d9680eda264a791aa34c0fa576a9",
+    "qwen_one_two/training/weight_repair.py": "aff987d19f012820218758e02162d8352acce6d2983b74b9663a7afd9f4917bc",
+    "scripts/two_gpu_diagnostics.py": "b64962b94ddc388c559ce6ae80619012c189b4cfc2be7954fb18ac7e04ddcd63"
+  },
+  "document_sha256": {
+    "AGENTS.md": "4a22e6427cf1376f483ae360750e6755daa4eb6472dc6290849e37d8b1ea7403",
+    "docs/cpu-03-results-2026-11-07.md": "4dac60ed51d71a35d1864b2f51222bae86169562c179ebaee67ffa8f55d62be6",
+    "docs/next-agent-handoff.md": "00905f9b72ae9815d398cfbe462753f2089a8cb8e13041a6168ca8688ba5eebb",
+    "docs/cpu-involvement-tasks.md": "a49dbc9e33872e60419d20d886b65c69f4211bca9b3db409c9b4df9c3e1a75ca",
+    "docs/two-gpu-diagnostics-v1.md": "c8e302724093ba8dd9095e002b6fa807018a8463de7fdec52be4dcce76611146"
+  },
+  "tests_sha256": {
+    "tests/test_host_metrics.py": "a269840e73cbbd170f7e5d1fcd95d7fa4c470fa0a2be90658728d1bc02f76b4e",
+    "tests/test_two_gpu.py": "fc67bf744df57dc74486d8682c5b08f542efc55d4133aebd17b350f4bbcf0aa5"
+  },
+  "audit": {
+    "passed": true,
+    "runs": {
+      "baseline-3090": {
+        "end_to_end_seconds": 39.483971443,
+        "end_to_end_cases_per_second": 0.2026138634901251,
+        "main_case_interval_sum_seconds": 12.646896188,
+        "main_cpu_seconds_per_case": 1.56735401275,
+        "setup_inclusive_cpu_seconds_per_case": 4.764046795125,
+        "device_case_counts": {
+          "GPU-225509c3-d702-6c27-de03-76b5e99b33b1": 8
+        },
+        "peak_main_allocated_bytes": 1937548800,
+        "setup_memory": {
+          "GPU-225509c3-d702-6c27-de03-76b5e99b33b1": {
+            "allocated_bytes": 1677941248,
+            "peak_allocated_bytes": 3622856704,
+            "peak_reserved_bytes": 4265607168,
+            "reserved_bytes": 4265607168
+          }
+        },
+        "counters": {},
+        "recurrence_key_count": 0,
+        "exclusive_main_cpu_seconds_by_phase": {},
+        "E_summary": {
+          "Choice": {
+            "cases": 2,
+            "passed": 0
+          },
+          "Noul": {
+            "cases": 2,
+            "passed": 0
+          },
+          "Score": {
+            "cases": 2,
+            "passed": 1
+          }
+        },
+        "X_summary": {
+          "passed": 0,
+          "scheduled": 2,
+          "status": "PROFILING_SUBSET_NOT_QUALIFICATION"
+        }
+      },
+      "profile-3090": {
+        "end_to_end_seconds": 39.493064314,
+        "end_to_end_cases_per_second": 0.20256721373641445,
+        "main_case_interval_sum_seconds": 12.601372471,
+        "main_cpu_seconds_per_case": 1.561992557625,
+        "setup_inclusive_cpu_seconds_per_case": 4.76858385975,
+        "device_case_counts": {
+          "GPU-225509c3-d702-6c27-de03-76b5e99b33b1": 8
+        },
+        "peak_main_allocated_bytes": 1937548800,
+        "setup_memory": {
+          "GPU-225509c3-d702-6c27-de03-76b5e99b33b1": {
+            "allocated_bytes": 1677941248,
+            "peak_allocated_bytes": 3622856704,
+            "peak_reserved_bytes": 4265607168,
+            "reserved_bytes": 4265607168
+          }
+        },
+        "counters": {
+          "audit_d2h_calls": 60,
+          "audit_readback_calls": 60,
+          "audit_requested_bytes": 2584576,
+          "recurrence_evictions": 83,
+          "recurrence_forward_capture_attempts": 83,
+          "recurrence_forward_captures": 83,
+          "recurrence_hits": 2653,
+          "recurrence_lookups": 2736,
+          "recurrence_misses": 83
+        },
+        "recurrence_key_count": 29,
+        "exclusive_main_cpu_seconds_by_phase": {
+          "backbone_forward": 8.083020158,
+          "codec_encode": 1.205568222,
+          "codec_finite_guard": 1.130351198,
+          "recurrence_capture_setup": 0.699723211,
+          "reference_model_encode": 0.345753875,
+          "codec_device_guard": 0.24356458,
+          "recurrence_input_copy": 0.184749153,
+          "reference_pooler": 0.1006556,
+          "session_step": 0.075398608,
+          "session_finite_guard": 0.074041633,
+          "reference_payload": 0.036800608,
+          "result_decode": 0.035359414,
+          "source_model_encode": 0.033015336,
+          "clean_encode": 0.030562916,
+          "codec_evaluate": 0.03008069,
+          "session_evaluate": 0.022832659,
+          "source_tokenize": 0.01343355,
+          "session_deliver": 0.005939761,
+          "materialize_view": 0.005634576,
+          "audit_readback": 0.004659872,
+          "prepare_view": 0.00463709,
+          "audit_numpy_bytes": 0.001289104,
+          "weight_fingerprint": 0.0
+        },
+        "E_summary": {
+          "Choice": {
+            "cases": 2,
+            "passed": 0
+          },
+          "Noul": {
+            "cases": 2,
+            "passed": 0
+          },
+          "Score": {
+            "cases": 2,
+            "passed": 1
+          }
+        },
+        "X_summary": {
+          "passed": 0,
+          "scheduled": 2,
+          "status": "PROFILING_SUBSET_NOT_QUALIFICATION"
+        }
+      },
+      "baseline-3060": {
+        "end_to_end_seconds": 39.001647572,
+        "end_to_end_cases_per_second": 0.20511953976383673,
+        "main_case_interval_sum_seconds": 12.3846599,
+        "main_cpu_seconds_per_case": 1.535788268625,
+        "setup_inclusive_cpu_seconds_per_case": 4.705248329625,
+        "device_case_counts": {
+          "GPU-744c1cf5-9578-6aad-95c1-7a6f1c9d11db": 8
+        },
+        "peak_main_allocated_bytes": 1937548800,
+        "setup_memory": {
+          "GPU-744c1cf5-9578-6aad-95c1-7a6f1c9d11db": {
+            "allocated_bytes": 1677941248,
+            "peak_allocated_bytes": 3622856704,
+            "peak_reserved_bytes": 4265607168,
+            "reserved_bytes": 4265607168
+          }
+        },
+        "counters": {},
+        "recurrence_key_count": 0,
+        "exclusive_main_cpu_seconds_by_phase": {},
+        "E_summary": {
+          "Choice": {
+            "cases": 2,
+            "passed": 0
+          },
+          "Noul": {
+            "cases": 2,
+            "passed": 0
+          },
+          "Score": {
+            "cases": 2,
+            "passed": 1
+          }
+        },
+        "X_summary": {
+          "passed": 0,
+          "scheduled": 2,
+          "status": "PROFILING_SUBSET_NOT_QUALIFICATION"
+        }
+      },
+      "profile-3060": {
+        "end_to_end_seconds": 39.851178735,
+        "end_to_end_cases_per_second": 0.20074688513476413,
+        "main_case_interval_sum_seconds": 12.965323329,
+        "main_cpu_seconds_per_case": 1.606555894875,
+        "setup_inclusive_cpu_seconds_per_case": 4.812414218625,
+        "device_case_counts": {
+          "GPU-744c1cf5-9578-6aad-95c1-7a6f1c9d11db": 8
+        },
+        "peak_main_allocated_bytes": 1937548800,
+        "setup_memory": {
+          "GPU-744c1cf5-9578-6aad-95c1-7a6f1c9d11db": {
+            "allocated_bytes": 1677941248,
+            "peak_allocated_bytes": 3622856704,
+            "peak_reserved_bytes": 4265607168,
+            "reserved_bytes": 4265607168
+          }
+        },
+        "counters": {
+          "audit_d2h_calls": 60,
+          "audit_readback_calls": 60,
+          "audit_requested_bytes": 2584576,
+          "recurrence_evictions": 83,
+          "recurrence_forward_capture_attempts": 83,
+          "recurrence_forward_captures": 83,
+          "recurrence_hits": 2653,
+          "recurrence_lookups": 2736,
+          "recurrence_misses": 83
+        },
+        "recurrence_key_count": 29,
+        "exclusive_main_cpu_seconds_by_phase": {
+          "backbone_forward": 8.315670105,
+          "codec_encode": 1.223367894,
+          "codec_finite_guard": 1.133786761,
+          "recurrence_capture_setup": 0.720701711,
+          "reference_model_encode": 0.337037696,
+          "codec_device_guard": 0.249136447,
+          "recurrence_input_copy": 0.192192907,
+          "session_finite_guard": 0.144383073,
+          "reference_pooler": 0.101136175,
+          "session_step": 0.075364684,
+          "reference_payload": 0.037259735,
+          "result_decode": 0.036048729,
+          "source_model_encode": 0.034073809,
+          "codec_evaluate": 0.030992598,
+          "clean_encode": 0.030902599,
+          "session_evaluate": 0.02325137,
+          "source_tokenize": 0.014179977,
+          "materialize_view": 0.005949237,
+          "session_deliver": 0.005844625,
+          "prepare_view": 0.004986854,
+          "audit_readback": 0.004837223,
+          "audit_numpy_bytes": 0.001298735,
+          "weight_fingerprint": 0.0
+        },
+        "E_summary": {
+          "Choice": {
+            "cases": 2,
+            "passed": 0
+          },
+          "Noul": {
+            "cases": 2,
+            "passed": 0
+          },
+          "Score": {
+            "cases": 2,
+            "passed": 1
+          }
+        },
+        "X_summary": {
+          "passed": 0,
+          "scheduled": 2,
+          "status": "PROFILING_SUBSET_NOT_QUALIFICATION"
+        }
+      },
+      "trace-3090": {
+        "end_to_end_seconds": 47.590886333,
+        "end_to_end_cases_per_second": 0.16809941180802762,
+        "main_case_interval_sum_seconds": 17.198472863,
+        "main_cpu_seconds_per_case": 2.13677709675,
+        "setup_inclusive_cpu_seconds_per_case": 5.7463896445,
+        "device_case_counts": {
+          "GPU-225509c3-d702-6c27-de03-76b5e99b33b1": 8
+        },
+        "peak_main_allocated_bytes": 1937548800,
+        "setup_memory": {
+          "GPU-225509c3-d702-6c27-de03-76b5e99b33b1": {
+            "allocated_bytes": 1677941248,
+            "peak_allocated_bytes": 3622856704,
+            "peak_reserved_bytes": 4265607168,
+            "reserved_bytes": 4265607168
+          }
+        },
+        "counters": {
+          "audit_d2h_calls": 60,
+          "audit_readback_calls": 60,
+          "audit_requested_bytes": 2584576,
+          "recurrence_evictions": 83,
+          "recurrence_forward_capture_attempts": 83,
+          "recurrence_forward_captures": 83,
+          "recurrence_hits": 2653,
+          "recurrence_lookups": 2736,
+          "recurrence_misses": 83
+        },
+        "recurrence_key_count": 29,
+        "exclusive_main_cpu_seconds_by_phase": {
+          "backbone_forward": 11.195007117,
+          "codec_encode": 1.623750803,
+          "codec_finite_guard": 1.603030064,
+          "recurrence_capture_setup": 0.923810396,
+          "reference_model_encode": 0.457735678,
+          "recurrence_input_copy": 0.276727322,
+          "codec_device_guard": 0.263772286,
+          "reference_pooler": 0.130036695,
+          "session_step": 0.100386276,
+          "session_finite_guard": 0.091646764,
+          "source_model_encode": 0.049714027,
+          "result_decode": 0.048206047,
+          "codec_evaluate": 0.040810104,
+          "reference_payload": 0.038085984,
+          "clean_encode": 0.033144585,
+          "session_evaluate": 0.024173217,
+          "source_tokenize": 0.013722045,
+          "session_deliver": 0.007585669,
+          "materialize_view": 0.005723888,
+          "prepare_view": 0.004931122,
+          "audit_readback": 0.004696575,
+          "audit_numpy_bytes": 0.001390135,
+          "weight_fingerprint": 0.0
+        },
+        "E_summary": {
+          "Choice": {
+            "cases": 2,
+            "passed": 0
+          },
+          "Noul": {
+            "cases": 2,
+            "passed": 0
+          },
+          "Score": {
+            "cases": 2,
+            "passed": 1
+          }
+        },
+        "X_summary": {
+          "passed": 0,
+          "scheduled": 2,
+          "status": "PROFILING_SUBSET_NOT_QUALIFICATION"
+        }
+      },
+      "baseline-both": {
+        "end_to_end_seconds": 35.499134413,
+        "end_to_end_cases_per_second": 0.2253576075102933,
+        "main_case_interval_sum_seconds": 12.950870873,
+        "main_cpu_seconds_per_case": 1.601481089875,
+        "setup_inclusive_cpu_seconds_per_case": 7.70912938,
+        "device_case_counts": {
+          "GPU-225509c3-d702-6c27-de03-76b5e99b33b1": 3,
+          "GPU-744c1cf5-9578-6aad-95c1-7a6f1c9d11db": 5
+        },
+        "peak_main_allocated_bytes": 1937507840,
+        "setup_memory": {
+          "GPU-225509c3-d702-6c27-de03-76b5e99b33b1": {
+            "allocated_bytes": 1677941248,
+            "peak_allocated_bytes": 3622856704,
+            "peak_reserved_bytes": 4265607168,
+            "reserved_bytes": 4265607168
+          },
+          "GPU-744c1cf5-9578-6aad-95c1-7a6f1c9d11db": {
+            "allocated_bytes": 1677941248,
+            "peak_allocated_bytes": 3622856704,
+            "peak_reserved_bytes": 4265607168,
+            "reserved_bytes": 4265607168
+          }
+        },
+        "counters": {},
+        "recurrence_key_count": 0,
+        "exclusive_main_cpu_seconds_by_phase": {},
+        "E_summary": {
+          "Choice": {
+            "cases": 2,
+            "passed": 0
+          },
+          "Noul": {
+            "cases": 2,
+            "passed": 0
+          },
+          "Score": {
+            "cases": 2,
+            "passed": 1
+          }
+        },
+        "X_summary": {
+          "passed": 0,
+          "scheduled": 2,
+          "status": "PROFILING_SUBSET_NOT_QUALIFICATION"
+        }
+      }
+    },
+    "same_card_profile_cases_exact": true,
+    "trace_cases_exact": true,
+    "dynamic_cases_same_card_exact": true,
+    "cross_device_discrete_control_provenance_exact": true,
+    "cross_device_scalar_maximum_absolute": 2.384185791015625e-07,
+    "cross_device_tensor_numeric_qualification": false,
+    "trace": {
+      "path": "data/cpu-03-20261107/trace-3090/cuda-trace-GPU-225509c3-d702-6c27-de03-76b5e99b33b1.json",
+      "sha256": "14e4c450964b83fd543c6a7fe18053ba5e943547e3ccdc04ea303a070fcfea1b",
+      "event_categories": {
+        "user_annotation": 1,
+        "cpu_op": 192519,
+        "overhead": 23,
+        "cuda_runtime": 67519,
+        "kernel": 94259,
+        "gpu_memset": 1560,
+        "gpu_memcpy": 3765,
+        "gpu_user_annotation": 11,
+        "Trace": 1
+      },
+      "cuda_runtime_calls": {
+        "cudaDeviceSynchronize": 13,
+        "cudaLaunchKernel": 51995,
+        "cudaMemsetAsync": 1560,
+        "cudaStreamIsCapturing": 521,
+        "cudaMemcpyAsync": 3730,
+        "cudaStreamSynchronize": 846,
+        "cudaOccupancyMaxActiveBlocksPerMultiprocessor": 2576,
+        "cudaLaunchKernelExC": 2607,
+        "cudaEventRecordWithFlags": 20,
+        "cudaStreamWaitEvent": 20,
+        "cudaMalloc": 188,
+        "cudaFree": 192,
+        "cudaFreeHost": 13,
+        "cudaStreamBeginCapture": 10,
+        "cudaStreamGetCaptureInfo": 2850,
+        "cudaThreadExchangeStreamCaptureMode": 40,
+        "cudaStreamEndCapture": 10,
+        "cudaGraphGetNodes": 10,
+        "cudaGraphInstantiateWithFlags": 10,
+        "cudaGraphDestroy": 10,
+        "cudaGraphExecDestroy": 10,
+        "cudaGraphLaunch": 252,
+        "cudaHostAlloc": 13,
+        "cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags": 23
+      },
+      "cuda_runtime_duration_sum_us": {
+        "cudaDeviceSynchronize": 234.01399999999998,
+        "cudaLaunchKernel": 419231.22700000234,
+        "cudaMemsetAsync": 9485.299,
+        "cudaStreamIsCapturing": 509.65799999999996,
+        "cudaMemcpyAsync": 39180.81800000011,
+        "cudaStreamSynchronize": 2872.523999999998,
+        "cudaOccupancyMaxActiveBlocksPerMultiprocessor": 4067.260999999991,
+        "cudaLaunchKernelExC": 13140.908000000001,
+        "cudaEventRecordWithFlags": 45.79,
+        "cudaStreamWaitEvent": 39.31099999999999,
+        "cudaMalloc": 17895.68,
+        "cudaFree": 23845.89900000001,
+        "cudaFreeHost": 2546.304,
+        "cudaStreamBeginCapture": 32.614,
+        "cudaStreamGetCaptureInfo": 1228.6419999999962,
+        "cudaThreadExchangeStreamCaptureMode": 28.063000000000002,
+        "cudaStreamEndCapture": 97.568,
+        "cudaGraphGetNodes": 14.767,
+        "cudaGraphInstantiateWithFlags": 4793.078,
+        "cudaGraphDestroy": 505.83000000000004,
+        "cudaGraphExecDestroy": 1767.661,
+        "cudaGraphLaunch": 50103.28599999999,
+        "cudaHostAlloc": 9536.490000000002,
+        "cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags": 208.95100000000005
+      },
+      "warning": "API/device durations can overlap; not additive elapsed/compute/idle attribution. Only first main job traced."
+    },
+    "operator_checks": {
+      "3090": {
+        "uuid": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+        "gpu_name": "NVIDIA GeForce RTX 3090",
+        "torch": "2.15.0+cu132",
+        "cuda": "13.2",
+        "tests": 8,
+        "errors": 0,
+        "failures": 0,
+        "passed": true,
+        "optimizer_updates": 0
+      },
+      "3060": {
+        "uuid": "GPU-744c1cf5-9578-6aad-95c1-7a6f1c9d11db",
+        "gpu_name": "NVIDIA GeForce RTX 3060",
+        "torch": "2.15.0+cu132",
+        "cuda": "13.2",
+        "tests": 8,
+        "errors": 0,
+        "failures": 0,
+        "passed": true,
+        "optimizer_updates": 0
+      }
+    },
+    "cpu_tests": {
+      "tests": 24,
+      "failures": 0,
+      "errors": 0,
+      "passed": true,
+      "model_runtimes_loaded": [],
+      "gpu_execution": false
+    },
+    "no_training": true,
+    "optimizer_updates": 0,
+    "new_semantic_data": 0,
+    "full_numeric_matrix_repeated": false
+  },
+  "source_preservation": "recurrence/neural/Session/backbone/evaluator byte-identical to 818f503; device guard/runner measurements changed",
+  "initial_failure": {
+    "derived_from": "operator-3060.log",
+    "tests": 8,
+    "errors": 1,
+    "failures": 0,
+    "passed": false,
+    "error": "secondary diagnostic ContextVar not propagated to checkpoint recomputation thread"
+  },
+  "presentations": {
+    "main": 48,
+    "startup": 21,
+    "total": 69,
+    "optimizer_updates": 0,
+    "new_semantic_data": 0,
+    "agents": 0,
+    "service_changes": 0
+  },
+  "limits": [
+    "single baseline/profile pair per card; warm distribution not established",
+    "cross-device audit hashes differ; full transformer-state numeric comparison not performed",
+    "original full numeric matrix reused, not repeated",
+    "initial two-card runner lacks separate parent main-phase wall interval",
+    "semantic failures remain failures; no accelerator qualification"
+  ],
+  "next_slice": "CPU-04 measured cache-retention comparison and main-phase wall timing",
+  "local_artifact_sha256": {
+    "data/cpu-03-20261107/operator_checks.py": "d4b61b52cec35e6931097ee9f9086f54b6038040b205e75bdf3fa8e39f1ca98f",
+    "data/cpu-03-20261107/run_operator_checks.py": "d6b40737c89725e976034da2e4eebc637d23d17cf5fe46f060b23810b0501534",
+    "data/cpu-03-20261107/operator-3090.log": "99f0a0fe964809277fcde4bf4088314cedfe6997ab68194431c5f7042e1b4bca",
+    "data/cpu-03-20261107/operator-3090.json": "839395f04aa7cafb5063bbbb0b71097a292eed27ee991170a2fc35027ef3eaf2",
+    "data/cpu-03-20261107/operator-3060.log": "d40b93dc5f5a5e4c6370b3d38fe39dd0b26a8b8645ccc1608ac2609c374c0a1e",
+    "data/cpu-03-20261107/operator-3060.json": "1d4a8aba084f1988b383a571db78123a0b4be7732a6968eba44d81f9c3c02d52",
+    "data/cpu-03-20261107/operator-exits.json": "50605da378f9e090280856afa0ba563350192c1e915a6ee418e2b9215ead99de",
+    "data/cpu-03-20261107/cpu_tests.py": "64aa63cfcb980a4248c2a0a24a8f86d4112c6ad0a77e081ae551e5220a26f63d",
+    "data/cpu-03-20261107/cpu-tests.log": "5ae9211a7f286e5c98856e98ea2045e6a9444b2bd49ee4ec9e65eca5797e1092",
+    "data/cpu-03-20261107/cpu-tests.json": "a7cf27572bbbb9248461bbc6ea7ca3e16ba0da8cba3fb89acabf9204ff0e50e0",
+    "data/cpu-03-20261107/cpu-tests-final.log": "62c6898a616c0a264e5c055443c5a52a35656c6d83ee5c09700b51cb14087882",
+    "data/cpu-03-20261107/operator-3060-final.log": "7b4201302716ee1fbfe60e26d40f250340be3cccdbd64505db2003ab2e60680d",
+    "data/cpu-03-20261107/prepare.py": "1ccedc9ad9073e448eededc0030f02e86cc1c77d5d87df37846362fbe369b400",
+    "data/cpu-03-20261107/preparation.log": "1e62baa9f23712414a92106e5ead41655b679cd4f56c8206fce21e7ac582b080",
+    "data/cpu-03-20261107/run_profiles.py": "7185f3e81f27660d8b295850468575118ff8051e9be87da08ea4b21321b95d79",
+    "data/cpu-03-20261107/operator-3060-initial-result.json": "9896b6c7de7a99e51d2bb421bf6329054ec1e4d78fa99a7e7a0debd24965b19e",
+    "data/cpu-03-20261107/audit.py": "641b861997978c4837874dd44c7819a8a9eac0d11a20bb747166a92fdac18a08",
+    "data/cpu-03-20261107/audit.log": "ad3328d5bc4c09585f341bdea13068f4edeb3f0ad332e382db4d0aa88ed9472e",
+    "data/cpu-03-20261107/audit-result.json": "05a6a5e790227081f5b879ebc7bf5fccbc49514dea096036aeacb07eed5611c7",
+    "data/cpu-03-20261107/evidence.py": "5016206119bdfd7906267e09e8c3382d0a6951aa3ef7364f423c9833c5cb9a41",
+    "data/cpu-03-20261107/baseline-3090/plan.json": "e39f58eaa98581193ab80ea7cd648348217b21915bec31bf23945ce14c9d40b1",
+    "data/cpu-03-20261107/baseline-3090/execution.log": "4a2d0aa79f806a41a9fb425864597ac5d95141405865f09f1e45583faecd7e4f",
+    "data/cpu-03-20261107/baseline-3090/run.lock": "0b64ea00f8a687366687eda93fc1a49b0401af4a91b97b4e4126da18cbdd8e80",
+    "data/cpu-03-20261107/baseline-3090/events.jsonl": "5143b7ffdbba762ec3b6f8620c88590b267855cb71bb6559bfc39260fc1f0358",
+    "data/cpu-03-20261107/baseline-3090/report.json": "8bb479ecefeb41965e4ce0a53b5f39e06f6c79ff34a4deca2551ca77d3e95f1f",
+    "data/cpu-03-20261107/baseline-3090/process-exit.json": "280269f7d916330062920af6ce67779205ddd4304fb393e9eeca3139a8e175fe",
+    "data/cpu-03-20261107/profile-3090/plan.json": "318a868a6177f401b6404bebeb05c86f42a1ff90fc4d0c1d9af6f92df503b44d",
+    "data/cpu-03-20261107/profile-3090/execution.log": "7f1c7b0a9fd5e1c0a8ea4fdaf49d68b019aaa4c68aaa7e8851e07b6fd7fa1a22",
+    "data/cpu-03-20261107/profile-3090/run.lock": "2cf0515f5ae84e2240eaf4c6bfacf3f0d7483fc3996cd87c71aef44c667c4caa",
+    "data/cpu-03-20261107/profile-3090/events.jsonl": "7ae1d19c770aad37e88bddc4d9bd3d3f24eced3afbbe55ccef0a596ede12ed41",
+    "data/cpu-03-20261107/profile-3090/report.json": "b2717c6bcba4ca86add4b1aac2191249c30e7cb39a637a79a06b94b70bd4119f",
+    "data/cpu-03-20261107/profile-3090/process-exit.json": "c553c8479f45d6736f636a04235849276f9f4680c43ade7ab069c7a4fb379e06",
+    "data/cpu-03-20261107/baseline-3060/plan.json": "a6badd57a1d2e74fa51a8aec72a9cc130b6f54175ee81089c0e546b0b754b334",
+    "data/cpu-03-20261107/baseline-3060/execution.log": "0cb997381f4cf89da896ffd5cf76ba12fa9fd2d200226b60769855d474f98315",
+    "data/cpu-03-20261107/baseline-3060/run.lock": "0322b029cb424455504d5c665f2e7cede6e2f7dba8a06d96b366eeb9cc3d3635",
+    "data/cpu-03-20261107/baseline-3060/events.jsonl": "07aeedd8f53e64281da36ae838d50f3d48613a39feb4f7cb16cf398121fd909d",
+    "data/cpu-03-20261107/baseline-3060/report.json": "049565462570ec4f4f42451ec5101c12d019ed28c78a82e6222a600ffdba6689",
+    "data/cpu-03-20261107/baseline-3060/process-exit.json": "eb167c6a74bb6485dd4363f5e62b1e217a9a1da043211e92af4d159a2e74764d",
+    "data/cpu-03-20261107/profile-3060/plan.json": "681eefe333424ab3939e3526baee013a952217ad6936470813bc012dffac2f3e",
+    "data/cpu-03-20261107/profile-3060/execution.log": "711ef3612e0cafb605f2f8da360244853197bfd64e0849613c6ca8128e061d87",
+    "data/cpu-03-20261107/profile-3060/run.lock": "d1636fcc93116821ed25dd2f0fc311d67888aa895f5b815573526706bbf5e943",
+    "data/cpu-03-20261107/profile-3060/events.jsonl": "e7cb9958b1b830b2694f0fed6c502d6e5b3198342206ae68e8a7eadf28947659",
+    "data/cpu-03-20261107/profile-3060/report.json": "0726f57c43dbd4bb60313c8d5435d697aabb931da92020e7b94e13642eac6f55",
+    "data/cpu-03-20261107/profile-3060/process-exit.json": "e15ee0356707bf8c65511fcd322276a7cdac02be4faf310a23b81a9fe7a64d9e",
+    "data/cpu-03-20261107/trace-3090/plan.json": "6b06c1c9b5086055f45d49fda4a825b88b8f8cfc693ff74f01d76e8f29560a91",
+    "data/cpu-03-20261107/trace-3090/execution.log": "73f830f9b1ab31953185b23259b6be84c01a1bf6074887c3c9a0f60351f89394",
+    "data/cpu-03-20261107/trace-3090/run.lock": "616430d414b41b4e03fe1aad593566a7076b8127fec95baa75e3751b1709ba34",
+    "data/cpu-03-20261107/trace-3090/events.jsonl": "db0f115f181e7c35c02bba821657ea643e4aae8ab7ed5c829b6d480ae5a84354",
+    "data/cpu-03-20261107/trace-3090/cuda-trace-GPU-225509c3-d702-6c27-de03-76b5e99b33b1.json": "14e4c450964b83fd543c6a7fe18053ba5e943547e3ccdc04ea303a070fcfea1b",
+    "data/cpu-03-20261107/trace-3090/report.json": "4e7fb6820573dee1fbe1a95c328c288be67de4fd6d12d7c4db55b6b23d9e79dc",
+    "data/cpu-03-20261107/trace-3090/process-exit.json": "f68e88be7ed705de616ef0116b1eaca654872aee39690a00c784eb729bd9f051",
+    "data/cpu-03-20261107/baseline-both/plan.json": "f8b970b108a418b9803574f2197743608a8484b1d97acaef2972aedeec3c5b11",
+    "data/cpu-03-20261107/baseline-both/execution.log": "9a9669ca0fe49e7297af9a2e0137657895036ff2a4782e6b78624cd05ee2268b",
+    "data/cpu-03-20261107/baseline-both/run.lock": "bbaddeedd803e67e25eb141abca3e5c7c0ad15ca107d06f20af1fad5bbd89d87",
+    "data/cpu-03-20261107/baseline-both/events.jsonl": "2211babb695d095c9707845ff7ce26eb8673d2c1a62799f116826974f7b3f0d2",
+    "data/cpu-03-20261107/baseline-both/report.json": "b168da6e1ecf38b7da67ec6727d2663615020e1bddde86f3c01503c11ca16462",
+    "data/cpu-03-20261107/baseline-both/process-exit.json": "61ef1a1e2d91adb393afd3b640b38ec22a41426595ad80db575bb74e1f28f5e8",
+    "data/cpu-03-20261107/source-before/qwen_one_two/__init__.py": "b6236192beea05d03b8d7c828e63761bca002cbd4ca967ecbc2fea0f7c02caad",
+    "data/cpu-03-20261107/source-before/qwen_one_two/curriculum.py": "7d4f4172e4a1b733ba38721224b58079c0b6196dc914cfb30e783d308328a2cf",
+    "data/cpu-03-20261107/source-before/qwen_one_two/decision.py": "0ef4605594a83668996abc0546f89ecf0faa67afd1c383acbc333b73b889864a",
+    "data/cpu-03-20261107/source-before/qwen_one_two/download.py": "eb3e8ca5009302d43abe5cbf2e4ec3b53c28ffc2ec6a786440ee40099fee53d4",
+    "data/cpu-03-20261107/source-before/qwen_one_two/g1_accounting.py": "6d6d872a7337dd026da0354c9526e7eee012576cf518e19397832896cc3a4dd2",
+    "data/cpu-03-20261107/source-before/qwen_one_two/g1_backbone.py": "e179c2c4550285de40d8babc30f4ee300eb340c23441b364e0ff8c641ba6865d",
+    "data/cpu-03-20261107/source-before/qwen_one_two/g1_checks.py": "7c32e89b246a6e26235e48e041f6ff5923b589cdf48df073a17bf253ed470950",
+    "data/cpu-03-20261107/source-before/qwen_one_two/g1_device.py": "e4a550b80ac3f1de35be7c6057cca65b0e46ec2ba2248ca72e0d67b6451b5f2e",
+    "data/cpu-03-20261107/source-before/qwen_one_two/g1_evidence.py": "2f882bed4c0ac93dcf0015d6083b471764a8a8fe3d586d337759da1117bb7aba",
+    "data/cpu-03-20261107/source-before/qwen_one_two/g1_gate_diagnosis.py": "d38c6a40d66ccf41195ccbdefd77f1bccda632492ecdbbd6841049f26874a3e3",
+    "data/cpu-03-20261107/source-before/qwen_one_two/g1_gate_repair.py": "18c25a33ccf05a16630960df40f29d309d19af0a12b23b6e99c3c2341e732b91",
+    "data/cpu-03-20261107/source-before/qwen_one_two/g1_precision_diagnosis.py": "acdc5008e7e02c13a24eda2f64a40f7f30176cdfb09e95bb637b20c0126ce3d9",
+    "data/cpu-03-20261107/source-before/qwen_one_two/g1_precision_math.py": "bc2e5a6393012079684734de386ad71afd5cbd26b2423a24f22f33ed6b9aedcf",
+    "data/cpu-03-20261107/source-before/qwen_one_two/g1_proof.py": "5a0d9991cffff111b12d23df1a5ad46be7cb77f1f67ba16c4038dbfa60ac9cb9",
+    "data/cpu-03-20261107/source-before/qwen_one_two/g1_protocol.py": "156ba44aa27b459279404d404e2a16da35e443717fca4d15851627e80cfeaba4",
+    "data/cpu-03-20261107/source-before/qwen_one_two/model.py": "65361404f081a2933830acc65453ee147098e6b12a000918c00dc83d991bfb00",
+    "data/cpu-03-20261107/source-before/qwen_one_two/policy.py": "a1b43898e6a695536276b44d6bb713b45c3ae5f56a363e586b6c4e3ff2afe978",
+    "data/cpu-03-20261107/source-before/qwen_one_two/refine_routes.py": "2a9ed2e1999290d985f5cdced7bfa83e00ec4c56247349848f7b205e7235db5c",
+    "data/cpu-03-20261107/source-before/qwen_one_two/server.py": "d83a9dc6764fb0d02ccfd87b40d2c5ba4bd69167a3733e27686b17d52d45139d",
+    "data/cpu-03-20261107/source-before/qwen_one_two/thinking.py": "47bfaf4c91e33f8587f4bad856f0d2b36c0e31705132b11f5e1d7f22a504e36b",
+    "data/cpu-03-20261107/source-before/qwen_one_two/train.py": "1d316c57efb6db71810ae6a43ba491832d0d7e66e91bc065de8e208c5dc38538",
+    "data/cpu-03-20261107/source-before/qwen_one_two/train_feedback.py": "234b516d33e7b070b44b47a1b0b5738917af0cc33bb4df67ad88fc7bf17af952",
+    "data/cpu-03-20261107/source-before/scripts/two_gpu_diagnostics.py": "b64962b94ddc388c559ce6ae80619012c189b4cfc2be7954fb18ac7e04ddcd63",
+    "data/cpu-03-20261107/source-before/qwen_one_two/codec/__init__.py": "9b577482d1138d4d449fcc2bc9aa493538658afefe0bffb2a72828ab12e7ea38",
+    "data/cpu-03-20261107/source-before/qwen_one_two/codec/backbone.py": "b76c85e94dc99c7588992459b5691ec2a97f518ecba6191f19df1cc7461326b3",
+    "data/cpu-03-20261107/source-before/qwen_one_two/codec/diagnose_precision.py": "4edc64ec7af6525493e57c33f5fe4866e9ec0c0709086ae1fa99898d75fb23f3",
+    "data/cpu-03-20261107/source-before/qwen_one_two/codec/finite.py": "031cd3714a070650619284a83205d48af5aa08f04865028f3a29076d13c98f70",
+    "data/cpu-03-20261107/source-before/qwen_one_two/codec/fixtures.py": "36c91e9d949d2d03d4aaaafa709853eaeb7796465b02f6a9853f109f95221bc3",
+    "data/cpu-03-20261107/source-before/qwen_one_two/codec/neural.py": "1ac72b7a37bc90639d1e25d0dbcd1375bc6c6e090e0306d0ef2a96c8620a4fec",
+    "data/cpu-03-20261107/source-before/qwen_one_two/codec/ownership.py": "d9f10f5f6f8a8233b208110820f4e620253e668463042a30ad2dbbce0357f8dc",
+    "data/cpu-03-20261107/source-before/qwen_one_two/codec/precision.py": "9eb775efc303ce6d9eb8bbec26ffdcd6422f37ad0732e03ef0885ae9433c8e5b",
+    "data/cpu-03-20261107/source-before/qwen_one_two/codec/qualify.py": "d1204bd1e1ce70721d03e936ec92c8e30cd9b54ce0d79e50bbab46e3fd540851",
+    "data/cpu-03-20261107/source-before/qwen_one_two/codec/qualify_matrix.py": "07e25deee4eb930d498d5ca071f76c9022ee27823d62d90fcad45f59efb5a1ff",
+    "data/cpu-03-20261107/source-before/qwen_one_two/codec/records.py": "089eb06d1fd55e9a1629297759c942f046dc570058cf9cb304c8d88069287b04",
+    "data/cpu-03-20261107/source-before/qwen_one_two/codec/recurrence.py": "c96bff0e7f56dd3ffcdde576d6d0a9a85bffe1aa7352262e41ee6560aa1f7ebc",
+    "data/cpu-03-20261107/source-before/qwen_one_two/codec/render.py": "9e16fb579268e4261cd134883e698f6ae3c69a2802f1dbc2502855062920b82b",
+    "data/cpu-03-20261107/source-before/qwen_one_two/codec/runtime.py": "350c79f141e6898c5f762bf9b9c1708bd11297bdd01227c93a39abec2bd61d3a",
+    "data/cpu-03-20261107/source-before/qwen_one_two/codec/schema.py": "5a2ff9f2f38b7338da5cf6d7f605bed953e136c37445983f0cf965f1e17dbe23",
+    "data/cpu-03-20261107/source-before/qwen_one_two/codec/session.py": "2992225ccc68128680dec23bd64d3273ca950362e35eac6a5430ad00bf45ae3b",
+    "data/cpu-03-20261107/source-before/qwen_one_two/codec/writer.py": "187d0a07a4f29c1c4da560f84f361e0099be49c588933d25c8bb35b51ddca1a0",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/__init__.py": "0a5bc5745bdcb26cbf81df3d10f5363d39539d811fd869326cb37ecb4a29a47e",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/behavior_qualification.py": "e620f747834a8fc336150588d2fac3f5b33d59a16390fda7fdadf6b40c9eee4b",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/binding.py": "6888c1a6f3597b9763f875242b34dea6f9f0abbe5f47b9529488e3aec30ddeae",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/checkpoint.py": "f94b519fe21933e5d121747d299f9005e89484fc0523047598d12be60a19f337",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/clean.py": "f9acc1c08507302b0d224be4f382e6b263ea4a12fabd138383167839185f148f",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/clean_packets.py": "7f0d846319a3b9fa391524f73894b8f13baa4f6632b3b127f094f60ba3d2a028",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/component_producer.py": "9cf2f2aea9e4e3bab4230d2fa17cc415e94ffdb6a6522075af86ef7fe2cc2aa8",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/diagnostics.py": "0e5ec6271090c034744a182c2bd4a86d421ee099be0b056da4b29438120b3060",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/driver.py": "c46128c8d9e0de5288717f4a2c6a78b6bb3fed5e4fa2a245b6123c267a587bc2",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/engine.py": "2500a47211fc13a41c3e646d2f315d2233b4304d1f67c71fb73b3eebc57aee4d",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/episodes.py": "0181ca87dff0f2cf4c3f7552aa197b9b67cd3bc0f1ad0b73e84ddcf284a7a5a5",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/host_metrics.py": "6027ae171e86d6fcf4b5eea4bdeb247ab6ad99349a9b4cdbd9b1b9ad61b9b86d",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/host_profile.py": "31d52a713e33de61e5b802a26c63f24e6dbcb476325d01afea788097e97d23e0",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/inputs.py": "8a96776ac2ab7a65f2cc51c3baaee12a333e76278775cc3d6b37b68cee99e332",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/losses.py": "a91938757131b177d38cba6e5275c0db7f7a053389a1a97c1bf173a82ae99041",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/manifest.py": "468257734527ceb5ec8656b6155388c2b3e92298f457cfa1764fd87cd58cbf5d",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/producer.py": "6827978aa735839a691f4f04f2d5cb6b2471d5c3c54c8604a76ac2ea7619e40f",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/profile.py": "3369e8e23579454fa3e71408fcb6196443cb86ed1c7e0f1f95974b91c9cc9cdb",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/qualification.py": "22d1de030bc85361a2366d03eb4c1c6c47a69f72e87fdcf59d6a9f8e04da72a9",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/receiver_learning.py": "60e5fc7eb79ac7c5374caaa72c19e3a5b2c6bea4cc6854fd9568420dd7dc7034",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/reference.py": "44cbd6da4b3374d3de7082cac633f9b63fd91cef768bd8462a01fcb17c0f2aec",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/reference_data.py": "5855ecf472ac6d553bf16372af54cc640c48deb704014e7f26eb652387a01e70",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/reference_exposure.py": "f6e576cb0ce1cd8c48275047d7c0360cf23d4b20f0bcf20eaafc3433971e1a3c",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/reference_qualification.py": "9e02394240fb88b2e4e77b604b020300d200cfae5bb217e3717247da27505db0",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/release.py": "906d6bf7fefaa9b251338e46b13dac289365f5347b73cd03b680e593578888c3",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/sampler.py": "aeee24107468a9a27657efa3ba5c053d36101aee982fad069af8411762e28950",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/two_gpu.py": "dcef17a8a6b25f2dc5af891cb893d3abc51e0bf052c5cb2177a2ef3b0f025bcf",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/two_gpu_worker.py": "fa607fe8056526b12eafa8489504fe89e911d9680eda264a791aa34c0fa576a9",
+    "data/cpu-03-20261107/source-before/qwen_one_two/training/weight_repair.py": "aff987d19f012820218758e02162d8352acce6d2983b74b9663a7afd9f4917bc"
+  }
+}

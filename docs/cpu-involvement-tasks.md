@@ -2,9 +2,9 @@
 
 Status: **CPU-01 instrumentation and CPU-02 source/specification work are
 implemented and CPU-validated**. [Results](cpu-01-02-results-2026-11-07.md).
-Actual GPU attribution and profiling overhead remain unmeasured. Both GPUs remain off, including
-status probes. No CPU model fallback, agents, new semantic data, training or
-service changes. This list does not authorize execution of GPU work or training.
+The GPU hold was lifted for throughput work on 2026-11-07. CPU-03's initial
+hardware runs are measured in the [baseline report](cpu-03-results-2026-11-07.md).
+No CPU model fallback, agents, new semantic data, training or service changes.
 
 The goal is fewer CPU instructions, launches, synchronizations and transfers per
 completed case, with a smaller CPU controller around GPU tensor computation.
@@ -81,9 +81,9 @@ future GPU runs distinguish launch/dispatch work, host waits, transfers, capture
 and device computation sufficiently to select a concrete next target. Profiling
 must not alter outputs, ledger events, eligibility or Session counts.
 
-Instrumentation/schema acceptance passes on CPU. GPU attribution, model-path
-profiling overhead and instrumented GPU output/accounting agreement are **not
-run**, deferred under CPU-03. Stage labels separate setup/startup/main but do not
+Instrumentation/schema acceptance passes on CPU. Initial GPU attribution,
+model-path profiling overhead and exact same-card instrumented receipt agreement
+are measured in CPU-03. Stage labels separate setup/startup/main but do not
 declare main cases warm; graph recapture is counted. Explicit audit-site byte
 counts do not represent every scalar or bus transfer.
 
@@ -106,21 +106,27 @@ fixtures. No required finite check or semantic decision has been deferred.
 See the [synchronization map](cpu-sync-boundaries-v1.md). The first normalization
 tail candidate has a versioned specification only; it is disabled/unimplemented.
 
-## CPU-03 — establish hardware baselines when the hold is lifted
+## CPU-03 — initial hardware baselines measured
 
-- [ ] Verify the configured cards and the new device guards. Check targeted
+- [x] Verify the configured cards and the new device guards. Check targeted
   3090 behavior and actual 3060 model loading, memory fit and numeric behavior.
   Shared startup readouts alone do not qualify the secondary card.
 - [ ] Run the fixed existing-case baseline on one card at a time, with models
   resident. Separate initialization/capture cost from warm repeated execution.
-- [ ] Record per-case CPU time, elapsed time, relevant host synchronization/
+- [x] Record per-case CPU time, elapsed time, relevant host synchronization/
   launch/transfer counts and peak memory, with actual runtime versions.
-- [ ] Define the existing forward/cache/gradient and exact-control checks needed
+- [x] Define the existing forward/cache/gradient and exact-control checks needed
   for each changed operator. Derivative-only checks take no optimizer steps.
 
 **Done when:** subsequent A/B trials can compare the same card, cases, weights
 and warm/cold conditions. Failures are recorded; no other card or CPU substitutes
 for an unavailable or incompatible GPU. No capability training is launched.
+
+Initial singleton baselines/profile and two-card runs pass; recurrence operator
+tests pass on both cards. The repeated warm comparison checkbox remains open
+for CPU-04. Full transformer-state/gradient qualification of the secondary card
+is not claimed. Actual subset recaptures, rather than simulated misses, select
+CPU-04 as the next candidate.
 
 ## CPU-04 — stop unnecessary recurrence graph capture
 
@@ -216,11 +222,10 @@ no-gradient inference path. Training itself still needs separate authorization.
 
 ## Next unfinished slice
 
-**CPU-03 hardware baseline**, once the user lifts the GPU hold: validate placement
-and compatibility, then use the prepared eight-case subset to compare baseline,
-host profiling and optional kernel/stream tracing on the same card. Complete
-CPU-01's hardware acceptance before selecting CPU-04/05/06. Nothing is queued;
-both GPUs remain off. No task starts merely by appearing here.
+**CPU-04 recurrence cache comparison:** use the observed 29-key working set to
+test bounded retention, with repeated same-card measurements, workspace and
+exact parity. Add separate parent main-phase timing. GPU use is now authorized
+for throughput diagnostics; training remains unauthorized.
 
 References: [current handoff](next-agent-handoff.md),
 [performance audit](receiver-performance-audit-2026-11-07.md),

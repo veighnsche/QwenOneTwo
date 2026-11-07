@@ -31,9 +31,10 @@ def source_hashes():
     return {str(p.relative_to(ROOT)):file_hash(p) for p in paths}
 
 
-def plan(snapshot, *, selection='full', profile_host=False, trace_cuda=False):
+def plan(snapshot, *, selection='full', profile_host=False, trace_cuda=False, devices=(PRIMARY,SECONDARY)):
     """Read existing data/manifest metadata, never weights or GPU libraries."""
     check(selection in {'full','cpu-profile'} and (not trace_cuda or profile_host),'profiling selection/options')
+    check(tuple(devices) in ((PRIMARY,),(SECONDARY,),(PRIMARY,SECONDARY)),'explicit diagnostic devices')
     release=load_release(ROOT/'data/training-collections-20261105/releases/development',expected_hash=DEV_SHA)
     manifest=decode((ROOT/CHECKPOINT/'manifest.json').read_bytes())
     check(file_hash(ROOT/CHECKPOINT/'manifest.json')==CHECKPOINT_SHA and manifest['reference_frozen']
@@ -75,13 +76,13 @@ def plan(snapshot, *, selection='full', profile_host=False, trace_cuda=False):
     return {'protocol':PROTOCOL,'profile':PROFILE,'sources':source_hashes(),'dataset':DEV_SHA,
         'snapshot':str(Path(snapshot).absolute()),'base_sha256':BASE_SHA,'diagnostic_sha256':DIAGNOSTIC_SHA,
         'checkpoint':str(CHECKPOINT),'checkpoint_manifest_sha256':CHECKPOINT_SHA,
-        'receiver':RECEIVER,'reference':REFERENCE,'devices':[{'uuid':u,'expected_name':DEVICES[u]} for u in (PRIMARY,SECONDARY)],
+        'receiver':RECEIVER,'reference':REFERENCE,'devices':[{'uuid':u,'expected_name':DEVICES[u]} for u in devices],
         'device_inventory':{'path':str(inventory.relative_to(ROOT)),'sha256':file_hash(inventory),
                             'names_verified_in_this_slice':False},
         'jobs':jobs,'cases':cases,'anchors':anchors,'omitted_reader_ids':omitted,
         'anchor_cases':anchor_cases,'selection':selection,'selection_evidence':selection_evidence,
         'profiling':{'host':bool(profile_host),'cuda_trace_first_job_per_worker':bool(trace_cuda)},
-        'presentations':{'main':len(cases),'startup_anchors':6,'distinct_existing_cases':len({c['id'] for c in cases}|set(anchors))},
+        'presentations':{'main':len(cases),'startup_anchors':3*len(devices),'distinct_existing_cases':len({c['id'] for c in cases}|set(anchors))},
         'status':'PREPARED_GPU_NOT_RUN','training_authorized':False,
         'qualification':'experimental read-only diagnostics; neither cross-device parity nor 3060 numerics qualified',
         'weight_file_hash_verification':'deferred to explicitly executed workers'}
@@ -100,12 +101,19 @@ def validate_case(case, expected, release):
 
 def compare_ready(messages, prepared):
     """Small shared-case observation only; not full state/gradient qualification."""
-    check(set(messages)=={PRIMARY,SECONDARY},'two unique device readiness receipts required')
+    devices=[d['uuid'] for d in prepared.get('devices',[{'uuid':PRIMARY},{'uuid':SECONDARY}])]
+    check(set(messages)==set(devices),'planned unique device readiness receipts required')
     for uuid,m in messages.items():
         check(m['uuid']==uuid and m['receiver']==prepared['receiver'] and m['reference']==prepared['reference']
               and m['base_frozen'] and m['gradients_none'] and m['optimizer_updates']==0
               and m['device_name'].endswith(DEVICES[uuid]),'worker weight identity/device/read-only check')
         check([c['id'] for c in m['anchors']]==prepared['anchors'],'shared anchor order')
+        for case in m['anchors']:
+            check(case['failure'] is None,'invalid shared anchor')
+            flags=('latent_request','latent_return','bound_snapshot','candidate_binding','consumed',
+                   'single_prefill','cache_continuity','accounting')
+            check(all(case['transport'].get(k) is True for k in flags),'invalid shared anchor transport')
+    if len(devices)==1:return  # No cross-device parity claim from a singleton.
     left,right=(messages[u]['anchors'] for u in (PRIMARY,SECONDARY))
     for a,b in zip(left,right):
         check(a['failure'] is None and b['failure'] is None,'invalid shared anchor')
@@ -123,14 +131,14 @@ def compare_ready(messages, prepared):
 
 
 def dispatch(jobs, devices, target, args, *, on_ready, on_result, on_final):
-    """Two processes pull whole jobs on completion; no static throughput ratio.
+    """One/two processes pull whole jobs on completion; no throughput ratio.
 
     Any infrastructure failure stops our own children; no fallback, retry, or
     existing service control. Callbacks persist partial receipts before cleanup.
     """
     ctx=mp.get_context('spawn');pending=deque(enumerate(jobs));active={};processes=[];ready={};busy={}
     completed=set();stopping=set();started=time.monotonic();cpu_started=time.process_time_ns();sends=receives=0
-    check(len(devices)==2 and len(set(devices))==2,'two unique workers required')
+    check(1<=len(devices)<=2 and len(set(devices))==len(devices),'one or two unique workers required')
     try:
         for uuid in devices:
             parent,child=ctx.Pipe();proc=ctx.Process(target=target,args=(child,uuid,*args))

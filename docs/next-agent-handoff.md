@@ -41,7 +41,40 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — CPU-01/02 implemented, GPUs remain off
+## Current checkpoint — CPU-03 hardware baselines complete
+
+The user lifted the GPU hold on 2026-11-07 for throughput work. Both configured
+cards are available for explicit read-only diagnostics; no agents, training,
+new semantic data or service changes. [Measured CPU-03 report](cpu-03-results-2026-11-07.md)
+and [portable evidence](evidence/cpu-03-v1.json). Earlier hold statements below
+describe their historical turns and no longer block authorized throughput work.
+
+Six eight-case runs complete: baseline/profile on each card, a first-job 3090
+CUDA trace and a two-card trial. Same-card instrumentation receipts match
+exactly; cross-card control/provenance match and scalar maximum difference is
+2.384185791015625e-7. All weights remain frozen/unchanged with grad=None and zero
+updates. No semantic or full 3060 numeric qualification is granted.
+
+3090/3060 baseline summed main intervals are 12.646896/12.384660 s; main CPU
+costs 1.567354/1.535788 seconds/case. Two-card end-to-end is 35.499134 s versus
+39.483971 s on 3090, a local 1.112× throughput observation with setup included.
+Do not claim a steady-state 2× benefit. CPU-03 adds singleton worker selection
+and measured memory; separate parent main-phase timing is still needed.
+
+Eight existing recurrence tests pass on each card. A failed initial 3060
+checkpoint test exposed loss of thread-local diagnostic permission in autograd
+engine threads. Admission and optimizer prohibition are now process-wide within
+the dedicated non-nested diagnostic scope. The failed log is retained; the
+corrected suite passes. CPU tests pass 24/24 in 6.770 s.
+
+**Next unfinished slice: CPU-04**. Actual main-work counters show 83 recaptures
+and evictions at capacity eight across 29 keys, costing about 0.7 CPU-seconds.
+Compare a larger bounded cache with same-card repeated measurements and exact
+output/gradient/cache/accounting checks. Do not remove finite checks or change
+model arithmetic. Full warm distributions/transformer-state numeric comparison
+across cards are not certified by the initial baselines.
+
+## Previous checkpoint — CPU-01/02 implemented, GPUs remained off
 
 The user authorized CPU-01/02 implementation, with both GPUs off, existing data,
 no agents or training, and direct commit/push. The existing diagnostic runner

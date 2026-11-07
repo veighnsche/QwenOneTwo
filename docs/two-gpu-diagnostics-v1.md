@@ -1,5 +1,9 @@
 # Two-GPU diagnostic runner — build evidence, 2026-11-07
 
+Historical build report. The hold was subsequently lifted; singleton selection,
+process-wide diagnostic thread guards and actual hardware measurements are in
+[CPU-03 results](cpu-03-results-2026-11-07.md).
+
 **Built and CPU-validated; both GPUs remain off.** No model runtime was imported
 by the preparation/test processes, no GPU/status tools ran, and no model weights
 were loaded. No agents, new semantic data/reviews, training or service changes.
