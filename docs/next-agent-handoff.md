@@ -5,6 +5,14 @@ Read this first for current status, then the
 topic contracts. Historical reports describe their recorded sources and runs.
 This handoff records measured mechanisms, not learned capability.
 
+## Current operating constraint — GPUs closed again, 2026-11-08
+
+The user renewed the hold on both GPUs after the completed comparison. No GPU
+workloads, device probes or GPU status tools until explicit reopening. No CPU
+model fallback. Ordinary CPU editing, saved-receipt analysis and static checks
+remain possible. Leave live services and The Operating Table unchanged. No new
+model run was launched for this status update; older permissions below are history.
+
 ## User direction: MVP gates — 2026-11-06
 
 Keep the following tests and their recorded results, but reconsider their role
