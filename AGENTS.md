@@ -34,6 +34,9 @@ training scope; this does not authorize general training or automatic extensions
 The user then authorized the matched value-only comparison, using the saved
 1,003 features and exact original initialization/exposure, with W/reference
 frozen and Choice unchanged. Scope: docs/receiver-value-only-comparison-v1.md.
+The user subsequently authorized the simple direct-readout diagnostic on saved
+latent features, with W/reference frozen, training/development separate, no agents
+or new data. Scope: docs/direct-latent-readout-v1.md; no production promotion.
 
 One user submission, one prompt prefill, one hybrid cache. Qev decision LoRA is
 on for the initial continuous budget readout, off for native generation, and
