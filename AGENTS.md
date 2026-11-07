@@ -5,9 +5,11 @@ remaining work and scope boundaries before continuing implementation.
 
 As of 2026-11-08, the user has closed both GPUs again. Do not run GPU workloads,
 device probes or GPU status tools until the user explicitly lifts this hold.
-Continue only ordinary CPU editing, metadata analysis and static checks; CPU
-model execution remains prohibited. Leave existing services unchanged. This
-current hold supersedes the historical GPU authorizations recorded below.
+The user also explicitly bans work that ramps up the fans: no CPU-heavy jobs,
+benchmarks, broad test suites or parallel workers during this noise hold. Keep
+any work light: small file edits, bounded text/metadata reads and lightweight
+static checks. CPU model execution remains prohibited. Do not change fan controls
+or existing services. This hold supersedes historical workload authorizations.
 
 All model workloads must run on an explicitly selected CUDA GPU. Use the RTX
 3090 UUID GPU-225509c3-d702-6c27-de03-76b5e99b33b1. No CPU fallback for inference,

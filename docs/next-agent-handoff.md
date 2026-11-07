@@ -5,13 +5,15 @@ Read this first for current status, then the
 topic contracts. Historical reports describe their recorded sources and runs.
 This handoff records measured mechanisms, not learned capability.
 
-## Current operating constraint — GPUs closed again, 2026-11-08
+## Current operating constraint — GPU and fan-noise hold, 2026-11-08
 
 The user renewed the hold on both GPUs after the completed comparison. No GPU
 workloads, device probes or GPU status tools until explicit reopening. No CPU
-model fallback. Ordinary CPU editing, saved-receipt analysis and static checks
-remain possible. Leave live services and The Operating Table unchanged. No new
-model run was launched for this status update; older permissions below are history.
+model fallback. The user further clarified that ramping up the fans is banned:
+no CPU-heavy jobs, benchmarks, broad test suites or parallel workers. Only light
+editing, bounded text/metadata reads and lightweight static checks remain within
+scope. Do not change fan controls, live services or The Operating Table. Older
+workload permissions below are historical until the user lifts this restriction.
 
 ## User direction: MVP gates — 2026-11-06
 
