@@ -6,6 +6,9 @@ The GPU hold was lifted for throughput work on 2026-11-07. CPU-03's initial
 hardware runs are measured in the [baseline report](cpu-03-results-2026-11-07.md).
 CPU-04's bounded retention policy and initial CPU-08 subset integration are
 measured in the [cache report](cpu-04-results-2026-11-07.md).
+The subsequent [kernel screens](throughput-kernel-screens-2026-11-07.md) adopt
+no kernel. [Resident-pool results](resident-pool-results-2026-11-07.md) add an
+opt-in two-process/card mode: higher queue throughput with higher CPU/memory cost.
 No CPU model fallback, agents, new semantic data, training or service changes.
 
 The goal is fewer CPU instructions, launches, synchronizations and transfers per
@@ -167,6 +170,11 @@ new profiling establishes a larger cost.
 
 ## CPU-06 — larger GPU execution blocks
 
+Screened, not adopted: exact RMS replay/pointwise variants have modest isolated
+gains; native RMS fails the original strict feedback state/gradient limits.
+Prototype code is archived, not enabled. This task's full-case acceptance remains
+open; scalar agreement cannot substitute for the failed state/gradient checks.
+
 - [ ] Prototype one pure tensor region using existing-order CUDA graph replay.
   Use compilation or custom fused kernels as separate candidates if justified.
 - [ ] Keep Session/registry/ledger mutation outside capture. Respect every
@@ -217,6 +225,13 @@ Initial eight-case integration only: 1.600930× main-phase throughput, 1.084579�
 end-to-end; two cards use 6.6818% more worker CPU/case and 65.8653% more
 setup-inclusive CPU/case. Full/long-run scaling is not established by one pair.
 
+Later, three alternating 24-presentation comparisons of two/four processes on
+both cards give **1.381197× main / 1.053164× end-to-end throughput**. Worker
+CPU/case rises **32.9089%**; setup-inclusive total CPU/case rises **81.2976%**.
+Use explicit `--workers-per-device 2` only when the queue-throughput tradeoff is
+desired; default remains one. All same-card receipts/accounting and frozen-weight
+checks pass. These gains must not be multiplied by the earlier eight-case results.
+
 ## CPU-09 — future training execution, not today's read-only diagnostics
 
 - [ ] If separately authorized, compare activation checkpoint/rematerialization
@@ -232,11 +247,12 @@ no-gradient inference path. Training itself still needs separate authorization.
 
 ## Next unfinished slice
 
-**CPU-06 candidate selection:** use the existing CUDA trace to identify a larger
-pure backbone region between mandatory checks. Select and specify the region
-before building; normalization-tail capture remains a possible unimplemented
-candidate. CPU-05 transfers are not the next measured cost. GPU throughput work
-is authorized; training remains unauthorized.
+**CPU-06 per-case host-work reduction:** screened normalization kernels do not
+qualify a safe substantial complete-case improvement. Select a larger region or
+shared-context approach only after specifying original numeric/error boundaries
+and reference/live isolation. Keep the narrower pool default for CPU efficiency.
+CPU-05 transfers are not the next measured cost. GPU throughput work is authorized;
+training remains unauthorized.
 
 References: [current handoff](next-agent-handoff.md),
 [performance audit](receiver-performance-audit-2026-11-07.md),

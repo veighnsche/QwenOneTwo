@@ -11,9 +11,11 @@ from .host_metrics import Recorder,stamp,elapsed
 from .two_gpu import ROOT,CHECKPOINT,PROFILE,RECEIVER,REFERENCE
 
 
-def worker(connection, uuid, prepared, execute_gpu=False):
+def worker(connection, worker_id, prepared, execute_gpu=False):
     try:
         check(execute_gpu is True,'GPU execution must be explicitly requested')
+        specs=[w for w in prepared['workers'] if w['id']==worker_id]
+        check(len(specs)==1,'unplanned diagnostic worker');uuid=specs[0]['uuid']
         started=stamp();basic=Recorder();options=prepared['profiling']
         detail=Recorder() if options['host'] else None
         check('torch' not in sys.modules,'set worker CUDA visibility before model runtime import')
@@ -58,7 +60,7 @@ def worker(connection, uuid, prepared, execute_gpu=False):
                     check(base['pass'] and base['base_tied_storage'],'frozen tied W mismatch')
                     check(receiver_hash(b,c)==RECEIVER and ref.fingerprint()==REFERENCE==ref.artifact_id,'receiver/reference changed')
                     check(all(not p.requires_grad and p.grad is None for m in (b,c,ref) for p in m.parameters()),'read-only model ownership')
-                    return {'uuid':uuid,'device_name':torch.cuda.get_device_name(0),'base_frozen':True,'base_check':base,
+                    return {'worker_id':worker_id,'pid':os.getpid(),'uuid':uuid,'device_name':torch.cuda.get_device_name(0),'base_frozen':True,'base_check':base,
                             'receiver':RECEIVER,'reference':REFERENCE,'gradients_none':True,'optimizer_updates':0,
                             'torch_version':torch.__version__,'cuda_runtime':torch.version.cuda,
                             'profile':PROFILE,'recurrence_cache_limit':recurrence.CACHE_LIMIT,
@@ -110,7 +112,7 @@ def worker(connection, uuid, prepared, execute_gpu=False):
                     else:results=[evaluated(k,'main_cases',ordinal+i) for i,k in enumerate(message['job']['ids'])]
                 trace_path=None
                 if trace_this:
-                    trace_path=str(Path(prepared['output_directory'])/('cuda-trace-'+uuid+'.json'))
+                    trace_path=str(Path(prepared['output_directory'])/('cuda-trace-'+worker_id.replace('/','-worker-')+'.json'))
                     trace.export_chrome_trace(trace_path);traced=True
                 ordinal+=len(results)
                 job_measurement=elapsed(start)

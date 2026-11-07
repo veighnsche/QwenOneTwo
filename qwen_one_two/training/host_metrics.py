@@ -94,7 +94,9 @@ def readback_bytes(tensor):
 
 def aggregate(parent,workers,case_metrics,wall_ns):
     """CPU totals include setup/anchors/idle; main-only cost is separate."""
-    ids=[c['id'] for c in case_metrics]
+    if any(type(c.get('repetition',0)) is not int or c.get('repetition',0)<0 for c in case_metrics):
+        raise ValueError('invalid measured repetition')
+    ids=[(c.get('repetition',0),c['id']) for c in case_metrics]
     if len(ids)!=len(set(ids)):raise ValueError('duplicate measured main case')
     def interval(value):
         if any(type(value[k]) is not int or value[k]<0 for k in ('cpu_ns','wall_ns')):
@@ -103,9 +105,10 @@ def aggregate(parent,workers,case_metrics,wall_ns):
     for value in workers.values():interval(value['process_total'])
     for value in case_metrics:interval(value)
     if sum(v['main_case_count'] for v in workers.values())!=len(ids):raise ValueError('worker measured case count')
-    if any(c.get('uuid') not in workers for c in case_metrics):raise ValueError('unknown measured worker')
+    def owner(c):return c.get('worker_id',c.get('uuid'))
+    if any(owner(c) not in workers for c in case_metrics):raise ValueError('unknown measured worker')
     for uuid,value in workers.items():
-        own=[c for c in case_metrics if c['uuid']==uuid]
+        own=[c for c in case_metrics if owner(c)==uuid]
         if len(own)!=value['main_case_count']:raise ValueError('per-worker case count')
         if any(sum(c[k] for c in own)>value['process_total'][k] for k in ('cpu_ns','wall_ns')):
             raise ValueError('case intervals exceed worker total')

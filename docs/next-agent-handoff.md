@@ -41,21 +41,67 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current work — throughput kernel screens rejected; pool validation in progress
+## Current checkpoint — opt-in resident pool measured; kernel shortcuts rejected
 
-[Kernel screening report](throughput-kernel-screens-2026-11-07.md) and
-[portable evidence](evidence/throughput-kernel-screens-v1.json) record completed
-CPU-06 investigations. No kernel was adopted. Native RMS fails the original
-strict FP32 state/gradient limits in the first 128-position Noul pair; other
-requested pairs are NOT RUN. Replay/pointwise/finite prototypes have only modest
-isolated gains. Temporary code is archived locally, with original math restored.
-No fitting, agents, new semantic data or service changes occurred.
+GPU throughput work remains authorized, with existing data and frozen W/reference.
+No agents, new semantic data/reviews, training or live-service changes. QwenOneTwo’s
+server **PID 2094 (`qwen-one-two.service`, port 3211)** was deliberately left running.
+Read [pool results](resident-pool-results-2026-11-07.md),
+[pool contract](resident-worker-pool-v1.md), [portable evidence](evidence/resident-worker-pool-v1.json),
+and [rejected kernel screens](throughput-kernel-screens-2026-11-07.md).
 
-An opt-in resident-worker pool is being implemented/validated in the working
-checkout using the existing dispatcher. Its initial same-card 24-case probe
-improves main throughput about 1.64× with two 3090 processes, at higher CPU and
-memory cost. Final two-versus-four-worker comparisons and the implementation
-commit are still pending at this checkpoint. This is no training authorization.
+The existing runner adds `--workers-per-device 1|2` and `--repetitions N`.
+Defaults remain one process/card and one presentation. Logical worker IDs bind
+physical UUIDs before Torch import; each process owns a complete frozen model
+and whole independent Sessions. Repeated coverage/accounting uses `(repetition,
+case ID)`. Reports distinguish worker/device counts, preserve all observations,
+and score only the first repetition. Same-GPU receipts must match exactly.
+No episode/cache/packet is split or shared across workers; no new coordinator.
+
+Three alternating two-card pairs compare **two versus four processes** on the
+same **24-presentation queue** (eight existing cases × three). Median main time
+**16.858844 → 12.205966 s**, throughput **1.381197×**. End-to-end
+**44.831816 → 42.568699 s**, only **1.053164×**. Worker CPU/case increases
+**32.9089%** (1.333451 → 1.772276 s); parent-plus-workers setup-inclusive CPU/case
+increases **81.2976%** (3.370115 → 6.109938 s). Allocation roughly doubles with
+replicated BF16 models. This is a throughput/CPU/memory tradeoff, not reduced CPU
+work. Keep the narrower default; do not multiply these gains by prior reports.
+
+All three pairs improve main and end-to-end throughput. **198 final presentations**
+(144 main + 54 startup) pass independent admission/receipt accounting. Every main
+receipt matches its same-card CPU-04 baseline exactly. Initial/final W/tying,
+receiver/reference fingerprints and grad=None pass, with zero updates. Six run
+exit codes are zero. Model/codec/device/precision/source/reference/evaluator math
+remains byte-identical to `c8e9daf`; unchanged numeric/gradient evidence is reused.
+**30 CPU tests pass in 10.791 s**, with model imports blocked, including spawned
+one/two/four-process echo fixtures. Final admission tests pass 7/7 in 0.007 s;
+all six saved startup sets pass the strengthened same-card group check. Timing
+sources precede that CPU-only checker refinement; only `compare_ready` changes,
+with both versions/AST evidence retained. Raw sources, plans, receipts, all timing
+samples and audits: `data/cpu-06-20261107/`.
+
+The initial single-card probe (one pair, 24 cases) measured **1.638×** main
+throughput for two 3090 processes, at higher CPU cost. It is exploratory support,
+not a separate long-run qualification. Main queue timing may overlap earlier
+workers’ final checks. Individual allocation peaks are not sampled device peaks.
+Full-context/310-case scaling, training memory and four-worker CUDA profiling
+remain unqualified. Existing semantic failures and lack of learned invocation
+remain unchanged; no ReferenceEvidence/accelerator grant is produced.
+
+**CPU-06 findings:** native fused RMS fails original strict FP32 states and
+parameter-gradient limits in the first 128-position Noul pair (worst state RMS
+7.98795e-5; wire gradient RMS 0.0055445). Other requested pairs are NOT RUN after
+rejection. Replay/pointwise and finite-predicate variants have only modest isolated
+gains and were not adopted. Their code/logs are archived; no prototype remains
+active. No tolerance, precision, guard timing or model arithmetic was relaxed.
+[Screening evidence](evidence/throughput-kernel-screens-v1.json).
+
+**Next unfinished target:** reduce per-case host work without more replicas.
+CPU-06 remains open. A larger pure region must retain exact operations or pass
+original strict qualification; native RMS is not an approved shortcut. A shared
+CUDA-context/weight approach would need reference/live and mutable-module
+isolation first. Keep all immediate failure boundaries; do not start training,
+deployment, unbounded pool growth or another numeric matrix merely by default.
 
 ## Previous checkpoint — CPU-04 retention measured; two-card integration passes
 

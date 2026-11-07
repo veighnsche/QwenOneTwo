@@ -119,6 +119,16 @@ class HostMetricsTests(unittest.TestCase):
         self.assertIsNone(r['gpu_compute_ns']);self.assertIsNone(r['gpu_idle_ns'])
         json.dumps(r,allow_nan=False)
 
+    def test_shared_gpu_workers_and_explicit_repetitions_account_once(self):
+        p,w,c=self.data()
+        for i,case in enumerate(c):case.update(id='SAME_RECORD',worker_id=case['uuid'],uuid='ONE_PHYSICAL_GPU',repetition=i)
+        r=aggregate(p,w,c,2500)
+        self.assertEqual(r['completed_main_cases'],2);self.assertEqual(r['parent_plus_worker_cpu_ns'],220)
+        c[1]['repetition']=0
+        with self.assertRaisesRegex(ValueError,'duplicate'):aggregate(p,w,c,2500)
+        c[1]['repetition']=-1
+        with self.assertRaisesRegex(ValueError,'repetition'):aggregate(p,w,c,2500)
+
     def test_aggregate_rejects_bad_coverage_and_intervals(self):
         for change in (lambda p,w,c:c.append(c[0]),lambda p,w,c:c[0].update(cpu_ns=-1),
                        lambda p,w,c:c[0].update(uuid='foreign'),lambda p,w,c:w['TEST_A'].update(main_case_count=2),
@@ -179,3 +189,16 @@ class ProfilingPlanTests(unittest.TestCase):
         from qwen_one_two.training.two_gpu import plan
         for limit in (0,16,True):
             with self.assertRaisesRegex(ValueError,'cache capacity'):plan('/never-opened',cache_limit=limit)
+
+    def test_repeated_pool_binds_worker_ids_to_devices_and_declares_all_cases(self):
+        from qwen_one_two.training.two_gpu import plan
+        p=plan('/TEST_ONLY_NOT_OPENED',selection='cpu-profile',workers_per_device=2,repetitions=3)
+        self.assertEqual(len(p['cases']),8);self.assertEqual(len(p['jobs']),21)
+        self.assertEqual(len(p['workers']),4);self.assertEqual(len({w['id'] for w in p['workers']}),4)
+        self.assertEqual(p['presentations'],{'main':24,'startup_anchors':12,'distinct_existing_cases':11})
+        self.assertEqual(sum(len(j['ids']) for j in p['jobs']),24)
+        for r in range(3):
+            own=[j for j in p['jobs'] if j['repetition']==r]
+            self.assertEqual(sum(len(j['ids'])==2 for j in own),1)
+        for kwargs in ({'workers_per_device':3},{'workers_per_device':True},{'repetitions':0},{'repetitions':True}):
+            with self.assertRaises(ValueError):plan('/never-opened',**kwargs)

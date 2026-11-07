@@ -21,10 +21,11 @@ def run(path, *, execute_gpu=False):
     parent_start=stamp();parent_metrics=Recorder()
     path=Path(path).resolve();out=output_directory(path.parent)
     prepared=decode(path.read_bytes())
-    check({'selection','profiling','anchor_cases','recurrence_cache_limit'}<=set(prepared),'old measurement plan; prepare a new source-bound plan')
+    check({'selection','profiling','anchor_cases','recurrence_cache_limit','workers','repetitions'}<=set(prepared),'old measurement plan; prepare a new source-bound plan')
     check(prepared==plan(prepared['snapshot'],selection=prepared['selection'],
         profile_host=prepared['profiling']['host'],trace_cuda=prepared['profiling']['cuda_trace_first_job_per_worker'],
-        devices=tuple(d['uuid'] for d in prepared['devices']),cache_limit=prepared['recurrence_cache_limit']),
+        devices=tuple(d['uuid'] for d in prepared['devices']),cache_limit=prepared['recurrence_cache_limit'],
+        workers_per_device=prepared['workers_per_device'],repetitions=prepared['repetitions']),
         'plan/source/data/checkpoint metadata drift')
     # An existing journal/lock is never overwritten or silently replayed. Partial
     # receipts are forensic evidence, not admitted accelerator qualification.
@@ -33,7 +34,8 @@ def run(path, *, execute_gpu=False):
     release=load_release(ROOT/'data/training-collections-20261105/releases/development',expected_hash=DEV_SHA)
     parent_preparation=elapsed(parent_start)
     expected={c['id']:c for c in prepared['cases']};anchor_expected={c['id']:c for c in prepared['anchor_cases']}
-    received={};finals={};readiness={};measurements=[]
+    workers={w['id']:w['uuid'] for w in prepared['workers']}
+    received={};finals={};readiness={};measurements=[];same_card={}
     with (out/'events.jsonl').open('x') as stream:
         def emit(entry):
             with parent_metrics.span('journal_encode'):body=json.dumps(entry,allow_nan=False)+'\n'
@@ -48,31 +50,38 @@ def run(path, *, execute_gpu=False):
             for m in messages.values():
                 for case in m['anchors']:validate_case(case,anchor_expected[case['id']],release)
             compare_ready(messages,prepared);readiness.update(messages)
-        def result(uuid,index,message):
-            emit({'event':'result','uuid':uuid,**message})
+        def result(worker_id,index,message):
+            uuid=workers[worker_id];job=prepared['jobs'][index];repetition=job.get('repetition',0)
+            emit({'event':'result','worker_id':worker_id,'uuid':uuid,**message})
             check([c['id'] for c in message['cases']]==prepared['jobs'][index]['ids'],'job case coverage/order')
             check([m['id'] for m in message['case_measurements']]==prepared['jobs'][index]['ids'],'measurement case coverage/order')
-            measurements.extend(dict(m,uuid=uuid) for m in message['case_measurements'])
+            measurements.extend(dict(m,uuid=uuid,worker_id=worker_id,repetition=repetition) for m in message['case_measurements'])
             for case in message['cases']:
                 validate_case(case,expected[case['id']],release)
-                check(case['id'] not in received,'duplicate case receipt');received[case['id']]=(uuid,case)
-        def final(uuid,message):
+                key=(repetition,case['id']);check(key not in received,'duplicate case presentation')
+                identity=(uuid,case['id'])
+                if identity in same_card:check(case==same_card[identity],'same-device repeated case changed')
+                else:same_card[identity]=case
+                received[key]=(worker_id,case)
+        def final(worker_id,message):
+            uuid=workers[worker_id]
             emit({'event':'final','worker':message})
-            check(message['uuid']==uuid and message['base_frozen'] and message['gradients_none']
+            check(message['worker_id']==worker_id and message['uuid']==uuid and message['base_frozen'] and message['gradients_none']
                   and message['optimizer_updates']==0 and message['receiver']==prepared['receiver']
                   and message['reference']==prepared['reference'] and message['device_name'].endswith(DEVICES[uuid]),
                   'invalid final read-only receipt')
-            finals[uuid]=message
+            finals[worker_id]=message
         try:
             from qwen_one_two.training.two_gpu_worker import worker
             worker_plan=dict(prepared,output_directory=str(out))
-            devices=[d['uuid'] for d in prepared['devices']]
+            devices=list(workers)
             timing=dispatch(prepared['jobs'],devices,worker,(worker_plan,True),
                 on_ready=lambda m:parent_metrics.call('ready_validate',ready,m),
                 on_result=lambda u,i,m:parent_metrics.call('result_validate',result,u,i,m),
                 on_final=lambda u,m:parent_metrics.call('final_validate',final,u,m))
-            check(set(received)==set(expected) and set(finals)==set(devices),'incomplete diagnostic run')
-            cases=[received[c['id']][1] for c in prepared['cases']]
+            coverage={(r,key) for r in range(prepared['repetitions']) for key in expected}
+            check(set(received)==coverage and set(finals)==set(devices),'incomplete diagnostic run')
+            cases=[received[(0,c['id'])][1] for c in prepared['cases']]
             from qwen_one_two.training.behavior_qualification import summarize,grade
             x=[c for c in cases if expected[c['id']]['panel']=='X']
             summary=(summarize(release,x,unchanged=True) if prepared['selection']=='full' else
@@ -84,18 +93,24 @@ def run(path, *, execute_gpu=False):
                 for op in ('Noul','Choice','Score')}
             report={'protocol':PROTOCOL,'status':'COMPLETED_UNQUALIFIED','plan_sha256':digest(canonical(prepared)),
                 'scope':'experimental forced latent receiver diagnostics; not learned invocation, native answer use or accelerator qualification',
-                'timing':timing,'device_case_counts':dict(Counter(u for u,_ in received.values())),
+                'timing':timing,'device_case_counts':dict(Counter(workers[w] for w,_ in received.values())),
+                'worker_case_counts':dict(Counter(w for w,_ in received.values())),
                 'worker_initial':readiness,'worker_final':finals,'cases':cases,'X_summary':summary,'E_summary':e_summary,
                 'optimizer_updates':0,'training_authorized':False,'accelerator_qualification_granted':False}
+            report['presentations']=prepared['presentations']
+            report['score_scope']='first repetition; repeats are throughput observations, not additional independent cases'
+            if prepared['repetitions']>1:
+                report['repeated_cases']=[{'repetition':r,'worker_id':received[(r,c['id'])][0],
+                    'case':received[(r,c['id'])][1]} for r in range(prepared['repetitions']) for c in prepared['cases']]
             parent_total=elapsed(parent_start)
             report['host_measurements']=aggregate(dict(parent_total,preparation=parent_preparation,reporting=parent_metrics.snapshot()),
                 {u:m['host_measurements'] for u,m in finals.items()},measurements,parent_total['wall_ns'])
             order={c['id']:i for i,c in enumerate(prepared['cases'])}
-            report['case_measurements']=sorted(measurements,key=lambda m:order[m['id']])
+            report['case_measurements']=sorted(measurements,key=lambda m:(m['repetition'],order[m['id']]))
             report['profiling']=prepared['profiling']
         except BaseException as exc:
             report={'protocol':PROTOCOL,'status':'FAILED_UNQUALIFIED','plan_sha256':digest(canonical(prepared)),
-                'error':repr(exc),'received_case_ids':list(received),'final_worker_receipts':finals,
+                'error':repr(exc),'received_case_presentations':list(received),'final_worker_receipts':finals,
                 'accelerator_qualification_granted':False,'training_authorized':False}
             report['parent_measurements']=dict(elapsed(parent_start),reporting=parent_metrics.snapshot())
             write_report(report);raise
@@ -111,11 +126,14 @@ def main():
     prepare.add_argument('--trace-cuda',action='store_true',help='future execution only: trace first main job per worker; implies host profiling')
     prepare.add_argument('--device',choices=('3090','3060','both'),default='both')
     prepare.add_argument('--cache-limit',type=int,choices=(8,32),default=8)
+    prepare.add_argument('--workers-per-device',type=int,choices=(1,2),default=1)
+    prepare.add_argument('--repetitions',type=int,default=1)
     execute=sub.add_parser('run');execute.add_argument('--plan',required=True);execute.add_argument('--execute-gpu',action='store_true')
     a=p.parse_args()
     if a.command=='prepare':
         devices={'3090':(PRIMARY,),'3060':(SECONDARY,),'both':(PRIMARY,SECONDARY)}[a.device]
-        prepared=plan(a.snapshot,selection=a.selection,profile_host=a.profile_host or a.trace_cuda,trace_cuda=a.trace_cuda,devices=devices,cache_limit=a.cache_limit)
+        prepared=plan(a.snapshot,selection=a.selection,profile_host=a.profile_host or a.trace_cuda,trace_cuda=a.trace_cuda,
+            devices=devices,cache_limit=a.cache_limit,workers_per_device=a.workers_per_device,repetitions=a.repetitions)
         out=output_directory(a.output);out.mkdir(parents=True,exist_ok=False)
         (out/'plan.json').write_bytes(canonical(prepared))
         print(json.dumps({'status':prepared['status'],'jobs':len(prepared['jobs']),'cases':len(prepared['cases']),

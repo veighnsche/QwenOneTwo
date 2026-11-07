@@ -8,6 +8,13 @@ The later [CPU-04 results](cpu-04-results-2026-11-07.md) add `prepare --cache-li
 32-entry diagnostic option is measured on both cards; general model/training
 defaults remain eight. Fresh source-bound plans are required.
 
+The later [resident pool v1](resident-worker-pool-v1.md) adds explicit one/two
+processes per card and repeated observations to this same runner. Defaults stay
+one process/card and one presentation. [Measured results](resident-pool-results-2026-11-07.md)
+report three two/four-process comparisons, including higher CPU/memory cost.
+Logical-worker IDs are distinct from physical UUIDs; startup/trace/coverage
+receipts bind both. No model arithmetic or service is changed.
+
 **Built and CPU-validated; both GPUs remain off.** No model runtime was imported
 by the preparation/test processes, no GPU/status tools ran, and no model weights
 were loaded. No agents, new semantic data/reviews, training or service changes.

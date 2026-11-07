@@ -86,6 +86,13 @@ class DevicePolicyTests(unittest.TestCase):
 
 
 class DispatchTests(unittest.TestCase):
+    def test_four_application_workers_cover_the_same_queue(self):
+        devices=['fixture-'+str(i) for i in range(4)];jobs=[{'ids':['TEST_ONLY-'+str(i)]} for i in range(12)]
+        received=[];finals=[]
+        r=dispatch(jobs,devices,fixture_worker,(),on_ready=lambda m:self.assertEqual(set(m),set(devices)),
+            on_result=lambda w,i,m:received.append((i,m['echo'])),on_final=lambda w,m:finals.append(w))
+        self.assertEqual([j for i,j in sorted(received)],jobs);self.assertEqual(set(finals),set(devices))
+        self.assertEqual(r['ipc_sends'],16);self.assertEqual(r['ipc_receives'],20)
     def test_single_resident_worker_covers_jobs_without_cross_device_claim(self):
         jobs=[{'ids':['TEST_ONLY-'+str(i)]} for i in range(3)];received=[];finals=[]
         result=dispatch(jobs,['fixture-a'],fixture_worker,(),on_ready=lambda m:self.assertEqual(set(m),{'fixture-a'}),
@@ -122,6 +129,22 @@ class DispatchTests(unittest.TestCase):
 
 
 class ReceiptTests(unittest.TestCase):
+    def test_worker_pool_admission_rejects_alias_and_same_card_drift(self):
+        p,original=self.readiness();p['workers']=[];messages={}
+        for uuid in (PRIMARY,SECONDARY):
+            for slot in range(2):
+                key=uuid+'/'+str(slot);p['workers'].append({'id':key,'uuid':uuid})
+                messages[key]=dict(copy.deepcopy(original[uuid]),worker_id=key)
+        compare_ready(messages,p)
+        key=PRIMARY+'/1';bad=copy.deepcopy(messages);bad[key]['worker_id']='other'
+        with self.assertRaises(ValueError):compare_ready(bad,p)
+        bad=copy.deepcopy(messages);bad[key]['anchors'][0]['predicted_value']+=1e-8
+        with self.assertRaisesRegex(ValueError,'same-device'):compare_ready(bad,p)
+        bad=copy.deepcopy(messages);bad[SECONDARY+'/1']['anchors'][0]['predicted_value']+=1e-8
+        with self.assertRaisesRegex(ValueError,'same-device'):compare_ready(bad,p)
+        bad=copy.deepcopy(messages);bad[key]['uuid']=SECONDARY
+        with self.assertRaises(ValueError):compare_ready(bad,p)
+
     def readiness(self):
         prepared={'receiver':'TEST_ONLY_RECEIVER','reference':'TEST_ONLY_REFERENCE','anchors':['TEST_ONLY']}
         messages={u:{'uuid':u,'receiver':prepared['receiver'],'reference':prepared['reference'],
@@ -171,3 +194,11 @@ class ReceiptTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'explicitly requested'):worker(conn,SECONDARY,{})
         self.assertEqual(os.environ.get('CUDA_VISIBLE_DEVICES'),before)
         self.assertEqual(conn.send.call_args.args[0]['kind'],'error');conn.close.assert_called_once()
+
+    def test_child_rejects_unplanned_pool_member_before_runtime_or_visibility_change(self):
+        from qwen_one_two.training.two_gpu_worker import worker
+        conn=Mock();before=os.environ.get('CUDA_VISIBLE_DEVICES')
+        with self.assertRaisesRegex(ValueError,'unplanned diagnostic worker'):
+            worker(conn,'unknown',{'workers':[{'id':PRIMARY,'uuid':PRIMARY}]},True)
+        self.assertEqual(os.environ.get('CUDA_VISIBLE_DEVICES'),before)
+        self.assertEqual(conn.send.call_args.args[0]['kind'],'error')
