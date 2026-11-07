@@ -69,6 +69,7 @@ def numeric_checks(codec, repair, features, train, ids):
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--snapshot', required=True); ap.add_argument('--output', required=True)
+    ap.add_argument('--value-only', action='store_true', help='matched comparison using the pinned full feature cache and saved initialization')
     ap.add_argument('--execute-gpu', action='store_true'); args = ap.parse_args()
     out = Path(args.output).resolve()
     check(out.is_relative_to(ROOT/'data') and not out.exists(), 'fresh local data/ output required')
@@ -76,6 +77,9 @@ def main():
     train = load_release(ROOT/'data/training-collections-20261105/releases/train', expected_hash=TRAIN_SHA)
     dev = load_release(ROOT/'data/training-collections-20261105/releases/development', expected_hash=DEV_SHA)
     ids = training_ids(train)
+    from qwen_one_two.training.receiver_comparison import load_control, value_losses, CONTROL, PROTOCOL as COMPARISON
+    matched = load_control(ids) if args.value_only else None
+    protocol = COMPARISON if matched else PROTOCOL
     pairs, omitted = suite(dev)
     eids = [e['id'] for e in dev.manifest['records'] if e['selected'] and dev.record(e['id']).get('evaluation_slice') == 'E']
     xids = [k for pair in pairs for k in pair['ids']]
@@ -97,13 +101,18 @@ def main():
     sources = source_hashes()
     sources[str(Path(__file__).relative_to(ROOT))] = file_hash(Path(__file__))
     sources['docs/receiver-residual-repair-v1.md'] = file_hash(ROOT/'docs/receiver-residual-repair-v1.md')
-    plan = {'protocol': PROTOCOL, 'sources': sources, 'gpu_uuid': PRIMARY, 'parent': str(CHECKPOINT),
+    if matched:
+        sources['docs/receiver-value-only-comparison-v1.md'] = file_hash(ROOT/'docs/receiver-value-only-comparison-v1.md')
+    plan = {'protocol': protocol, 'sources': sources, 'gpu_uuid': PRIMARY, 'parent': str(CHECKPOINT),
         'parent_manifest_sha256': CHECKPOINT_SHA, 'receiver': RECEIVER, 'reference': REFERENCE,
         'dataset': TRAIN_SHA, 'development': DEV_SHA, 'ids': ids, 'updates': UPDATES, 'visits': UPDATES*8,
         'reused_feature_hashes': {n: file_hash(old_root/n) for n in ('features.jsonl', 'features.safetensors')},
         'development_baseline': evidence['development_baseline'], 'omitted_reader_ids': omitted,
         'snapshot': str(Path(args.snapshot).resolve()), 'seed': 17, 'new_data': 0,
         'trainable_parameters': 133184, 'scope': 'operation-specific readout repair; no promotion or native training'}
+    if matched:
+        plan['matched_control'] = matched[0]
+        plan['reused_feature_hashes'] = {n:file_hash(CONTROL/n) for n in ('features.jsonl','features.safetensors')}
     (out/'plan.json').write_bytes(canonical(plan))
     for name in sources:
         dst = out/'source'/name; dst.parent.mkdir(parents=True, exist_ok=True); shutil.copy2(ROOT/name, dst)
@@ -132,7 +141,7 @@ def main():
     from qwen_one_two.training.learning_report import summarize_learning
     from qwen_one_two.training.episodes import STATUS_NAMES
     configure(); started = time.monotonic()
-    report = {'protocol': PROTOCOL, 'status': 'RUNNING', 'gpu_uuid': PRIMARY,
+    report = {'protocol': protocol, 'status': 'RUNNING', 'gpu_uuid': PRIMARY,
         'plan_sha256': file_hash(out/'plan.json'), 'optimizer_updates': 0, 'measurements': [], 'checkpoints': []}
     def persist(): (out/'report.json').write_bytes(canonical(report))
     def emit(**entry): print(json.dumps(entry, allow_nan=False), flush=True)
@@ -150,6 +159,19 @@ def main():
             repair = make_repair(); w = Window(repair_groups(repair), 'components')
             check(sum(p.numel() for p in repair.parameters()) == 133184, 'repair ownership size')
             report['ownership'] = w.ownership
+            def weights(): return {'repair.'+n: p for n, p in repair.named_parameters()}
+            if matched:
+                initial_path = CONTROL/'checkpoint-0000'
+                resume(initial_path,w,weights(),matched[3]['identities'])
+                original = load_file(str(initial_path/'weights.safetensors'),device='cuda')
+                rng = torch.load(initial_path/'rng.pt',map_location='cpu',weights_only=True)
+                check(all(torch.equal(p,original[n]) for n,p in weights().items()) and not w.optimizer.state
+                      and w.scheduled_windows == w.optimizer_updates == 0
+                      and torch.equal(rng['cuda'],torch.cuda.get_rng_state(0))
+                      and torch.equal(rng['torch'],torch.get_rng_state()) and rng['python'] == random.getstate(),
+                      'exact matched initialization/optimizer/RNG')
+                report.update(matched_control=matched[0],initial_state_exact=True,
+                              initial_repair_fingerprint=state_fingerprint(weights()))
             class CountingEncoder(CleanEncoder):
                 offline_source_tokens = 0
                 def _states(self, ids, limit):
@@ -175,10 +197,16 @@ def main():
                 check(not case.get('failure') and len(captured) >= 1 and torch.equal(captured[0], s.hidden[0, -1]), 'complete actual feature')
                 check(case['summary']['prefills'] == case['summary']['lineage'] == 1 and case['summary']['held_positions'] == 0, 'feature lineage')
                 return captured[0], case
-            cache_old = load_file(str(old_root/'features.safetensors'), device='cuda')
-            features = {r['record']: cache_old[r['record']+'.h'] for r in reused}
+            if matched:
+                features = load_file(str(CONTROL/'features.safetensors'),device='cuda')
+                reused = rows(CONTROL/'features.jsonl')
+                check(set(features) == set(ids) and [r['record'] for r in reused] == ids, 'complete matched features')
+                report['numeric_checks_reused'] = matched[2]['numeric_checks']
+            else:
+                cache_old = load_file(str(old_root/'features.safetensors'), device='cuda')
+                features = {r['record']: cache_old[r['record']+'.h'] for r in reused}
+                report['numeric_checks'] = numeric_checks(c, repair, features, train, list(features))
             controls = {r['record']: r for r in reused}
-            report['numeric_checks'] = numeric_checks(c, repair, features, train, list(features))
             persist()
             fresh_cases = []
             with (out/'features.jsonl').open('x') as stream, torch.no_grad():
@@ -194,14 +222,40 @@ def main():
                     check(head == case['head'], 'initial identity differs from actual parent')
                     stream.write(json.dumps(dict(case, reused=key in {r['record'] for r in reused}), allow_nan=False)+'\n'); stream.flush()
                     if (i+1) % 25 == 0: emit(event='extraction', completed=i+1, total=len(ids))
-            save_file(features, str(out/'features.safetensors')); feature_hash = state_fingerprint(features)
+            if matched:
+                shutil.copyfile(CONTROL/'features.safetensors',out/'features.safetensors')
+            else:
+                save_file(features, str(out/'features.safetensors'))
+            feature_hash = state_fingerprint(features)
             report.update(feature_sha256=file_hash(out/'features.safetensors'), initial_identity_exact=1003,
                           fresh_feature_sessions=len(fresh_cases), reused_features=len(reused))
-            identities = dict(parent['identities'], protocol=digest(PROTOCOL.encode()), sources=digest(canonical(sources)))
-            def weights(): return {'repair.'+n: p for n, p in repair.named_parameters()}
+            identities = dict(parent['identities'], protocol=digest(protocol.encode()), sources=digest(canonical(sources)))
+            if matched:
+                check(report['feature_sha256'] == matched[2]['feature_sha256'] and not fresh_cases, 'reuse without extraction')
+                # Exact scalar-loss VJPs through the unchanged real codec, with
+                # status absent from the objective and the other branch unused.
+                from qwen_one_two.codec.schema import Port
+                from qwen_one_two.training.losses import binary, regression
+                checked = {}
+                for op,port in (('Noul',Port.NOUL),('Score',Port.SCORE)):
+                    key = next(k for k in ids if train.record(k)['operation'] == op and expected(train.record(k))['status']=='Assessed')
+                    row = train.record(key); h = features[key]
+                    full = c.evaluate(repair[op](h),port)
+                    gold = expected(row)['payload']
+                    target_loss = binary(full['raw'],gold['p_true']) if op=='Noul' else regression(full['raw'],interval=tuple(gold['score_interval']))
+                    minimal = value_losses(losses(readout(c,repair,h,op),row))
+                    check(set(minimal)=={op.lower()} and torch.equal(target_loss,minimal[op.lower()]), 'matched scalar objective')
+                    actual = torch.autograd.grad(target_loss,w.parameters,allow_unused=True)
+                    reduced = torch.autograd.grad(minimal[op.lower()],w.parameters,allow_unused=True)
+                    check(all((x is None and y is None) or (x is not None and y is not None and torch.equal(x,y))
+                              for x,y in zip(actual,reduced)), 'value-only full/minimal VJP')
+                    check(all((g is not None)==(('.'+op+'.') in name) for name,g in zip(w.names,reduced)), 'branch gradient isolation')
+                    check(any(g is not None and bool(g.abs().sum()>0) for g in reduced), 'disconnected value gradient')
+                    checked[op]=True
+                report['value_only_gradient_checks_exact']=checked
             def checkpoint():
                 frozen(); path = out/f'checkpoint-{w.scheduled_windows:04d}'
-                sha = save(path, w, weights(), identities, {'protocol': PROTOCOL, 'parent_manifest': CHECKPOINT_SHA,
+                sha = save(path, w, weights(), identities, {'protocol': protocol, 'parent_manifest': CHECKPOINT_SHA,
                     'parent_receiver': RECEIVER, 'next_visit': w.scheduled_windows*8, 'order': ids,
                     'feature_sha256': report['feature_sha256']}, reference_frozen=True, reference_id=REFERENCE)
                 report['checkpoints'].append({'path': str(path.relative_to(ROOT)), 'sha256': sha}); return path
@@ -215,6 +269,10 @@ def main():
                             'losses': {k: float(v) for k, v in losses(got, row).items()}, 'new_causal_positions': 0, 'new_prefills': 0}
                         cases.append(case); stream.write(json.dumps(case, allow_nan=False)+'\n')
                 result = summarize_learning(train, cases, ids, kind='heads')
+                if matched and w.scheduled_windows == 0:
+                    check(result == matched[2]['measurements'][0]['report'] and
+                          cases == rows(CONTROL/'heads-0000.jsonl'), 'all initial heads/losses/metrics match control')
+                    report['initial_measurement_exact']=True
                 report['measurements'].append({'window': w.scheduled_windows, 'report': result})
                 emit(event='measurement', window=w.scheduled_windows, operations={k:v['counts'] for k,v in result['operations'].items()}); persist()
             checkpoint(); measure(); visits = Counter(); eligible = Counter()
@@ -223,10 +281,15 @@ def main():
                     keys = visit_ids(ids, update); records = []
                     for key in keys:
                         row = train.record(key); got = readout(c, repair, features[key], row['operation'])
-                        values = losses(got, row); eligible.update(values.keys()); visits[key] += 1
+                        values = losses(got, row)
+                        if matched: values = value_losses(values)
+                        eligible.update(values.keys()); visits[key] += 1
                         records.append({'record': key, 'losses': {k: float(v.detach()) for k,v in values.items()}})
                         w.add_episode(values, complete=True, positions=0)
-                    result = w.step(); stream.write(json.dumps({'window': result, 'visits': records}, allow_nan=False)+'\n')
+                    result = w.step()
+                    if matched:
+                        check(result['stepped'] == (update not in matched[0]['empty_scalar_windows']), 'matched eligible window step')
+                    stream.write(json.dumps({'window': result, 'visits': records}, allow_nan=False)+'\n')
                     if update == 1:
                         path = checkpoint(); before = state_fingerprint(weights())
                         def moments(): return state_fingerprint({str(i)+'.'+k:v for i,s in enumerate(w.optimizer.state.values()) for k,v in s.items()})
@@ -242,9 +305,11 @@ def main():
                               and rng[2] == random.getstate(), 'repair checkpoint/resume mismatch')
                         report['first_update_resume_exact'] = True
                     if update % 100 == 0:
-                        stream.flush(); report.update(optimizer_updates=w.optimizer_updates); persist(); emit(event='training', window=update)
+                        stream.flush(); report.update(optimizer_updates=w.optimizer_updates,scheduled_windows=w.scheduled_windows); persist(); emit(event='training', window=update)
                     if update % 500 == 0: checkpoint(); measure()
-            check(w.optimizer_updates == UPDATES and set(visits.values()) == {15,16} and set(visits) == set(ids), 'finite exposure completion')
+            expected_updates = matched[0]['expected_optimizer_updates'] if matched else UPDATES
+            check(w.scheduled_windows == UPDATES and w.optimizer_updates == expected_updates and
+                  set(visits.values()) == {15,16} and set(visits) == set(ids), 'finite exposure completion')
             report['visits'] = dict(visits); report['eligible'] = dict(eligible)
             report['training_seconds'] = time.monotonic()-started
             final_anchors = []
@@ -277,6 +342,11 @@ def main():
                     persist()
             report['combined_development'] = summarize_learning(dev,all_cases,eids+xids,kind='behavior')
             report['parent_development'] = summarize_learning(dev,[baseline[k] for k in eids+xids],eids+xids,kind='behavior')
+            if matched:
+                control_cases = rows(CONTROL/'development-E.jsonl')+rows(CONTROL/'development-X.jsonl')
+                report['matched_control_development'] = summarize_learning(dev,control_cases,eids+xids,kind='behavior')
+                check(report['matched_control_development'] == matched[2]['combined_development'], 'matched control metric drift')
+                report['matched_control_interventions'] = matched[2]['interventions']
             report['choice_retention_exact'] = sum(dev.record(c['id'])['operation'] == 'Choice' for c in all_cases)
             report['accounting'] = {'extraction_sessions':len(fresh_cases), 'extraction_positions':sum(c['summary']['total'] for c in fresh_cases),
                 'fresh_final_sessions':len(final_anchors), 'fresh_final_positions':sum(c['summary']['total'] for c in final_anchors),
@@ -288,7 +358,7 @@ def main():
             pool_hook.remove()
             report['final_base'] = frozen_check(b,args.snapshot); frozen()
             check(report['final_base']['pass'] and report['final_base']['base_tied_storage'] and state_fingerprint(features) == feature_hash, 'final W/features')
-            report.update(status='COMPLETED_REPAIR_NOT_PROMOTED', frozen_unchanged=True, cached_features_unchanged=True,
+            report.update(status='COMPLETED_VALUE_ONLY_NOT_PROMOTED' if matched else 'COMPLETED_REPAIR_NOT_PROMOTED', frozen_unchanged=True, cached_features_unchanged=True,
                 repair_fingerprint=state_fingerprint(weights()), seconds=time.monotonic()-started, peak_cuda_bytes=torch.cuda.max_memory_allocated())
         except BaseException as exc:
             report.update(status='FAILED_REPAIR', error=repr(exc), seconds=time.monotonic()-started); raise

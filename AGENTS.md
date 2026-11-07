@@ -31,6 +31,9 @@ The user subsequently authorized slice 4: one controlled Noul/Score receiver
 repair on the 3090, preserving Choice, with existing data, W/reference frozen,
 no agents or new data. See docs/receiver-residual-repair-v1.md for its finite
 training scope; this does not authorize general training or automatic extensions.
+The user then authorized the matched value-only comparison, using the saved
+1,003 features and exact original initialization/exposure, with W/reference
+frozen and Choice unchanged. Scope: docs/receiver-value-only-comparison-v1.md.
 
 One user submission, one prompt prefill, one hybrid cache. Qev decision LoRA is
 on for the initial continuous budget readout, off for native generation, and

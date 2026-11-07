@@ -7,9 +7,19 @@ import unittest
 from unittest.mock import patch
 from qwen_one_two.codec.schema import Port
 from qwen_one_two.training.receiver_repair import training_ids, visit_ids, installed
+from qwen_one_two.training.receiver_comparison import value_losses
 
 
 class ReceiverRepairTests(unittest.TestCase):
+    def test_value_only_removes_status_without_rescaling_or_mutating_values(self):
+        status, noul, score = object(), object(), object()
+        for source, expected in (({'status':status},{}), ({'status':status,'noul':noul},{'noul':noul}),
+                                 ({'status':status,'score':score},{'score':score}), ({},{})):
+            original = dict(source)
+            self.assertEqual(value_losses(source),expected)
+            self.assertEqual(source,original)
+        with self.assertRaises(ValueError): value_losses({'choice':object()})
+
     def test_training_only_and_complete_exposure(self):
         data = {str(i): {'operation': 'Noul' if i % 2 else 'Score', 'training_category': 'receiver'} for i in range(1003)}
         data['choice'] = {'operation': 'Choice', 'training_category': 'receiver'}
