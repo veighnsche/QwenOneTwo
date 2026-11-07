@@ -41,7 +41,82 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — slice 3 complete; simpler frozen-input candidate rejected
+## Current checkpoint — slice 4 complete; Choice retained, value repair unsuccessful
+
+The user authorized one controlled Noul/Score receiver repair on the 3090,
+existing data, frozen W/reference, no agents or new data. The
+[protocol](receiver-residual-repair-v1.md),
+[actual results](receiver-residual-repair-results-2026-11-07.md) and
+[portable evidence](evidence/receiver-residual-repair-v1.json) record its scope.
+**The finite experiment completed; its value-learning acceptance condition failed.**
+No weights were promoted and no additional fit/continuation was run.
+
+One opt-in 1024→32→1024 residual branch per Noul/Score operation, initially exact
+identity, adapts only status/scalar readouts. All existing W, R/D, codec heads,
+pooling/reference weights remain frozen; original Reason/structure and Choice
+bypass the repair. Score retains its actual BF16-effective LM-head row. Production
+defaults, Noul threshold, exact intervals, startup budget/S-curve and numeric
+tolerances are unchanged. **133,184 new parameters**, fresh A4 component schedule,
+**2,000 updates /16,000 visits**, all **1,003 existing Noul/Score receiver records**.
+955 records have 16 visits, 48 have 15. Eligibility: status 16,000, Noul 4,087,
+Score 4,049. No failed exposure or skipped update; development never enters fit.
+
+**Development parent → repair:** total behavior **83 →123 /310**, status
+**130 →182 /310**, full intervention pairs **23 →30 /90**. Noul assessed delivered
+success **0 →9 /80**, but independent truth stays **25/80** and Brier worsens
+**0.284675 →0.299799**. All assessed Noul probabilities remain below 0.5.
+Descriptive Noul AUC improves **0.600727 →0.675636**, with overlapping positive
+and negative ranges; this is a ranking signal, not solved truth/calibration.
+Score exact delivered success stays **0/50**; raw interval hits **1 →0 /50**,
+mean distance worsens **0.271739 →0.285469**, in both direction groups.
+**All 90 Choice cases exactly retained**, including complete canonical ledgers;
+assessed success remains **47/50**. **310/310 transports**, zero execution failures.
+Status gains do not certify better value reasoning or Reason meaning.
+
+Full-corpus training: Noul truth **168/256 unchanged**, Brier
+**0.232134 →0.217993**, AUC **0.359037 →0.767519**; status **395 →420 /501**.
+Score status **411 →502 /502**, but exact hits stay **0/254** and mean distance
+only **0.405995 →0.393886**. The package comparison does not isolate capacity,
+fresh optimizer/exposure, loss interference or reference fidelity as the cause.
+
+**19 CPU tests pass in 14.162 s**; byte compilation and whitespace checks pass.
+CUDA FP64 residual forward/VJP checks pass: maximum relative RMS
+**2.712716892e-8 /1.867542228e-7**, versus unchanged 1e-5 tolerance. Minimal/full
+head outputs and gradients agree exactly, with connected residual gradients.
+All **1,003 initial outputs** exactly match parent receipts. Four fresh final
+training Sessions match cached h, repaired heads and complete ledgers. Deliberate
+weight/moment/RNG perturbation followed by first-update resume restores exactly.
+Both 320-tensor W checks/physical tying, frozen receiver/reference fingerprints,
+feature fingerprints and gradient ownership pass. Independent CPU receipt audit
+recomputes exposures, masks, metrics, grades, provenance, accounting and retention.
+Completed transformer numeric matrices are reused; their implementation is unchanged.
+
+Raw: `data/receiver-repair-20261107/run/`, audit/log/test evidence in its parent.
+Final repair bundle `run/checkpoint-2000`, manifest
+`abc321bb1535656a931e7e5926e01def2417a3d90931235ae996e0a43feb6a8f`, requires
+the pinned parent-0188 checkpoint; it is not a standalone or default model.
+Repair fingerprint
+`12262d41a02ef9d148a68f0888f038f2a4c67fa56c598121417774d61ff0ceae`.
+
+Reused 24 training features. New **979 extraction /4 fresh checks /310 development
+Sessions**, **93,964 /399 /38,319 positions**: total **1,293 /132,682**. One
+prefill/cache lineage each, no held positions/invocation text. Cached fit visits
+add zero positions/prefills. Offline source/reference tokens **102,528 /42,925**,
+1,202 reference encodings, separately accounted. Model-run **1,619.862349 s**,
+peak CUDA **3,622,856,704 bytes**. No failed/retried GPU attempt. After exit only
+original service PID 2094 (3852 MiB) remains. No 3060, agents, new data/reviews,
+locked-data access, native training, deployment or Operating Table changes.
+
+**Next unfinished slice:** value learning/calibration that transfers while
+preserving Choice. A discriminating proposed comparison is a value-only residual
+fit on the **saved 1,003-feature cache**, matched in initialization, corpus and
+exposure, to isolate status/value interference. That explanation is not proven;
+do not present it as the fix. Further fitting needs new authorization. Do not
+repeat feature extraction or automatically extend this failed repair. Reference
+meaning, learned invocation, Reason meaning and complete native use remain
+unqualified. Earlier “next slice” sections below are historical checkpoints.
+
+## Previous checkpoint — slice 3 complete; simpler frozen-input candidate rejected
 
 The user authorized one simpler latent-input comparison on the 3090, existing
 data, frozen W/reference, no agents or training. Read the
