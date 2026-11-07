@@ -1,4 +1,4 @@
-"""Fixed, read-only input transforms of existing bound source count literals."""
+"""Fixed input transforms of existing bound source count literals."""
 from dataclasses import replace
 import json
 import re
@@ -45,8 +45,10 @@ def byte_span(offsets, start, end):
 
 
 class NumericConstruction:
-    def __init__(self, arm):
+    def __init__(self, arm, *, allow_training=False):
         check(arm in ARMS, 'single declared numeric arm')
+        check(type(allow_training) is bool, 'explicit numeric training opt-in')
+        self.allow_training=allow_training
         self.arm=arm; self.receipt=None
 
     def prepare(self, view, provenance, indices):
@@ -78,7 +80,7 @@ class NumericConstruction:
         """Return a bound request builder; targets/gold values are inaccessible."""
         import torch
         from ..codec.schema import ValueKind, Role
-        check(not torch.is_grad_enabled(), 'numeric comparison is read-only')
+        check(self.allow_training or not torch.is_grad_enabled(), 'numeric comparison is read-only')
         attrs=[]
         for spec in indices['numeric_specs']:
             source=factory.registry.get(factory.sources[spec['source']])

@@ -45,6 +45,10 @@ The user subsequently authorized fixing rubric-direction hashing and one matched
 numeric-access comparison on the 3090. See docs/numeric-access-comparison-v1.md:
 existing X Score data, all W/reference/receiver weights frozen, no agents, new
 data or training. This is a read-only diagnostic, not a production input change.
+The user subsequently authorized the matched quantity/operator receiver-learning
+comparison in docs/quantity-receiver-learning-v1.md: existing training data,
+3090 only, W/reference frozen, development held out, no agents or new data.
+This authorizes its two finite receiver fits, not general/native training.
 
 One user submission, one prompt prefill, one hybrid cache. Qev decision LoRA is
 on for the initial continuous budget readout, off for native generation, and
