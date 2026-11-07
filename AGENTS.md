@@ -37,6 +37,10 @@ frozen and Choice unchanged. Scope: docs/receiver-value-only-comparison-v1.md.
 The user subsequently authorized the simple direct-readout diagnostic on saved
 latent features, with W/reference frozen, training/development separate, no agents
 or new data. Scope: docs/direct-latent-readout-v1.md; no production promotion.
+The user then authorized a read-only training-to-X/latent-meaning audit using
+existing data and saved features, with W/reference frozen and no agents, new
+data or training. Scope: docs/training-x-semantic-audit-v1.md. Reuse recorded GPU
+measurements; this audit does not authorize a further probe fit or model run.
 
 One user submission, one prompt prefill, one hybrid cache. Qev decision LoRA is
 on for the initial continuous budget readout, off for native generation, and

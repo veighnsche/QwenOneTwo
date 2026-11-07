@@ -44,6 +44,10 @@ Raw output: `data/information-loss-20261107/baseline.json`; portable copy:
 - Reference records: **500 training /100 development**, but only **five unique
   annotations per role** in each split (ten roles). Repetitions are not independent
   meanings or broad semantic coverage.
+  This counts the release's original reference category, **not** the actual
+  current reference's expanded 3,376-view fitting catalogue. The
+  [subsequent audit](training-x-semantic-audit-2026-11-07.md) measures that actual
+  exposure and its overlap with receiver inputs; use it for current interpretation.
 - Receiver train/development family and permitted-input overlap: **zero**. No
   contradictory reviewed targets among identical permitted inputs in each panel.
   E has 129 unique views; X has 145. Expected invariance/repeated views remain

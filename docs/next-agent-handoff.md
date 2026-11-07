@@ -41,7 +41,75 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — direct-readout diagnostic complete; weak development transfer
+## Current checkpoint — training-to-X/meaning audit complete; no new model work
+
+The user authorized a read-only audit using existing data/saved features, frozen
+W/reference, no agents, new data or training. Read the
+[findings](training-x-semantic-audit-2026-11-07.md),
+[scope](training-x-semantic-audit-v1.md) and
+[portable evidence](evidence/training-x-semantic-audit-v1.json).
+**Completed, no promotion or new model execution.**
+
+The training task is narrower than X: assessed Noul is **256 positive AND** only;
+X adds ten negations and ten OR cases. Assessed Score training is **254 ordinary
+completion fractions**, source denominators 20/100, with **170 endpoint targets**.
+All 40 X Score denominators are 200, with 40 distinct nonendpoint/nonhalf targets;
+ten reverse the rubric and ten halve its scale. Training has 96 unit strings, X
+one. Same six domain labels do not imply matched task/numeric coverage.
+
+**Historical correction:** the original 500 reference rows contain 50 meanings,
+but the current pass-12 reference trained on **3,376 distinct views**, including
+all **6,499 receiver-training role requests /1,643 unique annotations**. X's
+Question/Target/Alternative/Conditions canonical inputs have zero exact matches
+in that catalogue; only 70/640 role requests match common anchors/dimension.
+Canonical novelty does not prove novel meaning or an invalid evaluation. It
+does confound attributing train/X differences only to the final head.
+
+Existing direct-readout subgroup results: ordinary Score distance improves
+**0.269677→0.228196 /20**, but still 0 exact; remaining-fraction error
+**0.194187→0.478984 /10**, half-completion **0.202020→0.411399 /10**. All tolerances
+unchanged. Direct positive-AND Noul 37/50 is below the 40-case majority reference;
+balanced accuracy 57.5%, AUC 0.665. Both sides correct on just **1/10 negation and
+3/10 OR pairs**. The parent's 10/10 negative-side success is its all-false bias,
+not negation proof.
+
+Saved boundaries: all 70 changed-input pairs change h; 20 excluded-input twins
+retain identical wire/h/q. This establishes sensitivity/invariance, not correct
+meaning. Choice's 10 renamed/reordered pairs correctly select A→X, useful limited
+evidence. Tie pairs all retain A, which is accepted on both sides. Category 10 returns
+are excluded from receiver input, so its invariance does not test contradiction
+understanding. Native reader category 9 remains excluded; Reason meaning unqualified.
+
+**Concrete input/audit gaps:** the component builders do not populate numeric
+attributes; all 180 saved request role sequences have zero ATTRIBUTE_DESC/INT64
+positions. Counts reach the receiver through source states; exact bytes/bindings
+outside the model do not establish numeric access. Rubric direction is passed to
+the renderer separately from `CleanView.materialize`'s hash. That hash alone is
+not full packet identity; existing full-row/wire evidence remains valid and no
+existing hash group has conflicting directions. No production fix was made.
+
+Validation: **5 model-free tests pass in 0.128302 s**, compilation/whitespace pass.
+Audit binds **1,003 training features, 180 X captures, 620 predictions, 90 pairs**,
+checks **3,474 source byte-coordinate entries /640 X reference entries**, and
+confirms zero train/X family/view overlap. Training receipts have source tensor
+hashes and view hashes, not individual reference tensor hashes; the initial
+CPU checker assumption was corrected. The initial RF-only exposure report is
+retained and superseded by the final catalogue audit. No new GPU attempt.
+Raw: `data/training-x-audit-20261107/`; checker:
+`scripts/audit_latent_semantics.py`. Tensor artifacts are hashed as opaque bytes,
+never executed on CPU. **Zero new Sessions/prefills/positions/encodings/fits**.
+No W/reference loading, agents, new reviews/data, locked access or service changes.
+
+**Next unfinished slice:** close the rubric-direction input-identity gap, then
+scope a matched source-quantity-access diagnostic using existing bound counts
+versus source-state-only inputs, with question/rubric/receiver/scoring fixed.
+Keep X for development, never training selection. No follow-up experiment,
+input-path modification or further fit is launched by this audit. Numeric access,
+reference interpretation, status/value integration and native use are still
+unresolved; do not attribute the failures to a single layer or automatically
+scale training. Earlier next-slice entries below are historical.
+
+## Previous checkpoint — direct-readout diagnostic complete; weak development transfer
 
 The user authorized a simple direct-readout diagnostic on the 3090 using saved
 features, frozen W/reference, separate training/development, no agents or new

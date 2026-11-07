@@ -10,6 +10,9 @@ The latest architecture review has a measured
 The subsequent [simpler latent-input comparison](simple-latent-results-2026-11-07.md)
 rejects one parameter-free pooling replacement with the frozen receiver. These
 describe measured mechanisms and failed transfer, not semantic qualification.
+The latest [training-to-X semantic audit](training-x-semantic-audit-2026-11-07.md)
+separates task/input shifts from surviving latent distinctions using saved
+features and predictions, with no new fitting or model execution.
 
 The [repository and artifact guide](repository-and-artifacts.md) explains what
 is included in GitHub, which evidence remains local and how to run from a clone.
