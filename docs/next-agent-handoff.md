@@ -41,7 +41,76 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — shared weights/context tested; CPU/case does not improve
+## Current checkpoint — larger pure replay reduces CPU/case by 3.5924%
+
+Implemented and qualified explicit `v3/linear-attention-block-v1` on the 3090.
+No agents, training, new data/reviews, service changes or arbitrary time cutoff.
+W/reference stay frozen; QwenOneTwo PID 2094 and The Operating Table stay
+unchanged. Read the [measured report](linear-attention-block-results-2026-11-07.md),
+[contract](linear-attention-block-v1.md) and
+[portable evidence](evidence/linear-attention-block-v1.json).
+
+`codec/attention_block.py` replays the original token-ordered recurrence in
+32-position chunks, concatenation, RMS normalization and gating as one pure
+1..1024-position operation. Actual q/k/v, beta/decay, incoming memory, norm
+vector and gate activation are explicit inputs. Dense projections stay outside
+capture; no permanent FP32 frozen matrix is retained. The independent gate
+projection runs earlier; its admission stays outside capture and no finite or
+publication boundary is crossed. VJPs save/copy actual inputs, and outputs are
+independent clones. BF16 storage, FP32 transformer, compensated BF16 vocabulary,
+immediate guards, one prefill/lineage, budget mapping and accounting stay intact.
+Default `attention_block_backend='eager'` stays unchanged; `'graph-v1'` is opt-in.
+
+**Six GPU operator tests pass in 8.218 s**, plus a strengthened saved-input
+post-eviction gradient assertion **1/1 in 0.682 s**. **36 prescribed full-model
+traces pass in 410.912892 s**: 128/512/1024 × Noul/Choice/Score × oracle /
+functional / checkpoint / serving, seed 17. All 27 candidate state comparisons
+are exact; all 18 parameter-gradient comparisons have zero RMS difference and
+cosine 1 for R/D/wire/emitter. Strict FP32 and original gradient limits are
+unchanged. All 320 W tensors/tying, diagnostic weights and grad=None checks pass.
+Reuse existing 324/108-case matrices; no BF16 arithmetic shortcut was restored.
+
+The actual frozen checkpoint-0188 reference has identical teacher-forced loss
+**0.10903861373662949** and exact 8,192-value latent-input VJP on existing
+`train-reference-0000`. Both receiver/reference fingerprints and frozen/grad=None
+checks pass with zero updates. The data experiment also clears/recomputes
+candidate reference payloads in a full parity pack, so it cannot hide behind
+cached oracle outputs. **34 CPU tests pass in 13.223 s**, with model imports
+blocked; four plan tests pass again after final scheduling changes in **1.959 s**.
+
+Three alternating resident warm pairs, existing eight-case pack, one frozen
+worker/model/context: median worker-case + parent-phase CPU/case
+**1.109460 → 1.069604 s (−3.5924%)**. Every pair improves (3.7546%, 3.4705%,
+3.4305%). Throughput **0.889370 → 0.921075 cases/s (+3.5649%)**; worker wall
+falls 3.5975%. Peak allocation adds **71,241,216 bytes (67.94 MiB)**. Counter-
+instrumented cold warmup pack CPU is almost equal (9.177257 / 9.156095 s);
+no cold single-request speedup is established. Warm observations have zero
+recaptures/evictions: 1,998 old versus 1,548
+larger-block requests, with 22/29 cold shape keys fitting explicit capacity 32.
+Normal retention remains eight. Warmup CPU samples include counters and actual
+inference; they are not isolated capture cost. One case's direct launches **43,324 → 41,722
+(−3.6977%)**; graph launches 198→180, device kernel events 72,682→72,502;
+**792 stream synchronizations unchanged**. Traces are separate from timing.
+
+The first 131-presentation run interleaved profiling with timing and showed a
+large oracle CPU shift after profiling. Its entire timing comparison is excluded,
+with all data retained. Corrected fresh-process timing completes all six packs
+before profiling; **147 presentations** pass. Both runs together preserve **278
+exact CPU-04 3090 receipts**, eleven distinct cases, zero updates. Existing
+semantic failures/absence of learned invocation remain unchanged. Raw commands,
+source snapshots, both timing sets, numeric/reference checks, traces and audit:
+`data/cpu-08-20261107/` (chronological name, not new two-card qualification).
+Numeric backend files are identical between qualifier and final benchmark;
+only experiment preparation/scheduling changed, so numeric checks were reused.
+
+**Next unfinished slice:** select the next pure projection/attention region from
+the saved traces; most dispatch and every required synchronization remain. This
+is a modest bounded CPU-06 improvement, not minimal CPU involvement. Do not
+retain FP32 W duplicates or defer existing guards to broaden capture. >1024,
+full 310-case/unseen-shape, new-profile 3060/shared-thread integration and full
+training memory remain unqualified. No training, deployment or default switch.
+
+## Previous checkpoint — shared weights/context tested; CPU/case does not improve
 
 Implemented the requested bounded 3090 diagnostic with private module views,
 shared frozen tensors and two thread/stream lanes in one process/CUDA context.

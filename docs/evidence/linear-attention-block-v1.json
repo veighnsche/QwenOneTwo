@@ -1,0 +1,537 @@
+{
+  "accelerator_qualification_granted": false,
+  "all_trials": {
+    "0": {
+      "backend": "eager",
+      "parent_cases_per_second": 0.8900661833855026,
+      "parent_interval": {
+        "cpu_ns": 4483863,
+        "wall_ns": 8988095660
+      },
+      "peak_allocated_bytes": 1991849472,
+      "peak_reserved_bytes": 2199912448,
+      "warmup_counts": {
+        "audit_d2h_calls": 60,
+        "audit_readback_calls": 60,
+        "audit_requested_bytes": 2584576,
+        "recurrence_forward_capture_attempts": 22,
+        "recurrence_forward_captures": 22,
+        "recurrence_hits": 1976,
+        "recurrence_lookups": 1998,
+        "recurrence_misses": 22
+      },
+      "worker_case_cpu_seconds": 8.883709404,
+      "worker_case_wall_seconds": 8.938186192,
+      "worker_plus_parent_cpu_seconds_per_case": 1.111024158375
+    },
+    "1": {
+      "backend": "graph-v1",
+      "parent_cases_per_second": 0.923901595188896,
+      "parent_interval": {
+        "cpu_ns": 5024787,
+        "wall_ns": 8658930823
+      },
+      "peak_allocated_bytes": 2063090688,
+      "peak_reserved_bytes": 2334130176,
+      "warmup_counts": {
+        "attention_block_forward_captures": 29,
+        "attention_block_hits": 1519,
+        "attention_block_lookups": 1548,
+        "attention_block_misses": 29,
+        "audit_d2h_calls": 60,
+        "audit_readback_calls": 60,
+        "audit_requested_bytes": 2584576
+      },
+      "worker_case_cpu_seconds": 8.549449589,
+      "worker_case_wall_seconds": 8.598133832,
+      "worker_plus_parent_cpu_seconds_per_case": 1.069309297
+    },
+    "2": {
+      "backend": "graph-v1",
+      "parent_cases_per_second": 0.9210748070002991,
+      "parent_interval": {
+        "cpu_ns": 4526939,
+        "wall_ns": 8685505172
+      },
+      "peak_allocated_bytes": 2063090688,
+      "peak_reserved_bytes": 2334130176,
+      "warmup_counts": {
+        "attention_block_forward_captures": 29,
+        "attention_block_hits": 1519,
+        "attention_block_lookups": 1548,
+        "attention_block_misses": 29,
+        "audit_d2h_calls": 60,
+        "audit_readback_calls": 60,
+        "audit_requested_bytes": 2584576
+      },
+      "worker_case_cpu_seconds": 8.563124016,
+      "worker_case_wall_seconds": 8.612532459,
+      "worker_plus_parent_cpu_seconds_per_case": 1.070956369375
+    },
+    "3": {
+      "backend": "eager",
+      "parent_cases_per_second": 0.8889292628707695,
+      "parent_interval": {
+        "cpu_ns": 4510416,
+        "wall_ns": 8999591232
+      },
+      "peak_allocated_bytes": 1991849472,
+      "peak_reserved_bytes": 2199912448,
+      "warmup_counts": {
+        "audit_d2h_calls": 60,
+        "audit_readback_calls": 60,
+        "audit_requested_bytes": 2584576,
+        "recurrence_forward_capture_attempts": 22,
+        "recurrence_forward_captures": 22,
+        "recurrence_hits": 1976,
+        "recurrence_lookups": 1998,
+        "recurrence_misses": 22
+      },
+      "worker_case_cpu_seconds": 8.871166932,
+      "worker_case_wall_seconds": 8.921579517,
+      "worker_plus_parent_cpu_seconds_per_case": 1.1094596685
+    },
+    "4": {
+      "backend": "eager",
+      "parent_cases_per_second": 0.8893698609990871,
+      "parent_interval": {
+        "cpu_ns": 4583935,
+        "wall_ns": 8995132791
+      },
+      "peak_allocated_bytes": 1991849472,
+      "peak_reserved_bytes": 2199912448,
+      "warmup_counts": {
+        "audit_d2h_calls": 60,
+        "audit_readback_calls": 60,
+        "audit_requested_bytes": 2584576,
+        "recurrence_forward_capture_attempts": 22,
+        "recurrence_forward_captures": 22,
+        "recurrence_hits": 1976,
+        "recurrence_lookups": 1998,
+        "recurrence_misses": 22
+      },
+      "worker_case_cpu_seconds": 8.856211846,
+      "worker_case_wall_seconds": 8.906045201,
+      "worker_plus_parent_cpu_seconds_per_case": 1.107599472625
+    },
+    "5": {
+      "backend": "graph-v1",
+      "parent_cases_per_second": 0.9193045996474388,
+      "parent_interval": {
+        "cpu_ns": 4921572,
+        "wall_ns": 8702229928
+      },
+      "peak_allocated_bytes": 2063090688,
+      "peak_reserved_bytes": 2334130176,
+      "warmup_counts": {
+        "attention_block_forward_captures": 29,
+        "attention_block_hits": 1519,
+        "attention_block_lookups": 1548,
+        "attention_block_misses": 29,
+        "audit_d2h_calls": 60,
+        "audit_readback_calls": 60,
+        "audit_requested_bytes": 2584576
+      },
+      "worker_case_cpu_seconds": 8.551906822,
+      "worker_case_wall_seconds": 8.600627838,
+      "worker_plus_parent_cpu_seconds_per_case": 1.06960354925
+    }
+  },
+  "comparison": {
+    "parent_throughput_gain_percent": 3.5648774926548388,
+    "peak_allocated_extra_bytes": 71241216,
+    "worker_case_wall_reduction_percent": 3.597475966990249,
+    "worker_plus_parent_cpu_per_case_reduction_percent": 3.5923900959721977
+  },
+  "default_attention_block_backend": "eager",
+  "evidence_scope": "Every sample retained; per-key counters and full receipts remain in hash-bound raw reports.",
+  "gpu_uuid": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+  "initial_interleaved_profile_run": {
+    "all_receipts_still_exact": true,
+    "reason": "Profiler ran between timed trials; oracle case CPU shifted from 1.098 to 1.427/1.443 seconds. Entire timing comparison excluded.",
+    "timing_accepted": false,
+    "trials": {
+      "0": {
+        "backend": "eager",
+        "observe_warm_counts": {
+          "audit_d2h_calls": 60,
+          "audit_readback_calls": 60,
+          "audit_requested_bytes": 2584576,
+          "recurrence_hits": 1998,
+          "recurrence_lookups": 1998
+        },
+        "parent_cases_per_second": 0.9004682713255588,
+        "parent_interval": {
+          "cpu_ns": 4581223,
+          "wall_ns": 8884266392
+        },
+        "peak_allocated_bytes": 1991849472,
+        "peak_reserved_bytes": 2199912448,
+        "warmup_counts": {
+          "audit_d2h_calls": 60,
+          "audit_readback_calls": 60,
+          "audit_requested_bytes": 2584576,
+          "recurrence_forward_capture_attempts": 22,
+          "recurrence_forward_captures": 22,
+          "recurrence_hits": 1976,
+          "recurrence_lookups": 1998,
+          "recurrence_misses": 22
+        },
+        "worker_case_cpu_seconds": 8.783643845,
+        "worker_case_wall_seconds": 8.834249852,
+        "worker_plus_parent_cpu_seconds_per_case": 1.0985281335
+      },
+      "1": {
+        "backend": "graph-v1",
+        "observe_warm_counts": {
+          "attention_block_hits": 1548,
+          "attention_block_lookups": 1548,
+          "audit_d2h_calls": 60,
+          "audit_readback_calls": 60,
+          "audit_requested_bytes": 2584576
+        },
+        "parent_cases_per_second": 0.7160746654648374,
+        "parent_interval": {
+          "cpu_ns": 4459687,
+          "wall_ns": 11172019324
+        },
+        "peak_allocated_bytes": 2063090688,
+        "peak_reserved_bytes": 2334130176,
+        "warmup_counts": {
+          "attention_block_forward_captures": 29,
+          "attention_block_hits": 1519,
+          "attention_block_lookups": 1548,
+          "attention_block_misses": 29,
+          "audit_d2h_calls": 60,
+          "audit_readback_calls": 60,
+          "audit_requested_bytes": 2584576
+        },
+        "worker_case_cpu_seconds": 11.051894252,
+        "worker_case_wall_seconds": 11.112333107,
+        "worker_plus_parent_cpu_seconds_per_case": 1.382044242375
+      },
+      "2": {
+        "backend": "graph-v1",
+        "observe_warm_counts": {},
+        "parent_cases_per_second": 0.7223661209998138,
+        "parent_interval": {
+          "cpu_ns": 4451461,
+          "wall_ns": 11074716501
+        },
+        "peak_allocated_bytes": 2063090688,
+        "peak_reserved_bytes": 2334130176,
+        "warmup_counts": {
+          "attention_block_forward_captures": 29,
+          "attention_block_hits": 1519,
+          "attention_block_lookups": 1548,
+          "attention_block_misses": 29,
+          "audit_d2h_calls": 60,
+          "audit_readback_calls": 60,
+          "audit_requested_bytes": 2584576
+        },
+        "worker_case_cpu_seconds": 10.939879793,
+        "worker_case_wall_seconds": 11.00126821,
+        "worker_plus_parent_cpu_seconds_per_case": 1.36804140675
+      },
+      "3": {
+        "backend": "eager",
+        "observe_warm_counts": {},
+        "parent_cases_per_second": 0.6923129228117064,
+        "parent_interval": {
+          "cpu_ns": 4414719,
+          "wall_ns": 11555468252
+        },
+        "peak_allocated_bytes": 1991849472,
+        "peak_reserved_bytes": 2199912448,
+        "warmup_counts": {
+          "audit_d2h_calls": 60,
+          "audit_readback_calls": 60,
+          "audit_requested_bytes": 2584576,
+          "recurrence_forward_capture_attempts": 22,
+          "recurrence_forward_captures": 22,
+          "recurrence_hits": 1976,
+          "recurrence_lookups": 1998,
+          "recurrence_misses": 22
+        },
+        "worker_case_cpu_seconds": 11.414447041,
+        "worker_case_wall_seconds": 11.47808233,
+        "worker_plus_parent_cpu_seconds_per_case": 1.42735772
+      },
+      "4": {
+        "backend": "eager",
+        "observe_warm_counts": {},
+        "parent_cases_per_second": 0.6837775256102372,
+        "parent_interval": {
+          "cpu_ns": 4958457,
+          "wall_ns": 11699711822
+        },
+        "peak_allocated_bytes": 1991849472,
+        "peak_reserved_bytes": 2199912448,
+        "warmup_counts": {
+          "audit_d2h_calls": 60,
+          "audit_readback_calls": 60,
+          "audit_requested_bytes": 2584576,
+          "recurrence_forward_capture_attempts": 22,
+          "recurrence_forward_captures": 22,
+          "recurrence_hits": 1976,
+          "recurrence_lookups": 1998,
+          "recurrence_misses": 22
+        },
+        "worker_case_cpu_seconds": 11.545202637,
+        "worker_case_wall_seconds": 11.610391913,
+        "worker_plus_parent_cpu_seconds_per_case": 1.44377013675
+      },
+      "5": {
+        "backend": "graph-v1",
+        "observe_warm_counts": {},
+        "parent_cases_per_second": 0.7111673475699322,
+        "parent_interval": {
+          "cpu_ns": 4526785,
+          "wall_ns": 11249110392
+        },
+        "peak_allocated_bytes": 2063090688,
+        "peak_reserved_bytes": 2334130176,
+        "warmup_counts": {
+          "attention_block_forward_captures": 29,
+          "attention_block_hits": 1519,
+          "attention_block_lookups": 1548,
+          "attention_block_misses": 29,
+          "audit_d2h_calls": 60,
+          "audit_readback_calls": 60,
+          "audit_requested_bytes": 2584576
+        },
+        "worker_case_cpu_seconds": 11.083705359,
+        "worker_case_wall_seconds": 11.14783716,
+        "worker_plus_parent_cpu_seconds_per_case": 1.386029018
+      }
+    }
+  },
+  "medians": {
+    "eager": {
+      "parent_cases_per_second": 0.8893698609990871,
+      "peak_allocated_bytes": 1991849472,
+      "peak_reserved_bytes": 2199912448,
+      "worker_case_cpu_seconds": 8.871166932,
+      "worker_case_wall_seconds": 8.921579517,
+      "worker_plus_parent_cpu_seconds_per_case": 1.1094596685
+    },
+    "graph-v1": {
+      "parent_cases_per_second": 0.9210748070002991,
+      "peak_allocated_bytes": 2063090688,
+      "peak_reserved_bytes": 2334130176,
+      "worker_case_cpu_seconds": 8.551906822,
+      "worker_case_wall_seconds": 8.600627838,
+      "worker_plus_parent_cpu_seconds_per_case": 1.06960354925
+    }
+  },
+  "observations": {
+    "eager": {
+      "counts": {
+        "audit_d2h_calls": 60,
+        "audit_readback_calls": 60,
+        "audit_requested_bytes": 2584576,
+        "recurrence_hits": 1998,
+        "recurrence_lookups": 1998
+      },
+      "cuda_trace": "/home/vince/QwenOneTwo/data/cpu-08-20261107/benchmark-clean-timing/cuda-trace-attention-eager.json"
+    },
+    "graph-v1": {
+      "counts": {
+        "attention_block_hits": 1548,
+        "attention_block_lookups": 1548,
+        "audit_d2h_calls": 60,
+        "audit_readback_calls": 60,
+        "audit_requested_bytes": 2584576
+      },
+      "cuda_trace": "/home/vince/QwenOneTwo/data/cpu-08-20261107/benchmark-clean-timing/cuda-trace-attention-graph-v1.json"
+    }
+  },
+  "optimizer_updates": 0,
+  "pairs": [
+    {
+      "cpu_reduction_percent": 3.7546313516722107,
+      "pair": 0
+    },
+    {
+      "cpu_reduction_percent": 3.470455052868837,
+      "pair": 1
+    },
+    {
+      "cpu_reduction_percent": 3.430475033086644,
+      "pair": 2
+    }
+  ],
+  "protocol": "linear-attention-block-v1",
+  "qualification": {
+    "candidate_comparisons": 27,
+    "exact_forward_states": true,
+    "exact_parameter_gradient_values": true,
+    "final_base": {
+      "base_tied_storage": true,
+      "mismatches": [],
+      "parameters_checked": 320,
+      "pass": true
+    },
+    "gradient_trace_comparisons": 18,
+    "initial_base": {
+      "base_tied_storage": true,
+      "mismatches": [],
+      "parameters_checked": 320,
+      "pass": true
+    },
+    "non_math_source_changes_after_qualification": [
+      "qwen_one_two/training/two_gpu_worker.py",
+      "scripts/benchmark_attention_block.py"
+    ],
+    "oracle_traces": 9,
+    "peak_allocated_by_mode": {
+      "checkpoint": 6352775680,
+      "functional": 10915595264,
+      "oracle": 10909249536,
+      "serving": 3421905408
+    },
+    "report_sha256": "daf58dead2beb0c74d645a6e5a045d0f0040f2e6aefcb18e551b98941d582847",
+    "seconds": 410.912891562999,
+    "traces": 36
+  },
+  "raw_root": "data/cpu-08-20261107",
+  "receipt_audit": {
+    "benchmark": {
+      "exact_cpu04_matches": 131,
+      "jobs": 112,
+      "plan_sha256": "c45cb0c54c1c264bb65bc4ef564385e55d32ee650628767ab1e919402df86baf",
+      "presentations": 131,
+      "report_sha256": "c3c1f0989bb4273e394395e90b69b6c2a1cebe78b3c74946922348235958adac"
+    },
+    "benchmark-clean-timing": {
+      "exact_cpu04_matches": 147,
+      "jobs": 126,
+      "plan_sha256": "42d2b192ac60fa4359996901b4fb38449cb87cb356fc9beb22638d3dd769bf1f",
+      "presentations": 147,
+      "report_sha256": "2bf2949a4cb4b06619770538e80cd8a69024b6b11e4279db5009da897bebeb6a"
+    }
+  },
+  "reference_vjp": {
+    "receiver": "94218aae6ec62a7745c349af8e9975fd4987520cf9f1345f38e44586e5e7742c",
+    "record": "train-reference-0000",
+    "reference": "5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f",
+    "report_sha256": "8d4da3791326c867b7bee4d73ae3156aa9ee8c5760176b164eb4814ee9614838",
+    "rows": [
+      {
+        "backend": "eager",
+        "gradient_finite": true,
+        "loss": 0.10903861373662949,
+        "prefix_length": 8,
+        "targets": 40
+      },
+      {
+        "backend": "graph-v1",
+        "gradient": {
+          "active": 8192,
+          "cosine": 1.0,
+          "normalized_rms": 0.0,
+          "pass": true
+        },
+        "gradient_exact": true,
+        "gradient_finite": true,
+        "loss": 0.10903861373662949,
+        "loss_absolute": 0.0,
+        "loss_exact": true,
+        "prefix_length": 8,
+        "targets": 40
+      }
+    ]
+  },
+  "status": "PASSED_SCOPED_NUMERIC_AND_MEASURED",
+  "tests": {
+    "cpu-tests": {
+      "passed": true,
+      "seconds": 13.223,
+      "sha256": "1a2341a883f9a4e62bc0fce3bdeb91a528cdab4364c370764fa10b95e07a39a2",
+      "tests": 34
+    },
+    "eviction-final-test": {
+      "passed": true,
+      "seconds": 0.682,
+      "sha256": "f94eb2ce5f3b44d46afd3eb6f093649cf962a37d1e042b37257a36e99d2a74fe",
+      "tests": 1
+    },
+    "operator-tests": {
+      "passed": true,
+      "seconds": 8.218,
+      "sha256": "c13dde5c1b014ff93e8df92b07959e81978458a56cf4d7d9ca1723ced4c1e072",
+      "tests": 6
+    },
+    "plan-final-tests": {
+      "passed": true,
+      "seconds": 2.026,
+      "sha256": "2e1de58c6ad1e9d61710225ca39f216052a30314841c7df1953bb7bbb4d68ad8",
+      "tests": 4
+    },
+    "plan-timing-final-tests": {
+      "passed": true,
+      "seconds": 1.959,
+      "sha256": "bd761e07ac2b998f1f0838f71e9a45e2fcddcbb57d1866b2b0f2a7490ddf95a9",
+      "tests": 4
+    }
+  },
+  "total_development_presentations": 278,
+  "traces": {
+    "direct_kernel_launch_reduction_percent": 3.6977195088172876,
+    "eager": {
+      "api_counts": {
+        "cudaDeviceSynchronize": 3,
+        "cudaGraphLaunch": 198,
+        "cudaLaunchKernel": 41337,
+        "cudaLaunchKernelExC": 1987,
+        "cudaMemcpyAsync": 3164,
+        "cudaMemsetAsync": 672,
+        "cudaOccupancyMaxActiveBlocksPerMultiprocessor": 2025,
+        "cudaStreamIsCapturing": 237,
+        "cudaStreamSynchronize": 792
+      },
+      "bytes": 159384581,
+      "case_overhead": {
+        "id": "development-E-0012",
+        "observed_seconds": 1.701745519,
+        "overhead_percent": 81.67593987552625,
+        "scope": "combined counters/profiler; observation after every timed pack",
+        "timed_median_seconds": 0.936692839
+      },
+      "direct_kernel_launch_calls": 43324,
+      "graph_launch_calls": 198,
+      "kernel_events": 72682,
+      "path": "/home/vince/QwenOneTwo/data/cpu-08-20261107/benchmark-clean-timing/cuda-trace-attention-eager.json",
+      "sha256": "fc6c402f526394fc09d83ed8720c0ce251b610eff26193484330b4e1ea13dda4",
+      "stream_synchronize_calls": 792
+    },
+    "graph-v1": {
+      "api_counts": {
+        "cudaDeviceSynchronize": 3,
+        "cudaGraphLaunch": 180,
+        "cudaLaunchKernel": 39735,
+        "cudaLaunchKernelExC": 1987,
+        "cudaMemcpyAsync": 3218,
+        "cudaMemsetAsync": 672,
+        "cudaOccupancyMaxActiveBlocksPerMultiprocessor": 2025,
+        "cudaStreamIsCapturing": 219,
+        "cudaStreamSynchronize": 792
+      },
+      "bytes": 157887377,
+      "case_overhead": {
+        "id": "development-E-0012",
+        "observed_seconds": 1.671347536,
+        "overhead_percent": 85.62124176057068,
+        "scope": "combined counters/profiler; observation after every timed pack",
+        "timed_median_seconds": 0.900407475
+      },
+      "direct_kernel_launch_calls": 41722,
+      "graph_launch_calls": 180,
+      "kernel_events": 72502,
+      "path": "/home/vince/QwenOneTwo/data/cpu-08-20261107/benchmark-clean-timing/cuda-trace-attention-graph-v1.json",
+      "sha256": "b4332673a19c87f1d928c228b46e51633f9979fa4ebba2ac1a2d6f83a26155e6",
+      "stream_synchronize_calls": 792
+    }
+  },
+  "training_authorized": false
+}

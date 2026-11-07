@@ -12,6 +12,10 @@ opt-in two-process/card mode: higher queue throughput with higher CPU/memory cos
 [Shared-context results](shared-context-results-2026-11-07.md) now test private
 module views with shared frozen tensors: memory/setup CPU falls, but measured
 CPU/case rises 8.2258%. This remains opt-in; CPU-06 is still open.
+The subsequent [larger pure attention block](linear-attention-block-results-2026-11-07.md)
+passes scoped numeric checks and reduces CPU/case 3.5924% with 67.94 MiB extra
+allocation. This completes CPU-06's first measured pure-region slice; further
+regions and broad integration remain open. Normal execution stays unchanged.
 No CPU model fallback, agents, new semantic data, training or service changes.
 
 The goal is fewer CPU instructions, launches, synchronizations and transfers per
@@ -176,19 +180,24 @@ new profiling establishes a larger cost.
 
 Screened, not adopted: exact RMS replay/pointwise variants have modest isolated
 gains; native RMS fails the original strict feedback state/gradient limits.
-Prototype code is archived, not enabled. This task's full-case acceptance remains
-open; scalar agreement cannot substitute for the failed state/gradient checks.
+Those prototype kernels are archived, not enabled; scalar agreement cannot
+substitute for their failed state/gradient checks.
 The [shared-context experiment](shared-context-results-2026-11-07.md) passes
 isolation and exact receipts but also fails to reduce CPU/case. It shares 1,719
 frozen tensors across private module views, not causal state across episodes.
+The separate [larger attention-block profile](linear-attention-block-v1.md)
+preserves the original operations and passes 36 complete numeric traces,
+exact reference/input VJP and all receipt checks. Three pairs reduce full-case
+CPU/case 3.5924% and direct launches 3.6977%, with unchanged synchronization
+counts. It is explicit opt-in; profile/context/training scope stays bounded.
 
-- [ ] Prototype one pure tensor region using existing-order CUDA graph replay.
+- [x] Prototype one pure tensor region using existing-order CUDA graph replay.
   Use compilation or custom fused kernels as separate candidates if justified.
-- [ ] Keep Session/registry/ledger mutation outside capture. Respect every
+- [x] Keep Session/registry/ledger mutation outside capture. Respect every
   existing host validation and control boundary in this first version.
-- [ ] Include all relevant shape, dtype, stream, device, adapter and captured
+- [x] Include all relevant shape, dtype, stream, device, adapter and captured
   weight dependencies in cache identity; define future weight invalidation.
-- [ ] Preserve BF16 frozen storage, FP32 transformer arithmetic and compensated
+- [x] Preserve BF16 frozen storage, FP32 transformer arithmetic and compensated
   vocabulary products. No implicit fast-math or permanent FP32 base duplicate.
 - [ ] Extend to another region only after the first has a measured benefit.
 

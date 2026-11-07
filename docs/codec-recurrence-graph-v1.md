@@ -13,6 +13,12 @@ explicit 32-entry cache in dedicated read-only workers, with measured evidence
 in [CPU-04](cpu-04-results-2026-11-07.md). Ordinary model/training retention stays
 eight; no recurrence equation, precision or tolerance is changed.
 
+The later, separately selected [linear-attention block v1](linear-attention-block-v1.md)
+extends the graph exception to recurrence/concatenation/normalization/gating only
+when explicitly enabled. It has its own [numeric and throughput evidence](linear-attention-block-results-2026-11-07.md).
+The default remains this recurrence-only path; that larger region is not certified
+by the historical recurrence measurements alone.
+
 `Backbone.recurrence_backend='graph-v1'` is the expanded backend default;
 `'eager'` explicitly selects the retained oracle. Unknown backends reject.
 Legacy G1 remains unchanged. The numeric qualification CLI defaults to eager

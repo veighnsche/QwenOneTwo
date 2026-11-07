@@ -5,6 +5,9 @@ Explicit diagnostic profile `v3/linear-attention-block-v1`. Disabled by default:
 `'graph-v1'` selects the new block only with FP32 transformer arithmetic and
 the existing recurrence graph profile. No compile, fusion, reassociation,
 precision/tolerance change, training or learned-flow certification is implied.
+It supersedes the [recurrence-only graph restriction](codec-recurrence-graph-v1.md)
+solely inside this explicitly selected pure operation, retaining the original
+[numeric limits](numeric-profile-v1.md).
 
 ## Region and ordering
 
