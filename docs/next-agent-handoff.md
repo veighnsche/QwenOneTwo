@@ -41,7 +41,67 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — projection candidate rejected; prioritize receiver learning
+## Current checkpoint — learning report and 32-update receiver probe complete
+
+The user authorized this existing-data probe on the 3090, with W/reference frozen,
+no agents or new data. Read the [fixed protocol](receiver-training-probe-v1.md),
+[measured report](receiver-training-probe-results-2026-11-07.md) and
+[portable evidence](evidence/receiver-training-probe-v1.json).
+
+Implemented training-only deterministic panel selection and separate head/status,
+calibration, eligible-loss and delivered-behavior reporting. Actual head telemetry
+is captured before labels; an AST audit confirms unchanged producer objectives.
+The source-bound runner forks checkpoint-0188 with exact moments/RNG/schedule,
+validates original identities, and declares its new sampler/protocol explicitly.
+All **32 updates** completed (windows **189..220**, **32 records × eight repeats =
+256 presentations**, zero failed exposures). No further updates were launched.
+
+Training heads: Noul truth **4/8 → 4/8**, Choice selection **4/4 → 4/4**, Score
+interval **0/10 → 0/10**. Noul Brier improves **0.256381 → 0.247584** but all final
+panel logits remain negative. Score mean interval distance improves
+**0.411528 → 0.166759** and interval loss **0.206481 → 0.053827**. Status fits
+quickly; this is neither a convergence claim nor proof of delivered behavior.
+
+Actual post-update held-out evaluations cover **130 E + 180 X**, with **310/310
+valid transports**, no failed cases, and frozen final receiver during evaluation.
+Compared with preserved historical checkpoint-0188 receipts (no parent rerun):
+
+- Combined assessed Noul **0 → 23 /80**, Choice **47 → 47 /50**, Score **0 → 0 /50**.
+- Noul independent raw truth correctness stays **25/80**; its behavior gain comes
+  from assessed status **0 → 76 /80**, not improved binary truth discrimination.
+- E behavior: Noul **13 → 18 /40**, Choice **11 → 14 /50**, Score **10 → 5 /40**.
+  X: Noul **9 → 50 /100**, Choice **40 → 40 /40**, Score **0 → 0 /40**.
+- Overall behavior **83 → 127 /310**; X pairs **23 → 30 /90**. Existing semantic/
+  behavior qualification remains **BLOCKED** on correctness/Score/interventions.
+
+First/last-repeat VJP observations show an initial status/feasibility scale
+imbalance; later Score D norms exceed status as status fits. Every sampled
+combined gradient is clipped under the unchanged rule. These observations do
+not isolate a causal fix. No coefficients, intervals or tolerances were relaxed.
+
+**21 CPU tests pass in 29.697 s**, model imports blocked. Independent receipt/
+source/checkpoint/report audit passes, including exact first-update receiver,
+optimizer and CPU/CUDA/Python RNG recovery. All **320 W tensors/tying**,
+reference/R/budget/nonreceiver codec and grad=None checks pass. Existing numeric
+matrices are reused; model arithmetic/loss math did not change. No agents,
+new data/reviews, service changes or Operating Table changes. PID 2094 remains
+the only GPU process after exit (3852 MiB on the 3090).
+
+Raw artifacts: `data/receiver-probe-20261107/`. Unpromoted final checkpoint:
+`run/checkpoint-0220`, manifest
+`ce1ab2bbcc946846a7b052c7f32cdc0a3e208dc6698e135cac7aa994bad15a41`;
+receiver `5eabb8e580144bf0829a5311528a307671bc6568141e489d7277ae5e7fcd329d`.
+Reference remains
+`5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f`.
+This is **COMPLETED_PROBE_NOT_PROMOTED**; do not install it into live services.
+
+**Next unfinished slice:** define a controlled value-objective balance comparison
+from the same parent/moments and fixed panel/exposures, measuring Noul separation,
+Score intervals and retention of status/Choice. No extra run or full training is
+authorized by completing this probe. Native learned invocation/answer use and
+Reason meaning remain unqualified; do not equate component status gains with MVP.
+
+## Previous checkpoint — projection candidate rejected; prioritize receiver learning
 
 The requested next projection-dispatch experiment is complete on the 3090 using
 existing cases, frozen W/reference, no agents, training, data/reviews, service

@@ -1,7 +1,10 @@
 # Task list: substantially reduce CPU involvement
 
 **Current priority:** park further incremental throughput work and return to
-Noul/Choice/Score receiver learning when instructed. The
+Noul/Choice/Score value learning. The authorized
+[32-update probe](receiver-training-probe-results-2026-11-07.md) is complete:
+status improves, while Noul discrimination and Score intervals remain unfinished.
+Further training needs its own instruction. The
 [projection dispatch screen](projection-dispatch-results-2026-11-07.md) increases
 CPU/case 4.4944% and fails checkpoint scope admission; its prototype is removed.
 This is not a proof that larger optimizations are impossible. The accepted
