@@ -1,0 +1,1121 @@
+{
+  "protocol": "throughput-kernel-screens-v1",
+  "date": "2026-11-07",
+  "status": "SCREENED_NOT_ADOPTED",
+  "model_source_base": "c8e9daf",
+  "unchanged_math_sha256": {
+    "qwen_one_two/codec/__init__.py": "9b577482d1138d4d449fcc2bc9aa493538658afefe0bffb2a72828ab12e7ea38",
+    "qwen_one_two/codec/backbone.py": "b76c85e94dc99c7588992459b5691ec2a97f518ecba6191f19df1cc7461326b3",
+    "qwen_one_two/codec/diagnose_precision.py": "4edc64ec7af6525493e57c33f5fe4866e9ec0c0709086ae1fa99898d75fb23f3",
+    "qwen_one_two/codec/finite.py": "031cd3714a070650619284a83205d48af5aa08f04865028f3a29076d13c98f70",
+    "qwen_one_two/codec/fixtures.py": "36c91e9d949d2d03d4aaaafa709853eaeb7796465b02f6a9853f109f95221bc3",
+    "qwen_one_two/codec/neural.py": "1ac72b7a37bc90639d1e25d0dbcd1375bc6c6e090e0306d0ef2a96c8620a4fec",
+    "qwen_one_two/codec/ownership.py": "d9f10f5f6f8a8233b208110820f4e620253e668463042a30ad2dbbce0357f8dc",
+    "qwen_one_two/codec/precision.py": "9eb775efc303ce6d9eb8bbec26ffdcd6422f37ad0732e03ef0885ae9433c8e5b",
+    "qwen_one_two/codec/qualify.py": "d1204bd1e1ce70721d03e936ec92c8e30cd9b54ce0d79e50bbab46e3fd540851",
+    "qwen_one_two/codec/qualify_matrix.py": "07e25deee4eb930d498d5ca071f76c9022ee27823d62d90fcad45f59efb5a1ff",
+    "qwen_one_two/codec/records.py": "089eb06d1fd55e9a1629297759c942f046dc570058cf9cb304c8d88069287b04",
+    "qwen_one_two/codec/recurrence.py": "c96bff0e7f56dd3ffcdde576d6d0a9a85bffe1aa7352262e41ee6560aa1f7ebc",
+    "qwen_one_two/codec/render.py": "9e16fb579268e4261cd134883e698f6ae3c69a2802f1dbc2502855062920b82b",
+    "qwen_one_two/codec/runtime.py": "350c79f141e6898c5f762bf9b9c1708bd11297bdd01227c93a39abec2bd61d3a",
+    "qwen_one_two/codec/schema.py": "5a2ff9f2f38b7338da5cf6d7f605bed953e136c37445983f0cf965f1e17dbe23",
+    "qwen_one_two/codec/session.py": "2992225ccc68128680dec23bd64d3273ca950362e35eac6a5430ad00bf45ae3b",
+    "qwen_one_two/codec/writer.py": "187d0a07a4f29c1c4da560f84f361e0099be49c588933d25c8bb35b51ddca1a0",
+    "qwen_one_two/g1_accounting.py": "6d6d872a7337dd026da0354c9526e7eee012576cf518e19397832896cc3a4dd2",
+    "qwen_one_two/g1_backbone.py": "e179c2c4550285de40d8babc30f4ee300eb340c23441b364e0ff8c641ba6865d",
+    "qwen_one_two/g1_checks.py": "7c32e89b246a6e26235e48e041f6ff5923b589cdf48df073a17bf253ed470950",
+    "qwen_one_two/g1_device.py": "e4a550b80ac3f1de35be7c6057cca65b0e46ec2ba2248ca72e0d67b6451b5f2e",
+    "qwen_one_two/g1_evidence.py": "2f882bed4c0ac93dcf0015d6083b471764a8a8fe3d586d337759da1117bb7aba",
+    "qwen_one_two/g1_gate_diagnosis.py": "d38c6a40d66ccf41195ccbdefd77f1bccda632492ecdbbd6841049f26874a3e3",
+    "qwen_one_two/g1_gate_repair.py": "18c25a33ccf05a16630960df40f29d309d19af0a12b23b6e99c3c2341e732b91",
+    "qwen_one_two/g1_precision_diagnosis.py": "acdc5008e7e02c13a24eda2f64a40f7f30176cdfb09e95bb637b20c0126ce3d9",
+    "qwen_one_two/g1_precision_math.py": "bc2e5a6393012079684734de386ad71afd5cbd26b2423a24f22f33ed6b9aedcf",
+    "qwen_one_two/g1_proof.py": "5a0d9991cffff111b12d23df1a5ad46be7cb77f1f67ba16c4038dbfa60ac9cb9",
+    "qwen_one_two/g1_protocol.py": "156ba44aa27b459279404d404e2a16da35e443717fca4d15851627e80cfeaba4",
+    "qwen_one_two/training/clean.py": "f9acc1c08507302b0d224be4f382e6b263ea4a12fabd138383167839185f148f",
+    "qwen_one_two/training/reference.py": "44cbd6da4b3374d3de7082cac633f9b63fd91cef768bd8462a01fcb17c0f2aec",
+    "qwen_one_two/training/behavior_qualification.py": "e620f747834a8fc336150588d2fac3f5b33d59a16390fda7fdadf6b40c9eee4b"
+  },
+  "native_numeric_rejection": {
+    "cases": [
+      {
+        "comparison": {
+          "boundaries": [
+            {
+              "label": "prefill",
+              "worst_state_rms": 9.983759824522467e-07
+            },
+            {
+              "label": "startup",
+              "worst_state_rms": 9.836971699810558e-07
+            },
+            {
+              "label": "thinking_close",
+              "worst_state_rms": 1.3475405137547105e-06
+            },
+            {
+              "label": "request",
+              "worst_state_rms": 7.987952127127693e-05
+            },
+            {
+              "label": "return",
+              "worst_state_rms": 7.30583357125184e-05
+            },
+            {
+              "label": "filler",
+              "worst_state_rms": 5.9898419140423346e-05
+            },
+            {
+              "label": "end",
+              "worst_state_rms": 4.9512008911507406e-05
+            }
+          ],
+          "budget_raw_absolute": 0.0,
+          "errors": [
+            "gradient:R",
+            "gradient:D",
+            "gradient:wire",
+            "gradient:emitter"
+          ],
+          "gradients": {
+            "D": {
+              "active": 10822656,
+              "cosine": 0.9999953484226417,
+              "normalized_rms": 0.0033141260298677863,
+              "pass": false
+            },
+            "R": {
+              "active": 5411328,
+              "cosine": 0.9999980928397495,
+              "normalized_rms": 0.001983626456644852,
+              "pass": false
+            },
+            "emitter": {
+              "active": 526080,
+              "cosine": 0.9999999343775835,
+              "normalized_rms": 0.0009098620133089888,
+              "pass": false
+            },
+            "wire": {
+              "active": 972544,
+              "cosine": 0.9999907427309322,
+              "normalized_rms": 0.005544496300927236,
+              "pass": false
+            }
+          },
+          "pass": false,
+          "strict_fp32_forward_pass": false,
+          "strict_fp32_maximum_absolute": 0.0019115805625915527,
+          "strict_fp32_worst_rms": 7.987952127127693e-05,
+          "worst_logit_rms": 2.177046062426156e-05,
+          "worst_scalar_absolute": 1.430511474609375e-06,
+          "worst_state_rms": 7.987952127127693e-05
+        },
+        "connectivity": {
+          "dL_dscalar": 0.15583276748657227,
+          "evaluating_D": {
+            "count": 8798592,
+            "finite": true,
+            "rms": 0.00011903678317787196
+          },
+          "packet": {
+            "count": 22528,
+            "finite": true,
+            "rms": 0.0097272439465988
+          },
+          "slots": {
+            "count": 8192,
+            "finite": true,
+            "rms": 2.915510432835399e-05
+          },
+          "writer_R": {
+            "count": 8192,
+            "finite": true,
+            "rms": 0.002308799986854124
+          }
+        },
+        "peak_allocated_bytes": 3906576384,
+        "port": 1,
+        "positions": 128,
+        "seconds": 13.244563647996983,
+        "summary": {
+          "A": 56,
+          "B": 39,
+          "H": 6,
+          "P": 27,
+          "attempts": 1,
+          "boundaries": [
+            [
+              "prefill",
+              27
+            ],
+            [
+              "startup",
+              30
+            ],
+            [
+              "thinking_close",
+              32
+            ],
+            [
+              "writer_start",
+              33
+            ],
+            [
+              "writer_tick",
+              34
+            ],
+            [
+              "writer_tick",
+              35
+            ],
+            [
+              "request",
+              57
+            ],
+            [
+              "return",
+              71
+            ],
+            [
+              "filler",
+              126
+            ],
+            [
+              "native",
+              127
+            ],
+            [
+              "end",
+              128
+            ]
+          ],
+          "consumed": 1,
+          "dispatched": 1,
+          "events": [
+            {
+              "count": 3,
+              "kind": "H",
+              "label": "startup",
+              "phase": 0,
+              "position": 27
+            },
+            {
+              "count": 2,
+              "kind": "H",
+              "label": "thinking_close",
+              "phase": 0,
+              "position": 30
+            },
+            {
+              "count": 1,
+              "kind": "B",
+              "label": "writer_start",
+              "phase": 1,
+              "position": 32
+            },
+            {
+              "count": 1,
+              "kind": "B",
+              "label": "writer_tick",
+              "phase": 1,
+              "position": 33
+            },
+            {
+              "count": 1,
+              "kind": "B",
+              "label": "writer_tick",
+              "phase": 1,
+              "position": 34
+            },
+            {
+              "count": 22,
+              "kind": "B",
+              "label": "request",
+              "phase": 1,
+              "position": 35
+            },
+            {
+              "count": 14,
+              "kind": "B",
+              "label": "return",
+              "phase": 1,
+              "position": 57
+            },
+            {
+              "count": 55,
+              "kind": "A",
+              "label": "prescribed_native_filler",
+              "phase": 1,
+              "position": 71
+            },
+            {
+              "count": 1,
+              "kind": "A",
+              "label": "native",
+              "phase": 1,
+              "position": 126
+            },
+            {
+              "count": 1,
+              "kind": "H",
+              "label": "chat_end",
+              "phase": 1,
+              "position": 127
+            }
+          ],
+          "granted_budget": 2048,
+          "held_positions": 0,
+          "lineage": 1,
+          "new_records": 4,
+          "override": 2048,
+          "phase": 1,
+          "predicted_budget": 0,
+          "prefills": 1,
+          "released_positions": 36,
+          "state": "Terminal",
+          "switches": [
+            [
+              0,
+              null,
+              "D"
+            ],
+            [
+              27,
+              "D",
+              "R"
+            ],
+            [
+              35,
+              "R",
+              "D"
+            ],
+            [
+              57,
+              "D",
+              "R"
+            ]
+          ],
+          "terminal": "Completed",
+          "total": 128,
+          "version_checks": 528
+        }
+      }
+    ],
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "norm_modules": 61,
+    "optimizer_updates": 0,
+    "status": "FAILED_NUMERIC",
+    "torch": "2.15.0+cu132",
+    "training_performed": false
+  },
+  "graph_micro": {
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "rows": [
+      {
+        "shape": [
+          1,
+          1,
+          1024
+        ],
+        "samples": [
+          {
+            "pair": 0,
+            "mode": "eager",
+            "wall_ns": 10655707,
+            "cpu_ns": 10570126,
+            "calls": 100
+          },
+          {
+            "pair": 0,
+            "mode": "graph",
+            "wall_ns": 9252432,
+            "cpu_ns": 9176472,
+            "calls": 100
+          },
+          {
+            "pair": 1,
+            "mode": "graph",
+            "wall_ns": 9088515,
+            "cpu_ns": 9017335,
+            "calls": 100
+          },
+          {
+            "pair": 1,
+            "mode": "eager",
+            "wall_ns": 10412313,
+            "cpu_ns": 10311131,
+            "calls": 100
+          },
+          {
+            "pair": 2,
+            "mode": "eager",
+            "wall_ns": 10545987,
+            "cpu_ns": 10485995,
+            "calls": 100
+          },
+          {
+            "pair": 2,
+            "mode": "graph",
+            "wall_ns": 8869054,
+            "cpu_ns": 8828831,
+            "calls": 100
+          }
+        ],
+        "speedup": 1.1603641518994028
+      },
+      {
+        "shape": [
+          1,
+          32,
+          1024
+        ],
+        "samples": [
+          {
+            "pair": 0,
+            "mode": "eager",
+            "wall_ns": 10433324,
+            "cpu_ns": 10392492,
+            "calls": 100
+          },
+          {
+            "pair": 0,
+            "mode": "graph",
+            "wall_ns": 8891588,
+            "cpu_ns": 8853327,
+            "calls": 100
+          },
+          {
+            "pair": 1,
+            "mode": "graph",
+            "wall_ns": 9126256,
+            "cpu_ns": 9055951,
+            "calls": 100
+          },
+          {
+            "pair": 1,
+            "mode": "eager",
+            "wall_ns": 10558907,
+            "cpu_ns": 10512168,
+            "calls": 100
+          },
+          {
+            "pair": 2,
+            "mode": "eager",
+            "wall_ns": 10270822,
+            "cpu_ns": 10241452,
+            "calls": 100
+          },
+          {
+            "pair": 2,
+            "mode": "graph",
+            "wall_ns": 8898141,
+            "cpu_ns": 8858886,
+            "calls": 100
+          }
+        ],
+        "speedup": 1.1725285090447544
+      },
+      {
+        "shape": [
+          1,
+          128,
+          1024
+        ],
+        "samples": [
+          {
+            "pair": 0,
+            "mode": "eager",
+            "wall_ns": 10518092,
+            "cpu_ns": 10474466,
+            "calls": 100
+          },
+          {
+            "pair": 0,
+            "mode": "graph",
+            "wall_ns": 8797766,
+            "cpu_ns": 8759617,
+            "calls": 100
+          },
+          {
+            "pair": 1,
+            "mode": "graph",
+            "wall_ns": 8917988,
+            "cpu_ns": 8879796,
+            "calls": 100
+          },
+          {
+            "pair": 1,
+            "mode": "eager",
+            "wall_ns": 10425932,
+            "cpu_ns": 10384153,
+            "calls": 100
+          },
+          {
+            "pair": 2,
+            "mode": "eager",
+            "wall_ns": 11262553,
+            "cpu_ns": 11204885,
+            "calls": 100
+          },
+          {
+            "pair": 2,
+            "mode": "graph",
+            "wall_ns": 9300074,
+            "cpu_ns": 9236678,
+            "calls": 100
+          }
+        ],
+        "speedup": 1.1794243275501155
+      },
+      {
+        "shape": [
+          1,
+          512,
+          1024
+        ],
+        "samples": [
+          {
+            "pair": 0,
+            "mode": "eager",
+            "wall_ns": 10784916,
+            "cpu_ns": 10745608,
+            "calls": 100
+          },
+          {
+            "pair": 0,
+            "mode": "graph",
+            "wall_ns": 9424555,
+            "cpu_ns": 9405702,
+            "calls": 100
+          },
+          {
+            "pair": 1,
+            "mode": "graph",
+            "wall_ns": 9238512,
+            "cpu_ns": 9193502,
+            "calls": 100
+          },
+          {
+            "pair": 1,
+            "mode": "eager",
+            "wall_ns": 10815336,
+            "cpu_ns": 10699992,
+            "calls": 100
+          },
+          {
+            "pair": 2,
+            "mode": "eager",
+            "wall_ns": 10590925,
+            "cpu_ns": 10548022,
+            "calls": 100
+          },
+          {
+            "pair": 2,
+            "mode": "graph",
+            "wall_ns": 9243110,
+            "cpu_ns": 9142585,
+            "calls": 100
+          }
+        ],
+        "speedup": 1.1668059776417246
+      },
+      {
+        "shape": [
+          1,
+          32,
+          8,
+          256
+        ],
+        "samples": [
+          {
+            "pair": 0,
+            "mode": "eager",
+            "wall_ns": 10702624,
+            "cpu_ns": 10597089,
+            "calls": 100
+          },
+          {
+            "pair": 0,
+            "mode": "graph",
+            "wall_ns": 9019660,
+            "cpu_ns": 8945957,
+            "calls": 100
+          },
+          {
+            "pair": 1,
+            "mode": "graph",
+            "wall_ns": 8831053,
+            "cpu_ns": 8790491,
+            "calls": 100
+          },
+          {
+            "pair": 1,
+            "mode": "eager",
+            "wall_ns": 10385974,
+            "cpu_ns": 10337102,
+            "calls": 100
+          },
+          {
+            "pair": 2,
+            "mode": "eager",
+            "wall_ns": 10245151,
+            "cpu_ns": 10226699,
+            "calls": 100
+          },
+          {
+            "pair": 2,
+            "mode": "graph",
+            "wall_ns": 8958994,
+            "cpu_ns": 8920180,
+            "calls": 100
+          }
+        ],
+        "speedup": 1.1592790440533838
+      }
+    ],
+    "optimizer_updates": 0
+  },
+  "pointwise_final_micro": {
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "rows": [
+      {
+        "shape": [
+          1,
+          1,
+          1024
+        ],
+        "samples": [
+          {
+            "pair": 0,
+            "mode": "eager",
+            "wall_ns": 10045554,
+            "cpu_ns": 10011119,
+            "calls": 100
+          },
+          {
+            "pair": 0,
+            "mode": "graph",
+            "wall_ns": 9247790,
+            "cpu_ns": 9218399,
+            "calls": 100
+          },
+          {
+            "pair": 1,
+            "mode": "graph",
+            "wall_ns": 9160615,
+            "cpu_ns": 9119778,
+            "calls": 100
+          },
+          {
+            "pair": 1,
+            "mode": "eager",
+            "wall_ns": 10102550,
+            "cpu_ns": 10060802,
+            "calls": 100
+          },
+          {
+            "pair": 2,
+            "mode": "eager",
+            "wall_ns": 10016318,
+            "cpu_ns": 9957411,
+            "calls": 100
+          },
+          {
+            "pair": 2,
+            "mode": "graph",
+            "wall_ns": 9412546,
+            "cpu_ns": 9367430,
+            "calls": 100
+          }
+        ],
+        "speedup": 1.0862653671850246
+      },
+      {
+        "shape": [
+          1,
+          32,
+          1024
+        ],
+        "samples": [
+          {
+            "pair": 0,
+            "mode": "eager",
+            "wall_ns": 10274683,
+            "cpu_ns": 10194214,
+            "calls": 100
+          },
+          {
+            "pair": 0,
+            "mode": "graph",
+            "wall_ns": 9301224,
+            "cpu_ns": 9255251,
+            "calls": 100
+          },
+          {
+            "pair": 1,
+            "mode": "graph",
+            "wall_ns": 9116084,
+            "cpu_ns": 9075932,
+            "calls": 100
+          },
+          {
+            "pair": 1,
+            "mode": "eager",
+            "wall_ns": 10041931,
+            "cpu_ns": 10001630,
+            "calls": 100
+          },
+          {
+            "pair": 2,
+            "mode": "eager",
+            "wall_ns": 10195122,
+            "cpu_ns": 10161545,
+            "calls": 100
+          },
+          {
+            "pair": 2,
+            "mode": "graph",
+            "wall_ns": 9289677,
+            "cpu_ns": 9242783,
+            "calls": 100
+          }
+        ],
+        "speedup": 1.097467866751449
+      },
+      {
+        "shape": [
+          1,
+          128,
+          1024
+        ],
+        "samples": [
+          {
+            "pair": 0,
+            "mode": "eager",
+            "wall_ns": 10230812,
+            "cpu_ns": 10184794,
+            "calls": 100
+          },
+          {
+            "pair": 0,
+            "mode": "graph",
+            "wall_ns": 9168081,
+            "cpu_ns": 9126588,
+            "calls": 100
+          },
+          {
+            "pair": 1,
+            "mode": "graph",
+            "wall_ns": 9158378,
+            "cpu_ns": 9118740,
+            "calls": 100
+          },
+          {
+            "pair": 1,
+            "mode": "eager",
+            "wall_ns": 10455966,
+            "cpu_ns": 10399618,
+            "calls": 100
+          },
+          {
+            "pair": 2,
+            "mode": "eager",
+            "wall_ns": 10157120,
+            "cpu_ns": 10112061,
+            "calls": 100
+          },
+          {
+            "pair": 2,
+            "mode": "graph",
+            "wall_ns": 9271322,
+            "cpu_ns": 9226244,
+            "calls": 100
+          }
+        ],
+        "speedup": 1.115916406061421
+      },
+      {
+        "shape": [
+          1,
+          512,
+          1024
+        ],
+        "samples": [
+          {
+            "pair": 0,
+            "mode": "eager",
+            "wall_ns": 10034689,
+            "cpu_ns": 9989101,
+            "calls": 100
+          },
+          {
+            "pair": 0,
+            "mode": "graph",
+            "wall_ns": 9581976,
+            "cpu_ns": 9530059,
+            "calls": 100
+          },
+          {
+            "pair": 1,
+            "mode": "graph",
+            "wall_ns": 9191344,
+            "cpu_ns": 9161877,
+            "calls": 100
+          },
+          {
+            "pair": 1,
+            "mode": "eager",
+            "wall_ns": 9984751,
+            "cpu_ns": 9942954,
+            "calls": 100
+          },
+          {
+            "pair": 2,
+            "mode": "eager",
+            "wall_ns": 10172769,
+            "cpu_ns": 10132003,
+            "calls": 100
+          },
+          {
+            "pair": 2,
+            "mode": "graph",
+            "wall_ns": 9136172,
+            "cpu_ns": 9097147,
+            "calls": 100
+          }
+        ],
+        "speedup": 1.091754263576687
+      },
+      {
+        "shape": [
+          1,
+          32,
+          8,
+          256
+        ],
+        "samples": [
+          {
+            "pair": 0,
+            "mode": "eager",
+            "wall_ns": 10228511,
+            "cpu_ns": 10188403,
+            "calls": 100
+          },
+          {
+            "pair": 0,
+            "mode": "graph",
+            "wall_ns": 9412779,
+            "cpu_ns": 9370764,
+            "calls": 100
+          },
+          {
+            "pair": 1,
+            "mode": "graph",
+            "wall_ns": 9322153,
+            "cpu_ns": 9283862,
+            "calls": 100
+          },
+          {
+            "pair": 1,
+            "mode": "eager",
+            "wall_ns": 10143374,
+            "cpu_ns": 10102608,
+            "calls": 100
+          },
+          {
+            "pair": 2,
+            "mode": "eager",
+            "wall_ns": 10131859,
+            "cpu_ns": 10087180,
+            "calls": 100
+          },
+          {
+            "pair": 2,
+            "mode": "graph",
+            "wall_ns": 9329407,
+            "cpu_ns": 9281782,
+            "calls": 100
+          }
+        ],
+        "speedup": 1.087247453133945
+      }
+    ],
+    "optimizer_updates": 0
+  },
+  "finite_micro": {
+    "rows": [
+      {
+        "numel": 5,
+        "samples": [
+          {
+            "mode": "eager",
+            "pair": 0,
+            "wall_ns": 8038202,
+            "cpu_ns": 8009797
+          },
+          {
+            "mode": "single-kernel-v1",
+            "pair": 0,
+            "wall_ns": 7675256,
+            "cpu_ns": 7645116
+          },
+          {
+            "mode": "single-kernel-v1",
+            "pair": 1,
+            "wall_ns": 7518871,
+            "cpu_ns": 7491613
+          },
+          {
+            "mode": "eager",
+            "pair": 1,
+            "wall_ns": 7875148,
+            "cpu_ns": 7842700
+          },
+          {
+            "mode": "eager",
+            "pair": 2,
+            "wall_ns": 7951350,
+            "cpu_ns": 7905671
+          },
+          {
+            "mode": "single-kernel-v1",
+            "pair": 2,
+            "wall_ns": 7616407,
+            "cpu_ns": 7581078
+          }
+        ],
+        "speedup": 1.04397651018387
+      },
+      {
+        "numel": 256,
+        "samples": [
+          {
+            "mode": "eager",
+            "pair": 0,
+            "wall_ns": 8234750,
+            "cpu_ns": 8176608
+          },
+          {
+            "mode": "single-kernel-v1",
+            "pair": 0,
+            "wall_ns": 7804053,
+            "cpu_ns": 7756436
+          },
+          {
+            "mode": "single-kernel-v1",
+            "pair": 1,
+            "wall_ns": 7721213,
+            "cpu_ns": 7683997
+          },
+          {
+            "mode": "eager",
+            "pair": 1,
+            "wall_ns": 7920342,
+            "cpu_ns": 7888397
+          },
+          {
+            "mode": "eager",
+            "pair": 2,
+            "wall_ns": 7851028,
+            "cpu_ns": 7817321
+          },
+          {
+            "mode": "single-kernel-v1",
+            "pair": 2,
+            "wall_ns": 7656743,
+            "cpu_ns": 7609242
+          }
+        ],
+        "speedup": 1.025789859702096
+      },
+      {
+        "numel": 1024,
+        "samples": [
+          {
+            "mode": "eager",
+            "pair": 0,
+            "wall_ns": 8335495,
+            "cpu_ns": 8279670
+          },
+          {
+            "mode": "single-kernel-v1",
+            "pair": 0,
+            "wall_ns": 7879256,
+            "cpu_ns": 7820799
+          },
+          {
+            "mode": "single-kernel-v1",
+            "pair": 1,
+            "wall_ns": 7918681,
+            "cpu_ns": 7868894
+          },
+          {
+            "mode": "eager",
+            "pair": 1,
+            "wall_ns": 8204094,
+            "cpu_ns": 8173182
+          },
+          {
+            "mode": "eager",
+            "pair": 2,
+            "wall_ns": 7971858,
+            "cpu_ns": 7942095
+          },
+          {
+            "mode": "single-kernel-v1",
+            "pair": 2,
+            "wall_ns": 7722074,
+            "cpu_ns": 7694104
+          }
+        ],
+        "speedup": 1.041226988944134
+      },
+      {
+        "numel": 8192,
+        "samples": [
+          {
+            "mode": "eager",
+            "pair": 0,
+            "wall_ns": 8109694,
+            "cpu_ns": 8076634
+          },
+          {
+            "mode": "single-kernel-v1",
+            "pair": 0,
+            "wall_ns": 7853116,
+            "cpu_ns": 7803508
+          },
+          {
+            "mode": "single-kernel-v1",
+            "pair": 1,
+            "wall_ns": 7880044,
+            "cpu_ns": 7818259
+          },
+          {
+            "mode": "eager",
+            "pair": 1,
+            "wall_ns": 8107347,
+            "cpu_ns": 8055456
+          },
+          {
+            "mode": "eager",
+            "pair": 2,
+            "wall_ns": 7878867,
+            "cpu_ns": 7872351
+          },
+          {
+            "mode": "single-kernel-v1",
+            "pair": 2,
+            "wall_ns": 7607528,
+            "cpu_ns": 7576517
+          }
+        ],
+        "speedup": 1.032373264319539
+      },
+      {
+        "numel": 16384,
+        "samples": [
+          {
+            "mode": "eager",
+            "pair": 0,
+            "wall_ns": 7966323,
+            "cpu_ns": 7933305
+          },
+          {
+            "mode": "single-kernel-v1",
+            "pair": 0,
+            "wall_ns": 7596478,
+            "cpu_ns": 7566391
+          },
+          {
+            "mode": "single-kernel-v1",
+            "pair": 1,
+            "wall_ns": 7965244,
+            "cpu_ns": 7916291
+          },
+          {
+            "mode": "eager",
+            "pair": 1,
+            "wall_ns": 7918573,
+            "cpu_ns": 7887684
+          },
+          {
+            "mode": "eager",
+            "pair": 2,
+            "wall_ns": 7902056,
+            "cpu_ns": 7872078
+          },
+          {
+            "mode": "single-kernel-v1",
+            "pair": 2,
+            "wall_ns": 7721598,
+            "cpu_ns": 7665889
+          }
+        ],
+        "speedup": 1.0255096160147161
+      }
+    ],
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "optimizer_updates": 0
+  },
+  "finite_tests": {
+    "tests": 4,
+    "errors": 0,
+    "failures": 0,
+    "passed": true
+  },
+  "adopted_kernel_changes": 0,
+  "model_optimizer_updates": 0,
+  "new_semantic_data": 0,
+  "agents": 0,
+  "service_changes": 0,
+  "limitations": [
+    "isolated screens do not establish complete-case gains",
+    "native qualification aborts after first failed pair; remaining eight pairs not run",
+    "no final integrity grant for rejected native candidate",
+    "no original full numeric matrix repeated",
+    "archived pointwise source is final variant; preliminary JIT timings are screening only"
+  ],
+  "report_sha256": "c8a2bb7dba3f35416b5145c1201f78d0cbfc55077b4fbe0d3ebe4c9fd4de0d5d",
+  "local_artifact_sha256": {
+    "data/cpu-06-20261107/finite-screen-source/qwen_one_two/codec/finite.py": "c137bb6f45086cefaf8bf76a85545661240377f6a6c8db824cb5dd9b06dfb421",
+    "data/cpu-06-20261107/finite-screen-source/qwen_one_two/codec/finite_kernel.py": "3244522385de2ef418ae9410aa2fedfc84f08fc06519a5c72bdfbaf5b4d99b66",
+    "data/cpu-06-20261107/finite-screen-source/qwen_one_two/codec/neural.py": "7801470f68cb99b534aca1b83f89f308392b64cbca149b425575781444bfb236",
+    "data/cpu-06-20261107/finite-screen-source/tests/test_single_finite_gpu.py": "693f5b62427537f228bcd1bea701c0a4bfdaacae908a17d44a3899ff70215975",
+    "data/cpu-06-20261107/fused-fast-micro.json": "82694d9f598ab829cf05353dae851f06ca279b453047fd53c626e1d59f896f34",
+    "data/cpu-06-20261107/fused-fast-screen-source.py": "3704bc7f09eec12399967f5723b245e7eccbfa4cf05fa678be46506903ebe457",
+    "data/cpu-06-20261107/fused-micro.json": "bb71e9ddf632a0c12be641797904c7f1c6110620084f0e7e27fd8414f7751938",
+    "data/cpu-06-20261107/fused-operator-final.json": "63281c5ad208c982ad091f40ade470208856932cff8893a9960a47dada7390d5",
+    "data/cpu-06-20261107/fused-operator-final.log": "4829b5471130035c31887da805960e4aa2c69033f368bdcc62b230ab122044f4",
+    "data/cpu-06-20261107/fused-operator-initial.json": "63281c5ad208c982ad091f40ade470208856932cff8893a9960a47dada7390d5",
+    "data/cpu-06-20261107/fused-operator-initial.log": "2effebf353d5ec969e228c8003e27fee1fd6a004297a9030da0c28e6d89a7b67",
+    "data/cpu-06-20261107/fused-pointer-screen-source.py": "930e24217eaa8deb7c06013086b86ecc58e153a52cddb4a1b8763d8a167d3b3b",
+    "data/cpu-06-20261107/fused_fast_operator_and_micro.py": "252903137139a3181ce01084a3dd2c74f84621dfbcfd6af1712571ee21691e8a",
+    "data/cpu-06-20261107/fused_operator_and_micro.py": "783cdf74b105a4042de2b32c64a7b8446714143aa744507d5dfc546095a4fab6",
+    "data/cpu-06-20261107/graph-screen-source/rms_graph.py": "171ec69ee690dc9e5599b54c70f326881e68ea8b5624b6f8b8bc335869a6371b",
+    "data/cpu-06-20261107/graph-screen-source/test_rms_graph_gpu.py": "324e350b5fed4505350b9b57413320abc2d8cceb8fe281ac112c806c2dc264b3",
+    "data/cpu-06-20261107/inspect_trace.py": "6426451891cefb77e0ccf80b049c5dd9924cf8cfa2dac35a00ff7b52daed823b",
+    "data/cpu-06-20261107/micro.json": "b5ffe74c4ee682fd8ef86bb20ac96d7cb4254a640113a5bbd1831c4d18a1a49b",
+    "data/cpu-06-20261107/native-qualification/report.json": "ec2868dd735b045df3ca23f9bc9271459bc64437a8839fe2e67f782b00908905",
+    "data/cpu-06-20261107/native-qualification.log": "702b57f828b23f26d46dc659eedb7763d7fd15e07938a2a72d8fc09b8bdefdb1",
+    "data/cpu-06-20261107/native-screen.json": "126d3ffa9fd985542ee8013f648e6e71d879ea91dc71ae027e3545eb4623f13c",
+    "data/cpu-06-20261107/native-screen.log": "d42d9af53a1e2a0befc9559f4cb1c5f444979488fb7143140cd2cf852408597a",
+    "data/cpu-06-20261107/native_screen.py": "726b46649a2ff5573b6ff81c7534740ae3315c81f326726830e2cc18feb4cc78",
+    "data/cpu-06-20261107/operator-initial.json": "63281c5ad208c982ad091f40ade470208856932cff8893a9960a47dada7390d5",
+    "data/cpu-06-20261107/operator-initial.log": "74839c0f09cc144db9a1fd609c2a99ab266f6830bb5d5f92996b0324ec33234b",
+    "data/cpu-06-20261107/operator_and_micro.py": "17351f2e0ae38abe0b4ebbd06e2f73e21257dd7c83a99ecde757effb1a5b7449",
+    "data/cpu-06-20261107/pointer-micro.json": "1dc49c48cf0cb4f3cbfa656466d5fb966c158abca5d3473c954b60d64acbd41a",
+    "data/cpu-06-20261107/pointer-operator.json": "63281c5ad208c982ad091f40ade470208856932cff8893a9960a47dada7390d5",
+    "data/cpu-06-20261107/pointer-operator.log": "960812c8974ab3037a59e686a242d58d6429e8d0343bc4984b674c7c3d14a87b",
+    "data/cpu-06-20261107/pointer_operator_and_micro.py": "65cceb624b443e103138ce71f0c92e798bab05410eea1b4d5eb46d05d7ac9051",
+    "data/cpu-06-20261107/pointwise-screen-source/rms_fused.py": "930e24217eaa8deb7c06013086b86ecc58e153a52cddb4a1b8763d8a167d3b3b",
+    "data/cpu-06-20261107/pointwise-screen-source/test_rms_fused_gpu.py": "fd8c827ccb71afb4367e1d4be4cda8cd71b01de4220027b870eb831ad73ff2bb",
+    "data/cpu-06-20261107/qualify_native.py": "540ba31d74f382cea511f9b030db34047efdf3a387f9c3713d4c71f075e15a9e",
+    "data/cpu-06-20261107/single-finite-micro.json": "47a41a45e640685567328815f01a19a012bc36bf29fa0e3aa8177fe2094ca900",
+    "data/cpu-06-20261107/single-finite-screen.log": "0fbfa93b559df823be915e435fd04a64433c33930280b11291c79c8984726eb4",
+    "data/cpu-06-20261107/single-finite-tests.json": "63281c5ad208c982ad091f40ade470208856932cff8893a9960a47dada7390d5",
+    "data/cpu-06-20261107/single_finite_screen.py": "4d063e6c2714f97d73917f9bd90290b425fc7c73b34a46db2bd131bb6f9bcf1f",
+    "data/cpu-06-20261107/trace-analysis.json": "e62fbe7e9d31d9ce7cf479acefee6680fb4506dbce5a09390c378a7ff3138f2a"
+  }
+}

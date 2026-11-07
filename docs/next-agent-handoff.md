@@ -41,7 +41,23 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — CPU-04 retention measured; two-card integration passes
+## Current work — throughput kernel screens rejected; pool validation in progress
+
+[Kernel screening report](throughput-kernel-screens-2026-11-07.md) and
+[portable evidence](evidence/throughput-kernel-screens-v1.json) record completed
+CPU-06 investigations. No kernel was adopted. Native RMS fails the original
+strict FP32 state/gradient limits in the first 128-position Noul pair; other
+requested pairs are NOT RUN. Replay/pointwise/finite prototypes have only modest
+isolated gains. Temporary code is archived locally, with original math restored.
+No fitting, agents, new semantic data or service changes occurred.
+
+An opt-in resident-worker pool is being implemented/validated in the working
+checkout using the existing dispatcher. Its initial same-card 24-case probe
+improves main throughput about 1.64× with two 3090 processes, at higher CPU and
+memory cost. Final two-versus-four-worker comparisons and the implementation
+commit are still pending at this checkpoint. This is no training authorization.
+
+## Previous checkpoint — CPU-04 retention measured; two-card integration passes
 
 GPU use remains authorized for throughput diagnostics. No agents, new semantic
 data, capability/reference training or services were used/changed. Two coherent
