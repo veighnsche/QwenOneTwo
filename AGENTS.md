@@ -7,6 +7,13 @@ All model workloads must run on an explicitly selected CUDA GPU. Use the RTX
 3090 UUID GPU-225509c3-d702-6c27-de03-76b5e99b33b1. No CPU fallback for inference,
 training, extraction, fitting or real-model tests. Ordinary static tests may use CPU.
 
+The experimental two-GPU diagnostic runner may also target RTX 3060 UUID
+GPU-744c1cf5-9578-6aad-95c1-7a6f1c9d11db in its explicit read-only worker scope.
+This is no permission to execute now: both GPUs remain off because of noise,
+including status probes, until the user lifts the hold. Ordinary model/training
+paths stay 3090-only; never use the 3060 as fallback. Diagnostic results cannot
+grant accelerator or learned-flow qualification. Leave existing services alone.
+
 One user submission, one prompt prefill, one hybrid cache. Qev decision LoRA is
 on for the initial continuous budget readout, off for native generation, and
 on temporarily when Qwen's trained internal gate requests Noul, Choice or Score.

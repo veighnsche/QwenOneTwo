@@ -5,12 +5,12 @@ from torch import nn
 from torch.nn import functional as F
 from .schema import Role, Metadata, Atom, Port, Status, bits, require
 from ..g1_backbone import GPU_UUID
+from ..g1_device import require_cuda
 
 
 def cuda_only(x=None):
-    require(os.environ.get('CUDA_VISIBLE_DEVICES')==GPU_UUID,'explicit RTX 3090 UUID required')
-    require(torch.cuda.is_available() and 'RTX 3090' in torch.cuda.get_device_name(0),'RTX 3090 unavailable; no CPU fallback')
-    if x is not None:require(x.is_cuda,'CPU model execution prohibited')
+    try:require_cuda(torch.cuda,x)
+    except RuntimeError as exc:raise ValueError(str(exc)) from exc
 
 
 def finite(x,label='codec value'):

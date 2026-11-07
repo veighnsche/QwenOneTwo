@@ -20,11 +20,11 @@ from transformers.models.qwen3_5.modeling_qwen3_5 import (
     Qwen3_5ForCausalLM, Qwen3_5TextRotaryEmbedding, apply_rotary_pos_emb,
 )
 from .g1_precision_math import compensated_linear
+from .g1_device import PRIMARY as GPU_UUID, require_cuda
 
 MODE = ContextVar('g1_adapter', default='R')
 TARGETS = {'q_proj','k_proj','v_proj','o_proj','in_proj_qkv','in_proj_z',
            'in_proj_b','in_proj_a','out_proj','gate_proj','up_proj','down_proj'}
-GPU_UUID = 'GPU-225509c3-d702-6c27-de03-76b5e99b33b1'
 
 
 class EffectiveTable:
@@ -105,8 +105,7 @@ class State:
 class Backbone(nn.Module):
     def __init__(self, snapshot, qev):
         super().__init__()
-        if not torch.cuda.is_available() or 'RTX 3090' not in torch.cuda.get_device_name(0):
-            raise RuntimeError('Explicit RTX 3090 CUDA execution required; no CPU fallback')
+        require_cuda(torch.cuda)
         snapshot, qev = Path(snapshot), Path(qev)
         self.tokenizer = AutoTokenizer.from_pretrained(snapshot, local_files_only=True)
         config = AutoConfig.from_pretrained(snapshot, local_files_only=True).text_config

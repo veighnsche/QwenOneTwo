@@ -1,0 +1,197 @@
+{
+  "protocol": "two-gpu-runner-build-v1",
+  "date": "2026-11-07",
+  "status": "CPU_VALIDATED_GPU_NOT_RUN",
+  "plan_sha256": "a3b09f7d8040c90b334d4b02127bff26b4c388a1b663dcd5b0c7aa6937175d61",
+  "source_hashes": {
+    "qwen_one_two/__init__.py": "b6236192beea05d03b8d7c828e63761bca002cbd4ca967ecbc2fea0f7c02caad",
+    "qwen_one_two/codec/__init__.py": "9b577482d1138d4d449fcc2bc9aa493538658afefe0bffb2a72828ab12e7ea38",
+    "qwen_one_two/codec/backbone.py": "b76c85e94dc99c7588992459b5691ec2a97f518ecba6191f19df1cc7461326b3",
+    "qwen_one_two/codec/diagnose_precision.py": "4edc64ec7af6525493e57c33f5fe4866e9ec0c0709086ae1fa99898d75fb23f3",
+    "qwen_one_two/codec/finite.py": "031cd3714a070650619284a83205d48af5aa08f04865028f3a29076d13c98f70",
+    "qwen_one_two/codec/fixtures.py": "36c91e9d949d2d03d4aaaafa709853eaeb7796465b02f6a9853f109f95221bc3",
+    "qwen_one_two/codec/neural.py": "1ac72b7a37bc90639d1e25d0dbcd1375bc6c6e090e0306d0ef2a96c8620a4fec",
+    "qwen_one_two/codec/ownership.py": "d9f10f5f6f8a8233b208110820f4e620253e668463042a30ad2dbbce0357f8dc",
+    "qwen_one_two/codec/precision.py": "9eb775efc303ce6d9eb8bbec26ffdcd6422f37ad0732e03ef0885ae9433c8e5b",
+    "qwen_one_two/codec/qualify.py": "d1204bd1e1ce70721d03e936ec92c8e30cd9b54ce0d79e50bbab46e3fd540851",
+    "qwen_one_two/codec/qualify_matrix.py": "07e25deee4eb930d498d5ca071f76c9022ee27823d62d90fcad45f59efb5a1ff",
+    "qwen_one_two/codec/records.py": "089eb06d1fd55e9a1629297759c942f046dc570058cf9cb304c8d88069287b04",
+    "qwen_one_two/codec/recurrence.py": "d0388df477d5b067875d4c30094e4e64fde9fed35c451b9b65aa223437da1735",
+    "qwen_one_two/codec/render.py": "9e16fb579268e4261cd134883e698f6ae3c69a2802f1dbc2502855062920b82b",
+    "qwen_one_two/codec/runtime.py": "350c79f141e6898c5f762bf9b9c1708bd11297bdd01227c93a39abec2bd61d3a",
+    "qwen_one_two/codec/schema.py": "5a2ff9f2f38b7338da5cf6d7f605bed953e136c37445983f0cf965f1e17dbe23",
+    "qwen_one_two/codec/session.py": "2992225ccc68128680dec23bd64d3273ca950362e35eac6a5430ad00bf45ae3b",
+    "qwen_one_two/codec/writer.py": "187d0a07a4f29c1c4da560f84f361e0099be49c588933d25c8bb35b51ddca1a0",
+    "qwen_one_two/curriculum.py": "7d4f4172e4a1b733ba38721224b58079c0b6196dc914cfb30e783d308328a2cf",
+    "qwen_one_two/decision.py": "0ef4605594a83668996abc0546f89ecf0faa67afd1c383acbc333b73b889864a",
+    "qwen_one_two/download.py": "eb3e8ca5009302d43abe5cbf2e4ec3b53c28ffc2ec6a786440ee40099fee53d4",
+    "qwen_one_two/g1_accounting.py": "6d6d872a7337dd026da0354c9526e7eee012576cf518e19397832896cc3a4dd2",
+    "qwen_one_two/g1_backbone.py": "e179c2c4550285de40d8babc30f4ee300eb340c23441b364e0ff8c641ba6865d",
+    "qwen_one_two/g1_checks.py": "7c32e89b246a6e26235e48e041f6ff5923b589cdf48df073a17bf253ed470950",
+    "qwen_one_two/g1_device.py": "61808accfaa3ce127df6ccaefa203c2cd1a88d5d8fcea50e83ee62a9fa9f166c",
+    "qwen_one_two/g1_evidence.py": "2f882bed4c0ac93dcf0015d6083b471764a8a8fe3d586d337759da1117bb7aba",
+    "qwen_one_two/g1_gate_diagnosis.py": "d38c6a40d66ccf41195ccbdefd77f1bccda632492ecdbbd6841049f26874a3e3",
+    "qwen_one_two/g1_gate_repair.py": "18c25a33ccf05a16630960df40f29d309d19af0a12b23b6e99c3c2341e732b91",
+    "qwen_one_two/g1_precision_diagnosis.py": "acdc5008e7e02c13a24eda2f64a40f7f30176cdfb09e95bb637b20c0126ce3d9",
+    "qwen_one_two/g1_precision_math.py": "bc2e5a6393012079684734de386ad71afd5cbd26b2423a24f22f33ed6b9aedcf",
+    "qwen_one_two/g1_proof.py": "5a0d9991cffff111b12d23df1a5ad46be7cb77f1f67ba16c4038dbfa60ac9cb9",
+    "qwen_one_two/g1_protocol.py": "156ba44aa27b459279404d404e2a16da35e443717fca4d15851627e80cfeaba4",
+    "qwen_one_two/model.py": "65361404f081a2933830acc65453ee147098e6b12a000918c00dc83d991bfb00",
+    "qwen_one_two/policy.py": "a1b43898e6a695536276b44d6bb713b45c3ae5f56a363e586b6c4e3ff2afe978",
+    "qwen_one_two/refine_routes.py": "2a9ed2e1999290d985f5cdced7bfa83e00ec4c56247349848f7b205e7235db5c",
+    "qwen_one_two/server.py": "d83a9dc6764fb0d02ccfd87b40d2c5ba4bd69167a3733e27686b17d52d45139d",
+    "qwen_one_two/thinking.py": "47bfaf4c91e33f8587f4bad856f0d2b36c0e31705132b11f5e1d7f22a504e36b",
+    "qwen_one_two/train.py": "1d316c57efb6db71810ae6a43ba491832d0d7e66e91bc065de8e208c5dc38538",
+    "qwen_one_two/train_feedback.py": "234b516d33e7b070b44b47a1b0b5738917af0cc33bb4df67ad88fc7bf17af952",
+    "qwen_one_two/training/__init__.py": "0a5bc5745bdcb26cbf81df3d10f5363d39539d811fd869326cb37ecb4a29a47e",
+    "qwen_one_two/training/behavior_qualification.py": "e620f747834a8fc336150588d2fac3f5b33d59a16390fda7fdadf6b40c9eee4b",
+    "qwen_one_two/training/binding.py": "6888c1a6f3597b9763f875242b34dea6f9f0abbe5f47b9529488e3aec30ddeae",
+    "qwen_one_two/training/checkpoint.py": "f94b519fe21933e5d121747d299f9005e89484fc0523047598d12be60a19f337",
+    "qwen_one_two/training/clean.py": "ebb80cbbcc8d6bbc0fdddbf58ff77f5a0e640f4cb2b4412d381044d6c690c221",
+    "qwen_one_two/training/clean_packets.py": "7f0d846319a3b9fa391524f73894b8f13baa4f6632b3b127f094f60ba3d2a028",
+    "qwen_one_two/training/component_producer.py": "9cf2f2aea9e4e3bab4230d2fa17cc415e94ffdb6a6522075af86ef7fe2cc2aa8",
+    "qwen_one_two/training/diagnostics.py": "0e5ec6271090c034744a182c2bd4a86d421ee099be0b056da4b29438120b3060",
+    "qwen_one_two/training/driver.py": "c46128c8d9e0de5288717f4a2c6a78b6bb3fed5e4fa2a245b6123c267a587bc2",
+    "qwen_one_two/training/engine.py": "2500a47211fc13a41c3e646d2f315d2233b4304d1f67c71fb73b3eebc57aee4d",
+    "qwen_one_two/training/episodes.py": "0181ca87dff0f2cf4c3f7552aa197b9b67cd3bc0f1ad0b73e84ddcf284a7a5a5",
+    "qwen_one_two/training/inputs.py": "8a96776ac2ab7a65f2cc51c3baaee12a333e76278775cc3d6b37b68cee99e332",
+    "qwen_one_two/training/losses.py": "a91938757131b177d38cba6e5275c0db7f7a053389a1a97c1bf173a82ae99041",
+    "qwen_one_two/training/manifest.py": "468257734527ceb5ec8656b6155388c2b3e92298f457cfa1764fd87cd58cbf5d",
+    "qwen_one_two/training/producer.py": "6827978aa735839a691f4f04f2d5cb6b2471d5c3c54c8604a76ac2ea7619e40f",
+    "qwen_one_two/training/profile.py": "3369e8e23579454fa3e71408fcb6196443cb86ed1c7e0f1f95974b91c9cc9cdb",
+    "qwen_one_two/training/qualification.py": "22d1de030bc85361a2366d03eb4c1c6c47a69f72e87fdcf59d6a9f8e04da72a9",
+    "qwen_one_two/training/receiver_learning.py": "60e5fc7eb79ac7c5374caaa72c19e3a5b2c6bea4cc6854fd9568420dd7dc7034",
+    "qwen_one_two/training/reference.py": "c006f8d92f753eb92250af042f3e6335980bd62861d86c5bda95dc731fe26bd9",
+    "qwen_one_two/training/reference_data.py": "5855ecf472ac6d553bf16372af54cc640c48deb704014e7f26eb652387a01e70",
+    "qwen_one_two/training/reference_exposure.py": "f6e576cb0ce1cd8c48275047d7c0360cf23d4b20f0bcf20eaafc3433971e1a3c",
+    "qwen_one_two/training/reference_qualification.py": "9e02394240fb88b2e4e77b604b020300d200cfae5bb217e3717247da27505db0",
+    "qwen_one_two/training/release.py": "906d6bf7fefaa9b251338e46b13dac289365f5347b73cd03b680e593578888c3",
+    "qwen_one_two/training/sampler.py": "aeee24107468a9a27657efa3ba5c053d36101aee982fad069af8411762e28950",
+    "qwen_one_two/training/two_gpu.py": "73f463f6c695830a8e05685975e8f118664bd246b91ce25068bf2d312b90fa1c",
+    "qwen_one_two/training/two_gpu_worker.py": "62e4327a087fa5e1c0440d000551b828b342a0aba62052a142004c2e5c97405d",
+    "qwen_one_two/training/weight_repair.py": "aff987d19f012820218758e02162d8352acce6d2983b74b9663a7afd9f4917bc",
+    "scripts/two_gpu_diagnostics.py": "bb70eb6e330eedfefe74694e06ea64d06d37f95ffd3d39e3bf147feffab51120",
+    "tests/test_two_gpu.py": "914ed272f3dc440640cc8e6749592818fa04cc1cb633a756d547b8ad6ef7451e",
+    "AGENTS.md": "1d0d64f1f3f607f5180250520997018bcdffbd99daf58ed04fabc9c6af5ad0a2"
+  },
+  "devices": [
+    {
+      "expected_name": "RTX 3090",
+      "uuid": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1"
+    },
+    {
+      "expected_name": "RTX 3060",
+      "uuid": "GPU-744c1cf5-9578-6aad-95c1-7a6f1c9d11db"
+    }
+  ],
+  "device_names_freshly_verified": false,
+  "inventory": {
+    "names_verified_in_this_slice": false,
+    "path": "data/g1-proof/run-20261105/manifest.json",
+    "sha256": "75893bfb09240f91af2c8a2a46d10e76883351eab3b8c02d4322c6755872c304"
+  },
+  "checkpoint_manifest_sha256": "0cd1d4bc55341e78339c1b0b05dec0b3650573d7501fb3f3d2fc6d2f649b6e58",
+  "receiver": "94218aae6ec62a7745c349af8e9975fd4987520cf9f1345f38e44586e5e7742c",
+  "reference": "5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f",
+  "dataset": "5b8f4cffdc4f33e255d3a34306cac03a68c50dcd9dab905ae8d8adcf89c81e77",
+  "planned_jobs": 220,
+  "planned_cases": 310,
+  "panels": {
+    "E": 130,
+    "X": 180
+  },
+  "atomic_intervention_pairs": 90,
+  "planned_anchor_ids": [
+    "development-E-0000",
+    "development-E-0040",
+    "development-E-0090"
+  ],
+  "planned_anchor_presentations": 6,
+  "plan_case_bindings_sha256": "249580d7c94eddc3853116d3bb7eb844c7758ab3c23d91fa09fbc382e337d8e0",
+  "plan_jobs_sha256": "c99f08ec6ad0322ace529f834001a20268b4549c7d94fccd34093f7d2e63f2b2",
+  "cpu_tests": {
+    "unique_tests": 78,
+    "initial": {
+      "tests": 77,
+      "failures": 0,
+      "errors": 0,
+      "passed": true,
+      "model_runtimes_loaded": [],
+      "gpu_execution": false
+    },
+    "final_targeted": {
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "passed": true,
+      "model_runtimes_loaded": [],
+      "gpu_execution": false
+    }
+  },
+  "saved_receipts": {
+    "passed": true,
+    "historical_3090_cases_checked": 310,
+    "new_gpu_cases": 0,
+    "secondary_gpu_results": 0,
+    "files": {
+      "data/receiver-learning-20261106/continued/final-E.jsonl": "6fd5a5b676c4e031a25e5479d7b67de42b8089e123cb0b117ef78d263cc7a72f",
+      "data/receiver-learning-20261106/continued/final-X.jsonl": "15bc2fb0b70cae60528ad90f3b3f7b23a9958cf3c0e9ce43c24fd7abec5d20ca"
+    },
+    "model_runtimes_loaded": []
+  },
+  "source_audit": {
+    "passed": true,
+    "base_commit": "fdfa1d2a22e647417ddb3a92faaca12e8facb3e5",
+    "unchanged_function_definitions": 82,
+    "checks": {
+      "qwen_one_two/g1_backbone.py": {
+        "arithmetic_and_optimizer_body_unchanged": true
+      },
+      "qwen_one_two/g1_proof.py": {
+        "arithmetic_and_optimizer_body_unchanged": true
+      },
+      "qwen_one_two/codec/neural.py": {
+        "guard_replaced_only": true
+      },
+      "qwen_one_two/codec/recurrence.py": {
+        "arithmetic_and_optimizer_body_unchanged": true
+      },
+      "qwen_one_two/training/engine.py": {
+        "arithmetic_and_optimizer_body_unchanged": true
+      }
+    },
+    "gpu_numeric_validation": false
+  },
+  "stale_source_plans_rejected": true,
+  "raw_files": {
+    "data/two-gpu-runner-20261107/prepared-ready/plan.json": "a3b09f7d8040c90b334d4b02127bff26b4c388a1b663dcd5b0c7aa6937175d61",
+    "data/two-gpu-runner-20261107/prepare-ready.log": "299f897d7951585e7b6f52c6bfdc197b35307c7d4175e919eb3bebf0d5da5772",
+    "data/two-gpu-runner-20261107/prepare-ready-result.json": "c62a0754cda8b15beb187c8d8af6840f94cb6507b5747a12886065d2ee8de1f5",
+    "data/two-gpu-runner-20261107/prepare_ready.py": "6f45054b97cfb715a40e3d884faab19a1953fee49328ac1fda98bd4646d45c8e",
+    "data/two-gpu-runner-20261107/run_tests.py": "ce31c9490b9c0e0ba5fc48767d4bf7f0c03d946bccfbef1193227e1fc43d9417",
+    "data/two-gpu-runner-20261107/run_targeted_tests.py": "1aaaaf8d106bda0c763f634deb1c8af6c640b9e5a1c4aab8b0d02231c99bed86",
+    "data/two-gpu-runner-20261107/tests-initial.log": "9eff5b82b903fbb96dbd56edfc3a5481290bd1388487b72662775c5226612593",
+    "data/two-gpu-runner-20261107/test-result-initial.json": "77af266b6f27b3517433aaf427924a426751bb719127dc32c922a3af70d0331e",
+    "data/two-gpu-runner-20261107/tests-final-targeted-v3.log": "e5e390ddd92ab8eda0abda319b972e76fdf78dc807de9ff628b5f518a68eb00f",
+    "data/two-gpu-runner-20261107/test-result.json": "71c84ff449143d263001fe091765b3db3da9d729fd8f249deadf2f5b8f49538f",
+    "data/two-gpu-runner-20261107/tests-final-targeted-v2.log": "ce1293b521e71838462b4440fc011841e1ccffb5b88540f8960baf18eab469eb",
+    "data/two-gpu-runner-20261107/test-result-failed-early-exit.json": "cb7c601080e5d0a1635c7385d4bc5bb7c7d32346b806aeca18c2e79728dab09a",
+    "data/two-gpu-runner-20261107/check_saved_receipts.py": "2cbfbbfcd76a3f69dfaff86ad91feede4e5a0225b91ff344c81acd83e10eb867",
+    "data/two-gpu-runner-20261107/saved-receipts.log": "b461a2bc2ff1a72893ebd3a3639223f2a48a9b78f84681c97792baeacf3f5595",
+    "data/two-gpu-runner-20261107/saved-receipt-result.json": "d01bd99cb744fc94bb59195ea2a972c587ed66eb59e391bf17ab1ee2f40ce79a",
+    "data/two-gpu-runner-20261107/audit_source.py": "cdcadf7e84aae3a7e3ed807c809a6808c35ef8e614ca5c204c1870716ce6cd56",
+    "data/two-gpu-runner-20261107/source-audit.json": "90ae00f18547ea6d39baf17259d52026b1bba9529f7b56697064081496e0ca95",
+    "data/two-gpu-runner-20261107/audit.py": "0da2ca1e8c799e9992b5e883aaf56ccfbb6d1f6b8c1f01e95c91b6e7063c5706"
+  },
+  "new_gpu_cases": 0,
+  "gpu_tools_or_model_workloads_run": false,
+  "agents_spawned": 0,
+  "training_runs": 0,
+  "initial_failure": "New premature-worker-exit fixture exposed an unwrapped BrokenPipeError. Dispatch now normalizes channel failures to RuntimeError; the retained final targeted suite passes.",
+  "limitations": [
+    "GPU execution, 3060 support/fit, numeric/gradient parity and throughput remain unmeasured.",
+    "Shared-anchor readout comparison is a future smoke check, not full numeric qualification.",
+    "Experimental diagnostic protocol cannot grant existing semantic/accelerator qualification.",
+    "Partial receipts are retained; existing run journals are refused. Automatic resume/retry is not implemented."
+  ]
+}

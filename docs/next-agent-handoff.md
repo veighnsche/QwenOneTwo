@@ -41,7 +41,57 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — CPU asset lookup/audit profile complete
+## Current checkpoint — two-GPU diagnostic runner built, GPUs not run
+
+**Both GPUs remain off, including status probes. No CPU model fallback.** The
+user authorized building a 3090/3060 diagnostic runner, with existing data, no
+agents or training, and commit/push. That build is complete and CPU-validated;
+no model workload was launched. Read the [runner specification/build evidence](two-gpu-diagnostics-v1.md),
+[portable evidence](evidence/two-gpu-runner-v1.json), and
+`scripts/two_gpu_diagnostics.py`.
+
+The prepared existing-data plan is
+`data/two-gpu-runner-20261107/prepared-ready/plan.json`:
+**220 main jobs / 310 cases** (130 E singles + 90 atomic X pairs), plus three
+shared startup cases on each card (six declared repeated presentations). It pins
+sources, release/record/view bytes, final receiver checkpoint 188, reference,
+expected weight hashes and the saved GPU inventory. Status is
+**PREPARED_GPU_NOT_RUN**; weight-file checks and actual names/placement are deferred.
+The secondary UUID is taken from saved inventory; its expected 3060 name has not
+been freshly verified. Actual startup rejects a wrong/unavailable card.
+
+Future explicitly opted-in execution uses two independent read-only processes,
+each with one visible UUID mapped to local cuda:0, frozen W/reference/live weights,
+and whole Session/cache ownership. Jobs are assigned on completion, pairs remain
+together, canonical report order is restored, and actual latent `evaluate_case`
+is reused. The three shared-case readout/control comparisons precede main jobs;
+they are not full 3060 numeric qualification. Per-case metadata/grades/accounting
+and final immutable-weight receipts are checked. Errors stop owned children,
+retain partial unqualified receipts and refuse silent retry/replay/overwrite.
+Automatic resume is not implemented. Existing services remain unchanged.
+
+`g1_device.py` provides a narrow explicit diagnostic scope for the secondary
+UUID. Ordinary paths stay 3090-only; optimizer Windows reject diagnostic scopes
+on either card. Guard changes preserve arithmetic/optimizer bodies and **82
+other function definitions** by static AST comparison. Existing numeric reports
+remain historical; **no new GPU numerical, gradient, memory or throughput
+qualification** is claimed. Experimental reports cannot grant ReferenceEvidence.
+
+**78 unique CPU tests pass**: broad **77/77 in 16.830 s**, final targeted
+**11/11 in 0.745 s**, with model imports blocked and CPU-only echo workers.
+A premature-exit fixture exposed unwrapped BrokenPipeError; channel errors are
+now normalized and the failed log retained. All **310 historical final 3090
+receipts** pass the new CPU validator. Final plan/source/pair/coverage/receipt
+audit, compilation and whitespace pass. **Zero new GPU/3060 results**, no agents,
+new semantic data/reviews, training or service changes. Raw evidence:
+`data/two-gpu-runner-20261107/`. Do not invoke `run --execute-gpu` during the hold.
+
+**Next unfinished slice:** after explicit permission to use GPUs again, verify
+the secondary card and targeted model/numeric/cache/gradient compatibility, then
+measure independent-case throughput. No execution/training is queued. Existing
+Noul transfer and Score failures remain unresolved.
+
+## Previous checkpoint — CPU asset lookup/audit profile complete
 
 **Keep the GPU off at the user's direction, including probes/status tools. No
 CPU model fallback. Leave existing services unchanged.** The requested CPU

@@ -8,6 +8,7 @@ import torch
 from torch import nn
 from ..codec.neural import cuda_only
 from ..codec.finite import all_finite
+from ..g1_device import require_training_context
 from ..codec.ownership import parameter_groups
 from .inputs import check
 from .losses import COEFFICIENTS, REFERENCE_COEFFICIENTS
@@ -78,6 +79,7 @@ def tensors(value):
 
 class Window:
     def __init__(self, groups, phase='components', *, schedule_profile='a4-v1'):
+        require_training_context()
         cuda_only()
         check(phase in PHASES, 'phase')
         scheduled_rate(phase, 1, schedule_profile)

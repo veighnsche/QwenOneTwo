@@ -9,6 +9,7 @@ from collections import OrderedDict
 import torch
 from torch.autograd.function import once_differentiable
 from ..g1_backbone import GPU_UUID
+from ..g1_device import require_visibility
 
 
 def eager_recurrence(q,k,v,beta,g,memory):
@@ -108,8 +109,9 @@ def graph_recurrence(q,k,v,beta,g,memory):
     and higher derivatives have no alternate execution path.
     """
     values=(q,k,v,beta,g,memory)
-    if os.environ.get('CUDA_VISIBLE_DEVICES')!=GPU_UUID or q.device.index!=0:
-        raise ValueError('explicit RTX 3090 UUID and local cuda:0 required')
+    try:require_visibility()
+    except RuntimeError as exc:raise ValueError(str(exc)) from exc
+    if q.device.index!=0:raise ValueError('selected local cuda:0 required')
     if any(x.device.type!='cuda' or x.device!=q.device or x.dtype!=q.dtype for x in values):
         raise ValueError('recurrence requires same-device CUDA tensors of one dtype')
     if q.dtype not in (torch.float32,torch.float64):raise ValueError('FP32 state or FP64 derivative check required')

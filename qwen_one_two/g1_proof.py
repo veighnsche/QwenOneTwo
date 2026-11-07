@@ -21,6 +21,7 @@ from torch.nn.attention import sdpa_kernel, SDPBackend
 from safetensors.torch import load_file, save_file
 
 from .g1_backbone import Backbone, GPU_UUID, norm
+from .g1_device import require_visibility
 from .g1_protocol import Codec, Ledger, AdmissionError
 from .decision import verify_qev, MODEL, REVISION, QEV_REVISION
 
@@ -30,8 +31,7 @@ def emit(**event):
 
 
 def configure():
-    if os.environ.get('CUDA_VISIBLE_DEVICES') != GPU_UUID:
-        raise RuntimeError('CUDA_VISIBLE_DEVICES must explicitly select '+GPU_UUID)
+    require_visibility()
     torch.backends.fp32_precision='ieee'
     torch.backends.cuda.matmul.fp32_precision='ieee'
     torch.backends.cudnn.conv.fp32_precision='ieee'
