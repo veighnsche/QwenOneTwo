@@ -41,7 +41,86 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — slice 4 complete; Choice retained, value repair unsuccessful
+## Current checkpoint — matched value-only comparison complete; no value transfer gain
+
+The user authorized one matched value-only comparison on the 3090 using the saved
+1,003 features, exact initialization/exposure, frozen W/reference and unchanged
+Choice, no agents or new data. Read the
+[protocol](receiver-value-only-comparison-v1.md),
+[actual results](receiver-value-only-results-2026-11-07.md) and
+[portable evidence](evidence/receiver-value-only-comparison-v1.json).
+**The comparison completed; removing status loss did not fix development values.**
+No promotion, extra fit or schedule extension.
+
+The prior joint repair is the matched control. New checkpoint-0000 **weights,
+optimizer and RNG files are byte-identical** to its saved initialization. All
+1,003 initial heads/losses/metrics and feature tensor bytes match. All original
+model/loss/optimizer/ownership/schedule implementations match archived sources;
+the launcher adds an explicit `--value-only` mode. The only objective change is
+removing status before eligible-count accumulation. Forward routing is unchanged:
+status/scalars share the residual, Reason/structure use original h, Choice bypasses.
+All existing W, R/D, codec/reference parameters stay frozen; only the same 133,184
+new residual parameters train. Exact values, bindings, thresholds and numeric
+tolerances are unchanged.
+
+Exactly **2,000 scheduled windows /16,000 visits**, same order and 955×16/48×15
+per-record exposure counts. Scalar eligibility exactly **Noul 4,087 /Score 4,049**,
+status zero. Ten predetermined windows have no eligible scalar target and correctly
+skip AdamW: **1,990 updates**. Inactive branches get no gradient/moment/decay update
+under the existing rules; no replacement examples or attempts to equalize updates.
+All **1,003 features reused**, zero new bulk extraction.
+
+**Development joint control → value-only:** behavior **123 →78 /310**, correct
+status **182 →129 /310**, complete intervention pairs **30 →20 /90**. Noul truth
+stays **25/80**, delivered success **9 →4 /80**, Brier **0.299799 →0.302809**,
+descriptive AUC **0.675636 →0.638545**. All assessed development Noul predictions
+remain false: 0/55 true positives, 25/25 true negatives, balanced accuracy 0.5.
+Score exact delivered success stays **0/50**; interval distance worsens
+**0.285469 →0.288103**, in both scale-direction groups. **All 90 Choice cases
+exactly retain both controls' outputs and complete ledgers**, including 47/50
+assessed successes. **310/310 transports**, zero execution failures.
+
+Training joint → value-only: Noul truth **168 →169 /256** (eight true positives
+gained, seven true negatives lost), BCE **0.626934 →0.507407**, Brier
+**0.217993 →0.174319**, AUC **0.767519 →0.763934**; status **420 →358 /501**.
+Score hits **0/254 unchanged**, mean distance **0.393886 →0.393377**, status
+**502 →417 /502**. Better Noul training probability loss does not transfer;
+status competition alone is not a sufficient fix in this configuration. No
+impossibility/convergence claim or diagnosis of the remaining bottleneck.
+
+**20 CPU tests pass in 13.860 s**, byte compilation/whitespace checks pass.
+Targeted GPU full/minimal scalar loss/VJP equality, selected-branch nonzero gradients
+and other-branch gradient isolation pass. Prior unchanged residual FP64/transformer
+numeric qualifications reused. Exact first-update perturbed-state resume, four
+fresh final h/head/ledger checks, both 320-tensor W/physical-tying checks, frozen
+receiver/reference fingerprints, feature hashes and gradient ownership pass.
+Independent CPU audit recomputes matched exposure, active owners, empty windows,
+eligibility, source audits, summaries/grades, accounting and Choice retention.
+
+Raw: `data/receiver-value-only-20261107/run/`, logs/audit/test receipts in parent;
+`prepared/` is model-free preflight. No failed/retried GPU attempt. Final repair
+`run/checkpoint-2000` manifest
+`7d719824ec545cd9f12489cf61a9c231bc79085111a49501d65b591e82b32ffc`, fingerprint
+`f98e0f742d105e553666e02a045ae1a251f0890a1b3145e3c0e24632cfba7245`.
+It requires the pinned parent and explicit experimental installation.
+
+New **4 fresh-check /310 development Sessions**, **399 /38,211 positions**,
+total **314 /38,610**. One prefill/cache lineage each; no held positions or
+invocation text. Cached fit/measurement adds zero positions/prefills. Separate
+offline source/reference tokens **26,551 /16,316**, 483 reference encodings.
+Model-run **479.425140 s**, peak CUDA **3,622,856,704 bytes**; not a matched
+throughput benchmark. After exit only existing PID 2094 (3852 MiB) remains.
+No 3060, agents, new data/reviews, locked-data access, reference/native training,
+deployment or Operating Table/service changes.
+
+**Next unfinished slice:** distinguish remaining scalar information/transfer
+limitations from readout optimization using the saved feature corpus. A separately
+specified direct-readout diagnostic is a candidate next comparison; additional
+fitting needs new authorization. Do not repeat this status-loss comparison or
+bulk extraction by default. Reference meaning, Reason meaning, learned invocation
+and full native use remain unqualified. Earlier “next slice” entries are historical.
+
+## Previous checkpoint — slice 4 complete; Choice retained, value repair unsuccessful
 
 The user authorized one controlled Noul/Score receiver repair on the 3090,
 existing data, frozen W/reference, no agents or new data. The
