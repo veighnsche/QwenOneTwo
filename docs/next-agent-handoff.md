@@ -1,4 +1,4 @@
-# Next-agent handoff — 2026-11-06
+# Next-agent handoff — 2026-11-07
 
 Read this first for current status, then the
 [implementation specification](architecture-and-training-plan.md) and its linked
@@ -41,58 +41,101 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — receiver-learning experiment active
+## Current checkpoint — receiver-learning experiment complete
 
-The user explicitly authorized receiver-path verification and a receiver-learning
-experiment, superseding the earlier no-capability-training boundary for this
-receiver-only run. No agents or new data are authorized. W and the entire
-pass-12 reference stay frozen; native R, gate/writer/reader objectives and the
-budget row also remain frozen. Do not start reference pass 13.
+**The requested receiver experiment and performance audit are complete. No job
+remains active.** Read the [measured results](receiver-learning-results-2026-11-07.md),
+[portable evidence](evidence/receiver-learning-v1.json),
+[fixed protocol](receiver-learning-v1.md),
+[training-path evidence](evidence/receiver-training-paths-v1.json),
+[exact continuation](evidence/receiver-learning-resume-v1.json) and
+[Astra performance audit](receiver-performance-audit-2026-11-07.md).
 
-Read the [fixed receiver experiment](receiver-learning-v1.md). Implementation
-`training/receiver_learning.py` completes isolated request-to-heads objectives
-before result decoding; malformed untrained Reason decodes no longer discard
-valid classifier losses. Actual behavioral evaluation still decodes real results
-without overrides. Frozen annotation payload caching preserves exact contents;
-D-dependent sources are always recomputed. Locked labels remain unopened.
+The user's explicit authorization allowed receiver-only capability learning on
+the RTX 3090, superseding the earlier no-capability-training boundary for this
+run. All **1,500 existing receiver records** were presented once, plus four
+declared real-record repeats: **1,504 presentations / 188 optimizer windows**,
+with **zero failed training exposures**. This is one initial full receiver pass,
+not the full 2,000-window component phase or convergence. No reference pass 13,
+writer/gate/reader training, new scenarios/reviews, promotion or service changes.
 
-A bookkeeping bug was found during the run: the outer eligibility Counter sums
-live loss tensors instead of counting examples. The optimizer's own component
-counts are correct. A fix and five regression checks pass; every model/loss/
-optimizer/producer source and the update-loop AST (excluding counts) are unchanged.
-The original process stopped immediately after checkpoint 75 (intentional SIGINT,
-exit -2) and resumed exact weights/optimizer/RNG/cursor with the accounting fix.
-The continuation has executed window 76 with verified sample-order continuity;
-see [resume evidence](evidence/receiver-learning-resume-v1.json). No completed
-optimizer window was replayed; in-flight preparation may recur. Source identities
-and both segment logs are preserved. Read local `CONTINUATION-NOTES.md` first.
+The isolated request-to-heads objective prevents malformed untrained Reason
+feedback from discarding valid classifier losses. It uses actual latent requests,
+answer-blind clean inputs and labels accessed after evaluation. It ends at the
+heads with no supplied/claimed return or native answer. Frozen annotation caches
+are bit-identical; D-dependent sources remain fresh. Actual evaluation continues
+to decode and consume real model outputs without overrides.
 
-Active launcher/evidence: `data/receiver-learning-20261106/`, especially the active `continued.log`, `continued-exit.json` when finished,
-and `continued/` checkpoints/reports. The preserved original `run.log`/`exit.json`
-belong to the intentionally interrupted prefix. Do not mistake that exit for
-completion of the experiment. The detached launcher
-runs `scripts/train_receiver.py` on the explicitly selected RTX 3090. Do not
-launch a duplicate. The run first measures the new 130-case E baseline, verifies
-actual gradients across operation/status strata, then completes **1,504 real
-presentations / 188 windows**: all 1,500 receiver records once, with four explicit
-wraparound records. It finishes with 130 E and 180 X development evaluations.
-The original 180 X baseline is reused with pinned weights/source/view/cache
-compatibility checks. There is no elapsed-time cap or automatic extension.
+| Operation | E baseline → final | X baseline → final |
+|---|---:|---:|
+| Noul | **4 → 13 / 40** | **13 → 9 / 100** |
+| Choice | **8 → 11 / 50** | **31 → 40 / 40** |
+| Score | **0 → 10 / 40** | **0 → 0 / 40** |
 
-Already passed: three actual-release schedule/answer-blindness tests, ten
-behavioral-grading tests, ten training-input tests, and ten CUDA loss/eligibility/
-accumulation tests. All 13 real-model operation/status preflight strata now pass finite connected
-D-gradient checks, with no R/reference gradients or preflight optimizer updates.
-The first actual update and exact model/optimizer checkpoint roundtrip pass;
-see [training-path evidence](evidence/receiver-training-paths-v1.json). Learning
-is running through the declared pass. No component, receiver or autonomous
-capability acceptance is claimed.
+All ten final E Score successes are **non-assessed responses**. Numeric Score
+agreement remains **0/50** assessable E+X cases, with large continuous errors.
+Noul assesses **0/80** assessable development cases; its E gain mainly reflects
+Unresolved responses. Choice reaches **40/40 controlled X cases / 20/20 Choice
+pairs**, but missing/conflicting/no-feasible E statuses remain unsuccessful.
+Do not certify all Choice or overall semantics from that subset.
+
+Overall behavioral successes **56→83/310**, returned statuses **115→130/310**,
+valid exchanges **280→310/310**, complete intervention pairs **16→23/90**.
+All final decoding failures disappear, but Reason support meaning is untested.
+Unsupported Assessed returns remain **46/130** reviewed non-assessable cases
+(previously 95/130). The scoped intervention qualification remains **BLOCKED**.
+No native answer consumption or learned invocation/writing is qualified.
+
+A read-only final-checkpoint probe on the same 13 preflight training records
+improves status accuracy **3→8/13** and all seven loss types on common eligible
+examples. Status CE **1.975497→0.833762**; the one assessed Choice loss
+**0.251437→0.00000309944**. Value probes are one example per operation, not a full
+training recovery score. This demonstrates connected learning, not held-out
+semantic competence or a unique cause of the remaining failure.
+
+**All 320 W tensors / physical tying, frozen reference, R and frozen codec checks
+pass.** All gradients finish None. Every training record/view hash, window,
+eligibility count and Session accounting receipt passes audit; objective ledger
+**160,853 positions**, excluding separate offline encodings/rematerializations.
+All files in ten checkpoints pass hashes, and development grades/pairs are
+recomputed. Training/development selected families are disjoint (**288/104**).
+Locked labels remain unopened. Existing numeric matrices are reused; no new
+trained-weight parity or full-flow certificate is claimed.
+
+Tests: **25 unique model-free checks**, **10 CUDA loss/accumulation checks**,
+**13 actual preflight operation/status gradient strata**, exact first-update
+model/optimizer checkpoint roundtrip, and the final zero-update matched probe.
+Sources/weights use v3 FP32 transformer / compensated BF16 vocabulary arithmetic;
+original BF16 transformer arithmetic is still failed. Raw evidence:
+`data/receiver-learning-20261106/`.
+
+The original eligibility Counter summed tensors, retaining graphs; optimizer
+counts were correct. It was fixed at checkpoint **75**, intentional SIGINT
+**exit -2**; all weights/moments/RNG/order/cursor continue exactly at **76**.
+No completed optimizer window was replayed; in-flight preparation can recur.
+Continuation and matched probe both **exit 0**. Prefix and continuation source
+identities/logs remain preserved. Active execution is over; do not restart it.
+
+Final checkpoint: `continued/checkpoint-0188` in that evidence root, manifest
+`0cd1d4bc55341e78339c1b0b05dec0b3650573d7501fb3f3d2fc6d2f649b6e58`.
+Final receiver fingerprint
+`94218aae6ec62a7745c349af8e9975fd4987520cf9f1345f38e44586e5e7742c`;
+reference unchanged
+`5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f`.
 
 The user subsequently authorized **one Astra read-only performance subagent**.
-Its [audit](receiver-performance-audit-2026-11-07.md) found one trainer, low CPU
-contention and repeated VJP/synchronization costs. It changed no source, job or
-service and launched no model experiment. Suggested speedups are unmeasured;
-training continues unchanged. No other agents are authorized by that request.
+It found one trainer, low CPU contention and repeated VJP/synchronization costs;
+it changed no training source, job or service and launched no model workload.
+The parent reproduced its timing statistics. Suggested speedups remain
+unbenchmarked. No other agents are authorized by that request.
+
+**Next unfinished slice:** optimize iteration speed with fused same-boundary
+finite checks and gradient/failure/rollback/accounting equivalence, then measured
+checkpoint/cache-policy comparisons. Separately isolate Noul's training/development
+transfer and Score's numerical failure before choosing further fitting or data
+changes. No further training, generation or deployment is queued. Preserve the
+known existing Reason annotation discrepancy; no corrected annotation/review is
+claimed. Keep current failures and all previous reports intact.
 
 ## Previous checkpoint — semantic/behavioral gate replacement
 

@@ -128,3 +128,17 @@ with fused boundary checks and actual timing/cache counters, followed by a
 checkpoint/cache-policy comparison. Consider whole-window gradients only with
 an explicit contract revision and measured memory/parity evidence. There is no
 measured optimized implementation or achieved speedup in this audit.
+
+## Parent follow-up: release metadata parsing
+
+The final ledger audit exposed another CPU cost. `ReviewedRelease.manifest`
+returns a freshly parsed/validated copy of its immutable 4,072,795-byte training
+manifest (9,728 descriptors, 17,809 assets). Three isolated CPU metadata decodes
+measured 0.06177, 0.06172 and 0.06249 seconds, mean **0.06199415 s**.
+`component_view` accesses that property twice per example: approximately **0.992 s
+per eight-example window** at this isolated rate, not a measured end-to-end
+speedup. Raw measurements are `data/receiver-learning-20261106/manifest-cost-audit.json`.
+This is ordinary JSON bookkeeping, not a model benchmark. Immutable purpose and
+selected-ID accessors could avoid repeated full decodes while retaining the
+existing fresh-copy manifest API and all release-validation guarantees. This
+smaller opportunity is additional to Astra's audit, not a finding attributed to it.
