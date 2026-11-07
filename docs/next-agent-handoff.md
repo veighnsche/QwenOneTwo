@@ -41,7 +41,57 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — receiver-learning experiment complete
+## Current checkpoint — fused finite checks complete
+
+The user requested Astra's fused finite checks, a 3090 benchmark, exact
+output/gradient/accounting checks, frozen W/reference, no new data/agents/training,
+and commit/push. **This slice is implemented and validated. No job remains
+active.** Read the [measured report](fused-finite-results-2026-11-07.md),
+[portable evidence](evidence/fused-finite-v1.json) and
+`scripts/benchmark_finite.py`.
+
+The runtime and training engine use read-only multi-tensor infinity norms and
+one host finite decision at each existing boundary. All hidden/cache tensors,
+each component's gradients, combined gradients and pre/post optimizer state
+remain checked; no per-linear guard was deferred. Objective arithmetic,
+per-component VJPs, eligible denominators, None masks, clipping/rollback,
+precision, accounting and control behavior remain unchanged.
+
+On the pinned RTX 3090, two fixed existing eight-record batches at final receiver
+checkpoint 188 pass output/cache/loss-byte and exact gradient-value parity
+against literal pre-change sources from `d767129`. There are **4,671 component
+buffer / 809 combined-gradient tensor comparisons**, all seven eligible loss
+types, **17 / 25 VJPs**, and identical source/accounting reports. Each Session
+retains one prefill/cache lineage. The **32 parity / 96 timed presentations**
+account for **14,576 objective-ledger positions**, excluding separate encodings/
+rematerializations. Intentional masked -Inf logits remain unchanged.
+
+Three alternating timed pairs per batch give median **36.844481→36.166659 s**
+and **51.328583→50.424776 s**: **1.839684% / 1.760827%** less elapsed time.
+The predicates themselves improve **7.4509× / 8.5798×**, with measured host
+scalar decisions **49→1 / 405→1**. This is a small full-window improvement,
+not a solution to the wider iteration-speed problem. Peak allocated tensor
+memory is identical between paths. Optimizer update/clipping time is excluded.
+
+**25 unique targeted CUDA tests pass**, including six boundary-fixture tests
+against both literal legacy and fused classes (6+6, no failures/errors).
+NaN/Inf, finite extremes, graph/version immutability, loss/derivative/buffer
+failures, CPU-state rejection, partial-step rollback, cancellation, mutated
+cache, lineage/position and accounting checks pass. The benchmark exits **0**
+after **750.440664 s**; source/receipt/eligibility/timing recomputation passes.
+All **320 W tensors / physical tying**, frozen reference, R/receiver/codec
+fingerprints and final grad=None checks pass. **Zero model optimizer updates**;
+no generation, agents, annotation changes or service changes. Raw artifacts:
+`data/fused-finite-20261107/`. The old 324-case numeric matrix is reused;
+no new broad-matrix or semantic/full-flow certification is claimed. Original
+BF16 transformer arithmetic remains failed.
+
+**Next unfinished slice:** separately measure checkpoint/cache-policy effects
+with gradient/accounting equivalence before selecting a change. This is pending,
+not launched. The Noul training/development transfer and Score numerical failures
+below remain unresolved. No further training or data generation is queued.
+
+## Previous checkpoint — receiver-learning experiment complete
 
 **The requested receiver experiment and performance audit are complete. No job
 remains active.** Read the [measured results](receiver-learning-results-2026-11-07.md),
@@ -126,12 +176,12 @@ reference unchanged
 The user subsequently authorized **one Astra read-only performance subagent**.
 It found one trainer, low CPU contention and repeated VJP/synchronization costs;
 it changed no training source, job or service and launched no model workload.
-The parent reproduced its timing statistics. Suggested speedups remain
-unbenchmarked. No other agents are authorized by that request.
+The parent reproduced its timing statistics. The suggestions were initially
+unbenchmarked; the finite-check slice above now has measured results. No other
+agents are authorized by that request.
 
-**Next unfinished slice:** optimize iteration speed with fused same-boundary
-finite checks and gradient/failure/rollback/accounting equivalence, then measured
-checkpoint/cache-policy comparisons. Separately isolate Noul's training/development
+The subsequent finite-check slice is completed above; measured checkpoint/cache-
+policy comparisons remain pending. Separately isolate Noul's training/development
 transfer and Score's numerical failure before choosing further fitting or data
 changes. No further training, generation or deployment is queued. Preserve the
 known existing Reason annotation discrepancy; no corrected annotation/review is

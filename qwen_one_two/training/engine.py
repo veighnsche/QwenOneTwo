@@ -7,6 +7,7 @@ from collections import defaultdict
 import torch
 from torch import nn
 from ..codec.neural import cuda_only
+from ..codec.finite import all_finite
 from ..codec.ownership import parameter_groups
 from .inputs import check
 from .losses import COEFFICIENTS, REFERENCE_COEFFICIENTS
@@ -114,11 +115,12 @@ class Window:
             check(set(losses) <= set(self.coefficients), 'component not eligible in this phase')
             for component, loss in losses.items():
                 cuda_only(loss)
-                check(loss.ndim == 0 and loss.requires_grad and bool(loss.isfinite()), 'invalid component loss')
+                check(loss.ndim == 0 and loss.requires_grad, 'invalid component loss')
+            check(all_finite(losses.values()), 'invalid component loss')
             for index,(component,loss) in enumerate(losses.items()):
                 grads = torch.autograd.grad(loss,self.parameters,allow_unused=True,
                                             retain_graph=index < len(losses)-1)
-                check(all(g is None or bool(g.isfinite().all()) for g in grads), 'nonfinite component gradient')
+                check(all_finite(grads), 'nonfinite component gradient')
                 buffers = self.buffers.setdefault(component,{})
                 for pi,g in enumerate(grads):
                     if g is not None:
@@ -143,7 +145,7 @@ class Window:
                     p.grad = g.mul(weight)
                 else:
                     p.grad.add_(g,alpha=weight)
-        check(all(p.grad is None or bool(p.grad.isfinite().all()) for p in self.parameters), 'nonfinite combined gradient')
+        check(all_finite(p.grad for p in self.parameters), 'nonfinite combined gradient')
 
     def step(self):
         multiplier = scheduled_rate(self.phase, self.scheduled_windows+1, self.schedule_profile)
@@ -156,15 +158,14 @@ class Window:
             if active:
                 for group in self.optimizer.param_groups:
                     group['lr'] = group['peak_lr']*multiplier
-                check(all(t.is_cuda and bool(t.isfinite().all()) for state in self.optimizer.state.values()
-                          for t in tensors(state)), 'invalid optimizer state')
+                check(all_finite(t for state in self.optimizer.state.values()
+                                 for t in tensors(state)), 'invalid optimizer state')
                 report['unclipped_norm'] = float(torch.nn.utils.clip_grad_norm_(active,1.,error_if_nonfinite=True))
                 # Roll back a partial AdamW step on device/numeric failure. Save
                 # only active masters/moments; unused rows remain grad=None.
                 backup = [(p,p.detach().clone(),clone_state(self.optimizer.state.get(p))) for p in active]
                 self.optimizer.step()
-                check(all(bool(p.isfinite().all()) for p in active) and
-                      all(t.is_cuda and bool(t.isfinite().all()) for p in active for t in tensors(self.optimizer.state[p])),
+                check(all_finite((*active, *(t for p in active for t in tensors(self.optimizer.state[p])))),
                       'nonfinite optimizer update')
                 self.optimizer_updates += 1
             report['stepped'] = bool(active)

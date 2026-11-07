@@ -6,6 +6,7 @@ from .render import Renderer
 from .writer import Writer,decode_result
 from .runtime import Runtime
 from .neural import thinking_budget
+from .finite import all_finite
 import uuid
 
 
@@ -49,7 +50,7 @@ class Session:
         if mode!=self.mode:self.switches.append((old.position,self.mode,mode));self.mode=mode
         try:
             self.hidden,self.state=self.backbone(old,mode,embeds)
-            checks=((bool(self.hidden.isfinite().all()) and all(bool(t.isfinite().all()) for pair in self.state.layers for t in pair),'nonfinite causal state'),
+            checks=((all_finite((self.hidden, *(t for pair in self.state.layers for t in pair))),'nonfinite causal state'),
                     (versions==tuple(t._version for pair in old.layers for t in pair),'mutated prior causal state'),
                     (old.position+len(embeds)==self.state.position==self.runtime.position,'model/ledger position divergence'),
                     (self.state.lineage==old.lineage==1,'cache lineage reset'))
