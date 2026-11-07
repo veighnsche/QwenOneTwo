@@ -41,12 +41,14 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current work — architecture baseline complete; information capture next
+## Current checkpoint — architecture slices 1–2 complete, no training
 
 The user authorized architecture-review slices 1–2 only: existing data, 3090,
 frozen W/reference, no agents or training. Read the
-[architecture/data baseline](architecture-baseline-2026-11-07.md) and
-[read-only diagnostic protocol](information-loss-v1.md).
+[architecture/data baseline](architecture-baseline-2026-11-07.md),
+[read-only diagnostic protocol](information-loss-v1.md),
+[measured findings](information-loss-results-2026-11-07.md) and
+[portable diagnostic evidence](evidence/information-loss-v1.json).
 
 Slice 1 metadata audit completed: 1,500 receiver records/288 families; assessed
 Noul 168 false/88 true versus X 20/50. All 254 assessed training Score records
@@ -56,10 +58,50 @@ receiver train/development family/input overlap or contradictory identical-input
 targets found. Ten CPU tests pass (14.330 s). Locked data remains unopened.
 Portable evidence: `docs/evidence/architecture-baseline-v1.json`.
 
-Slice 2 will reuse 32 cached training features and capture the 90 existing X
-pairs on the 3090 without updates. No new representation, fitted probe or
-capability training is authorized by this scope. Do not interpret class shift,
-rank or vector distances as a causal diagnosis or semantic qualification.
+Slice 2 completed on the 3090 with **all W/D/R/codec/reference weights frozen**:
+32 cached training features reused, **180 X cases /90 pairs** newly captured.
+Every case exactly reproduces parent-0188 outputs, views, transport and complete
+canonical ledger. Parent/final training scalar heads and all **140 saved final
+X scalar-head values** reproduce exactly without installing or fitting heads.
+
+**Findings:** saved final Noul head separates the eight training cases by ranking
+(AUC **0.5 →1.0**), but all logits remain negative: false −0.318092..−0.134084,
+true −0.080566..−0.013014, so fixed-threshold correctness stays **4/8**. Assessed
+X ranking worsens **0.600 →0.373**, correctness **20/70** unchanged. This shows
+training distinction plus threshold failure, not absence of learned distinction;
+it does not establish that moving a threshold would fix generalization.
+
+All **150 changed role-input comparisons** have different pooled slots; all
+**70 changed-input pairs** have different h. The **20 identical-input pairs**
+have bit-identical wire/h/q. No exact collision observed; semantic preservation
+and useful interpretation are still unproven. Centered training Noul/Score ranks
+are maximal for these tiny samples (7/9), q/k row ranks 256 with conditions ~3.
+Parent Score changes in the reviewed direction in **5/10 reversal, 0/10 scale**
+pairs; saved final head values in **5/10, 10/10**. Direction is not exact-value
+or generalization success. Parent behavior unchanged **49/180**, statuses 89/180,
+pairs 23/90, transport 180/180. Existing semantic acceptance remains BLOCKED.
+
+Successful run **215.737326 s**, peak **3,622,856,704 CUDA bytes**, **21,244 Session
+positions**, one prefill/lineage each. Offline source/reference tokens 14,212/5,894
+are separate; 160 unique reference encodings, 480 cache hits. Cached visits add
+zero positions. All 320 W tensors/physical tying, frozen fingerprints/cache and
+grad=None checks pass. **14 CPU tests pass** (10 in 14.330 s +4 in 0.095 s), CUDA
+analytic statistics checks and independent receipt/source/accounting audit pass.
+Production numeric/backward code is unchanged; completed matrices reused.
+
+Raw: `data/information-loss-20261107/run-v2/`. The first attempt stopped after
+one request on a tuple/list comparison bug; canonical full-ledger serialization
+fixed it. Keep its failed report/log/partial capture. It has no retained case
+ledger; do not claim an exact physical-position total across both attempts.
+After exit only original service PID 2094 (3852 MiB) remains. No agents, generation,
+reviews, training, locked-data access, service/deployment/Operating Table changes.
+
+**Next unfinished slice:** design and implement one versioned simpler latent
+input comparison against this unchanged control (slice 3), explicitly separating
+semantic interpretation/transfer from vector differentiation. Use the observed
+coverage gaps and readout behavior to define its hypothesis. Do not assume pooler
+collapse, rewrite the reference, change thresholds, launch fitting or expand data
+automatically. No new representation or subsequent training ran in slices 1–2.
 
 ## Previous checkpoint — frozen-representation Noul/Score head experiment complete
 
