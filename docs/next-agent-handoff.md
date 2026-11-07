@@ -41,7 +41,84 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — controlled loss-balance comparison complete; candidate rejected
+## Current checkpoint — frozen-representation Noul/Score head experiment complete
+
+The user authorized the head-only 3090 experiment with W/reference/representations
+frozen, existing data, no agents or new data. Read the
+[predeclared protocol](receiver-head-only-v1.md),
+[measured results](receiver-head-only-results-2026-11-07.md) and
+[portable evidence](evidence/receiver-head-only-v1.json).
+
+Only **codec.prototypes and codec.score_row**, **3,072 FP32 master parameters**,
+train. D/R, input encoders, shared Qev q/k, all status/Choice/Reason heads, budget,
+W and reference stay frozen. Restore parent checkpoint-0188 strictly, project
+its head moments/settings exactly, retain A4 schedule 188 and clip 1. The same
+32 training records/families/order are reused. GPU-extracted detached features
+support **1,812 head updates**, windows **189..2000**, **453 repeats /14,496 cached
+visits**. These visits add **zero causal positions/prefills**; they are not latent
+episodes. Noul eligibility 3,624, Score 4,530; no Choice/non-assessed losses.
+
+There are **32 initial +32 final fresh extractions**, each set charging **3,332
+session positions** with exact accounting, one prefill/lineage per case, no
+invocation text or gold returns. Final h/candidate tensors, source-state hashes
+and head outputs/losses exactly match cached replay. Initial heads/losses match
+the saved joint control. Minimal-head forward/gradients match the actual Codec;
+first-update receiver/optimizer/CPU-CUDA-Python RNG roundtrip is exact.
+
+**Results:** Noul training truth stays **4/8**, Brier **0.256381 → 0.232680**,
+BCE **0.706077 → 0.658275**. Choice training selection stays **4/4**. Score
+training interval hits **0 → 3 /10**, mean distance **0.411528 → 0.000959**,
+raw MSE **0.206481 → 0.000001851882**. All ten targets are zero-width point
+intervals. The seven misses are roughly **0.000879..0.001711** from target;
+the three hits are zero targets reached by the existing clamp. No interval or
+threshold was relaxed. Approximate Score training fit is demonstrated; its
+small residual cause/strict precision feasibility are not isolated.
+
+The 32-update matched point is separately recorded: head-only Noul Brier 0.256086
+and Score distance 0.300245 vs joint 0.247584 and 0.166759. The final 1,812-update
+endpoint is not an equal-exposure improvement claim over the joint 32-update run.
+
+All **130 E +180 X** cases execute, with **310/310 valid transports** and zero
+failed evaluations. Compared with parent 0188 saved receipts (not rerun):
+
+- Independent assessed Noul truth **25 → 24 /80**, Brier **0.284675 → 0.261361**.
+- Independent assessed Score interval hits **1 → 0 /50**, mean distance
+  **0.271739 → 0.319199**. E distance 0.458949, X 0.284261: training fit did not transfer.
+- **All 90 Choice cases exactly retain actual results/statuses/views/grades**;
+  assessed Choice delivery remains **47/50**.
+- Status stays **130/310**; frozen parent status accepts **0/80** assessed Noul
+  and 45/50 assessed Score cases. Delivered assessed success stays **Noul 0/80,
+  Choice 47/50, Score 0/50**; overall behavior 83/310; X pairs 23/90. The existing
+  semantic/behavior qualifier remains BLOCKED. The experiment itself completed.
+
+**26 CPU tests pass in 29.597 s**, model imports blocked. Independent source,
+release/control, replay/ledger, ownership, checkpoint and report audit passes.
+All **320 W tensors/physical tying**, frozen representation/reference/cache and
+grad=None boundary checks pass. All 12 checkpoints validate. No backbone/loss
+arithmetic or tolerance changes; prior numeric matrices reused. Only original
+GPU service PID 2094 remains after exit, 3852 MiB. No agents, new data/reviews,
+services/deployment changes or Operating Table modifications.
+
+Raw: `data/receiver-head-only-20261107/`. Unpromoted final checkpoint:
+`run/checkpoint-2000`, manifest
+`7f05e09f5c7a7b58a9dc69556ace3a38d1e9c4f71f46173c716b597e236991e2`;
+receiver `618412959e691888215f208f75e1bad8c6d4d0d32bac18dfaf37cf5776191751`.
+Frozen representation fingerprint
+`94153808343ca8b2bb3b5763d00db94eac5c2c06a205d188d00018208726e64e`.
+Reference remains
+`5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f`.
+These head bundles require the pinned parent for frozen backbone adapters;
+they are not standalone native-model exports. **COMPLETED_HEAD_ONLY_NOT_PROMOTED**.
+
+**Next unfinished slice:** measure frozen-feature information/separability and
+conditioning on the 3090 to distinguish weak/ambiguous features from readout
+optimization problems; inspect Score transfer separately from its small training
+residuals. This is a proposed diagnostic, not another authorized fit. Do not infer
+architectural impossibility, relax exact values/bindings, promote weights, extend
+training or launch data generation automatically. Learned invocation/native
+answer use, Reason meaning and the complete MVP remain unqualified.
+
+## Previous checkpoint — controlled loss-balance comparison complete; candidate rejected
 
 The user authorized one existing-data loss-balance comparison on the 3090 with
 W/reference frozen, no agents or new data. Read the

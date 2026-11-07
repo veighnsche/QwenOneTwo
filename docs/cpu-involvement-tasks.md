@@ -2,10 +2,11 @@
 
 **Current priority:** park further incremental throughput work and return to
 Noul/Choice/Score value learning. The authorized
-[loss-balance comparison](receiver-loss-balance-results-2026-11-07.md) is complete
-and does not improve overall behavior; Noul discrimination and Score intervals
-remain unfinished. The next proposed isolation is fixed-representation readout
-learning. Further training needs its own instruction. The
+[head-only experiment](receiver-head-only-results-2026-11-07.md) is complete:
+Score closely approximates the training points but fails held-out agreement;
+Noul training truth remains 4/8. Choice retention is exact. The next proposed
+diagnostic examines feature information/conditioning and Score transfer.
+Further training needs its own instruction. The
 [projection dispatch screen](projection-dispatch-results-2026-11-07.md) increases
 CPU/case 4.4944% and fails checkpoint scope admission; its prototype is removed.
 This is not a proof that larger optimizations are impossible. The accepted
