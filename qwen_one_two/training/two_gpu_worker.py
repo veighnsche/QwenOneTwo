@@ -33,10 +33,12 @@ def worker(connection, uuid, prepared, execute_gpu=False):
                 from .behavior_qualification import receiver_hash,evaluate_case
                 from .release import load_release,decode
                 from .clean import CleanEncoder
+                from ..codec import recurrence
                 from .two_gpu import DEV_SHA,source_hashes
                 check(prepared['sources']==source_hashes(),'worker source drift')
                 require_cuda(torch.cuda);check(torch.cuda.device_count()==1,'one visible GPU per process')
                 configure();torch.set_grad_enabled(False)
+                recurrence.CACHE_LIMIT=prepared['recurrence_cache_limit'];recurrence.clear_graph_cache()
                 stack.enter_context(sdpa_kernel(SDPBackend.MATH));stack.enter_context(torch.no_grad())
                 snapshot=Path(prepared['snapshot']);initial=ROOT/'data/g1-proof/gate-repair-v2-20261105/diagnostic.safetensors'
                 check(file_hash(snapshot/'model.safetensors-00001-of-00001.safetensors')==BASE_SHA,'base file hash')
@@ -59,7 +61,8 @@ def worker(connection, uuid, prepared, execute_gpu=False):
                     return {'uuid':uuid,'device_name':torch.cuda.get_device_name(0),'base_frozen':True,'base_check':base,
                             'receiver':RECEIVER,'reference':REFERENCE,'gradients_none':True,'optimizer_updates':0,
                             'torch_version':torch.__version__,'cuda_runtime':torch.version.cuda,
-                            'profile':PROFILE,'accelerator_qualification_granted':False}
+                            'profile':PROFILE,'recurrence_cache_limit':recurrence.CACHE_LIMIT,
+                            'accelerator_qualification_granted':False}
                 encoder=CleanEncoder(b,ref,checkpoint_hash=RECEIVER,profile_hash=digest(PROFILE.encode()),cache_references=True)
                 if detail:
                     from .host_profile import model_hooks
@@ -85,15 +88,22 @@ def worker(connection, uuid, prepared, execute_gpu=False):
                     'anchor_measurements':[v[1] for v in anchors],'setup_measurements':basic.snapshot(),
                     'setup_memory':setup_memory,'host_threads':{'torch_intraop':torch.get_num_threads(),
                     'torch_interop':torch.get_num_interop_threads()}})
-            ordinal=0;traced=False
+            ordinal=0;traced=False;active_trial=None
             while True:
                 with basic.span('ipc_wait'):message=connection.recv()
                 if message['kind']=='stop':break
                 check(message['kind']=='job','unknown worker command')
+                check(message['job']==prepared['jobs'][message['index']],'unplanned diagnostic job')
+                if 'cache_trial' in message['job']:
+                    job=message['job'];check(prepared.get('cache_benchmark') is True,'unplanned cache benchmark')
+                    check(job['cache_limit'] in (8,32),'cache trial capacity')
+                    if job['cache_trial']!=active_trial:
+                        recurrence.clear_graph_cache();recurrence.CACHE_LIMIT=job['cache_limit'];active_trial=job['cache_trial']
                 start=stamp();trace_this=options['cuda_trace_first_job_per_worker'] and not traced
+                counter=Recorder() if message['job'].get('count_cache') else None
                 trace_context=(torch.profiler.profile(activities=[torch.profiler.ProfilerActivity.CPU,
                                 torch.profiler.ProfilerActivity.CUDA]) if trace_this else nullcontext())
-                with trace_context as trace:
+                with (counter.activate() if counter else nullcontext()),trace_context as trace:
                     if trace_this:
                         with torch.profiler.record_function('qot_diagnostic_job'):
                             results=[evaluated(k,'main_cases',ordinal+i) for i,k in enumerate(message['job']['ids'])]
@@ -104,6 +114,8 @@ def worker(connection, uuid, prepared, execute_gpu=False):
                     trace.export_chrome_trace(trace_path);traced=True
                 ordinal+=len(results)
                 job_measurement=elapsed(start)
+                job_measurement['recurrence_cache_limit']=recurrence.CACHE_LIMIT
+                if counter:job_measurement['cache_counts']=counter.snapshot()['counts']
                 with basic.span('ipc_send'):
                     connection.send({'kind':'result','index':message['index'],'cases':[v[0] for v in results],
                         'case_measurements':[v[1] for v in results],'job_measurements':job_measurement,

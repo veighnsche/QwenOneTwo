@@ -21,10 +21,10 @@ def run(path, *, execute_gpu=False):
     parent_start=stamp();parent_metrics=Recorder()
     path=Path(path).resolve();out=output_directory(path.parent)
     prepared=decode(path.read_bytes())
-    check({'selection','profiling','anchor_cases'}<=set(prepared),'old measurement plan; prepare a new source-bound plan')
+    check({'selection','profiling','anchor_cases','recurrence_cache_limit'}<=set(prepared),'old measurement plan; prepare a new source-bound plan')
     check(prepared==plan(prepared['snapshot'],selection=prepared['selection'],
         profile_host=prepared['profiling']['host'],trace_cuda=prepared['profiling']['cuda_trace_first_job_per_worker'],
-        devices=tuple(d['uuid'] for d in prepared['devices'])),
+        devices=tuple(d['uuid'] for d in prepared['devices']),cache_limit=prepared['recurrence_cache_limit']),
         'plan/source/data/checkpoint metadata drift')
     # An existing journal/lock is never overwritten or silently replayed. Partial
     # receipts are forensic evidence, not admitted accelerator qualification.
@@ -110,11 +110,12 @@ def main():
     prepare.add_argument('--profile-host',action='store_true')
     prepare.add_argument('--trace-cuda',action='store_true',help='future execution only: trace first main job per worker; implies host profiling')
     prepare.add_argument('--device',choices=('3090','3060','both'),default='both')
+    prepare.add_argument('--cache-limit',type=int,choices=(8,32),default=8)
     execute=sub.add_parser('run');execute.add_argument('--plan',required=True);execute.add_argument('--execute-gpu',action='store_true')
     a=p.parse_args()
     if a.command=='prepare':
         devices={'3090':(PRIMARY,),'3060':(SECONDARY,),'both':(PRIMARY,SECONDARY)}[a.device]
-        prepared=plan(a.snapshot,selection=a.selection,profile_host=a.profile_host or a.trace_cuda,trace_cuda=a.trace_cuda,devices=devices)
+        prepared=plan(a.snapshot,selection=a.selection,profile_host=a.profile_host or a.trace_cuda,trace_cuda=a.trace_cuda,devices=devices,cache_limit=a.cache_limit)
         out=output_directory(a.output);out.mkdir(parents=True,exist_ok=False)
         (out/'plan.json').write_bytes(canonical(prepared))
         print(json.dumps({'status':prepared['status'],'jobs':len(prepared['jobs']),'cases':len(prepared['cases']),

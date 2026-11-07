@@ -4,6 +4,8 @@ Status: **CPU-01 instrumentation and CPU-02 source/specification work are
 implemented and CPU-validated**. [Results](cpu-01-02-results-2026-11-07.md).
 The GPU hold was lifted for throughput work on 2026-11-07. CPU-03's initial
 hardware runs are measured in the [baseline report](cpu-03-results-2026-11-07.md).
+CPU-04's bounded retention policy and initial CPU-08 subset integration are
+measured in the [cache report](cpu-04-results-2026-11-07.md).
 No CPU model fallback, agents, new semantic data, training or service changes.
 
 The goal is fewer CPU instructions, launches, synchronizations and transfers per
@@ -111,7 +113,7 @@ tail candidate has a versioned specification only; it is disabled/unimplemented.
 - [x] Verify the configured cards and the new device guards. Check targeted
   3090 behavior and actual 3060 model loading, memory fit and numeric behavior.
   Shared startup readouts alone do not qualify the secondary card.
-- [ ] Run the fixed existing-case baseline on one card at a time, with models
+- [x] Run the fixed existing-case baseline on one card at a time, with models
   resident. Separate initialization/capture cost from warm repeated execution.
 - [x] Record per-case CPU time, elapsed time, relevant host synchronization/
   launch/transfer counts and peak memory, with actual runtime versions.
@@ -123,24 +125,28 @@ and warm/cold conditions. Failures are recorded; no other card or CPU substitute
 for an unavailable or incompatible GPU. No capability training is launched.
 
 Initial singleton baselines/profile and two-card runs pass; recurrence operator
-tests pass on both cards. The repeated warm comparison checkbox remains open
-for CPU-04. Full transformer-state/gradient qualification of the secondary card
+tests pass on both cards. CPU-04 adds three alternating resident warm pairs per
+card, with cold workspace warmups measured separately. Full transformer-state/gradient qualification of the secondary card
 is not claimed. Actual subset recaptures, rather than simulated misses, select
 CPU-04 as the next candidate.
 
 ## CPU-04 — stop unnecessary recurrence graph capture
 
-- [ ] Measure actual working-set shapes and cache churn. Astra's previous cache
+- [x] Measure actual working-set shapes and cache churn. Astra's previous cache
   estimates were partial-trace simulations, not a current measured miss rate.
-- [ ] Compare capacity eight with a capacity selected from the observed working
+- [x] Compare capacity eight with a capacity selected from the observed working
   set. Record capture cost and retained workspace on each eligible card.
-- [ ] Preserve stream/device/dtype/shape isolation and invocation-specific saved
+- [x] Preserve stream/device/dtype/shape isolation and invocation-specific saved
   inputs. Replayed outputs must own independent state buffers.
 
 **Done when:** capture counts and CPU time fall reproducibly, outputs and
 derivatives meet the existing recurrence oracle, accounting stays exact and
 memory fit is measured. Do not pad, crop or invent logical positions to obtain
 cache hits. Retain the existing policy if the candidate does not help.
+
+Measured on the existing eight-case pack: explicit read-only capacity 32 reduces
+wall/CPU on every pair, eliminates warm recapture and costs 51.41 MiB allocated.
+Model/training defaults remain eight; full training/context memory is unqualified.
 
 ## CPU-05 — fewer audit transfers, identical evidence
 
@@ -196,16 +202,20 @@ No blanket removal of per-linear hooks or relaxation of tolerance is permitted.
 
 ## CPU-08 — integrate and test two-card throughput
 
-- [ ] Establish each accepted candidate against its same-card baseline first;
+- [x] Establish each accepted candidate against its same-card baseline first;
   comparing 3090 baseline with 3060 candidate confounds hardware and software.
-- [ ] Run both resident diagnostic workers with complete cases/pairs, canonical
+- [x] Run both resident diagnostic workers with complete cases/pairs, canonical
   ordering and read-only final receipts. Measure parent plus worker CPU time.
-- [ ] Report cases/second, CPU seconds/case, elapsed time and per-card memory,
+- [x] Report cases/second, CPU seconds/case, elapsed time and per-card memory,
   including setup/amortization. Check whether the second worker actually helps.
 
 **Done when:** the report distinguishes per-case CPU reductions from parallel
 throughput gains, preserves every case/failure and makes no assumed 2× claim.
 Existing semantic failures remain failures; speed does not certify capability.
+
+Initial eight-case integration only: 1.600930× main-phase throughput, 1.084579×
+end-to-end; two cards use 6.6818% more worker CPU/case and 65.8653% more
+setup-inclusive CPU/case. Full/long-run scaling is not established by one pair.
 
 ## CPU-09 — future training execution, not today's read-only diagnostics
 
@@ -222,10 +232,11 @@ no-gradient inference path. Training itself still needs separate authorization.
 
 ## Next unfinished slice
 
-**CPU-04 recurrence cache comparison:** use the observed 29-key working set to
-test bounded retention, with repeated same-card measurements, workspace and
-exact parity. Add separate parent main-phase timing. GPU use is now authorized
-for throughput diagnostics; training remains unauthorized.
+**CPU-06 candidate selection:** use the existing CUDA trace to identify a larger
+pure backbone region between mandatory checks. Select and specify the region
+before building; normalization-tail capture remains a possible unimplemented
+candidate. CPU-05 transfers are not the next measured cost. GPU throughput work
+is authorized; training remains unauthorized.
 
 References: [current handoff](next-agent-handoff.md),
 [performance audit](receiver-performance-audit-2026-11-07.md),

@@ -1,0 +1,827 @@
+{
+  "protocol": "cpu-04-retention-v1",
+  "date": "2026-11-07",
+  "base_commit": "4879331",
+  "status": "MEASURED_READ_ONLY_UNQUALIFIED",
+  "source_hashes": {
+    "qwen_one_two/__init__.py": "b6236192beea05d03b8d7c828e63761bca002cbd4ca967ecbc2fea0f7c02caad",
+    "qwen_one_two/codec/__init__.py": "9b577482d1138d4d449fcc2bc9aa493538658afefe0bffb2a72828ab12e7ea38",
+    "qwen_one_two/codec/backbone.py": "b76c85e94dc99c7588992459b5691ec2a97f518ecba6191f19df1cc7461326b3",
+    "qwen_one_two/codec/diagnose_precision.py": "4edc64ec7af6525493e57c33f5fe4866e9ec0c0709086ae1fa99898d75fb23f3",
+    "qwen_one_two/codec/finite.py": "031cd3714a070650619284a83205d48af5aa08f04865028f3a29076d13c98f70",
+    "qwen_one_two/codec/fixtures.py": "36c91e9d949d2d03d4aaaafa709853eaeb7796465b02f6a9853f109f95221bc3",
+    "qwen_one_two/codec/neural.py": "1ac72b7a37bc90639d1e25d0dbcd1375bc6c6e090e0306d0ef2a96c8620a4fec",
+    "qwen_one_two/codec/ownership.py": "d9f10f5f6f8a8233b208110820f4e620253e668463042a30ad2dbbce0357f8dc",
+    "qwen_one_two/codec/precision.py": "9eb775efc303ce6d9eb8bbec26ffdcd6422f37ad0732e03ef0885ae9433c8e5b",
+    "qwen_one_two/codec/qualify.py": "d1204bd1e1ce70721d03e936ec92c8e30cd9b54ce0d79e50bbab46e3fd540851",
+    "qwen_one_two/codec/qualify_matrix.py": "07e25deee4eb930d498d5ca071f76c9022ee27823d62d90fcad45f59efb5a1ff",
+    "qwen_one_two/codec/records.py": "089eb06d1fd55e9a1629297759c942f046dc570058cf9cb304c8d88069287b04",
+    "qwen_one_two/codec/recurrence.py": "c96bff0e7f56dd3ffcdde576d6d0a9a85bffe1aa7352262e41ee6560aa1f7ebc",
+    "qwen_one_two/codec/render.py": "9e16fb579268e4261cd134883e698f6ae3c69a2802f1dbc2502855062920b82b",
+    "qwen_one_two/codec/runtime.py": "350c79f141e6898c5f762bf9b9c1708bd11297bdd01227c93a39abec2bd61d3a",
+    "qwen_one_two/codec/schema.py": "5a2ff9f2f38b7338da5cf6d7f605bed953e136c37445983f0cf965f1e17dbe23",
+    "qwen_one_two/codec/session.py": "2992225ccc68128680dec23bd64d3273ca950362e35eac6a5430ad00bf45ae3b",
+    "qwen_one_two/codec/writer.py": "187d0a07a4f29c1c4da560f84f361e0099be49c588933d25c8bb35b51ddca1a0",
+    "qwen_one_two/curriculum.py": "7d4f4172e4a1b733ba38721224b58079c0b6196dc914cfb30e783d308328a2cf",
+    "qwen_one_two/decision.py": "0ef4605594a83668996abc0546f89ecf0faa67afd1c383acbc333b73b889864a",
+    "qwen_one_two/download.py": "eb3e8ca5009302d43abe5cbf2e4ec3b53c28ffc2ec6a786440ee40099fee53d4",
+    "qwen_one_two/g1_accounting.py": "6d6d872a7337dd026da0354c9526e7eee012576cf518e19397832896cc3a4dd2",
+    "qwen_one_two/g1_backbone.py": "e179c2c4550285de40d8babc30f4ee300eb340c23441b364e0ff8c641ba6865d",
+    "qwen_one_two/g1_checks.py": "7c32e89b246a6e26235e48e041f6ff5923b589cdf48df073a17bf253ed470950",
+    "qwen_one_two/g1_device.py": "e4a550b80ac3f1de35be7c6057cca65b0e46ec2ba2248ca72e0d67b6451b5f2e",
+    "qwen_one_two/g1_evidence.py": "2f882bed4c0ac93dcf0015d6083b471764a8a8fe3d586d337759da1117bb7aba",
+    "qwen_one_two/g1_gate_diagnosis.py": "d38c6a40d66ccf41195ccbdefd77f1bccda632492ecdbbd6841049f26874a3e3",
+    "qwen_one_two/g1_gate_repair.py": "18c25a33ccf05a16630960df40f29d309d19af0a12b23b6e99c3c2341e732b91",
+    "qwen_one_two/g1_precision_diagnosis.py": "acdc5008e7e02c13a24eda2f64a40f7f30176cdfb09e95bb637b20c0126ce3d9",
+    "qwen_one_two/g1_precision_math.py": "bc2e5a6393012079684734de386ad71afd5cbd26b2423a24f22f33ed6b9aedcf",
+    "qwen_one_two/g1_proof.py": "5a0d9991cffff111b12d23df1a5ad46be7cb77f1f67ba16c4038dbfa60ac9cb9",
+    "qwen_one_two/g1_protocol.py": "156ba44aa27b459279404d404e2a16da35e443717fca4d15851627e80cfeaba4",
+    "qwen_one_two/model.py": "65361404f081a2933830acc65453ee147098e6b12a000918c00dc83d991bfb00",
+    "qwen_one_two/policy.py": "a1b43898e6a695536276b44d6bb713b45c3ae5f56a363e586b6c4e3ff2afe978",
+    "qwen_one_two/refine_routes.py": "2a9ed2e1999290d985f5cdced7bfa83e00ec4c56247349848f7b205e7235db5c",
+    "qwen_one_two/server.py": "d83a9dc6764fb0d02ccfd87b40d2c5ba4bd69167a3733e27686b17d52d45139d",
+    "qwen_one_two/thinking.py": "47bfaf4c91e33f8587f4bad856f0d2b36c0e31705132b11f5e1d7f22a504e36b",
+    "qwen_one_two/train.py": "1d316c57efb6db71810ae6a43ba491832d0d7e66e91bc065de8e208c5dc38538",
+    "qwen_one_two/train_feedback.py": "234b516d33e7b070b44b47a1b0b5738917af0cc33bb4df67ad88fc7bf17af952",
+    "qwen_one_two/training/__init__.py": "0a5bc5745bdcb26cbf81df3d10f5363d39539d811fd869326cb37ecb4a29a47e",
+    "qwen_one_two/training/behavior_qualification.py": "e620f747834a8fc336150588d2fac3f5b33d59a16390fda7fdadf6b40c9eee4b",
+    "qwen_one_two/training/binding.py": "6888c1a6f3597b9763f875242b34dea6f9f0abbe5f47b9529488e3aec30ddeae",
+    "qwen_one_two/training/checkpoint.py": "f94b519fe21933e5d121747d299f9005e89484fc0523047598d12be60a19f337",
+    "qwen_one_two/training/clean.py": "f9acc1c08507302b0d224be4f382e6b263ea4a12fabd138383167839185f148f",
+    "qwen_one_two/training/clean_packets.py": "7f0d846319a3b9fa391524f73894b8f13baa4f6632b3b127f094f60ba3d2a028",
+    "qwen_one_two/training/component_producer.py": "9cf2f2aea9e4e3bab4230d2fa17cc415e94ffdb6a6522075af86ef7fe2cc2aa8",
+    "qwen_one_two/training/diagnostics.py": "0e5ec6271090c034744a182c2bd4a86d421ee099be0b056da4b29438120b3060",
+    "qwen_one_two/training/driver.py": "c46128c8d9e0de5288717f4a2c6a78b6bb3fed5e4fa2a245b6123c267a587bc2",
+    "qwen_one_two/training/engine.py": "2500a47211fc13a41c3e646d2f315d2233b4304d1f67c71fb73b3eebc57aee4d",
+    "qwen_one_two/training/episodes.py": "0181ca87dff0f2cf4c3f7552aa197b9b67cd3bc0f1ad0b73e84ddcf284a7a5a5",
+    "qwen_one_two/training/host_metrics.py": "6027ae171e86d6fcf4b5eea4bdeb247ab6ad99349a9b4cdbd9b1b9ad61b9b86d",
+    "qwen_one_two/training/host_profile.py": "31d52a713e33de61e5b802a26c63f24e6dbcb476325d01afea788097e97d23e0",
+    "qwen_one_two/training/inputs.py": "8a96776ac2ab7a65f2cc51c3baaee12a333e76278775cc3d6b37b68cee99e332",
+    "qwen_one_two/training/losses.py": "a91938757131b177d38cba6e5275c0db7f7a053389a1a97c1bf173a82ae99041",
+    "qwen_one_two/training/manifest.py": "468257734527ceb5ec8656b6155388c2b3e92298f457cfa1764fd87cd58cbf5d",
+    "qwen_one_two/training/producer.py": "6827978aa735839a691f4f04f2d5cb6b2471d5c3c54c8604a76ac2ea7619e40f",
+    "qwen_one_two/training/profile.py": "3369e8e23579454fa3e71408fcb6196443cb86ed1c7e0f1f95974b91c9cc9cdb",
+    "qwen_one_two/training/qualification.py": "22d1de030bc85361a2366d03eb4c1c6c47a69f72e87fdcf59d6a9f8e04da72a9",
+    "qwen_one_two/training/receiver_learning.py": "60e5fc7eb79ac7c5374caaa72c19e3a5b2c6bea4cc6854fd9568420dd7dc7034",
+    "qwen_one_two/training/reference.py": "44cbd6da4b3374d3de7082cac633f9b63fd91cef768bd8462a01fcb17c0f2aec",
+    "qwen_one_two/training/reference_data.py": "5855ecf472ac6d553bf16372af54cc640c48deb704014e7f26eb652387a01e70",
+    "qwen_one_two/training/reference_exposure.py": "f6e576cb0ce1cd8c48275047d7c0360cf23d4b20f0bcf20eaafc3433971e1a3c",
+    "qwen_one_two/training/reference_qualification.py": "9e02394240fb88b2e4e77b604b020300d200cfae5bb217e3717247da27505db0",
+    "qwen_one_two/training/release.py": "906d6bf7fefaa9b251338e46b13dac289365f5347b73cd03b680e593578888c3",
+    "qwen_one_two/training/sampler.py": "aeee24107468a9a27657efa3ba5c053d36101aee982fad069af8411762e28950",
+    "qwen_one_two/training/two_gpu.py": "77fc5f7272c01c7a9fa7964594f8a5a90c7b09dd0b841cfb9c8a3c0099abb192",
+    "qwen_one_two/training/two_gpu_worker.py": "f3abfbcbead980581ceb7d7ba39c0dadf43f8bca1df5c965d050c3838741dc35",
+    "qwen_one_two/training/weight_repair.py": "aff987d19f012820218758e02162d8352acce6d2983b74b9663a7afd9f4917bc",
+    "scripts/benchmark_recurrence_cache.py": "4f15b3875095b343d82e9e7f92f502ffa439cfc1e45eaf649409f6c338cc3704",
+    "scripts/two_gpu_diagnostics.py": "f9b238f816990c9ecd7fc165e672f17f35991cbba90f0cf31f6e4b1d9c5a55ee"
+  },
+  "test_source_hashes": {
+    "tests/test_host_metrics.py": "07c1e2f5606a68652ad206f69a2dfb05dd49b74fb0a3b952da74661e7c1a358e",
+    "tests/test_two_gpu.py": "d09755e9da8b3a6d875ffa679f0573de3abd6ab9e60b5814246dd108f1db0f72"
+  },
+  "document_sha256": {
+    "docs/cpu-04-results-2026-11-07.md": "d243e3d945e56af41c8edf7e92455ae510efdca283a157c0b320eb715d4f11fd",
+    "docs/recurrence-cache-retention-v1.md": "daac890cb93a9a5c1faf77c6c9c16a84ac12d503ba3c1401d040f3b7e819a260",
+    "docs/cpu-involvement-tasks.md": "f675a936d766967a0c91c9be6596b3110b497915da85656566be252035218548",
+    "docs/next-agent-handoff.md": "a9d7182f5e68e908dbf006e2cf0433030b010bbf3b3315ebef334f6241b95a73",
+    "docs/two-gpu-diagnostics-v1.md": "72dc15ce2d8994f03102bed82a6a07574818a77c6e8a83394d22700197e9f682",
+    "docs/codec-recurrence-graph-v1.md": "761d13689839720d0796ed64360d3b6c0c852e0cd3be0c0195d51add7c605d70"
+  },
+  "cache_audit": {
+    "passed": true,
+    "cards": {
+      "3090": {
+        "trials": {
+          "0": {
+            "capacity": 8,
+            "wall_seconds": 9.422895314,
+            "cpu_seconds": 9.350011697,
+            "parent_interval_seconds": 9.498127725,
+            "parent_cpu_seconds": 0.003872664,
+            "peak_allocated_bytes": 1938147840,
+            "peak_reserved_bytes": 2084569088,
+            "parent_plus_worker_cpu_seconds": 9.353884360999999,
+            "warmup_counters": {
+              "recurrence_lookups": 1998,
+              "recurrence_misses": 37,
+              "recurrence_forward_capture_attempts": 37,
+              "recurrence_forward_captures": 37,
+              "recurrence_hits": 1961,
+              "audit_readback_calls": 60,
+              "audit_requested_bytes": 2584576,
+              "audit_d2h_calls": 60,
+              "recurrence_evictions": 29
+            },
+            "warmup_keys": 22,
+            "warmup_wall_seconds": 9.406867552,
+            "observe_warm_counters": {
+              "recurrence_lookups": 1998,
+              "recurrence_misses": 37,
+              "recurrence_forward_capture_attempts": 37,
+              "recurrence_forward_captures": 37,
+              "recurrence_evictions": 37,
+              "recurrence_hits": 1961,
+              "audit_readback_calls": 60,
+              "audit_requested_bytes": 2584576,
+              "audit_d2h_calls": 60
+            },
+            "observe_warm_keys": 22,
+            "observe_warm_wall_seconds": 9.535955927
+          },
+          "1": {
+            "capacity": 32,
+            "wall_seconds": 8.910208963,
+            "cpu_seconds": 8.86119921,
+            "parent_interval_seconds": 9.012315565,
+            "parent_cpu_seconds": 0.004546344,
+            "peak_allocated_bytes": 1992054272,
+            "peak_reserved_bytes": 2199912448,
+            "parent_plus_worker_cpu_seconds": 8.865745554,
+            "warmup_counters": {
+              "recurrence_lookups": 1998,
+              "recurrence_misses": 22,
+              "recurrence_forward_capture_attempts": 22,
+              "recurrence_forward_captures": 22,
+              "recurrence_hits": 1976,
+              "audit_readback_calls": 60,
+              "audit_requested_bytes": 2584576,
+              "audit_d2h_calls": 60
+            },
+            "warmup_keys": 22,
+            "warmup_wall_seconds": 9.284984621,
+            "observe_warm_counters": {
+              "recurrence_lookups": 1998,
+              "recurrence_hits": 1998,
+              "audit_readback_calls": 60,
+              "audit_requested_bytes": 2584576,
+              "audit_d2h_calls": 60
+            },
+            "observe_warm_keys": 22,
+            "observe_warm_wall_seconds": 8.990571642
+          },
+          "2": {
+            "capacity": 32,
+            "wall_seconds": 8.924853052,
+            "cpu_seconds": 8.874357029,
+            "parent_interval_seconds": 9.034796264,
+            "parent_cpu_seconds": 0.003828685,
+            "peak_allocated_bytes": 1992054272,
+            "peak_reserved_bytes": 2199912448,
+            "parent_plus_worker_cpu_seconds": 8.878185714,
+            "warmup_counters": {
+              "recurrence_lookups": 1998,
+              "recurrence_misses": 22,
+              "recurrence_forward_capture_attempts": 22,
+              "recurrence_forward_captures": 22,
+              "recurrence_hits": 1976,
+              "audit_readback_calls": 60,
+              "audit_requested_bytes": 2584576,
+              "audit_d2h_calls": 60
+            },
+            "warmup_keys": 22,
+            "warmup_wall_seconds": 9.260438626,
+            "observe_warm_counters": {},
+            "observe_warm_keys": 0,
+            "observe_warm_wall_seconds": 0.0
+          },
+          "3": {
+            "capacity": 8,
+            "wall_seconds": 9.423862446,
+            "cpu_seconds": 9.347112217,
+            "parent_interval_seconds": 9.559077049,
+            "parent_cpu_seconds": 0.00394603,
+            "peak_allocated_bytes": 1938147840,
+            "peak_reserved_bytes": 2084569088,
+            "parent_plus_worker_cpu_seconds": 9.351058247,
+            "warmup_counters": {
+              "recurrence_lookups": 1998,
+              "recurrence_misses": 37,
+              "recurrence_forward_capture_attempts": 37,
+              "recurrence_forward_captures": 37,
+              "recurrence_hits": 1961,
+              "audit_readback_calls": 60,
+              "audit_requested_bytes": 2584576,
+              "audit_d2h_calls": 60,
+              "recurrence_evictions": 29
+            },
+            "warmup_keys": 22,
+            "warmup_wall_seconds": 9.474469592,
+            "observe_warm_counters": {},
+            "observe_warm_keys": 0,
+            "observe_warm_wall_seconds": 0.0
+          },
+          "4": {
+            "capacity": 8,
+            "wall_seconds": 9.373658366,
+            "cpu_seconds": 9.303874464,
+            "parent_interval_seconds": 9.535307205,
+            "parent_cpu_seconds": 0.004021168,
+            "peak_allocated_bytes": 1938147840,
+            "peak_reserved_bytes": 2084569088,
+            "parent_plus_worker_cpu_seconds": 9.307895632,
+            "warmup_counters": {
+              "recurrence_lookups": 1998,
+              "recurrence_misses": 37,
+              "recurrence_forward_capture_attempts": 37,
+              "recurrence_forward_captures": 37,
+              "recurrence_hits": 1961,
+              "audit_readback_calls": 60,
+              "audit_requested_bytes": 2584576,
+              "audit_d2h_calls": 60,
+              "recurrence_evictions": 29
+            },
+            "warmup_keys": 22,
+            "warmup_wall_seconds": 9.455921189,
+            "observe_warm_counters": {},
+            "observe_warm_keys": 0,
+            "observe_warm_wall_seconds": 0.0
+          },
+          "5": {
+            "capacity": 32,
+            "wall_seconds": 8.92397452,
+            "cpu_seconds": 8.874272857,
+            "parent_interval_seconds": 9.095350844,
+            "parent_cpu_seconds": 0.003858227,
+            "peak_allocated_bytes": 1992054272,
+            "peak_reserved_bytes": 2199912448,
+            "parent_plus_worker_cpu_seconds": 8.878131084,
+            "warmup_counters": {
+              "recurrence_lookups": 1998,
+              "recurrence_misses": 22,
+              "recurrence_forward_capture_attempts": 22,
+              "recurrence_forward_captures": 22,
+              "recurrence_hits": 1976,
+              "audit_readback_calls": 60,
+              "audit_requested_bytes": 2584576,
+              "audit_d2h_calls": 60
+            },
+            "warmup_keys": 22,
+            "warmup_wall_seconds": 9.30481514,
+            "observe_warm_counters": {},
+            "observe_warm_keys": 0,
+            "observe_warm_wall_seconds": 0.0
+          }
+        },
+        "medians": {
+          "8": {
+            "wall_seconds": 9.422895314,
+            "cpu_seconds": 9.347112217,
+            "parent_cpu_seconds": 0.00394603,
+            "parent_plus_worker_cpu_seconds": 9.351058247,
+            "parent_interval_seconds": 9.535307205,
+            "peak_allocated_bytes": 1938147840,
+            "peak_reserved_bytes": 2084569088
+          },
+          "32": {
+            "wall_seconds": 8.92397452,
+            "cpu_seconds": 8.874272857,
+            "parent_cpu_seconds": 0.003858227,
+            "parent_plus_worker_cpu_seconds": 8.878131084,
+            "parent_interval_seconds": 9.034796264,
+            "peak_allocated_bytes": 1992054272,
+            "peak_reserved_bytes": 2199912448
+          }
+        },
+        "paired_speedups": [
+          {
+            "wall_seconds": 1.0575392062216442,
+            "cpu_seconds": 1.0551632431926783,
+            "parent_interval_seconds": 1.053905364997059
+          },
+          {
+            "wall_seconds": 1.0559123372779986,
+            "cpu_seconds": 1.0532720496206214,
+            "parent_interval_seconds": 1.058029065590449
+          },
+          {
+            "wall_seconds": 1.0503905345081601,
+            "cpu_seconds": 1.0484097811643387,
+            "parent_interval_seconds": 1.0483715657093349
+          }
+        ],
+        "median_wall_reduction_percent": 5.294771695688183,
+        "median_cpu_reduction_percent": 5.058667843315567,
+        "median_parent_plus_worker_cpu_reduction_percent": 5.057472111797868,
+        "median_parent_throughput_speedup": 1.0553981436188367,
+        "all_three_pairs_faster_cpu_and_wall": true,
+        "peak_allocated_increase_bytes": 53906432,
+        "presentations_including_anchors": 123,
+        "objective_ledger_positions_including_anchors": 16574,
+        "operator": {
+          "uuid": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+          "gpu_name": "NVIDIA GeForce RTX 3090",
+          "torch": "2.15.0+cu132",
+          "cuda": "13.2",
+          "tests": 8,
+          "errors": 0,
+          "failures": 0,
+          "passed": true,
+          "optimizer_updates": 0,
+          "cache_limit": 32
+        }
+      },
+      "3060": {
+        "trials": {
+          "0": {
+            "capacity": 8,
+            "wall_seconds": 9.343154563,
+            "cpu_seconds": 9.27485793,
+            "parent_interval_seconds": 9.418441083,
+            "parent_cpu_seconds": 0.003924145,
+            "peak_allocated_bytes": 1938147840,
+            "peak_reserved_bytes": 2084569088,
+            "parent_plus_worker_cpu_seconds": 9.278782074999999,
+            "warmup_counters": {
+              "recurrence_lookups": 1998,
+              "recurrence_misses": 37,
+              "recurrence_forward_capture_attempts": 37,
+              "recurrence_forward_captures": 37,
+              "recurrence_hits": 1961,
+              "audit_readback_calls": 60,
+              "audit_requested_bytes": 2584576,
+              "audit_d2h_calls": 60,
+              "recurrence_evictions": 29
+            },
+            "warmup_keys": 22,
+            "warmup_wall_seconds": 9.387014,
+            "observe_warm_counters": {
+              "recurrence_lookups": 1998,
+              "recurrence_misses": 37,
+              "recurrence_forward_capture_attempts": 37,
+              "recurrence_forward_captures": 37,
+              "recurrence_evictions": 37,
+              "recurrence_hits": 1961,
+              "audit_readback_calls": 60,
+              "audit_requested_bytes": 2584576,
+              "audit_d2h_calls": 60
+            },
+            "observe_warm_keys": 22,
+            "observe_warm_wall_seconds": 9.549600253
+          },
+          "1": {
+            "capacity": 32,
+            "wall_seconds": 8.965591713,
+            "cpu_seconds": 8.911380193,
+            "parent_interval_seconds": 9.069814799,
+            "parent_cpu_seconds": 0.004525952,
+            "peak_allocated_bytes": 1992054272,
+            "peak_reserved_bytes": 2199912448,
+            "parent_plus_worker_cpu_seconds": 8.915906145,
+            "warmup_counters": {
+              "recurrence_lookups": 1998,
+              "recurrence_misses": 22,
+              "recurrence_forward_capture_attempts": 22,
+              "recurrence_forward_captures": 22,
+              "recurrence_hits": 1976,
+              "audit_readback_calls": 60,
+              "audit_requested_bytes": 2584576,
+              "audit_d2h_calls": 60
+            },
+            "warmup_keys": 22,
+            "warmup_wall_seconds": 9.224613387,
+            "observe_warm_counters": {
+              "recurrence_lookups": 1998,
+              "recurrence_hits": 1998,
+              "audit_readback_calls": 60,
+              "audit_requested_bytes": 2584576,
+              "audit_d2h_calls": 60
+            },
+            "observe_warm_keys": 22,
+            "observe_warm_wall_seconds": 8.925037562
+          },
+          "2": {
+            "capacity": 32,
+            "wall_seconds": 8.983624439,
+            "cpu_seconds": 8.930862448,
+            "parent_interval_seconds": 9.094108377,
+            "parent_cpu_seconds": 0.003934497,
+            "peak_allocated_bytes": 1992054272,
+            "peak_reserved_bytes": 2199912448,
+            "parent_plus_worker_cpu_seconds": 8.934796944999999,
+            "warmup_counters": {
+              "recurrence_lookups": 1998,
+              "recurrence_misses": 22,
+              "recurrence_forward_capture_attempts": 22,
+              "recurrence_forward_captures": 22,
+              "recurrence_hits": 1976,
+              "audit_readback_calls": 60,
+              "audit_requested_bytes": 2584576,
+              "audit_d2h_calls": 60
+            },
+            "warmup_keys": 22,
+            "warmup_wall_seconds": 9.255001628,
+            "observe_warm_counters": {},
+            "observe_warm_keys": 0,
+            "observe_warm_wall_seconds": 0.0
+          },
+          "3": {
+            "capacity": 8,
+            "wall_seconds": 9.392320931,
+            "cpu_seconds": 9.314035286,
+            "parent_interval_seconds": 9.526514639,
+            "parent_cpu_seconds": 0.004045464,
+            "peak_allocated_bytes": 1938147840,
+            "peak_reserved_bytes": 2084569088,
+            "parent_plus_worker_cpu_seconds": 9.31808075,
+            "warmup_counters": {
+              "recurrence_lookups": 1998,
+              "recurrence_misses": 37,
+              "recurrence_forward_capture_attempts": 37,
+              "recurrence_forward_captures": 37,
+              "recurrence_hits": 1961,
+              "audit_readback_calls": 60,
+              "audit_requested_bytes": 2584576,
+              "audit_d2h_calls": 60,
+              "recurrence_evictions": 29
+            },
+            "warmup_keys": 22,
+            "warmup_wall_seconds": 9.365501958,
+            "observe_warm_counters": {},
+            "observe_warm_keys": 0,
+            "observe_warm_wall_seconds": 0.0
+          },
+          "4": {
+            "capacity": 8,
+            "wall_seconds": 9.33110698,
+            "cpu_seconds": 9.270557031,
+            "parent_interval_seconds": 9.493420367,
+            "parent_cpu_seconds": 0.003932417,
+            "peak_allocated_bytes": 1938147840,
+            "peak_reserved_bytes": 2084569088,
+            "parent_plus_worker_cpu_seconds": 9.274489447999999,
+            "warmup_counters": {
+              "recurrence_lookups": 1998,
+              "recurrence_misses": 37,
+              "recurrence_forward_capture_attempts": 37,
+              "recurrence_forward_captures": 37,
+              "recurrence_hits": 1961,
+              "audit_readback_calls": 60,
+              "audit_requested_bytes": 2584576,
+              "audit_d2h_calls": 60,
+              "recurrence_evictions": 29
+            },
+            "warmup_keys": 22,
+            "warmup_wall_seconds": 9.361814477,
+            "observe_warm_counters": {},
+            "observe_warm_keys": 0,
+            "observe_warm_wall_seconds": 0.0
+          },
+          "5": {
+            "capacity": 32,
+            "wall_seconds": 8.933396082,
+            "cpu_seconds": 8.882056201,
+            "parent_interval_seconds": 9.105003528,
+            "parent_cpu_seconds": 0.003922774,
+            "peak_allocated_bytes": 1992054272,
+            "peak_reserved_bytes": 2199912448,
+            "parent_plus_worker_cpu_seconds": 8.885978974999999,
+            "warmup_counters": {
+              "recurrence_lookups": 1998,
+              "recurrence_misses": 22,
+              "recurrence_forward_capture_attempts": 22,
+              "recurrence_forward_captures": 22,
+              "recurrence_hits": 1976,
+              "audit_readback_calls": 60,
+              "audit_requested_bytes": 2584576,
+              "audit_d2h_calls": 60
+            },
+            "warmup_keys": 22,
+            "warmup_wall_seconds": 9.219847169,
+            "observe_warm_counters": {},
+            "observe_warm_keys": 0,
+            "observe_warm_wall_seconds": 0.0
+          }
+        },
+        "medians": {
+          "8": {
+            "wall_seconds": 9.343154563,
+            "cpu_seconds": 9.27485793,
+            "parent_cpu_seconds": 0.003932417,
+            "parent_plus_worker_cpu_seconds": 9.278782074999999,
+            "parent_interval_seconds": 9.493420367,
+            "peak_allocated_bytes": 1938147840,
+            "peak_reserved_bytes": 2084569088
+          },
+          "32": {
+            "wall_seconds": 8.965591713,
+            "cpu_seconds": 8.911380193,
+            "parent_cpu_seconds": 0.003934497,
+            "parent_plus_worker_cpu_seconds": 8.915906145,
+            "parent_interval_seconds": 9.094108377,
+            "peak_allocated_bytes": 1992054272,
+            "peak_reserved_bytes": 2199912448
+          }
+        },
+        "paired_speedups": [
+          {
+            "wall_seconds": 1.042112429618286,
+            "cpu_seconds": 1.0407880405871939,
+            "parent_interval_seconds": 1.0384380818931869
+          },
+          {
+            "wall_seconds": 1.0454934970595782,
+            "cpu_seconds": 1.04290434884996,
+            "parent_interval_seconds": 1.0475479556735439
+          },
+          {
+            "wall_seconds": 1.0445195639317226,
+            "cpu_seconds": 1.043739965297254,
+            "parent_interval_seconds": 1.0426597131791908
+          }
+        ],
+        "median_wall_reduction_percent": 4.041063941029021,
+        "median_cpu_reduction_percent": 3.9189574626724233,
+        "median_parent_plus_worker_cpu_reduction_percent": 3.9108142325888107,
+        "median_parent_throughput_speedup": 1.043908866427181,
+        "all_three_pairs_faster_cpu_and_wall": true,
+        "peak_allocated_increase_bytes": 53906432,
+        "presentations_including_anchors": 123,
+        "objective_ledger_positions_including_anchors": 16574,
+        "operator": {
+          "uuid": "GPU-744c1cf5-9578-6aad-95c1-7a6f1c9d11db",
+          "gpu_name": "NVIDIA GeForce RTX 3060",
+          "torch": "2.15.0+cu132",
+          "cuda": "13.2",
+          "tests": 8,
+          "errors": 0,
+          "failures": 0,
+          "passed": true,
+          "optimizer_updates": 0,
+          "cache_limit": 32
+        }
+      }
+    },
+    "cpu_tests": {
+      "tests": 25,
+      "failures": 0,
+      "errors": 0,
+      "passed": true,
+      "model_runtimes_loaded": [],
+      "gpu_execution": false
+    },
+    "opt_in_test": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "passed": true,
+      "model_runtimes_loaded": [],
+      "gpu_execution": false
+    },
+    "default_model_cache_capacity": 8,
+    "optimizer_updates": 0,
+    "training_performed": false,
+    "agents": 0,
+    "new_semantic_data": 0,
+    "scope": "selected existing eight-case read-only pack; ordinary/training defaults unchanged; no full learned-flow/accelerator qualification",
+    "source_preservation": "recurrence/Session/neural/backbone/evaluator unchanged bytes from 4879331"
+  },
+  "integration_audit": {
+    "passed": true,
+    "runs": {
+      "single32": {
+        "main_wall_seconds": 11.418855627001903,
+        "main_cases_per_second": 0.7005955991844389,
+        "end_to_end_seconds": 37.941082922,
+        "main_cpu_seconds_per_case": 1.41643079525,
+        "setup_inclusive_cpu_seconds_per_case": 4.576487449625,
+        "peak_main_allocated_bytes": 1999106560,
+        "peak_main_allocated_bytes_per_card": {
+          "GPU-225509c3-d702-6c27-de03-76b5e99b33b1": 1999106560
+        },
+        "device_case_counts": {
+          "GPU-225509c3-d702-6c27-de03-76b5e99b33b1": 8
+        },
+        "presentations": {
+          "distinct_existing_cases": 11,
+          "main": 8,
+          "startup_anchors": 3
+        },
+        "grades": {
+          "E": {
+            "Choice": {
+              "cases": 2,
+              "passed": 0
+            },
+            "Noul": {
+              "cases": 2,
+              "passed": 0
+            },
+            "Score": {
+              "cases": 2,
+              "passed": 1
+            }
+          },
+          "X": {
+            "passed": 0,
+            "scheduled": 2,
+            "status": "PROFILING_SUBSET_NOT_QUALIFICATION"
+          }
+        }
+      },
+      "both32": {
+        "main_wall_seconds": 7.132640541000001,
+        "main_cases_per_second": 1.121604257780022,
+        "end_to_end_seconds": 34.982324305,
+        "main_cpu_seconds_per_case": 1.51107384675,
+        "setup_inclusive_cpu_seconds_per_case": 7.590806171375,
+        "peak_main_allocated_bytes": 1991500288,
+        "peak_main_allocated_bytes_per_card": {
+          "GPU-225509c3-d702-6c27-de03-76b5e99b33b1": 1991500288,
+          "GPU-744c1cf5-9578-6aad-95c1-7a6f1c9d11db": 1978402304
+        },
+        "device_case_counts": {
+          "GPU-225509c3-d702-6c27-de03-76b5e99b33b1": 3,
+          "GPU-744c1cf5-9578-6aad-95c1-7a6f1c9d11db": 5
+        },
+        "presentations": {
+          "distinct_existing_cases": 11,
+          "main": 8,
+          "startup_anchors": 6
+        },
+        "grades": {
+          "E": {
+            "Choice": {
+              "cases": 2,
+              "passed": 0
+            },
+            "Noul": {
+              "cases": 2,
+              "passed": 0
+            },
+            "Score": {
+              "cases": 2,
+              "passed": 1
+            }
+          },
+          "X": {
+            "passed": 0,
+            "scheduled": 2,
+            "status": "PROFILING_SUBSET_NOT_QUALIFICATION"
+          }
+        }
+      }
+    },
+    "main_throughput_speedup": 1.600929636277587,
+    "end_to_end_throughput_speedup": 1.084578674395775,
+    "main_cpu_cost_increase_percent": 6.681798490782986,
+    "setup_inclusive_cpu_cost_increase_percent": 65.86533351024475,
+    "main_cpu_cost_scope": "worker case intervals; parent-plus-worker totals are setup inclusive",
+    "exact_case_receipts_same_card": true,
+    "optimizer_updates": 0,
+    "limitations": "single first-pack comparison with shared startup; not stable long-run scaling, memory pooling, training or semantic qualification"
+  },
+  "final_checks": {
+    "passed": true,
+    "sources_match_executed_snapshot": true,
+    "compiled_files": 72,
+    "new_document_links": true,
+    "whitespace": true,
+    "source_preservation": "recurrence/Session/neural/backbone/evaluator unchanged bytes from 4879331",
+    "model_runtime_imported_in_this_audit": false
+  },
+  "test_times_seconds": {
+    "cpu_suite": 8.698,
+    "final_opt_in_case": 0.004
+  },
+  "presentations": {
+    "resident_comparisons_including_startup": 246,
+    "normal_integration_including_startup": 25,
+    "total": 271,
+    "operator_fixture_tests": 16,
+    "model_optimizer_updates": 0,
+    "new_semantic_data": 0,
+    "agents": 0,
+    "service_changes": 0
+  },
+  "selection": "same pinned six E extrema and intact X pair from CPU-03; existing checkpoint 188 and frozen reference",
+  "policy": "explicit read-only --cache-limit 32 available; ordinary model/training default remains eight",
+  "measurement_limits": [
+    "selected eight-case pack only; three paired resident measurements per card",
+    "normal two-card integration is a single first-pack comparison, not long-run scaling",
+    "worker main CPU intervals separate from parent-plus-worker setup-inclusive totals",
+    "matched resident parent interval ends before last result validation",
+    "no full 3060 transformer-state or training memory qualification",
+    "existing semantic failures retained; no learned invocation/native answer certification",
+    "original full numeric matrix reused, not repeated"
+  ],
+  "next_unfinished_slice": "CPU-06 select/specify a larger pure backbone region using existing trace; preserve mandatory failure boundaries",
+  "local_artifact_sha256": {
+    "data/cpu-04-20261107/cpu_tests.py": "7787d895f0c61faf7b1d9dc1ac32a82c89240c1aced9687307a1aca94e6d6abb",
+    "data/cpu-04-20261107/operator_checks.py": "4b9fe0ca5f0578cc38bf503c8632ba93b3e0ecd7ac0dc3f9000d55fd833b4018",
+    "data/cpu-04-20261107/cpu-tests.log": "d3fa448300ba851baa924e4f38aca73a6cdb5994a1fe5581acfb298d182a5ead",
+    "data/cpu-04-20261107/cpu-tests.json": "bd15b6df9c8e3c21ce8afb6780446603abc6c3b6889362c38fe540cbe358d2a0",
+    "data/cpu-04-20261107/run_operator_checks.py": "f308ef7547209789961d69f2216b4fcb9d4fa786d421179c5c5d2ec62cf8d4b5",
+    "data/cpu-04-20261107/operator-3090.log": "bdc0dcf1a9f7fae7ccd5b02d3bbf4b91ea5aaaca1f4429c924e987eee05cf7f6",
+    "data/cpu-04-20261107/operator-3090.json": "c92caec50aa94d18d7e5c2e2adad55b0b421d4200d8534e74f7288d329470832",
+    "data/cpu-04-20261107/operator-3060.log": "cf85af2525ee4915cfb864bc7ba890d3b2975eaa2e9c573ab2cbe58a12963d76",
+    "data/cpu-04-20261107/operator-3060.json": "c65877f0c70b40aadf74b498232012ea9ac20be6dd7a294e17c49af79f9c693a",
+    "data/cpu-04-20261107/operator-exits.json": "10a940b9eae4f7c4bbde6e8f132b2cedea9f0b7c3f31ba3eb644a8e022cc3e09",
+    "data/cpu-04-20261107/run_benchmarks.py": "09dc6e8599589c27b5752048de34cefbdae5820345f3d47b37e401604631f08a",
+    "data/cpu-04-20261107/benchmark-3090.log": "d679fdc751b0971b63e2eace3a74da3ec90af2530409ee113da0bf4a0436773a",
+    "data/cpu-04-20261107/test_opt_in.py": "0ae552a4ec303f253010b25022995952fb4a10edba91199f982a10b2a720fbad",
+    "data/cpu-04-20261107/test-opt-in.log": "53b8b6c3bfe5fa6280c3d1d937fa2a2c9e5ff75a2851c5ff20568226155a5afa",
+    "data/cpu-04-20261107/cpu-test-opt-in.json": "7ed506e19b74525e19d8d123394fb6611758ec669e93920edf4ea1a9397cd939",
+    "data/cpu-04-20261107/benchmark-3090-exit.json": "a1eb795cd8b31459c21677bdcaa69afbafdc62656befa2b166d0c9250af669c9",
+    "data/cpu-04-20261107/benchmark-3060.log": "862e723ab52efc7ce2c6c08adc4130fa5db01a041445fb32a03560efd1689502",
+    "data/cpu-04-20261107/audit.py": "20df6a9c978ed41fe6d1e93de5acd5287f9725c3f827b789b1558666bbb31951",
+    "data/cpu-04-20261107/benchmark-3060-exit.json": "ad4e50657c16811234310c500b3cf1be22dc8fbdc097bb6b58267178f51723c9",
+    "data/cpu-04-20261107/audit.log": "eb821b2a999f5bd0008a402cada446e5175ca19ceb27aef3880a8a7a5aa14066",
+    "data/cpu-04-20261107/audit-result.json": "2d9a61990527c2e7254059b1d951e678675127455cce4893e8b58bfa5385c49d",
+    "data/cpu-04-20261107/run_integration.py": "743d4f78520028d7aca8ff06995d01f5d0d917ae9a6f56075fc3ab154c55b037",
+    "data/cpu-04-20261107/audit_integration.py": "9c288fc984f2129789bdc436dee1d3ae8e0e0de654903168c59b5b99a4bff69e",
+    "data/cpu-04-20261107/integration-audit.log": "06683a87cac6fa5929c2be617ac1d58f195a59faf96db24285ddefb7f4a60e67",
+    "data/cpu-04-20261107/integration-audit.json": "d835b1294289d078efa3ac8fef7eeae3a5fd824e62d9c1fcd42ed8df7abf5df9",
+    "data/cpu-04-20261107/gpu-final.csv": "37b65a285245a46806a9bf44a05e33a864e6353327de2a504d2f047823d12964",
+    "data/cpu-04-20261107/processes-final.csv": "56b166d819fec9450efad8f4163a74d6f248b1bcd54077594b8f4d495fcc65f9",
+    "data/cpu-04-20261107/evidence.py": "254258595eb766ccbcdde105be9cec0fa83c40c139f28393ad45c4f0e100287d",
+    "data/cpu-04-20261107/final-checks.json": "caa373189b6ebb1ea6641d93c04276d11e53a9f00f64cccb4c98e1f1b31580f8",
+    "data/cpu-04-20261107/benchmark-3090/plan.json": "a82ffba3bf40c207ddc57cc5040e97c37ec0d0325747e7d78380524feef89ba4",
+    "data/cpu-04-20261107/benchmark-3090/events.jsonl": "ab9b7ebda7bf10f64fb942fda554b57ecbabf6b5717c2fb3859ea3ec6f2057df",
+    "data/cpu-04-20261107/benchmark-3090/report.json": "cbf352f903d86b21883019cca58bdecb071916420209c6a1fe11a7d9a53e3082",
+    "data/cpu-04-20261107/benchmark-3060/plan.json": "590bb6747b303a127ced1b354c56fc9db7180fececa93ef9e68255166178c749",
+    "data/cpu-04-20261107/benchmark-3060/events.jsonl": "380bc7d6416dec081e31151154e9367cbd349480400838c953a27b4c30dc6271",
+    "data/cpu-04-20261107/benchmark-3060/report.json": "1d3dbf886ba697955564b0009ba69f895f33dc22d5f2e435491771d8bb2a8a21",
+    "data/cpu-04-20261107/single32/plan.json": "16965a6c2c91de4a353bcd2b1cafb05abe0b4861518f78b6bf0b3b9bea121738",
+    "data/cpu-04-20261107/single32/execution.log": "c65faaa8ccc8da8d23f52ddefccc114a11d9800e0b008966f377706c9a3a2460",
+    "data/cpu-04-20261107/single32/run.lock": "978f020a289fc23176fcb57fcd4611226486514c16784aa89d013ff01b48aa6f",
+    "data/cpu-04-20261107/single32/events.jsonl": "b294e7aa1f8f34dd3ecca83a9c64a763b2564786e5905e417987cefc341fcef8",
+    "data/cpu-04-20261107/single32/report.json": "037ca93047364463b5f2648095d2ce3ba74e8e3fd629b53d6b99f5bfb15542ad",
+    "data/cpu-04-20261107/single32/process-exit.json": "73e121921743c567a4f18f3fdecd8fa851601149cd28089bbca0e955a2d95ada",
+    "data/cpu-04-20261107/both32/plan.json": "345e4a53d6d7317a00f0bfdafd4f309d7683b15da4180d37ce4ba2e33a853951",
+    "data/cpu-04-20261107/both32/execution.log": "12acb7da180b926762234d27c4bc19bf5d987098ecf0a002162815e3ab0c8f89",
+    "data/cpu-04-20261107/both32/run.lock": "45d6ccc1b864d45dd11bac53111374e07d7d077bb8d7c3ee67725dbf83501b3f",
+    "data/cpu-04-20261107/both32/events.jsonl": "c58e1d49c51bf2602ae297df41ca3538877b6ab2efb6369c6ba00c1d7e7e776f",
+    "data/cpu-04-20261107/both32/report.json": "b8845606fb9b29b85018e04d2602e8638c3d72406e68c8b068c5be623a989864",
+    "data/cpu-04-20261107/both32/process-exit.json": "ead01f507c218aa948b8e882164121041784dab55df087c330486357d2bd87ce",
+    "data/cpu-04-20261107/source/qwen_one_two/__init__.py": "b6236192beea05d03b8d7c828e63761bca002cbd4ca967ecbc2fea0f7c02caad",
+    "data/cpu-04-20261107/source/qwen_one_two/curriculum.py": "7d4f4172e4a1b733ba38721224b58079c0b6196dc914cfb30e783d308328a2cf",
+    "data/cpu-04-20261107/source/qwen_one_two/decision.py": "0ef4605594a83668996abc0546f89ecf0faa67afd1c383acbc333b73b889864a",
+    "data/cpu-04-20261107/source/qwen_one_two/download.py": "eb3e8ca5009302d43abe5cbf2e4ec3b53c28ffc2ec6a786440ee40099fee53d4",
+    "data/cpu-04-20261107/source/qwen_one_two/g1_accounting.py": "6d6d872a7337dd026da0354c9526e7eee012576cf518e19397832896cc3a4dd2",
+    "data/cpu-04-20261107/source/qwen_one_two/g1_backbone.py": "e179c2c4550285de40d8babc30f4ee300eb340c23441b364e0ff8c641ba6865d",
+    "data/cpu-04-20261107/source/qwen_one_two/g1_checks.py": "7c32e89b246a6e26235e48e041f6ff5923b589cdf48df073a17bf253ed470950",
+    "data/cpu-04-20261107/source/qwen_one_two/g1_device.py": "e4a550b80ac3f1de35be7c6057cca65b0e46ec2ba2248ca72e0d67b6451b5f2e",
+    "data/cpu-04-20261107/source/qwen_one_two/g1_evidence.py": "2f882bed4c0ac93dcf0015d6083b471764a8a8fe3d586d337759da1117bb7aba",
+    "data/cpu-04-20261107/source/qwen_one_two/g1_gate_diagnosis.py": "d38c6a40d66ccf41195ccbdefd77f1bccda632492ecdbbd6841049f26874a3e3",
+    "data/cpu-04-20261107/source/qwen_one_two/g1_gate_repair.py": "18c25a33ccf05a16630960df40f29d309d19af0a12b23b6e99c3c2341e732b91",
+    "data/cpu-04-20261107/source/qwen_one_two/g1_precision_diagnosis.py": "acdc5008e7e02c13a24eda2f64a40f7f30176cdfb09e95bb637b20c0126ce3d9",
+    "data/cpu-04-20261107/source/qwen_one_two/g1_precision_math.py": "bc2e5a6393012079684734de386ad71afd5cbd26b2423a24f22f33ed6b9aedcf",
+    "data/cpu-04-20261107/source/qwen_one_two/g1_proof.py": "5a0d9991cffff111b12d23df1a5ad46be7cb77f1f67ba16c4038dbfa60ac9cb9",
+    "data/cpu-04-20261107/source/qwen_one_two/g1_protocol.py": "156ba44aa27b459279404d404e2a16da35e443717fca4d15851627e80cfeaba4",
+    "data/cpu-04-20261107/source/qwen_one_two/model.py": "65361404f081a2933830acc65453ee147098e6b12a000918c00dc83d991bfb00",
+    "data/cpu-04-20261107/source/qwen_one_two/policy.py": "a1b43898e6a695536276b44d6bb713b45c3ae5f56a363e586b6c4e3ff2afe978",
+    "data/cpu-04-20261107/source/qwen_one_two/refine_routes.py": "2a9ed2e1999290d985f5cdced7bfa83e00ec4c56247349848f7b205e7235db5c",
+    "data/cpu-04-20261107/source/qwen_one_two/server.py": "d83a9dc6764fb0d02ccfd87b40d2c5ba4bd69167a3733e27686b17d52d45139d",
+    "data/cpu-04-20261107/source/qwen_one_two/thinking.py": "47bfaf4c91e33f8587f4bad856f0d2b36c0e31705132b11f5e1d7f22a504e36b",
+    "data/cpu-04-20261107/source/qwen_one_two/train.py": "1d316c57efb6db71810ae6a43ba491832d0d7e66e91bc065de8e208c5dc38538",
+    "data/cpu-04-20261107/source/qwen_one_two/train_feedback.py": "234b516d33e7b070b44b47a1b0b5738917af0cc33bb4df67ad88fc7bf17af952",
+    "data/cpu-04-20261107/source/scripts/benchmark_recurrence_cache.py": "4f15b3875095b343d82e9e7f92f502ffa439cfc1e45eaf649409f6c338cc3704",
+    "data/cpu-04-20261107/source/scripts/two_gpu_diagnostics.py": "f9b238f816990c9ecd7fc165e672f17f35991cbba90f0cf31f6e4b1d9c5a55ee",
+    "data/cpu-04-20261107/source/qwen_one_two/codec/__init__.py": "9b577482d1138d4d449fcc2bc9aa493538658afefe0bffb2a72828ab12e7ea38",
+    "data/cpu-04-20261107/source/qwen_one_two/codec/backbone.py": "b76c85e94dc99c7588992459b5691ec2a97f518ecba6191f19df1cc7461326b3",
+    "data/cpu-04-20261107/source/qwen_one_two/codec/diagnose_precision.py": "4edc64ec7af6525493e57c33f5fe4866e9ec0c0709086ae1fa99898d75fb23f3",
+    "data/cpu-04-20261107/source/qwen_one_two/codec/finite.py": "031cd3714a070650619284a83205d48af5aa08f04865028f3a29076d13c98f70",
+    "data/cpu-04-20261107/source/qwen_one_two/codec/fixtures.py": "36c91e9d949d2d03d4aaaafa709853eaeb7796465b02f6a9853f109f95221bc3",
+    "data/cpu-04-20261107/source/qwen_one_two/codec/neural.py": "1ac72b7a37bc90639d1e25d0dbcd1375bc6c6e090e0306d0ef2a96c8620a4fec",
+    "data/cpu-04-20261107/source/qwen_one_two/codec/ownership.py": "d9f10f5f6f8a8233b208110820f4e620253e668463042a30ad2dbbce0357f8dc",
+    "data/cpu-04-20261107/source/qwen_one_two/codec/precision.py": "9eb775efc303ce6d9eb8bbec26ffdcd6422f37ad0732e03ef0885ae9433c8e5b",
+    "data/cpu-04-20261107/source/qwen_one_two/codec/qualify.py": "d1204bd1e1ce70721d03e936ec92c8e30cd9b54ce0d79e50bbab46e3fd540851",
+    "data/cpu-04-20261107/source/qwen_one_two/codec/qualify_matrix.py": "07e25deee4eb930d498d5ca071f76c9022ee27823d62d90fcad45f59efb5a1ff",
+    "data/cpu-04-20261107/source/qwen_one_two/codec/records.py": "089eb06d1fd55e9a1629297759c942f046dc570058cf9cb304c8d88069287b04",
+    "data/cpu-04-20261107/source/qwen_one_two/codec/recurrence.py": "c96bff0e7f56dd3ffcdde576d6d0a9a85bffe1aa7352262e41ee6560aa1f7ebc",
+    "data/cpu-04-20261107/source/qwen_one_two/codec/render.py": "9e16fb579268e4261cd134883e698f6ae3c69a2802f1dbc2502855062920b82b",
+    "data/cpu-04-20261107/source/qwen_one_two/codec/runtime.py": "350c79f141e6898c5f762bf9b9c1708bd11297bdd01227c93a39abec2bd61d3a",
+    "data/cpu-04-20261107/source/qwen_one_two/codec/schema.py": "5a2ff9f2f38b7338da5cf6d7f605bed953e136c37445983f0cf965f1e17dbe23",
+    "data/cpu-04-20261107/source/qwen_one_two/codec/session.py": "2992225ccc68128680dec23bd64d3273ca950362e35eac6a5430ad00bf45ae3b",
+    "data/cpu-04-20261107/source/qwen_one_two/codec/writer.py": "187d0a07a4f29c1c4da560f84f361e0099be49c588933d25c8bb35b51ddca1a0",
+    "data/cpu-04-20261107/source/qwen_one_two/training/__init__.py": "0a5bc5745bdcb26cbf81df3d10f5363d39539d811fd869326cb37ecb4a29a47e",
+    "data/cpu-04-20261107/source/qwen_one_two/training/behavior_qualification.py": "e620f747834a8fc336150588d2fac3f5b33d59a16390fda7fdadf6b40c9eee4b",
+    "data/cpu-04-20261107/source/qwen_one_two/training/binding.py": "6888c1a6f3597b9763f875242b34dea6f9f0abbe5f47b9529488e3aec30ddeae",
+    "data/cpu-04-20261107/source/qwen_one_two/training/checkpoint.py": "f94b519fe21933e5d121747d299f9005e89484fc0523047598d12be60a19f337",
+    "data/cpu-04-20261107/source/qwen_one_two/training/clean.py": "f9acc1c08507302b0d224be4f382e6b263ea4a12fabd138383167839185f148f",
+    "data/cpu-04-20261107/source/qwen_one_two/training/clean_packets.py": "7f0d846319a3b9fa391524f73894b8f13baa4f6632b3b127f094f60ba3d2a028",
+    "data/cpu-04-20261107/source/qwen_one_two/training/component_producer.py": "9cf2f2aea9e4e3bab4230d2fa17cc415e94ffdb6a6522075af86ef7fe2cc2aa8",
+    "data/cpu-04-20261107/source/qwen_one_two/training/diagnostics.py": "0e5ec6271090c034744a182c2bd4a86d421ee099be0b056da4b29438120b3060",
+    "data/cpu-04-20261107/source/qwen_one_two/training/driver.py": "c46128c8d9e0de5288717f4a2c6a78b6bb3fed5e4fa2a245b6123c267a587bc2",
+    "data/cpu-04-20261107/source/qwen_one_two/training/engine.py": "2500a47211fc13a41c3e646d2f315d2233b4304d1f67c71fb73b3eebc57aee4d",
+    "data/cpu-04-20261107/source/qwen_one_two/training/episodes.py": "0181ca87dff0f2cf4c3f7552aa197b9b67cd3bc0f1ad0b73e84ddcf284a7a5a5",
+    "data/cpu-04-20261107/source/qwen_one_two/training/host_metrics.py": "6027ae171e86d6fcf4b5eea4bdeb247ab6ad99349a9b4cdbd9b1b9ad61b9b86d",
+    "data/cpu-04-20261107/source/qwen_one_two/training/host_profile.py": "31d52a713e33de61e5b802a26c63f24e6dbcb476325d01afea788097e97d23e0",
+    "data/cpu-04-20261107/source/qwen_one_two/training/inputs.py": "8a96776ac2ab7a65f2cc51c3baaee12a333e76278775cc3d6b37b68cee99e332",
+    "data/cpu-04-20261107/source/qwen_one_two/training/losses.py": "a91938757131b177d38cba6e5275c0db7f7a053389a1a97c1bf173a82ae99041",
+    "data/cpu-04-20261107/source/qwen_one_two/training/manifest.py": "468257734527ceb5ec8656b6155388c2b3e92298f457cfa1764fd87cd58cbf5d",
+    "data/cpu-04-20261107/source/qwen_one_two/training/producer.py": "6827978aa735839a691f4f04f2d5cb6b2471d5c3c54c8604a76ac2ea7619e40f",
+    "data/cpu-04-20261107/source/qwen_one_two/training/profile.py": "3369e8e23579454fa3e71408fcb6196443cb86ed1c7e0f1f95974b91c9cc9cdb",
+    "data/cpu-04-20261107/source/qwen_one_two/training/qualification.py": "22d1de030bc85361a2366d03eb4c1c6c47a69f72e87fdcf59d6a9f8e04da72a9",
+    "data/cpu-04-20261107/source/qwen_one_two/training/receiver_learning.py": "60e5fc7eb79ac7c5374caaa72c19e3a5b2c6bea4cc6854fd9568420dd7dc7034",
+    "data/cpu-04-20261107/source/qwen_one_two/training/reference.py": "44cbd6da4b3374d3de7082cac633f9b63fd91cef768bd8462a01fcb17c0f2aec",
+    "data/cpu-04-20261107/source/qwen_one_two/training/reference_data.py": "5855ecf472ac6d553bf16372af54cc640c48deb704014e7f26eb652387a01e70",
+    "data/cpu-04-20261107/source/qwen_one_two/training/reference_exposure.py": "f6e576cb0ce1cd8c48275047d7c0360cf23d4b20f0bcf20eaafc3433971e1a3c",
+    "data/cpu-04-20261107/source/qwen_one_two/training/reference_qualification.py": "9e02394240fb88b2e4e77b604b020300d200cfae5bb217e3717247da27505db0",
+    "data/cpu-04-20261107/source/qwen_one_two/training/release.py": "906d6bf7fefaa9b251338e46b13dac289365f5347b73cd03b680e593578888c3",
+    "data/cpu-04-20261107/source/qwen_one_two/training/sampler.py": "aeee24107468a9a27657efa3ba5c053d36101aee982fad069af8411762e28950",
+    "data/cpu-04-20261107/source/qwen_one_two/training/two_gpu.py": "77fc5f7272c01c7a9fa7964594f8a5a90c7b09dd0b841cfb9c8a3c0099abb192",
+    "data/cpu-04-20261107/source/qwen_one_two/training/two_gpu_worker.py": "f3abfbcbead980581ceb7d7ba39c0dadf43f8bca1df5c965d050c3838741dc35",
+    "data/cpu-04-20261107/source/qwen_one_two/training/weight_repair.py": "aff987d19f012820218758e02162d8352acce6d2983b74b9663a7afd9f4917bc"
+  }
+}

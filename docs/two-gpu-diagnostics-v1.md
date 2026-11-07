@@ -3,6 +3,10 @@
 Historical build report. The hold was subsequently lifted; singleton selection,
 process-wide diagnostic thread guards and actual hardware measurements are in
 [CPU-03 results](cpu-03-results-2026-11-07.md).
+The later [CPU-04 results](cpu-04-results-2026-11-07.md) add `prepare --cache-limit
+32`, complete scheduled-job admission and parent main-phase timing. The explicit
+32-entry diagnostic option is measured on both cards; general model/training
+defaults remain eight. Fresh source-bound plans are required.
 
 **Built and CPU-validated; both GPUs remain off.** No model runtime was imported
 by the preparation/test processes, no GPU/status tools ran, and no model weights

@@ -27,14 +27,15 @@ ROOT=Path(__file__).resolve().parents[2]
 
 
 def source_hashes():
-    paths=sorted((ROOT/'qwen_one_two').rglob('*.py'))+[ROOT/'scripts/two_gpu_diagnostics.py']
+    paths=sorted((ROOT/'qwen_one_two').rglob('*.py'))+[ROOT/'scripts/two_gpu_diagnostics.py',ROOT/'scripts/benchmark_recurrence_cache.py']
     return {str(p.relative_to(ROOT)):file_hash(p) for p in paths}
 
 
-def plan(snapshot, *, selection='full', profile_host=False, trace_cuda=False, devices=(PRIMARY,SECONDARY)):
+def plan(snapshot, *, selection='full', profile_host=False, trace_cuda=False, devices=(PRIMARY,SECONDARY), cache_limit=8):
     """Read existing data/manifest metadata, never weights or GPU libraries."""
     check(selection in {'full','cpu-profile'} and (not trace_cuda or profile_host),'profiling selection/options')
     check(tuple(devices) in ((PRIMARY,),(SECONDARY,),(PRIMARY,SECONDARY)),'explicit diagnostic devices')
+    check(type(cache_limit) is int and cache_limit in (8,32),'diagnostic recurrence cache capacity')
     release=load_release(ROOT/'data/training-collections-20261105/releases/development',expected_hash=DEV_SHA)
     manifest=decode((ROOT/CHECKPOINT/'manifest.json').read_bytes())
     check(file_hash(ROOT/CHECKPOINT/'manifest.json')==CHECKPOINT_SHA and manifest['reference_frozen']
@@ -82,6 +83,7 @@ def plan(snapshot, *, selection='full', profile_host=False, trace_cuda=False, de
         'jobs':jobs,'cases':cases,'anchors':anchors,'omitted_reader_ids':omitted,
         'anchor_cases':anchor_cases,'selection':selection,'selection_evidence':selection_evidence,
         'profiling':{'host':bool(profile_host),'cuda_trace_first_job_per_worker':bool(trace_cuda)},
+        'recurrence_cache_limit':cache_limit,
         'presentations':{'main':len(cases),'startup_anchors':3*len(devices),'distinct_existing_cases':len({c['id'] for c in cases}|set(anchors))},
         'status':'PREPARED_GPU_NOT_RUN','training_authorized':False,
         'qualification':'experimental read-only diagnostics; neither cross-device parity nor 3060 numerics qualified',
@@ -138,6 +140,7 @@ def dispatch(jobs, devices, target, args, *, on_ready, on_result, on_final):
     """
     ctx=mp.get_context('spawn');pending=deque(enumerate(jobs));active={};processes=[];ready={};busy={}
     completed=set();stopping=set();started=time.monotonic();cpu_started=time.process_time_ns();sends=receives=0
+    main_started=main_finished=None
     check(1<=len(devices)<=2 and len(set(devices))==len(devices),'one or two unique workers required')
     try:
         for uuid in devices:
@@ -162,10 +165,13 @@ def dispatch(jobs, devices, target, args, *, on_ready, on_result, on_final):
                     check(uuid not in ready,'duplicate worker readiness');ready[uuid]=message
                     if len(ready)==len(devices):
                         on_ready(ready)
+                        main_started=time.monotonic()
                         for pipe,(device,_) in active.items():next_job(pipe,device)
                 elif kind=='result':
                     index=message['index'];check(busy.get(uuid)==index and index not in completed,'duplicate/unscheduled result')
-                    on_result(uuid,index,message);completed.add(index);del busy[uuid];next_job(conn,uuid)
+                    on_result(uuid,index,message);completed.add(index)
+                    if len(completed)==len(jobs):main_finished=time.monotonic()
+                    del busy[uuid];next_job(conn,uuid)
                 elif kind=='final':
                     check(uuid in stopping and uuid not in busy,'premature worker final receipt')
                     on_final(uuid,message);conn.close();del active[conn]
@@ -176,6 +182,7 @@ def dispatch(jobs, devices, target, args, *, on_ready, on_result, on_final):
         check(not pending and len(completed)==len(jobs),'missing diagnostic jobs')
         for proc in processes:proc.join();check(proc.exitcode==0,'worker nonzero exit')
         return {'jobs_completed':len(completed),'wall_seconds':time.monotonic()-started,
+                'main_wall_seconds':None if main_finished is None else main_finished-main_started,
                 'parent_dispatch_cpu_ns':time.process_time_ns()-cpu_started,'ipc_sends':sends,'ipc_receives':receives}
     finally:
         for proc in processes:

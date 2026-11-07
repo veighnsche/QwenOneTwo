@@ -159,3 +159,23 @@ class ProfilingPlanTests(unittest.TestCase):
             self.assertEqual([d['uuid'] for d in p['devices']],[uuid]);self.assertEqual(p['presentations']['startup_anchors'],3)
         for devices in ((),(PRIMARY,PRIMARY),('arbitrary',)):
             with self.assertRaisesRegex(ValueError,'explicit diagnostic devices'):plan('/never-opened',devices=devices)
+
+    def test_cache_benchmark_discloses_every_presentation_and_timing_phase(self):
+        from scripts.benchmark_recurrence_cache import benchmark_plan
+        from qwen_one_two.g1_device import PRIMARY
+        p=benchmark_plan('/TEST_ONLY_NOT_OPENED',PRIMARY)
+        self.assertEqual(len(p['jobs']),105)
+        self.assertEqual(sum(len(j['ids']) for j in p['jobs']),120)
+        self.assertEqual(p['presentations']['main'],120)
+        self.assertEqual(p['presentations']['startup_anchors'],3)
+        self.assertFalse(p['profiling']['host']);self.assertFalse(p['profiling']['cuda_trace_first_job_per_worker'])
+        for trial,limit in enumerate((8,32,32,8,8,32)):
+            own=[j for j in p['jobs'] if j['cache_trial']==trial]
+            self.assertTrue(all(j['cache_limit']==limit for j in own))
+            timed=[j for j in own if j['phase']=='timed']
+            self.assertEqual(sum(len(j['ids']) for j in timed),8)
+            self.assertFalse(any(j['count_cache'] for j in timed))
+            self.assertEqual(sum(j['last_in_pack'] for j in timed),1)
+        from qwen_one_two.training.two_gpu import plan
+        for limit in (0,16,True):
+            with self.assertRaisesRegex(ValueError,'cache capacity'):plan('/never-opened',cache_limit=limit)

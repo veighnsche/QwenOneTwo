@@ -109,6 +109,8 @@ class DispatchTests(unittest.TestCase):
         self.assertEqual(r['ipc_sends'],14)  # twelve jobs plus two stops
         self.assertEqual(r['ipc_receives'],16)  # twelve results, two ready/final pairs
         self.assertGreaterEqual(r['parent_dispatch_cpu_ns'],0)
+        self.assertGreater(r['main_wall_seconds'],0)
+        self.assertLessEqual(r['main_wall_seconds'],r['wall_seconds'])
 
     def test_failure_exit_or_foreign_result_never_returns_success(self):
         for mode in ('error','exit','wrong-index','premature-final','duplicate'):
@@ -160,6 +162,8 @@ class ReceiptTests(unittest.TestCase):
         from scripts.two_gpu_diagnostics import run,output_directory
         with self.assertRaisesRegex(ValueError,'--execute-gpu'):run('/no/such/plan.json')
         with self.assertRaisesRegex(ValueError,'repository data'):output_directory('/tmp/unrelated')
+        from scripts.benchmark_recurrence_cache import run as cache_run
+        with self.assertRaisesRegex(ValueError,'--execute-gpu'):cache_run({},None)
 
     def test_child_also_requires_explicit_execution_before_setting_visibility(self):
         from qwen_one_two.training.two_gpu_worker import worker

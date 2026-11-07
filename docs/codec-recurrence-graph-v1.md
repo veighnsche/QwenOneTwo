@@ -8,6 +8,11 @@ setting **only inside this pure recurrence operation**. It enables neither
 and its measured 324/108-case matrices remain historical evidence for their
 recorded source snapshots.
 
+The later [diagnostic retention v1](recurrence-cache-retention-v1.md) permits an
+explicit 32-entry cache in dedicated read-only workers, with measured evidence
+in [CPU-04](cpu-04-results-2026-11-07.md). Ordinary model/training retention stays
+eight; no recurrence equation, precision or tolerance is changed.
+
 `Backbone.recurrence_backend='graph-v1'` is the expanded backend default;
 `'eager'` explicitly selects the retained oracle. Unknown backends reject.
 Legacy G1 remains unchanged. The numeric qualification CLI defaults to eager

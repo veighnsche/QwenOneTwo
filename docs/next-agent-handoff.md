@@ -41,7 +41,53 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — CPU-03 hardware baselines complete
+## Current checkpoint — CPU-04 retention measured; two-card integration passes
+
+GPU use remains authorized for throughput diagnostics. No agents, new semantic
+data, capability/reference training or services were used/changed. Two coherent
+slices follow the earlier CPU-only instrumentation: CPU-03 baselines/guard fix
+and CPU-04 cache-retention comparison. [CPU-04 report](cpu-04-results-2026-11-07.md),
+[contract](recurrence-cache-retention-v1.md), [portable evidence](evidence/cpu-04-v1.json).
+
+The normal diagnostic runner accepts `prepare --cache-limit 32`; model/training
+defaults remain eight. This explicitly selected policy retains the same
+device/stream/shape/dtype key and equations. Worker admission binds the complete
+scheduled job. Parent main-phase wall time now separates resident throughput
+from setup/final integrity. No finite boundary, tolerance or accounting changes.
+
+Three alternating resident pairs on each card use the same existing eight cases
+and frozen checkpoint/reference. Median summed case time improves **5.2948% on
+3090 / 4.0411% on 3060**; CPU falls **5.0587% / 3.9190%**. All three pairs improve
+both metrics. Independent warm observations show **37 → 0 recaptures/evictions**
+over 1,998 requests. Allocated peak increases **53,906,432 bytes (51.41 MiB)**.
+Timed passes have profiling/counters off; cold warmups and separate counter
+observations are fully disclosed. Every repeated case receipt matches exactly.
+
+The normal 32-entry path also passes a single finite integration comparison:
+3090 main phase **11.418856 s**, both cards **7.132641 s**: **1.600930× throughput**.
+Including setup, **37.941083 / 34.982324 s**, only **1.084579×**. Two cards cost
+**6.6818% more worker CPU/case** and **65.8653% more setup-inclusive CPU/case**.
+Do not conflate parallel throughput with reduced total CPU work or claim 2×.
+This is eight-case first-pack evidence, not stable full-workload scaling.
+
+CPU fixtures pass **25/25 in 8.698 s**, plus the final explicit-execution test.
+The existing recurrence suite passes **8/8 per card at capacity 32**, including
+exact eager values/derivatives, 512/1024 composition, checkpoint, streams and
+failure guards. Recurrence/Session/neural/backbone/evaluator bytes are unchanged
+from `4879331`. Both independent audits pass; all weights/ties/fingerprints and
+grad=None checks pass. There are **271 CPU-04 model presentations, zero updates**.
+No new 324-case matrix, full 3060 transformer-state qualification, training-memory
+qualification or learned-flow certification is claimed. Noul/Score failures stay.
+
+**Next unfinished performance slice: CPU-06 candidate selection**, using the
+existing trace to isolate a larger pure backbone region between required guards.
+The retained normalization-tail specification is unimplemented and need not be
+chosen if profiling shows a better region. CPU-05 transfers are not the next
+demonstrated bottleneck. Use explicit capacity 32 for this read-only pack; keep
+future training/backward memory and semantics qualification separate. No larger
+capture or training is queued.
+
+## Previous checkpoint — CPU-03 hardware baselines complete
 
 The user lifted the GPU hold on 2026-11-07 for throughput work. Both configured
 cards are available for explicit read-only diagnostics; no agents, training,
