@@ -1,0 +1,373 @@
+{
+  "protocol": "cpu-01-02-host-instrumentation-v1",
+  "date": "2026-11-07",
+  "base_commit": "3907e611a751ec51cc284f1d3b35938650a01fd5",
+  "status": "IMPLEMENTED_CPU_VALIDATED_GPU_NOT_RUN",
+  "scope": {
+    "gpu_workloads": 0,
+    "gpu_status_probes": 0,
+    "new_semantic_data": 0,
+    "agents": 0,
+    "training": 0,
+    "service_changes": 0,
+    "accelerator_qualification_granted": false
+  },
+  "source_hashes": {
+    "qwen_one_two/__init__.py": "b6236192beea05d03b8d7c828e63761bca002cbd4ca967ecbc2fea0f7c02caad",
+    "qwen_one_two/codec/__init__.py": "9b577482d1138d4d449fcc2bc9aa493538658afefe0bffb2a72828ab12e7ea38",
+    "qwen_one_two/codec/backbone.py": "b76c85e94dc99c7588992459b5691ec2a97f518ecba6191f19df1cc7461326b3",
+    "qwen_one_two/codec/diagnose_precision.py": "4edc64ec7af6525493e57c33f5fe4866e9ec0c0709086ae1fa99898d75fb23f3",
+    "qwen_one_two/codec/finite.py": "031cd3714a070650619284a83205d48af5aa08f04865028f3a29076d13c98f70",
+    "qwen_one_two/codec/fixtures.py": "36c91e9d949d2d03d4aaaafa709853eaeb7796465b02f6a9853f109f95221bc3",
+    "qwen_one_two/codec/neural.py": "1ac72b7a37bc90639d1e25d0dbcd1375bc6c6e090e0306d0ef2a96c8620a4fec",
+    "qwen_one_two/codec/ownership.py": "d9f10f5f6f8a8233b208110820f4e620253e668463042a30ad2dbbce0357f8dc",
+    "qwen_one_two/codec/precision.py": "9eb775efc303ce6d9eb8bbec26ffdcd6422f37ad0732e03ef0885ae9433c8e5b",
+    "qwen_one_two/codec/qualify.py": "d1204bd1e1ce70721d03e936ec92c8e30cd9b54ce0d79e50bbab46e3fd540851",
+    "qwen_one_two/codec/qualify_matrix.py": "07e25deee4eb930d498d5ca071f76c9022ee27823d62d90fcad45f59efb5a1ff",
+    "qwen_one_two/codec/records.py": "089eb06d1fd55e9a1629297759c942f046dc570058cf9cb304c8d88069287b04",
+    "qwen_one_two/codec/recurrence.py": "c96bff0e7f56dd3ffcdde576d6d0a9a85bffe1aa7352262e41ee6560aa1f7ebc",
+    "qwen_one_two/codec/render.py": "9e16fb579268e4261cd134883e698f6ae3c69a2802f1dbc2502855062920b82b",
+    "qwen_one_two/codec/runtime.py": "350c79f141e6898c5f762bf9b9c1708bd11297bdd01227c93a39abec2bd61d3a",
+    "qwen_one_two/codec/schema.py": "5a2ff9f2f38b7338da5cf6d7f605bed953e136c37445983f0cf965f1e17dbe23",
+    "qwen_one_two/codec/session.py": "2992225ccc68128680dec23bd64d3273ca950362e35eac6a5430ad00bf45ae3b",
+    "qwen_one_two/codec/writer.py": "187d0a07a4f29c1c4da560f84f361e0099be49c588933d25c8bb35b51ddca1a0",
+    "qwen_one_two/curriculum.py": "7d4f4172e4a1b733ba38721224b58079c0b6196dc914cfb30e783d308328a2cf",
+    "qwen_one_two/decision.py": "0ef4605594a83668996abc0546f89ecf0faa67afd1c383acbc333b73b889864a",
+    "qwen_one_two/download.py": "eb3e8ca5009302d43abe5cbf2e4ec3b53c28ffc2ec6a786440ee40099fee53d4",
+    "qwen_one_two/g1_accounting.py": "6d6d872a7337dd026da0354c9526e7eee012576cf518e19397832896cc3a4dd2",
+    "qwen_one_two/g1_backbone.py": "e179c2c4550285de40d8babc30f4ee300eb340c23441b364e0ff8c641ba6865d",
+    "qwen_one_two/g1_checks.py": "7c32e89b246a6e26235e48e041f6ff5923b589cdf48df073a17bf253ed470950",
+    "qwen_one_two/g1_device.py": "61808accfaa3ce127df6ccaefa203c2cd1a88d5d8fcea50e83ee62a9fa9f166c",
+    "qwen_one_two/g1_evidence.py": "2f882bed4c0ac93dcf0015d6083b471764a8a8fe3d586d337759da1117bb7aba",
+    "qwen_one_two/g1_gate_diagnosis.py": "d38c6a40d66ccf41195ccbdefd77f1bccda632492ecdbbd6841049f26874a3e3",
+    "qwen_one_two/g1_gate_repair.py": "18c25a33ccf05a16630960df40f29d309d19af0a12b23b6e99c3c2341e732b91",
+    "qwen_one_two/g1_precision_diagnosis.py": "acdc5008e7e02c13a24eda2f64a40f7f30176cdfb09e95bb637b20c0126ce3d9",
+    "qwen_one_two/g1_precision_math.py": "bc2e5a6393012079684734de386ad71afd5cbd26b2423a24f22f33ed6b9aedcf",
+    "qwen_one_two/g1_proof.py": "5a0d9991cffff111b12d23df1a5ad46be7cb77f1f67ba16c4038dbfa60ac9cb9",
+    "qwen_one_two/g1_protocol.py": "156ba44aa27b459279404d404e2a16da35e443717fca4d15851627e80cfeaba4",
+    "qwen_one_two/model.py": "65361404f081a2933830acc65453ee147098e6b12a000918c00dc83d991bfb00",
+    "qwen_one_two/policy.py": "a1b43898e6a695536276b44d6bb713b45c3ae5f56a363e586b6c4e3ff2afe978",
+    "qwen_one_two/refine_routes.py": "2a9ed2e1999290d985f5cdced7bfa83e00ec4c56247349848f7b205e7235db5c",
+    "qwen_one_two/server.py": "d83a9dc6764fb0d02ccfd87b40d2c5ba4bd69167a3733e27686b17d52d45139d",
+    "qwen_one_two/thinking.py": "47bfaf4c91e33f8587f4bad856f0d2b36c0e31705132b11f5e1d7f22a504e36b",
+    "qwen_one_two/train.py": "1d316c57efb6db71810ae6a43ba491832d0d7e66e91bc065de8e208c5dc38538",
+    "qwen_one_two/train_feedback.py": "234b516d33e7b070b44b47a1b0b5738917af0cc33bb4df67ad88fc7bf17af952",
+    "qwen_one_two/training/__init__.py": "0a5bc5745bdcb26cbf81df3d10f5363d39539d811fd869326cb37ecb4a29a47e",
+    "qwen_one_two/training/behavior_qualification.py": "e620f747834a8fc336150588d2fac3f5b33d59a16390fda7fdadf6b40c9eee4b",
+    "qwen_one_two/training/binding.py": "6888c1a6f3597b9763f875242b34dea6f9f0abbe5f47b9529488e3aec30ddeae",
+    "qwen_one_two/training/checkpoint.py": "f94b519fe21933e5d121747d299f9005e89484fc0523047598d12be60a19f337",
+    "qwen_one_two/training/clean.py": "f9acc1c08507302b0d224be4f382e6b263ea4a12fabd138383167839185f148f",
+    "qwen_one_two/training/clean_packets.py": "7f0d846319a3b9fa391524f73894b8f13baa4f6632b3b127f094f60ba3d2a028",
+    "qwen_one_two/training/component_producer.py": "9cf2f2aea9e4e3bab4230d2fa17cc415e94ffdb6a6522075af86ef7fe2cc2aa8",
+    "qwen_one_two/training/diagnostics.py": "0e5ec6271090c034744a182c2bd4a86d421ee099be0b056da4b29438120b3060",
+    "qwen_one_two/training/driver.py": "c46128c8d9e0de5288717f4a2c6a78b6bb3fed5e4fa2a245b6123c267a587bc2",
+    "qwen_one_two/training/engine.py": "2500a47211fc13a41c3e646d2f315d2233b4304d1f67c71fb73b3eebc57aee4d",
+    "qwen_one_two/training/episodes.py": "0181ca87dff0f2cf4c3f7552aa197b9b67cd3bc0f1ad0b73e84ddcf284a7a5a5",
+    "qwen_one_two/training/host_metrics.py": "6027ae171e86d6fcf4b5eea4bdeb247ab6ad99349a9b4cdbd9b1b9ad61b9b86d",
+    "qwen_one_two/training/host_profile.py": "31d52a713e33de61e5b802a26c63f24e6dbcb476325d01afea788097e97d23e0",
+    "qwen_one_two/training/inputs.py": "8a96776ac2ab7a65f2cc51c3baaee12a333e76278775cc3d6b37b68cee99e332",
+    "qwen_one_two/training/losses.py": "a91938757131b177d38cba6e5275c0db7f7a053389a1a97c1bf173a82ae99041",
+    "qwen_one_two/training/manifest.py": "468257734527ceb5ec8656b6155388c2b3e92298f457cfa1764fd87cd58cbf5d",
+    "qwen_one_two/training/producer.py": "6827978aa735839a691f4f04f2d5cb6b2471d5c3c54c8604a76ac2ea7619e40f",
+    "qwen_one_two/training/profile.py": "3369e8e23579454fa3e71408fcb6196443cb86ed1c7e0f1f95974b91c9cc9cdb",
+    "qwen_one_two/training/qualification.py": "22d1de030bc85361a2366d03eb4c1c6c47a69f72e87fdcf59d6a9f8e04da72a9",
+    "qwen_one_two/training/receiver_learning.py": "60e5fc7eb79ac7c5374caaa72c19e3a5b2c6bea4cc6854fd9568420dd7dc7034",
+    "qwen_one_two/training/reference.py": "44cbd6da4b3374d3de7082cac633f9b63fd91cef768bd8462a01fcb17c0f2aec",
+    "qwen_one_two/training/reference_data.py": "5855ecf472ac6d553bf16372af54cc640c48deb704014e7f26eb652387a01e70",
+    "qwen_one_two/training/reference_exposure.py": "f6e576cb0ce1cd8c48275047d7c0360cf23d4b20f0bcf20eaafc3433971e1a3c",
+    "qwen_one_two/training/reference_qualification.py": "9e02394240fb88b2e4e77b604b020300d200cfae5bb217e3717247da27505db0",
+    "qwen_one_two/training/release.py": "906d6bf7fefaa9b251338e46b13dac289365f5347b73cd03b680e593578888c3",
+    "qwen_one_two/training/sampler.py": "aeee24107468a9a27657efa3ba5c053d36101aee982fad069af8411762e28950",
+    "qwen_one_two/training/two_gpu.py": "f5360fd60a16e890d510066f8e2c5191f6b864669068a594cf82507cae57ed7c",
+    "qwen_one_two/training/two_gpu_worker.py": "d48f03b9caa423daa80798ada01b7d958632b5375b13d2ed28cdbd3b1370411c",
+    "qwen_one_two/training/weight_repair.py": "aff987d19f012820218758e02162d8352acce6d2983b74b9663a7afd9f4917bc",
+    "scripts/two_gpu_diagnostics.py": "50223f74a290cf662e45df534cfff7ddfcee53807bf70ac740f8258b95bbadb9"
+  },
+  "test_source_hashes": {
+    "tests/test_host_metrics.py": "ff7042de296b1736ad46d495704e6d0903fe8fd5c1e269423bef9e7bcdbc3702",
+    "tests/test_two_gpu.py": "6cc5e5370627614fa6262816e0e2b10bf211c8d652183603c31d3a51c2b466e9"
+  },
+  "documents": {
+    "docs/cpu-01-02-results-2026-11-07.md": "fd5426e38640033fd46ef7e1b3edfad0275389c8a4169f61d750478c1b15cfaa",
+    "docs/cpu-sync-boundaries-v1.md": "55723ec1306dacd9aa0c70954e27a420a0c9be8c80df05ee98aae0fc30041e34",
+    "docs/cpu-involvement-tasks.md": "d28a4029c39b8f33048c862530002456b9b22f6de379dc3fee9d8f1a82875b2c",
+    "docs/next-agent-handoff.md": "8f1957ed4224f884c1eba80182a3dec5c9340bd93c26a9286c9ec3a411fec2c3",
+    "docs/two-gpu-diagnostics-v1.md": "1abdd39198784a2ab697f36caf1320947770f5764edd1fc15fd14fa266f71aae"
+  },
+  "plans": {
+    "full": {
+      "path": "data/cpu-01-02-20261107/full/plan.json",
+      "sha256": "215f38ccd3a777d3a5f3a30d396d1b5e556c6e342667d317c9174ecc51b88591",
+      "status": "PREPARED_GPU_NOT_RUN",
+      "main_cases": 310,
+      "main_jobs": 220,
+      "presentations": {
+        "distinct_existing_cases": 310,
+        "main": 310,
+        "startup_anchors": 6
+      },
+      "profiling": {
+        "cuda_trace_first_job_per_worker": false,
+        "host": false
+      }
+    },
+    "cpu-baseline": {
+      "path": "data/cpu-01-02-20261107/cpu-baseline/plan.json",
+      "sha256": "dd616975f845678b716c0a8fcf321ae52ea0c1278fd5eb0c7fc9471e59e0c71a",
+      "status": "PREPARED_GPU_NOT_RUN",
+      "main_cases": 8,
+      "main_jobs": 7,
+      "presentations": {
+        "distinct_existing_cases": 11,
+        "main": 8,
+        "startup_anchors": 6
+      },
+      "profiling": {
+        "cuda_trace_first_job_per_worker": false,
+        "host": false
+      }
+    },
+    "host-profile": {
+      "path": "data/cpu-01-02-20261107/host-profile/plan.json",
+      "sha256": "27e4ff05048e96935aa4083c260431dc305e12124088c1315cc598710476e04b",
+      "status": "PREPARED_GPU_NOT_RUN",
+      "main_cases": 8,
+      "main_jobs": 7,
+      "presentations": {
+        "distinct_existing_cases": 11,
+        "main": 8,
+        "startup_anchors": 6
+      },
+      "profiling": {
+        "cuda_trace_first_job_per_worker": false,
+        "host": true
+      }
+    },
+    "cuda-trace": {
+      "path": "data/cpu-01-02-20261107/cuda-trace/plan.json",
+      "sha256": "f20208d84e94f3b674aed9189640894d1822bfc5a59b990b0ab3e13bb4ff7195",
+      "status": "PREPARED_GPU_NOT_RUN",
+      "main_cases": 8,
+      "main_jobs": 7,
+      "presentations": {
+        "distinct_existing_cases": 11,
+        "main": 8,
+        "startup_anchors": 6
+      },
+      "profiling": {
+        "cuda_trace_first_job_per_worker": true,
+        "host": true
+      }
+    }
+  },
+  "selection_evidence": {
+    "extrema": {
+      "Choice": [
+        "development-E-0074",
+        "development-E-0061"
+      ],
+      "Noul": [
+        "development-E-0012",
+        "development-E-0028"
+      ],
+      "Score": [
+        "development-E-0106",
+        "development-E-0117"
+      ]
+    },
+    "method": "min/max historical Session total positions per operation; first canonical X pair",
+    "pair": {
+      "category": 1,
+      "id": "development-X-01-000",
+      "ids": [
+        "development-X-01-000-0",
+        "development-X-01-000-1"
+      ],
+      "operation": "Noul"
+    },
+    "receipt_path": "data/receiver-learning-20261106/continued/final-E.jsonl",
+    "receipt_sha256": "6fd5a5b676c4e031a25e5479d7b67de42b8089e123cb0b117ef78d263cc7a72f"
+  },
+  "validation": {
+    "broad_tests": {
+      "tests": 88,
+      "failures": 0,
+      "errors": 0,
+      "passed": true,
+      "model_runtimes_loaded": [],
+      "gpu_execution": false,
+      "elapsed_seconds": 19.029
+    },
+    "final_targeted_dispatch_tests": {
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "passed": true,
+      "model_runtimes_loaded": [],
+      "gpu_execution": false,
+      "elapsed_seconds": 0.746
+    },
+    "initial_test_error": "one AST fingerprint fixture lacked __package__; fixed fixture namespace; failed logs retained",
+    "source_audit": {
+      "passed": true,
+      "base_commit": "3907e611a751ec51cc284f1d3b35938650a01fd5",
+      "checks": {
+        "qwen_one_two/training/clean.py": "AST identical after removing counters/imports and expanding original readback expression",
+        "qwen_one_two/training/reference.py": "AST identical after removing counters/imports and expanding original readback expression",
+        "qwen_one_two/codec/recurrence.py": "AST identical after removing counters/imports and expanding original readback expression",
+        "qwen_one_two/training/behavior_qualification.py": "unchanged bytes",
+        "qwen_one_two/codec/session.py": "unchanged bytes",
+        "qwen_one_two/codec/neural.py": "unchanged bytes",
+        "qwen_one_two/g1_backbone.py": "unchanged bytes"
+      },
+      "gpu_validation": false
+    },
+    "saved_receipts": {
+      "passed": true,
+      "historical_3090_cases_checked": 310,
+      "new_gpu_cases": 0,
+      "secondary_gpu_results": 0,
+      "files": {
+        "data/receiver-learning-20261106/continued/final-E.jsonl": "6fd5a5b676c4e031a25e5479d7b67de42b8089e123cb0b117ef78d263cc7a72f",
+        "data/receiver-learning-20261106/continued/final-X.jsonl": "15bc2fb0b70cae60528ad90f3b3f7b23a9958cf3c0e9ce43c24fd7abec5d20ca"
+      },
+      "model_runtimes_loaded": []
+    },
+    "final_checks": {
+      "passed": true,
+      "source_bound_plans": 4,
+      "full_case_job_identity_preserved": true,
+      "profile_subset_bindings_identical": true,
+      "compiled_sources": 71,
+      "new_document_links": true,
+      "model_runtimes_loaded": [],
+      "gpu_execution": false
+    }
+  },
+  "overhead": {
+    "scope": "CPU_FIXTURE_OVERHEAD_ONLY; Python call instrumentation over literal bytes; no model timing estimate",
+    "samples": [
+      {
+        "pair": 0,
+        "profile_hooks": false,
+        "calls": 10000,
+        "wall_ns": 793410,
+        "cpu_ns": 791799
+      },
+      {
+        "pair": 0,
+        "profile_hooks": true,
+        "calls": 10000,
+        "wall_ns": 41284055,
+        "cpu_ns": 41123291
+      },
+      {
+        "pair": 1,
+        "profile_hooks": true,
+        "calls": 10000,
+        "wall_ns": 39933460,
+        "cpu_ns": 39835492
+      },
+      {
+        "pair": 1,
+        "profile_hooks": false,
+        "calls": 10000,
+        "wall_ns": 798212,
+        "cpu_ns": 798185
+      },
+      {
+        "pair": 2,
+        "profile_hooks": false,
+        "calls": 10000,
+        "wall_ns": 800259,
+        "cpu_ns": 797054
+      },
+      {
+        "pair": 2,
+        "profile_hooks": true,
+        "calls": 10000,
+        "wall_ns": 39699526,
+        "cpu_ns": 39623633
+      },
+      {
+        "pair": 3,
+        "profile_hooks": true,
+        "calls": 10000,
+        "wall_ns": 39919164,
+        "cpu_ns": 39848994
+      },
+      {
+        "pair": 3,
+        "profile_hooks": false,
+        "calls": 10000,
+        "wall_ns": 818257,
+        "cpu_ns": 816353
+      },
+      {
+        "pair": 4,
+        "profile_hooks": false,
+        "calls": 10000,
+        "wall_ns": 771828,
+        "cpu_ns": 771850
+      },
+      {
+        "pair": 4,
+        "profile_hooks": true,
+        "calls": 10000,
+        "wall_ns": 39258600,
+        "cpu_ns": 39197367
+      }
+    ],
+    "recorded_calls": 50000,
+    "payload_sha256": "6c3253a60fe4caf607118040d1d3d3ac34414eb612724affb420ec6e8b17b7df",
+    "model_runtimes_loaded": []
+  },
+  "measurement_limits": [
+    "selected Python calls are not kernel launch counts",
+    "explicit audit-site requested bytes are not all bus transfers",
+    "parent total stops before final report encoding; final write is separate journal event",
+    "worker total stops before final send/teardown",
+    "main phase is not guaranteed warm",
+    "CPU fixture overhead is not model-path overhead",
+    "GPU compute/idle attribution is null until actual device evidence"
+  ],
+  "not_run": [
+    "GPU numeric/gradient parity",
+    "instrumented GPU output/accounting agreement",
+    "real profiling overhead",
+    "CUDA trace support and kernel/wait attribution",
+    "3060 compatibility/memory fit",
+    "capture-region execution"
+  ],
+  "next_unfinished_slice": "CPU-03 after user explicitly lifts GPU hold; no GPU execution queued",
+  "local_artifact_sha256": {
+    "data/cpu-01-02-20261107/run_tests.py": "61b330ada837a43967750af99a9031833025d76777f4309a2e7c9c2781cf87cf",
+    "data/cpu-01-02-20261107/tests.log": "758a2504bc30530f2e1909054f7e057a14ae455b9800f0d9ee9c116bc0d247ef",
+    "data/cpu-01-02-20261107/test-result.json": "0a37e2761c9085584efd65ab360fbf6284652b87157bb5ae3512405f66d28c70",
+    "data/cpu-01-02-20261107/tests-initial-failed.log": "758a2504bc30530f2e1909054f7e057a14ae455b9800f0d9ee9c116bc0d247ef",
+    "data/cpu-01-02-20261107/test-result-initial-failed.json": "17069d3e4e0b038898634ce61f7b5f14e5b2afb2639e8ee6630e263b29613a76",
+    "data/cpu-01-02-20261107/tests-final.log": "3981a0f65a005ee8d90667bfe75af1ec86fa382ab819d3a18a35ce4b48b3bac8",
+    "data/cpu-01-02-20261107/overhead.py": "c6105b71db53ed22206d00b681396ca64991e7ca33660af42fb19703f04822c1",
+    "data/cpu-01-02-20261107/overhead.json": "09c786e6713dbf75a22e07bf5a7efc21cc9ab3dafde9b5dfd2cbdcefa13349e7",
+    "data/cpu-01-02-20261107/prepare_plans.py": "c319b22dbc6e4a9388417d4b036fc2448cab1d8d31e384b8c237d86d8f542a9d",
+    "data/cpu-01-02-20261107/preparation.log": "2c5948c56e43fceb4154598db68656d35f7bef9d9b55d95c5227a1eef402f4e1",
+    "data/cpu-01-02-20261107/source_audit.py": "9eb08469c23ed45985b93dfb7d79058edbc578b82e2de59670d4af20f444e882",
+    "data/cpu-01-02-20261107/source-audit.json": "241e77cf0c3ad4139611b9593c99ecc5eb52824af007fc92170c3d8ae3509fc1",
+    "data/cpu-01-02-20261107/preparation-result.json": "75820885b707fe2edee9f77d6ce855d2e51ab764dc445040262b86308bf685bf",
+    "data/cpu-01-02-20261107/check_saved_receipts.py": "e6778e40a6dc97d45c65966f215f509dcab57e58f0a9da2a69db647f1eb12c68",
+    "data/cpu-01-02-20261107/saved-receipts.log": "b461a2bc2ff1a72893ebd3a3639223f2a48a9b78f84681c97792baeacf3f5595",
+    "data/cpu-01-02-20261107/tests-dispatch-final.log": "9aa3f64596f19388131c5a6f325a615e7e275b912f700fe079d6a724996f1419",
+    "data/cpu-01-02-20261107/targeted_tests.py": "b1153f723dda5b0d3bc01dad0ee48c98c79022d320ba68d74b3b6bade45421d6",
+    "data/cpu-01-02-20261107/saved-receipt-result.json": "d01bd99cb744fc94bb59195ea2a972c587ed66eb59e391bf17ab1ee2f40ce79a",
+    "data/cpu-01-02-20261107/test-result-dispatch-final.json": "71c84ff449143d263001fe091765b3db3da9d729fd8f249deadf2f5b8f49538f",
+    "data/cpu-01-02-20261107/finalize_evidence.py": "f7b9e7c8adedcc5e340ab316c003d95f6d496a1403c4a0c1a846b9a2e55daa3e",
+    "data/cpu-01-02-20261107/final-checks.json": "f4e5f2cc920d30ad6304534a1e2bc50eef2a1c60aecad900e55109d243b577ff",
+    "data/cpu-01-02-20261107/full/plan.json": "215f38ccd3a777d3a5f3a30d396d1b5e556c6e342667d317c9174ecc51b88591",
+    "data/cpu-01-02-20261107/cpu-baseline/plan.json": "dd616975f845678b716c0a8fcf321ae52ea0c1278fd5eb0c7fc9471e59e0c71a",
+    "data/cpu-01-02-20261107/host-profile/plan.json": "27e4ff05048e96935aa4083c260431dc305e12124088c1315cc598710476e04b",
+    "data/cpu-01-02-20261107/cuda-trace/plan.json": "f20208d84e94f3b674aed9189640894d1822bfc5a59b990b0ab3e13bb4ff7195",
+    "data/cpu-01-02-20261107/baseline-source/qwen_one_two/training/clean.py": "ebb80cbbcc8d6bbc0fdddbf58ff77f5a0e640f4cb2b4412d381044d6c690c221",
+    "data/cpu-01-02-20261107/baseline-source/qwen_one_two/training/reference.py": "c006f8d92f753eb92250af042f3e6335980bd62861d86c5bda95dc731fe26bd9",
+    "data/cpu-01-02-20261107/baseline-source/qwen_one_two/codec/recurrence.py": "d0388df477d5b067875d4c30094e4e64fde9fed35c451b9b65aa223437da1735"
+  }
+}

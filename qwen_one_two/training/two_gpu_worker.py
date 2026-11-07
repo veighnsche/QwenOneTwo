@@ -1,45 +1,50 @@
 """Explicitly executed read-only child. Importing this file does no GPU work."""
+from contextlib import ExitStack,nullcontext
 import os
 from pathlib import Path
 import sys
-import time
 import traceback
 from ..g1_device import diagnostic_device,require_cuda
 from .inputs import check,digest
 from .manifest import BASE_SHA,DIAGNOSTIC_SHA,file_hash
+from .host_metrics import Recorder,stamp,elapsed
 from .two_gpu import ROOT,CHECKPOINT,PROFILE,RECEIVER,REFERENCE
 
 
 def worker(connection, uuid, prepared, execute_gpu=False):
     try:
         check(execute_gpu is True,'GPU execution must be explicitly requested')
+        started=stamp();basic=Recorder();options=prepared['profiling']
+        detail=Recorder() if options['host'] else None
         check('torch' not in sys.modules,'set worker CUDA visibility before model runtime import')
         os.environ['CUDA_VISIBLE_DEVICES']=uuid
         os.chdir(ROOT)
-        with diagnostic_device(uuid,execute_gpu=True):
-            import torch
-            from torch.nn.attention import sdpa_kernel,SDPBackend
-            from ..g1_proof import configure
-            from ..g1_evidence import frozen_check
-            from ..codec.qualify import load
-            from .reference import Reference
-            from .receiver_learning import groups
-            from .checkpoint import restore_model
-            from .behavior_qualification import receiver_hash,evaluate_case
-            from .release import load_release,decode
-            from .clean import CleanEncoder
-            from .two_gpu import DEV_SHA,source_hashes
-            check(prepared['sources']==source_hashes(),'worker source drift')
-            require_cuda(torch.cuda);check(torch.cuda.device_count()==1,'one visible GPU per process')
-            configure();torch.set_grad_enabled(False)
-            snapshot=Path(prepared['snapshot']);initial=ROOT/'data/g1-proof/gate-repair-v2-20261105/diagnostic.safetensors'
-            check(file_hash(snapshot/'model.safetensors-00001-of-00001.safetensors')==BASE_SHA,'base file hash')
-            check(file_hash(initial)==DIAGNOSTIC_SHA,'initial diagnostic hash')
-            checkpoint=ROOT/CHECKPOINT
-            check(file_hash(checkpoint/'manifest.json')==prepared['checkpoint_manifest_sha256'],'checkpoint metadata drift')
-            manifest=decode((checkpoint/'manifest.json').read_bytes())
-            release=load_release(ROOT/'data/training-collections-20261105/releases/development',expected_hash=DEV_SHA)
-            with sdpa_kernel(SDPBackend.MATH),torch.no_grad():
+        with diagnostic_device(uuid,execute_gpu=True),ExitStack() as stack:
+            if detail:stack.enter_context(detail.activate())
+            with basic.span('setup'):
+                import torch
+                from torch.nn.attention import sdpa_kernel,SDPBackend
+                from ..g1_proof import configure
+                from ..g1_evidence import frozen_check
+                from ..codec.qualify import load
+                from .reference import Reference
+                from .receiver_learning import groups
+                from .checkpoint import restore_model
+                from .behavior_qualification import receiver_hash,evaluate_case
+                from .release import load_release,decode
+                from .clean import CleanEncoder
+                from .two_gpu import DEV_SHA,source_hashes
+                check(prepared['sources']==source_hashes(),'worker source drift')
+                require_cuda(torch.cuda);check(torch.cuda.device_count()==1,'one visible GPU per process')
+                configure();torch.set_grad_enabled(False)
+                stack.enter_context(sdpa_kernel(SDPBackend.MATH));stack.enter_context(torch.no_grad())
+                snapshot=Path(prepared['snapshot']);initial=ROOT/'data/g1-proof/gate-repair-v2-20261105/diagnostic.safetensors'
+                check(file_hash(snapshot/'model.safetensors-00001-of-00001.safetensors')==BASE_SHA,'base file hash')
+                check(file_hash(initial)==DIAGNOSTIC_SHA,'initial diagnostic hash')
+                checkpoint=ROOT/CHECKPOINT
+                check(file_hash(checkpoint/'manifest.json')==prepared['checkpoint_manifest_sha256'],'checkpoint metadata drift')
+                manifest=decode((checkpoint/'manifest.json').read_bytes())
+                release=load_release(ROOT/'data/training-collections-20261105/releases/development',expected_hash=DEV_SHA)
                 b,c,_=load(snapshot,initial)
                 ref=Reference(b,c,pooler_kind='target-v2');ref.freeze();groups(b,c,ref)
                 restore_model(checkpoint,b,c,ref,manifest['identities'])
@@ -55,18 +60,48 @@ def worker(connection, uuid, prepared, execute_gpu=False):
                             'receiver':RECEIVER,'reference':REFERENCE,'gradients_none':True,'optimizer_updates':0,
                             'torch_version':torch.__version__,'cuda_runtime':torch.version.cuda,
                             'profile':PROFILE,'accelerator_qualification_granted':False}
-                initial_integrity=integrity()
                 encoder=CleanEncoder(b,ref,checkpoint_hash=RECEIVER,profile_hash=digest(PROFILE.encode()),cache_references=True)
-                def evaluated(key):return evaluate_case(b,c,ref,release,release.record(key),encoder)
-                connection.send({'kind':'ready',**initial_integrity,'anchors':[evaluated(k) for k in prepared['anchors']]})
-                while True:
-                    message=connection.recv()
-                    if message['kind']=='stop':break
-                    check(message['kind']=='job','unknown worker command')
-                    start=time.monotonic();cases=[evaluated(k) for k in message['job']['ids']]
-                    connection.send({'kind':'result','index':message['index'],'cases':cases,
-                                     'seconds':time.monotonic()-start})
-                connection.send({'kind':'final',**integrity()})
+                if detail:
+                    from .host_profile import model_hooks
+                    stack.enter_context(model_hooks(detail,b,c,ref,encoder))
+                initial_integrity=integrity()
+            def evaluated(key,phase,ordinal):
+                before=detail.snapshot() if detail else None;start=stamp()
+                with basic.span(phase):case=evaluate_case(b,c,ref,release,release.record(key),encoder)
+                measurement={'id':key,'phase':phase,'worker_case_ordinal':ordinal,**elapsed(start)}
+                if detail:measurement['details']=Recorder.difference(before,detail.snapshot())
+                return case,measurement
+            anchors=[evaluated(k,'startup_anchors',i) for i,k in enumerate(prepared['anchors'])]
+            with basic.span('ipc_send'):
+                connection.send({'kind':'ready',**initial_integrity,'anchors':[v[0] for v in anchors],
+                    'anchor_measurements':[v[1] for v in anchors],'setup_measurements':basic.snapshot()})
+            ordinal=0;traced=False
+            while True:
+                with basic.span('ipc_wait'):message=connection.recv()
+                if message['kind']=='stop':break
+                check(message['kind']=='job','unknown worker command')
+                start=stamp();trace_this=options['cuda_trace_first_job_per_worker'] and not traced
+                trace_context=(torch.profiler.profile(activities=[torch.profiler.ProfilerActivity.CPU,
+                                torch.profiler.ProfilerActivity.CUDA]) if trace_this else nullcontext())
+                with trace_context as trace:
+                    if trace_this:
+                        with torch.profiler.record_function('qot_diagnostic_job'):
+                            results=[evaluated(k,'main_cases',ordinal+i) for i,k in enumerate(message['job']['ids'])]
+                    else:results=[evaluated(k,'main_cases',ordinal+i) for i,k in enumerate(message['job']['ids'])]
+                trace_path=None
+                if trace_this:
+                    trace_path=str(Path(prepared['output_directory'])/('cuda-trace-'+uuid+'.json'))
+                    trace.export_chrome_trace(trace_path);traced=True
+                ordinal+=len(results)
+                job_measurement=elapsed(start)
+                with basic.span('ipc_send'):
+                    connection.send({'kind':'result','index':message['index'],'cases':[v[0] for v in results],
+                        'case_measurements':[v[1] for v in results],'job_measurements':job_measurement,
+                        'seconds':job_measurement['wall_ns']/1e9,'cuda_trace':trace_path})
+            with basic.span('final_integrity'):final=integrity()
+            connection.send({'kind':'final',**final,'host_measurements':{'process_total':elapsed(started),
+                'basic':basic.snapshot(),'details':detail.snapshot() if detail else None,
+                'main_case_count':ordinal,'cutoff':'before final send; main labels do not imply warm shapes'}})
     except BaseException:
         try:connection.send({'kind':'error','error':traceback.format_exc()})
         except (BrokenPipeError,EOFError):pass

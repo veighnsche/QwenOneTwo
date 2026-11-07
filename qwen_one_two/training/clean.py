@@ -2,6 +2,7 @@
 from dataclasses import dataclass
 import json
 from .inputs import Binding, ReferenceInput, SLOTS, check, digest, canonical, REQUEST_KINDS, Field, reference_input
+from .host_metrics import readback_bytes
 
 
 @dataclass(frozen=True)
@@ -123,13 +124,13 @@ class CleanEncoder:
                               parent={'source':binding.source,'version':binding.version,'sha256':parent.sha256,
                                       'byte_start':binding.start,'byte_end':binding.end},
                               tokens=len(ids), offsets=offsets, transformations=['fresh_tokenize', 'W+D', 'body_states'],
-                              tensor_hash=digest(body_states.contiguous().cpu().numpy().tobytes())))
+                              tensor_hash=digest(readback_bytes(body_states.contiguous()))))
         for ref in view.references:
             payload=self.reference_payload(ref)
             slots.append(payload)
             audit.append(dict(self.identity, role=ref.role, input_hash=ref.sha256, bindings=ref.bindings, dependencies=ref.dependencies,
                               transformations=['role_whitelist', 'fresh_tokenize', 'frozen_W', 'frozen_pooler'],
-                              tensor_hash=digest(payload.contiguous().cpu().numpy().tobytes())))
+                              tensor_hash=digest(readback_bytes(payload.contiguous()))))
         return {'registry': registry, 'sources': tuple(refs), 'slots': tuple(slots),
                 'input_hash': digest(model_bytes), 'audit': audit}
 

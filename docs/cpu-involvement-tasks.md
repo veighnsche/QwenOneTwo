@@ -1,6 +1,8 @@
 # Task list: substantially reduce CPU involvement
 
-Planning status: **no tasks below have started**. Both GPUs remain off, including
+Status: **CPU-01 instrumentation and CPU-02 source/specification work are
+implemented and CPU-validated**. [Results](cpu-01-02-results-2026-11-07.md).
+Actual GPU attribution and profiling overhead remain unmeasured. Both GPUs remain off, including
 status probes. No CPU model fallback, agents, new semantic data, training or
 service changes. This list does not authorize execution of GPU work or training.
 
@@ -51,25 +53,27 @@ measurements have not been exercised on hardware.
 CPU-01/02 come first. CPU-03 supplies the measurements needed to choose between
 CPU-04/05/06; it is not a requirement to implement every candidate. CPU-07 is the
 larger architectural option if remaining host checks impose a substantial floor.
-Each implementation is a separate reviewable slice and commit, with evidence.
+CPU-01/02 form the first implementation commit, with evidence; subsequent
+implementations remain separate reviewable slices.
 
 ## CPU-01 — measure CPU work rather than guessing
 
-- [ ] Extend the existing diagnostic runner; do not create another coordinator,
+- [x] Extend the existing diagnostic runner; do not create another coordinator,
   monitoring service or general benchmark framework.
-- [ ] Record CPU process time for each worker, parent CPU time, wall time,
+- [x] Record CPU process time for each worker, parent CPU time, wall time,
   completed case counts and cold/warm phases. Aggregate both workers' CPU time;
   faster completion with more total CPU work is a separate tradeoff.
-- [ ] Attribute preparation, source/reference encoding, Session execution,
+- [x] Attribute preparation, source/reference encoding, Session execution,
   evaluation/decode, audit readbacks/hashes and reporting where practical.
-- [ ] Add lightweight recurrence cache hit/miss/capture/eviction counters and
+- [x] Add lightweight recurrence cache hit/miss/capture/eviction counters and
   transfer call/byte counts. Keep counters out of model-facing packets.
-- [ ] Prepare a fixed profiling subset from existing receipts: Noul, Choice and
-  Score, short/long observed inputs and an intact intervention pair. Pin IDs,
+- [x] Prepare a fixed profiling subset from existing receipts: Noul, Choice and
+  Score, min/max observed Session position counts and an intact intervention pair. Pin IDs,
   record/view hashes, weights, sources and execution profile. Do not run all 310
   cases just to discover which region is expensive.
-- [ ] Make detailed profiling opt-in. Measure its overhead separately from
-  unprofiled A/B timings. Do not insert synchronization after every operation or
+- [x] Make detailed profiling opt-in and provide an independent baseline plan.
+  CPU fixture overhead is recorded separately; actual model profiling overhead
+  remains deferred. Do not insert synchronization after every operation or
   label CUDA-event elapsed time as pure kernel compute time.
 
 **Done when:** CPU-only tests validate aggregation, ordering and counter schema;
@@ -77,21 +81,30 @@ future GPU runs distinguish launch/dispatch work, host waits, transfers, capture
 and device computation sufficiently to select a concrete next target. Profiling
 must not alter outputs, ledger events, eligibility or Session counts.
 
+Instrumentation/schema acceptance passes on CPU. GPU attribution, model-path
+profiling overhead and instrumented GPU output/accounting agreement are **not
+run**, deferred under CPU-03. Stage labels separate setup/startup/main but do not
+declare main cases warm; graph recapture is counted. Explicit audit-site byte
+counts do not represent every scalar or bus transfer.
+
 ## CPU-02 — identify the real capture boundaries
 
-- [ ] Inventory hot `.item()`, Python scalar/bool conversions, `.cpu()` transfers,
+- [x] Inventory hot `.item()`, Python scalar/bool conversions, `.cpu()` transfers,
   per-linear finite hooks, device-policy checks and shape-dependent control.
-- [ ] For each boundary, identify its purpose: numeric rejection, actual control
+- [x] For each boundary, identify its purpose: numeric rejection, actual control
   decision, accounting/cancellation, provenance audit or redundant host work.
-- [ ] Draw the pure tensor regions between required boundaries. Start with
+- [x] Draw the pure tensor regions between required boundaries. Start with
   repeated regions; record shape, dtype, stream, adapter and weight dependencies.
-- [ ] Specify a new versioned execution profile for any capture beyond the
+- [x] Specify a new versioned execution profile for any capture beyond the
   existing recurrence exception. Leave the qualified path as the comparison
   oracle. A global `torch.compile` switch is not an implementation plan.
 
 **Done when:** the first candidate region has explicit inputs/outputs, cache-key
 and invalidation rules, error/cancellation boundaries, oracle and acceptance
 fixtures. No required finite check or semantic decision has been deferred.
+
+See the [synchronization map](cpu-sync-boundaries-v1.md). The first normalization
+tail candidate has a versioned specification only; it is disabled/unimplemented.
 
 ## CPU-03 — establish hardware baselines when the hold is lifted
 
@@ -201,12 +214,13 @@ Existing semantic failures remain failures; speed does not certify capability.
 benefit are recorded. Checkpoint-on/off comparisons do not optimize the current
 no-gradient inference path. Training itself still needs separate authorization.
 
-## First implementation slice
+## Next unfinished slice
 
-**CPU-01 + CPU-02 preparation:** add the smallest useful measurement fields and
-counter fixtures to the existing runner, and document its synchronization map.
-Keep all GPU execution disabled. Then use actual measurements, once permitted,
-to choose the next implementation. No task starts merely by appearing here.
+**CPU-03 hardware baseline**, once the user lifts the GPU hold: validate placement
+and compatibility, then use the prepared eight-case subset to compare baseline,
+host profiling and optional kernel/stream tracing on the same card. Complete
+CPU-01's hardware acceptance before selecting CPU-04/05/06. Nothing is queued;
+both GPUs remain off. No task starts merely by appearing here.
 
 References: [current handoff](next-agent-handoff.md),
 [performance audit](receiver-performance-audit-2026-11-07.md),

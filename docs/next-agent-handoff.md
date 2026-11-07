@@ -41,14 +41,53 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — two-GPU diagnostic runner built, GPUs not run
+## Current checkpoint — CPU-01/02 implemented, GPUs remain off
+
+The user authorized CPU-01/02 implementation, with both GPUs off, existing data,
+no agents or training, and direct commit/push. The existing diagnostic runner
+now records parent/worker process CPU and wall intervals, per-case phases,
+dispatch counts, optional detailed call/copy/cache attribution and an optional
+future first-job CUDA trace. [Results and limits](cpu-01-02-results-2026-11-07.md),
+[portable evidence](evidence/cpu-01-02-v1.json), and
+[synchronization map/capture specification](cpu-sync-boundaries-v1.md).
+
+**88/88 CPU tests passed in 19.029 s** with model-runtime imports blocked;
+the final targeted dispatch suite passes **11/11 in 0.746 s**. All 310 saved
+final 3090 receipts pass identity/grade/accounting rechecks. Source-expression
+and literal-byte fixtures pass. These are CPU validations, not GPU numerical,
+gradient or performance qualification. One initial fixture namespace failure
+and its fix are preserved in the evidence.
+
+Four new source-bound plans under `data/cpu-01-02-20261107/` are
+`full/plan.json` (310 cases/220 jobs), `cpu-baseline/plan.json`,
+`host-profile/plan.json`, and `cuda-trace/plan.json` (each eight cases/seven jobs).
+The subset pins six E min/max historical Session-position cases plus an intact
+X pair; shared startup adds six presentations. Nothing was executed on either
+GPU, including status probes. No new semantic data, agents, training, model
+runtime imports or service changes occurred. Older plans are source-bound
+historical evidence, not current execution plans.
+
+CPU-02 specifies a normalization-tail capture candidate with its finite guard
+left in place. It is disabled/unimplemented. No arithmetic, graph policy,
+eligibility, accounting or model-facing packets changed. Detailed attribution
+counts selected host calls and explicit audit-copy requests; it is not a full
+kernel/transfer census. GPU compute/idle remains null. The separate CPU fixture
+overhead measurement does not establish actual model profiling overhead.
+
+**Next unfinished slice: CPU-03**, once the user explicitly lifts the GPU hold:
+verify actual placement and 3060 compatibility, collect same-card baseline,
+profile overhead and kernel/wait evidence, and check instrumented outputs and
+accounting. No hardware execution is queued. Use those measurements to choose
+CPU-04/05/06; do not implement every candidate automatically. Existing Noul/Score
+semantic failures remain unresolved.
+
+## Previous checkpoint — two-GPU diagnostic runner built, GPUs not run
 
 The user subsequently requested a prioritized task list for substantially
 reducing CPU involvement. See [CPU-involvement tasks](cpu-involvement-tasks.md).
 It separates CPU-only preparation, deferred GPU measurement/optimization and
-future training execution. **The task-list turn changes documentation only**;
-no listed implementation or workload has started. The first proposed slice is
-CPU-01/02 instrumentation and a synchronization map, with GPUs still off.
+future training execution. The original task-list turn changed documentation
+only; CPU-01/02 were implemented subsequently as recorded above.
 
 **Both GPUs remain off, including status probes. No CPU model fallback.** The
 user authorized building a 3090/3060 diagnostic runner, with existing data, no

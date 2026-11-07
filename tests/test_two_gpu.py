@@ -88,6 +88,9 @@ class DispatchTests(unittest.TestCase):
         self.assertEqual([v[2] for v in sorted(results,key=lambda v:v[1])],jobs)
         self.assertEqual(len({v[1] for v in results}),12);self.assertEqual(r['jobs_completed'],12)
         self.assertEqual(set(finals),{'fixture-a','fixture-b'})
+        self.assertEqual(r['ipc_sends'],14)  # twelve jobs plus two stops
+        self.assertEqual(r['ipc_receives'],16)  # twelve results, two ready/final pairs
+        self.assertGreaterEqual(r['parent_dispatch_cpu_ns'],0)
 
     def test_failure_exit_or_foreign_result_never_returns_success(self):
         for mode in ('error','exit','wrong-index','premature-final','duplicate'):

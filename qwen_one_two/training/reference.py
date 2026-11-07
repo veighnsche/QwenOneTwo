@@ -8,6 +8,7 @@ from torch.func import functional_call
 from torch.utils.checkpoint import checkpoint
 from ..codec.neural import Codec, ReferencePooler, cuda_only
 from .inputs import check,SLOTS
+from .host_metrics import readback_bytes
 
 
 class TargetPooler(nn.Module):
@@ -268,5 +269,5 @@ def state_fingerprint(state):
     for name,tensor in sorted(state.items()):
         h.update(canonical({'name':name,'shape':list(tensor.shape),'dtype':str(tensor.dtype)}))
         # Host byte hashing is artifact bookkeeping, not CPU inference.
-        h.update(tensor.detach().contiguous().reshape(-1).view(torch.uint8).cpu().numpy().tobytes())
+        h.update(readback_bytes(tensor.detach().contiguous().reshape(-1).view(torch.uint8)))
     return h.hexdigest()

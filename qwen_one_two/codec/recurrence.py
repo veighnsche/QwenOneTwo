@@ -10,6 +10,7 @@ import torch
 from torch.autograd.function import once_differentiable
 from ..g1_backbone import GPU_UUID
 from ..g1_device import require_visibility
+from ..training.host_metrics import current
 
 
 def eager_recurrence(q,k,v,beta,g,memory):
@@ -29,6 +30,7 @@ CACHE_LIMIT=8
 
 class _Graphs:
     def __init__(self,values):
+        if (meter:=current()) is not None:meter.counts['recurrence_forward_capture_attempts']+=1
         self.inputs=tuple(x.detach().clone().requires_grad_() for x in values)
         self.dy=torch.zeros_like(values[2]);self.dn=torch.zeros_like(values[5])
         self.forward=torch.cuda.CUDAGraph()
@@ -40,9 +42,11 @@ class _Graphs:
         torch.cuda.current_stream().wait_stream(stream)
         with torch.cuda.graph(self.forward,stream=stream),torch.no_grad():
             self.outputs=eager_recurrence(*self.inputs)
+        if meter is not None:meter.counts['recurrence_forward_captures']+=1
 
     def prepare_backward(self):
         if self.backward is not None:return
+        if (meter:=current()) is not None:meter.counts['recurrence_backward_capture_attempts']+=1
         stream=torch.cuda.Stream(device=self.inputs[0].device)
         stream.wait_stream(torch.cuda.current_stream())
         # Internal capture tape belongs to this backend, even during an outer
@@ -56,6 +60,7 @@ class _Graphs:
             with torch.cuda.graph(self.backward,stream=stream),torch.enable_grad():
                 out=eager_recurrence(*self.inputs)
                 self.gradients=torch.autograd.grad(out,self.inputs,(self.dy,self.dn))
+        if meter is not None:meter.counts['recurrence_backward_captures']+=1
 
     def copy(self,values):
         with torch.no_grad():
@@ -65,9 +70,16 @@ class _Graphs:
 def _graphs(values):
     stream=torch.cuda.current_stream(values[0].device).cuda_stream
     key=(values[0].device.index,stream,tuple((tuple(x.shape),x.dtype) for x in values))
+    meter=current()
+    if meter is not None:
+        meter.counts['recurrence_lookups']+=1
+        meter.counts['recurrence_hits' if key in _CACHE else 'recurrence_misses']+=1
+        meter.counts['recurrence_key_requests:'+repr(key)]+=1
     if key not in _CACHE:
         _CACHE[key]=_Graphs(values)
-        while len(_CACHE)>CACHE_LIMIT:_CACHE.popitem(last=False)
+        while len(_CACHE)>CACHE_LIMIT:
+            _CACHE.popitem(last=False)
+            if meter is not None:meter.counts['recurrence_evictions']+=1
     _CACHE.move_to_end(key)
     return _CACHE[key]
 

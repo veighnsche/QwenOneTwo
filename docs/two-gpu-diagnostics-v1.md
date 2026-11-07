@@ -154,6 +154,22 @@ Raw evidence: `data/two-gpu-runner-20261107/`. [Portable build evidence](evidenc
 binds the final plan, source hashes, test/failure logs, source audit and saved
 receipt validation. Source snapshots for the prior guard bodies are preserved.
 
+## CPU-01/02 measurement extension
+
+The subsequent [CPU-01/02 slice](cpu-01-02-results-2026-11-07.md) adds process
+CPU/wall and dispatch measurements to this runner. `prepare --selection
+cpu-profile` selects eight pinned existing cases/seven jobs; the default remains
+full coverage. `--profile-host` adds selected Python-call, recurrence-cache and
+explicit audit-copy attribution. `--trace-cuda` implies host profiling and, only
+on a future explicit run, traces the first main job on each worker. Neither flag
+executes models during preparation. They are optional profiling tools, not a
+new qualified execution profile. Case result bodies remain unchanged.
+
+Current plans live under `data/cpu-01-02-20261107/{full,cpu-baseline,host-profile,cuda-trace}/`.
+Earlier plans/receipts above retain their original source identity and evidence;
+fresh preparation is required for this extension. Both GPUs remain off.
+See the [synchronization map](cpu-sync-boundaries-v1.md) for remaining boundaries.
+
 **Next unfinished slice:** when the GPU hold is explicitly lifted, validate the
 actual 3060 placement, model load/fit and targeted numeric/cache/gradient behavior,
 then measure two-worker throughput on existing cases. No such execution or
