@@ -41,7 +41,67 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — training-to-X/meaning audit complete; no new model work
+## Current checkpoint — direction hash fixed; numeric-access comparison complete
+
+The user authorized the direction-hash repair and one matched numeric-access
+comparison on the 3090, existing data, frozen W/reference, no agents, new data
+or training. Both slices are complete. Read the
+[protocol](numeric-access-comparison-v1.md),
+[results](numeric-access-results-2026-11-07.md) and
+[portable evidence](evidence/numeric-access-comparison-v1.json).
+
+**Hash fix (`dcc3206`):** `clean-view-v2` explicitly hashes rubric direction;
+direction-only changes differ, invalid directions fail, and request construction
+rejects a direction different from the hashed view. Old receipts stay unchanged.
+Diagnostic reuse explicitly maps old/new hashes with full row/reference/source
+bindings; no implicit fallback. Historical launchers may reject source/hash drift
+and need their recorded snapshots. Model/packet arithmetic is unchanged.
+
+**Comparison (`dbd94c0`):** all 40 X Score cases /20 pairs. Original source-state
+baseline reused; two new matched arms add source-literal UTF8 versus parsed INT64
+attributes for required/completed counts. Both add eight request positions,
+preserve all original evidence and use identical source-bound Key substrings.
+Two derived Key encodings copy existing wording; no released rows/labels/reviews
+are created. No ratios, complements or desired outputs enter the input.
+
+**No Score improvement:** baseline /literal /INT64 mean interval distance
+**0.2338902032 /0.2346320546 /0.2348618014**. All are **0/40 exact head and delivered
+Score**, with 40/40 correct status and transport. INT64 lowers error versus
+literal on 20 cases and raises it on 20. All paths retain **5/10 reversal and
+0/10 half-scale correct directions; 0/20 both-exact pairs**. No promotion.
+
+Four source-only anchors (Noul, Choice, Score higher/lower) exactly reproduce
+saved wire, h, outputs and full ledgers. All 40 matched cases have exact
+non-attribute wire rows, original source/reference tensors, source literal atoms
+and request event lengths. All matched h differ; median relative L2 **0.091647**,
+which shows sensitivity, not correct numeric use. Noul/Choice anchors are not
+fresh full-operation retention qualification.
+
+**35 CPU tests pass in 0.236 s**, compilation/whitespace pass. Independent CPU
+receipt audit passes and verifies 85 executed-source files. All 320 W tensors,
+physical tying, receiver/reference/cache identities and grad=None pass on 3090.
+No failed GPU attempts; unchanged v3 numeric/gradient matrices reused.
+
+Exactly **84 new Sessions /10,950 positions** (498 anchors, 5,226 per arm), one
+prefill/cache each, exact accounting, no invocation text. Offline: **31 source
+encodings /656 tokens +222 cache hits; two reference encodings /53 tokens +657
+cache hits**. Frozen source/ref cache reuse is process-local and reported
+separately from Sessions. Model-run measured region **78.289277 s**, peak CUDA
+**3,622,856,704 bytes**, excludes metadata prep/final serialization. Raw:
+`data/numeric-access-20261107/run/`, receipt audit/tests metadata in parent.
+Only original PID2094 /3,852 MiB remains. No 3060, agents, data/reviews, training,
+locked-set access, deployment, service or Operating Table changes.
+
+**Next unfinished slice:** test learning of quantity/operator use with matched
+training-side exposure using existing training cases, keeping development held
+out. Distinguish raw-count access from the requested operation. This frozen
+comparison shows no immediate format benefit; it cannot prove typed values
+unlearnable, particularly because receiver training did not use attributes.
+No further learning or format search is authorized or launched by this result.
+Reference fidelity, Noul transfer, Reason meaning and complete native use remain
+unqualified. Earlier next-slice entries below are historical.
+
+## Previous checkpoint — training-to-X/meaning audit complete; no new model work
 
 The user authorized a read-only audit using existing data/saved features, frozen
 W/reference, no agents, new data or training. Read the

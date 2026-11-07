@@ -13,6 +13,9 @@ describe measured mechanisms and failed transfer, not semantic qualification.
 The latest [training-to-X semantic audit](training-x-semantic-audit-2026-11-07.md)
 separates task/input shifts from surviving latent distinctions using saved
 features and predictions, with no new fitting or model execution.
+The subsequent [direction fix and numeric-access comparison](numeric-access-results-2026-11-07.md)
+fixes input identity and finds no immediate benefit from matched INT64 attributes
+with the frozen receiver.
 
 The [repository and artifact guide](repository-and-artifacts.md) explains what
 is included in GitHub, which evidence remains local and how to run from a clone.
