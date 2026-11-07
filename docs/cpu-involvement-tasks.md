@@ -1,5 +1,13 @@
 # Task list: substantially reduce CPU involvement
 
+**Current priority:** park further incremental throughput work and return to
+Noul/Choice/Score receiver learning when instructed. The
+[projection dispatch screen](projection-dispatch-results-2026-11-07.md) increases
+CPU/case 4.4944% and fails checkpoint scope admission; its prototype is removed.
+This is not a proof that larger optimizations are impossible. The accepted
+3.5924% attention-block gain remains available; this task list stays a backlog,
+not a prerequisite for further learning. No training ran in the screen.
+
 Status: **CPU-01 instrumentation and CPU-02 source/specification work are
 implemented and CPU-validated**. [Results](cpu-01-02-results-2026-11-07.md).
 The GPU hold was lifted for throughput work on 2026-11-07. CPU-03's initial

@@ -41,7 +41,54 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — larger pure replay reduces CPU/case by 3.5924%
+## Current checkpoint — projection candidate rejected; prioritize receiver learning
+
+The requested next projection-dispatch experiment is complete on the 3090 using
+existing cases, frozen W/reference, no agents, training, data/reviews, service
+changes or elapsed-time cap. Read the
+[projection screen](projection-dispatch-results-2026-11-07.md) and
+[portable evidence](evidence/projection-dispatch-screen-v1.json).
+
+Saved CPU-08 traces select 1,860 frozen projections / 5,582 matrix multiplications
+in one Noul case. A small unoptimized Script-dispatch prototype preserves separate
+ops and BF16 weight ownership, but **regresses CPU/case 4.4944%**
+(1.046848 → 1.093898 s) and throughput **−4.3178%**. Every pair worsens
+(4.6955%, 4.5689%, 4.2556% CPU). Peak allocation/reservation are unchanged.
+Both same-case traces have 41,722 direct launches, 180 graph launches and 792
+stream synchronizations. All six timed packs finish before any profiler starts.
+
+All **147 forward presentations** match prior CPU-04 receipts exactly and pass
+independent admission, including cold candidate reference payloads. All 320 W
+tensors/tying, receiver/reference identities, frozen/grad=None and zero-update
+checks pass. This does not qualify its gradients or learned behavior. The four
+GPU operator test methods have one **checkpoint scope error**, preserved in two
+runs: ordinary forward/gradient comparisons are exact, but checkpoint
+recomputation observes JIT optimizations enabled even after extending the
+disabled outer scope through backward. Its internal propagation cause is not
+established beyond this guard observation.
+No guard/tolerance was relaxed. Full 36-trace qualification is **NOT RUN** for
+this rejected candidate. Do not claim this profile passed numeric qualification.
+
+**All active prototype code/selectors/tests were removed.** Backend, scripts and
+tests are byte-equivalent to starting commit `22e6646`; previous qualified paths
+and defaults remain unchanged. Full prototype sources, patch, failures, timings,
+all traces, source hashes, commands and restoration audit are retained in
+`data/cpu-09-20261107/`. The installed deprecated Script API would add maintenance
+without a measured gain. This rejects one approach, not all possible projection
+optimization. QwenOneTwo PID 2094 and The Operating Table remain unchanged.
+
+**Next priority: return to Noul/Choice/Score receiver learning**, rather than
+another incremental throughput round. Existing checkpoint-0188 E receipts
+(historical, no new evaluation) pass **Noul 13/40, Choice 11/50, Score 10/40**;
+all 130 have valid transport. Status correctness is 13/40, 13/50, 15/40. Use these
+as the recorded component baseline, not learned-invocation/native-answer proof.
+Reuse the existing training release, keep development E/X out of updates, preserve
+exact values/bindings/accounting, and evaluate semantic/behavioral changes in all
+three operations. Current request forbids training; no updates were launched.
+The next learning task needs its own instruction to execute. Keep existing
+accepted performance options, without adding another prerequisite tuning project.
+
+## Previous checkpoint — larger pure replay reduces CPU/case by 3.5924%
 
 Implemented and qualified explicit `v3/linear-attention-block-v1` on the 3090.
 No agents, training, new data/reviews, service changes or arbitrary time cutoff.

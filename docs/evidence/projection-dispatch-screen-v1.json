@@ -1,0 +1,269 @@
+{
+  "agents_used": false,
+  "comparison": {
+    "cpu_per_case_increase_percent": 4.494356029123714,
+    "peak_allocation_delta_bytes": 0,
+    "throughput_change_percent": -4.317819092567598,
+    "worker_case_wall_change_percent": 4.5175179361824025
+  },
+  "decision": "Remove active prototype. Park incremental throughput work and prioritize Noul/Choice/Score receiver learning next; current turn authorizes no training.",
+  "existing_learning_results": {
+    "new_evaluation": false,
+    "sha256": "6fd5a5b676c4e031a25e5479d7b67de42b8089e123cb0b117ef78d263cc7a72f",
+    "source": "data/receiver-learning-20261106/continued/final-E.jsonl",
+    "summary": {
+      "Choice": {
+        "cases": 50,
+        "passed": 11,
+        "status_correct": 13,
+        "transport_valid": 50,
+        "value_correct": 11
+      },
+      "Noul": {
+        "cases": 40,
+        "passed": 13,
+        "status_correct": 13,
+        "transport_valid": 40,
+        "value_correct": 13
+      },
+      "Score": {
+        "cases": 40,
+        "passed": 10,
+        "status_correct": 15,
+        "transport_valid": 40,
+        "value_correct": 10
+      }
+    }
+  },
+  "frozen_final": {
+    "base_check": {
+      "base_tied_storage": true,
+      "mismatches": [],
+      "parameters_checked": 320,
+      "pass": true
+    },
+    "gradients_none": true,
+    "optimizer_updates": 0,
+    "receiver": "94218aae6ec62a7745c349af8e9975fd4987520cf9f1345f38e44586e5e7742c",
+    "reference": "5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f"
+  },
+  "gpu_uuid": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+  "medians": {
+    "eager": {
+      "parent_cases_per_second": 0.9405980194050897,
+      "peak_allocated_bytes": 2063090688,
+      "peak_reserved_bytes": 2334130176,
+      "worker_case_cpu_seconds": 8.37032074,
+      "worker_case_wall_seconds": 8.418715108,
+      "worker_plus_parent_cpu_seconds_per_case": 1.046848421
+    },
+    "script-v1": {
+      "parent_cases_per_second": 0.8999846985389041,
+      "peak_allocated_bytes": 2063090688,
+      "peak_reserved_bytes": 2334130176,
+      "worker_case_cpu_seconds": 8.74670443,
+      "worker_case_wall_seconds": 8.799032073,
+      "worker_plus_parent_cpu_seconds_per_case": 1.093897516125
+    }
+  },
+  "numeric_checks": {
+    "checkpoint_check_passed": false,
+    "failure": "During checkpoint recomputation the unchanged guard observes JIT optimizations enabled despite the disabled outer scope. Precise internal propagation cause not further investigated.",
+    "frozen_bf16_tape_ownership_check_passed": true,
+    "full_model_36_trace_qualification_run": false,
+    "operator_runs": [
+      {
+        "errors": 1,
+        "log": "operator-initial.log",
+        "sha256": "3929bce3453f1390592fcf09fe60bc8ce2cfa11d1990800c394e446011c1cdad",
+        "tests": 4
+      },
+      {
+        "errors": 1,
+        "log": "operator-tests.log",
+        "sha256": "245c1a99fd2f67b5ad0c2a41b4eb6244623919cec58c260ebb601fd996d590db",
+        "tests": 4
+      }
+    ],
+    "ordinary_operator_forward_and_gradients_before_checkpoint": {
+      "completed_shape_seed_rank_comparisons": 18,
+      "exact": true
+    },
+    "original_tolerances_unchanged": true,
+    "reason_not_run": "Candidate rejected: slower complete cases and checkpoint guard failure. No numeric tolerance or guard was relaxed.",
+    "separate_ops_no_tensor_constants_ir_check_passed": true
+  },
+  "optimizer_updates": 0,
+  "pairs": [
+    {
+      "cpu_increase_percent": 4.6955345099575,
+      "pair": 0
+    },
+    {
+      "cpu_increase_percent": 4.568917795518357,
+      "pair": 1
+    },
+    {
+      "cpu_increase_percent": 4.255630723596315,
+      "pair": 2
+    }
+  ],
+  "plan_sha256": "ed7a5c7504213027b2e818c87fb8823d0a22ea5fbbefb0212591c0cc0f01998b",
+  "production_restored": {
+    "all_tracked_backend_scripts_tests_equal_starting_commit": true,
+    "default_changed": false,
+    "prior_numeric_qualification_reused": true,
+    "prototype_module_and_test_absent": true
+  },
+  "protocol": "projection-script-dispatch-screen-v1",
+  "prototype_sources": "data/cpu-09-20261107/source-v0",
+  "raw_root": "data/cpu-09-20261107",
+  "receipts": {
+    "all_timed_packs_before_any_profiler": true,
+    "baseline_sha256": "cbf352f903d86b21883019cca58bdecb071916420209c6a1fe11a7d9a53e3082",
+    "distinct_existing_cases": 11,
+    "exact_prior_receipt_matches": 147,
+    "jobs": 126,
+    "presentations": 147
+  },
+  "report_sha256": "ebcbff1692b77135de2759c9c0c97791a8d33dedf2a4e999972f12cb83f15e9b",
+  "scope": "one rejected unoptimized Script dispatch approach; not proof that all projection optimizations have reached a ceiling",
+  "starting_commit": "22e6646abd68cd52428d2638144bbffee6ff6862",
+  "status": "REJECTED_PERFORMANCE_AND_CHECKPOINT_SCOPE",
+  "target_trace": {
+    "FrozenFeedbackLinear": {
+      "calls": 1860,
+      "inclusive_us": 242954.88100000002,
+      "self_us": 37660.04300000009
+    },
+    "aten::mm": {
+      "calls": 5582,
+      "inclusive_us": 233499.7510000011,
+      "self_us": 233499.7510000011
+    },
+    "path": "data/cpu-08-20261107/benchmark-clean-timing/cuda-trace-attention-graph-v1.json",
+    "sha256": "b4332673a19c87f1d928c228b46e51633f9979fa4ebba2ac1a2d6f83a26155e6",
+    "timing_scope": "saved CPU-08 larger-block first-case trace; profiler/counter overhead included; CPU op intervals not GPU compute"
+  },
+  "traces": {
+    "eager": {
+      "api_counts": {
+        "cudaDeviceSynchronize": 3,
+        "cudaGraphLaunch": 180,
+        "cudaLaunchKernel": 39735,
+        "cudaLaunchKernelExC": 1987,
+        "cudaMemcpyAsync": 3218,
+        "cudaMemsetAsync": 672,
+        "cudaOccupancyMaxActiveBlocksPerMultiprocessor": 2025,
+        "cudaStreamIsCapturing": 219,
+        "cudaStreamSynchronize": 792
+      },
+      "bytes": 157449970,
+      "direct_kernel_launch_calls": 41722,
+      "graph_launch_calls": 180,
+      "kernel_events": 72700,
+      "sha256": "75e26708d3deef605332ebf90d11a5c98e80e3c58f3b15447d03fdee7f7836ea",
+      "stream_synchronize_calls": 792
+    },
+    "script-v1": {
+      "api_counts": {
+        "cudaDeviceSynchronize": 3,
+        "cudaGraphLaunch": 180,
+        "cudaLaunchKernel": 39735,
+        "cudaLaunchKernelExC": 1987,
+        "cudaMemcpyAsync": 3218,
+        "cudaMemsetAsync": 672,
+        "cudaOccupancyMaxActiveBlocksPerMultiprocessor": 2025,
+        "cudaStreamIsCapturing": 219,
+        "cudaStreamSynchronize": 792
+      },
+      "bytes": 159274637,
+      "direct_kernel_launch_calls": 41722,
+      "graph_launch_calls": 180,
+      "kernel_events": 72502,
+      "sha256": "dfe62cbf625c8ee1551d0d3f147eba23a0b558cfa0aa27180da93509f65335da",
+      "stream_synchronize_calls": 792
+    }
+  },
+  "training_performed": false,
+  "trials": {
+    "0": {
+      "backend": "eager",
+      "parent_cases_per_second": 0.9437957439459435,
+      "parent_interval": {
+        "cpu_ns": 4466628,
+        "wall_ns": 8476410337
+      },
+      "peak_allocated_bytes": 2063090688,
+      "peak_reserved_bytes": 2334130176,
+      "worker_case_cpu_seconds": 8.37032074,
+      "worker_case_wall_seconds": 8.418715108,
+      "worker_plus_parent_cpu_seconds_per_case": 1.046848421
+    },
+    "1": {
+      "backend": "script-v1",
+      "parent_cases_per_second": 0.8999846985389041,
+      "parent_interval": {
+        "cpu_ns": 5114535,
+        "wall_ns": 8889040017
+      },
+      "peak_allocated_bytes": 2063090688,
+      "peak_reserved_bytes": 2334130176,
+      "worker_case_cpu_seconds": 8.762913864,
+      "worker_case_wall_seconds": 8.816061081,
+      "worker_plus_parent_cpu_seconds_per_case": 1.096003549875
+    },
+    "2": {
+      "backend": "script-v1",
+      "parent_cases_per_second": 0.9012645293709572,
+      "parent_interval": {
+        "cpu_ns": 4475699,
+        "wall_ns": 8876417233
+      },
+      "peak_allocated_bytes": 2063090688,
+      "peak_reserved_bytes": 2334130176,
+      "worker_case_cpu_seconds": 8.74670443,
+      "worker_case_wall_seconds": 8.799032073,
+      "worker_plus_parent_cpu_seconds_per_case": 1.093897516125
+    },
+    "3": {
+      "backend": "eager",
+      "parent_cases_per_second": 0.9405980194050897,
+      "parent_interval": {
+        "cpu_ns": 4377645,
+        "wall_ns": 8505227350
+      },
+      "peak_allocated_bytes": 2063090688,
+      "peak_reserved_bytes": 2334130176,
+      "worker_case_cpu_seconds": 8.364438169,
+      "worker_case_wall_seconds": 8.412150505,
+      "worker_plus_parent_cpu_seconds_per_case": 1.04610197675
+    },
+    "4": {
+      "backend": "eager",
+      "parent_cases_per_second": 0.9374764497859376,
+      "parent_interval": {
+        "cpu_ns": 4490505,
+        "wall_ns": 8533547698
+      },
+      "peak_allocated_bytes": 2063090688,
+      "peak_reserved_bytes": 2334130176,
+      "worker_case_cpu_seconds": 8.37934071,
+      "worker_case_wall_seconds": 8.429702595,
+      "worker_plus_parent_cpu_seconds_per_case": 1.047978901875
+    },
+    "5": {
+      "backend": "script-v1",
+      "parent_cases_per_second": 0.8987553530545703,
+      "parent_interval": {
+        "cpu_ns": 4805445,
+        "wall_ns": 8901198722
+      },
+      "peak_allocated_bytes": 2063090688,
+      "peak_reserved_bytes": 2334130176,
+      "worker_case_cpu_seconds": 8.735810667,
+      "worker_case_wall_seconds": 8.786556003,
+      "worker_plus_parent_cpu_seconds_per_case": 1.092577014
+    }
+  }
+}
