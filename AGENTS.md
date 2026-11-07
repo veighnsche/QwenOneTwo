@@ -11,7 +11,9 @@ The experimental two-GPU diagnostic runner may also target RTX 3060 UUID
 GPU-744c1cf5-9578-6aad-95c1-7a6f1c9d11db in its explicit read-only worker scope.
 The user lifted the noise-related GPU hold on 2026-11-07 for throughput work.
 Read-only throughput diagnostics and device probes may run on these cards;
-training remains unauthorized. Ordinary model/training
+the user subsequently authorized the bounded existing-data receiver training
+probe (32 training records, eight repeats), with W/reference frozen and no agents
+or new data. General/full training remains unauthorized. Ordinary model/training
 paths stay 3090-only; never use the 3060 as fallback. Diagnostic results cannot
 grant accelerator or learned-flow qualification. Leave existing services alone.
 

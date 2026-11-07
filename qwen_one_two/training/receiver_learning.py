@@ -92,6 +92,15 @@ class ReceiverProducer:
                 candidates=index['candidates'],rubric=index['rubric'],direction=index['direction'],session=s)
             _,evaluated,_=s.evaluate(packet)
             check(isinstance(packet,Packet),'latent receiver request')
+            # Observe actual heads before reading outcome labels. This is report
+            # telemetry only; no predicted value is substituted into the packet.
+            head={'status':next(v for k,v in STATUS_NAMES.items() if int(k)==int(evaluated['status_logits'].argmax())+1)}
+            if row['operation']=='Choice':
+                head['selected']=index['identities'][int(evaluated['pointer_logits'].argmax())]
+            else:
+                head['value']=float(evaluated['value'].detach())
+                head['raw']=float(evaluated['raw'].detach())
+            report['head']=head
             # Outcome labels are accessed only after the actual request forward.
             gold=row['supervision']['result'];payload=gold['payload'] or {}
             status=next(k for k,v in STATUS_NAMES.items() if v==gold['status'])
