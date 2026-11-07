@@ -1,4 +1,4 @@
-# Next-agent handoff — 2026-11-07
+# Next-agent handoff — 2026-11-08
 
 Read this first for current status, then the
 [implementation specification](architecture-and-training-plan.md) and its linked
@@ -41,7 +41,85 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — direction hash fixed; numeric-access comparison complete
+## Current checkpoint — matched quantity/operator receiver comparison complete
+
+The user authorized the matched receiver-learning comparison on existing data,
+3090 only, W/reference frozen, development held out, no agents or new data.
+Both fits and all measurements are complete, with no promotion. Implementation
+commit `57a3cf8`; read the [fixed protocol](quantity-receiver-learning-v1.md),
+[results](quantity-receiver-learning-results-2026-11-08.md) and
+[portable evidence](evidence/quantity-receiver-learning-v1.json).
+
+**Matched scope:** literal UTF8 versus INT64, all 254 assessed Score training rows
+/96 families, four passes /1,016 presentations /127 updates per arm, A4 positions
+189..315. Identical initial receiver/moments/RNG, same source-bound count fields,
+eight extra request positions, zero failed training exposures. Existing Score
+loss plus auxiliary count regression through D/packet representations; count
+predictions never enter Score/runtime. Status/Reason/Noul/Choice losses absent;
+their private heads receive no updates, but shared representations change.
+
+**Training values learn:** Score mean interval distance literal
+**0.4048570293→0.0405827365**, INT64 **0.4036024587→0.0403374007**. Exact head hits
+38/254 and 57/254 are all endpoints; interior errors improve but remain 0/84
+exact. Required/completed count MAE **5.1608/8.0563** versus **13.1336/6.4100**;
+both counts nearest-integer correct only **2/254 versus 0/254**. Correct Assessed
+status collapses **253→89** and **254→75**, so head learning is not usable behavior.
+
+**Held-out transfer fails:** only after both fits, each fixed checkpoint runs all
+130 E source-only +180 applicable X cases. X Score mean error **0.3374772806 /
+0.3383736139**, worse than frozen literal/INT64 **0.2346320546 /0.2348618014**.
+Both remain **0/40 exact head/delivered Score, 0/20 both-correct pairs**; correct
+Score status **7/40 /12/40**, down from 40/40. Reversal directions **5/10 both**;
+half-scale **5/10 /1/10**. Literal ordinary-completion error improves modestly
+**0.2651124950→0.2383401253**; INT64 worsens **0.2677185292→0.3289889189**.
+Required/completed X count MAE **98.5304/29.3868 /105.5418/48.3076**; both integers
+recovered **0/40** in both arms. No count clipping was added.
+
+Training has denominators 20/100, counts<=100, ordinary completion only. X always
+requires 200 and adds new units/reference meanings, reversal and half-scale.
+No assessed receiver training examples for those operators exist. INT64's 128
+bit is unseen during training. These are concurrent transfer shifts, not proof
+of a unique cause or unlearnability; no missing examples/annotations were invented.
+
+**Retention is mixed:** Choice X stays **40/40** in both arms; assessed Choice E
+changes **7/10 parent→10/10 literal /4/10 INT64**. Assessed Noul E+X was already
+**0/80** and remains zero; correct abstentions increase. All-operation behavioral
+passes **83/310 parent→99/310 /117/310** must not be mistaken for assessed Noul/
+Score competence. All **620/620** new development sessions pass actual latent
+transport/binding/cache/accounting, with no runtime failures. Historical controls
+were reused with explicit row/view bindings, not rerun. Locked/reader cases remain
+excluded; no development fitting, stopping, selection or promotion.
+
+**Validation:** 38 CPU tests pass in 15.203 s; compilation/whitespace pass. Receipt
+audit PASS over 88 archived source files, all exposure/atom/optimizer/checkpoint
+receipts and recomputed summaries. Initial non-attribute wire/source/reference/
+ledgers match; each arm's first eight training/no-grad forwards match exactly.
+First-update model/moments/all RNG roundtrips exact. Same-graph separate/combined
+VJP max relative RMS **3.7994001e-6 /2.5423570e-6**, minimum cosine
+**0.9999999999928306 /0.9999999999968955**; nonzero quantity-only D/atom/readout
+gradients. All 320 W tensors, physical tying, reference/R/nonreceiver owners and
+grad=None pass. Unchanged v3 qualification reused; no expensive matrix rerun.
+
+Exactly **3,668 Sessions /395,482 positions**: 2,032 training, 1,016 training
+measurements, 620 development. One prefill/lineage each; max 209 positions.
+Offline **11,140 source encodings /275,608 tokens**, **954 frozen reference
+encodings /25,982 cache hits**. First/fourth exposures of all 254 records per arm
+have identical reference payloads and changed D-dependent source states.
+Measured run region **7,666.574491 s**, peak CUDA **3,622,856,704 bytes**, exit 0.
+Raw: `data/quantity-learning-20261107/run/`; audit/validation/exit/GPU evidence
+in parent. Only original PID2094 /3,852 MiB remains. No failed GPU model runs,
+3060, agents, new records/reviews, native/general training, deployment, live
+service or Operating Table changes.
+
+**Next unfinished slice:** preserve/recover status and assessed behavior while
+retaining value learning, then qualify count-range/operator transfer. The tested
+objective omitted status/retention losses; its failure does not establish failure
+of a joint or isolated repair. Missing operator/range training coverage is a
+separate limitation. No additional fit or data generation is authorized by this
+result. Reference fidelity, Reason meaning, learned invocation and complete native
+use remain unqualified. Earlier next-slice entries below are historical.
+
+## Previous checkpoint — direction hash fixed; numeric-access comparison complete
 
 The user authorized the direction-hash repair and one matched numeric-access
 comparison on the 3090, existing data, frozen W/reference, no agents, new data
