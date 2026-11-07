@@ -41,7 +41,88 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — matched value-only comparison complete; no value transfer gain
+## Current checkpoint — direct-readout diagnostic complete; weak development transfer
+
+The user authorized a simple direct-readout diagnostic on the 3090 using saved
+features, frozen W/reference, separate training/development, no agents or new
+data. Read the [protocol](direct-latent-readout-v1.md),
+[actual results](direct-latent-readout-results-2026-11-07.md) and
+[portable evidence](evidence/direct-latent-readout-v1.json).
+**Completed; training signal is decodable, but held-out transfer remains weak.**
+No production installation, additional fit or promotion.
+
+Two standalone affine ridge probes directly read all 1,024 h coordinates with
+an intercept, bypassing fixed heads/prototypes and the residual bridge. Training
+uses **256 assessed Noul /254 assessed Score**, **96 families per operation**, from
+the saved 1,003-feature corpus. Three-fold family-grouped training-only validation
+chooses lambda among 1e-9/1e-6/0.001/1; both choose **0.001**. Completed **24 CV
+solves +two final fits**, entirely CUDA FP64, with means/scales fitted inside each
+training subset. Both probes/export are finalized before opening development
+tensors. No development-based calibration/selection, iterations or time cutoff.
+
+Development coverage is the saved **X** h: **70 assessed Noul /40 assessed Score**,
+20 families per operation. E h was not saved and was not regenerated; do not
+compare these directly with the earlier 80/50 E+X denominators. No train/development
+family or permitted-input overlap, all selected training inputs unique. No
+non-assessed value labels invented, locked data unopened. Exact scalar ABI,
+Noul threshold and Score intervals retained for diagnostic metrics.
+
+**Direct development:** Noul **48/70**, Brier **0.226305**, AUC **0.558**. This
+imbalanced subset has 50 true/20 false labels: **43/50 true, 5/20 false** correct,
+balanced accuracy **55.5%**, and 48 is below the **50-case majority-label reference**.
+Do not sell the headline gain from prior 20/70 as strong transfer. Prior X
+parent/joint/value-only AUCs were 0.600/0.621/0.618. Score **0/40 exact**, mean
+distance **0.336694**, worse than parent **0.233890**, joint **0.250675**, value-only
+**0.254892**. Error worsens in both directions: parent→direct higher
+**0.247125 →0.289264 /30**, lower **0.194187 →0.478984 /10**.
+
+Of 90 intervention pairs, 50 have two assessed scalar targets. Direct gets both
+correct in **12/50**: four of 20 changed-truth Noul pairs and eight of ten
+unchanged-target Noul pairs; Score zero of 20. Direction on changed targets
+**20/40**, parent22/joint21/value-only18. These are scalar checks, **not** full
+behavior/transport successes. Choice/status/Reason/native delivery are not tested
+or modified; prior receipts remain historical, not fresh qualification.
+
+Training fit /grouped OOF: Noul **197/256 /177/256**, balanced accuracy
+**75.14% /66.21%**, Brier **0.154134 /0.166796**, AUC **0.866071 /0.785038**.
+Score mean distance **0.263342 /0.310479**, exact hits **1/254 /8/254**.
+Weak regularization gives very poor OOF raw MSE (Noul12.224/3.313,
+Score3.103/2.036 at 1e-9/1e-6), versus selected0.167704/0.143547. This is evidence
+for regularization, not a reason to select using development. Training or OOF
+success does not establish reference fidelity or complete learned use.
+
+**26 CPU tests pass in 14.118 s**, compilation/whitespace checks pass. CUDA analytic
+affine/primal-versus-dual checks pass (max absolute difference **1.387778781e-17**);
+constant features rejected. Maximum equation residual across all fitted systems
+**1.547262027e-11**, versus declared1e-8. Exact export/reload predictions on
+**510 training +110 development** records, unchanged feature tensor/file hashes
+and parent manifest. Independent CPU receipt audit recomputes CV selection,
+family splits, all scalar/pair/direction metrics, provenance and accounting.
+Production numeric qualification reused; new diagnostic arithmetic is explicitly
+FP64 with FP32 scalar reporting, not a change to v3 or a new backpropagation path.
+
+Raw: `data/direct-readout-20261107/run/`, logs/audit/test receipts in parent;
+`prepared/` is model-free preflight. Export `readouts.safetensors` SHA256
+`a82f043469c837417aaab37ce78ef32d273d5ea3b09b6430d53f5094b098b969`, with
+`export.json` marking production-incompatible/no promotion. No failed GPU attempt.
+GPU fit/check/evaluation wall **2.247410 s**, peak CUDA **46,622,720 bytes**;
+excludes release preparation/imports, not a matched transformer benchmark.
+**Zero new Sessions, prefills, causal positions, source/reference encodings**.
+W/reference/codec model instances never loaded. Only original PID2094 (3852MiB)
+remains after exit. No 3060, agents, new annotations/reviews, native training,
+deployment or Operating Table/service changes.
+
+**Next unfinished slice:** audit the existing training-to-X task/input mismatch
+and the semantic/numeric information preserved by the latent path before another
+receiver fit. Reuse the caches and these diagnostics. The affine result neither
+proves h is uninformative nor rules out nonlinear decoding; it does not isolate
+architecture, optimization and distribution differences. Do not automatically
+scale training, repeat a loss sweep, promote probes or generate examples.
+Reference meaning, status/value integration, Reason meaning, learned invocation
+and full native use remain unqualified. Further model experiments need new scope.
+Earlier “next slice” entries below are historical.
+
+## Previous checkpoint — matched value-only comparison complete; no value transfer gain
 
 The user authorized one matched value-only comparison on the 3090 using the saved
 1,003 features, exact initialization/exposure, frozen W/reference and unchanged
