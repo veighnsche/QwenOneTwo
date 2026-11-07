@@ -13,7 +13,9 @@ The user lifted the noise-related GPU hold on 2026-11-07 for throughput work.
 Read-only throughput diagnostics and device probes may run on these cards;
 the user subsequently authorized the bounded existing-data receiver training
 probe (32 training records, eight repeats) and its controlled loss-balance
-comparison, with W/reference frozen and no agents or new data.
+comparison, and subsequently the frozen-representation Noul/Score head-only
+experiment with Choice retention checks. Keep W/reference frozen, no agents
+or new data.
 General/full training remains unauthorized. Ordinary model/training
 paths stay 3090-only; never use the 3060 as fallback. Diagnostic results cannot
 grant accelerator or learned-flow qualification. Leave existing services alone.
