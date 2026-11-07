@@ -110,6 +110,7 @@ class CleanPackets:
     def request(self,port,question,target,*,evidence=(),candidates=(),rubric=(),direction=1,
                 target_attributes=(),candidate_attributes=(),session=None):
         check(self.runtime is None, 'one immutable clean request per construction')
+        self.view.validate_request_direction(bool(rubric),direction)
         check(self.view.operation in (None,{Port.NOUL:'Noul',Port.CHOICE:'Choice',Port.SCORE:'Score'}[port]), 'clean operation mismatch')
         check(all(isinstance(span,Span) and span.source in self.sources for span in evidence), 'clean evidence scope')
         # No incoming state, draft, catalogue or registry from the full context.

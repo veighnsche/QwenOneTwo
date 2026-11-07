@@ -12,9 +12,19 @@ class CleanView:
     permitted_nodes: frozenset[str]
     purpose: str = 'receiver'
     operation: str | None = None
+    rubric_direction: int | None = None
+
+    def validate_request_direction(self, has_rubric, direction):
+        """The renderer must use the metadata committed by this input view."""
+        check((type(self.rubric_direction) is int and self.rubric_direction in (1, 2)
+               and type(direction) is int and direction == self.rubric_direction) if has_rubric else self.rubric_direction is None,
+              'request rubric direction differs from hashed view')
 
     def materialize(self, provenance):
         check(self.purpose in {'receiver', 'reader', 'writer'}, 'clean view purpose')
+        check(self.rubric_direction is None or (self.operation == 'Score'
+              and type(self.rubric_direction) is int and self.rubric_direction in (1, 2)),
+              'clean rubric direction metadata')
         allowed = REQUEST_KINDS | ({'reason', 'approved_return'} if self.purpose == 'reader' else set())
         for ref in self.references:
             data = json.loads(ref.content)
@@ -37,7 +47,8 @@ class CleanView:
             excerpts.append(binding.extract(provenance.sources))
         # Global source IDs, parent offsets, hidden scenario IDs and labels are
         # deliberately absent. Local references are derived in this order.
-        model_bytes = canonical({'references': [r.content.decode() for r in self.references],
+        model_bytes = canonical({'schema': 'clean-view-v2', 'rubric_direction': self.rubric_direction,
+                                 'references': [r.content.decode() for r in self.references],
                                  'sources': [x.decode() for x in excerpts], 'purpose': self.purpose, 'operation': self.operation})
         return tuple(excerpts), model_bytes
 

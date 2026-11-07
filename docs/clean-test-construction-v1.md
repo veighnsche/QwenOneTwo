@@ -149,3 +149,17 @@ This establishes traceable construction, not absence of learned prior knowledge
 or logical inference from legitimate evidence. Fresh synthetic cases and existing
 family split rules help distinguish memorization. No passing tensor-provenance,
 semantic, gradient or GPU test is claimed by recording this design.
+
+## Implemented input identity revision — 2026-11-07
+
+`CleanView.materialize` now emits `schema=clean-view-v2` and an explicit
+`rubric_direction` (1 higher, 2 lower, null without a rubric). Component builders
+reject unspecified/unknown rubric directions, and `CleanPackets.request` rejects
+a renderer direction different from the hashed view. Direction-only changes
+therefore change the input hash even when reference/source bytes are identical.
+Model-free tests cover both directions, invalid types and request mismatches.
+
+Old receipts retain their original hashes and source snapshots. They are not
+silently accepted as v2: diagnostic reuse requires an explicit old/new mapping,
+complete row/reference/source binding and unchanged-model replay evidence.
+This changes audit identity and validation, not tensor arithmetic or packet ABI.

@@ -62,6 +62,7 @@ def component_view(release,row,*,intervention=False):
     rubric=semantics.get('rubric')
     indices['rubric']=()
     if rubric:
+        check(row['operation']=='Score' and rubric.get('direction') in {'higher','lower'}, 'explicit Score rubric direction')
         indices['rubric']=tuple(role(name,rubric[name]) for name in ('dimension','conditions','zero','one','midpoint') if name in rubric)
     indices['direction']=2 if rubric and rubric.get('direction')=='lower' else 1
     indices['reason']=None
@@ -83,7 +84,8 @@ def component_view(release,row,*,intervention=False):
             node='fact-'+str(len(bindings));bindings.append(binding)
             nodes[node]=Node('source_fact',digest(body),binding=binding)
     p=Provenance(nodes,sources)
-    view=CleanView(tuple(refs),tuple(bindings),frozenset(nodes),purpose='reader' if reading else 'receiver',operation=row['operation'])
+    view=CleanView(tuple(refs),tuple(bindings),frozenset(nodes),purpose='reader' if reading else 'receiver',operation=row['operation'],
+                   rubric_direction=indices['direction'] if rubric else None)
     view.materialize(p)
     return view,p,indices
 

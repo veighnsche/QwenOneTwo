@@ -6,6 +6,24 @@ from qwen_one_two.training.clean import CleanView
 
 
 class InputTests(unittest.TestCase):
+    def test_direction_is_hashed_and_bound_to_request(self):
+        from dataclasses import replace
+        p=Provenance({}, {})
+        higher=CleanView((),(),frozenset(),operation='Score',rubric_direction=1)
+        lower=replace(higher,rubric_direction=2)
+        self.assertNotEqual(higher.materialize(p)[1],lower.materialize(p)[1])
+        higher.validate_request_direction(True,1)
+        lower.validate_request_direction(True,2)
+        for has_rubric,direction in ((True,2),(True,True),(False,1)):
+            with self.assertRaisesRegex(ValueError,'hashed view'):
+                higher.validate_request_direction(has_rubric,direction)
+        with self.assertRaisesRegex(ValueError,'hashed view'):
+            replace(higher,rubric_direction=None).validate_request_direction(True,1)
+        for direction in (0,3,True,'higher'):
+            with self.assertRaisesRegex(ValueError,'direction metadata'):
+                replace(higher,rubric_direction=direction).materialize(p)
+        self.assertIn(b'clean-view-v2',higher.materialize(p)[1])
+
     def setUp(self):
         body = 'Orientation complete. Badge expired. α'.encode()
         self.source = Source('original', 1, body, digest(body))
