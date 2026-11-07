@@ -57,8 +57,8 @@ class Targets:
 def request_targets(reference,release,row,source,*,call_index=0,source_ref=None,source_record=None):
     """Reviewed role meanings only enter the independent offline encoder."""
     check(canonical(row)==canonical(release.record(row['id'])),'target record/release drift')
-    check(release.manifest['purpose']!='locked','locked supervision prohibited')
-    check(any(e['id']==row['id'] and e['selected'] for e in release.manifest['records']),'unselected supervision')
+    check(release.purpose!='locked','locked supervision prohibited')
+    check(row['id'] in release.selected_ids,'unselected supervision')
     check(row['training_category'] in {'writer','interleaved'},'native request targets')
     if row['training_category']=='interleaved':
         call=row['trajectory']['calls'][call_index]

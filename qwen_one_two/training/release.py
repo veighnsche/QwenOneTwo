@@ -154,17 +154,23 @@ def _batch_audits(manifest, records, selected):
 
 @dataclass(frozen=True, init=False)
 class ReviewedRelease:
-    """Immutable byte snapshot; properties return fresh JSON copies to callers."""
+    """Immutable byte snapshot; JSON properties return fresh copies to callers."""
     identity: str
+    purpose: str
+    selected_ids: frozenset[str]
     _manifest: bytes
     _records: MappingProxyType
     _assets: tuple
     _summary: bytes
 
-    def __init__(self, identity, manifest, records, assets, summary, *, _token=None):
+    def __init__(self, identity, manifest, records, assets, summary, *, selected_ids, _token=None):
         check(_token is _TOKEN, 'use load_release to validate release evidence')
         snapshots = MappingProxyType({key:canonical(record) for key,record in records.items()})
-        for name, value in (('identity', identity), ('_manifest', manifest), ('_records', snapshots),
+        # Derive only from the loader's fully validated metadata. These small
+        # immutable fields avoid reparsing the whole manifest per exposure.
+        for name, value in (('identity', identity), ('purpose', summary['purpose']),
+                            ('selected_ids', frozenset(selected_ids)),
+                            ('_manifest', manifest), ('_records', snapshots),
                             ('_assets', tuple(sorted(assets.items()))), ('_summary', canonical(summary))):
             object.__setattr__(self, name, value)
 
@@ -188,7 +194,7 @@ class ReviewedRelease:
         return dict(self._assets)[path]
 
     def sampler_rows(self):
-        check(self.manifest['purpose'] == 'training', 'sampler requires a training release')
+        check(self.purpose == 'training', 'sampler requires a training release')
         records = self.records
         rows = []
         for entry in self.manifest['records']:
@@ -325,7 +331,7 @@ def load_release(path, *, expected_hash=None):
                'review_policy':REVIEW_POLICY, 'approval_kind':evidence['kind'],
                'selected_review_kinds':dict(Counter(r['kind'] for k in selected for r in records[k]['reviews'])),
                'semantic_authentication':False}
-    return ReviewedRelease(identity, raw, records, assets, summary, _token=_TOKEN)
+    return ReviewedRelease(identity, raw, records, assets, summary, selected_ids=selected, _token=_TOKEN)
 
 
 def bind_pilot(training, pilot):

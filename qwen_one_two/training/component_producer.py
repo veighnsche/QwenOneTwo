@@ -12,8 +12,8 @@ from .producer import PrerequisiteError,EpisodeLengthError
 def component_view(release,row,*,intervention=False):
     """Build per-role inputs with byte-bound facts; Reason stays separate."""
     check(canonical(row)==canonical(release.record(row['id'])),'record/release drift')
-    check(release.manifest['purpose']!='locked','locked collection is not an episode-development source')
-    check(any(e['id']==row['id'] and e['selected'] for e in release.manifest['records']),'unselected component record')
+    check(release.purpose!='locked','locked collection is not an episode-development source')
+    check(row['id'] in release.selected_ids,'unselected component record')
     category=row['training_category']
     if intervention:
         check(row.get('evaluation_slice') in {'E','X'} and category is None,'reviewed receiver evaluation view')
@@ -91,8 +91,8 @@ def component_view(release,row,*,intervention=False):
 def reference_record(release,row):
     """Select one existing reference annotation; no live model/request context."""
     check(canonical(row)==canonical(release.record(row['id'])),'record/release drift')
-    check(release.manifest['purpose']!='locked','locked reference material')
-    check(any(e['id']==row['id'] and e['selected'] for e in release.manifest['records']),'unselected reference record')
+    check(release.purpose!='locked','locked reference material')
+    check(row['id'] in release.selected_ids,'unselected reference record')
     check(row['training_category']=='reference' or
           (row['split']=='development' and row.get('evaluation_slice')=='RF'),'reference category')
     check(set(row['model_inputs'])=={'role','meaning'},'reference input whitelist')

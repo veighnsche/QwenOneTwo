@@ -3,6 +3,7 @@ import copy
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch,PropertyMock
 
 from release_fixtures import row, write_release
 from qwen_one_two.training.producer import native_plan, PrerequisiteError
@@ -104,6 +105,43 @@ class ProducerInputs(unittest.TestCase):
         release,record=self.release('reference',operation='Noul',reference_role='target',
             model_inputs={'role':'target','meaning':{'referent':'Neutral item','status':'Assessed'}})
         with self.assertRaisesRegex(ValueError,'whitelist'):reference_record(release,record)
+
+    def test_admission_never_decodes_full_manifest(self):
+        from qwen_one_two.training.component_producer import component_view,reference_record
+        from qwen_one_two.training.release import ReviewedRelease
+        native,nrow=self.release()
+        meaning={'question':{'proposition':'SCHEMA ONLY question'},'target':{'referent':'SCHEMA ONLY target'}}
+        component,crow=self.release('receiver',operation='Noul',model_inputs={'request':meaning,'evidence':{}})
+        reference,rrow=self.release('reference',operation='Noul',reference_role='target',
+                                    model_inputs={'role':'target','meaning':{'referent':'SCHEMA ONLY target'}})
+        self.assertTrue(native.sampler_rows())
+        with patch.object(ReviewedRelease,'manifest',new_callable=PropertyMock,
+                          side_effect=AssertionError('full manifest decoded')):
+            native_plan(native,nrow,'components',1)
+            view,p,_=component_view(component,crow);view.materialize(p)
+            reference_record(reference,rrow)
+
+    def test_unselected_and_locked_admission_reject_before_model_import(self):
+        from qwen_one_two.training.component_producer import component_view,reference_record
+        from qwen_one_two.training.binding import request_targets
+        from qwen_one_two.training.producer import EpisodeProducer
+        from qwen_one_two.training.release import ReviewedRelease
+        # These are schema-only rejection fixtures, never model inputs/data.
+        for purpose,selected in (('training',{'kept'}),('locked',{'kept','blocked'})):
+            split='train' if purpose=='training' else 'locked'
+            rows=[row(k,split=split,training_category='receiver') for k in ('kept','blocked')]
+            temp=tempfile.TemporaryDirectory();self.addCleanup(temp.cleanup)
+            write_release(Path(temp.name),rows,purpose=purpose,selected=selected)
+            release=load_release(temp.name);record=release.record('blocked')
+            producer=EpisodeProducer.__new__(EpisodeProducer)
+            producer.release=release;producer.reference_evidence=None
+            with patch.object(ReviewedRelease,'manifest',new_callable=PropertyMock,
+                              side_effect=AssertionError('full manifest decoded')):
+                for call in (lambda:component_view(release,record),lambda:reference_record(release,record),
+                             lambda:native_plan(release,record,'components',1),
+                             lambda:request_targets(None,release,record,None),
+                             lambda:producer(record,'components',1)):
+                    with self.assertRaisesRegex(ValueError,'locked|unselected'):call()
 
 
 if __name__=='__main__':unittest.main()

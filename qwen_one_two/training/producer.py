@@ -35,9 +35,9 @@ def native_plan(release, row, phase, window):
     """Select permitted inputs before any model execution; never serialize row."""
     check(isinstance(release, ReviewedRelease), 'load a reviewed release first')
     check(canonical(row) == canonical(release.record(row['id'])), 'record/release drift')
-    check(any(e['id'] == row['id'] and e['selected'] for e in release.manifest['records']),
+    check(row['id'] in release.selected_ids,
           'unselected episode record')
-    check(release.manifest['purpose'] != 'locked', 'locked collection is not an episode-development source')
+    check(release.purpose != 'locked', 'locked collection is not an episode-development source')
     check(phase in PHASES and phase != 'reference' and 1 <= window <= PHASES[phase], 'native phase/window')
     category = row['training_category']
     if category in {'reference', 'receiver', 'reader', 'decision_replay'}:
@@ -127,8 +127,8 @@ class EpisodeProducer:
     def __call__(self,row,phase,window):
         if self.reference_evidence is not None:self.reference_evidence.assert_reference(self.reference)
         check(canonical(row)==canonical(self.release.record(row['id'])),'record/release drift')
-        check(self.release.manifest['purpose']!='locked','locked collection is not an episode-development source')
-        check(any(e['id']==row['id'] and e['selected'] for e in self.release.manifest['records']), 'unselected episode record')
+        check(self.release.purpose!='locked','locked collection is not an episode-development source')
+        check(row['id'] in self.release.selected_ids, 'unselected episode record')
         check(phase in PHASES and 1<=window<=PHASES[phase],'phase/window')
         if row['training_category'] in {'receiver','reader','decision_replay'}:
             if self.component is None:

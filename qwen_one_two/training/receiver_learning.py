@@ -8,7 +8,7 @@ PROTOCOL='receiver-learning-v1'
 
 
 def training_order(release):
-    check(isinstance(release,ReviewedRelease) and release.manifest['purpose']=='training','receiver training release')
+    check(isinstance(release,ReviewedRelease) and release.purpose=='training','receiver training release')
     ids=[e['id'] for e in release.manifest['records'] if e['selected']
          and release.record(e['id'])['training_category']=='receiver']
     check(len(ids)==1500,'pinned complete receiver catalogue')
@@ -47,7 +47,7 @@ class ReceiverProducer:
     """
     def __init__(self,backbone,codec,reference,release):
         from .clean import CleanEncoder
-        check(release.manifest['purpose']=='training','never train on development/locked records')
+        check(release.purpose=='training','never train on development/locked records')
         self.b,self.c,self.ref,self.release=backbone,codec,reference,release
         self.encoder=CleanEncoder(backbone,reference,checkpoint_hash=receiver_hash(backbone,codec),
             profile_hash=digest(PROFILE.encode()),cache_references=True)

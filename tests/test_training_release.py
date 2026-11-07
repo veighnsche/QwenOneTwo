@@ -5,6 +5,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from dataclasses import FrozenInstanceError
 
 from qwen_one_two.training.inputs import canonical, digest, validate_record_manifest
 from qwen_one_two.training.release import load_release, decode
@@ -32,6 +33,28 @@ class ReleaseTests(unittest.TestCase):
         self.assertEqual(release.asset('sources/s.txt'), source)
         with self.assertRaisesRegex(ValueError, 'hash mismatch'):
             load_release(self.root)
+
+    def test_admission_metadata_stays_immutable_and_manifest_stays_fresh(self):
+        write_release(self.root, [row('selected'),row('retained')],selected={'selected'})
+        release=load_release(self.root)
+        before=release._manifest
+        self.assertEqual(release.purpose,'development')
+        self.assertEqual(release.selected_ids,frozenset({'selected'}))
+        changed=release.manifest
+        changed['purpose']='training';changed['records'][1]['selected']=True
+        changed['records'].clear()
+        self.assertEqual(release.manifest['purpose'],'development')
+        self.assertEqual(len(release.manifest['records']),2)
+        self.assertEqual(release.selected_ids,frozenset({'selected'}))
+        self.assertEqual(release._manifest,before)
+        with self.assertRaises(FrozenInstanceError):release.purpose='training'
+        with self.assertRaises(FrozenInstanceError):release.selected_ids=frozenset({'retained'})
+        with self.assertRaises(AttributeError):release.selected_ids.add('retained')
+        # An on-disk edit cannot alter the already admitted snapshot/index.
+        (self.root/'manifest.json').write_bytes(canonical(changed))
+        self.assertEqual(release.purpose,'development')
+        self.assertEqual(release.selected_ids,frozenset({'selected'}))
+        with self.assertRaises(ValueError):load_release(self.root)
 
     def test_pinned_manifest_and_current_review_binding(self):
         manifest = write_release(self.root)

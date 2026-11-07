@@ -41,7 +41,47 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — fused finite checks complete
+## Current checkpoint — CPU-only manifest optimization complete
+
+**GPU work is on hold at the user's direction because of noise complaints.**
+Do not activate the GPU for workloads, probes or status tools in follow-up work
+without the user lifting that restriction. CPU model execution remains banned.
+Leave existing services unchanged. The user authorized ordinary CPU work on
+repeated manifest parsing; **that slice is complete, with no active job.** Read
+the [measured report](manifest-access-results-2026-11-07.md),
+[portable evidence](evidence/manifest-access-v1.json) and
+`scripts/benchmark_manifest.py`.
+
+The validated immutable release now exposes `purpose` and frozenset
+`selected_ids`. Per-record component/reference/native/supervision admission uses
+them; public JSON properties still return fresh copies. Loader validation is
+AST-identical before the final constructor call. Source/provenance checks,
+answer blindness, the Reason exception, record comparisons and sampling order
+are unchanged. No mutable decoded manifest is cached or handed out by reference.
+
+Literal prior sources from `8459e84` yield identical full training/development
+snapshots (**9,728 / 1,600 records; 17,809 / 2,832 assets**) and **110 matching
+existing input/provenance cases** (52 reference, 46 component, 12 native).
+Five alternating CPU pairs on eight existing receiver records give median
+**0.909318→0.015810 s** preparation time, saving **0.893508 s**; full-manifest
+reads fall **16→0**. This is CPU input preparation, not full training timing.
+
+**51 model-free tests pass in 16.263 s**, with model-runtime imports blocked.
+An initial new test fixture omitted its operation; it was corrected and its
+failed log retained. The final full run, benchmark **exit 0**, source/snapshot
+hashes, loader AST, timing recomputation, compilation and whitespace checks pass.
+Raw receipts: `data/manifest-access-20261107/`. No GPU tools, model loads,
+CPU inference, new semantic data/reviews, agents, training or service changes.
+Existing numeric and learned-flow results below remain unchanged; no new model
+qualification or end-to-end training speedup is claimed.
+
+**Next unfinished slice:** checkpoint/cache-policy comparisons remain pending
+and paused until GPU work is allowed again. Independent CPU profiling of repeated
+asset lookups/audit serialization is available as a separate next slice, not
+launched here. Noul transfer and Score numerical failures remain unresolved.
+No training or data generation is queued.
+
+## Previous checkpoint — fused finite checks complete
 
 The user requested Astra's fused finite checks, a 3090 benchmark, exact
 output/gradient/accounting checks, frozen W/reference, no new data/agents/training,

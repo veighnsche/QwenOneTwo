@@ -1,0 +1,1465 @@
+{
+  "protocol": "manifest-access-v1",
+  "scope": "CPU metadata/input preparation only; no GPU/model workload or training speed measurement",
+  "baseline_commit": "8459e8441887b6621aa2ceec6ddcbb2206d017b0",
+  "baseline_sources": {
+    "release.py": "2d9e0d216cf13bac3e57c652bb486dfea6880b6a5e1ff51e3d0ac5c699af9da3",
+    "component_producer.py": "e24fea359c8cfd5ce1b05efc4705543369fa60fc0eecf49ae70602a09167a0cc",
+    "producer.py": "4b6bfade492f256af38d0493b168cbc640310943bc145a43b3c3d0bd2fbe15a1"
+  },
+  "sources": {
+    "scripts/benchmark_manifest.py": "13e3495c5d342126ee5a1d9b2d48af1584ebca041f54808f0a84579eb7251647",
+    "qwen_one_two/training/release.py": "68cf7d1edf1f834053815ec46a28b11633e4b1b816eda7703b005305b9ad3bb6",
+    "qwen_one_two/training/component_producer.py": "9cf2f2aea9e4e3bab4230d2fa17cc415e94ffdb6a6522075af86ef7fe2cc2aa8",
+    "qwen_one_two/training/producer.py": "6827978aa735839a691f4f04f2d5cb6b2471d5c3c54c8604a76ac2ea7619e40f",
+    "qwen_one_two/training/binding.py": "6888c1a6f3597b9763f875242b34dea6f9f0abbe5f47b9529488e3aec30ddeae",
+    "qwen_one_two/training/receiver_learning.py": "60e5fc7eb79ac7c5374caaa72c19e3a5b2c6bea4cc6854fd9568420dd7dc7034"
+  },
+  "snapshots": {
+    "train": {
+      "identity": "c70d4f44135a34c00e7fa0348833b1ec56613def15f5753231589492ed35478f",
+      "manifest_bytes": 4072795,
+      "records": 9728,
+      "assets": 17809,
+      "selected": 8000,
+      "all_snapshot_bytes_equal": true,
+      "records_sha256": "5338046d6fbffaf1f8214fe751d8e139e3776a491bac18c984e85902844e6d5f",
+      "assets_sha256": "a7d7d020ba94ad3c624dc58347290f7edd1ef3f6d0e20ac5749a895fc16eac8c"
+    },
+    "development": {
+      "identity": "5b8f4cffdc4f33e255d3a34306cac03a68c50dcd9dab905ae8d8adcf89c81e77",
+      "manifest_bytes": 670388,
+      "records": 1600,
+      "assets": 2832,
+      "selected": 1000,
+      "all_snapshot_bytes_equal": true,
+      "records_sha256": "ffd525acc535adfdbc284cf7df64edeb970aeb02e9b8561a0f9a56580569305f",
+      "assets_sha256": "b14d8f2454a1299c96f022eb5c26a4f4ddbbd96fbfb44cbad7b3dc76187801c0"
+    }
+  },
+  "cases": [
+    {
+      "split": "train",
+      "record": "train-reference-0000",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "question",
+        "Noul"
+      ],
+      "matched_sha256": "8d54ecbb217667855a78ea24660a87aa4e3bf52844caca708794b00efdd25caa"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0001",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "target",
+        "Score"
+      ],
+      "matched_sha256": "466892afe61d3eb020a0065faec3062dd233acdefb121acce592f60465ef15f2"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0002",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "alternative",
+        "Choice"
+      ],
+      "matched_sha256": "6b493f98904d2de0e4f920c9f9d95e615bfe6cf15b4547046def3ab06720a360"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0003",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "dimension",
+        "Noul"
+      ],
+      "matched_sha256": "d8d0d7d02f1ac5125b066558786893c0387cc678733b867000963dbf9d3dbd64"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0004",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "conditions",
+        "Score"
+      ],
+      "matched_sha256": "deaf668de9d4201ee008ffcb0ad9057ac27cefd74811c2a064ea3b187cf16566"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0005",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "zero",
+        "Choice"
+      ],
+      "matched_sha256": "767f8a3aa90694134b6e7e2f8fe995ef589e8dd7c2b5b45bdb9ad843a7131c97"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0006",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "one",
+        "Noul"
+      ],
+      "matched_sha256": "0fd4f4ccc94b044557213cf3007d22ade0631b850e087eab6ee4030b28e32b6a"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0007",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "midpoint",
+        "Score"
+      ],
+      "matched_sha256": "955d930f91c4ba3ce6c4f7ba614a71c7529ef9be405bc9bbc19aaea7d9aa873d"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0008",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "key",
+        "Choice"
+      ],
+      "matched_sha256": "6a443e9154593fcd81e15b6995942230ee22e0b50ab393430657b9f3af194e5c"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0009",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "reason",
+        "Noul"
+      ],
+      "matched_sha256": "c4517a5a2b8e0c20f111146225cebf186f0488408980f70e4146eb73773cb704"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0010",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "question",
+        "Choice"
+      ],
+      "matched_sha256": "e805be3f9d00e9cfc43dfc09dc2f2c878d4f9113b52ea1db52b621ca267a0cd6"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0011",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "target",
+        "Noul"
+      ],
+      "matched_sha256": "0cd71265a1424893ae996e765f511ed1498a92915e9ce0c58798562bfa9befd2"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0012",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "alternative",
+        "Score"
+      ],
+      "matched_sha256": "4c60d1e1050d8c0f95b1a7f928e3c548bb232318d680a27dc451a1d898520eb1"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0013",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "dimension",
+        "Choice"
+      ],
+      "matched_sha256": "da1b370848ef9a6e258e6c128444aa9b893024c257bdd94817e16453f0355693"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0014",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "conditions",
+        "Noul"
+      ],
+      "matched_sha256": "e3d5f33926e81ea24af9b53098e8b39de9995fcd404f647830d05f0adb9738d2"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0015",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "zero",
+        "Score"
+      ],
+      "matched_sha256": "2c8523b748033ce6dd3e9252037e1b552966fe8ea6b4f8b86917cb310540112b"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0016",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "one",
+        "Choice"
+      ],
+      "matched_sha256": "2a8107fa3b801828f74511e9c46933183d060513c1c621f417944a78338d70c5"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0017",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "midpoint",
+        "Noul"
+      ],
+      "matched_sha256": "9bf252273b9b96442dea4799b66b4c6f0c47c670143e6946ed38b604dcf0551b"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0018",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "key",
+        "Score"
+      ],
+      "matched_sha256": "7864a950d6ef6c2da72576e13aa7716c6869ea584bedbdd19ec01e88b7ba3684"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0019",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "reason",
+        "Choice"
+      ],
+      "matched_sha256": "8a70ad49a7c491c6c3916914ab2262132e2f10c7ff0e73ab954cf030ac0b5e9b"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0020",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "question",
+        "Score"
+      ],
+      "matched_sha256": "f5bfd7e5d907a41c263fd8c9663ade008e29a8a1993334237029a1116bcb635e"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0021",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "target",
+        "Choice"
+      ],
+      "matched_sha256": "3ce1d60564803d594eee0aadf56cdcd1d01a5ffc0fda45cd715f255c07eefbec"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0022",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "alternative",
+        "Noul"
+      ],
+      "matched_sha256": "da244c4f65b1c0100b28ed0a9ffbdc4770991d9283710f2688783db896abc37f"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0023",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "dimension",
+        "Score"
+      ],
+      "matched_sha256": "7fe068b1ff57ba7a2e3be3787f19fb0d4b1af1a7f04b096d6b09fae8b944d45a"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0024",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "conditions",
+        "Choice"
+      ],
+      "matched_sha256": "7bb36c4006ded79fa032f24b3885bc64e31700178753adcee8100dd3528aa1cd"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0025",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "zero",
+        "Noul"
+      ],
+      "matched_sha256": "ceccc9da993fac69c006bfdf130e543b3f919f45b8336378175c40b1e4952db4"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0026",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "one",
+        "Score"
+      ],
+      "matched_sha256": "97d845b5c8d294056617ae013bee1d0b598eb3728f198d13ffd53e8592838ccd"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0027",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "midpoint",
+        "Choice"
+      ],
+      "matched_sha256": "98c06f6b3c7d8965331fa23a9869c79c4e2df1b6bd4ce3361d04c64ae3272b87"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0028",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "key",
+        "Noul"
+      ],
+      "matched_sha256": "cd18e6e0dcd2a8c5299a2bb9eea8c7fc211b8c3ebc706837cbd53189daafdcb1"
+    },
+    {
+      "split": "train",
+      "record": "train-reference-0029",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "reason",
+        "Score"
+      ],
+      "matched_sha256": "e04bd8654249ee4e496fb7d3c02b802ac939e539765a9a75b0917f264446a464"
+    },
+    {
+      "split": "train",
+      "record": "train-receiver-0000",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "receiver",
+        "Choice",
+        null,
+        "Assessed"
+      ],
+      "matched_sha256": "71ad2b18f56724e19bcbd5809214f1f68fe6d827c56f7f39a7167c80799214eb"
+    },
+    {
+      "split": "train",
+      "record": "train-receiver-0001",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "receiver",
+        "Score",
+        null,
+        "Assessed"
+      ],
+      "matched_sha256": "2e8c11bbe287a86a4b87937a90cda8e940e42fbd1beb7db2115142d76d6e04d2"
+    },
+    {
+      "split": "train",
+      "record": "train-receiver-0002",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "receiver",
+        "Choice",
+        null,
+        "Insufficient"
+      ],
+      "matched_sha256": "5978823e46f21e5c2d724f9d248e545b0f571bbecd443c03155ac6d5b021b840"
+    },
+    {
+      "split": "train",
+      "record": "train-receiver-0003",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "receiver",
+        "Score",
+        null,
+        "Insufficient"
+      ],
+      "matched_sha256": "45fc445b6cc560e2bb0df3ef6332e673248c09247d40d0871c63694ec8cd2fc1"
+    },
+    {
+      "split": "train",
+      "record": "train-receiver-0004",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "receiver",
+        "Noul",
+        null,
+        "Unresolved"
+      ],
+      "matched_sha256": "7cb17b3468f670c7200e2243c6f16318be88c4a3d7e763ce1eaeca6c6d8376e3"
+    },
+    {
+      "split": "train",
+      "record": "train-receiver-0005",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "receiver",
+        "Score",
+        null,
+        "Unresolved"
+      ],
+      "matched_sha256": "e6814ee8d614dc81adb4d708830434f02349869749be513b14d000e755fe4bc3"
+    },
+    {
+      "split": "train",
+      "record": "train-receiver-0009",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "receiver",
+        "Noul",
+        null,
+        "Conflicting"
+      ],
+      "matched_sha256": "1ffe743a5748f56f3ccec27e5b3133f417afcd2413dba68178ac7419f080c99f"
+    },
+    {
+      "split": "train",
+      "record": "train-receiver-0010",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "receiver",
+        "Score",
+        null,
+        "Conflicting"
+      ],
+      "matched_sha256": "e5969bd3f322989db4f1dadd8d5413db7bd1abee915ee4daec32f393906fa329"
+    },
+    {
+      "split": "train",
+      "record": "train-receiver-0011",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "receiver",
+        "Noul",
+        null,
+        "Assessed"
+      ],
+      "matched_sha256": "691387ebed9a1af541152c06a3a03bb821f940fb2833896ddce814516e0d657b"
+    },
+    {
+      "split": "train",
+      "record": "train-receiver-0021",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "receiver",
+        "Choice",
+        null,
+        "Conflicting"
+      ],
+      "matched_sha256": "8a6381302628850ab150927d4255c385f7ef1fb98199a82c86a8105290459ecc"
+    },
+    {
+      "split": "train",
+      "record": "train-receiver-0032",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "receiver",
+        "Noul",
+        null,
+        "Insufficient"
+      ],
+      "matched_sha256": "a1b4df7f05e6d65a7b2aee6baf7055de228479725f2bffb0516832101b37fa38"
+    },
+    {
+      "split": "train",
+      "record": "train-receiver-0034",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "receiver",
+        "Choice",
+        null,
+        "Unresolved"
+      ],
+      "matched_sha256": "e4b32cb93304bb5d1dc159a955ecc13a8d9ff4c52d5a06e55f82f0a38b5973f1"
+    },
+    {
+      "split": "train",
+      "record": "train-receiver-0035",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "receiver",
+        "Choice",
+        null,
+        "NoFeasibleChoice"
+      ],
+      "matched_sha256": "a02dbbf6e798dd7609f5ca707f4c4c6a78e448aeb3121820d91692d8cac3714f"
+    },
+    {
+      "split": "train",
+      "record": "train-writer-0000",
+      "kind": "native",
+      "stratum": [
+        "native",
+        "writer",
+        "Choice"
+      ],
+      "matched_sha256": "f351dcffdf7b1220cd7272bc6ada3462d8c6d336b71f3ddaea6c040948693349"
+    },
+    {
+      "split": "train",
+      "record": "train-writer-0001",
+      "kind": "native",
+      "stratum": [
+        "native",
+        "writer",
+        "Score"
+      ],
+      "matched_sha256": "400f3ac1907c7e7ae549f6998cccaa365d77ffbeef0016153a5bedb6af9dc862"
+    },
+    {
+      "split": "train",
+      "record": "train-writer-0004",
+      "kind": "native",
+      "stratum": [
+        "native",
+        "writer",
+        "Noul"
+      ],
+      "matched_sha256": "607288489f02399c49f8fd19aa1bdb8c20c5e2318be060e6e6f43037ce31b4ea"
+    },
+    {
+      "split": "train",
+      "record": "train-reader-0000",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "reader",
+        "Choice",
+        null,
+        "Assessed"
+      ],
+      "matched_sha256": "f40ad54dd4d139e698378e24bb0fec7a9087b096ca33b067b2ec8aa5b35f0b25"
+    },
+    {
+      "split": "train",
+      "record": "train-reader-0001",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "reader",
+        "Score",
+        null,
+        "Assessed"
+      ],
+      "matched_sha256": "f7aedafa83a1747f065ccbf5eeebfa0cc141c43a79dee95330c57aa404c33139"
+    },
+    {
+      "split": "train",
+      "record": "train-reader-0002",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "reader",
+        "Choice",
+        null,
+        "Insufficient"
+      ],
+      "matched_sha256": "40b135f2926b61440cd37a5fa39c62cfb04e3f42b3489454b7a993bb90263108"
+    },
+    {
+      "split": "train",
+      "record": "train-reader-0003",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "reader",
+        "Score",
+        null,
+        "Insufficient"
+      ],
+      "matched_sha256": "35dadee87ee5d1d43cdd1ec2f4892eb5d5eb5311558f45305a794296164b30de"
+    },
+    {
+      "split": "train",
+      "record": "train-reader-0004",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "reader",
+        "Noul",
+        null,
+        "Unresolved"
+      ],
+      "matched_sha256": "dba2d4e29132700ea725d33904e69e7af02f2fd4178255a719a9af183e8e137d"
+    },
+    {
+      "split": "train",
+      "record": "train-reader-0005",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "reader",
+        "Score",
+        null,
+        "Unresolved"
+      ],
+      "matched_sha256": "6c4c5d4e0a9727ce4f59a7488c7d96e9341e751a1874aeaf851561eaa426ddfb"
+    },
+    {
+      "split": "train",
+      "record": "train-reader-0009",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "reader",
+        "Noul",
+        null,
+        "Conflicting"
+      ],
+      "matched_sha256": "4c9cdf9b51727c9648997f7c5687b030c2ddc4c47f20d8ee03068e6b98f5c041"
+    },
+    {
+      "split": "train",
+      "record": "train-reader-0010",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "reader",
+        "Score",
+        null,
+        "Conflicting"
+      ],
+      "matched_sha256": "a0a718f497d2a430e156d2895d319b684c77e4e101fac0dae8a7e997ff917024"
+    },
+    {
+      "split": "train",
+      "record": "train-reader-0011",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "reader",
+        "Noul",
+        null,
+        "Assessed"
+      ],
+      "matched_sha256": "8da212e8a5c08b39f84e7491f7c5266963dd7a5c0dccfa54e8386489c3ce7fc5"
+    },
+    {
+      "split": "train",
+      "record": "train-reader-0021",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "reader",
+        "Choice",
+        null,
+        "Conflicting"
+      ],
+      "matched_sha256": "f656a9a4cee56a336d3969e393509f53adadb6642a2e7f6139541b72fc26e606"
+    },
+    {
+      "split": "train",
+      "record": "train-reader-0032",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "reader",
+        "Noul",
+        null,
+        "Insufficient"
+      ],
+      "matched_sha256": "5f70cc5bcebea26b3bfcc695f7dd51cf26e2a9cce68ff2bc855220c6a28feea5"
+    },
+    {
+      "split": "train",
+      "record": "train-reader-0034",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "reader",
+        "Choice",
+        null,
+        "Unresolved"
+      ],
+      "matched_sha256": "6b0b6b67854a2cbea4f3b0285384bda3ab3366c0be7f45ec9e95a364ed5213d8"
+    },
+    {
+      "split": "train",
+      "record": "train-reader-0035",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "reader",
+        "Choice",
+        null,
+        "NoFeasibleChoice"
+      ],
+      "matched_sha256": "a281171d22cd9a8f611503a87f55da68a805b83d21b3eb7e6850f96e40ca6ff8"
+    },
+    {
+      "split": "train",
+      "record": "train-interleaved-0000",
+      "kind": "native",
+      "stratum": [
+        "native",
+        "interleaved",
+        "Choice"
+      ],
+      "matched_sha256": "31d7e128659d53e4b0d9d3be8885271c429b78cfe48c80d4e3b1844a07b46968"
+    },
+    {
+      "split": "train",
+      "record": "train-interleaved-0001",
+      "kind": "native",
+      "stratum": [
+        "native",
+        "interleaved",
+        "Score"
+      ],
+      "matched_sha256": "06be4c1ffaf4b819855b6acb939f636eb18f60f9de7f1fa8e90d81559925c5b1"
+    },
+    {
+      "split": "train",
+      "record": "train-interleaved-0004",
+      "kind": "native",
+      "stratum": [
+        "native",
+        "interleaved",
+        "Noul"
+      ],
+      "matched_sha256": "87c0cb76995c691ed54d5832d36c3ee59c47b0ed935eb3c4757b41734452d16b"
+    },
+    {
+      "split": "train",
+      "record": "train-direct-0000",
+      "kind": "native",
+      "stratum": [
+        "native",
+        "direct",
+        "Choice"
+      ],
+      "matched_sha256": "b2f2c9187c1e20f4f623194015267d5b14034b17493d9fe2bb6e1a4f8f0010d6"
+    },
+    {
+      "split": "train",
+      "record": "train-direct-0001",
+      "kind": "native",
+      "stratum": [
+        "native",
+        "direct",
+        "Score"
+      ],
+      "matched_sha256": "9ee29ddc75d91878f2e7a53acf2d8509e8c9d1232903dab632b48b9510d111c9"
+    },
+    {
+      "split": "train",
+      "record": "train-direct-0004",
+      "kind": "native",
+      "stratum": [
+        "native",
+        "direct",
+        "Noul"
+      ],
+      "matched_sha256": "914dd1886739d613655a198dbda46b8415007cadf3f29e3fc746ee5b930aa23c"
+    },
+    {
+      "split": "train",
+      "record": "train-language-replay-0000",
+      "kind": "native",
+      "stratum": [
+        "native",
+        "language_replay",
+        "Choice"
+      ],
+      "matched_sha256": "36ed6a53b2e4d53315e0c16d7c7a0e3d2bac50643ab16c99238f22c5ab6b3884"
+    },
+    {
+      "split": "train",
+      "record": "train-language-replay-0001",
+      "kind": "native",
+      "stratum": [
+        "native",
+        "language_replay",
+        "Score"
+      ],
+      "matched_sha256": "b86ce95d93cb6ae62c0bd59149b6d7b3feddb552dcd80a693fcaf891344ad591"
+    },
+    {
+      "split": "train",
+      "record": "train-language-replay-0004",
+      "kind": "native",
+      "stratum": [
+        "native",
+        "language_replay",
+        "Noul"
+      ],
+      "matched_sha256": "b0575f7b4fb812f933ac71ffc5695acdfd61aec621160e2389fadc35fb0405d7"
+    },
+    {
+      "split": "train",
+      "record": "train-decision-replay-0000",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "decision_replay",
+        "Choice",
+        null,
+        "Assessed"
+      ],
+      "matched_sha256": "916f6d0153316d7287e2e7f05583469ba52662658a58bd533a63184048890149"
+    },
+    {
+      "split": "train",
+      "record": "train-decision-replay-0001",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "decision_replay",
+        "Score",
+        null,
+        "Assessed"
+      ],
+      "matched_sha256": "c074bb1215822f82d9d032228b8c5b680da7884df6d2e3ad7cfc82b58f7e7ccc"
+    },
+    {
+      "split": "train",
+      "record": "train-decision-replay-0005",
+      "kind": "component",
+      "stratum": [
+        "component",
+        "decision_replay",
+        "Noul",
+        null,
+        "Assessed"
+      ],
+      "matched_sha256": "767c9015ff48d2a8754ec75434fa22e4be75d2526cda0e49f84d92c6e75eb794"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0000",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "question",
+        "Noul"
+      ],
+      "matched_sha256": "05cd1d12b326019191e5a1d312ad46404e7d3156538984181352c097f16fc4c7"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0010",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "target",
+        "Choice"
+      ],
+      "matched_sha256": "6f80a26ea23454f4b94b9051c9cefdcfea79592e14c9f7b3e2e922a1107c7b7e"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0020",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "alternative",
+        "Choice"
+      ],
+      "matched_sha256": "5514b65dc4ccacd5da59c62a8ff34a38d804c314bc6369cd2c68bc87fb9bcb82"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0021",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "alternative",
+        "Score"
+      ],
+      "matched_sha256": "2992fc5f44b104178df8bbf79498253e73e6adb5c956678472b4430f6655f0f0"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0030",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "dimension",
+        "Score"
+      ],
+      "matched_sha256": "e6348f2d5fa1afa87c10259edd8b0e4a1788327028139ea16f57192f1a7516bb"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0031",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "dimension",
+        "Noul"
+      ],
+      "matched_sha256": "d7cc45a4156813f7070aeb764fe9de63c684fa98e8f63271c03d7021d16e225b"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0040",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "conditions",
+        "Noul"
+      ],
+      "matched_sha256": "496bc77b22282916f46e708d90af227506435270fa1370a5b65dd31aa0806178"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0041",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "conditions",
+        "Choice"
+      ],
+      "matched_sha256": "2ec136606102ac774682faf56ea9ea580cf888dbd2749ef75775682918e4d3a2"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0050",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "zero",
+        "Choice"
+      ],
+      "matched_sha256": "50da8c6cdb6b751be17209a6282b2cde66041e64752336636571a50bee20f633"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0052",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "zero",
+        "Score"
+      ],
+      "matched_sha256": "1b89b1f1e10d9ff321aab61ed1c29f0da3396b9d6849c5b4adee7ee185145273"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0060",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "one",
+        "Score"
+      ],
+      "matched_sha256": "7a3b4bfb93e5d8aeb3c3deaec9213d852608798de72e823f71e7ca6b336f36d0"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0062",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "one",
+        "Noul"
+      ],
+      "matched_sha256": "12486f6a59c40f90d5feec2b60fd4bc9d26ad0bfb9f5dd09cf0b6a9ae276d57b"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0064",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "one",
+        "Choice"
+      ],
+      "matched_sha256": "c1489eb9a93b9c3af639b392ad194a9faeb1125b125f375d1fb108ad8c37ffcd"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0070",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "midpoint",
+        "Score"
+      ],
+      "matched_sha256": "89f1464518c1d8c97e5964e70acc9eaea3ff19956c427a6d3242cb1abbe4eb1b"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0071",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "midpoint",
+        "Choice"
+      ],
+      "matched_sha256": "fe2282b907c803e8199fd552526d1d4e35588bfe7c9a9be8dca8af80a658ab93"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0073",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "midpoint",
+        "Noul"
+      ],
+      "matched_sha256": "ad5474089067e29eac3f7d2be0a2d398f27ef71b4944419e2db096e51c030e4a"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0080",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "key",
+        "Choice"
+      ],
+      "matched_sha256": "6af88bbc0bf502400d0ce4a9fa6736e099c040d77184fd1ed8c9806cea01ecea"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0081",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "key",
+        "Score"
+      ],
+      "matched_sha256": "0fc7dc05b73d98766d95e0f2f8f54d7613e2bd26e218618eefef4fd4e0aa3aef"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0084",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "key",
+        "Noul"
+      ],
+      "matched_sha256": "1b1de84f1a751374adf5db8f8370b096cf5e56caea9aa756daa3166f1983e7fd"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0090",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "reason",
+        "Choice"
+      ],
+      "matched_sha256": "30f485bf98a3e0d85cb7d0f8bfc34005e8fdefa8a898c6fe8c17b5d125afbffb"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0092",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "reason",
+        "Noul"
+      ],
+      "matched_sha256": "242dfadf53d341b2e0d996726983012667c8c406f3b5e09a252d20546e42d64c"
+    },
+    {
+      "split": "development",
+      "record": "development-RF-0093",
+      "kind": "reference",
+      "stratum": [
+        "reference",
+        "reason",
+        "Score"
+      ],
+      "matched_sha256": "0c70cff5df274a40b23217afb06a4c2b641dc1c22949787bbef9caa3172b929c"
+    },
+    {
+      "split": "development",
+      "record": "development-E-0000",
+      "kind": "component",
+      "stratum": [
+        "component",
+        null,
+        "Noul",
+        "E",
+        "Assessed"
+      ],
+      "matched_sha256": "525a6539f80ef1d78f54830d67606246c0664db044223356bb1b473e5bd983da"
+    },
+    {
+      "split": "development",
+      "record": "development-E-0010",
+      "kind": "component",
+      "stratum": [
+        "component",
+        null,
+        "Noul",
+        "E",
+        "Insufficient"
+      ],
+      "matched_sha256": "bf3881c509a24c3491cc88dbffb9ed915fbca51072cdf8050b3e11d6edb02f93"
+    },
+    {
+      "split": "development",
+      "record": "development-E-0020",
+      "kind": "component",
+      "stratum": [
+        "component",
+        null,
+        "Noul",
+        "E",
+        "Conflicting"
+      ],
+      "matched_sha256": "a31fc6b3b4ce96ff980ff834c88b7b3b975c4bd3faf911d0c92ceb671feaeae0"
+    },
+    {
+      "split": "development",
+      "record": "development-E-0030",
+      "kind": "component",
+      "stratum": [
+        "component",
+        null,
+        "Noul",
+        "E",
+        "Unresolved"
+      ],
+      "matched_sha256": "efda517601d754347a979dcf278a1b9eb4f8ed63b76cc611408174aa92d14e60"
+    },
+    {
+      "split": "development",
+      "record": "development-E-0040",
+      "kind": "component",
+      "stratum": [
+        "component",
+        null,
+        "Choice",
+        "E",
+        "Assessed"
+      ],
+      "matched_sha256": "6311796d3e80d74bab3d75cb22e4222b7454d4377c7583da1ac8893c70199cb3"
+    },
+    {
+      "split": "development",
+      "record": "development-E-0050",
+      "kind": "component",
+      "stratum": [
+        "component",
+        null,
+        "Choice",
+        "E",
+        "Insufficient"
+      ],
+      "matched_sha256": "c7ee26b4f1d09aeb2531e1d9dd1494eaf1e4c2298c192f02241dd1c730cb0ebf"
+    },
+    {
+      "split": "development",
+      "record": "development-E-0060",
+      "kind": "component",
+      "stratum": [
+        "component",
+        null,
+        "Choice",
+        "E",
+        "Conflicting"
+      ],
+      "matched_sha256": "dfea51f7c321d6f0397b00e6e6dd29800cd1e63517ff0b20a7a191673c78de3b"
+    },
+    {
+      "split": "development",
+      "record": "development-E-0070",
+      "kind": "component",
+      "stratum": [
+        "component",
+        null,
+        "Choice",
+        "E",
+        "Unresolved"
+      ],
+      "matched_sha256": "424a1f4ff579959ed1e5b01f8864cb57cd0717a94ea96090c04e72b58b7e9acd"
+    },
+    {
+      "split": "development",
+      "record": "development-E-0080",
+      "kind": "component",
+      "stratum": [
+        "component",
+        null,
+        "Choice",
+        "E",
+        "NoFeasibleChoice"
+      ],
+      "matched_sha256": "ffa8536b04a3b4cb0c9a249c337c0bb54b1429703993a09218ed429873d3a00f"
+    },
+    {
+      "split": "development",
+      "record": "development-E-0090",
+      "kind": "component",
+      "stratum": [
+        "component",
+        null,
+        "Score",
+        "E",
+        "Assessed"
+      ],
+      "matched_sha256": "a9026643a36b874c3fa43eefcc9a668f75aad8c9c30a5391ba607d0149c75fb4"
+    },
+    {
+      "split": "development",
+      "record": "development-E-0100",
+      "kind": "component",
+      "stratum": [
+        "component",
+        null,
+        "Score",
+        "E",
+        "Insufficient"
+      ],
+      "matched_sha256": "d2fbd65281978dd0b5bf02fde42fe193f6640265561902c4702202a0646817fe"
+    },
+    {
+      "split": "development",
+      "record": "development-E-0110",
+      "kind": "component",
+      "stratum": [
+        "component",
+        null,
+        "Score",
+        "E",
+        "Conflicting"
+      ],
+      "matched_sha256": "677bbf23ad8681008d90a6f5b6a690859cf3b746a88752e8022b9aae2baea132"
+    },
+    {
+      "split": "development",
+      "record": "development-E-0120",
+      "kind": "component",
+      "stratum": [
+        "component",
+        null,
+        "Score",
+        "E",
+        "Unresolved"
+      ],
+      "matched_sha256": "7999ebd89ad580ff38c068ce8a93db9154385488d6a8bd40d332ee927e3d7a26"
+    },
+    {
+      "split": "development",
+      "record": "development-X-01-000-0",
+      "kind": "component",
+      "stratum": [
+        "component",
+        null,
+        "Noul",
+        "X",
+        "Assessed"
+      ],
+      "matched_sha256": "8825b8f09be27a7cfab59d6690b9f33bf61615314194e1a950fbddc997c61e26"
+    },
+    {
+      "split": "development",
+      "record": "development-X-03-000-1",
+      "kind": "component",
+      "stratum": [
+        "component",
+        null,
+        "Noul",
+        "X",
+        "Insufficient"
+      ],
+      "matched_sha256": "e05f72da2445cb58b108b35df5b0d75038d7eeba10150c2198dc7728ce6c4c33"
+    },
+    {
+      "split": "development",
+      "record": "development-X-05-000-0",
+      "kind": "component",
+      "stratum": [
+        "component",
+        null,
+        "Choice",
+        "X",
+        "Assessed"
+      ],
+      "matched_sha256": "bb1987ea2b3a78eff5dbc956ac7603e3f6809e63e84f4807af7f2d8b71e044b0"
+    },
+    {
+      "split": "development",
+      "record": "development-X-07-000-0",
+      "kind": "component",
+      "stratum": [
+        "component",
+        null,
+        "Score",
+        "X",
+        "Assessed"
+      ],
+      "matched_sha256": "bae976f01df31489fe196fc81be9c0a6ef3223ef139227f35c82832cd6a6c659"
+    }
+  ],
+  "fixed_timing_records": [
+    "train-receiver-1086",
+    "train-receiver-0872",
+    "train-receiver-0112",
+    "train-receiver-1158",
+    "train-receiver-0348",
+    "train-receiver-1079",
+    "train-receiver-0531",
+    "train-receiver-0245"
+  ],
+  "timings": [
+    {
+      "repeat": 0,
+      "path": "legacy",
+      "seconds": 0.9046868810000888
+    },
+    {
+      "repeat": 0,
+      "path": "current",
+      "seconds": 0.015810118999070255
+    },
+    {
+      "repeat": 1,
+      "path": "current",
+      "seconds": 0.014613933000873658
+    },
+    {
+      "repeat": 1,
+      "path": "legacy",
+      "seconds": 0.9093181290008943
+    },
+    {
+      "repeat": 2,
+      "path": "legacy",
+      "seconds": 0.9083000390000961
+    },
+    {
+      "repeat": 2,
+      "path": "current",
+      "seconds": 0.015922898999633617
+    },
+    {
+      "repeat": 3,
+      "path": "current",
+      "seconds": 0.01475107499936712
+    },
+    {
+      "repeat": 3,
+      "path": "legacy",
+      "seconds": 0.9134640440006478
+    },
+    {
+      "repeat": 4,
+      "path": "legacy",
+      "seconds": 0.910474547999911
+    },
+    {
+      "repeat": 4,
+      "path": "current",
+      "seconds": 0.015866497999013518
+    }
+  ],
+  "medians": {
+    "legacy": 0.9093181290008943,
+    "current": 0.015810118999070255
+  },
+  "seconds_saved_per_eight_views": 0.893508010001824,
+  "manifest_reads_per_eight_views": {
+    "legacy": 16,
+    "current": 0
+  },
+  "cuda_visible_devices": "",
+  "model_runtimes_loaded": [],
+  "python": "3.12.15 (main, Oct  1 2026, 00:00:00) [GCC 14.3.1 20251022 (Red Hat 14.3.1-4)]",
+  "passed": true,
+  "tests": {
+    "tests": 51,
+    "failures": 0,
+    "errors": 0,
+    "passed": true,
+    "blocked_model_imports": [
+      "torch",
+      "transformers",
+      "safetensors",
+      "triton",
+      "cupy"
+    ],
+    "model_runtimes_loaded": []
+  },
+  "case_counts": {
+    "reference": 52,
+    "component": 46,
+    "native": 12
+  },
+  "loader_validation_ast_identical": true,
+  "benchmark_exit_code": 0,
+  "tests_seconds": 16.263,
+  "test_sources": {
+    "tests/test_training_release.py": "fe1ce12e4cd45a7368752b8b22320646d4c54968686ed952554804d0d2e7b11d",
+    "tests/test_episode_producer.py": "30c80427c0e5708befbb3ed3e83660d5db48a8dafd4ffdeca64b94822f63e382",
+    "tests/test_training_inputs.py": "abdf58bc7c685ed02ea02d62865fdc52202df6140c24f97b2c3fbf04d28bd575",
+    "tests/test_reference_data.py": "6579e1fa6fdda55093ff52545030de4392e5ceffb05aeca101f893a360ba90f0",
+    "tests/test_reference_qualification.py": "0828994d5744260ab6098d2ca7ef7ef80b074077594f71ba1653beb9f1c28328",
+    "tests/test_receiver_learning.py": "a29b7cf9e9143ef53fb9f26b7586f24851c7fb50ff8386e172fe7718a302a7c0"
+  },
+  "raw_files": {
+    "data/manifest-access-20261107/run/report.json": "e324a2897431fb54fbe77bc57201fb5f104b5c155cfab2f69dc26e203004cab5",
+    "data/manifest-access-20261107/benchmark.log": "513eff6206b491443706a1c6733a984a94105cb6c6347d8e74cbb1c71b42d4ad",
+    "data/manifest-access-20261107/tests.log": "57037cabe939f761d5d1486ce6ee5ea83745ebf8f9209d07526deb8f8f649970",
+    "data/manifest-access-20261107/test-result.json": "39fa0f395480dbc6fe59a5043af14a59e2ba949d68a1d7b47cae60b4314ec408",
+    "data/manifest-access-20261107/run_tests.py": "f10e20e33d2ef219b7409b58c31ecb518a3d5e4cf1d9f29356165349d929605c",
+    "data/manifest-access-20261107/tests-initial-failed.log": "b704e3415af4bce650673c933921e83858bf53b9177ca9f613acd1001cbdc4a4",
+    "data/manifest-access-20261107/test-result-initial-failed.json": "3bbe5f9c2bbb6ec8154ae336d56ceea8b8ff81265ed6248cf58feaf850646b29",
+    "data/manifest-access-20261107/audit.py": "bce6e3685e963ec738a80c25bc402a52fabdacdecec07ae53813005ac89884ce"
+  },
+  "initial_test_failure": "One new fixture omitted operation; fixture corrected. Initial 51-test run had one error; final full run passes all 51. Failed log retained.",
+  "limitations": [
+    "CPU preparation timing only; no end-to-end training/GPU speedup measured.",
+    "No models imported/loaded/executed, no GPU tools, new semantic data, agents or training.",
+    "No new numeric or learned-flow qualification; existing model reports remain unchanged."
+  ]
+}
