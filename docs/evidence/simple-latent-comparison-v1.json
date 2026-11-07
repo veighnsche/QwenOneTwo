@@ -1,0 +1,1531 @@
+{
+  "accounting": {
+    "candidate_offline_source_tokens": 14212,
+    "candidate_positions": 20856,
+    "candidate_sessions": 180,
+    "control_anchor_positions": 374,
+    "control_anchor_sessions": 3,
+    "control_offline_source_tokens": 253,
+    "new_reference_encodings": 0,
+    "reference_pooler_calls": 0,
+    "reused_control_positions_executed": 0,
+    "text_invocation_tokens": 0,
+    "unique_reused_reference_states": 160
+  },
+  "audit": {
+    "anchors": 3,
+    "cases": 180,
+    "locked_opened": false,
+    "role_payload_byte_hashes": 160,
+    "status": "PASSED"
+  },
+  "cache_unchanged": true,
+  "candidate_behavior": {
+    "blockers": [
+      "receiver semantic/behavior success below 90%",
+      "per-operation success below 85%",
+      "status accuracy below 95%",
+      "reviewed Score agreement below 90%",
+      "paired intervention success below 90%"
+    ],
+    "omitted_reader_ids": [
+      "development-X-09-000-0",
+      "development-X-09-000-1",
+      "development-X-09-001-0",
+      "development-X-09-001-1",
+      "development-X-09-002-0",
+      "development-X-09-002-1",
+      "development-X-09-003-0",
+      "development-X-09-003-1",
+      "development-X-09-004-0",
+      "development-X-09-004-1",
+      "development-X-09-005-0",
+      "development-X-09-005-1",
+      "development-X-09-006-0",
+      "development-X-09-006-1",
+      "development-X-09-007-0",
+      "development-X-09-007-1",
+      "development-X-09-008-0",
+      "development-X-09-008-1",
+      "development-X-09-009-0",
+      "development-X-09-009-1"
+    ],
+    "operations": {
+      "Choice": {
+        "passed": 11,
+        "scheduled": 40,
+        "status_correct": 39
+      },
+      "Noul": {
+        "passed": 20,
+        "scheduled": 100,
+        "status_correct": 70
+      },
+      "Score": {
+        "passed": 0,
+        "scheduled": 40,
+        "status_correct": 40
+      }
+    },
+    "pairs_passed": 0,
+    "pairs_scheduled": 90,
+    "passed": 31,
+    "scheduled": 180,
+    "status": "BLOCKED",
+    "status_correct": 149,
+    "transport_valid": 180
+  },
+  "candidate_capture_sha256": "edff6fa51cf42e694534cfa0096382788af9a203af804790fdfd8bc5d121f942",
+  "candidate_learning": {
+    "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+    "kind": "behavior",
+    "operations": {
+      "Choice": {
+        "counts": {
+          "assessed_behavior_passed": 11,
+          "assessed_head_correct": 11,
+          "assessed_head_status_correct": 11,
+          "assessed_scheduled": 40,
+          "assessed_selection_measured": 39,
+          "assessed_status_correct": 39,
+          "behavior_passed": 11,
+          "failed": 0,
+          "nonassessed_behavior_passed": 0,
+          "scheduled": 40,
+          "status_correct": 39,
+          "transport_valid": 40
+        },
+        "losses": {},
+        "noul_brier": {
+          "mean": null,
+          "measured": 0
+        },
+        "raw_readout": {
+          "maximum": null,
+          "mean": null,
+          "measured": 0,
+          "minimum": null
+        },
+        "score_interval_distance": {
+          "mean": null,
+          "measured": 0
+        },
+        "status_confusion": {
+          "Assessed -> Assessed": 39,
+          "Assessed -> Conflicting": 1
+        }
+      },
+      "Noul": {
+        "counts": {
+          "assessed_behavior_passed": 20,
+          "assessed_head_correct": 20,
+          "assessed_head_status_correct": 20,
+          "assessed_probability_ties": 0,
+          "assessed_scheduled": 70,
+          "assessed_status_correct": 70,
+          "behavior_passed": 20,
+          "failed": 0,
+          "nonassessed_behavior_passed": 0,
+          "scheduled": 100,
+          "status_correct": 70,
+          "transport_valid": 100
+        },
+        "losses": {},
+        "noul_brier": {
+          "mean": 0.29391752228608403,
+          "measured": 70
+        },
+        "raw_readout": {
+          "maximum": null,
+          "mean": null,
+          "measured": 0,
+          "minimum": null
+        },
+        "score_interval_distance": {
+          "mean": null,
+          "measured": 0
+        },
+        "status_confusion": {
+          "Assessed -> Assessed": 70,
+          "Insufficient -> Assessed": 30
+        }
+      },
+      "Score": {
+        "counts": {
+          "assessed_behavior_passed": 0,
+          "assessed_head_correct": 0,
+          "assessed_head_status_correct": 0,
+          "assessed_scheduled": 40,
+          "assessed_status_correct": 40,
+          "behavior_passed": 0,
+          "failed": 0,
+          "nonassessed_behavior_passed": 0,
+          "scheduled": 40,
+          "status_correct": 40,
+          "transport_valid": 40
+        },
+        "losses": {},
+        "noul_brier": {
+          "mean": null,
+          "measured": 0
+        },
+        "raw_readout": {
+          "maximum": null,
+          "mean": null,
+          "measured": 0,
+          "minimum": null
+        },
+        "score_interval_distance": {
+          "mean": 0.24122762291226535,
+          "measured": 40
+        },
+        "status_confusion": {
+          "Assessed -> Assessed": 40
+        }
+      }
+    },
+    "scheduled": 180,
+    "scope": "actual decoded/delivered receiver behavior; not learned invocation"
+  },
+  "candidate_noul_values": {
+    "above_half": 0,
+    "below_half": 100,
+    "maximum": 0.4183657765388489,
+    "measured": 100,
+    "minimum": 0.4131150245666504
+  },
+  "candidate_profile": "ordered-full-width-means-v1",
+  "categories": {
+    "1": {
+      "candidate_passed": 0,
+      "candidate_value_direction": {
+        "correct": 3,
+        "measured": 10
+      },
+      "control_passed": 0,
+      "control_value_direction": {
+        "correct": 9,
+        "measured": 10
+      },
+      "pairs": 10
+    },
+    "10": {
+      "candidate_passed": 0,
+      "candidate_value_direction": {
+        "correct": 0,
+        "measured": 0
+      },
+      "control_passed": 0,
+      "control_value_direction": {
+        "correct": 0,
+        "measured": 0
+      },
+      "pairs": 10
+    },
+    "2": {
+      "candidate_passed": 0,
+      "candidate_value_direction": {
+        "correct": 1,
+        "measured": 10
+      },
+      "control_passed": 0,
+      "control_value_direction": {
+        "correct": 8,
+        "measured": 10
+      },
+      "pairs": 10
+    },
+    "3": {
+      "candidate_passed": 0,
+      "candidate_value_direction": {
+        "correct": 0,
+        "measured": 0
+      },
+      "control_passed": 0,
+      "control_value_direction": {
+        "correct": 0,
+        "measured": 0
+      },
+      "pairs": 10
+    },
+    "4": {
+      "candidate_passed": 0,
+      "candidate_value_direction": {
+        "correct": 0,
+        "measured": 0
+      },
+      "control_passed": 3,
+      "control_value_direction": {
+        "correct": 0,
+        "measured": 0
+      },
+      "pairs": 10
+    },
+    "5": {
+      "candidate_passed": 0,
+      "candidate_value_direction": {
+        "correct": 0,
+        "measured": 0
+      },
+      "control_passed": 10,
+      "control_value_direction": {
+        "correct": 0,
+        "measured": 0
+      },
+      "pairs": 10
+    },
+    "6": {
+      "candidate_passed": 0,
+      "candidate_value_direction": {
+        "correct": 0,
+        "measured": 0
+      },
+      "control_passed": 10,
+      "control_value_direction": {
+        "correct": 0,
+        "measured": 0
+      },
+      "pairs": 10
+    },
+    "7": {
+      "candidate_passed": 0,
+      "candidate_value_direction": {
+        "correct": 4,
+        "measured": 10
+      },
+      "control_passed": 0,
+      "control_value_direction": {
+        "correct": 5,
+        "measured": 10
+      },
+      "pairs": 10
+    },
+    "8": {
+      "candidate_passed": 0,
+      "candidate_value_direction": {
+        "correct": 7,
+        "measured": 10
+      },
+      "control_passed": 0,
+      "control_value_direction": {
+        "correct": 0,
+        "measured": 10
+      },
+      "pairs": 10
+    }
+  },
+  "completed_cases": 180,
+  "control_anchors_exact": 3,
+  "control_behavior": {
+    "blockers": [
+      "receiver semantic/behavior success below 90%",
+      "per-operation success below 85%",
+      "status accuracy below 95%",
+      "reviewed Score agreement below 90%",
+      "paired intervention success below 90%"
+    ],
+    "omitted_reader_ids": [
+      "development-X-09-000-0",
+      "development-X-09-000-1",
+      "development-X-09-001-0",
+      "development-X-09-001-1",
+      "development-X-09-002-0",
+      "development-X-09-002-1",
+      "development-X-09-003-0",
+      "development-X-09-003-1",
+      "development-X-09-004-0",
+      "development-X-09-004-1",
+      "development-X-09-005-0",
+      "development-X-09-005-1",
+      "development-X-09-006-0",
+      "development-X-09-006-1",
+      "development-X-09-007-0",
+      "development-X-09-007-1",
+      "development-X-09-008-0",
+      "development-X-09-008-1",
+      "development-X-09-009-0",
+      "development-X-09-009-1"
+    ],
+    "operations": {
+      "Choice": {
+        "passed": 40,
+        "scheduled": 40,
+        "status_correct": 40
+      },
+      "Noul": {
+        "passed": 9,
+        "scheduled": 100,
+        "status_correct": 9
+      },
+      "Score": {
+        "passed": 0,
+        "scheduled": 40,
+        "status_correct": 40
+      }
+    },
+    "pairs_passed": 23,
+    "pairs_scheduled": 90,
+    "passed": 49,
+    "scheduled": 180,
+    "status": "BLOCKED",
+    "status_correct": 89,
+    "transport_valid": 180
+  },
+  "control_learning": {
+    "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+    "kind": "behavior",
+    "operations": {
+      "Choice": {
+        "counts": {
+          "assessed_behavior_passed": 40,
+          "assessed_head_correct": 40,
+          "assessed_head_status_correct": 40,
+          "assessed_scheduled": 40,
+          "assessed_selection_measured": 40,
+          "assessed_status_correct": 40,
+          "behavior_passed": 40,
+          "failed": 0,
+          "nonassessed_behavior_passed": 0,
+          "scheduled": 40,
+          "status_correct": 40,
+          "transport_valid": 40
+        },
+        "losses": {},
+        "noul_brier": {
+          "mean": null,
+          "measured": 0
+        },
+        "raw_readout": {
+          "maximum": null,
+          "mean": null,
+          "measured": 0,
+          "minimum": null
+        },
+        "score_interval_distance": {
+          "mean": null,
+          "measured": 0
+        },
+        "status_confusion": {
+          "Assessed -> Assessed": 40
+        }
+      },
+      "Noul": {
+        "counts": {
+          "assessed_behavior_passed": 0,
+          "assessed_head_correct": 20,
+          "assessed_head_status_correct": 0,
+          "assessed_probability_ties": 0,
+          "assessed_scheduled": 70,
+          "assessed_status_correct": 0,
+          "behavior_passed": 9,
+          "failed": 0,
+          "nonassessed_behavior_passed": 9,
+          "scheduled": 100,
+          "status_correct": 9,
+          "transport_valid": 100
+        },
+        "losses": {},
+        "noul_brier": {
+          "mean": 0.2891483589298889,
+          "measured": 70
+        },
+        "raw_readout": {
+          "maximum": null,
+          "mean": null,
+          "measured": 0,
+          "minimum": null
+        },
+        "score_interval_distance": {
+          "mean": null,
+          "measured": 0
+        },
+        "status_confusion": {
+          "Assessed -> Unresolved": 70,
+          "Insufficient -> Assessed": 3,
+          "Insufficient -> Insufficient": 9,
+          "Insufficient -> Unresolved": 18
+        }
+      },
+      "Score": {
+        "counts": {
+          "assessed_behavior_passed": 0,
+          "assessed_head_correct": 0,
+          "assessed_head_status_correct": 0,
+          "assessed_scheduled": 40,
+          "assessed_status_correct": 40,
+          "behavior_passed": 0,
+          "failed": 0,
+          "nonassessed_behavior_passed": 0,
+          "scheduled": 40,
+          "status_correct": 40,
+          "transport_valid": 40
+        },
+        "losses": {},
+        "noul_brier": {
+          "mean": null,
+          "measured": 0
+        },
+        "raw_readout": {
+          "maximum": null,
+          "mean": null,
+          "measured": 0,
+          "minimum": null
+        },
+        "score_interval_distance": {
+          "mean": 0.23389020322356374,
+          "measured": 40
+        },
+        "status_confusion": {
+          "Assessed -> Assessed": 40
+        }
+      }
+    },
+    "scheduled": 180,
+    "scope": "actual decoded/delivered receiver behavior; not learned invocation"
+  },
+  "cpu_tests": {
+    "command": "PYTHONPATH=tests .venv/bin/python -m unittest test_simple_latent test_information_loss -q",
+    "passed": 10,
+    "seconds": 0.189
+  },
+  "decision": "REJECTED_AS_FROZEN_REPLACEMENT",
+  "displacement": {
+    "h_relative_l2_mean": 0.6244076297752218,
+    "wire_relative_l2_mean": 0.45167608366248835
+  },
+  "failures": {},
+  "final_base": {
+    "base_tied_storage": true,
+    "mismatches": [],
+    "parameters_checked": 320,
+    "pass": true
+  },
+  "frozen_unchanged": true,
+  "gpu_uuid": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+  "gradients_none": true,
+  "identical_input_invariance": [
+    "development-X-04-000",
+    "development-X-04-001",
+    "development-X-04-002",
+    "development-X-04-003",
+    "development-X-04-004",
+    "development-X-04-005",
+    "development-X-04-006",
+    "development-X-04-007",
+    "development-X-04-008",
+    "development-X-04-009",
+    "development-X-10-000",
+    "development-X-10-001",
+    "development-X-10-002",
+    "development-X-10-003",
+    "development-X-10-004",
+    "development-X-10-005",
+    "development-X-10-006",
+    "development-X-10-007",
+    "development-X-10-008",
+    "development-X-10-009"
+  ],
+  "initial_base": {
+    "base_tied_storage": true,
+    "mismatches": [],
+    "parameters_checked": 320,
+    "pass": true
+  },
+  "optimizer_updates": 0,
+  "paired_outcomes": {
+    "Choice": {
+      "both_fail": 0,
+      "both_pass": 11,
+      "candidate_only": 0,
+      "cases": 40,
+      "control_only": 29
+    },
+    "Noul": {
+      "both_fail": 71,
+      "both_pass": 0,
+      "candidate_only": 20,
+      "cases": 100,
+      "control_only": 9
+    },
+    "Score": {
+      "both_fail": 40,
+      "both_pass": 0,
+      "candidate_only": 0,
+      "cases": 40,
+      "control_only": 0
+    }
+  },
+  "peak_cuda_bytes": 3622856704,
+  "plan": {
+    "anchors": [
+      "development-X-01-000-0",
+      "development-X-05-000-0",
+      "development-X-07-000-0"
+    ],
+    "candidate_count": 1,
+    "candidate_profile": "ordered-full-width-means-v1",
+    "capture_sha256": "28820b5c58acdae8725b4f1a069a20641b12b7afd3f4b866e4f6553c2b46fbbb",
+    "checkpoint": "data/receiver-learning-20261106/continued/checkpoint-0188",
+    "checkpoint_manifest_sha256": "0cd1d4bc55341e78339c1b0b05dec0b3650573d7501fb3f3d2fc6d2f649b6e58",
+    "control_evidence_sha256": "1f14881180752190fce10ec86aec9640260cd4f4257c05f80e554326aed6e2b1",
+    "dataset": "5b8f4cffdc4f33e255d3a34306cac03a68c50dcd9dab905ae8d8adcf89c81e77",
+    "gpu_uuid": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+    "new_annotations": 0,
+    "new_sessions": {
+      "candidate": 180,
+      "control_anchors": 3
+    },
+    "numeric_profile": "b1-full-v3-feedback-fp32-vocab-compensated2-temporal32-recurrence-graph-v1",
+    "omitted_reader_ids": [
+      "development-X-09-000-0",
+      "development-X-09-000-1",
+      "development-X-09-001-0",
+      "development-X-09-001-1",
+      "development-X-09-002-0",
+      "development-X-09-002-1",
+      "development-X-09-003-0",
+      "development-X-09-003-1",
+      "development-X-09-004-0",
+      "development-X-09-004-1",
+      "development-X-09-005-0",
+      "development-X-09-005-1",
+      "development-X-09-006-0",
+      "development-X-09-006-1",
+      "development-X-09-007-0",
+      "development-X-09-007-1",
+      "development-X-09-008-0",
+      "development-X-09-008-1",
+      "development-X-09-009-0",
+      "development-X-09-009-1"
+    ],
+    "optimizer_updates": 0,
+    "pairs": [
+      {
+        "category": 1,
+        "id": "development-X-01-000",
+        "ids": [
+          "development-X-01-000-0",
+          "development-X-01-000-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 1,
+        "id": "development-X-01-001",
+        "ids": [
+          "development-X-01-001-0",
+          "development-X-01-001-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 1,
+        "id": "development-X-01-002",
+        "ids": [
+          "development-X-01-002-0",
+          "development-X-01-002-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 1,
+        "id": "development-X-01-003",
+        "ids": [
+          "development-X-01-003-0",
+          "development-X-01-003-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 1,
+        "id": "development-X-01-004",
+        "ids": [
+          "development-X-01-004-0",
+          "development-X-01-004-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 1,
+        "id": "development-X-01-005",
+        "ids": [
+          "development-X-01-005-0",
+          "development-X-01-005-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 1,
+        "id": "development-X-01-006",
+        "ids": [
+          "development-X-01-006-0",
+          "development-X-01-006-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 1,
+        "id": "development-X-01-007",
+        "ids": [
+          "development-X-01-007-0",
+          "development-X-01-007-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 1,
+        "id": "development-X-01-008",
+        "ids": [
+          "development-X-01-008-0",
+          "development-X-01-008-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 1,
+        "id": "development-X-01-009",
+        "ids": [
+          "development-X-01-009-0",
+          "development-X-01-009-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 2,
+        "id": "development-X-02-000",
+        "ids": [
+          "development-X-02-000-0",
+          "development-X-02-000-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 2,
+        "id": "development-X-02-001",
+        "ids": [
+          "development-X-02-001-0",
+          "development-X-02-001-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 2,
+        "id": "development-X-02-002",
+        "ids": [
+          "development-X-02-002-0",
+          "development-X-02-002-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 2,
+        "id": "development-X-02-003",
+        "ids": [
+          "development-X-02-003-0",
+          "development-X-02-003-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 2,
+        "id": "development-X-02-004",
+        "ids": [
+          "development-X-02-004-0",
+          "development-X-02-004-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 2,
+        "id": "development-X-02-005",
+        "ids": [
+          "development-X-02-005-0",
+          "development-X-02-005-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 2,
+        "id": "development-X-02-006",
+        "ids": [
+          "development-X-02-006-0",
+          "development-X-02-006-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 2,
+        "id": "development-X-02-007",
+        "ids": [
+          "development-X-02-007-0",
+          "development-X-02-007-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 2,
+        "id": "development-X-02-008",
+        "ids": [
+          "development-X-02-008-0",
+          "development-X-02-008-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 2,
+        "id": "development-X-02-009",
+        "ids": [
+          "development-X-02-009-0",
+          "development-X-02-009-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 3,
+        "id": "development-X-03-000",
+        "ids": [
+          "development-X-03-000-0",
+          "development-X-03-000-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 3,
+        "id": "development-X-03-001",
+        "ids": [
+          "development-X-03-001-0",
+          "development-X-03-001-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 3,
+        "id": "development-X-03-002",
+        "ids": [
+          "development-X-03-002-0",
+          "development-X-03-002-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 3,
+        "id": "development-X-03-003",
+        "ids": [
+          "development-X-03-003-0",
+          "development-X-03-003-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 3,
+        "id": "development-X-03-004",
+        "ids": [
+          "development-X-03-004-0",
+          "development-X-03-004-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 3,
+        "id": "development-X-03-005",
+        "ids": [
+          "development-X-03-005-0",
+          "development-X-03-005-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 3,
+        "id": "development-X-03-006",
+        "ids": [
+          "development-X-03-006-0",
+          "development-X-03-006-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 3,
+        "id": "development-X-03-007",
+        "ids": [
+          "development-X-03-007-0",
+          "development-X-03-007-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 3,
+        "id": "development-X-03-008",
+        "ids": [
+          "development-X-03-008-0",
+          "development-X-03-008-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 3,
+        "id": "development-X-03-009",
+        "ids": [
+          "development-X-03-009-0",
+          "development-X-03-009-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 4,
+        "id": "development-X-04-000",
+        "ids": [
+          "development-X-04-000-0",
+          "development-X-04-000-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 4,
+        "id": "development-X-04-001",
+        "ids": [
+          "development-X-04-001-0",
+          "development-X-04-001-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 4,
+        "id": "development-X-04-002",
+        "ids": [
+          "development-X-04-002-0",
+          "development-X-04-002-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 4,
+        "id": "development-X-04-003",
+        "ids": [
+          "development-X-04-003-0",
+          "development-X-04-003-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 4,
+        "id": "development-X-04-004",
+        "ids": [
+          "development-X-04-004-0",
+          "development-X-04-004-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 4,
+        "id": "development-X-04-005",
+        "ids": [
+          "development-X-04-005-0",
+          "development-X-04-005-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 4,
+        "id": "development-X-04-006",
+        "ids": [
+          "development-X-04-006-0",
+          "development-X-04-006-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 4,
+        "id": "development-X-04-007",
+        "ids": [
+          "development-X-04-007-0",
+          "development-X-04-007-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 4,
+        "id": "development-X-04-008",
+        "ids": [
+          "development-X-04-008-0",
+          "development-X-04-008-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 4,
+        "id": "development-X-04-009",
+        "ids": [
+          "development-X-04-009-0",
+          "development-X-04-009-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 5,
+        "id": "development-X-05-000",
+        "ids": [
+          "development-X-05-000-0",
+          "development-X-05-000-1"
+        ],
+        "operation": "Choice"
+      },
+      {
+        "category": 5,
+        "id": "development-X-05-001",
+        "ids": [
+          "development-X-05-001-0",
+          "development-X-05-001-1"
+        ],
+        "operation": "Choice"
+      },
+      {
+        "category": 5,
+        "id": "development-X-05-002",
+        "ids": [
+          "development-X-05-002-0",
+          "development-X-05-002-1"
+        ],
+        "operation": "Choice"
+      },
+      {
+        "category": 5,
+        "id": "development-X-05-003",
+        "ids": [
+          "development-X-05-003-0",
+          "development-X-05-003-1"
+        ],
+        "operation": "Choice"
+      },
+      {
+        "category": 5,
+        "id": "development-X-05-004",
+        "ids": [
+          "development-X-05-004-0",
+          "development-X-05-004-1"
+        ],
+        "operation": "Choice"
+      },
+      {
+        "category": 5,
+        "id": "development-X-05-005",
+        "ids": [
+          "development-X-05-005-0",
+          "development-X-05-005-1"
+        ],
+        "operation": "Choice"
+      },
+      {
+        "category": 5,
+        "id": "development-X-05-006",
+        "ids": [
+          "development-X-05-006-0",
+          "development-X-05-006-1"
+        ],
+        "operation": "Choice"
+      },
+      {
+        "category": 5,
+        "id": "development-X-05-007",
+        "ids": [
+          "development-X-05-007-0",
+          "development-X-05-007-1"
+        ],
+        "operation": "Choice"
+      },
+      {
+        "category": 5,
+        "id": "development-X-05-008",
+        "ids": [
+          "development-X-05-008-0",
+          "development-X-05-008-1"
+        ],
+        "operation": "Choice"
+      },
+      {
+        "category": 5,
+        "id": "development-X-05-009",
+        "ids": [
+          "development-X-05-009-0",
+          "development-X-05-009-1"
+        ],
+        "operation": "Choice"
+      },
+      {
+        "category": 6,
+        "id": "development-X-06-000",
+        "ids": [
+          "development-X-06-000-0",
+          "development-X-06-000-1"
+        ],
+        "operation": "Choice"
+      },
+      {
+        "category": 6,
+        "id": "development-X-06-001",
+        "ids": [
+          "development-X-06-001-0",
+          "development-X-06-001-1"
+        ],
+        "operation": "Choice"
+      },
+      {
+        "category": 6,
+        "id": "development-X-06-002",
+        "ids": [
+          "development-X-06-002-0",
+          "development-X-06-002-1"
+        ],
+        "operation": "Choice"
+      },
+      {
+        "category": 6,
+        "id": "development-X-06-003",
+        "ids": [
+          "development-X-06-003-0",
+          "development-X-06-003-1"
+        ],
+        "operation": "Choice"
+      },
+      {
+        "category": 6,
+        "id": "development-X-06-004",
+        "ids": [
+          "development-X-06-004-0",
+          "development-X-06-004-1"
+        ],
+        "operation": "Choice"
+      },
+      {
+        "category": 6,
+        "id": "development-X-06-005",
+        "ids": [
+          "development-X-06-005-0",
+          "development-X-06-005-1"
+        ],
+        "operation": "Choice"
+      },
+      {
+        "category": 6,
+        "id": "development-X-06-006",
+        "ids": [
+          "development-X-06-006-0",
+          "development-X-06-006-1"
+        ],
+        "operation": "Choice"
+      },
+      {
+        "category": 6,
+        "id": "development-X-06-007",
+        "ids": [
+          "development-X-06-007-0",
+          "development-X-06-007-1"
+        ],
+        "operation": "Choice"
+      },
+      {
+        "category": 6,
+        "id": "development-X-06-008",
+        "ids": [
+          "development-X-06-008-0",
+          "development-X-06-008-1"
+        ],
+        "operation": "Choice"
+      },
+      {
+        "category": 6,
+        "id": "development-X-06-009",
+        "ids": [
+          "development-X-06-009-0",
+          "development-X-06-009-1"
+        ],
+        "operation": "Choice"
+      },
+      {
+        "category": 7,
+        "id": "development-X-07-000",
+        "ids": [
+          "development-X-07-000-0",
+          "development-X-07-000-1"
+        ],
+        "operation": "Score"
+      },
+      {
+        "category": 7,
+        "id": "development-X-07-001",
+        "ids": [
+          "development-X-07-001-0",
+          "development-X-07-001-1"
+        ],
+        "operation": "Score"
+      },
+      {
+        "category": 7,
+        "id": "development-X-07-002",
+        "ids": [
+          "development-X-07-002-0",
+          "development-X-07-002-1"
+        ],
+        "operation": "Score"
+      },
+      {
+        "category": 7,
+        "id": "development-X-07-003",
+        "ids": [
+          "development-X-07-003-0",
+          "development-X-07-003-1"
+        ],
+        "operation": "Score"
+      },
+      {
+        "category": 7,
+        "id": "development-X-07-004",
+        "ids": [
+          "development-X-07-004-0",
+          "development-X-07-004-1"
+        ],
+        "operation": "Score"
+      },
+      {
+        "category": 7,
+        "id": "development-X-07-005",
+        "ids": [
+          "development-X-07-005-0",
+          "development-X-07-005-1"
+        ],
+        "operation": "Score"
+      },
+      {
+        "category": 7,
+        "id": "development-X-07-006",
+        "ids": [
+          "development-X-07-006-0",
+          "development-X-07-006-1"
+        ],
+        "operation": "Score"
+      },
+      {
+        "category": 7,
+        "id": "development-X-07-007",
+        "ids": [
+          "development-X-07-007-0",
+          "development-X-07-007-1"
+        ],
+        "operation": "Score"
+      },
+      {
+        "category": 7,
+        "id": "development-X-07-008",
+        "ids": [
+          "development-X-07-008-0",
+          "development-X-07-008-1"
+        ],
+        "operation": "Score"
+      },
+      {
+        "category": 7,
+        "id": "development-X-07-009",
+        "ids": [
+          "development-X-07-009-0",
+          "development-X-07-009-1"
+        ],
+        "operation": "Score"
+      },
+      {
+        "category": 8,
+        "id": "development-X-08-000",
+        "ids": [
+          "development-X-08-000-0",
+          "development-X-08-000-1"
+        ],
+        "operation": "Score"
+      },
+      {
+        "category": 8,
+        "id": "development-X-08-001",
+        "ids": [
+          "development-X-08-001-0",
+          "development-X-08-001-1"
+        ],
+        "operation": "Score"
+      },
+      {
+        "category": 8,
+        "id": "development-X-08-002",
+        "ids": [
+          "development-X-08-002-0",
+          "development-X-08-002-1"
+        ],
+        "operation": "Score"
+      },
+      {
+        "category": 8,
+        "id": "development-X-08-003",
+        "ids": [
+          "development-X-08-003-0",
+          "development-X-08-003-1"
+        ],
+        "operation": "Score"
+      },
+      {
+        "category": 8,
+        "id": "development-X-08-004",
+        "ids": [
+          "development-X-08-004-0",
+          "development-X-08-004-1"
+        ],
+        "operation": "Score"
+      },
+      {
+        "category": 8,
+        "id": "development-X-08-005",
+        "ids": [
+          "development-X-08-005-0",
+          "development-X-08-005-1"
+        ],
+        "operation": "Score"
+      },
+      {
+        "category": 8,
+        "id": "development-X-08-006",
+        "ids": [
+          "development-X-08-006-0",
+          "development-X-08-006-1"
+        ],
+        "operation": "Score"
+      },
+      {
+        "category": 8,
+        "id": "development-X-08-007",
+        "ids": [
+          "development-X-08-007-0",
+          "development-X-08-007-1"
+        ],
+        "operation": "Score"
+      },
+      {
+        "category": 8,
+        "id": "development-X-08-008",
+        "ids": [
+          "development-X-08-008-0",
+          "development-X-08-008-1"
+        ],
+        "operation": "Score"
+      },
+      {
+        "category": 8,
+        "id": "development-X-08-009",
+        "ids": [
+          "development-X-08-009-0",
+          "development-X-08-009-1"
+        ],
+        "operation": "Score"
+      },
+      {
+        "category": 10,
+        "id": "development-X-10-000",
+        "ids": [
+          "development-X-10-000-0",
+          "development-X-10-000-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 10,
+        "id": "development-X-10-001",
+        "ids": [
+          "development-X-10-001-0",
+          "development-X-10-001-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 10,
+        "id": "development-X-10-002",
+        "ids": [
+          "development-X-10-002-0",
+          "development-X-10-002-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 10,
+        "id": "development-X-10-003",
+        "ids": [
+          "development-X-10-003-0",
+          "development-X-10-003-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 10,
+        "id": "development-X-10-004",
+        "ids": [
+          "development-X-10-004-0",
+          "development-X-10-004-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 10,
+        "id": "development-X-10-005",
+        "ids": [
+          "development-X-10-005-0",
+          "development-X-10-005-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 10,
+        "id": "development-X-10-006",
+        "ids": [
+          "development-X-10-006-0",
+          "development-X-10-006-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 10,
+        "id": "development-X-10-007",
+        "ids": [
+          "development-X-10-007-0",
+          "development-X-10-007-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 10,
+        "id": "development-X-10-008",
+        "ids": [
+          "development-X-10-008-0",
+          "development-X-10-008-1"
+        ],
+        "operation": "Noul"
+      },
+      {
+        "category": 10,
+        "id": "development-X-10-009",
+        "ids": [
+          "development-X-10-009-0",
+          "development-X-10-009-1"
+        ],
+        "operation": "Noul"
+      }
+    ],
+    "protocol": "simple-latent-comparison-v1",
+    "receiver": "94218aae6ec62a7745c349af8e9975fd4987520cf9f1345f38e44586e5e7742c",
+    "reference": "5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f",
+    "reused_control_cases": 180,
+    "scope": "frozen receiver compatibility only; fixed slot capacity; no fitted readout, new data or promotion",
+    "snapshot": "/home/vince/the-operating-table/data/huggingface/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+    "sources": {
+      "qwen_one_two/__init__.py": "b6236192beea05d03b8d7c828e63761bca002cbd4ca967ecbc2fea0f7c02caad",
+      "qwen_one_two/codec/__init__.py": "9b577482d1138d4d449fcc2bc9aa493538658afefe0bffb2a72828ab12e7ea38",
+      "qwen_one_two/codec/attention_block.py": "e0aac0b53d7a6afed5bd5dbe0cc3570bdb9254391d1e1cb7eb8acd12674196c9",
+      "qwen_one_two/codec/backbone.py": "45f403ae15e9d1e651b235428847571dbe68f04bc1545fd17b684d029a2f2d31",
+      "qwen_one_two/codec/diagnose_precision.py": "4edc64ec7af6525493e57c33f5fe4866e9ec0c0709086ae1fa99898d75fb23f3",
+      "qwen_one_two/codec/finite.py": "031cd3714a070650619284a83205d48af5aa08f04865028f3a29076d13c98f70",
+      "qwen_one_two/codec/fixtures.py": "36c91e9d949d2d03d4aaaafa709853eaeb7796465b02f6a9853f109f95221bc3",
+      "qwen_one_two/codec/neural.py": "1ac72b7a37bc90639d1e25d0dbcd1375bc6c6e090e0306d0ef2a96c8620a4fec",
+      "qwen_one_two/codec/ownership.py": "d9f10f5f6f8a8233b208110820f4e620253e668463042a30ad2dbbce0357f8dc",
+      "qwen_one_two/codec/precision.py": "9eb775efc303ce6d9eb8bbec26ffdcd6422f37ad0732e03ef0885ae9433c8e5b",
+      "qwen_one_two/codec/qualify.py": "d1204bd1e1ce70721d03e936ec92c8e30cd9b54ce0d79e50bbab46e3fd540851",
+      "qwen_one_two/codec/qualify_matrix.py": "07e25deee4eb930d498d5ca071f76c9022ee27823d62d90fcad45f59efb5a1ff",
+      "qwen_one_two/codec/records.py": "089eb06d1fd55e9a1629297759c942f046dc570058cf9cb304c8d88069287b04",
+      "qwen_one_two/codec/recurrence.py": "ccab3956c20373b6a54cb2ebfcf26289193a7325b09f9f6a38e10883c23694c2",
+      "qwen_one_two/codec/render.py": "9e16fb579268e4261cd134883e698f6ae3c69a2802f1dbc2502855062920b82b",
+      "qwen_one_two/codec/runtime.py": "350c79f141e6898c5f762bf9b9c1708bd11297bdd01227c93a39abec2bd61d3a",
+      "qwen_one_two/codec/schema.py": "5a2ff9f2f38b7338da5cf6d7f605bed953e136c37445983f0cf965f1e17dbe23",
+      "qwen_one_two/codec/session.py": "2992225ccc68128680dec23bd64d3273ca950362e35eac6a5430ad00bf45ae3b",
+      "qwen_one_two/codec/writer.py": "187d0a07a4f29c1c4da560f84f361e0099be49c588933d25c8bb35b51ddca1a0",
+      "qwen_one_two/curriculum.py": "7d4f4172e4a1b733ba38721224b58079c0b6196dc914cfb30e783d308328a2cf",
+      "qwen_one_two/decision.py": "0ef4605594a83668996abc0546f89ecf0faa67afd1c383acbc333b73b889864a",
+      "qwen_one_two/download.py": "eb3e8ca5009302d43abe5cbf2e4ec3b53c28ffc2ec6a786440ee40099fee53d4",
+      "qwen_one_two/g1_accounting.py": "6d6d872a7337dd026da0354c9526e7eee012576cf518e19397832896cc3a4dd2",
+      "qwen_one_two/g1_backbone.py": "e179c2c4550285de40d8babc30f4ee300eb340c23441b364e0ff8c641ba6865d",
+      "qwen_one_two/g1_checks.py": "7c32e89b246a6e26235e48e041f6ff5923b589cdf48df073a17bf253ed470950",
+      "qwen_one_two/g1_device.py": "e4a550b80ac3f1de35be7c6057cca65b0e46ec2ba2248ca72e0d67b6451b5f2e",
+      "qwen_one_two/g1_evidence.py": "2f882bed4c0ac93dcf0015d6083b471764a8a8fe3d586d337759da1117bb7aba",
+      "qwen_one_two/g1_gate_diagnosis.py": "d38c6a40d66ccf41195ccbdefd77f1bccda632492ecdbbd6841049f26874a3e3",
+      "qwen_one_two/g1_gate_repair.py": "18c25a33ccf05a16630960df40f29d309d19af0a12b23b6e99c3c2341e732b91",
+      "qwen_one_two/g1_precision_diagnosis.py": "acdc5008e7e02c13a24eda2f64a40f7f30176cdfb09e95bb637b20c0126ce3d9",
+      "qwen_one_two/g1_precision_math.py": "bc2e5a6393012079684734de386ad71afd5cbd26b2423a24f22f33ed6b9aedcf",
+      "qwen_one_two/g1_proof.py": "5a0d9991cffff111b12d23df1a5ad46be7cb77f1f67ba16c4038dbfa60ac9cb9",
+      "qwen_one_two/g1_protocol.py": "156ba44aa27b459279404d404e2a16da35e443717fca4d15851627e80cfeaba4",
+      "qwen_one_two/model.py": "65361404f081a2933830acc65453ee147098e6b12a000918c00dc83d991bfb00",
+      "qwen_one_two/policy.py": "a1b43898e6a695536276b44d6bb713b45c3ae5f56a363e586b6c4e3ff2afe978",
+      "qwen_one_two/refine_routes.py": "2a9ed2e1999290d985f5cdced7bfa83e00ec4c56247349848f7b205e7235db5c",
+      "qwen_one_two/server.py": "d83a9dc6764fb0d02ccfd87b40d2c5ba4bd69167a3733e27686b17d52d45139d",
+      "qwen_one_two/thinking.py": "47bfaf4c91e33f8587f4bad856f0d2b36c0e31705132b11f5e1d7f22a504e36b",
+      "qwen_one_two/train.py": "1d316c57efb6db71810ae6a43ba491832d0d7e66e91bc065de8e208c5dc38538",
+      "qwen_one_two/train_feedback.py": "234b516d33e7b070b44b47a1b0b5738917af0cc33bb4df67ad88fc7bf17af952",
+      "qwen_one_two/training/__init__.py": "0a5bc5745bdcb26cbf81df3d10f5363d39539d811fd869326cb37ecb4a29a47e",
+      "qwen_one_two/training/architecture_audit.py": "3ce0497d421383fcbf23fea4e9f9ebfe4a1d87c2edfc33d9805287202cb71cad",
+      "qwen_one_two/training/behavior_qualification.py": "e620f747834a8fc336150588d2fac3f5b33d59a16390fda7fdadf6b40c9eee4b",
+      "qwen_one_two/training/binding.py": "6888c1a6f3597b9763f875242b34dea6f9f0abbe5f47b9529488e3aec30ddeae",
+      "qwen_one_two/training/checkpoint.py": "f94b519fe21933e5d121747d299f9005e89484fc0523047598d12be60a19f337",
+      "qwen_one_two/training/clean.py": "f9acc1c08507302b0d224be4f382e6b263ea4a12fabd138383167839185f148f",
+      "qwen_one_two/training/clean_packets.py": "7f0d846319a3b9fa391524f73894b8f13baa4f6632b3b127f094f60ba3d2a028",
+      "qwen_one_two/training/component_producer.py": "9cf2f2aea9e4e3bab4230d2fa17cc415e94ffdb6a6522075af86ef7fe2cc2aa8",
+      "qwen_one_two/training/diagnostics.py": "0e5ec6271090c034744a182c2bd4a86d421ee099be0b056da4b29438120b3060",
+      "qwen_one_two/training/driver.py": "c46128c8d9e0de5288717f4a2c6a78b6bb3fed5e4fa2a245b6123c267a587bc2",
+      "qwen_one_two/training/engine.py": "2500a47211fc13a41c3e646d2f315d2233b4304d1f67c71fb73b3eebc57aee4d",
+      "qwen_one_two/training/episodes.py": "0181ca87dff0f2cf4c3f7552aa197b9b67cd3bc0f1ad0b73e84ddcf284a7a5a5",
+      "qwen_one_two/training/host_metrics.py": "d544d401b6a970f14ba614026c699f0f83c2b1ad6809cd6d6ed41588c45906bc",
+      "qwen_one_two/training/host_profile.py": "31d52a713e33de61e5b802a26c63f24e6dbcb476325d01afea788097e97d23e0",
+      "qwen_one_two/training/information_loss.py": "7fa33d9dcd33fe08fba00e34857bf7339d646cf617845c4d7c3c770275b0cf23",
+      "qwen_one_two/training/inputs.py": "8a96776ac2ab7a65f2cc51c3baaee12a333e76278775cc3d6b37b68cee99e332",
+      "qwen_one_two/training/learning_report.py": "9cdc91b9ee28b63b010caa6a49753468e4bc61b29f31f9d2bf21fc324d575962",
+      "qwen_one_two/training/losses.py": "a91938757131b177d38cba6e5275c0db7f7a053389a1a97c1bf173a82ae99041",
+      "qwen_one_two/training/manifest.py": "468257734527ceb5ec8656b6155388c2b3e92298f457cfa1764fd87cd58cbf5d",
+      "qwen_one_two/training/producer.py": "6827978aa735839a691f4f04f2d5cb6b2471d5c3c54c8604a76ac2ea7619e40f",
+      "qwen_one_two/training/profile.py": "3369e8e23579454fa3e71408fcb6196443cb86ed1c7e0f1f95974b91c9cc9cdb",
+      "qwen_one_two/training/qualification.py": "22d1de030bc85361a2366d03eb4c1c6c47a69f72e87fdcf59d6a9f8e04da72a9",
+      "qwen_one_two/training/receiver_learning.py": "f524c6da6fb31dd8b5d3204957c83ea2a7f69c6370ca30d366307ac88bb72110",
+      "qwen_one_two/training/reference.py": "44cbd6da4b3374d3de7082cac633f9b63fd91cef768bd8462a01fcb17c0f2aec",
+      "qwen_one_two/training/reference_data.py": "5855ecf472ac6d553bf16372af54cc640c48deb704014e7f26eb652387a01e70",
+      "qwen_one_two/training/reference_exposure.py": "f6e576cb0ce1cd8c48275047d7c0360cf23d4b20f0bcf20eaafc3433971e1a3c",
+      "qwen_one_two/training/reference_qualification.py": "9e02394240fb88b2e4e77b604b020300d200cfae5bb217e3717247da27505db0",
+      "qwen_one_two/training/release.py": "906d6bf7fefaa9b251338e46b13dac289365f5347b73cd03b680e593578888c3",
+      "qwen_one_two/training/sampler.py": "aeee24107468a9a27657efa3ba5c053d36101aee982fad069af8411762e28950",
+      "qwen_one_two/training/shared_frozen.py": "750ebdc0b069122485f7974784be101d2b2c8c76c8443036c4659e25e2df6a5f",
+      "qwen_one_two/training/simple_latent.py": "d1e2f07438245a2a2842d06395874d17bc7e61fd82bc26bb5980ddedcc37dc90",
+      "qwen_one_two/training/two_gpu.py": "dca18fef30e5ef9ca6346c297f42c56fdcfae65c25cec683d65fdadc345a3cc1",
+      "qwen_one_two/training/two_gpu_worker.py": "2fe83f3be4905753fe722eba14813b260449037f46df5c9c151c9d6cc0e16da2",
+      "qwen_one_two/training/weight_repair.py": "aff987d19f012820218758e02162d8352acce6d2983b74b9663a7afd9f4917bc",
+      "scripts/benchmark_attention_block.py": "43b568b728ca3df753572525ab6a6fc938277788c0cc96451d5fec5340cc9991",
+      "scripts/benchmark_recurrence_cache.py": "4f15b3875095b343d82e9e7f92f502ffa439cfc1e45eaf649409f6c338cc3704",
+      "scripts/compare_latent_inputs.py": "5698f068f6fe21e8439d7d526d11ba80be041d5f35c6568724a3c64abd0cf575",
+      "scripts/qualify_attention_block.py": "b62211b5fdbf860a1c957bea2131a223facc45f83d81e6e34345b8c302cc4bc3",
+      "scripts/two_gpu_diagnostics.py": "ea35d0ca685a2163bf2eca04b647df8684ff992fee8a5cfdaa2465902990018f"
+    }
+  },
+  "plan_sha256": "4031ccdc1ce777f3681047d4f172ee4e44a20f508dfdc14aac70275d4c5f3f2f",
+  "pooling_checks": {
+    "all_tokens_covered_once": true,
+    "max_fp32_reference_relative_rms": 8.288918963966587e-08,
+    "max_slot_squared_rms_error_from_one": 2.384185791015625e-07,
+    "real_roles_checked": 160
+  },
+  "promotion": false,
+  "protocol": "simple-latent-comparison-v1",
+  "raw_hashes": {
+    "data/simple-latent-20261107/audit.py": "93dccd70f192ac05de5d4beedcc852419e169a9de14e7489b1ffb685c25c655d",
+    "data/simple-latent-20261107/cpu-tests.log": "97e74750b1544986ba0f8c4eb2e360e190f631c6874675ec65747da156e0dc19",
+    "data/simple-latent-20261107/run.log": "6e9c6659b9be9d0d18e03736e0811ce0afb7ea1b47220b3551fe74e5a39f8ede",
+    "data/simple-latent-20261107/run/anchors.jsonl": "a0077ed81479f7ab96d14b32ffeaea670cffdcb1e7363acf9f3d155ac67fa3d1",
+    "data/simple-latent-20261107/run/candidate.jsonl": "914b50720d8b91b6fae3724ff1435a23808a3ea4a1e6829cbc96f804bd227cec",
+    "data/simple-latent-20261107/run/differences.json": "8d7db4fbfee5b23b2625498716daa1edeb2d48d2d4e125959e5d16594a91d52c"
+  },
+  "raw_root": "data/simple-latent-20261107",
+  "receiver": "94218aae6ec62a7745c349af8e9975fd4987520cf9f1345f38e44586e5e7742c",
+  "reference": "5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f",
+  "report_sha256": "6ff7f7ca5ce371607939ebcc46403d6d305be373430f7aef2a418f3bdf87aaca",
+  "scope": "frozen receiver compatibility only; fixed slot capacity; no fitted readout, new data or promotion",
+  "seconds": 195.1081647319952,
+  "status": "COMPLETED_COMPARISON_NOT_PROMOTED",
+  "test_sources": {
+    "tests/test_information_loss.py": "21923c9f332f92a00ebc3580d3c6c8bda7cbaaa352d7dc1002d29881630f3ba1",
+    "tests/test_simple_latent.py": "5592c66e1c6bf7b36881787c27b2d3d62b0ec6390480497381693cd1a32b3a1d"
+  },
+  "training_performed": false
+}

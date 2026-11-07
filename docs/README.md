@@ -7,8 +7,9 @@ completion report; topic documents below define contracts and starting defaults.
 The latest architecture review has a measured
 [data/gradient baseline](architecture-baseline-2026-11-07.md) and
 [read-only information-loss results](information-loss-results-2026-11-07.md).
-These describe existing representations and failed transfer, not a new model
-architecture or semantic qualification.
+The subsequent [simpler latent-input comparison](simple-latent-results-2026-11-07.md)
+rejects one parameter-free pooling replacement with the frozen receiver. These
+describe measured mechanisms and failed transfer, not semantic qualification.
 
 The [repository and artifact guide](repository-and-artifacts.md) explains what
 is included in GitHub, which evidence remains local and how to run from a clone.

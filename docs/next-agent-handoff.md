@@ -41,7 +41,72 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — architecture slices 1–2 complete, no training
+## Current checkpoint — slice 3 complete; simpler frozen-input candidate rejected
+
+The user authorized one simpler latent-input comparison on the 3090, existing
+data, frozen W/reference, no agents or training. Read the
+[protocol](simple-latent-comparison-v1.md),
+[actual results](simple-latent-results-2026-11-07.md), and
+[portable evidence](evidence/simple-latent-comparison-v1.json).
+
+Candidate **ordered-full-width-means-v1** replaces learned reference pooling
+with ordered, disjoint means of the same frozen-W token states and existing
+FP32 normalization. All tokens contribute exactly once. This bypasses the learned
+256-wide pooling machinery, keeping 1024 width and existing slot counts; it is
+**not an uncompressed-input/increased-capacity test**. The existing prepared-draft
+R tick sees the new semantic records too. No fixed hidden prefix at D is claimed.
+
+Reuse all **160** captured pre-pool/pooled role tensors and **180 X /90-pair**
+control receipts from slice 2. **Three fresh control anchors** exactly match
+saved outputs, full canonical ledgers, wire and h. All **180 candidate cases**
+execute once with zero execution failures. W, D/R, codec, heads and reference
+remain frozen; parent-0188 receiver/reference identities are unchanged. Candidate
+provenance is explicitly a new basis, **not compatible reference targets**.
+
+**Results, control →candidate:** behavior **49 →31 /180**; status **89 →149 /180**;
+complete pairs **23 →0 /90**. Choice **40 →11 /40**, Score **0 →0 /40** and mean
+Score distance **0.233890 →0.241228**. Noul assessed delivered success **0 →20 /70**,
+but independent truth accuracy remains **20/70** and Brier worsens
+**0.289148 →0.293918**. The candidate predicts false on all 100 Noul cases
+(probabilities 0.413115..0.418366) and marks all Assessed, including all 30
+Insufficient cases. Status gains are not better truth reasoning. Candidate gains
+20 Noul cases, loses nine Noul and 29 Choice cases, retains 11 successes.
+
+All **180/180 transports** pass. Source byte/offset/tensor lineage, permitted
+views, request framing/length, startup budget and every nonsemantic wire row
+match the control exactly. All **20 identical-input pairs** retain identical
+wire/h. Every candidate role payload passes GPU FP64-reference comparison:
+maximum relative RMS **8.288918964e−8** versus unchanged 1e−5 tolerance.
+
+**10 CPU tests pass in 0.189 s**; all 320 W tensors/physical tying, frozen
+fingerprints/cache, grad=None, byte compilation and whitespace checks pass.
+Independent CPU audit recomputes receipts/grades/accounting, source snapshots and
+160 saved payload byte hashes. No production forward/backward implementation or
+numeric tolerance changed; completed matrices reused.
+
+New execution: candidate **180 Sessions /20,856 positions**, anchors **3 /374**,
+total **183 /21,230**. One prefill/lineage each, exact accounting, no held positions
+or invocation text. Offline source tokens **14,212 +253** are separate. Zero new
+reference encodings/pooler calls. Model-run wall **195.108165 s**, peak CUDA
+**3,622,856,704 bytes**; not a matched throughput benchmark.
+
+Raw: `data/simple-latent-20261107/run/`, with `audit.py`, logs and portable hashes
+in its parent. No failed/retried GPU attempt. Only original service PID 2094
+(3852 MiB) remains after exit. No 3060 model work, agents, data generation/reviews,
+locked-data access, training, promotion, service/deployment/Operating Table changes.
+
+**Decision:** retain learned pooling as the control; reject this fixed-capacity
+replacement with the frozen receiver. An unfamiliar basis failing without
+adaptation does not prove it loses necessary information or could never learn.
+Reference semantic fidelity, receiver adaptation and complete native use remain
+unqualified. No additional candidate was tried.
+
+**Next unfinished slice:** slice 4, define the receiver-learning design/repair
+using the observed Noul threshold/status and Score coverage/transfer failures,
+preserving Choice. Fitting/adaptation needs new authorization; this comparison
+does not justify an automatic pooler rewrite, threshold change or training run.
+
+## Previous checkpoint — architecture slices 1–2 complete, no training
 
 The user authorized architecture-review slices 1–2 only: existing data, 3090,
 frozen W/reference, no agents or training. Read the
