@@ -161,6 +161,7 @@ class ReviewedRelease:
     _manifest: bytes
     _records: MappingProxyType
     _assets: tuple
+    _asset_index: MappingProxyType
     _summary: bytes
 
     def __init__(self, identity, manifest, records, assets, summary, *, selected_ids, _token=None):
@@ -171,7 +172,9 @@ class ReviewedRelease:
         for name, value in (('identity', identity), ('purpose', summary['purpose']),
                             ('selected_ids', frozenset(selected_ids)),
                             ('_manifest', manifest), ('_records', snapshots),
-                            ('_assets', tuple(sorted(assets.items()))), ('_summary', canonical(summary))):
+                            ('_assets', tuple(sorted(assets.items()))),
+                            ('_asset_index', MappingProxyType(dict(assets))),
+                            ('_summary', canonical(summary))):
             object.__setattr__(self, name, value)
 
     @property
@@ -191,7 +194,7 @@ class ReviewedRelease:
         return decode(self._summary)
 
     def asset(self, path):
-        return dict(self._assets)[path]
+        return self._asset_index[path]
 
     def sampler_rows(self):
         check(self.purpose == 'training', 'sampler requires a training release')

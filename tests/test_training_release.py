@@ -6,6 +6,7 @@ import sys
 import tempfile
 import unittest
 from dataclasses import FrozenInstanceError
+from unittest.mock import patch
 
 from qwen_one_two.training.inputs import canonical, digest, validate_record_manifest
 from qwen_one_two.training.release import load_release, decode
@@ -55,6 +56,29 @@ class ReleaseTests(unittest.TestCase):
         self.assertEqual(release.purpose,'development')
         self.assertEqual(release.selected_ids,frozenset({'selected'}))
         with self.assertRaises(ValueError):load_release(self.root)
+
+    def test_asset_index_preserves_verified_bytes_and_rejection(self):
+        assets={'sources/\u03b1.txt':b'SCHEMA ONLY bytes','empty.txt':b''}
+        write_release(self.root,assets=assets)
+        release=load_release(self.root);expected=dict(release._assets)
+        self.assertEqual(dict(release._asset_index),expected)
+        # Lookups read the admitted snapshot only, including empty bytes. They
+        # must never reread files or resolve an unknown/traversing path.
+        with patch('qwen_one_two.training.release._path',side_effect=AssertionError('filesystem lookup')):
+            for _ in range(3):
+                for name,body in expected.items():
+                    self.assertEqual(release.asset(name),body)
+                    self.assertIs(release.asset(name),body)
+            for name in ('missing','../escape','/tmp/outside',b'empty.txt'):
+                with self.assertRaises(KeyError) as exc:release.asset(name)
+                self.assertEqual(exc.exception.args,(name,))
+            with self.assertRaises(TypeError):release.asset([])
+        with self.assertRaises(TypeError):release._asset_index['empty.txt']=b'changed'
+        with self.assertRaises(FrozenInstanceError):release._asset_index={}
+        (self.root/'empty.txt').write_bytes(b'changed on disk')
+        self.assertEqual(release.asset('empty.txt'),b'')
+        self.assertEqual(release._assets,tuple(sorted(expected.items())))
+        with self.assertRaisesRegex(ValueError,'hash mismatch'):load_release(self.root)
 
     def test_pinned_manifest_and_current_review_binding(self):
         manifest = write_release(self.root)

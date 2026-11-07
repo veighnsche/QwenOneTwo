@@ -1,0 +1,750 @@
+{
+  "protocol": "asset-audit-v1",
+  "date": "2026-11-07",
+  "status": "PASS",
+  "scope": "CPU input preparation and existing audit JSON only; no training speed measurement",
+  "baseline_commit": "c10c163e2572ead63e4d65c358c184cd2f222ffc",
+  "baseline_source_sha256": "68cf7d1edf1f834053815ec46a28b11633e4b1b816eda7703b005305b9ad3bb6",
+  "snapshots": {
+    "train": {
+      "identity": "c70d4f44135a34c00e7fa0348833b1ec56613def15f5753231589492ed35478f",
+      "assets": 17809,
+      "records": 9728,
+      "all_asset_bytes_equal": true,
+      "all_snapshot_bytes_equal": true
+    },
+    "development": {
+      "identity": "5b8f4cffdc4f33e255d3a34306cac03a68c50dcd9dab905ae8d8adcf89c81e77",
+      "assets": 2832,
+      "records": 1600,
+      "all_asset_bytes_equal": true,
+      "all_snapshot_bytes_equal": true
+    }
+  },
+  "verified_asset_payloads": 20641,
+  "prior_input_cases": 110,
+  "prior_input_case_list_sha256": "a54756f862450633728979449a0b8c9e4f27421ce8870b62959b0575a646ae59",
+  "prior_input_evidence_sha256": "0e27d6ba6dedcb62545c7aec241d782c821caf9ffe870572bade3ce68ed11112",
+  "direct_paired_component_cases": 16,
+  "measurements": {
+    "105": {
+      "records": [
+        "train-receiver-1086",
+        "train-receiver-0872",
+        "train-receiver-0112",
+        "train-receiver-1158",
+        "train-receiver-0348",
+        "train-receiver-1079",
+        "train-receiver-0531",
+        "train-receiver-0245"
+      ],
+      "medians": {
+        "prepare_eight": {
+          "legacy": 0.01526919756004645,
+          "current": 0.006943564839966712
+        },
+        "asset_lookups": {
+          "legacy": 0.008108526360010727,
+          "current": 9.254399628844112e-07
+        }
+      },
+      "cpu_preparation_seconds_saved": 0.008325632720079738,
+      "cpu_preparation_reduction_percent": 54.52567292641939,
+      "alternating_pair_samples": [
+        {
+          "operation": "prepare_eight",
+          "pair": 0,
+          "path": "legacy",
+          "seconds_per_eight": 0.015175192480019178
+        },
+        {
+          "operation": "prepare_eight",
+          "pair": 0,
+          "path": "current",
+          "seconds_per_eight": 0.006943564839966712
+        },
+        {
+          "operation": "prepare_eight",
+          "pair": 1,
+          "path": "current",
+          "seconds_per_eight": 0.00696120188003988
+        },
+        {
+          "operation": "prepare_eight",
+          "pair": 1,
+          "path": "legacy",
+          "seconds_per_eight": 0.015522849440021674
+        },
+        {
+          "operation": "prepare_eight",
+          "pair": 2,
+          "path": "legacy",
+          "seconds_per_eight": 0.01526919756004645
+        },
+        {
+          "operation": "prepare_eight",
+          "pair": 2,
+          "path": "current",
+          "seconds_per_eight": 0.006904884120012866
+        },
+        {
+          "operation": "prepare_eight",
+          "pair": 3,
+          "path": "current",
+          "seconds_per_eight": 0.006932109240005957
+        },
+        {
+          "operation": "prepare_eight",
+          "pair": 3,
+          "path": "legacy",
+          "seconds_per_eight": 0.01559257783999783
+        },
+        {
+          "operation": "prepare_eight",
+          "pair": 4,
+          "path": "legacy",
+          "seconds_per_eight": 0.015269113960021058
+        },
+        {
+          "operation": "prepare_eight",
+          "pair": 4,
+          "path": "current",
+          "seconds_per_eight": 0.006985669319983572
+        },
+        {
+          "operation": "asset_lookups",
+          "pair": 0,
+          "path": "legacy",
+          "seconds_per_eight": 0.008131777800008422
+        },
+        {
+          "operation": "asset_lookups",
+          "pair": 0,
+          "path": "current",
+          "seconds_per_eight": 9.254399628844112e-07
+        },
+        {
+          "operation": "asset_lookups",
+          "pair": 1,
+          "path": "current",
+          "seconds_per_eight": 5.753599543822929e-07
+        },
+        {
+          "operation": "asset_lookups",
+          "pair": 1,
+          "path": "legacy",
+          "seconds_per_eight": 0.008039029520004988
+        },
+        {
+          "operation": "asset_lookups",
+          "pair": 2,
+          "path": "legacy",
+          "seconds_per_eight": 0.0080949531999795
+        },
+        {
+          "operation": "asset_lookups",
+          "pair": 2,
+          "path": "current",
+          "seconds_per_eight": 9.470000077271834e-07
+        },
+        {
+          "operation": "asset_lookups",
+          "pair": 3,
+          "path": "current",
+          "seconds_per_eight": 5.975600652163848e-07
+        },
+        {
+          "operation": "asset_lookups",
+          "pair": 3,
+          "path": "legacy",
+          "seconds_per_eight": 0.008115287680047913
+        },
+        {
+          "operation": "asset_lookups",
+          "pair": 4,
+          "path": "legacy",
+          "seconds_per_eight": 0.008108526360010727
+        },
+        {
+          "operation": "asset_lookups",
+          "pair": 4,
+          "path": "current",
+          "seconds_per_eight": 9.384800068801269e-07
+        }
+      ],
+      "audit_sha256": "45eb3308c44e0a2d7cb89ef42b01e19cb3968376eb1d3f8646b46abb740bd0d9",
+      "audit_bytes": 55106,
+      "audit_median_seconds": {
+        "audit_json": 0.0003804319985647453,
+        "audit_json_write_flush": 0.00040557499960414134
+      },
+      "before_median_seconds": {
+        "prepare_eight": 0.014845092000541626,
+        "asset_lookups": 0.007756134000374004,
+        "record_hashes": 0.0005381770006351871,
+        "audit_json": 0.0003977859996666666,
+        "audit_json_write_flush": 0.0003987830004916759
+      },
+      "profile_before_top": [
+        {
+          "function": "prepare",
+          "file": "/home/vince/QwenOneTwo/data/asset-audit-20261107/profile_before.py",
+          "line": 17,
+          "calls": 25,
+          "self_seconds": 0.0011571370000000001,
+          "cumulative_seconds": 0.596072723
+        },
+        {
+          "function": "component_view",
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/component_producer.py",
+          "line": 12,
+          "calls": 200,
+          "self_seconds": 0.009553168,
+          "cumulative_seconds": 0.49442004500000003
+        },
+        {
+          "function": "materialize",
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/clean.py",
+          "line": 15,
+          "calls": 400,
+          "self_seconds": 0.019857369,
+          "cumulative_seconds": 0.202843567
+        },
+        {
+          "function": "asset",
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/release.py",
+          "line": 193,
+          "calls": 200,
+          "self_seconds": 0.19373410200000002,
+          "cumulative_seconds": 0.19373410200000002
+        },
+        {
+          "function": "dependencies",
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/inputs.py",
+          "line": 76,
+          "calls": 11275,
+          "self_seconds": 0.021132375000000002,
+          "cumulative_seconds": 0.16534435
+        },
+        {
+          "function": "<built-in method builtins.all>",
+          "file": "~",
+          "line": 0,
+          "calls": 16350,
+          "self_seconds": 0.065163788,
+          "cumulative_seconds": 0.12900882500000002
+        },
+        {
+          "function": "permit",
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/inputs.py",
+          "line": 90,
+          "calls": 5075,
+          "self_seconds": 0.015480783000000001,
+          "cumulative_seconds": 0.122965183
+        },
+        {
+          "function": "reference_input",
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/inputs.py",
+          "line": 136,
+          "calls": 2325,
+          "self_seconds": 0.020644128,
+          "cumulative_seconds": 0.115669007
+        }
+      ],
+      "profile_after_top": [
+        {
+          "file": "/home/vince/QwenOneTwo/scripts/benchmark_assets.py",
+          "line": 119,
+          "function": "<lambda>",
+          "calls": 25,
+          "self_seconds": 5.6748000000000006e-05,
+          "cumulative_seconds": 0.402170629
+        },
+        {
+          "file": "/home/vince/QwenOneTwo/scripts/benchmark_assets.py",
+          "line": 90,
+          "function": "prepare",
+          "calls": 25,
+          "self_seconds": 0.001180724,
+          "cumulative_seconds": 0.402113881
+        },
+        {
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/component_producer.py",
+          "line": 12,
+          "function": "component_view",
+          "calls": 200,
+          "self_seconds": 0.009185376,
+          "cumulative_seconds": 0.299911399
+        },
+        {
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/clean.py",
+          "line": 15,
+          "function": "materialize",
+          "calls": 400,
+          "self_seconds": 0.020286225,
+          "cumulative_seconds": 0.202347618
+        },
+        {
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/inputs.py",
+          "line": 76,
+          "function": "dependencies",
+          "calls": 11275,
+          "self_seconds": 0.02143851,
+          "cumulative_seconds": 0.16535976700000002
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.all>",
+          "calls": 16350,
+          "self_seconds": 0.065070246,
+          "cumulative_seconds": 0.128619374
+        },
+        {
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/inputs.py",
+          "line": 90,
+          "function": "permit",
+          "calls": 5075,
+          "self_seconds": 0.015727819,
+          "cumulative_seconds": 0.12283067900000001
+        },
+        {
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/inputs.py",
+          "line": 136,
+          "function": "reference_input",
+          "calls": 2325,
+          "self_seconds": 0.020823129000000003,
+          "cumulative_seconds": 0.11495245100000001
+        }
+      ],
+      "audit_profile_top": [
+        {
+          "file": "/home/vince/QwenOneTwo/scripts/benchmark_assets.py",
+          "line": 109,
+          "function": "serialize_flush",
+          "calls": 25,
+          "self_seconds": 3.0097000000000003e-05,
+          "cumulative_seconds": 0.010583429
+        },
+        {
+          "file": "/home/vince/QwenOneTwo/scripts/benchmark_assets.py",
+          "line": 108,
+          "function": "serialize",
+          "calls": 25,
+          "self_seconds": 0.000100007,
+          "cumulative_seconds": 0.010063243000000001
+        },
+        {
+          "file": "/usr/lib64/python3.12/json/__init__.py",
+          "line": 183,
+          "function": "dumps",
+          "calls": 25,
+          "self_seconds": 1.4911000000000002e-05,
+          "cumulative_seconds": 0.009963236
+        },
+        {
+          "file": "/usr/lib64/python3.12/json/encoder.py",
+          "line": 183,
+          "function": "encode",
+          "calls": 25,
+          "self_seconds": 4.7367e-05,
+          "cumulative_seconds": 0.009948325000000001
+        },
+        {
+          "file": "/usr/lib64/python3.12/json/encoder.py",
+          "line": 205,
+          "function": "iterencode",
+          "calls": 25,
+          "self_seconds": 0.009881126,
+          "cumulative_seconds": 0.009881126
+        }
+      ]
+    },
+    "111": {
+      "records": [
+        "train-receiver-0927",
+        "train-receiver-1487",
+        "train-receiver-0354",
+        "train-receiver-1139",
+        "train-receiver-1039",
+        "train-receiver-0853",
+        "train-receiver-1373",
+        "train-receiver-0910"
+      ],
+      "medians": {
+        "prepare_eight": {
+          "legacy": 0.01779684435998206,
+          "current": 0.009404332519989112
+        },
+        "asset_lookups": {
+          "legacy": 0.008057267359981779,
+          "current": 9.246399713447318e-07
+        }
+      },
+      "cpu_preparation_seconds_saved": 0.008392511839992949,
+      "cpu_preparation_reduction_percent": 47.15730311641276,
+      "alternating_pair_samples": [
+        {
+          "operation": "prepare_eight",
+          "pair": 0,
+          "path": "legacy",
+          "seconds_per_eight": 0.017858370559988544
+        },
+        {
+          "operation": "prepare_eight",
+          "pair": 0,
+          "path": "current",
+          "seconds_per_eight": 0.009683410240031663
+        },
+        {
+          "operation": "prepare_eight",
+          "pair": 1,
+          "path": "current",
+          "seconds_per_eight": 0.009404332519989112
+        },
+        {
+          "operation": "prepare_eight",
+          "pair": 1,
+          "path": "legacy",
+          "seconds_per_eight": 0.017844638679962374
+        },
+        {
+          "operation": "prepare_eight",
+          "pair": 2,
+          "path": "legacy",
+          "seconds_per_eight": 0.01779684435998206
+        },
+        {
+          "operation": "prepare_eight",
+          "pair": 2,
+          "path": "current",
+          "seconds_per_eight": 0.009441438280045986
+        },
+        {
+          "operation": "prepare_eight",
+          "pair": 3,
+          "path": "current",
+          "seconds_per_eight": 0.009328449999957229
+        },
+        {
+          "operation": "prepare_eight",
+          "pair": 3,
+          "path": "legacy",
+          "seconds_per_eight": 0.01775376944002346
+        },
+        {
+          "operation": "prepare_eight",
+          "pair": 4,
+          "path": "legacy",
+          "seconds_per_eight": 0.017738776879996296
+        },
+        {
+          "operation": "prepare_eight",
+          "pair": 4,
+          "path": "current",
+          "seconds_per_eight": 0.0093335639200086
+        },
+        {
+          "operation": "asset_lookups",
+          "pair": 0,
+          "path": "legacy",
+          "seconds_per_eight": 0.00820392672001617
+        },
+        {
+          "operation": "asset_lookups",
+          "pair": 0,
+          "path": "current",
+          "seconds_per_eight": 1.0426800145069138e-06
+        },
+        {
+          "operation": "asset_lookups",
+          "pair": 1,
+          "path": "current",
+          "seconds_per_eight": 5.741600034525618e-07
+        },
+        {
+          "operation": "asset_lookups",
+          "pair": 1,
+          "path": "legacy",
+          "seconds_per_eight": 0.00808005236001918
+        },
+        {
+          "operation": "asset_lookups",
+          "pair": 2,
+          "path": "legacy",
+          "seconds_per_eight": 0.008057267359981779
+        },
+        {
+          "operation": "asset_lookups",
+          "pair": 2,
+          "path": "current",
+          "seconds_per_eight": 1.0064799425890668e-06
+        },
+        {
+          "operation": "asset_lookups",
+          "pair": 3,
+          "path": "current",
+          "seconds_per_eight": 5.827599670737982e-07
+        },
+        {
+          "operation": "asset_lookups",
+          "pair": 3,
+          "path": "legacy",
+          "seconds_per_eight": 0.008042090200033271
+        },
+        {
+          "operation": "asset_lookups",
+          "pair": 4,
+          "path": "legacy",
+          "seconds_per_eight": 0.007988056319954922
+        },
+        {
+          "operation": "asset_lookups",
+          "pair": 4,
+          "path": "current",
+          "seconds_per_eight": 9.246399713447318e-07
+        }
+      ],
+      "audit_sha256": "b82ff5bde77ade5679eba4bc2ceae4b9f217e258ead09a64b9b45593b4d19cf4",
+      "audit_bytes": 62991,
+      "audit_median_seconds": {
+        "audit_json": 0.000457159998404677,
+        "audit_json_write_flush": 0.0005047920003562467
+      },
+      "before_median_seconds": {
+        "prepare_eight": 0.017325318998700823,
+        "asset_lookups": 0.00768948200129671,
+        "record_hashes": 0.0006576390005648136,
+        "audit_json": 0.0004469270006666193,
+        "audit_json_write_flush": 0.0004686840002250392
+      },
+      "profile_before_top": [
+        {
+          "function": "prepare",
+          "file": "/home/vince/QwenOneTwo/data/asset-audit-20261107/profile_before.py",
+          "line": 17,
+          "calls": 25,
+          "self_seconds": 0.00132448,
+          "cumulative_seconds": 0.7750270450000001
+        },
+        {
+          "function": "component_view",
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/component_producer.py",
+          "line": 12,
+          "calls": 200,
+          "self_seconds": 0.011034192,
+          "cumulative_seconds": 0.627367105
+        },
+        {
+          "function": "materialize",
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/clean.py",
+          "line": 15,
+          "calls": 400,
+          "self_seconds": 0.028234746,
+          "cumulative_seconds": 0.29485225800000003
+        },
+        {
+          "function": "dependencies",
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/inputs.py",
+          "line": 76,
+          "calls": 17850,
+          "self_seconds": 0.032068252000000005,
+          "cumulative_seconds": 0.260402811
+        },
+        {
+          "function": "<built-in method builtins.all>",
+          "file": "~",
+          "line": 0,
+          "calls": 24700,
+          "self_seconds": 0.10312273200000001,
+          "cumulative_seconds": 0.207541941
+        },
+        {
+          "function": "asset",
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/release.py",
+          "line": 193,
+          "calls": 200,
+          "self_seconds": 0.19555454800000002,
+          "cumulative_seconds": 0.19555454800000002
+        },
+        {
+          "function": "permit",
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/inputs.py",
+          "line": 90,
+          "calls": 6850,
+          "self_seconds": 0.021982077000000003,
+          "cumulative_seconds": 0.18742361700000001
+        },
+        {
+          "function": "reference_input",
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/inputs.py",
+          "line": 136,
+          "calls": 3150,
+          "self_seconds": 0.029708212,
+          "cumulative_seconds": 0.17381644200000002
+        }
+      ],
+      "profile_after_top": [
+        {
+          "file": "/home/vince/QwenOneTwo/scripts/benchmark_assets.py",
+          "line": 119,
+          "function": "<lambda>",
+          "calls": 25,
+          "self_seconds": 9.005800000000001e-05,
+          "cumulative_seconds": 0.5623691740000001
+        },
+        {
+          "file": "/home/vince/QwenOneTwo/scripts/benchmark_assets.py",
+          "line": 90,
+          "function": "prepare",
+          "calls": 25,
+          "self_seconds": 0.0012907910000000001,
+          "cumulative_seconds": 0.562279116
+        },
+        {
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/component_producer.py",
+          "line": 12,
+          "function": "component_view",
+          "calls": 200,
+          "self_seconds": 0.010138344,
+          "cumulative_seconds": 0.41720974800000005
+        },
+        {
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/clean.py",
+          "line": 15,
+          "function": "materialize",
+          "calls": 400,
+          "self_seconds": 0.027676011,
+          "cumulative_seconds": 0.287818958
+        },
+        {
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/inputs.py",
+          "line": 76,
+          "function": "dependencies",
+          "calls": 17850,
+          "self_seconds": 0.031495809,
+          "cumulative_seconds": 0.251980645
+        },
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.all>",
+          "calls": 24700,
+          "self_seconds": 0.100714039,
+          "cumulative_seconds": 0.19983889100000002
+        },
+        {
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/inputs.py",
+          "line": 90,
+          "function": "permit",
+          "calls": 6850,
+          "self_seconds": 0.021680356,
+          "cumulative_seconds": 0.18209840900000002
+        },
+        {
+          "file": "/home/vince/QwenOneTwo/qwen_one_two/training/inputs.py",
+          "line": 136,
+          "function": "reference_input",
+          "calls": 3150,
+          "self_seconds": 0.029272712000000003,
+          "cumulative_seconds": 0.16921264
+        }
+      ],
+      "audit_profile_top": [
+        {
+          "file": "/home/vince/QwenOneTwo/scripts/benchmark_assets.py",
+          "line": 109,
+          "function": "serialize_flush",
+          "calls": 25,
+          "self_seconds": 3.2762e-05,
+          "cumulative_seconds": 0.012261020000000001
+        },
+        {
+          "file": "/home/vince/QwenOneTwo/scripts/benchmark_assets.py",
+          "line": 108,
+          "function": "serialize",
+          "calls": 25,
+          "self_seconds": 9.354300000000001e-05,
+          "cumulative_seconds": 0.011711867
+        },
+        {
+          "file": "/usr/lib64/python3.12/json/__init__.py",
+          "line": 183,
+          "function": "dumps",
+          "calls": 25,
+          "self_seconds": 1.5106e-05,
+          "cumulative_seconds": 0.011618324000000001
+        },
+        {
+          "file": "/usr/lib64/python3.12/json/encoder.py",
+          "line": 183,
+          "function": "encode",
+          "calls": 25,
+          "self_seconds": 4.8933e-05,
+          "cumulative_seconds": 0.011603218
+        },
+        {
+          "file": "/usr/lib64/python3.12/json/encoder.py",
+          "line": 205,
+          "function": "iterencode",
+          "calls": 25,
+          "self_seconds": 0.011534795,
+          "cumulative_seconds": 0.011534795
+        }
+      ]
+    }
+  },
+  "tests": {
+    "tests": 52,
+    "failures": 0,
+    "errors": 0,
+    "passed": true,
+    "blocked_model_imports": [
+      "torch",
+      "transformers",
+      "safetensors",
+      "triton",
+      "cupy"
+    ],
+    "model_runtimes_loaded": []
+  },
+  "tests_seconds": 16.179,
+  "source_hashes": {
+    "scripts/benchmark_assets.py": "37a3b4f6c1c93f773fe086033f232ad0d28ffefe3001afd21b2a236f0cd03bfb",
+    "scripts/benchmark_manifest.py": "13e3495c5d342126ee5a1d9b2d48af1584ebca041f54808f0a84579eb7251647",
+    "qwen_one_two/training/release.py": "906d6bf7fefaa9b251338e46b13dac289365f5347b73cd03b680e593578888c3",
+    "qwen_one_two/training/component_producer.py": "9cf2f2aea9e4e3bab4230d2fa17cc415e94ffdb6a6522075af86ef7fe2cc2aa8",
+    "qwen_one_two/training/clean.py": "ebb80cbbcc8d6bbc0fdddbf58ff77f5a0e640f4cb2b4412d381044d6c690c221",
+    "qwen_one_two/training/inputs.py": "8a96776ac2ab7a65f2cc51c3baaee12a333e76278775cc3d6b37b68cee99e332",
+    "scripts/train_receiver.py": "d63d8418aca6c9d9f6673d91218e755c4e59203ffb9252df753e67d0faaac493",
+    "tests/test_training_release.py": "f493466c8293915322a1c3d7e57ed6014bb5c0f3913f1cb087e044b526045ab5"
+  },
+  "loader_and_other_nonclass_code_ast_identical": true,
+  "audit_serialization_bytes_identical": true,
+  "gpu_tools_run": false,
+  "model_runtimes_loaded": [],
+  "benchmark_exit_code": 0,
+  "raw_files": {
+    "data/asset-audit-20261107/profile_before.py": "99846a2f8721076f66de9b529618cd40d5ccc2a5850ba5e57cd4a83fbe89c748",
+    "data/asset-audit-20261107/profile-before.json": "193c027a6ebc8dfb0a817ac9bf986c0bd9484e7ee7e152f6f3ab38f5edba2f68",
+    "data/asset-audit-20261107/profile-before.log": "c3342730a43a4ee4d9a1b85bc168c547213ba7f66a5125d008d3aa56a39ddbec",
+    "data/asset-audit-20261107/run/report.json": "dddc482855aad3acbaa03d4abdfb84b57265d96849825faf987daddb966a111d",
+    "data/asset-audit-20261107/benchmark.log": "d89775caa2d54b211af7f9abcb2107ba8895985def961712e50126044f4fbd8a",
+    "data/asset-audit-20261107/run_tests.py": "5e5eb90b14bcdbac3cf283bf93aa94d90546f5a4d28934f0308e7c2a8237d0e2",
+    "data/asset-audit-20261107/tests.log": "e945ee9b66c42a030a548d0b82dfbedcdbebb83fa7620805cba8822924b6cc5c",
+    "data/asset-audit-20261107/test-result.json": "2b73f6bb815d5f318c1855120e8558096c46dc1d622083eac128198a3c994540",
+    "data/asset-audit-20261107/audit.py": "2cc6a00fcc4259120ff9128dcd25ed1e7064008e2945d2ed704b93978207343a",
+    "data/asset-audit-20261107/prepare-105.pstats": "eaeabe36581be268af22e7d0bbc892f65161b6ee79a6d6e3c9ee804123332178",
+    "data/asset-audit-20261107/prepare-111.pstats": "6c95d590c00a894d23674164f199451d6c38d48fd0fc14329695522deb1741b6",
+    "data/asset-audit-20261107/run/audit-105.pstats": "9a7bc594f9de4b8049ebf2c54c3e9ad30331df64195a7515fe2aa29c330164f5",
+    "data/asset-audit-20261107/run/audit-111.pstats": "f5b7487e57c6cb70a209f7824b97e30a692aeac05bd80133e91360f121bc5fb5",
+    "data/asset-audit-20261107/run/prepare-105.pstats": "dea8400ef44d23a8b8037484b9e82856630a8e4619a66c2c7e218d120e257d18",
+    "data/asset-audit-20261107/run/prepare-111.pstats": "78495dc7e399de808f21c98611bf67fada5518b56a43d9cf32c522c40c4710d9"
+  },
+  "limitations": [
+    "CPU preparation and saved receipt JSON only; no end-to-end training speed measured.",
+    "Tensor hashing, GPU transfers and live model fingerprint costs excluded; GPU remains off.",
+    "Audit serialization remains unchanged because measured CPU asset reconstruction was larger.",
+    "No new semantic data, reviews, agents, training or model qualification."
+  ]
+}

@@ -41,7 +41,48 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — CPU-only manifest optimization complete
+## Current checkpoint — CPU asset lookup/audit profile complete
+
+**Keep the GPU off at the user's direction, including probes/status tools. No
+CPU model fallback. Leave existing services unchanged.** The requested CPU
+profile and next concrete bottleneck fix are complete; no active job remains.
+Read the [measured report](asset-audit-results-2026-11-07.md),
+[portable evidence](evidence/asset-audit-v1.json) and
+`scripts/benchmark_assets.py`.
+
+The old asset accessor rebuilt a dictionary of all **17,809 training assets**
+on every lookup. Initial CPU measurements found **7.76 / 7.69 ms** for eight
+lookups, versus **0.40 / 0.45 ms** for actual saved audit JSON serialization.
+The fix constructs one private read-only index from the validated bytes. The
+original sorted asset tuple, loader checks, record copies and all audit
+serialization/flush/hash behavior remain unchanged; payload bytes are shared,
+not cloned. No new dependency or mutable data cache.
+
+Five alternating CPU pairs (25 repetitions/path/operation/pair) give eight-view
+preparation medians **15.269198→6.943565 ms** and **17.796844→9.404333 ms**:
+**8.325633 / 8.392512 ms** saved, **54.5257% / 47.1573%** less CPU preparation.
+Eight isolated lookups fall **8.108526 / 8.057267 ms→0.925440 / 0.924640 µs**.
+These are fixed CPU batches, **not measured full training speedups**. Audit JSON
+bytes match the initial profile. Tensor hashes/device transfers are excluded.
+
+All **20,641 asset payloads** and full train/development snapshots match the
+literal `c10c163` baseline. **110 prior input/provenance cases** reproduce their
+committed hashes; **16 direct paired component cases** match. **52 model-free
+tests pass in 16.179 s** with model-runtime imports blocked. Immutable index,
+byte sharing, empty/Unicode/missing/invalid keys, no lookup filesystem access,
+disk mutation isolation/reload rejection and existing provenance/Reason/sampling
+checks pass. Loader and non-class module AST, source hashes, timing/receipt
+recomputation, compilation and whitespace checks pass. Benchmark **exit 0**.
+Raw receipts: `data/asset-audit-20261107/`.
+
+No GPU tools, model loads, agents, new semantic data/reviews, training or service
+changes. Prior numeric and learned-flow results remain unchanged. **Next
+unfinished slice:** GPU checkpoint/cache-policy comparisons remain paused.
+Independent CPU provenance traversal is now visible in profiles, but any change
+must preserve mutation/contamination rejection; none is queued. Noul transfer
+and Score numerical failures remain unresolved. No new data/training is queued.
+
+## Previous checkpoint — CPU-only manifest optimization complete
 
 **GPU work is on hold at the user's direction because of noise complaints.**
 Do not activate the GPU for workloads, probes or status tools in follow-up work
