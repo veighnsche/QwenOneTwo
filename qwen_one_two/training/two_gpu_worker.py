@@ -96,12 +96,25 @@ def worker(connection, worker_id, prepared, execute_gpu=False):
                 if message['kind']=='stop':break
                 check(message['kind']=='job','unknown worker command')
                 check(message['job']==prepared['jobs'][message['index']],'unplanned diagnostic job')
+                if 'attention_block_backend' in message['job']:
+                    job=message['job']
+                    check(prepared.get('attention_block_benchmark') is True,'unplanned attention block benchmark')
+                    check(job['attention_block_backend'] in ('eager','graph-v1'),'attention block profile')
+                    if job['cache_trial']!=active_trial:
+                        from ..codec import attention_block
+                        attention_block.clear_graph_cache();attention_block.CACHE_LIMIT=32
+                        if job.get('refresh_reference_cache'):
+                            encoder.reference_cache.clear()
+                    b.attention_block_backend=job['attention_block_backend']
                 if 'cache_trial' in message['job']:
                     job=message['job'];check(prepared.get('cache_benchmark') is True,'unplanned cache benchmark')
                     check(job['cache_limit'] in (8,32),'cache trial capacity')
                     if job['cache_trial']!=active_trial:
                         recurrence.clear_graph_cache();recurrence.CACHE_LIMIT=job['cache_limit'];active_trial=job['cache_trial']
                 start=stamp();trace_this=options['cuda_trace_first_job_per_worker'] and not traced
+                if message['job'].get('trace_attention_block'):
+                    check(prepared.get('attention_block_benchmark') is True,'unplanned attention trace')
+                    trace_this=True
                 counter=Recorder() if message['job'].get('count_cache') else None
                 trace_context=(torch.profiler.profile(activities=[torch.profiler.ProfilerActivity.CPU,
                                 torch.profiler.ProfilerActivity.CUDA]) if trace_this else nullcontext())
@@ -113,10 +126,15 @@ def worker(connection, worker_id, prepared, execute_gpu=False):
                 trace_path=None
                 if trace_this:
                     trace_path=str(Path(prepared['output_directory'])/('cuda-trace-'+worker_id.replace('/','-worker-')+'.json'))
+                    if message['job'].get('trace_attention_block'):
+                        trace_path=str(Path(prepared['output_directory'])/('cuda-trace-attention-'+b.attention_block_backend+'.json'))
                     trace.export_chrome_trace(trace_path);traced=True
                 ordinal+=len(results)
                 job_measurement=elapsed(start)
                 job_measurement['recurrence_cache_limit']=recurrence.CACHE_LIMIT
+                if prepared.get('attention_block_benchmark'):
+                    job_measurement['attention_block_backend']=b.attention_block_backend
+                    job_measurement['attention_block_cache_entries']=len(attention_block._CACHE)
                 if counter:job_measurement['cache_counts']=counter.snapshot()['counts']
                 with basic.span('ipc_send'):
                     connection.send({'kind':'result','index':message['index'],'cases':[v[0] for v in results],

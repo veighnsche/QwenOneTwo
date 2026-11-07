@@ -27,7 +27,8 @@ ROOT=Path(__file__).resolve().parents[2]
 
 
 def source_hashes():
-    paths=sorted((ROOT/'qwen_one_two').rglob('*.py'))+[ROOT/'scripts/two_gpu_diagnostics.py',ROOT/'scripts/benchmark_recurrence_cache.py']
+    paths=sorted((ROOT/'qwen_one_two').rglob('*.py'))+[ROOT/'scripts'/name for name in
+        ('two_gpu_diagnostics.py','benchmark_recurrence_cache.py','benchmark_attention_block.py','qualify_attention_block.py')]
     return {str(p.relative_to(ROOT)):file_hash(p) for p in paths}
 
 

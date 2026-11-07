@@ -44,6 +44,7 @@ class Table(EffectiveTable):
 class Backbone(CoreBackbone):
     temporal_chunk=32
     recurrence_backend='graph-v1'
+    attention_block_backend='eager'
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
@@ -85,6 +86,18 @@ class Backbone(CoreBackbone):
         pieces=[]
         if self.recurrence_backend not in {'eager','graph-v1'}:
             raise ValueError('unknown recurrence backend')
+        if self.attention_block_backend not in {'eager','graph-v1'}:
+            raise ValueError('unknown attention block backend')
+        if self.attention_block_backend=='graph-v1':
+            if self.feedback_precision!='fp32' or x.dtype!=torch.float32 or self.recurrence_backend!='graph-v1':
+                raise ValueError('attention block requires v3 FP32/recurrence graph profile')
+            from .attention_block import graph_block
+            # Independent dense gate projection is an explicit block input.
+            # Its CUDA/frozen-weight admission remains outside capture; no
+            # finite, Session or publication boundary is crossed.
+            z=a.in_proj_z(x).reshape_as(v)
+            y,memory=graph_block(q,k,v,beta,g,memory,z,a.norm.weight,float(a.norm.variance_epsilon))
+            return a.out_proj(y.reshape(1,x.shape[1],-1)),(new_conv,memory)
         for i in range(0,x.shape[1],self.temporal_chunk):
             args=(q[:,i:i+self.temporal_chunk],k[:,i:i+self.temporal_chunk],v[:,i:i+self.temporal_chunk],
                   beta[:,i:i+self.temporal_chunk],g[:,i:i+self.temporal_chunk],memory)
