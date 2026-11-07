@@ -1,0 +1,332 @@
+{
+  "collections": {
+    "development": {
+      "allocations": {
+        "E": 130,
+        "F": 400,
+        "R": 100,
+        "RF": 100,
+        "W": 70,
+        "X": 200
+      },
+      "families": 120,
+      "records": 1000,
+      "release": "5b8f4cffdc4f33e255d3a34306cac03a68c50dcd9dab905ae8d8adcf89c81e77"
+    },
+    "train": {
+      "allocations": {
+        "decision_replay": 1000,
+        "direct": 500,
+        "interleaved": 2000,
+        "language_replay": 1000,
+        "reader": 750,
+        "receiver": 1500,
+        "reference": 500,
+        "writer": 750
+      },
+      "families": 288,
+      "records": 8000,
+      "release": "c70d4f44135a34c00e7fa0348833b1ec56613def15f5753231589492ed35478f"
+    }
+  },
+  "contradictory_identical_inputs": {
+    "development_E": {},
+    "development_X": {},
+    "train_receiver": {}
+  },
+  "development_pairs": 90,
+  "locked_opened": false,
+  "model_execution": false,
+  "omitted_reader_cases": 20,
+  "panels": {
+    "development_E": {
+      "domains": {
+        "access_rules": 21,
+        "demo_preparation": 20,
+        "issue_prioritization": 20,
+        "refund_eligibility": 22,
+        "resource_allocation": 24,
+        "scheduling": 23
+      },
+      "families": 91,
+      "noul_truth": {
+        "false": 5,
+        "true": 5
+      },
+      "operation_status": {
+        "Choice/Assessed": 10,
+        "Choice/Conflicting": 10,
+        "Choice/Insufficient": 10,
+        "Choice/NoFeasibleChoice": 10,
+        "Choice/Unresolved": 10,
+        "Noul/Assessed": 10,
+        "Noul/Conflicting": 10,
+        "Noul/Insufficient": 10,
+        "Noul/Unresolved": 10,
+        "Score/Assessed": 10,
+        "Score/Conflicting": 10,
+        "Score/Insufficient": 10,
+        "Score/Unresolved": 10
+      },
+      "operations": {
+        "Choice": 50,
+        "Noul": 40,
+        "Score": 40
+      },
+      "records": 130,
+      "score_directions": {
+        "higher": 10
+      },
+      "score_intervals": {
+        "[0,0]": 3,
+        "[0.18,0.18]": 1,
+        "[0.4,0.6]": 1,
+        "[0.6666666666666666,0.6666666666666666]": 1,
+        "[1,1]": 2,
+        "[1.0,1.0]": 2
+      },
+      "score_point_targets": 9,
+      "unique_permitted_inputs": 129
+    },
+    "development_X": {
+      "domains": {
+        "access_rules": 30,
+        "demo_preparation": 32,
+        "issue_prioritization": 28,
+        "refund_eligibility": 30,
+        "resource_allocation": 32,
+        "scheduling": 28
+      },
+      "families": 60,
+      "noul_truth": {
+        "false": 20,
+        "true": 50
+      },
+      "operation_status": {
+        "Choice/Assessed": 40,
+        "Noul/Assessed": 70,
+        "Noul/Insufficient": 30,
+        "Score/Assessed": 40
+      },
+      "operations": {
+        "Choice": 40,
+        "Noul": 100,
+        "Score": 40
+      },
+      "records": 180,
+      "score_directions": {
+        "higher": 30,
+        "lower": 10
+      },
+      "score_intervals": {
+        "[0.0125,0.0125]": 1,
+        "[0.025,0.025]": 1,
+        "[0.0375,0.0375]": 1,
+        "[0.04,0.04]": 1,
+        "[0.075,0.075]": 1,
+        "[0.08,0.08]": 1,
+        "[0.08499999999999996,0.08499999999999996]": 1,
+        "[0.1175,0.1175]": 1,
+        "[0.13,0.13]": 1,
+        "[0.135,0.135]": 1,
+        "[0.1425,0.1425]": 1,
+        "[0.17,0.17]": 1,
+        "[0.18,0.18]": 1,
+        "[0.235,0.235]": 1,
+        "[0.285,0.285]": 1,
+        "[0.34,0.34]": 1,
+        "[0.345,0.345]": 1,
+        "[0.3525,0.3525]": 1,
+        "[0.38,0.38]": 1,
+        "[0.39,0.39]": 1,
+        "[0.4,0.4]": 1,
+        "[0.405,0.405]": 1,
+        "[0.445,0.445]": 1,
+        "[0.44999999999999996,0.44999999999999996]": 1,
+        "[0.485,0.485]": 1,
+        "[0.495,0.495]": 1,
+        "[0.505,0.505]": 1,
+        "[0.55,0.55]": 1,
+        "[0.5549999999999999,0.5549999999999999]": 1,
+        "[0.6,0.6]": 1,
+        "[0.61,0.61]": 1,
+        "[0.655,0.655]": 1,
+        "[0.705,0.705]": 1,
+        "[0.76,0.76]": 1,
+        "[0.81,0.81]": 1,
+        "[0.8200000000000001,0.8200000000000001]": 1,
+        "[0.865,0.865]": 1,
+        "[0.87,0.87]": 1,
+        "[0.915,0.915]": 1,
+        "[0.97,0.97]": 1
+      },
+      "score_point_targets": 40,
+      "unique_permitted_inputs": 145
+    },
+    "train_receiver": {
+      "domains": {
+        "access_rules": 252,
+        "demo_preparation": 250,
+        "issue_prioritization": 250,
+        "refund_eligibility": 249,
+        "resource_allocation": 252,
+        "scheduling": 247
+      },
+      "families": 288,
+      "noul_truth": {
+        "false": 168,
+        "true": 88
+      },
+      "operation_status": {
+        "Choice/Assessed": 158,
+        "Choice/Conflicting": 86,
+        "Choice/Insufficient": 82,
+        "Choice/NoFeasibleChoice": 83,
+        "Choice/Unresolved": 88,
+        "Noul/Assessed": 256,
+        "Noul/Conflicting": 82,
+        "Noul/Insufficient": 84,
+        "Noul/Unresolved": 79,
+        "Score/Assessed": 254,
+        "Score/Conflicting": 83,
+        "Score/Insufficient": 82,
+        "Score/Unresolved": 83
+      },
+      "operations": {
+        "Choice": 497,
+        "Noul": 501,
+        "Score": 502
+      },
+      "records": 1500,
+      "score_directions": {
+        "higher": 254
+      },
+      "score_intervals": {
+        "[0.0,0.0]": 85,
+        "[0.06,0.06]": 4,
+        "[0.12,0.12]": 3,
+        "[0.15,0.15]": 4,
+        "[0.21,0.21]": 4,
+        "[0.27,0.27]": 4,
+        "[0.33,0.33]": 4,
+        "[0.36,0.36]": 4,
+        "[0.42,0.42]": 4,
+        "[0.48,0.48]": 4,
+        "[0.5,0.5]": 23,
+        "[0.57,0.57]": 2,
+        "[0.63,0.63]": 4,
+        "[0.69,0.69]": 4,
+        "[0.78,0.78]": 4,
+        "[0.84,0.84]": 4,
+        "[0.9,0.9]": 4,
+        "[0.99,0.99]": 4,
+        "[1.0,1.0]": 85
+      },
+      "score_point_targets": 254,
+      "unique_permitted_inputs": 1500
+    }
+  },
+  "protocol": "architecture-baseline-v1",
+  "receiver_family_overlap": [],
+  "receiver_permitted_input_overlap": [],
+  "reference_roles": {
+    "development": {
+      "alternative": {
+        "records": 10,
+        "unique_annotations": 5
+      },
+      "conditions": {
+        "records": 10,
+        "unique_annotations": 5
+      },
+      "dimension": {
+        "records": 10,
+        "unique_annotations": 5
+      },
+      "key": {
+        "records": 10,
+        "unique_annotations": 5
+      },
+      "midpoint": {
+        "records": 10,
+        "unique_annotations": 5
+      },
+      "one": {
+        "records": 10,
+        "unique_annotations": 5
+      },
+      "question": {
+        "records": 10,
+        "unique_annotations": 5
+      },
+      "reason": {
+        "records": 10,
+        "unique_annotations": 5
+      },
+      "target": {
+        "records": 10,
+        "unique_annotations": 5
+      },
+      "zero": {
+        "records": 10,
+        "unique_annotations": 5
+      }
+    },
+    "train": {
+      "alternative": {
+        "records": 50,
+        "unique_annotations": 5
+      },
+      "conditions": {
+        "records": 50,
+        "unique_annotations": 5
+      },
+      "dimension": {
+        "records": 50,
+        "unique_annotations": 5
+      },
+      "key": {
+        "records": 50,
+        "unique_annotations": 5
+      },
+      "midpoint": {
+        "records": 50,
+        "unique_annotations": 5
+      },
+      "one": {
+        "records": 50,
+        "unique_annotations": 5
+      },
+      "question": {
+        "records": 50,
+        "unique_annotations": 5
+      },
+      "reason": {
+        "records": 50,
+        "unique_annotations": 5
+      },
+      "target": {
+        "records": 50,
+        "unique_annotations": 5
+      },
+      "zero": {
+        "records": 50,
+        "unique_annotations": 5
+      }
+    }
+  },
+  "scope": "metadata and permitted-input audit; no new annotations, review, fitting or semantic certification",
+  "raw_path": "data/information-loss-20261107/baseline.json",
+  "raw_sha256": "84e6b063e7568ec1cfe343e64e43759dde0113c6935d45bfd9f98c480a7e741c",
+  "sources": {
+    "qwen_one_two/training/architecture_audit.py": "3ce0497d421383fcbf23fea4e9f9ebfe4a1d87c2edfc33d9805287202cb71cad",
+    "scripts/audit_architecture.py": "f39a2efa1ea0f9cb2d91489f89f64be4e64249b8958c03fe7319f695486fa50a",
+    "tests/test_architecture_audit.py": "d0636884430a9b26a370f6b750f42c2decd9674258b2c6c14d3fe99e2ec2bd6e"
+  },
+  "validation": {
+    "tests": 10,
+    "seconds": 14.33,
+    "passed": true,
+    "command": "PYTHONPATH=tests .venv/bin/python -m unittest test_architecture_audit test_learning_report test_receiver_heads -q"
+  }
+}

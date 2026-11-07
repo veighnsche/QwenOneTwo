@@ -41,7 +41,27 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — frozen-representation Noul/Score head experiment complete
+## Current work — architecture baseline complete; information capture next
+
+The user authorized architecture-review slices 1–2 only: existing data, 3090,
+frozen W/reference, no agents or training. Read the
+[architecture/data baseline](architecture-baseline-2026-11-07.md) and
+[read-only diagnostic protocol](information-loss-v1.md).
+
+Slice 1 metadata audit completed: 1,500 receiver records/288 families; assessed
+Noul 168 false/88 true versus X 20/50. All 254 assessed training Score records
+are increasing-scale exact points, 170 at endpoints; X includes ten reversed
+scales. Reference training has only five distinct annotations per role. No
+receiver train/development family/input overlap or contradictory identical-input
+targets found. Ten CPU tests pass (14.330 s). Locked data remains unopened.
+Portable evidence: `docs/evidence/architecture-baseline-v1.json`.
+
+Slice 2 will reuse 32 cached training features and capture the 90 existing X
+pairs on the 3090 without updates. No new representation, fitted probe or
+capability training is authorized by this scope. Do not interpret class shift,
+rank or vector distances as a causal diagnosis or semantic qualification.
+
+## Previous checkpoint — frozen-representation Noul/Score head experiment complete
 
 The user authorized the head-only 3090 experiment with W/reference/representations
 frozen, existing data, no agents or new data. Read the

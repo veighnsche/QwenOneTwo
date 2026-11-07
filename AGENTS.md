@@ -20,6 +20,11 @@ General/full training remains unauthorized. Ordinary model/training
 paths stay 3090-only; never use the 3060 as fallback. Diagnostic results cannot
 grant accelerator or learned-flow qualification. Leave existing services alone.
 
+The user subsequently authorized architecture-review slices 1–2: a CPU metadata
+baseline and read-only information-loss diagnostics on the 3090, reusing existing
+data with W/reference frozen, no agents or training. See
+docs/architecture-baseline-2026-11-07.md and docs/information-loss-v1.md.
+
 One user submission, one prompt prefill, one hybrid cache. Qev decision LoRA is
 on for the initial continuous budget readout, off for native generation, and
 on temporarily when Qwen's trained internal gate requests Noul, Choice or Score.
