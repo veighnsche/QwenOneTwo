@@ -24,6 +24,9 @@ The user subsequently authorized architecture-review slices 1–2: a CPU metadat
 baseline and read-only information-loss diagnostics on the 3090, reusing existing
 data with W/reference frozen, no agents or training. See
 docs/architecture-baseline-2026-11-07.md and docs/information-loss-v1.md.
+The user then authorized slice 3: one simpler latent-input comparison on the
+3090 using existing data, frozen W/reference, no agents or training. The explicit
+read-only profile/protocol is docs/simple-latent-comparison-v1.md.
 
 One user submission, one prompt prefill, one hybrid cache. Qev decision LoRA is
 on for the initial continuous budget readout, off for native generation, and
