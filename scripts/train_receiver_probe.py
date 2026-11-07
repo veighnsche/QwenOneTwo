@@ -2,6 +2,7 @@
 import argparse
 from collections import Counter
 import json
+import math
 import os
 import random
 from pathlib import Path
@@ -14,6 +15,35 @@ from qwen_one_two.training.release import load_release,decode
 from qwen_one_two.training.learning_report import PROTOCOL,probe_panel,summarize_learning
 from scripts.fit_reference import TRAIN_SHA,DEV_SHA
 from qwen_one_two.g1_device import PRIMARY,require_visibility
+
+BALANCE_PROTOCOL='receiver-loss-balance-v1'
+BALANCE_OVERRIDES={'status':.1,'feasibility':.05}
+
+
+def loss_balance_baseline(path,panel,sources):
+    """Bind the completed control and forbid unrelated executable changes."""
+    path=Path(path).resolve();check(path.is_relative_to(ROOT/'data'),'baseline belongs in data/')
+    evidence=decode((ROOT/'docs/evidence/receiver-training-probe-v1.json').read_bytes())
+    check(file_hash(path/'plan.json')==evidence['plan_sha256'] and
+          file_hash(path/'report.json')==evidence['report_sha256'],'baseline plan/report drift')
+    for name,sha in evidence['raw_file_sha256'].items():
+        check(file_hash(ROOT/name)==sha,'baseline receipt drift: '+name)
+    plan=decode((path/'plan.json').read_bytes());report=decode((path/'report.json').read_bytes())
+    check(plan['protocol']==PROTOCOL and report['status']=='COMPLETED_PROBE_NOT_PROMOTED'
+          and report['optimizer_updates']==32 and report['failed_exposures']=={},'incomplete baseline')
+    check(plan['panel']==panel,'comparison panel/order changed')
+    for name in ('parent_checkpoint','parent_manifest_sha256','receiver','reference','dataset','development'):
+        expected={'parent_checkpoint':str(CHECKPOINT),'parent_manifest_sha256':CHECKPOINT_SHA,'receiver':RECEIVER,
+                  'reference':REFERENCE,'dataset':TRAIN_SHA,'development':DEV_SHA}[name]
+        check(plan[name]==expected,'comparison parent/data changed: '+name)
+    check(set(plan['sources'])==set(sources),'comparison source set changed')
+    changed=[n for n,h in plan['sources'].items() if sources[n]!=h]
+    check(set(changed)<={'scripts/train_receiver_probe.py'},'unrelated comparison source changes')
+    for name,sha in plan['sources'].items():
+        check(file_hash(path/'source'/name)==sha,'baseline source archive drift: '+name)
+    return {'protocol':BALANCE_PROTOCOL,'baseline':str(path.relative_to(ROOT)),
+            'plan_sha256':evidence['plan_sha256'],'report_sha256':evidence['report_sha256'],
+            'overrides':dict(BALANCE_OVERRIDES),'scale':.1,'changed_sources':changed},report
 
 
 def gradient_report(window):
@@ -45,7 +75,9 @@ def gradient_report(window):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--snapshot',required=True)
-    parser.add_argument('--output',required=True);parser.add_argument('--execute-gpu',action='store_true');a=parser.parse_args()
+    parser.add_argument('--output',required=True);parser.add_argument('--execute-gpu',action='store_true')
+    parser.add_argument('--loss-balance-baseline',help='completed v1 control; run the single fixed tenfold reduction')
+    a=parser.parse_args()
     out=Path(a.output).resolve();check(out.is_relative_to(ROOT/'data'),'probe outputs belong in data/')
     check(not out.exists(),'never overwrite a probe');out.mkdir(parents=True)
     train=load_release(ROOT/'data/training-collections-20261105/releases/train',expected_hash=TRAIN_SHA)
@@ -55,12 +87,16 @@ def main():
                  and dev.record(e['id']).get('evaluation_slice') in ('E','X')}
     check(not devfamilies&{p['family'] for p in panel},'probe/development family overlap')
     sources=source_hashes();sources['scripts/train_receiver_probe.py']=file_hash(Path(__file__))
-    plan={'protocol':PROTOCOL,'parent_checkpoint':str(CHECKPOINT),'parent_manifest_sha256':CHECKPOINT_SHA,
+    comparison,baseline=(loss_balance_baseline(a.loss_balance_baseline,panel,sources)
+                         if a.loss_balance_baseline else (None,None))
+    protocol=BALANCE_PROTOCOL if comparison else PROTOCOL
+    plan={'protocol':protocol,'parent_checkpoint':str(CHECKPOINT),'parent_manifest_sha256':CHECKPOINT_SHA,
         'receiver':RECEIVER,'reference':REFERENCE,'dataset':TRAIN_SHA,'development':DEV_SHA,'sources':sources,
         'panel':panel,'repeats':8,'training_presentations':256,'scheduled_probe_windows':32,
         'measurement_repeats':[0,1,2,4,8],'optimizer':'restore checkpoint-0188 moments/RNG/schedule; no warmup reset',
         'training_scope':'D and existing receiver owners only; W/R/budget/reference frozen; no native training',
         'snapshot':str(Path(a.snapshot).resolve())}
+    if comparison:plan['loss_balance']=comparison
     (out/'plan.json').write_bytes(canonical(plan))
     for name in sources:
         target=out/'source'/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(ROOT/name,target)
@@ -84,7 +120,7 @@ def main():
     from qwen_one_two.training.reference_qualification import PROFILE
     configure();started=time.monotonic()
     manifest=decode((ROOT/CHECKPOINT/'manifest.json').read_bytes())
-    report={'protocol':PROTOCOL,'status':'RUNNING','plan_sha256':digest(canonical(plan)),
+    report={'protocol':protocol,'status':'RUNNING','plan_sha256':digest(canonical(plan)),
         'gpu_uuid':PRIMARY,'measurements':[],'checkpoints':[],'optimizer_updates':0,
         'scope':'training-panel learnability, not full-catalogue training or promotion','training_performed':True}
     def persist():(out/'report.json').write_bytes(canonical(report))
@@ -92,7 +128,14 @@ def main():
     with sdpa_kernel(SDPBackend.MATH):
         b,c,_=load(a.snapshot,ROOT/'data/g1-proof/gate-repair-v2-20261105/diagnostic.safetensors')
         ref=Reference(b,c,pooler_kind='target-v2');ref.freeze();owned=groups(b,c,ref)
-        w=Window(owned,'components');b.checkpointing=True
+        class BalanceWindow(Window):
+            @property
+            def coefficients(self):return dict(super().coefficients,**BALANCE_OVERRIDES)
+        w=(BalanceWindow if comparison else Window)(owned,'components');b.checkpointing=True
+        if comparison:
+            check(Window.coefficients.fget(w)['status']==1. and Window.coefficients.fget(w)['feasibility']==.5,
+                  'baseline coefficient defaults changed')
+        report['loss_coefficients']=dict(w.coefficients)
         restore_model(ROOT/CHECKPOINT,b,c,ref,manifest['identities'],window=w)
         check(w.scheduled_windows==w.optimizer_updates==188 and receiver_hash(b,c)==RECEIVER
               and ref.fingerprint()==REFERENCE,'restored parent state')
@@ -105,15 +148,16 @@ def main():
         old_sources=decode((ROOT/CHECKPOINT.parent/'source-snapshot/manifest.json').read_bytes())
         report['source_changes_since_parent']=[k for k,v in old_sources.items() if sources.get(k)!=v]
         report['migration']='new explicitly declared probe fork; original identities validated on restore; moments/RNG/counters retained; original sampler is not relabeled as probe history'
-        identities=dict(manifest['identities'],protocol=digest(PROTOCOL.encode()),sources=digest(canonical(sources)))
+        identities=dict(manifest['identities'],protocol=digest(protocol.encode()),sources=digest(canonical(sources)))
         def frozen():
             check(ref.fingerprint()==REFERENCE and native()==frozen_native,'frozen reference/R/codec changed')
             check(all(p.grad is None for m in (b,c,ref) for p in m.parameters()),'outstanding parameter gradients')
         def checkpoint(repeat,cursor):
             frozen();path=out/f'checkpoint-{w.scheduled_windows:04d}'
             sha=save(path,w,bundle_tensors(b,c,ref),identities,
-                {'protocol':PROTOCOL,'order':order,'repeat':repeat,'probe_cursor':cursor,'parent_checkpoint':str(CHECKPOINT),
-                 'parent_sampler':manifest['sampler'],'initial_scheduled_windows':188},reference_frozen=True,reference_id=REFERENCE)
+                {'protocol':protocol,'order':order,'repeat':repeat,'probe_cursor':cursor,'parent_checkpoint':str(CHECKPOINT),
+                 'parent_sampler':manifest['sampler'],'initial_scheduled_windows':188,
+                 'loss_coefficients':dict(w.coefficients)},reference_frozen=True,reference_id=REFERENCE)
             report['checkpoints'].append({'path':str(path.relative_to(ROOT)),'sha256':sha});return path
         def measure(repeat):
             frozen();before=receiver_hash(b,c);cases=[]
@@ -123,6 +167,12 @@ def main():
                     stream.write(json.dumps(case,allow_nan=False)+'\n');stream.flush();del s
             check(receiver_hash(b,c)==before,'measurement changed receiver');frozen()
             summary=summarize_learning(train,cases,order,kind='heads')
+            if comparison and repeat==0:
+                check(summary==baseline['measurements'][0]['report'],'initial control head/loss mismatch')
+                saved=[decode(line) for line in (Path(a.loss_balance_baseline)/'panel-00.jsonl').read_bytes().splitlines()]
+                check(all(all(left[k]==right[k] for k in ('record','record_sha256','input_sha256','head','losses'))
+                          for left,right in zip(cases,saved)) and len(cases)==len(saved),'initial control receipt mismatch')
+                report['baseline_initial_panel_exact']=True
             report['measurements'].append({'repeat':repeat,'receiver':before,'report':summary});persist()
             emit(event='panel',repeat=repeat,operations={op:x['counts'] for op,x in summary['operations'].items()})
         try:
@@ -138,6 +188,20 @@ def main():
                             else:eligible.update(case['losses'].keys())
                             del s,losses
                         diagnostic=gradient_report(w) if repeat in (1,8) else None
+                        if comparison and w.scheduled_windows==188:
+                            control=decode((Path(a.loss_balance_baseline)/'training.jsonl').read_bytes().splitlines()[0])
+                            check(all(all(left[k]==right[k] for k in ('record','record_sha256','input_sha256','head','losses'))
+                                      for left,right in zip(cases,control['episodes'])), 'first-window control mismatch')
+                            old=control['gradient_diagnostics']
+                            check(diagnostic['D_cosine_with_status']==old['D_cosine_with_status'], 'initial gradient cosine mismatch')
+                            check(set(diagnostic['components'])==set(old['components']), 'initial gradient eligibility mismatch')
+                            for component,values in diagnostic['components'].items():
+                                scale=.1 if component in BALANCE_OVERRIDES else 1.
+                                check(values['eligible']==old['components'][component]['eligible'], 'initial gradient denominator mismatch')
+                                for name in ('weighted_norm','weighted_D_norm'):
+                                    check(math.isclose(values[name],old['components'][component][name]*scale,
+                                                       rel_tol=1e-12,abs_tol=1e-12), 'initial gradient scaling mismatch')
+                            report['baseline_initial_gradient_norms_match']=True
                         result=w.step();entry={'repeat':repeat,'offset':offset,'window':result,'episodes':cases,
                             'gradient_diagnostics':diagnostic,'seconds':time.monotonic()-t}
                         stream.write(json.dumps(entry,allow_nan=False)+'\n');stream.flush()
