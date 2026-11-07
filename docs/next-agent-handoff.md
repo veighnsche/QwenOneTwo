@@ -43,6 +43,13 @@ training, promote weights, or authorize deployment.
 
 ## Current checkpoint — two-GPU diagnostic runner built, GPUs not run
 
+The user subsequently requested a prioritized task list for substantially
+reducing CPU involvement. See [CPU-involvement tasks](cpu-involvement-tasks.md).
+It separates CPU-only preparation, deferred GPU measurement/optimization and
+future training execution. **The task-list turn changes documentation only**;
+no listed implementation or workload has started. The first proposed slice is
+CPU-01/02 instrumentation and a synchronization map, with GPUs still off.
+
 **Both GPUs remain off, including status probes. No CPU model fallback.** The
 user authorized building a 3090/3060 diagnostic runner, with existing data, no
 agents or training, and commit/push. That build is complete and CPU-validated;

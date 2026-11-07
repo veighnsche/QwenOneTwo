@@ -1,0 +1,215 @@
+# Task list: substantially reduce CPU involvement
+
+Planning status: **no tasks below have started**. Both GPUs remain off, including
+status probes. No CPU model fallback, agents, new semantic data, training or
+service changes. This list does not authorize execution of GPU work or training.
+
+The goal is fewer CPU instructions, launches, synchronizations and transfers per
+completed case, with a smaller CPU controller around GPU tensor computation.
+Track **CPU seconds per case**, elapsed time, throughput and memory together.
+Low CPU utilization alone is not success; waiting longer can also lower it.
+No speedup target is assumed before measurement, and no arbitrary time cap is
+introduced. Finish each agreed finite experiment and preserve all outcomes.
+
+Every candidate preserves W/reference contents, one prompt/prefill/causal-cache
+lineage per episode, latent request/return transport, the continuous startup
+score and ordered FP64 S-curve mapping, exact values/bindings, cancellation and
+the existing tolerances. Execution changes do not grant semantic acceptance.
+
+## Completed foundations — reuse their evidence
+
+- [x] Remove repeated manifest decoding from per-record admission.
+  [CPU measurements](manifest-access-results-2026-11-07.md).
+- [x] Replace repeated asset-table reconstruction with an immutable index.
+  [CPU measurements](asset-audit-results-2026-11-07.md).
+- [x] Fuse same-boundary finite checks without removing checked tensors.
+  Predicates improved substantially; complete measured zero-update windows
+  improved about 1.8% under their recorded sources.
+  [GPU measurements](fused-finite-results-2026-11-07.md).
+- [x] Build resident, read-only 3090/3060 worker orchestration and CPU tests.
+  Hardware execution, compatibility and throughput remain unmeasured.
+  [Runner build](two-gpu-diagnostics-v1.md).
+
+These are separate scoped measurements. Do not add their isolated savings or
+infer a current full-training speedup. Device-guard changes after the prior GPU
+measurements have not been exercised on hardware.
+
+## Work order
+
+| ID | Priority | Task | What can be done while GPUs are off? |
+|---|---|---|---|
+| CPU-01 | First | Add minimal CPU/dispatch/transfer/cache measurements | Implementation, fixtures and static checks |
+| CPU-02 | First | Map synchronization boundaries and select capture regions | Source inventory and execution specification |
+| CPU-03 | Prerequisite | Establish actual GPU baselines and 3060 compatibility | Prepare existing-case selection and acceptance checks only |
+| CPU-04 | High | Reduce recurrence graph recapture | Counter/identity design; GPU evidence required before changing defaults |
+| CPU-05 | High | Consolidate audit transfers and frozen-payload hash work | Byte-layout and ownership design/tests; tensor execution deferred |
+| CPU-06 | High | Replay larger pure tensor regions | Backend/fixture preparation; capture and parity deferred |
+| CPU-07 | Structural | Reduce mandatory host synchronization with GPU failure handling | Specify semantics and failure cases; no behavior change yet |
+| CPU-08 | Integration | Measure both GPUs together with accepted changes | Prepare comparison plan; execution deferred |
+| CPU-09 | Later | Reduce backward/checkpoint/VJP overhead | Source analysis only; separate diagnostic authorization required |
+
+CPU-01/02 come first. CPU-03 supplies the measurements needed to choose between
+CPU-04/05/06; it is not a requirement to implement every candidate. CPU-07 is the
+larger architectural option if remaining host checks impose a substantial floor.
+Each implementation is a separate reviewable slice and commit, with evidence.
+
+## CPU-01 — measure CPU work rather than guessing
+
+- [ ] Extend the existing diagnostic runner; do not create another coordinator,
+  monitoring service or general benchmark framework.
+- [ ] Record CPU process time for each worker, parent CPU time, wall time,
+  completed case counts and cold/warm phases. Aggregate both workers' CPU time;
+  faster completion with more total CPU work is a separate tradeoff.
+- [ ] Attribute preparation, source/reference encoding, Session execution,
+  evaluation/decode, audit readbacks/hashes and reporting where practical.
+- [ ] Add lightweight recurrence cache hit/miss/capture/eviction counters and
+  transfer call/byte counts. Keep counters out of model-facing packets.
+- [ ] Prepare a fixed profiling subset from existing receipts: Noul, Choice and
+  Score, short/long observed inputs and an intact intervention pair. Pin IDs,
+  record/view hashes, weights, sources and execution profile. Do not run all 310
+  cases just to discover which region is expensive.
+- [ ] Make detailed profiling opt-in. Measure its overhead separately from
+  unprofiled A/B timings. Do not insert synchronization after every operation or
+  label CUDA-event elapsed time as pure kernel compute time.
+
+**Done when:** CPU-only tests validate aggregation, ordering and counter schema;
+future GPU runs distinguish launch/dispatch work, host waits, transfers, capture
+and device computation sufficiently to select a concrete next target. Profiling
+must not alter outputs, ledger events, eligibility or Session counts.
+
+## CPU-02 — identify the real capture boundaries
+
+- [ ] Inventory hot `.item()`, Python scalar/bool conversions, `.cpu()` transfers,
+  per-linear finite hooks, device-policy checks and shape-dependent control.
+- [ ] For each boundary, identify its purpose: numeric rejection, actual control
+  decision, accounting/cancellation, provenance audit or redundant host work.
+- [ ] Draw the pure tensor regions between required boundaries. Start with
+  repeated regions; record shape, dtype, stream, adapter and weight dependencies.
+- [ ] Specify a new versioned execution profile for any capture beyond the
+  existing recurrence exception. Leave the qualified path as the comparison
+  oracle. A global `torch.compile` switch is not an implementation plan.
+
+**Done when:** the first candidate region has explicit inputs/outputs, cache-key
+and invalidation rules, error/cancellation boundaries, oracle and acceptance
+fixtures. No required finite check or semantic decision has been deferred.
+
+## CPU-03 — establish hardware baselines when the hold is lifted
+
+- [ ] Verify the configured cards and the new device guards. Check targeted
+  3090 behavior and actual 3060 model loading, memory fit and numeric behavior.
+  Shared startup readouts alone do not qualify the secondary card.
+- [ ] Run the fixed existing-case baseline on one card at a time, with models
+  resident. Separate initialization/capture cost from warm repeated execution.
+- [ ] Record per-case CPU time, elapsed time, relevant host synchronization/
+  launch/transfer counts and peak memory, with actual runtime versions.
+- [ ] Define the existing forward/cache/gradient and exact-control checks needed
+  for each changed operator. Derivative-only checks take no optimizer steps.
+
+**Done when:** subsequent A/B trials can compare the same card, cases, weights
+and warm/cold conditions. Failures are recorded; no other card or CPU substitutes
+for an unavailable or incompatible GPU. No capability training is launched.
+
+## CPU-04 — stop unnecessary recurrence graph capture
+
+- [ ] Measure actual working-set shapes and cache churn. Astra's previous cache
+  estimates were partial-trace simulations, not a current measured miss rate.
+- [ ] Compare capacity eight with a capacity selected from the observed working
+  set. Record capture cost and retained workspace on each eligible card.
+- [ ] Preserve stream/device/dtype/shape isolation and invocation-specific saved
+  inputs. Replayed outputs must own independent state buffers.
+
+**Done when:** capture counts and CPU time fall reproducibly, outputs and
+derivatives meet the existing recurrence oracle, accounting stays exact and
+memory fit is measured. Do not pad, crop or invent logical positions to obtain
+cache hits. Retain the existing policy if the candidate does not help.
+
+## CPU-05 — fewer audit transfers, identical evidence
+
+- [ ] Consolidate compatible tensor readbacks into fewer transfers. Preserve
+  original tensor order, headers, dtype/shape information and exact byte slices.
+- [ ] Avoid extra host copies when hashing the transferred bytes. Keep canonical
+  serialization and all required provenance/binding coverage unchanged.
+- [ ] Consider retaining a hash alongside a frozen reference payload only after
+  enforcing private immutable ownership and defensive copies. Never reuse a
+  hash for a changed tensor or cache fresh D-dependent source states.
+- [ ] Preserve current live-weight identity checks. Tensor versions alone do
+  not detect every `.data` mutation and cannot justify hash reuse.
+
+**Done when:** audit output and SHA256 bytes are identical, mutation/admission
+regressions pass, and measured transfer/CPU cost falls. Ordinary JSON formatting
+was already measured at roughly 0.4–0.5 ms per saved window; revisit it only if
+new profiling establishes a larger cost.
+
+## CPU-06 — larger GPU execution blocks
+
+- [ ] Prototype one pure tensor region using existing-order CUDA graph replay.
+  Use compilation or custom fused kernels as separate candidates if justified.
+- [ ] Keep Session/registry/ledger mutation outside capture. Respect every
+  existing host validation and control boundary in this first version.
+- [ ] Include all relevant shape, dtype, stream, device, adapter and captured
+  weight dependencies in cache identity; define future weight invalidation.
+- [ ] Preserve BF16 frozen storage, FP32 transformer arithmetic and compensated
+  vocabulary products. No implicit fast-math or permanent FP32 base duplicate.
+- [ ] Extend to another region only after the first has a measured benefit.
+
+**Done when:** CPU launch work and complete-case CPU time fall, with measured
+wall time/memory, original numeric tolerances, connected derivative checks,
+immutable prior caches, exact budgets/discrete decisions and P+B+A+H. Cold
+capture costs and exclusions remain visible. Reuse unchanged qualification;
+broaden checks only where the execution change makes them relevant.
+
+## CPU-07 — the aggressive option: GPU-side failure handling
+
+- [ ] Measure the synchronization floor remaining after accepted prior slices.
+- [ ] Specify device-side failure flags and predication that prevent dependent
+  computation or decisions after an invalid intermediate value.
+- [ ] Define deterministic first-error selection, when the host observes it,
+  cancellation behavior, unusable-state handling and ledger ownership.
+- [ ] Review the specification against existing immediate rejection contracts
+  before changing execution. Checking accumulated flags only at the end is not
+  equivalent to the current guards.
+- [ ] Implement one isolated region under a separate experimental profile.
+
+**Done when:** injected NaN/Inf/overflow and cancellation failures preserve the
+specified first error, prevent invalid downstream effects, retain exact
+accounting/cache behavior and show a measured reduction in host round trips.
+No blanket removal of per-linear hooks or relaxation of tolerance is permitted.
+
+## CPU-08 — integrate and test two-card throughput
+
+- [ ] Establish each accepted candidate against its same-card baseline first;
+  comparing 3090 baseline with 3060 candidate confounds hardware and software.
+- [ ] Run both resident diagnostic workers with complete cases/pairs, canonical
+  ordering and read-only final receipts. Measure parent plus worker CPU time.
+- [ ] Report cases/second, CPU seconds/case, elapsed time and per-card memory,
+  including setup/amortization. Check whether the second worker actually helps.
+
+**Done when:** the report distinguishes per-case CPU reductions from parallel
+throughput gains, preserves every case/failure and makes no assumed 2× claim.
+Existing semantic failures remain failures; speed does not certify capability.
+
+## CPU-09 — future training execution, not today's read-only diagnostics
+
+- [ ] If separately authorized, compare activation checkpoint/rematerialization
+  policies using derivative-only existing-data probes, with zero updates.
+- [ ] Investigate reducing repeated component VJP dispatch only with preserved
+  component sums/counts, eligibility, None gradients and failure detection.
+- [ ] Treat whole-window retained graphs or altered per-component checking as
+  contract changes, not equivalent runtime switches. Measure memory explicitly.
+
+**Done when:** gradient/mask/ownership/accounting agreement and a measured CPU
+benefit are recorded. Checkpoint-on/off comparisons do not optimize the current
+no-gradient inference path. Training itself still needs separate authorization.
+
+## First implementation slice
+
+**CPU-01 + CPU-02 preparation:** add the smallest useful measurement fields and
+counter fixtures to the existing runner, and document its synchronization map.
+Keep all GPU execution disabled. Then use actual measurements, once permitted,
+to choose the next implementation. No task starts merely by appearing here.
+
+References: [current handoff](next-agent-handoff.md),
+[performance audit](receiver-performance-audit-2026-11-07.md),
+[recurrence execution contract](codec-recurrence-graph-v1.md),
+[numeric profile](numeric-profile-v1.md),
+[PyTorch CUDA graph constraints](https://docs.pytorch.org/docs/main/notes/cuda.html#cuda-graphs).
