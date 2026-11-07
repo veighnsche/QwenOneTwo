@@ -131,7 +131,7 @@ def source_hashes():
     return {str(p.relative_to(root)):digest(p.read_bytes()) for p in files}
 
 
-def evaluate_case(backbone,codec,reference,release,row,encoder):
+def evaluate_case(backbone,codec,reference,release,row,encoder,*,construction=None):
     import torch
     from .component_producer import component_view
     from .clean_packets import CleanPackets
@@ -145,6 +145,9 @@ def evaluate_case(backbone,codec,reference,release,row,encoder):
     s=None
     try:
         view,p,indices=component_view(release,row,intervention=True)
+        if construction is not None:
+            check(not torch.is_grad_enabled(), 'diagnostic construction requires no_grad')
+            view,p,indices=construction.prepare(view,p,indices)
         run=str(uuid.uuid4());encoded=encoder.encode(view,p,run=run)
         factory=CleanPackets(encoded,view,p)
         case['view_sha256']=encoded['input_hash'];case['construction_audit']=encoded['audit']
@@ -159,8 +162,10 @@ def evaluate_case(backbone,codec,reference,release,row,encoder):
             evidence.extend(factory.span(index,start,min(32,n-start)) for start in range(0,n,32))
         check(len(evidence)<=8,'component evidence exceeds eight spans; never crop')
         port=next(k for k,v in PORT_NAMES.items() if v==row['operation'])
-        packet=factory.request(port,indices['question'],indices['target'],evidence=tuple(evidence),
+        request=factory.request if construction is None else construction.request(factory,indices)
+        packet=request(port,indices['question'],indices['target'],evidence=tuple(evidence),
             candidates=indices['candidates'],rubric=indices['rubric'],direction=indices['direction'],session=s)
+        if construction is not None:case['input_construction']=construction.receipt
         _,evaluated,_=s.evaluate(packet)
         # Record unmodified head decisions even if Reason decoding later fails.
         case['predicted_status']=STATUS_NAMES[int(evaluated['status_logits'].argmax())+1]

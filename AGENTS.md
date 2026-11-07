@@ -41,6 +41,10 @@ The user then authorized a read-only training-to-X/latent-meaning audit using
 existing data and saved features, with W/reference frozen and no agents, new
 data or training. Scope: docs/training-x-semantic-audit-v1.md. Reuse recorded GPU
 measurements; this audit does not authorize a further probe fit or model run.
+The user subsequently authorized fixing rubric-direction hashing and one matched
+numeric-access comparison on the 3090. See docs/numeric-access-comparison-v1.md:
+existing X Score data, all W/reference/receiver weights frozen, no agents, new
+data or training. This is a read-only diagnostic, not a production input change.
 
 One user submission, one prompt prefill, one hybrid cache. Qev decision LoRA is
 on for the initial continuous budget readout, off for native generation, and
