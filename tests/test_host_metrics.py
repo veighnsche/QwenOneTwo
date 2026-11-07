@@ -95,7 +95,7 @@ class HostMetricsTests(unittest.TestCase):
     def test_actual_cache_metadata_function_counts_hit_miss_and_eviction(self):
         fn=definition('qwen_one_two/codec/recurrence.py','_graphs')
         scope={'torch':SimpleNamespace(cuda=SimpleNamespace(current_stream=lambda device:SimpleNamespace(cuda_stream=7))),
-               '_CACHE':OrderedDict(),'CACHE_LIMIT':2,'current':current,'_Graphs':lambda values:object()}
+               '_CACHE':OrderedDict(),'CACHE_LIMIT':2,'_SEALED':False,'current':current,'_Graphs':lambda values:object()}
         exec(compile(ast.Module(body=[fn],type_ignores=[]),'schema-cache','exec'),scope)
         def values(n):return (SimpleNamespace(shape=(1,n,2,3),dtype='TEST_ONLY',device=SimpleNamespace(index=0)),)
         r=Recorder()
@@ -104,6 +104,11 @@ class HostMetricsTests(unittest.TestCase):
         self.assertEqual({k:v for k,v in r.counts.items() if not k.startswith('recurrence_key')},
                          {'recurrence_lookups':4,'recurrence_misses':3,'recurrence_hits':1,'recurrence_evictions':1})
         self.assertEqual(sum(v for k,v in r.counts.items() if k.startswith('recurrence_key')),4)
+        scope['_SEALED']=True
+        scope['_graphs'](values(1))
+        before=list(scope['_CACHE'])
+        with self.assertRaisesRegex(RuntimeError,'unwarmed recurrence'):scope['_graphs'](values(4))
+        self.assertEqual(list(scope['_CACHE']),before)
 
     def data(self):
         parent={'cpu_ns':20,'wall_ns':2500}

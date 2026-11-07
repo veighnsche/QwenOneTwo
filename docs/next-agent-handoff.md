@@ -41,7 +41,72 @@ Existing failed reports remain failures under their original protocols. This
 documentation change does not interrupt or extend an active experiment, launch
 training, promote weights, or authorize deployment.
 
-## Current checkpoint — opt-in resident pool measured; kernel shortcuts rejected
+## Current checkpoint — shared weights/context tested; CPU/case does not improve
+
+Implemented the requested bounded 3090 diagnostic with private module views,
+shared frozen tensors and two thread/stream lanes in one process/CUDA context.
+No agents, training, new data/reviews, service changes or time cutoff. W,
+receiver and reference remain frozen. QwenOneTwo server PID 2094 and The
+Operating Table were left unchanged. Read the
+[shared-context report](shared-context-results-2026-11-07.md),
+[contract](shared-context-diagnostic-v1.md) and
+[portable evidence](evidence/shared-context-diagnostic-v1.json).
+
+`training/shared_frozen.py` shares the exact 1,719 registered tensors
+(1,656,951,700 bytes), with private module/parameter dictionaries, tokenizer,
+precision owners and reference memo caches. It preserves embedding tying and
+reference/live isolation; rejects trainable tensors and dynamic RoPE. Sessions,
+registries and causal caches are private per case. Actual concurrent
+cold-reference calls exercise the temporary `functional_call` substitutions.
+All stream shapes are warmed serially before the process-wide
+`recurrence.replay_only()` barrier forbids new forward/backward capture. Cache
+capacity is bounded at 32/lane (64 shared); ordinary defaults remain eight.
+All workers finish main work before final integrity checks start.
+
+Three alternating replica/shared pairs use the identical existing eight-case
+queue × three, with identical eleven-case warmup/cold-reference stress per lane.
+All seven formal runs, including one serial control, exit zero. **Sharing fails
+the CPU/case target:** median parent-plus-worker main CPU/case
+**1.273707 → 1.378479 s (+8.2258%)**; main throughput
+**1.506258 → 1.273485 cases/s (−15.4537%)**. CPU/case rises in every pair
+(8.4832%, 5.8451%, 10.7591%). Ready allocation falls **46.7664%**
+(3,587,922,944 → 1,909,981,696 bytes); setup-inclusive CPU falls **21.6540%**,
+but end-to-end wall rises **26.9784%**. Serial control CPU/case is **1.079273 s**
+at **0.921948 cases/s** (one sample). Keep this memory/setup option opt-in;
+normal serving/training/two-GPU defaults do not change. No claim that the GIL
+alone explains the slowdown. CPU intervals and Queue-feeder cutoffs are explicit
+in the report; allocator peaks are not sampled physical-device peaks.
+
+**454 formal presentations** independently admitted (168 main + 143 warmup +
+143 concurrent cold-reference stress), eleven distinct cases, exact receipts
+across all runs. **376** applicable presentations match the CPU-04 3090 baseline
+exactly. An earlier 46-presentation probe also matches, retained separately and
+excluded from medians. Initial/final 320-tensor W/tying checks, receiver/reference
+hashes, frozen/grad=None ownership and zero updates all pass. Capture entries
+remain 30/replica and 60/shared throughout stress/main. Existing semantic
+failures and lack of learned invocation remain unchanged.
+
+**30 CPU tests pass in 10.890 s**, with model runtimes blocked; initial AST
+fixture namespace failure was corrected and retained in the logs. **Four
+recurrence GPU tests pass in 0.946 s**, including exact connected gradients,
+checkpoint/stream behavior, cold-capture rejection and nonfinite checks.
+**Two sharing GPU tests pass in 0.324 s**, including deliberately overlapping
+reference/live substitutions and rejection of trainable/duplicated tensors.
+Existing recurrence definitions are AST-identical after removing only new cold
+capture guards; other math/reference/evaluator files are byte-identical to
+`ef78a4f`. Reuse completed 324/108-case numeric qualification; no tolerance
+change or expensive matrix rerun. Raw plans, commands, sources, complete events,
+tests, initial failures, all samples and audits: `data/cpu-07-20261107/`.
+That chronological directory name does not complete task CPU-07.
+
+**Next unfinished slice:** CPU-06 still needs an actual reduction in per-case
+dispatch work within a larger pure GPU region, preserving exact operations and
+all immediate guard/control boundaries. Shared weights reduce duplication and
+setup CPU, not repeated operator dispatch. Full 310-case/long-context/threaded
+gradient training and 3060 shared-context behavior remain unqualified. Do not
+grow replicas, relax RMS tolerances, generate data, train or deploy by default.
+
+## Previous checkpoint — opt-in resident pool measured; kernel shortcuts rejected
 
 GPU throughput work remains authorized, with existing data and frozen W/reference.
 No agents, new semantic data/reviews, training or live-service changes. QwenOneTwo’s

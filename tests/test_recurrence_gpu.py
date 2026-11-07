@@ -124,5 +124,24 @@ class RecurrenceGPU(unittest.TestCase):
         with self.assertRaises(ValueError):finite(y)
         with self.assertRaises(ValueError):finite(m)
 
+    def test_replay_only_preserves_gradients_and_rejects_cold_capture(self):
+        from qwen_one_two.codec.recurrence import replay_only
+        clear_graph_cache();args=inputs(8,dk=8,dv=7,heads=2)
+        warm=graph_recurrence(*args)
+        expected=torch.autograd.grad(sum(x.square().sum() for x in warm),args)
+        with replay_only():
+            actual=graph_recurrence(*args)
+            gradients=torch.autograd.grad(sum(x.square().sum() for x in actual),args)
+            self.assertTrue(all(torch.equal(a,b) for a,b in zip(actual,warm)))
+            self.assertTrue(all(torch.equal(a,b) for a,b in zip(gradients,expected)))
+            with self.assertRaisesRegex(RuntimeError,'unwarmed recurrence'):
+                graph_recurrence(*inputs(7,dk=8,dv=7,heads=2))
+        cold=graph_recurrence(*inputs(7,dk=8,dv=7,heads=2))
+        with replay_only():
+            with self.assertRaisesRegex(RuntimeError,'unwarmed backward'):
+                cold[0].sum().backward()
+        # Scope exit restores normal capture; failed sealed work cannot poison it.
+        graph_recurrence(*inputs(7,dk=8,dv=7,heads=2))[1].sum().backward()
+
 
 if __name__=='__main__':unittest.main()

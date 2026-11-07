@@ -9,6 +9,9 @@ measured in the [cache report](cpu-04-results-2026-11-07.md).
 The subsequent [kernel screens](throughput-kernel-screens-2026-11-07.md) adopt
 no kernel. [Resident-pool results](resident-pool-results-2026-11-07.md) add an
 opt-in two-process/card mode: higher queue throughput with higher CPU/memory cost.
+[Shared-context results](shared-context-results-2026-11-07.md) now test private
+module views with shared frozen tensors: memory/setup CPU falls, but measured
+CPU/case rises 8.2258%. This remains opt-in; CPU-06 is still open.
 No CPU model fallback, agents, new semantic data, training or service changes.
 
 The goal is fewer CPU instructions, launches, synchronizations and transfers per
@@ -34,12 +37,13 @@ the existing tolerances. Execution changes do not grant semantic acceptance.
   improved about 1.8% under their recorded sources.
   [GPU measurements](fused-finite-results-2026-11-07.md).
 - [x] Build resident, read-only 3090/3060 worker orchestration and CPU tests.
-  Hardware execution, compatibility and throughput remain unmeasured.
+  Initial hardware execution and subset compatibility/throughput are measured
+  in CPU-03/04; full secondary-card transformer qualification remains open.
   [Runner build](two-gpu-diagnostics-v1.md).
 
 These are separate scoped measurements. Do not add their isolated savings or
-infer a current full-training speedup. Device-guard changes after the prior GPU
-measurements have not been exercised on hardware.
+infer a current full-training speedup. CPU-03 exercises the device-guard changes
+on hardware; it does not qualify the entire training path.
 
 ## Work order
 
@@ -174,6 +178,9 @@ Screened, not adopted: exact RMS replay/pointwise variants have modest isolated
 gains; native RMS fails the original strict feedback state/gradient limits.
 Prototype code is archived, not enabled. This task's full-case acceptance remains
 open; scalar agreement cannot substitute for the failed state/gradient checks.
+The [shared-context experiment](shared-context-results-2026-11-07.md) passes
+isolation and exact receipts but also fails to reduce CPU/case. It shares 1,719
+frozen tensors across private module views, not causal state across episodes.
 
 - [ ] Prototype one pure tensor region using existing-order CUDA graph replay.
   Use compilation or custom fused kernels as separate candidates if justified.

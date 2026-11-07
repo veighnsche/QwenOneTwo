@@ -5,6 +5,7 @@ reused across layers/cache versions without stale activations. No fitting.
 """
 import os
 import threading
+from contextlib import contextmanager
 from collections import OrderedDict
 import torch
 from torch.autograd.function import once_differentiable
@@ -26,6 +27,23 @@ def eager_recurrence(q,k,v,beta,g,memory):
 _CACHE=OrderedDict()
 _LOCK=threading.RLock()
 CACHE_LIMIT=8
+_SEALED=False
+
+
+@contextmanager
+def replay_only():
+    """Diagnostic barrier: warm all streams first, forbid new global captures.
+
+    Covers every thread in this process. Does not change equations or cache
+    keys; a missing shape/backward graph fails rather than capturing alongside
+    another lane. Call only after warmup has joined all lanes.
+    """
+    global _SEALED
+    with _LOCK:
+        previous=_SEALED;_SEALED=True
+    try:yield
+    finally:
+        with _LOCK:_SEALED=previous
 
 
 class _Graphs:
@@ -46,6 +64,7 @@ class _Graphs:
 
     def prepare_backward(self):
         if self.backward is not None:return
+        if _SEALED:raise RuntimeError('unwarmed backward in replay-only diagnostic')
         if (meter:=current()) is not None:meter.counts['recurrence_backward_capture_attempts']+=1
         stream=torch.cuda.Stream(device=self.inputs[0].device)
         stream.wait_stream(torch.cuda.current_stream())
@@ -76,6 +95,7 @@ def _graphs(values):
         meter.counts['recurrence_hits' if key in _CACHE else 'recurrence_misses']+=1
         meter.counts['recurrence_key_requests:'+repr(key)]+=1
     if key not in _CACHE:
+        if _SEALED:raise RuntimeError('unwarmed recurrence in replay-only diagnostic')
         _CACHE[key]=_Graphs(values)
         while len(_CACHE)>CACHE_LIMIT:
             _CACHE.popitem(last=False)

@@ -1,0 +1,311 @@
+{
+  "accelerator_qualification_granted": false,
+  "comparison": {
+    "end_to_end_wall_change_percent": 26.978373899328556,
+    "main_cpu_per_case_change_percent": 8.225776632747127,
+    "main_throughput_ratio_shared_over_replicas": 0.845462807758867,
+    "ready_allocation_change_percent": -46.76636801261248,
+    "total_cpu_change_percent": -21.65399751704873
+  },
+  "cpu_tests": {
+    "errors": 0,
+    "failures": 0,
+    "gpu_execution": false,
+    "model_runtimes_loaded": [],
+    "passed": true,
+    "tests": 30
+  },
+  "decision": "Opt-in memory/setup tradeoff only; rejected as a per-case CPU improvement. Defaults unchanged.",
+  "exit_codes": [
+    {
+      "exit_code": 0,
+      "run": "pair-0-replicas"
+    },
+    {
+      "exit_code": 0,
+      "run": "pair-0-shared"
+    },
+    {
+      "exit_code": 0,
+      "run": "pair-1-shared"
+    },
+    {
+      "exit_code": 0,
+      "run": "pair-1-replicas"
+    },
+    {
+      "exit_code": 0,
+      "run": "pair-2-replicas"
+    },
+    {
+      "exit_code": 0,
+      "run": "pair-2-shared"
+    },
+    {
+      "exit_code": 0,
+      "run": "pair-3-serial"
+    }
+  ],
+  "exploratory_probe": {
+    "exact_receipt_match_to_formal_runs": true,
+    "included_in_comparison_medians": false,
+    "presentations": 46,
+    "report_sha256": "2d14795bb3255eef2c9bd30223e57e6f325522faa3d6a52c4c6a9aff434fa04a",
+    "scope": "earlier runner revision; before cold-reference stress and final-integrity barrier; plan hashes retained, source snapshot is final revision"
+  },
+  "medians": {
+    "replicas": {
+      "cases_per_second": 1.5062579867949013,
+      "end_to_end_seconds": 73.647667751,
+      "main_cpu_seconds": 30.568961987,
+      "main_cpu_seconds_per_case": 1.2737067494583334,
+      "main_wall_seconds": 15.933525472,
+      "ready_allocated_bytes": 3587922944,
+      "ready_reserved_bytes": 4525654016,
+      "sum_process_peak_allocated_bytes": 4043232256,
+      "sum_process_peak_reserved_bytes": 4527751168,
+      "total_cpu_seconds": 173.318088392
+    },
+    "serial": {
+      "cases_per_second": 0.9219475686869584,
+      "end_to_end_seconds": 76.602645989,
+      "main_cpu_seconds": 25.902554093,
+      "main_cpu_seconds_per_case": 1.0792730872083334,
+      "main_wall_seconds": 26.031849115,
+      "ready_allocated_bytes": 1793961472,
+      "ready_reserved_bytes": 2262827008,
+      "sum_process_peak_allocated_bytes": 2024311296,
+      "sum_process_peak_reserved_bytes": 2264924160,
+      "total_cpu_seconds": 87.108459291
+    },
+    "shared": {
+      "cases_per_second": 1.2734851067248356,
+      "end_to_end_seconds": 93.516610925,
+      "main_cpu_seconds": 33.083496519,
+      "main_cpu_seconds_per_case": 1.378479021625,
+      "main_wall_seconds": 18.845921223,
+      "ready_allocated_bytes": 1909981696,
+      "ready_reserved_bytes": 2785017856,
+      "sum_process_peak_allocated_bytes": 2281259008,
+      "sum_process_peak_reserved_bytes": 2787115008,
+      "total_cpu_seconds": 135.787793835
+    }
+  },
+  "optimizer_updates": 0,
+  "pairs": [
+    {
+      "cpu_change_percent": 8.483184421958857,
+      "pair": 0,
+      "shared_main_faster": false
+    },
+    {
+      "cpu_change_percent": 5.845142362896927,
+      "pair": 1,
+      "shared_main_faster": false
+    },
+    {
+      "cpu_change_percent": 10.759076091276754,
+      "pair": 2,
+      "shared_main_faster": false
+    }
+  ],
+  "protocol": "shared-context-diagnostic-v1",
+  "raw_root": "data/cpu-07-20261107",
+  "receipt_admission": {
+    "baseline_sha256": "cbf352f903d86b21883019cca58bdecb071916420209c6a1fe11a7d9a53e3082",
+    "cold_reference_stress": 143,
+    "cross_run_exact": true,
+    "distinct_existing_cases": 11,
+    "exact_cpu04_matches": 376,
+    "main": 168,
+    "total": 454,
+    "warm": 143
+  },
+  "runs": [
+    {
+      "cases_per_second": 1.5062579867949013,
+      "end_to_end_seconds": 73.577942694,
+      "lane_case_counts": {
+        "0/0": 13,
+        "1/0": 11
+      },
+      "main_cpu_seconds": 30.496428267,
+      "main_cpu_seconds_per_case": 1.270684511125,
+      "main_wall_seconds": 15.933525472,
+      "mode": "replicas",
+      "plan_sha256": "36e37ff71246f658cb98770f5db409933f4ac8d8ac95ca1b3dd3e3bc32793ada",
+      "ready_allocated_bytes": 3587922944,
+      "ready_reserved_bytes": 4525654016,
+      "report_sha256": "e759028e2c9a5e7571b879813da4a4dbb46d42370cd6312c1cf5b6b50d5f4fdf",
+      "run": "pair-0-replicas",
+      "sum_process_peak_allocated_bytes": 4043232256,
+      "sum_process_peak_reserved_bytes": 4527751168,
+      "total_cpu_seconds": 173.40113071
+    },
+    {
+      "cases_per_second": 1.2734851067248356,
+      "end_to_end_seconds": 93.516610925,
+      "lane_case_counts": {
+        "0/0": 13,
+        "0/1": 11
+      },
+      "main_cpu_seconds": 33.083496519,
+      "main_cpu_seconds_per_case": 1.378479021625,
+      "main_wall_seconds": 18.845921223,
+      "mode": "shared",
+      "plan_sha256": "398e6dfc660e19c4a3952102cc9c21174a4c76b034a8593b5f726c3711e6bc78",
+      "ready_allocated_bytes": 1909981696,
+      "ready_reserved_bytes": 2785017856,
+      "report_sha256": "7b9079d626bf29257804a3e96798acbd41b43857064d5ab12a1d2ec808887157",
+      "run": "pair-0-shared",
+      "sum_process_peak_allocated_bytes": 2284257280,
+      "sum_process_peak_reserved_bytes": 2787115008,
+      "total_cpu_seconds": 135.787793835
+    },
+    {
+      "cases_per_second": 1.30085043123501,
+      "end_to_end_seconds": 92.348733561,
+      "lane_case_counts": {
+        "0/0": 11,
+        "0/1": 13
+      },
+      "main_cpu_seconds": 32.355761334,
+      "main_cpu_seconds_per_case": 1.34815672225,
+      "main_wall_seconds": 18.449469227,
+      "mode": "shared",
+      "plan_sha256": "398e6dfc660e19c4a3952102cc9c21174a4c76b034a8593b5f726c3711e6bc78",
+      "ready_allocated_bytes": 1909981696,
+      "ready_reserved_bytes": 2785017856,
+      "report_sha256": "aac68f1fb47198362f11dea1d12dd0887c3d5b7683ade976108a42d418ed2d87",
+      "run": "pair-1-shared",
+      "sum_process_peak_allocated_bytes": 2268780032,
+      "sum_process_peak_reserved_bytes": 2787115008,
+      "total_cpu_seconds": 133.938781912
+    },
+    {
+      "cases_per_second": 1.513818576296412,
+      "end_to_end_seconds": 74.734785469,
+      "lane_case_counts": {
+        "0/0": 12,
+        "1/0": 12
+      },
+      "main_cpu_seconds": 30.568961987,
+      "main_cpu_seconds_per_case": 1.2737067494583334,
+      "main_wall_seconds": 15.853947346,
+      "mode": "replicas",
+      "plan_sha256": "36e37ff71246f658cb98770f5db409933f4ac8d8ac95ca1b3dd3e3bc32793ada",
+      "ready_allocated_bytes": 3587922944,
+      "ready_reserved_bytes": 4525654016,
+      "report_sha256": "fdbb886edfe375ec5470669402c378938caa42c6b5e812e9f760e2cec8260f98",
+      "run": "pair-1-replicas",
+      "sum_process_peak_allocated_bytes": 4048622592,
+      "sum_process_peak_reserved_bytes": 4529848320,
+      "total_cpu_seconds": 173.318088392
+    },
+    {
+      "cases_per_second": 1.4994308156875071,
+      "end_to_end_seconds": 73.647667751,
+      "lane_case_counts": {
+        "0/0": 13,
+        "1/0": 11
+      },
+      "main_cpu_seconds": 30.716072839,
+      "main_cpu_seconds_per_case": 1.2798363682916667,
+      "main_wall_seconds": 16.006073604,
+      "mode": "replicas",
+      "plan_sha256": "36e37ff71246f658cb98770f5db409933f4ac8d8ac95ca1b3dd3e3bc32793ada",
+      "ready_allocated_bytes": 3587922944,
+      "ready_reserved_bytes": 4525654016,
+      "report_sha256": "e47f5750b0f9e0f80cff5be81597a0bee0ab3ad0c5d1d183ed323f2a3b6eb0ef",
+      "run": "pair-2-replicas",
+      "sum_process_peak_allocated_bytes": 4043232256,
+      "sum_process_peak_reserved_bytes": 4527751168,
+      "total_cpu_seconds": 172.646911632
+    },
+    {
+      "cases_per_second": 1.23828258285964,
+      "end_to_end_seconds": 95.457721511,
+      "lane_case_counts": {
+        "0/0": 11,
+        "0/1": 13
+      },
+      "main_cpu_seconds": 34.020838488,
+      "main_cpu_seconds_per_case": 1.417534937,
+      "main_wall_seconds": 19.381682608,
+      "mode": "shared",
+      "plan_sha256": "398e6dfc660e19c4a3952102cc9c21174a4c76b034a8593b5f726c3711e6bc78",
+      "ready_allocated_bytes": 1909981696,
+      "ready_reserved_bytes": 2785017856,
+      "report_sha256": "a36200cd8d9881329a69b09a1964b17adaebb29604929014c577a495efd8024d",
+      "run": "pair-2-shared",
+      "sum_process_peak_allocated_bytes": 2281259008,
+      "sum_process_peak_reserved_bytes": 2787115008,
+      "total_cpu_seconds": 138.720879909
+    },
+    {
+      "cases_per_second": 0.9219475686869584,
+      "end_to_end_seconds": 76.602645989,
+      "lane_case_counts": {
+        "0/0": 24
+      },
+      "main_cpu_seconds": 25.902554093,
+      "main_cpu_seconds_per_case": 1.0792730872083334,
+      "main_wall_seconds": 26.031849115,
+      "mode": "serial",
+      "plan_sha256": "bc1b3390bd7fb2f63930bc5017f372778e758e35426e12b78176ed51cf56b1b3",
+      "ready_allocated_bytes": 1793961472,
+      "ready_reserved_bytes": 2262827008,
+      "report_sha256": "3e69ea047d38817317772264983e602953c194f2cf04c6919a0e922f3c50942f",
+      "run": "pair-3-serial",
+      "sum_process_peak_allocated_bytes": 2024311296,
+      "sum_process_peak_reserved_bytes": 2264924160,
+      "total_cpu_seconds": 87.108459291
+    }
+  ],
+  "source_equivalence": {
+    "byte_identical_math_files": [
+      "qwen_one_two/codec/backbone.py",
+      "qwen_one_two/codec/neural.py",
+      "qwen_one_two/codec/precision.py",
+      "qwen_one_two/g1_backbone.py",
+      "qwen_one_two/g1_precision_math.py",
+      "qwen_one_two/training/reference.py",
+      "qwen_one_two/training/clean.py",
+      "qwen_one_two/training/behavior_qualification.py",
+      "qwen_one_two/training/component_producer.py"
+    ],
+    "recurrence_existing_definitions_equal_after_removing_cold_capture_guards": true,
+    "starting_head": "ef78a4f9ea62009547319cddf24d36bd6a570380"
+  },
+  "status": "COMPLETED_UNQUALIFIED",
+  "tests": {
+    "cpu": {
+      "count": 30,
+      "log": "data/cpu-07-20261107/cpu-tests.log",
+      "passed": true,
+      "seconds": 10.89,
+      "sha256": "87a2f2d573d82823b4ba098b6f82de0efc3a9a2b13a8bde3f951d5976e8dae8c"
+    },
+    "initial_cpu_fixture_failure": {
+      "final_errors": 0,
+      "initial_errors": 1,
+      "log": "data/cpu-07-20261107/cpu-tests-initial.log",
+      "reason": "AST-extracted cache test omitted the new _SEALED global; fixture updated and complete suite rerun"
+    },
+    "recurrence_gpu": {
+      "count": 4,
+      "log": "data/cpu-07-20261107/recurrence-gpu-tests.log",
+      "passed": true,
+      "seconds": 0.946,
+      "sha256": "8b4a09f12bad1e01e3bc7399a462cc12d7371fd21d57d079460fba37a2b2ed41"
+    },
+    "shared_views_gpu": {
+      "count": 2,
+      "log": "data/cpu-07-20261107/shared-frozen-gpu-tests.log",
+      "passed": true,
+      "seconds": 0.324,
+      "sha256": "78fdffdb3381d4d845c1f4a3f195c591142c35c01b8c448713cc95e649c47bdd"
+    }
+  },
+  "training_authorized": false
+}
