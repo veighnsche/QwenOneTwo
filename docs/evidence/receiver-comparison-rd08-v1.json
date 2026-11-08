@@ -18,6 +18,15 @@
   },
   "authorization": "submitted Prompt8 finite receiver comparison; four passes/all1500 records per arm; RD09 excluded",
   "baseline_commit": "de5807391f6ae36e5fda32480900188db908d99a",
+  "blocker_record_commit": "2c977ce81caa7235bf8b602d221d0c4b40e1b1de",
+  "blocker_record_push": {
+    "command": "git -c 'credential.helper=!gh auth git-credential' push origin main",
+    "exit_code": 0,
+    "finalization": "separate ledger/handoff/evidence finalization committed and pushed on top; slice remains blocked",
+    "remote_main_verified": "2c977ce81caa7235bf8b602d221d0c4b40e1b1de",
+    "result": "de58073..2c977ce main -> main",
+    "verification_command": "git -c 'credential.helper=!gh auth git-credential' ls-remote origin refs/heads/main"
+  },
   "command": {
     "argv": [
       "python",

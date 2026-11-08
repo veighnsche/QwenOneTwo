@@ -19,7 +19,7 @@ because a later queued task starts.
 | RD-05 | delivered | Joint objectives, owners, binding/mask tests; deferred GPU IDs | `fe90af0` pushed/verified; [report](redesign-rd05-results-2026-11-08.md), [evidence](evidence/joint-receiver-objectives-v1.json); 74 static tests pass +14 refreshed; two new GPU checks resolved by RD-07; Reason masks preserved |
 | RD-06 | delivered | Native wiring/eligibility report; deferred real-return/gradient IDs | `6f74680` pushed/verified; [report](redesign-rd06-results-2026-11-08.md), [evidence](evidence/direct-native-flow-v1.json); 86 static tests pass +10 refreshed; two new GPU checks resolved by RD-07; zero complete corpus formation/semantic continuation/direct reader support |
 | RD-07 | delivered | All required deferred/changed-path 3090 checks pass; actual counts/hashes | [Report](redesign-rd07-results-2026-11-08.md), [evidence](evidence/redesign-qualification-v1.json); ten deferred +three new GPU checks pass; twelve1024 traces; zero updates; `7da99c6` pushed and verified |
-| RD-08 | blocked | Complete matched fit/evaluation receipts; useful-improvement outcome separate | [Report](redesign-rd08-results-2026-11-08.md), [evidence](evidence/receiver-comparison-rd08-v1.json); RD-07 passes/current; common support0/1500; neither fit launched, zero updates; learning not evaluated |
+| RD-08 | blocked | Complete matched fit/evaluation receipts; useful-improvement outcome separate | [Report](redesign-rd08-results-2026-11-08.md), [evidence](evidence/receiver-comparison-rd08-v1.json); RD-07 passes/current; common support0/1500; neither fit launched, zero updates; learning not evaluated; blocker `2c977ce` pushed/verified |
 | RD-09 | pending | Accepted RD-08 receiver plus eligible native run/evaluation receipts | None; training not authorized by prompt preparation |
 
 RD-07 is delivered; technical acceptance passes and implementation `7da99c6` is pushed/verified.
@@ -574,5 +574,8 @@ coverage audit and affected qualification, then the exact existing-runner full
 matched schedule/initialization/moments/RNG/owner binding. Existing finite RD-08
 authorization persists; no automatic redesign search or smaller fit. RD-09 stays
 unstarted and blocked. No model workload, agents, new records/reviews, locked
-access, deployment or service/Operating Table change. Blocker record commit/push
-finalization follows; RD-08 remains blocked rather than delivered.
+access, deployment or service/Operating Table change. Blocker record commit `2c977ce81caa7235bf8b602d221d0c4b40e1b1de` is pushed;
+authenticated push exit0 (`de58073..2c977ce main -> main`) and authenticated
+`git ls-remote` returned the identical SHA.197 local Markdown targets, artifact
+hashes and staged whitespace pass. This ledger/handoff/evidence finalization is
+committed/pushed separately on top. RD-08 remains blocked rather than delivered.

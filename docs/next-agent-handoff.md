@@ -51,8 +51,9 @@ automatic architecture search. The user's existing finite RD-08 authorization
 persists after prerequisites pass; no RD-09 authorization was given. RD-09 remains
 unstarted and no fitted receiver qualifies it. No agents, new data/reviews, locked
 access, deployment or service/Operating Table changes. Earlier statements that
-RD-08 was unsubmitted are historical and superseded here. Blocker record is being
-committed/pushed; do not mark RD-08 delivered.
+RD-08 was unsubmitted are historical and superseded here. Blocker record `2c977ce81caa7235bf8b602d221d0c4b40e1b1de` is pushed and exact
+remote main SHA verified. Ledger/handoff/evidence finalization is committed and
+pushed separately on top. Do not mark RD-08 delivered.
 
 ## Previous requested work — RD-07 qualification, 2026-11-08
 

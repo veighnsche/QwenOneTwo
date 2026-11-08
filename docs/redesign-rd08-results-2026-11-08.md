@@ -87,3 +87,10 @@ for the already authorized RD-08 scope once its prerequisites are satisfied.
 RD-01..07 remain delivered. RD-08 is the earliest unfinished slice, marked
 **blocked**; RD-09 is unstarted. No weights were promoted or deployed. No agents,
 new records/reviews, locked-set access or service/Operating Table changes occurred.
+
+Blocker record commit `2c977ce81caa7235bf8b602d221d0c4b40e1b1de` is pushed to main.
+Authenticated push exited0 (`de58073..2c977ce main -> main`); subsequent remote
+main verification returned the identical full SHA. Delivery-index finalization
+is committed/pushed separately on top; RD-08 remains blocked. Artifact hashes,
+197 local Markdown targets and staged whitespace pass; production source is
+unchanged and valid prior tests/measurements were reused.
