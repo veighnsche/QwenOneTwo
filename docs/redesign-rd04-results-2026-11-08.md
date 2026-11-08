@@ -142,3 +142,8 @@ Reason meaning and useful improvement remain separate, unmeasured outcomes.
 No agents, new data/reviews, locked access, fitting, model workloads, deployment,
 service or Operating Table changes. RD-01 supervision/operator gaps remain.
 This task stops at RD-04; next unfinished implementation slice is RD-05.
+
+Delivery: contract `22476193bb517b503e927cd141feddf56e02af7b` preceded
+implementation `ae800a4bf675fb58e6419ca411054fa9cabb973a`; both pushed to main.
+Authenticated remote verification returned the exact implementation SHA before
+ledger/handoff delivery finalization. All 261 checked local Markdown targets resolve.

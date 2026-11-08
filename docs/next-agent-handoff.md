@@ -21,9 +21,11 @@ as recorded below.
 
 ## Current requested work — RD-04 direct role states, 2026-11-08
 
-RD-04 model-free implementation/checks are complete, awaiting implementation
-commit/push and delivery finalization. The layout/admission contract was committed
-and pushed first as `2247619`. Read the [RD-04 report](redesign-rd04-results-2026-11-08.md),
+RD-04 staged implementation is delivered. Implementation/evidence commit
+`ae800a4` is pushed to main and its exact remote SHA was verified; ledger/handoff
+delivery finalization is committed and pushed separately. The layout/admission
+contract was committed and pushed first as `2247619`.
+Read the [RD-04 report](redesign-rd04-results-2026-11-08.md),
 [implementation evidence](evidence/direct-role-states-v1.json),
 [coverage evidence](evidence/direct-role-layout-coverage-v1.json),
 [versioned contract](direct-role-states-v1.md) and [ledger](redesign-progress.md).
@@ -63,6 +65,7 @@ New-profile execution remains gated; old prepared plans are stale.
 No agents, new records/reviews, locked access, fitting, deployment, service or
 Operating Table changes. Existing RD-01 coverage/native supervision gaps and
 historical profiling-test drift remain. Stop at RD-04; **RD-05 is unstarted**.
+Compilation, whitespace, evidence hashes and 261 local Markdown targets pass.
 
 ## Previous requested work — RD-03 frozen-W sources, 2026-11-08
 
