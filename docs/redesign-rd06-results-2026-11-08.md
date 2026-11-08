@@ -173,3 +173,9 @@ learned invocation, final-answer correctness or useful improvement.
 No agents, new data/reviews, locked access, fitting, deployment, service or
 Operating Table changes. Stop at RD-06; next unfinished slice is RD-07 technical
 qualification. Future fits remain blocked by layout/support limits and unrun checks.
+
+Delivery: implementation/evidence `6f74680c4c6a866999d271d15e681d239d9ff588`
+was pushed to main and authenticated remote verification returned that exact SHA.
+Ledger/handoff delivery finalization follows as a separate commit. All 245 checked
+local Markdown targets resolve. Ten GPU checks remain pending; no learned behavior
+or GPU qualification result is claimed.

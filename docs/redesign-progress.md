@@ -17,13 +17,13 @@ because a later queued task starts.
 | RD-03 | delivered | Source/cache policy and static checks; explicit deferred GPU check IDs | [Report](redesign-rd03-results-2026-11-08.md), [evidence](evidence/frozen-w-source-v1.json); 50 static tests pass; three GPU checks pending RD-07; `2cbfa41` pushed and verified |
 | RD-04 | delivered | Versioned payload/admission contracts and implementation; deferred GPU IDs | Contract `2247619`, implementation `ae800a4` pushed/verified; [report](redesign-rd04-results-2026-11-08.md), [evidence](evidence/direct-role-states-v1.json); 61 static tests pass +6 refreshed; three new GPU checks pending RD-07; zero receiver support |
 | RD-05 | delivered | Joint objectives, owners, binding/mask tests; deferred GPU IDs | `fe90af0` pushed/verified; [report](redesign-rd05-results-2026-11-08.md), [evidence](evidence/joint-receiver-objectives-v1.json); 74 static tests pass +14 refreshed; two new GPU checks pending RD-07; Reason masks preserved |
-| RD-06 | in_progress | Native wiring/eligibility report; deferred real-return/gradient IDs | [Report](redesign-rd06-results-2026-11-08.md), [evidence](evidence/direct-native-flow-v1.json); 86 static tests pass +10 refreshed; implementation ready to commit/push; zero complete corpus formation/semantic continuation/direct reader support |
+| RD-06 | delivered | Native wiring/eligibility report; deferred real-return/gradient IDs | `6f74680` pushed/verified; [report](redesign-rd06-results-2026-11-08.md), [evidence](evidence/direct-native-flow-v1.json); 86 static tests pass +10 refreshed; two new GPU checks pending RD-07; zero complete corpus formation/semantic continuation/direct reader support |
 | RD-07 | pending | All required deferred/changed-path 3090 checks pass; actual counts/hashes | RD03-GPU-D-INDEPENDENCE, RD03-GPU-CACHE-PARITY, RD03-GPU-CONSUMER-GRADIENTS; RD04-GPU-IDENTITY-PROJECTION, RD04-GPU-DIRECT-ROUNDTRIP, RD04-GPU-DIRECT-GRADIENTS; RD05-GPU-GRADIENT-ACCUMULATION, RD05-GPU-RESUME; RD06-GPU-NATIVE-RETURN, RD06-GPU-CONNECTED-GRADIENT pending; no GPU execution |
 | RD-08 | pending | Complete matched fit/evaluation receipts; useful-improvement outcome separate | None; training not authorized by prompt preparation |
 | RD-09 | pending | Accepted RD-08 receiver plus eligible native run/evaluation receipts | None; training not authorized by prompt preparation |
 
-Earliest unfinished implementation slice: **RD-06**, implementation/checks complete,
-awaiting commit/push and delivery finalization. RD-07..09 are unstarted.
+Earliest unfinished slice: **RD-07** technical qualification; RD-07..09 are unstarted.
+RD-06 is delivered under the staged implementation protocol.
 Ten RD-03..06 GPU checks remain pending RD-07; no redesign model job was launched.
 
 For each attempted slice add a short entry with implementation/evidence paths,
@@ -388,8 +388,8 @@ a future-fit blocker, not an unfinished predecessor static implementation check.
 
 ## RD-06 implementation — 2026-11-08
 
-Currently due model-free acceptance: **pass**; staged delivery awaits commit/push
-and finalization. GPU qualification: **pending RD-07**. Learning outcome:
+Staged implementation acceptance: **pass**, delivered.
+GPU qualification: **pending RD-07**. Learning outcome:
 **not_applicable**; no model workload, source extraction, actual Session or update.
 
 Evidence: [report](redesign-rd06-results-2026-11-08.md),
@@ -464,3 +464,13 @@ No model execution, feature extraction, training, agents, new data/reviews, lock
 access, deployment, service or Operating Table change. Historical profiling input
 drift and earlier data/native supervision gaps remain. Stop after RD-06; no RD-07
 GPU execution is included. Next unfinished slice is RD-07 technical qualification.
+
+Implementation commit: `6f74680c4c6a866999d271d15e681d239d9ff588`.
+`git -c 'credential.helper=!gh auth git-credential' push origin main`: exit0,
+`0cd19cd..6f74680 main -> main`. Authenticated `git ls-remote` returned
+`6f74680c4c6a866999d271d15e681d239d9ff588 refs/heads/main`, identical to local HEAD.
+245 local Markdown targets resolve; all current source/test/contract/raw hashes
+and staged whitespace pass. This ledger/handoff delivery finalization is committed
+and pushed separately on top of the verified implementation. Ten GPU checks remain
+pending and no learning outcome is claimed. Layout/native support limits remain
+concrete blockers for later fits. Stop after RD-06; next is RD-07 qualification.

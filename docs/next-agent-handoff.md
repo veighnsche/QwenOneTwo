@@ -21,8 +21,9 @@ as recorded below.
 
 ## Current requested work — RD-06 native flow and supervision, 2026-11-08
 
-RD-06 model-free implementation/checks are complete, awaiting implementation
-commit/push and delivery finalization. Read the
+RD-06 staged implementation is delivered. Implementation/evidence commit
+`6f74680` is pushed to main and its exact remote SHA was verified; ledger/handoff
+delivery finalization is committed and pushed separately. Read the
 [RD-06 report](redesign-rd06-results-2026-11-08.md),
 [evidence](evidence/direct-native-flow-v1.json),
 [native contract](direct-native-flow-v1.md) and [ledger](redesign-progress.md).
@@ -50,7 +51,7 @@ zero direct receiver support also remains a fit blocker requiring explicit layou
 revision/re-audit. No bounds, panel, tolerance or data/review was changed.
 
 Held-out plan: native W/F470, prepared receiver X180 and supplied-reader R/X9
-120; all100 X pairs retain their actual exposure (90 prepared /10 supplied).
+120; all 100 X pairs retain their actual exposure (90 prepared /10 supplied).
 There are no actual-native-final X pair labels. Explicit native W/F evaluation
 uses free control and no targets/effort/override and cannot enter training.
 Typed-final grading is separate from receiver heads/consumed returns; extraction
@@ -61,7 +62,7 @@ All **86 model-free tests pass** (116.312 s), plus ten refreshed native tests
 (14.224 s) after final telemetry/typed-field changes; final GPU registration guard
 passes. Full Rust BPE/Jinja audit and four current-byte CLI preparations pass
 with model imports blocked. Repeated direct plans are identical; all actual
-execution counters zero. Source migrations/old raw artifacts and33 unchanged
+execution counters zero. Source migrations/old raw artifacts and 33 unchanged
 boundary checks were verified. Historical profiling input drift remains unchanged.
 
 **Ten GPU checks remain pending RD-07**, never executed. The eight earlier IDs
@@ -75,6 +76,8 @@ writer/R gradients. No optimizer update or corpus semantic qualification is clai
 No model execution, actual Session, extraction, fitting, agents, new data/reviews,
 locked access, deployment, service or Operating Table change. Stop after RD-06;
 **RD-07 is unstarted**. Later fits remain blocked by support limits and unrun checks.
+Current evidence hashes, compilation, staged whitespace and 245 local Markdown
+targets pass.
 
 ## Previous requested work — RD-05 joint objectives and binding, 2026-11-08
 
