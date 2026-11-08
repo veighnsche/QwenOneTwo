@@ -15,7 +15,7 @@ because a later queued task starts.
 | RD-01 | delivered | Coverage/panel/native-supervision manifests; model-free checks | [Report](redesign-rd01-results-2026-11-08.md), [manifest](evidence/redesign-coverage-v1.json); 23 tests pass; implementation `800c100` pushed and verified |
 | RD-02 | delivered | Runner preparation/rejection checks; identity/resume contracts | [Report](redesign-rd02-results-2026-11-08.md), [evidence](evidence/receiver-preparation-v1.json); 12 final preparation tests +28 reused tests pass; `254f526` pushed and verified |
 | RD-03 | delivered | Source/cache policy and static checks; explicit deferred GPU check IDs | [Report](redesign-rd03-results-2026-11-08.md), [evidence](evidence/frozen-w-source-v1.json); 50 static tests pass; three GPU checks pending RD-07; `2cbfa41` pushed and verified |
-| RD-04 | pending | Versioned payload/admission contracts and implementation; deferred GPU IDs | None; plan only |
+| RD-04 | in_progress | Versioned payload/admission contracts and implementation; deferred GPU IDs | Predecessors verified with migration evidence; contract work started |
 | RD-05 | pending | Joint objectives, owners, binding/mask tests; deferred GPU IDs | None; plan only |
 | RD-06 | pending | Native wiring/eligibility report; deferred real-return/gradient IDs | None; plan only |
 | RD-07 | pending | All required deferred/changed-path 3090 checks pass; actual counts/hashes | RD03-GPU-D-INDEPENDENCE, RD03-GPU-CACHE-PARITY, RD03-GPU-CONSUMER-GRADIENTS pending; no GPU execution |
@@ -200,3 +200,16 @@ Implementation is delivered under staged protocol; all three GPU checks remain
 pending and no GPU qualification or learned result is claimed.
 Stop after RD-03; next implementation slice is RD-04, retaining these GPU checks
 as pending until RD-07.
+
+## RD-04 recovery — 2026-11-08
+
+Clean main `483c256`; RD-01/02 verified through RD-03 source migration, RD-03
+source/test/raw hashes unchanged. Valid recorded model-free results reused.
+Three RD-03 GPU checks remain pending RD-07. No matching RD-04 implementation
+or run manifest; sandbox process visibility is limited. No model execution.
+
+RD-04 contract phase: `codec/layout.py`, `docs/direct-role-states-v1.md` and
+seven named owner specifications define version 2 metadata, 32-state fields,
+variable exact-attribute keys and complete 256/64 admission/return costs.
+`python -m unittest tests.test_role_layout`: four model-free tests pass.
+Contract commit/push precedes representation implementation as required.

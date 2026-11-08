@@ -1,5 +1,10 @@
 # Version-one latent representation proposal
 
+The opt-in [direct-role-states-v1 contract](direct-role-states-v1.md) versions
+variable request-role lengths, native emission capacity and complete return
+reservations together. The rules below remain the legacy default; the new
+profile is experimental and its GPU assertions are pending RD-07.
+
 Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
 for implementation status, measured evidence and remaining work.
 
