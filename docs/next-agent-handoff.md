@@ -19,7 +19,42 @@ change fan controls, live services or The Operating Table. Older hold statements
 below are historical. The completed comparison and next unfinished slice remain
 as recorded below.
 
-## Current requested work — RD-07 qualification, 2026-11-08
+## Current requested work — RD-08 receiver comparison, 2026-11-08
+
+The user submitted/authorized finite RD-08 training, but **RD-08 is blocked before
+execution**, not delivered as a failed experiment. See the
+[report](redesign-rd08-results-2026-11-08.md),
+[evidence](evidence/receiver-comparison-rd08-v1.json) and [ledger](redesign-progress.md).
+All RD-01..07 deliveries were verified; RD-07's thirteen GPU passes remain valid
+for unchanged current source, with raw evidence and pushed ancestors verified.
+No technical qualification check is pending; no GPU rerun was needed.
+
+Required complete shared support is absent: direct training0/1500, E0/130, X0/180.
+Every training return reservation exceeds64 (89–166 positions);1136 questions
+also exceed32. All501 Noul/497 Choice/502 Score rows and288 families remain in
+the derived manifest, with all1810 training/E/X IDs/hashes/costs/exclusions.
+Prompt8 explicitly forbids substituting a smaller experiment when complete shared
+support is unavailable. Both plans still declare the identical full1500×4 order,
+6000 exposures/750 windows per arm; those are planned counts only.
+
+Actual per arm:0 exposures,0 windows,0 updates,0 measurements/evaluations. No fit
+or checkpoint exists; learning acceptance **not_evaluated**. Model-import-blocked
+verification exits0. Existing full-panel audits/tests reused after dependency
+verification. Host inspection found3090 accessible, no matching fit/qualification
+job, and existing server PID2094 untouched. No model workload ran in RD-08.
+
+Earliest unfinished slice: **RD-08**. Recovery needs an explicit layout revision
+carrying complete existing roles, full training/E/X re-audit and affected GPU
+qualification, then exact existing-runner full matched schedule/owners/moments/RNG.
+Do not weaken limits, crop, invent labels, silently select a subset or start an
+automatic architecture search. The user's existing finite RD-08 authorization
+persists after prerequisites pass; no RD-09 authorization was given. RD-09 remains
+unstarted and no fitted receiver qualifies it. No agents, new data/reviews, locked
+access, deployment or service/Operating Table changes. Earlier statements that
+RD-08 was unsubmitted are historical and superseded here. Blocker record is being
+committed/pushed; do not mark RD-08 delivered.
+
+## Previous requested work — RD-07 qualification, 2026-11-08
 
 RD-07 is **delivered**, with technical acceptance **pass**. Implementation/evidence
 commit `7da99c652fba8729df247c62fcb029fb931d5cea` is pushed to main, and exact

@@ -19,12 +19,12 @@ because a later queued task starts.
 | RD-05 | delivered | Joint objectives, owners, binding/mask tests; deferred GPU IDs | `fe90af0` pushed/verified; [report](redesign-rd05-results-2026-11-08.md), [evidence](evidence/joint-receiver-objectives-v1.json); 74 static tests pass +14 refreshed; two new GPU checks resolved by RD-07; Reason masks preserved |
 | RD-06 | delivered | Native wiring/eligibility report; deferred real-return/gradient IDs | `6f74680` pushed/verified; [report](redesign-rd06-results-2026-11-08.md), [evidence](evidence/direct-native-flow-v1.json); 86 static tests pass +10 refreshed; two new GPU checks resolved by RD-07; zero complete corpus formation/semantic continuation/direct reader support |
 | RD-07 | delivered | All required deferred/changed-path 3090 checks pass; actual counts/hashes | [Report](redesign-rd07-results-2026-11-08.md), [evidence](evidence/redesign-qualification-v1.json); ten deferred +three new GPU checks pass; twelve1024 traces; zero updates; `7da99c6` pushed and verified |
-| RD-08 | pending | Complete matched fit/evaluation receipts; useful-improvement outcome separate | None; training not authorized by prompt preparation |
+| RD-08 | blocked | Complete matched fit/evaluation receipts; useful-improvement outcome separate | [Report](redesign-rd08-results-2026-11-08.md), [evidence](evidence/receiver-comparison-rd08-v1.json); RD-07 passes/current; common support0/1500; neither fit launched, zero updates; learning not evaluated |
 | RD-09 | pending | Accepted RD-08 receiver plus eligible native run/evaluation receipts | None; training not authorized by prompt preparation |
 
 RD-07 is delivered; technical acceptance passes and implementation `7da99c6` is pushed/verified.
 All ten deferred GPU checks are resolved; no required RD-07 check remains pending.
-Earliest unfinished slice: **RD-08**, unstarted and outside this submission; affected fits remain blocked by layout/support limits.
+Earliest unfinished slice: **RD-08**, authorized but blocked before either fit: complete shared support0/1500. Explicit layout revision/full re-audit required; RD-09 remains unstarted.
 
 For each attempted slice add a short entry with implementation/evidence paths,
 exact commands/results, dependency hashes, relevant implementation commits and
@@ -530,3 +530,49 @@ authenticated `git ls-remote` returned the identical full SHA for main. This
 ledger/handoff/evidence delivery finalization is committed and pushed separately
 on top. 190 current local Markdown targets resolve; exact source/test/raw hashes
 verify. Stop after RD-07, no required technical checks pending.
+
+## RD-08 recovery/preflight — 2026-11-08
+
+Submitted authorization: finite two-arm receiver comparison only, four passes over
+all1500 supported records per arm,6000 exposures/750 eight-example windows.
+Started on clean main `de5807391f6ae36e5fda32480900188db908d99a`, matching
+authenticated remote main. Host read-only process inspection found only existing
+server PID2094 and no matching RD-08/receiver fit or qualification process. Exact
+3090 is accessible on host; no GPU-access blocker. No service changed.
+
+RD-01..07 evidence/source/raw/commit verification and common-support preflight
+are in progress. No fit, optimizer update or development evaluation launched.
+
+## RD-08 coverage blocker — 2026-11-08
+
+Delivery: **blocked before fitting**, not a completed failed experiment.
+RD-01..07 remain delivered; RD-07 technical qualification: **pass**, all13 IDs
+and executed source/test/raw hashes unchanged. Seven predecessor implementation
+commits and their original source/test/contract/raw evidence verified in order.
+Valid unchanged tests/measurements reused; no unnecessary GPU rerun.
+
+[Report](redesign-rd08-results-2026-11-08.md),
+[portable evidence](evidence/receiver-comparison-rd08-v1.json), raw
+`data/redesign-rd08-20261108/`. Model-import-blocked command
+`PYTHONPATH=. python data/redesign-rd08-20261108/verify_and_record.py > data/redesign-rd08-20261108/preflight.log 2>&1`:
+exit0. Both prior current-byte plans have identical full order:1500 records ×4,
+6000 exposures/750 windows per arm. Full coverage sources/raw/tokenizer/release
+and all1810 record identities verify. All1500 training rows exceed return64
+(observed89–166);1136 questions also exceed32. All501 Noul/497 Choice/502 Score
+and288 families retained. E0/130 and X0/180. Common support is zero regardless
+of control support; no pooled-control support count was invented.
+
+Prompt8 explicitly says: "If complete shared support is unavailable, record the
+coverage blocker and do not silently substitute a smaller experiment."
+Therefore neither fit or development evaluation was launched. Actual per arm:
+0 exposures/windows/updates/measurements. Learning acceptance **not_evaluated**;
+no receiver artifact or new checkpoint. No training failure or useful-improvement
+pass/fail claimed. No envelopes, semantic masks, data, grading or exposure changed.
+
+Next recovery: explicit revised complete-role layout contract, full training/E/X
+coverage audit and affected qualification, then the exact existing-runner full
+matched schedule/initialization/moments/RNG/owner binding. Existing finite RD-08
+authorization persists; no automatic redesign search or smaller fit. RD-09 stays
+unstarted and blocked. No model workload, agents, new records/reviews, locked
+access, deployment or service/Operating Table change. Blocker record commit/push
+finalization follows; RD-08 remains blocked rather than delivered.

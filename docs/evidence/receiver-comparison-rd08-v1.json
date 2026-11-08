@@ -1,0 +1,354 @@
+{
+  "accounting": {
+    "RD09_started": false,
+    "agents": false,
+    "deployment": false,
+    "development_evaluations": 0,
+    "feature_extraction": false,
+    "locked_access": false,
+    "model_execution": false,
+    "new_checkpoints": 0,
+    "new_records": false,
+    "new_reviews": false,
+    "optimizer_updates": 0,
+    "scheduled_windows": 0,
+    "services_changed": false,
+    "training": false,
+    "training_exposures": 0
+  },
+  "authorization": "submitted Prompt8 finite receiver comparison; four passes/all1500 records per arm; RD09 excluded",
+  "baseline_commit": "de5807391f6ae36e5fda32480900188db908d99a",
+  "command": {
+    "argv": [
+      "python",
+      "data/redesign-rd08-20261108/verify_and_record.py"
+    ],
+    "cwd": "/home/vince/QwenOneTwo",
+    "environment": {
+      "PYTHONPATH": "."
+    },
+    "exit_code": 0,
+    "model_imports": "torch/numpy/safetensors/transformers/peft blocked",
+    "stdout_stderr": "data/redesign-rd08-20261108/preflight.log"
+  },
+  "coverage_evidence": {
+    "derivation": "direct candidate has zero support, so intersection is empty regardless of pooled support; no control support count inferred",
+    "development_model_evaluated": false,
+    "full_common_support_manifest": "data/redesign-rd08-20261108/common-support.json",
+    "metadata_development_rows": 310,
+    "path": "docs/evidence/direct-role-layout-coverage-v1.json",
+    "sha256": "7dbfe7d15582527fa99c2d76acf103e9456d3aa889403015d422281a785162df",
+    "sha256_full_common_support_manifest": "61608ac43322616cf8ecd380d5216bb9fa395b790dfe08c296d29d1f143baa20"
+  },
+  "delivery": "blocked",
+  "learning_acceptance": {
+    "Choice_retention": null,
+    "E_X_cohorts": null,
+    "Noul_baselines": null,
+    "Reason": null,
+    "interior_Score": null,
+    "joint_status_value": null,
+    "reason": "Neither fixed fit could start under required complete shared support; no learning result or fitted artifact exists",
+    "status": "not_evaluated"
+  },
+  "next_recovery": "explicit layout revision with complete roles and full-panel re-audit; affected technical qualification; then exact existing-runner matched full schedule/identities. No smaller experiment, cropping, invented labels, allowance increase or automatic search. Existing RD08 finite training authorization persists.",
+  "protocol": "receiver-comparison-rd08-v1",
+  "qualification": {
+    "checks": {
+      "RD03-GPU-CACHE-PARITY": {
+        "executed": true,
+        "status": "pass",
+        "test": "tests.test_frozen_source_gpu.FrozenSourceGPU.test_cache_matches_uncached_and_preserves_bindings"
+      },
+      "RD03-GPU-CONSUMER-GRADIENTS": {
+        "executed": true,
+        "status": "pass",
+        "test": "tests.test_frozen_source_gpu.FrozenSourceGPU.test_consumer_gradients_and_frozen_W"
+      },
+      "RD03-GPU-D-INDEPENDENCE": {
+        "executed": true,
+        "status": "pass",
+        "test": "tests.test_frozen_source_gpu.FrozenSourceGPU.test_frozen_features_ignore_D_updates"
+      },
+      "RD04-GPU-DIRECT-GRADIENTS": {
+        "executed": true,
+        "status": "pass",
+        "test": "tests.test_direct_roles_gpu.DirectRolesGPU.test_live_projection_and_consumer_gradients"
+      },
+      "RD04-GPU-DIRECT-ROUNDTRIP": {
+        "executed": true,
+        "status": "pass",
+        "test": "tests.test_direct_roles_gpu.DirectRolesGPU.test_direct_packets_returns_and_immutable_bindings"
+      },
+      "RD04-GPU-IDENTITY-PROJECTION": {
+        "executed": true,
+        "status": "pass",
+        "test": "tests.test_direct_roles_gpu.DirectRolesGPU.test_identity_projection_and_legacy_wire"
+      },
+      "RD05-GPU-GRADIENT-ACCUMULATION": {
+        "executed": true,
+        "status": "pass",
+        "test": "tests.test_joint_receiver_gpu.JointReceiverGPU.test_joint_VJPs_and_eligible_accumulation"
+      },
+      "RD05-GPU-RESUME": {
+        "executed": true,
+        "status": "pass",
+        "test": "tests.test_joint_receiver_gpu.JointReceiverGPU.test_complete_window_resume_and_frozen_owners"
+      },
+      "RD06-GPU-CONNECTED-GRADIENT": {
+        "executed": true,
+        "status": "pass",
+        "test": "tests.test_native_redesign_gpu.NativeRedesignGPU.test_native_loss_through_actual_return_receiver_and_writer"
+      },
+      "RD06-GPU-NATIVE-RETURN": {
+        "executed": true,
+        "status": "pass",
+        "test": "tests.test_native_redesign_gpu.NativeRedesignGPU.test_actual_native_return_and_prefill_source"
+      },
+      "RD07-GPU-CANCELLATION-ENVELOPES": {
+        "executed": true,
+        "status": "pass",
+        "test": "tests.test_redesign_qualification_gpu.RedesignQualificationGPU.test_cancellation_and_exact_envelopes"
+      },
+      "RD07-GPU-LONG-PARITY": {
+        "executed": true,
+        "status": "pass",
+        "test": "tests.test_redesign_qualification_gpu.RedesignQualificationGPU.test_direct_1024_functional_checkpoint_serving_FP32"
+      },
+      "RD07-GPU-PROJECTION-FP64": {
+        "executed": true,
+        "status": "pass",
+        "test": "tests.test_redesign_qualification_gpu.RedesignQualificationGPU.test_projection_forward_and_VJP_FP64_reference"
+      }
+    },
+    "evidence": "docs/evidence/redesign-qualification-v1.json",
+    "evidence_sha256": "8ddc1e52812248608a6cc5be3612e4489dcfa8ae9875479e9afd286493b66c25",
+    "implementation_commit": "7da99c652fba8729df247c62fcb029fb931d5cea",
+    "pending": [],
+    "rerun": false,
+    "reuse_reason": "current source/test hashes, all raw/child reports and immutable dependencies verified",
+    "source_hashes_unchanged": true,
+    "status": "pass"
+  },
+  "raw_hashes": {
+    "data/redesign-rd08-20261108/common-support.json": "61608ac43322616cf8ecd380d5216bb9fa395b790dfe08c296d29d1f143baa20",
+    "data/redesign-rd08-20261108/preflight.log": "bd70903f655e6eec739520ef52db541041581fe5594a5a25f7f3785ea00908cf",
+    "data/redesign-rd08-20261108/recovery.json": "9a22c752a6d5814b9eb9809d77aacd14b76ef15982048f0c4570b89890781fe3",
+    "data/redesign-rd08-20261108/support-summary.json": "beaf97537af850416af189c71efafeda45be07102b5d7183169971a00a01494b",
+    "data/redesign-rd08-20261108/validation.json": "38078cc70c1756a9a16445fd7e7a14207844d64808fb6fad56847fae4cc04e5c",
+    "data/redesign-rd08-20261108/verify_and_record.py": "c98a8368d64f483ca4c3be1e739efaab3d01dabccecf97571afe6a636bca5145"
+  },
+  "read_only_host_commands": {
+    "existing_server_pid": 2094,
+    "gpu": "nvidia-smi --query-gpu=uuid,name,memory.used --format=csv",
+    "gpu_result": "3090 GPU-225509c3-d702-6c27-de03-76b5e99b33b1 accessible,3884MiB used;3060 idle11MiB; no model workload launched",
+    "matching_fit_or_qualification_processes": 0,
+    "process_inspection": "ps -eo pid,args | rg '(redesign|train_receiver|run_deferred|run_changed|qwen_one_two.server)'",
+    "remote": "git -c 'credential.helper=!gh auth git-credential' ls-remote origin refs/heads/main",
+    "remote_main": "de5807391f6ae36e5fda32480900188db908d99a",
+    "service_actions": []
+  },
+  "recovery": {
+    "RD07_current_source_and_checks": "pass; all thirteen IDs resolved; unchanged evidence reused",
+    "baseline_commit": "de5807391f6ae36e5fda32480900188db908d99a",
+    "matching_run_manifest": false,
+    "matching_training_process": false,
+    "predecessors": [
+      {
+        "ancestor": true,
+        "evidence": "docs/evidence/redesign-coverage-v1.json",
+        "evidence_sha256": "2b0585a141779974ee3799439603adb5512437d348902cd1e7fa59e7662c5628",
+        "implementation_commit": "800c100a56dfcc2afe33bdc004e965affef45331",
+        "raw_hashes_verified": 12,
+        "slice": "RD-01",
+        "source_test_contract_hashes_at_delivery": 13
+      },
+      {
+        "ancestor": true,
+        "evidence": "docs/evidence/receiver-preparation-v1.json",
+        "evidence_sha256": "cb9d85bb641cac2575a8c3017abe77056360d3697093bedcc316f8a8c88474f9",
+        "implementation_commit": "254f5268eacedd920b1c4219b79bcda8744a4524",
+        "raw_hashes_verified": 18,
+        "slice": "RD-02",
+        "source_test_contract_hashes_at_delivery": 86
+      },
+      {
+        "ancestor": true,
+        "evidence": "docs/evidence/frozen-w-source-v1.json",
+        "evidence_sha256": "11234011524726f37ab0f3ec8b744de497384df8b84b47d16cc5cfb58f50b5f0",
+        "implementation_commit": "2cbfa41518a0433ea868e2f0ca2c0bad08568008",
+        "raw_hashes_verified": 14,
+        "slice": "RD-03",
+        "source_test_contract_hashes_at_delivery": 91
+      },
+      {
+        "ancestor": true,
+        "evidence": "docs/evidence/direct-role-states-v1.json",
+        "evidence_sha256": "2ae39b6d9d832dad932ef9bc554e3848d65d662e392c0d0db0509cddff69a19e",
+        "implementation_commit": "ae800a4bf675fb58e6419ca411054fa9cabb973a",
+        "raw_hashes_verified": 29,
+        "slice": "RD-04",
+        "source_test_contract_hashes_at_delivery": 107
+      },
+      {
+        "ancestor": true,
+        "evidence": "docs/evidence/joint-receiver-objectives-v1.json",
+        "evidence_sha256": "5e9f23708d0441c3adae2cdf657115d0199a8080339b77a18c2eb2de63b4435b",
+        "implementation_commit": "fe90af01540fab0962167f2b4375d07cb169f84b",
+        "raw_hashes_verified": 62,
+        "slice": "RD-05",
+        "source_test_contract_hashes_at_delivery": 106
+      },
+      {
+        "ancestor": true,
+        "evidence": "docs/evidence/direct-native-flow-v1.json",
+        "evidence_sha256": "a08b1bb4f9e935d3c5c3a5955c737d564c872f6066b8f45195dee593cf6fa1b0",
+        "implementation_commit": "6f74680c4c6a866999d271d15e681d239d9ff588",
+        "raw_hashes_verified": 47,
+        "slice": "RD-06",
+        "source_test_contract_hashes_at_delivery": 113
+      },
+      {
+        "ancestor": true,
+        "evidence": "docs/evidence/redesign-qualification-v1.json",
+        "evidence_sha256": "8ddc1e52812248608a6cc5be3612e4489dcfa8ae9875479e9afd286493b66c25",
+        "implementation_commit": "7da99c652fba8729df247c62fcb029fb931d5cea",
+        "raw_hashes_verified": 35,
+        "slice": "RD-07",
+        "source_test_contract_hashes_at_delivery": 100
+      }
+    ],
+    "prepared_plans": {
+      "direct": {
+        "exposures": {
+          "distinct_records": 1500,
+          "examples_per_window": 8,
+          "failure_policy": "failed attempts remain scheduled; no replacement/retry",
+          "passes": 4,
+          "presentations": 6000,
+          "windows": 750
+        },
+        "path": "data/redesign-rd07-20261108/preparation/direct/plan.json",
+        "run_sha256": "7ef5ff13d6a170803c5727843d2da36461ec23f53fa141bb53e6d3c7ff6664b1",
+        "sha256": "add9772fa6ca83aedc8084a838bdea86ff628b542114d67378fd3c3df5b68ee5"
+      },
+      "frozen-pooled": {
+        "exposures": {
+          "distinct_records": 1500,
+          "examples_per_window": 8,
+          "failure_policy": "failed attempts remain scheduled; no replacement/retry",
+          "passes": 4,
+          "presentations": 6000,
+          "windows": 750
+        },
+        "path": "data/redesign-rd07-20261108/preparation/frozen-pooled/plan.json",
+        "run_sha256": "b54a88b6adeabbfb3ac86cf010216e2740d6a1f487bef4a8ba0ae04335ae7bd9",
+        "sha256": "a2105c4c084bfbfeb48162c6184d8527728146273ffefb6e608e74db2bb1102d"
+      }
+    },
+    "remote_main_verified": "de5807391f6ae36e5fda32480900188db908d99a"
+  },
+  "status": "BLOCKED_BEFORE_FIT",
+  "support": {
+    "RD09_started": false,
+    "actual_per_arm": {
+      "development_evaluations": 0,
+      "exposures": 0,
+      "initial_measurements": 0,
+      "updates": 0,
+      "windows": 0
+    },
+    "blocker": "All1500 candidate training rows violate full return64 reservation;1136 also have question length>32. No valid complete shared support. Prompt8 prohibits a smaller substitute. Explicit revised layout and full audit/qualification required; no bounds or grading changed.",
+    "common_supported_training_records": 0,
+    "panels": {
+      "development_E": {
+        "common_supported": 0,
+        "direct_supported": 0,
+        "excluded": 130,
+        "families_excluded": 91,
+        "issues": {
+          "admission: direct field exceeds 32 content states; never crop": 63,
+          "admission: direct worst-case return exceeds 64 positions": 67,
+          "field_overlength/alternative": 7,
+          "field_overlength/question": 63,
+          "request_overlength": 3,
+          "return_overlength": 130
+        },
+        "operations": {
+          "Choice": 50,
+          "Noul": 40,
+          "Score": 40
+        },
+        "return_max_max": 209,
+        "return_max_min": 79,
+        "total": 130
+      },
+      "development_X": {
+        "common_supported": 0,
+        "direct_supported": 0,
+        "excluded": 180,
+        "families_excluded": 60,
+        "issues": {
+          "admission: direct field exceeds 32 content states; never crop": 155,
+          "admission: direct worst-case return exceeds 64 positions": 25,
+          "field_overlength/question": 155,
+          "return_overlength": 180
+        },
+        "operations": {
+          "Choice": 40,
+          "Noul": 100,
+          "Score": 40
+        },
+        "return_max_max": 170,
+        "return_max_min": 83,
+        "total": 180
+      },
+      "train_receiver": {
+        "common_supported": 0,
+        "direct_supported": 0,
+        "excluded": 1500,
+        "families_excluded": 288,
+        "issues": {
+          "admission: direct field exceeds 32 content states; never crop": 1136,
+          "admission: direct worst-case return exceeds 64 positions": 364,
+          "field_overlength/alternative": 86,
+          "field_overlength/question": 1136,
+          "return_overlength": 1500
+        },
+        "operations": {
+          "Choice": 497,
+          "Noul": 501,
+          "Score": 502
+        },
+        "return_max_max": 166,
+        "return_max_min": 89,
+        "total": 1500
+      }
+    },
+    "planned_per_arm": {
+      "exposures": 6000,
+      "passes": 4,
+      "windows": 750
+    },
+    "required_training_records": 1500,
+    "status": "BLOCKED_COMPLETE_SHARED_SUPPORT_UNAVAILABLE",
+    "training_completed": false,
+    "useful_improvement": "not_evaluated"
+  },
+  "validation": {
+    "RD07_checks_current": "13 pass",
+    "RD07_current_source_and_thirteen_GPU_checks": "pass",
+    "all_rows_and_zero_common_support": "pass",
+    "current_releases_and_all1810_row_identities": "pass",
+    "evidence_raw_hashes": "pass",
+    "local_markdown_targets": 197,
+    "no_fit_no_RD09": "pass",
+    "predecessor_implementation_and_raw_hashes": "pass",
+    "prepared_full_matched_order": "pass",
+    "production_changes": 0,
+    "staged_whitespace": "pass",
+    "test_policy": "reuse valid unchanged results; no implementation changed",
+    "training_common_support": "fail:0/1500; blocker, not failed learning",
+    "unchanged_tests": "valid recorded model-free/GPU results reused"
+  }
+}
