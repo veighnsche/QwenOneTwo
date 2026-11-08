@@ -53,7 +53,10 @@ and affected qualification; full authorized RD-08 comparison with accepted recei
 valid native supervision; then fix/commit exact finite native eligibility/owners/
 coefficients/forcing/evaluation manifests before training. Do not crop, invent
 labels, weaken acceptance, substitute a smaller experiment or start automatic
-search/extra passes. Blocker record commit/push finalization follows. Historical
+search/extra passes. Blocker record `a864b65515831daada0616e2a19b7db0b8175bff` is pushed and its exact
+remote SHA verified; ledger/handoff/evidence finalization is committed/pushed
+separately on top.207 current local Markdown targets resolve; dependency/raw
+hashes and staged whitespace pass. Historical
 statements below about absent RD-09 authorization are superseded here.
 
 ## Previous requested work — RD-08 receiver comparison, 2026-11-08

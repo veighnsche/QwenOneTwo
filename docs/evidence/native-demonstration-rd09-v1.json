@@ -22,6 +22,15 @@
     "windows": 0
   },
   "authorization": "Submitted conditional finite RD09; recover predecessors, require accepted receiver and valid supervision; no extra training/deployment",
+  "blocker_record_commit": "a864b65515831daada0616e2a19b7db0b8175bff",
+  "blocker_record_push": {
+    "command": "git -c 'credential.helper=!gh auth git-credential' push origin main",
+    "exit_code": 0,
+    "finalization": "ledger/handoff/evidence commit pushed separately on top; RD08/RD09 remain blocked",
+    "remote_main_verified": "a864b65515831daada0616e2a19b7db0b8175bff",
+    "result": "9af92fd..a864b65 main -> main",
+    "verification_command": "git -c 'credential.helper=!gh auth git-credential' ls-remote origin refs/heads/main"
+  },
   "command": {
     "argv": [
       "python",
