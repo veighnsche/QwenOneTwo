@@ -16,15 +16,15 @@ because a later queued task starts.
 | RD-02 | delivered | Runner preparation/rejection checks; identity/resume contracts | [Report](redesign-rd02-results-2026-11-08.md), [evidence](evidence/receiver-preparation-v1.json); 12 final preparation tests +28 reused tests pass; `254f526` pushed and verified |
 | RD-03 | delivered | Source/cache policy and static checks; explicit deferred GPU check IDs | [Report](redesign-rd03-results-2026-11-08.md), [evidence](evidence/frozen-w-source-v1.json); 50 static tests pass; three GPU checks pending RD-07; `2cbfa41` pushed and verified |
 | RD-04 | delivered | Versioned payload/admission contracts and implementation; deferred GPU IDs | Contract `2247619`, implementation `ae800a4` pushed/verified; [report](redesign-rd04-results-2026-11-08.md), [evidence](evidence/direct-role-states-v1.json); 61 static tests pass +6 refreshed; three new GPU checks pending RD-07; zero receiver support |
-| RD-05 | pending | Joint objectives, owners, binding/mask tests; deferred GPU IDs | None; plan only |
+| RD-05 | in_progress | Joint objectives, owners, binding/mask tests; deferred GPU IDs | [Report](redesign-rd05-results-2026-11-08.md), [evidence](evidence/joint-receiver-objectives-v1.json); 74 static tests pass +14 refreshed; implementation ready to commit/push; two new GPU checks pending RD-07 |
 | RD-06 | pending | Native wiring/eligibility report; deferred real-return/gradient IDs | None; plan only |
-| RD-07 | pending | All required deferred/changed-path 3090 checks pass; actual counts/hashes | RD03-GPU-D-INDEPENDENCE, RD03-GPU-CACHE-PARITY, RD03-GPU-CONSUMER-GRADIENTS; RD04-GPU-IDENTITY-PROJECTION, RD04-GPU-DIRECT-ROUNDTRIP, RD04-GPU-DIRECT-GRADIENTS pending; no GPU execution |
+| RD-07 | pending | All required deferred/changed-path 3090 checks pass; actual counts/hashes | RD03-GPU-D-INDEPENDENCE, RD03-GPU-CACHE-PARITY, RD03-GPU-CONSUMER-GRADIENTS; RD04-GPU-IDENTITY-PROJECTION, RD04-GPU-DIRECT-ROUNDTRIP, RD04-GPU-DIRECT-GRADIENTS; RD05-GPU-GRADIENT-ACCUMULATION, RD05-GPU-RESUME pending; no GPU execution |
 | RD-08 | pending | Complete matched fit/evaluation receipts; useful-improvement outcome separate | None; training not authorized by prompt preparation |
 | RD-09 | pending | Accepted RD-08 receiver plus eligible native run/evaluation receipts | None; training not authorized by prompt preparation |
 
-Earliest unfinished implementation slice: **RD-05**; RD-05..09 are unstarted.
-RD-04 is delivered under the staged implementation protocol.
-Six RD-03/04 GPU checks remain pending RD-07; no redesign model job was launched.
+Earliest unfinished implementation slice: **RD-05**, implementation/checks complete,
+awaiting commit/push and delivery finalization. RD-06..09 are unstarted.
+Eight RD-03/04/05 GPU checks remain pending RD-07; no redesign model job was launched.
 
 For each attempted slice add a short entry with implementation/evidence paths,
 exact commands/results, dependency hashes, relevant implementation commits and
@@ -33,7 +33,7 @@ RD-07 resolves them. Record active run manifest/PID/log/checkpoint paths when a
 long job starts, and update them when it finishes or is interrupted. Store raw
 artifacts locally under `data/`; commit concise reports/portable evidence only.
 
-Current RD-04 implementation delivery blockers: **none**. Future real-data fit
+Current RD-05 implementation delivery blockers: **none**. Future real-data fit
 blocker: the initial direct-role layout admits zero receiver rows (train1500,
 E130, X180). An explicit layout revision and full re-audit are required before
 that fit; no subset, allowance increase or waiver was applied. RD-01 data/native
@@ -286,3 +286,81 @@ Implementation commit: `ae800a4bf675fb58e6419ca411054fa9cabb973a`.
 committed and pushed separately on top of the verified implementation. Six GPU
 checks remain pending; zero-support coverage blocks a future fit, with no waiver.
 Stop after RD-04. Next unfinished implementation slice is RD-05.
+
+## RD-05 recovery — 2026-11-08
+
+Clean main `7576540` matches authenticated remote main. RD-01..04 source/test/raw
+evidence and migration chains verified; delivered commits are ancestors. Six
+RD-03/04 GPU checks remain pending RD-07. Valid unchanged results reused. No
+matching RD-05 manifest or job was found; process inspection is limited to the
+sandbox namespace. No service changed. The zero-admissible-row direct-layout
+coverage finding still blocks a future fit; it is not an unfinished RD-04 static
+implementation check. RD-05 makes no layout or allowance revision.
+
+## RD-05 implementation — 2026-11-08
+
+Currently due model-free acceptance: **pass**; staged delivery awaits commit/push
+and finalization. GPU qualification: **pending RD-07**. Learning outcome:
+**not_applicable**; no model execution, feature extraction, fitting or update.
+
+Evidence: [report](redesign-rd05-results-2026-11-08.md),
+[portable manifest](evidence/joint-receiver-objectives-v1.json),
+[contract](prepared-receiver-component-v1.md), raw `data/redesign-rd05-20261108/`.
+`component_admission.py` binds reviewed clean inputs to the actual Runtime/
+snapshot, exact ordered roles/candidates, source states/coordinates and complete
+spans. Labels attach only after the complete forward and revalidation; record IDs
+or predicted answers do not admit arbitrary writer vectors. Receipts explicitly
+claim no reference qualification or accepted receiver behavior. Diagnostic-reference
+rejection and unsupported native masks remain. Failed empty attempts still occupy
+scheduled exposures with no loss credit; unadmitted gradients reject.
+
+Existing joint status/Noul/Choice/Score/Boolean feasibility losses and coefficients
+are reused. Eligibility was factored unchanged into a model-free module; existing
+actual-status and old supported Reason/isolated-reader exceptions remain. New-profile
+Reason targets are unsupported/masked, never encoded or zero-filled. All 832
+reviewed Reason annotations are retained. Metadata potentials after exact admission:
+status1500 /Noul256 /Choice158 /Score254 /feasibility497; actual eligible exposures
+are zero because no model was run. All 13 operation/reference-status cells remain
+visible. Direct layout admission remains 0/1500 train, 0/130 E, 0/180 X; a future
+fit still requires explicit layout revision/re-audit, without hidden subsets or
+raised limits.
+
+Exact projection owners are shared by preparation and actual construction. W, R,
+startup row and reference remain frozen; writer length head is frozen for receiver
+work. `extend_profile_window` retains parent masters/moments/RNG/counters and adds
+fresh zero-delta projection owners without an update. Existing Window/checkpoint
+math is unchanged. Joint reports separate heads/delivered success, raw/status
+cells, eligible counts, Reason masks and paired startup retention. Frozen private
+rows do not protect shared D features. Existing VJP diagnostics report each named
+owner directly from saved buffers, with no extra forward/backward/update.
+
+Commands/results:
+
+- `PYTHONPATH=tests:. python -m unittest tests.test_component_admission tests.test_joint_receiver tests.test_learning_report tests.test_training_inputs tests.test_receiver_learning tests.test_receiver_plan tests.test_training_schedule tests.test_episode_producer tests.test_frozen_source`: **74 pass**, 120.531 s.
+- After fixing failed-empty exposure retention,
+  `PYTHONPATH=tests:. python -m unittest tests.test_component_admission tests.test_joint_receiver`:
+  **14 pass**, 22.151 s, including one added test; other unchanged results reused.
+  Together 75 distinct model-free tests are covered.
+- Final GPU method collection/registration guard test: **1 pass**, 11.813 s.
+  GPU methods were inspected/compiled/collection-imported only, never executed
+  or counted as passing skipped suites.
+- Four actual final `verified-final/` CLI preparations, with model imports blocked:
+  direct/repeat/frozen-pooled/legacy all exit 0. Direct repeated plans are
+  byte-identical; current source hashes match; all execution counters zero.
+  Earlier preparation artifacts remain retained as superseded after source edits.
+- Compilation and `git diff --check`: pass; exact commands/hashes in evidence.
+  Predecessor migrations and 34 unchanged boundary/algorithm checks pass.
+
+New deferred IDs, all **pending**, owner **RD-07**, exact 3090 UUID only:
+
+- `RD05-GPU-GRADIENT-ACCUMULATION` → `JointReceiverGPU.test_joint_VJPs_and_eligible_accumulation`.
+- `RD05-GPU-RESUME` → `JointReceiverGPU.test_complete_window_resume_and_frozen_owners`.
+
+The first uses an existing reviewed frozen-W/pooled component and real joint VJPs;
+the second checks parent/direct owners, real moments/RNG and engineering checkpoint
+restoration. Neither steps an optimizer or claims corpus/direct semantic support.
+All six earlier GPU IDs remain pending. No actual joint delivered behavior,
+startup retention or owner gradient was measured in RD-05. RD-01 label/native
+gaps and historical profiling receipt drift remain unchanged. No agents, new
+records/reviews, locked access, deployment, service or Operating Table changes.
+Stop after RD-05; no RD-06 implementation is included.

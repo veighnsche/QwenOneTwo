@@ -10,7 +10,8 @@ from .inputs import canonical, check, digest
 from .learning_report import probe_panel
 from .loss_config import COEFFICIENTS
 from .manifest import BASE_SHA, DIAGNOSTIC_SHA, file_hash
-from .receiver_profiles import LEGACY, profile, receiver_parameter
+from .receiver_profiles import LEGACY, profile, receiver_parameter,direct_projection_owners
+from .component_admission import GPU_CHECKS as JOINT_GPU_CHECKS,PROTOCOL as COMPONENT_ADMISSION
 from .frozen_source import FROZEN_SOURCE, GPU_CHECKS
 from ..codec.layout import GPU_CHECKS as DIRECT_GPU_CHECKS
 from .reference_qualification import PROFILE
@@ -117,9 +118,7 @@ def prepare(snapshot, input_profile, *, regime='component', root=ROOT):
     check(len(order) % 8 == 0, 'complete eight-example windows; never pad or drop rows')
     saved, owners = initial_state(root)
     if input_profile=='direct-role-states-v1':
-        owners=owners+[{'name':'direct_role_projection_'+suffix,'lr':2e-4,'weight_decay':decay,
-            'parameters':[{'name':'codec.direct_role_projection.'+name,'shape':shape,'dtype':'torch.float32'}]}
-            for suffix,name,shape,decay in [('matrix','weight',[1024,1024],.01),('bias','bias',[1024],0.)]]
+        owners=owners+direct_projection_owners()
     diagnostic = 'data/g1-proof/gate-repair-v2-20261105/diagnostic.safetensors'
     check(file_hash(root/diagnostic) == DIAGNOSTIC_SHA, 'diagnostic initialization drift')
     qev = decode((root/'data/qev/release_manifest.json').read_bytes())
@@ -151,14 +150,25 @@ def prepare(snapshot, input_profile, *, regime='component', root=ROOT):
              {'status':'implemented; frozen during receiver fit','owner':'codec.direct_role_length',
               'parameter_names_shapes':{'codec.direct_role_length.weight':[33,256],'codec.direct_role_length.bias':[33]},
               'initialization':'FP32 zero logits; no RNG draw; writer-only length owner'}],
+        'profile_construction':'restore exact parent Window first; extend_profile_window retains old masters/Adam moments/RNG/counters; new zero-delta projection moments stay absent until eligible gradients' if input_profile=='direct-role-states-v1' else 'exact existing parent Window; no owner migration',
         'objectives': {k: COEFFICIENTS[k] for k in ('status', 'noul', 'choice', 'score', 'feasibility', 'alignment', 'structure')},
         'objective_masks': 'existing decision_losses Eligibility; Reason only after actual non-assessed status; no new auxiliary loss',
+        'experimental_component_admission':None if input_profile==LEGACY else {
+            'protocol':COMPONENT_ADMISSION,'scope':'reviewed prepared receiver training components only',
+            'reference_qualification':None,'receiver_behavior_accepted':False,
+            'Reason':'unsupported/masked for new profiles; never encoded as a request or silently zero-filled',
+            'binding':'actual admitted snapshot, exact source states/coordinates, ordered role states/candidates, reviewed input identity',
+            'native_semantics':'unsupported until explicit RD-06 admission; existing masks retained'},
+        'measurement_contract':{'heads':'joint status/value, per-cell confusion, raw values and eligible-example counts',
+            'behavior':'separate actual delivered-return grade; head success never implies delivery',
+            'startup':'paired raw scalar and continuous mapped budget, regardless of frozen private row; override disclosed'},
         'dependencies': dependencies, 'training_order': order, 'exposures': {'passes': passes,
             'distinct_records': len(selected), 'presentations': len(order), 'windows': len(order)//8,
             'examples_per_window': 8, 'failure_policy': 'failed attempts remain scheduled; no replacement/retry'},
         'required_evidence': {'RD-01': file_hash(root/COVERAGE),
             'source_policy_checks': {key:'pending_RD07' for key in GPU_CHECKS} if spec['source_policy']==FROZEN_SOURCE else {},
             'direct_role_checks': {key:'pending_RD07' for key in DIRECT_GPU_CHECKS} if input_profile=='direct-role-states-v1' else {},
+            'joint_objective_checks': {key:'pending_RD07' for key in JOINT_GPU_CHECKS} if input_profile!=LEGACY else {},
             'pending_slices': spec['required_slices'], 'native_regime': 'unsupported until RD-06',
             'new_profile_gpu_qualification': 'pending RD-07' if input_profile != LEGACY else 'historical legacy path only'},
         'authorization': 'preparation only; this manifest grants no model execution, fitting or promotion'}

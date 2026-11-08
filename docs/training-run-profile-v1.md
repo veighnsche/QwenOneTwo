@@ -1,5 +1,10 @@
 # A4: training run profile v1
 
+The opt-in [prepared receiver component v1 contract](prepared-receiver-component-v1.md)
+versions RD-05 experimental admission, exact snapshot binding, joint objectives,
+Reason masks and receiver ownership. It claims no reference qualification or
+training authorization; legacy/native rules below remain in force outside it.
+
 Rules and starting defaults. See the [current handoff](next-agent-handoff.md)
 for implementation status, measured evidence and remaining work.
 

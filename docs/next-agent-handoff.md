@@ -19,7 +19,65 @@ change fan controls, live services or The Operating Table. Older hold statements
 below are historical. The completed comparison and next unfinished slice remain
 as recorded below.
 
-## Current requested work — RD-04 direct role states, 2026-11-08
+## Current requested work — RD-05 joint objectives and binding, 2026-11-08
+
+RD-05 model-free implementation/checks are complete, awaiting implementation
+commit/push and delivery finalization. Read the
+[RD-05 report](redesign-rd05-results-2026-11-08.md),
+[portable evidence](evidence/joint-receiver-objectives-v1.json),
+[prepared-component contract](prepared-receiver-component-v1.md) and
+[ledger](redesign-progress.md).
+
+The new profiles have explicit experimental prepared-receiver admission bound to
+an exact reviewed permitted view, independent encoding, actual sealed snapshot,
+source states/coordinates and ordered candidates. Labels attach after the complete
+forward and revalidation. Null reference qualification/unaccepted behavior are
+explicit. Native/writer semantics keep their masks; the diagnostic-reference guard
+remains. Empty failed attempts retain their scheduled slot without losses.
+
+Existing joint status/Noul/Choice/Score and reviewed Boolean feasibility losses,
+coefficients and eligible-example means remain. Eligibility was extracted without
+changing its AST. New-profile Reason targets are unsupported and masked, never
+encoded/zero-filled; the old supported post-forward Reason/reader exception stays.
+All 832 reviewed Reasons remain in metadata. W, R, startup row and reference stay
+frozen; writer length head is frozen during receiver work. Exact owner specs and
+parent-to-direct Window construction preserve old masters/moments/RNG/counters;
+new projection moments stay absent until actual eligible gradients. No step occurs.
+
+Joint reports separate head predictions from actual delivered grades, per-cell
+status/value evidence, eligibility and paired startup retention. Private row freeze
+does not protect shared D features. VJP diagnostics read per-owner norms/counts
+from actual Window buffers without another model/gradient call. No actual delivery,
+retention or owner gradient has been measured for this redesign.
+
+All **74 model-free tests pass** (120.531 s), plus **14 refreshed binding/dispatch
+tests** (22.151 s) after a failed-empty-exposure fix, including one added test;
+75 distinct tests covered. Final GPU collection/registration guard test passes.
+Four final CLI preparations under `data/redesign-rd05-20261108/verified-final/` pass
+with model imports blocked, repeated direct plans byte-identical and all actual
+execution counters zero. Earlier preparations are retained as superseded after
+source changes; do not relabel them current. Predecessor deliveries/raw artifacts
+and their current source migrations were verified. Core loss/Window/checkpoint,
+Session/runtime, native producer/binding and numeric algorithms remain unchanged.
+
+**Eight GPU checks remain pending RD-07**, never executed: the six RD-03/04 IDs
+below plus `RD05-GPU-GRADIENT-ACCUMULATION` and `RD05-GPU-RESUME` in
+`tests/test_joint_receiver_gpu.py`. They require submitted RD-07, exact 3090 UUID
+and explicit opt-in before model imports. The VJP fixture uses an existing
+frozen-W/pooled reviewed component; the resume fixture uses parent/direct owners,
+real moments/RNG and declared engineering perturbations. No optimizer update or
+semantic qualification is claimed.
+
+**Future-fit blocker unchanged:** direct layout supports 0/1500 train, 0/130 E,
+0/180 X. An explicit layout revision and complete re-audit are required before a
+real-data fit; no allowance increase, selected panel or invented annotation was
+used. Metadata objective potentials are not admitted or measured examples.
+Existing RD-01 supervision/native gaps and historical profiling-test drift remain.
+No model execution, feature extraction, fitting, agents, new data/reviews, locked
+access, deployment, service or Operating Table changes. Stop after RD-05;
+**RD-06 is unstarted**.
+
+## Previous requested work — RD-04 direct role states, 2026-11-08
 
 RD-04 staged implementation is delivered. Implementation/evidence commit
 `ae800a4` is pushed to main and its exact remote SHA was verified; ledger/handoff

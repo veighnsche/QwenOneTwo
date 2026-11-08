@@ -52,6 +52,8 @@ def gradient_report(window):
     import torch
     d_names={p['name'] for g in window.ownership if g['name']=='D' for p in g['parameters']}
     d_indices={i for i,n in enumerate(window.names) if n in d_names}
+    owner_indices={group['name']:{i for i,n in enumerate(window.names)
+        if n in {p['name'] for p in group['parameters']}} for group in window.ownership}
     def squared(buffers,indices=None):
         xs=[g.detach() for i,g in buffers.items() if indices is None or i in indices]
         if not xs:return torch.zeros((),device='cuda',dtype=torch.float64)
@@ -61,7 +63,10 @@ def gradient_report(window):
         scale=window.coefficients[name]/window.counts[name]
         norms[name]={'eligible':window.counts[name],'coefficient':window.coefficients[name],
             'weighted_norm':float(squared(buffers).sqrt()*scale),
-            'weighted_D_norm':float(squared(buffers,d_indices).sqrt()*scale)}
+            'weighted_D_norm':float(squared(buffers,d_indices).sqrt()*scale),
+            'owners':{owner:{'parameters_with_gradient':len(set(buffers)&indices),
+                            'weighted_norm':float(squared(buffers,indices).sqrt()*scale)}
+                      for owner,indices in owner_indices.items()}}
     cosine={};status=window.buffers.get('status',{})
     for name in ('noul','score','choice','alignment'):
         other=window.buffers.get(name,{})

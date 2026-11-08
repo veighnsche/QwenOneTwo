@@ -131,7 +131,7 @@ def source_hashes():
     return {str(p.relative_to(root)):digest(p.read_bytes()) for p in files}
 
 
-def evaluate_case(backbone,codec,reference,release,row,encoder,*,construction=None):
+def evaluate_case(backbone,codec,reference,release,row,encoder,*,construction=None,input_profile='d-pooled-role-slots-v1'):
     import torch
     from .component_producer import component_view
     from .clean_packets import CleanPackets
@@ -144,6 +144,11 @@ def evaluate_case(backbone,codec,reference,release,row,encoder,*,construction=No
     case={'id':row['id'],'record_sha256':digest(canonical(row)),'actual':None,'failure':None}
     s=None
     try:
+        from .receiver_profiles import LEGACY,profile
+        if input_profile!=LEGACY:
+            spec=profile(input_profile,'component')
+            check(construction is None and encoder.source_policy==spec['source_policy'] and encoder.role_policy==spec['roles'],
+                  'new-profile behavior requires the declared unmodified component encoder')
         view,p,indices=component_view(release,row,intervention=True)
         if construction is not None:
             check(not torch.is_grad_enabled(), 'diagnostic construction requires no_grad')
@@ -155,7 +160,10 @@ def evaluate_case(backbone,codec,reference,release,row,encoder,*,construction=No
         rendered=backbone.tokenizer.apply_chat_template([{'role':'user','content':PROMPT}],
             tokenize=False,add_generation_prompt=True,enable_thinking=True)
         ids=backbone.tokenizer.encode(rendered,add_special_tokens=False)
-        s=Session.open(backbone,codec,ids,128,override=512,run=run);rt=s.runtime
+        s=Session.open(backbone,codec,ids,128,override=512,run=run,profile=factory.profile);rt=s.runtime
+        if input_profile!=LEGACY:
+            case.update(input_profile=input_profile,startup={'raw':float(s.raw_budget.detach()),
+                'predicted_budget':s.predicted_budget,'granted_budget':rt.budget,'override':s.override})
         evidence=[]
         for index,ref in enumerate(factory.sources):
             n=len(factory.registry.get(ref).token_ids)

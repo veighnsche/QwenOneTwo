@@ -7,6 +7,53 @@ from .behavior_qualification import expected,grade,fp32
 PROTOCOL='receiver-training-probe-v1'
 
 
+def summarize_joint_learning(release,heads,behavior,ids,*,startup_baseline=()):
+    """Report separate head, actual-delivery and startup evidence without tuning.
+
+    Full ordered panels are mandatory. Missing/failed cases stay denominators;
+    no prediction-dependent selection, coefficient change or qualification flag.
+    """
+    head_report=summarize_learning(release,heads,ids,kind='heads')
+    delivered=summarize_learning(release,behavior,ids,kind='behavior')
+    cells={};eligible=Counter();reason_masks=Counter()
+    for head,actual in zip(heads,behavior):
+        row=release.record(head['record']);status=expected(row)['status'];key=row['operation']+'/'+status
+        cell=cells.setdefault(key,{'scheduled':0,'head_status_correct':0,'delivered_passed':0,'failed':0})
+        cell['scheduled']+=1;cell['head_status_correct']+=int(not head.get('failure') and head.get('head',{}).get('status')==status)
+        cell['delivered_passed']+=int(actual['score']['passed'])
+        cell['failed']+=int(bool(head.get('failure') or actual.get('failure')))
+        if not head.get('failure'):eligible.update(head.get('losses',{}).keys())
+        if head.get('reason_mask'):reason_masks[head['reason_mask']]+=1
+    startup={'scheduled':len(ids),'paired':0,'missing':len(ids),'raw_changed':0,'mapped_budget_changed':0,
+             'maximum_raw_difference':None,'maximum_budget_difference':None,
+             'scope':'private startup-row freeze does not protect shared D features; overrides are not predictions'}
+    if startup_baseline:
+        check([c['record'] for c in startup_baseline]==list(ids),'complete ordered startup baseline required')
+        from ..g1_accounting import budget
+        raw_delta=[];mapped_delta=[]
+        for old,new in zip(startup_baseline,heads):
+            check(isinstance(old.get('input_sha256'),str) and len(old['input_sha256'])==64
+                  and old['input_sha256']==new.get('input_sha256') and old['record_sha256']==new['record_sha256'],
+                  'startup retention input drift')
+            left,right=old.get('startup'),new.get('startup')
+            if not left or not right:continue
+            for item in (left,right):
+                check(type(item['raw']) in (int,float) and math.isfinite(item['raw'])
+                      and item['predicted_budget']==budget(item['raw']),'startup continuous mapping drift')
+                check(item['granted_budget']==(item['override'] if item['override'] is not None else item['predicted_budget']),
+                      'startup override telemetry drift')
+            raw_delta.append(abs(right['raw']-left['raw']))
+            mapped_delta.append(abs(right['predicted_budget']-left['predicted_budget']))
+        startup.update(paired=len(raw_delta),missing=len(ids)-len(raw_delta),
+            raw_changed=sum(d!=0 for d in raw_delta),mapped_budget_changed=sum(d!=0 for d in mapped_delta),
+            maximum_raw_difference=max(raw_delta) if raw_delta else None,
+            maximum_budget_difference=max(mapped_delta) if mapped_delta else None)
+    return {'heads':head_report,'delivered':delivered,'cells':cells,'eligible_examples':dict(eligible),
+            'reason_masks':dict(reason_masks),'startup_retention':startup,
+            'owner_gradients':'not inferred from telemetry; use actual Window VJP diagnostics',
+            'qualification':'none; measured joint behavior is separate from implementation delivery'}
+
+
 def summarize_coverage_learning(release, cases, manifest, *, panel, kind):
     """Keep the complete E/X/training report beside metadata-selected subgroups.
 

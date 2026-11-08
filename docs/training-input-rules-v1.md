@@ -1,5 +1,10 @@
 # Role-specific training-input rules v1
 
+The opt-in [prepared receiver component v1 contract](prepared-receiver-component-v1.md)
+versions RD-05 experimental admission, exact snapshot binding, joint objectives,
+Reason masks and receiver ownership. It claims no reference qualification or
+training authorization; legacy/native rules below remain in force outside it.
+
 The opt-in [direct-role-states-v1 contract](direct-role-states-v1.md) versions
 variable request-role lengths, native emission capacity and complete return
 reservations together. The rules below remain the legacy default; the new

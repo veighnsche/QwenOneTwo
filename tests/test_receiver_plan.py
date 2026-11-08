@@ -101,6 +101,13 @@ class ReceiverPlanTests(unittest.TestCase):
         self.assertEqual(owners['codec.direct_role_projection.bias']['shape'],[1024])
         self.assertFalse(any(name.startswith('codec.direct_role_length.') for name in owners))
         self.assertIn('codec.direct_role_length',plan['frozen_owners'])
+        self.assertIsNone(plan['experimental_component_admission']['reference_qualification'])
+        self.assertFalse(plan['experimental_component_admission']['receiver_behavior_accepted'])
+        self.assertIn('unsupported/masked',plan['experimental_component_admission']['Reason'])
+        self.assertEqual(set(plan['required_evidence']['joint_objective_checks']),
+                         {'RD05-GPU-GRADIENT-ACCUMULATION','RD05-GPU-RESUME'})
+        self.assertEqual(plan['objectives']['status'],1.)
+        self.assertEqual(plan['objectives']['feasibility'],.5)
 
     def test_wrong_gpu_profile_and_regime_reject_before_models(self):
         profile = self.plan['contract']['input_profile']

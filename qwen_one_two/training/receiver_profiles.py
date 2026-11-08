@@ -18,6 +18,37 @@ PREFIXES = ('role.', 'slot.', 'owner.', 'attribute.', 'tags.', 'meta.', 'source.
 PREFIXES = PREFIXES+('direct_role_projection.',)
 
 
+def direct_projection_owners():
+    return [{'name':'direct_role_projection_'+suffix,'lr':2e-4,'weight_decay':decay,
+        'parameters':[{'name':'codec.direct_role_projection.'+name,'shape':shape,'dtype':'torch.float32'}]}
+        for suffix,name,shape,decay in [('matrix','weight',[1024,1024],.01),('bias','bias',[1024],0.)]]
+
+
+def extend_receiver_groups(codec,groups,input_profile):
+    """After restoring the exact legacy parent, add fresh opt-in owners only.
+
+    Existing masters/moments are not relabeled as projection state. Future fits
+    still need qualified initialization/resume and their separate authorization.
+    """
+    profile(input_profile,'component')
+    if input_profile!='direct-role-states-v1':return groups
+    codec.enable_direct_roles()
+    codec.direct_role_length.requires_grad_(False)
+    parameters=dict(codec.named_parameters());extended=list(groups)
+    for spec in direct_projection_owners():
+        entries=[]
+        for item in spec['parameters']:
+            p=parameters[item['name'][6:]]
+            check(p.is_cuda and p.requires_grad and list(p.shape)==item['shape'] and str(p.dtype)==item['dtype'],
+                  'direct projection owner/device/shape')
+            entries.append((item['name'],p))
+        extended.append({k:v for k,v in spec.items() if k!='parameters'} | {'named_parameters':entries})
+    names=[n for group in extended for n,_ in group['named_parameters']]
+    ids=[id(p) for group in extended for _,p in group['named_parameters']]
+    check(len(set(names))==len(names) and len(set(ids))==len(ids),'duplicate receiver owner')
+    return extended
+
+
 def profile(name, regime):
     check(name in PROFILES, 'unknown input profile')
     check(regime == 'component', 'input profile requires component regime; native wiring belongs to RD-06')

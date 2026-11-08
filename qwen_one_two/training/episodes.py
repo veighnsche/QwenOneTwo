@@ -65,6 +65,20 @@ def collect_session(window, session, losses, exposure):
     check(isinstance(exposure,Exposure), 'explicit exposure metadata required')
     check(not getattr(session,'episode_report',{}).get('diagnostic_reference',False),
           'diagnostic reference episodes cannot enter optimizer accumulation')
+    from .receiver_profiles import LEGACY
+    from ..codec.layout import DIRECT
+    report=getattr(session,'episode_report',{})
+    if report.get('input_profile',LEGACY)!=LEGACY or getattr(session.runtime,'profile',None)==DIRECT:
+        from .component_admission import PreparedReceiver
+        admission=getattr(session,'component_admission',None)
+        check(exposure.branch=='isolated_receiver',
+              'new-profile optimization requires explicit prepared receiver admission; native semantics stay masked')
+        # A failed attempt with no gradients still occupies its scheduled slot.
+        # Only a completed optimization graph requires semantic admission.
+        if losses or session.runtime.terminal not in ('Failed','Cancelled'):
+            check(isinstance(admission,PreparedReceiver),'new-profile optimization requires prepared receiver admission')
+            admission.validate(session.runtime)
+            check(report.get('component_admission')==admission.receipt(),'experimental admission telemetry drift')
     exposure.validate()
     summary = session.summary()
     rt = session.runtime

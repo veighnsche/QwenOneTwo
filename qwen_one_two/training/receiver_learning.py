@@ -8,6 +8,33 @@ from .receiver_profiles import receiver_parameter, profile, LEGACY
 PROTOCOL='receiver-learning-v1'
 
 
+def extend_profile_window(parent,owned,codec,input_profile):
+    """Migrate a restored complete parent without resetting old Adam state.
+
+    No step occurs here. New projection moments remain absent until a real
+    eligible gradient, as with the existing optimizer's lazy initialization.
+    """
+    from .receiver_profiles import extend_receiver_groups
+    from .engine import Window,clone_state
+    from .loss_config import COEFFICIENTS
+    check(parent.examples==0 and not parent.buffers and all(p.grad is None for p in parent.parameters),
+          'profile construction requires a complete-window boundary')
+    check(parent.phase=='components' and parent.coefficients==COEFFICIENTS,'new profile retains existing joint coefficients')
+    if input_profile!='direct-role-states-v1':
+        profile(input_profile,'component');return parent
+    groups=extend_receiver_groups(codec,owned,input_profile)
+    result=Window(groups,parent.phase,schedule_profile=parent.schedule_profile)
+    check(result.names[:len(parent.names)]==parent.names,'parent owner order changed')
+    for old,new in zip(parent.optimizer.param_groups,result.optimizer.param_groups):
+        check(len(old['params'])==len(new['params']) and all(a is b for a,b in zip(old['params'],new['params'])),
+              'parent optimizer aliases changed')
+        for key,value in old.items():
+            if key!='params':new[key]=clone_state(value)
+    for p,state in parent.optimizer.state.items():result.optimizer.state[p]=clone_state(state)
+    result.scheduled_windows=parent.scheduled_windows;result.optimizer_updates=parent.optimizer_updates
+    return result
+
+
 def training_order(release):
     check(isinstance(release,ReviewedRelease) and release.purpose=='training','receiver training release')
     ids=[e['id'] for e in release.manifest['records'] if e['selected']
@@ -64,6 +91,7 @@ class ReceiverProducer:
         from ..codec.schema import Kind
         from ..codec.session import Session
         from ..codec.render import Packet
+        from .component_admission import admit_prepared_component
         view,p,index=component_view(self.release,row)
         check(row['training_category']=='receiver','receiver records only')
         # Identity follows the current D/codec; source states are never cached.
@@ -104,6 +132,11 @@ class ReceiverProducer:
             port=next(k for k,v in PORT_NAMES.items() if v==row['operation'])
             packet=factory.request(port,index['question'],index['target'],evidence=tuple(spans),
                 candidates=index['candidates'],rubric=index['rubric'],direction=index['direction'],session=s)
+            admission=None
+            if self.input_profile!=LEGACY:
+                admission=admit_prepared_component(self.release,row,view,p,encoded,index,rt,packet,input_profile=self.input_profile)
+                s.component_admission=admission
+                report['component_admission']=admission.receipt()
             _,evaluated,_=s.evaluate(packet)
             check(isinstance(packet,Packet),'latent receiver request')
             # Observe actual heads before reading outcome labels. This is report
@@ -123,11 +156,11 @@ class ReceiverProducer:
             candidates=() if snapshot.bank is None else rt.registry.get(snapshot.bank,Kind.BANK).candidates
             mapping=dict(zip(index['identities'],candidates))
             reason=None
-            if row['supervision'].get('reason') is not None:
+            if self.input_profile==LEGACY and row['supervision'].get('reason') is not None:
                 target=annotation('reason',row['supervision']['reason'],row['operation'])
                 reason=self.encoder.reference_payload(target)
                 report['reason_target_sha256']=target.sha256
-            labels=DecisionLabels(packet.snapshot,status,noul=payload.get('p_true'),
+            labels=admission.labels(rt,self.release,row) if admission is not None else DecisionLabels(packet.snapshot,status,noul=payload.get('p_true'),
                 choice=tuple(mapping[k] for k in payload.get('acceptable_selection_ids',[])),
                 score_interval=tuple(payload['score_interval']) if 'score_interval' in payload else None,
                 feasibility=tuple((mapping[k],0 if v is True else 1) for k,v in gold.get('feasibility',{}).items()
@@ -139,6 +172,10 @@ class ReceiverProducer:
                 losses['structure']=ce(self.c.heads['child_count'](evaluated['feature']),0)
             report.update(eligibility=eligibility,predicted_status=STATUS_NAMES[actual],
                           reference_status=gold['status'],losses={k:float(v.detach()) for k,v in losses.items()})
+            if admission is not None:
+                report['reason_mask']=admission.receipt()['reason_mask']
+                report['startup']={'raw':float(s.raw_budget.detach()),'predicted_budget':s.predicted_budget,
+                                   'granted_budget':rt.budget,'override':s.override}
             # Ending this declared component releases unused return reservations;
             # no result is supplied or claimed consumed, and no native loss exists.
             rt.terminate('Completed',emit_end=False)
