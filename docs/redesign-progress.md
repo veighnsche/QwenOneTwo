@@ -19,7 +19,7 @@ because a later queued task starts.
 | RD-05 | delivered | Joint objectives, owners, binding/mask tests; deferred GPU IDs | `fe90af0` pushed/verified; [report](redesign-rd05-results-2026-11-08.md), [evidence](evidence/joint-receiver-objectives-v1.json); 74 static tests pass +14 refreshed; two new GPU checks resolved by RD-07; Reason masks preserved |
 | RD-06 | delivered | Native wiring/eligibility report; deferred real-return/gradient IDs | `6f74680` pushed/verified; [report](redesign-rd06-results-2026-11-08.md), [evidence](evidence/direct-native-flow-v1.json); 86 static tests pass +10 refreshed; two new GPU checks resolved by RD-07; zero complete corpus formation/semantic continuation/direct reader support |
 | RD-07 | delivered | All required deferred/changed-path 3090 checks pass; actual counts/hashes | [Report](redesign-rd07-results-2026-11-08.md), [evidence](evidence/redesign-qualification-v1.json); ten deferred +three new GPU checks pass; twelve1024 traces; zero updates; `7da99c6` pushed and verified |
-| RD-08 | blocked | Complete matched fit/evaluation receipts; useful-improvement outcome separate | [Report](redesign-rd08-results-2026-11-08.md), [evidence](evidence/receiver-comparison-rd08-v1.json); RD-07 passes/current; common support0/1500; neither fit launched, zero updates; learning not evaluated; blocker `2c977ce` pushed/verified |
+| RD-08 | in_progress | Complete matched fit/evaluation receipts; useful-improvement outcome separate | [Report](redesign-rd08-results-2026-11-08.md), [evidence](evidence/receiver-comparison-rd08-v1.json); RD-07 passes/current; common support0/1500; neither fit launched, zero updates; learning not evaluated; blocker `2c977ce` pushed/verified |
 | RD-09 | blocked | Accepted RD-08 receiver plus eligible native run/evaluation receipts | [Report](redesign-rd09-results-2026-11-08.md), [evidence](evidence/native-demonstration-rd09-v1.json); conditional authorization recorded; blocked on RD-08/no accepted receiver and zero native supervision; execution unstarted, zero updates; blocker `a864b65` pushed/verified |
 
 RD-07 is delivered; technical acceptance passes and implementation `7da99c6` is pushed/verified.
@@ -621,3 +621,15 @@ authenticated push exit0 (`9af92fd..a864b65 main -> main`); remote main returned
 the identical full SHA.207 local Markdown targets, dependency/raw hashes and
 staged whitespace pass. Ledger/handoff/evidence finalization is committed/pushed
 separately on top. RD-08/RD-09 remain blocked; native execution unstarted.
+
+## RD-08 explicit format recovery — 2026-11-08
+
+User explicitly authorized revising the format to fit all1500 existing examples,
+full coverage recheck, changed-path qualification and resuming fixed RD-08.
+RD-09 must not start; no new data. Clean pushed main4770032 recovered; host3090
+accessible, existing server2094 untouched, no matching fit. Versioned compact
+returns will bind immutable existing roles by Ref instead of re-echoing content.
+Both matched arms use compact returns; candidate carries all role states with
+explicit63-state field capacity. Existing256/64 envelopes and old profiles stay.
+Native v2 writing is unsupported/unstarted; no old native length owner is resized.
+Contract is committed before runtime implementation. No fit launched yet.
