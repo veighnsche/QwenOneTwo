@@ -15,6 +15,7 @@ from qwen_one_two.training.release import load_release,decode
 from qwen_one_two.training.learning_report import PROTOCOL,probe_panel,summarize_learning
 from scripts.fit_reference import TRAIN_SHA,DEV_SHA
 from qwen_one_two.g1_device import PRIMARY,require_visibility
+from qwen_one_two.training.receiver_profiles import LEGACY, PROFILES
 
 BALANCE_PROTOCOL='receiver-loss-balance-v1'
 BALANCE_OVERRIDES={'status':.1,'feasibility':.05}
@@ -75,13 +76,38 @@ def gradient_report(window):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--snapshot',required=True)
-    parser.add_argument('--output',required=True);parser.add_argument('--execute-gpu',action='store_true')
+    parser.add_argument('--output',required=True)
+    action=parser.add_mutually_exclusive_group(required=True)
+    action.add_argument('--prepare',action='store_true');action.add_argument('--execute-gpu',action='store_true')
+    parser.add_argument('--input-profile',choices=tuple(PROFILES))
+    parser.add_argument('--regime',choices=('component','native'),default='component')
+    parser.add_argument('--prepared-plan');parser.add_argument('--resume');parser.add_argument('--resume-sha256')
     parser.add_argument('--loss-balance-baseline',help='completed v1 control; run the single fixed tenfold reduction')
     a=parser.parse_args()
+    from qwen_one_two.training import receiver_plan as planning
+    check(bool(a.resume)==bool(a.resume_sha256),'resume path and exact manifest hash required together')
+    if a.prepare:
+        check(a.input_profile is not None and not any((a.prepared_plan,a.resume,a.loss_balance_baseline)),
+              'prepare requires one explicit input profile; no execution/resume/comparison flags')
+        receipt=planning.prepare_to(a.output,a.snapshot,a.input_profile,a.regime)
+        print(json.dumps(receipt));return
+    prepared=None
+    if a.prepared_plan:
+        check(a.input_profile is not None and not a.loss_balance_baseline,'prepared execution requires explicit profile; no historical comparison flags')
+        prepared=planning.load_plan(a.prepared_plan,a.snapshot,a.input_profile,a.regime)
+        planning.admit_execution(prepared,gpu=os.environ.get('CUDA_VISIBLE_DEVICES'),input_profile=a.input_profile,regime=a.regime)
+        if a.resume:planning.inspect_resume(prepared,a.resume,a.resume_sha256)
+    else:
+        check(a.input_profile in (None,LEGACY) and a.regime=='component' and not a.resume,
+              'new profiles/resume require an exact prepared plan')
+    require_visibility();check(os.environ['CUDA_VISIBLE_DEVICES']==PRIMARY,'3090 only')
     out=Path(a.output).resolve();check(out.is_relative_to(ROOT/'data'),'probe outputs belong in data/')
     check(not out.exists(),'never overwrite a probe');out.mkdir(parents=True)
     train=load_release(ROOT/'data/training-collections-20261105/releases/train',expected_hash=TRAIN_SHA)
     dev=load_release(ROOT/'data/training-collections-20261105/releases/development',expected_hash=DEV_SHA)
+    if prepared:
+        check(prepared['contract']['releases']=={'training':train.identity,'development':dev.identity},
+              'prepared execution release identity mismatch')
     panel=probe_panel(train);order=[p['id'] for p in panel]
     devfamilies={dev.record(e['id'])['family'] for e in dev.manifest['records'] if e['selected']
                  and dev.record(e['id']).get('evaluation_slice') in ('E','X')}
@@ -97,11 +123,10 @@ def main():
         'training_scope':'D and existing receiver owners only; W/R/budget/reference frozen; no native training',
         'snapshot':str(Path(a.snapshot).resolve())}
     if comparison:plan['loss_balance']=comparison
+    if prepared:plan['prepared_run_sha256']=prepared['run_sha256']
     (out/'plan.json').write_bytes(canonical(plan))
     for name in sources:
         target=out/'source'/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(ROOT/name,target)
-    if not a.execute_gpu:print(json.dumps({'status':'PREPARED_GPU_NOT_RUN','panel':len(panel)}));return
-    require_visibility();check(os.environ['CUDA_VISIBLE_DEVICES']==PRIMARY,'3090 only')
     check(file_hash(ROOT/CHECKPOINT/'manifest.json')==CHECKPOINT_SHA,'parent manifest drift')
     check(file_hash(Path(a.snapshot)/'model.safetensors-00001-of-00001.safetensors')==BASE_SHA,'base file drift')
     check(file_hash(ROOT/'data/g1-proof/gate-repair-v2-20261105/diagnostic.safetensors')==DIAGNOSTIC_SHA,'initial weights drift')
@@ -118,6 +143,8 @@ def main():
     from qwen_one_two.training.behavior_qualification import receiver_hash,evaluate_case,suite,summarize
     from qwen_one_two.training.clean import CleanEncoder
     from qwen_one_two.training.reference_qualification import PROFILE
+    from qwen_one_two.training.host_metrics import Recorder
+    from qwen_one_two.codec.session import Session
     configure();started=time.monotonic()
     manifest=decode((ROOT/CHECKPOINT/'manifest.json').read_bytes())
     report={'protocol':protocol,'status':'RUNNING','plan_sha256':digest(canonical(plan)),
@@ -125,7 +152,11 @@ def main():
         'scope':'training-panel learnability, not full-catalogue training or promotion','training_performed':True}
     def persist():(out/'report.json').write_bytes(canonical(report))
     def emit(**v):print(json.dumps(v,allow_nan=False),flush=True)
-    with sdpa_kernel(SDPBackend.MATH):
+    execution_meter=Recorder()
+    with sdpa_kernel(SDPBackend.MATH), execution_meter.patch([
+            (CleanEncoder,'_states','offline_source_encoding_calls'),
+            (Reference,'annotation_states','offline_reference_encoding_calls'),
+            (Session,'__init__','session_constructions'),(Session,'prefill','prefill_calls')]):
         b,c,_=load(a.snapshot,ROOT/'data/g1-proof/gate-repair-v2-20261105/diagnostic.safetensors')
         ref=Reference(b,c,pooler_kind='target-v2');ref.freeze();owned=groups(b,c,ref)
         class BalanceWindow(Window):
@@ -149,15 +180,32 @@ def main():
         report['source_changes_since_parent']=[k for k,v in old_sources.items() if sources.get(k)!=v]
         report['migration']='new explicitly declared probe fork; original identities validated on restore; moments/RNG/counters retained; original sampler is not relabeled as probe history'
         identities=dict(manifest['identities'],protocol=digest(protocol.encode()),sources=digest(canonical(sources)))
+        if prepared:
+            check(order*8==prepared['contract']['training_order'] and w.ownership==prepared['contract']['owners'],
+                  'prepared schedule/ownership differs from actual Window')
+            identities=prepared['checkpoint_identities']
+        exposures=Counter();eligible=Counter();failures=Counter();cursor=0
+        if a.resume:
+            saved=planning.restore_prepared(prepared,a.resume,a.resume_sha256,b,c,ref,w)
+            cursor=saved['sampler']['cursor'];receipts=saved['sampler']['receipts']
+            exposures.update(receipts['exposures']);eligible.update(receipts['eligible']);failures.update(receipts['failures'])
+            report['measurements']=receipts['measurements']
+            report['resume']={'path':a.resume,'sha256':a.resume_sha256,'cursor':cursor,
+                              'scope':'new execution counters exclude the recorded checkpoint prefix'}
+            report.update(optimizer_updates=w.optimizer_updates-188,scheduled_probe_windows=w.scheduled_windows-188,
+                          exposures=dict(exposures),eligible_examples=dict(eligible),failed_exposures=dict(failures))
         def frozen():
             check(ref.fingerprint()==REFERENCE and native()==frozen_native,'frozen reference/R/codec changed')
             check(all(p.grad is None for m in (b,c,ref) for p in m.parameters()),'outstanding parameter gradients')
         def checkpoint(repeat,cursor):
             frozen();path=out/f'checkpoint-{w.scheduled_windows:04d}'
+            sampler=({'protocol':protocol,'order':order,'repeat':repeat,'probe_cursor':cursor,'parent_checkpoint':str(CHECKPOINT),
+                'parent_sampler':manifest['sampler'],'initial_scheduled_windows':188,
+                'loss_coefficients':dict(w.coefficients)} if prepared is None else planning.sampler_state(prepared,cursor,
+                    {'exposures':dict(exposures),'eligible':dict(eligible),'failures':dict(failures),
+                     'measurements':report['measurements']}))
             sha=save(path,w,bundle_tensors(b,c,ref),identities,
-                {'protocol':protocol,'order':order,'repeat':repeat,'probe_cursor':cursor,'parent_checkpoint':str(CHECKPOINT),
-                 'parent_sampler':manifest['sampler'],'initial_scheduled_windows':188,
-                 'loss_coefficients':dict(w.coefficients)},reference_frozen=True,reference_id=REFERENCE)
+                sampler,reference_frozen=True,reference_id=REFERENCE)
             report['checkpoints'].append({'path':str(path.relative_to(ROOT)),'sha256':sha});return path
         def measure(repeat):
             frozen();before=receiver_hash(b,c);cases=[]
@@ -176,10 +224,13 @@ def main():
             report['measurements'].append({'repeat':repeat,'receiver':before,'report':summary});persist()
             emit(event='panel',repeat=repeat,operations={op:x['counts'] for op,x in summary['operations'].items()})
         try:
-            checkpoint(0,0);measure(0);exposures=Counter();eligible=Counter();failures=Counter()
+            if not a.resume:checkpoint(0,0);measure(0)
+            elif cursor in (0,32,64,128,256) and cursor//32 not in {m['repeat'] for m in report['measurements']}:
+                measure(cursor//32)
             with (out/'training.jsonl').open('x') as stream:
                 for repeat in range(1,9):
                     for offset in range(0,32,8):
+                        if (repeat-1)*32+offset<cursor:continue
                         cases=[];t=time.monotonic()
                         for key in order[offset:offset+8]:
                             s,losses,exposure=producer(train.record(key));case=s.episode_report
@@ -217,7 +268,7 @@ def main():
                             check(torch.equal(cuda_rng,torch.cuda.get_rng_state(0)) and torch.equal(cpu_rng,torch.get_rng_state())
                                   and python_rng==random.getstate(),'first-update RNG roundtrip')
                             report['first_update_roundtrip_exact']=True
-                    if repeat in (1,2,4,8):checkpoint(repeat,repeat*32);measure(repeat)
+                    if repeat in (1,2,4,8) and repeat*32>cursor:checkpoint(repeat,repeat*32);measure(repeat)
             # Actual feedback decoding/delivery, on held-out data only after updates.
             b.checkpointing=False
             encoder=CleanEncoder(b,ref,checkpoint_hash=receiver_hash(b,c),profile_hash=digest(PROFILE.encode()),cache_references=True)
@@ -241,7 +292,11 @@ def main():
                 frozen_native_unchanged=True,gradients_none=True,seconds=time.monotonic()-started,peak_cuda_bytes=torch.cuda.max_memory_allocated())
         except BaseException as error:
             report.update(status='FAILED_PROBE',error=repr(error),seconds=time.monotonic()-started);raise
-        finally:persist()
+        finally:
+            report['execution_accounting']={'host':execution_meter.snapshot(),
+                'actual_optimizer_updates_this_process':w.optimizer_updates-(saved['optimizer_updates'] if a.resume else 188),
+                'scope':'actual encoding/Session/prefill calls, including failed calls; host intervals are not GPU compute time; excludes checkpoint prefix'}
+            persist()
     emit(status=report['status'],optimizer_updates=report['optimizer_updates'])
 
 

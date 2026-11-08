@@ -15,9 +15,7 @@ from ..codec.neural import cuda_only
 from .engine import PHASES, clone_state, tensors
 from .profile import scheduled_rate
 from .inputs import canonical, digest, check
-
-FORMAT = 'qot-training-bundle-v1'
-IDENTITIES = {'base', 'qev', 'protocol', 'precision', 'reference', 'dataset', 'sources'}
+from .checkpoint_metadata import FORMAT, IDENTITIES, validate_identities, inspect
 
 
 def bundle_tensors(backbone, codec, reference):
@@ -25,12 +23,6 @@ def bundle_tensors(backbone, codec, reference):
     result.update({'codec.'+name:t for name,t in codec.state_dict(keep_vars=True).items()})
     result.update({'reference.'+name:t for name,t in reference.state_dict(keep_vars=True).items()})
     return result
-
-
-def validate_identities(identities):
-    check(set(identities) == IDENTITIES, 'bundle identity fields')
-    check(all(isinstance(v,str) and len(v) == 64 and all(c in '0123456789abcdef' for c in v)
-              for v in identities.values()), 'bundle identity hashes')
 
 
 def save(path, window, weights, identities, sampler, *, reference_frozen, reference_id):
@@ -70,18 +62,6 @@ def save(path, window, weights, identities, sampler, *, reference_frozen, refere
         shutil.rmtree(temp,ignore_errors=True)
         raise
     return digest((path/'manifest.json').read_bytes())
-
-
-def inspect(path, expected_identities):
-    validate_identities(expected_identities)
-    path = Path(path)
-    manifest = json.loads((path/'manifest.json').read_bytes())
-    check(manifest['format'] == FORMAT and manifest['identities'] == expected_identities, 'incompatible bundle')
-    check({'weights.safetensors','optimizer.pt','rng.pt'} <= set(manifest['files']), 'incomplete bundle')
-    check(set(manifest['files']) <= {'weights.safetensors','effective-rows.safetensors','optimizer.pt','rng.pt'}, 'unexpected bundle files')
-    for name,sha in manifest['files'].items():
-        check(digest((path/name).read_bytes()) == sha, 'artifact hash mismatch: '+name)
-    return manifest
 
 
 def _load_weights(path, targets, manifest):

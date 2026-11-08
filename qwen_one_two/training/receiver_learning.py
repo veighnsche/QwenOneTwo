@@ -3,6 +3,7 @@ import uuid
 from .inputs import check,digest,canonical,Exposure
 from .release import ReviewedRelease
 from .behavior_qualification import PROMPT,PROFILE,receiver_hash
+from .receiver_profiles import receiver_parameter
 
 PROTOCOL='receiver-learning-v1'
 
@@ -20,13 +21,9 @@ def training_order(release):
 def groups(backbone,codec,reference):
     from ..codec.ownership import parameter_groups
     original=parameter_groups(backbone,codec)
-    prefixes=('role.','slot.','owner.','attribute.','tags.','meta.','source.','atom.','value.',
-              'qev_q.','qev_k.','eval_trunk.','status.','feasibility.','emit1.','emit2.','emitout.',
-              'heads.child_count.')
     selected=[]
     for group in original:
-        entries=[(n,p) for n,p in group['named_parameters'] if group['name']=='D'
-                 or (n.startswith('codec.') and (n[6:] in {'score_row','prototypes'} or n[6:].startswith(prefixes)))]
+        entries=[(n,p) for n,p in group['named_parameters'] if receiver_parameter(group['name'],n)]
         if entries:selected.append(dict(group,named_parameters=entries))
     backbone.requires_grad_(False);codec.requires_grad_(False)
     for group in selected:

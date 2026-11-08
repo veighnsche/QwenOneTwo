@@ -19,7 +19,47 @@ change fan controls, live services or The Operating Table. Older hold statements
 below are historical. The completed comparison and next unfinished slice remain
 as recorded below.
 
-## Current requested work — RD-01 metadata coverage, 2026-11-08
+## Current requested work — RD-02 receiver preparation, 2026-11-08
+
+RD-02 implementation and model-free evidence are complete; commit/push verification
+is being finalized in the [ledger](redesign-progress.md). Read the
+[RD-02 report](redesign-rd02-results-2026-11-08.md) and
+[portable evidence](evidence/receiver-preparation-v1.json). The existing probe
+runner now requires explicit preparation/execution, provides named legacy,
+frozen-W pooled and direct-role profiles, and binds panels, permitted views,
+frozen dependencies, initial checkpoint/moments/RNG, owners, objectives and
+scheduled exposures in deterministic plans. New profiles remain unimplemented/
+unqualified and reject execution; no model was run.
+
+Bound legacy execution/resume uses the existing loop, Window and transactional
+checkpoint code. Model-free guards reject stale releases/profiles/caches/
+checkpoints, wrong GPU/regime, ambiguous actions and incompatible cursors/owners.
+Failed attempts stay scheduled; actual updates remain separate. Preparation
+receipts have zero encodings, Sessions, prefills, positions and optimizer updates.
+Existing host timing/call instrumentation distinguishes actual execution from plans.
+
+All three actual CLI preparations pass with model libraries blocked; repeated
+legacy output is byte-identical. The proposed comparison arms share the same
+1,500 records /four passes /6,000 presentations /750 windows, initial state,
+objectives and existing owners, with separate profile/checkpoint identities.
+The RD-04 projection owner remains explicitly pending, without fabricated tensors.
+40 model-free tests pass (62.390 s); final guard changes are covered by a fresh
+12-test pass (47.402 s), reusing the other 28 unchanged results. Compilation and
+whitespace pass. No optimizer/tensor algorithm was changed or exercised.
+
+The broader initial run exposed a pre-existing historical profiling-test setup
+failure: all 130 saved E receipt view hashes use the historical schema and reject
+current clean-view-v2; original row hashes still match. Its unchanged source and
+raw failure/proof are recorded. Required Recorder tests pass. Do not treat that
+older diagnostic fixture as passing or substitute its stale views into new plans.
+
+RD-01 implementation/raw evidence and pushed commits were verified and valid
+23-test results reused. All RD-01 missing operator/range/native binding labels
+remain limits on later work. No new model execution, training, data/review,
+agents, locked access, deployment or service change occurred. No required RD-02
+check remains pending. **Next unfinished slice: RD-03**; stop at RD-02 here.
+
+## Previous requested work — RD-01 metadata coverage, 2026-11-08
 
 RD-01 is delivered. Implementation/evidence commit `800c100` is pushed to `main`
 and its exact remote SHA was verified; the [progress ledger](redesign-progress.md)

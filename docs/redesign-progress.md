@@ -13,7 +13,7 @@ because a later queued task starts.
 | Slice | Delivery | Required evidence / checks | Current evidence |
 |---|---|---|---|
 | RD-01 | delivered | Coverage/panel/native-supervision manifests; model-free checks | [Report](redesign-rd01-results-2026-11-08.md), [manifest](evidence/redesign-coverage-v1.json); 23 tests pass; implementation `800c100` pushed and verified |
-| RD-02 | pending | Runner preparation/rejection checks; identity/resume contracts | None; plan only |
+| RD-02 | in_progress | Runner preparation/rejection checks; identity/resume contracts | [Report](redesign-rd02-results-2026-11-08.md), [evidence](evidence/receiver-preparation-v1.json); model-free checks pass; commit/push pending |
 | RD-03 | pending | Source/cache policy and static checks; explicit deferred GPU check IDs | None; plan only |
 | RD-04 | pending | Versioned payload/admission contracts and implementation; deferred GPU IDs | None; plan only |
 | RD-05 | pending | Joint objectives, owners, binding/mask tests; deferred GPU IDs | None; plan only |
@@ -22,8 +22,8 @@ because a later queued task starts.
 | RD-08 | pending | Complete matched fit/evaluation receipts; useful-improvement outcome separate | None; training not authorized by prompt preparation |
 | RD-09 | pending | Accepted RD-08 receiver plus eligible native run/evaluation receipts | None; training not authorized by prompt preparation |
 
-Earliest unfinished slice: **RD-02**, not started by this RD-01-only submission.
-RD-02..09 are unstarted; no redesign model job was launched.
+Earliest unfinished slice: **RD-02**, awaiting commit/push verification only.
+RD-03..09 are unstarted; no redesign model job was launched.
 
 For each attempted slice add a short entry with implementation/evidence paths,
 exact commands/results, dependency hashes, relevant implementation commits and
@@ -79,3 +79,55 @@ local HEAD. This delivery/handoff finalization is committed and pushed separatel
 on top of that verified implementation; no RD-02 work is included. 141 local
 Markdown targets resolve across the changed ledger/handoff/report. All required
 RD-01 checks pass; learned capability remains unchanged.
+
+## RD-02 — 2026-11-08
+
+Technical acceptance: **pass** for this model-free slice. Learning outcome:
+**not_applicable**. No required RD-02 check is deferred; new-profile tensor and
+resume qualification remains future RD-07 work as those profiles are implemented.
+
+Predecessor recovery: RD-01 source/test/raw/reused-audit hashes are unchanged;
+its recorded 23 passing tests are reused. Both delivered commits are ancestors
+of clean baseline `47c58a3`, verified as remote `main`. No matching RD-02 job or
+run manifest existed; sandbox process inspection has limited host visibility.
+
+Implementation: `scripts/train_receiver_probe.py` gains explicit prepare/execution
+and named profiles; `training/receiver_plan.py` binds plans, caches and resumable
+identities. `receiver_profiles.py` shares profile/owner declarations;
+`checkpoint_metadata.py` exposes model-free inspection used by the existing CUDA
+checkpoint loader; `loss_config.py` shares unchanged coefficients. The actual
+`Window`, Adam/update and tensor checkpoint save/restore bodies remain unchanged.
+Bound legacy resume uses the existing loop and restores complete-window state.
+
+Evidence: [report](redesign-rd02-results-2026-11-08.md),
+[portable manifest](evidence/receiver-preparation-v1.json), and raw plans/receipts/
+logs/blocked-import launcher under `data/redesign-rd02-20261108/verified/`.
+All three actual runner preparations pass with model imports blocked. Repeated
+legacy plans are byte-identical. Proposed frozen-pooled/direct arms bind the
+same 1,500 records, four passes /6,000 presentations /750 windows, initial masters/
+moments/RNG, owners, objectives and dependencies, with distinct profile identities.
+All preparation execution counters are zero. These proposed fits are not launched
+or authorized by preparation; new profiles reject execution pending RD-03..07.
+
+Commands/results:
+
+- Four actual blocked-import runner preparations: exit 0. Exact commands, snapshot,
+  environment, output paths, source/artifact hashes and host intervals are in evidence.
+- `PYTHONPATH=tests:. python -m unittest tests.test_receiver_plan tests.test_receiver_learning tests.test_training_schedule tests.test_training_driver tests.test_host_metrics.HostMetricsTests`: **40 pass**, 62.390 s.
+- After final dependency/admission additions, `PYTHONPATH=tests:. python -m unittest tests.test_receiver_plan`: **12 pass**, 47.402 s; unchanged results for the other 28 tests reused.
+- Compilation of all nine changed/new Python files and `git diff --check`: pass.
+  Existing coefficient values, unchanged Window/tensor checkpoint ASTs, plan source
+  hashes and all reused RD-01 hashes verified. Exact compilation command in evidence.
+
+A broader initial invocation also found the **pre-existing**
+`HostMetrics.ProfilingPlanTests` setup error `profiling receipt input drift`:
+130/130 rows match original records and historical input hashes, 0/130 match
+current v2 view hashes. Relevant code/tests are unchanged from baseline. Its raw
+failure/proof is retained; required Recorder and RD-02 checks pass independently.
+No stale receipt was relabeled valid. This older diagnostic fixture remains a
+known limitation, not an RD-02 implementation blocker.
+
+No model/GPU execution, fitting, optimizer update, agents, new annotations/reviews,
+locked access, deployment, service or Operating Table changes. RD-01 data/native
+supervision limits remain as recorded. Handoff updated. Implementation commit/
+push verification: pending finalization. Stop at RD-02; next slice is RD-03.
