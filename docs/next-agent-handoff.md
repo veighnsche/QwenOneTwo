@@ -53,12 +53,37 @@ Both fixed fits must complete before either E/X model evaluation. Protocol fixes
 familiar-cohort Noul/Score, per-cell status and47 historical Choice retention IDs
 before fitting. No dev selection, retries/extra passes, new data or deployment.
 
-Earliest unfinished RD-08 is **in_progress**. Code/evidence/plans are being
-committed/pushed before the first fit. Raw `data/redesign-format-v2-20261108/`;
-plans `plans/control/plan.json` and `plans/candidate/plan.json`. Reconnect to actual
-run manifests/logs/checkpoints if interrupted; do not duplicate a fit. RD-09 stays
-unstarted regardless of RD-08 outcome. Earlier zero-support/current-source pending
-statements below describe historical v1 and are superseded by this section.
+Earliest unfinished RD-08 is **in_progress**.4137167 implementation/qualification
+was pushed and verified before control launched. Control PID597060 has now exited
+FAILED_PROBE after full1500 baseline observations and1 saved update/cursor8.
+Its exact first-update model/moment/RNG round-trip passed; next input failed only
+a stale reference version-counter guard after identical checkpoint restoration.
+
+The guard is repaired with full originally bound reference checksum/ownership
+revalidation before rebind; changed content still rejects. Targeted3090 cache/
+restore test passes32.961s, exact heads/losses/cache hits2 and W320/tying/reference,
+0 steps; three compact static tests pass.18 qualified IDs now resolved. Payload/
+model/optimizer math and metadata audit methods unchanged; original measurements
+and first update remain valid with explicit source migration. New qualified plans
+`data/redesign-format-v2-20261108/plans-cache/{control,candidate}/plan.json`.
+
+Recovery checkpoint and exact file/protocol migration:
+`data/redesign-format-v2-20261108/control-migration.json`, destination
+`migrated-control/checkpoint-0189/`. All tensor/optimizer/RNG files unchanged;
+original full order/owners/objectives/receipts retained. Resume at cursor8 with749
+windows remaining; do not repeat the saved update. New output `control-resumed/`;
+copy original `control/panel-00.jsonl` unchanged there after output creation,
+preserving its original source provenance/initial0188 measurement. Original
+control logs/report/checkpoints stay immutable. Candidate output `candidate/`
+still unstarted and must use new plans-cache/candidate plan only after control
+completes. Neither development evaluation has run. RD09 stays unstarted.
+
+This cache fix/qualification/migration is committed/pushed before resume. Do not
+alter source or plans during fits. Reconnect to actual report PID/log/checkpoint,
+never duplicate. Both fixed fits finish before either evaluation; failure is an
+actual recorded learning outcome, never permission for retries/extra passes or
+native learning. Historical zero-support/source-pending statements below are
+superseded by the qualified v2 recovery above.
 
 ## Previous requested work — conditional RD-09, 2026-11-08
 

@@ -291,3 +291,26 @@ class CompactResumeGPU(unittest.TestCase):
             record({'check':'v2-eight-joint-VJPs','input_profile':profile,'eligible':dict(w.counts),
                     'owned_parameters':len(w.names),'optimizer_updates':0})
             self.assertEqual(w.optimizer_updates,188);w.abort()
+
+    def test_cached_component_survives_exact_checkpoint_restore(self):
+        import torch
+        from qwen_one_two.training.receiver_learning import ReceiverProducer
+        from qwen_one_two.training.checkpoint import save,bundle_tensors,restore_model
+        from qwen_one_two.training.two_gpu import ROOT
+        producer=ReceiverProducer(self.b,self.c,self.ref,self.train,input_profile='frozen-w-pooled-compact-v2',cache_sources=True)
+        with torch.no_grad():before,_,_=producer(self.row)
+        self.assertNotIn('failure',before.episode_report)
+        heads=before.episode_report['head'];losses=before.episode_report['losses'];stamp=producer.encoder.reference_stamp
+        with tempfile.TemporaryDirectory(dir=ROOT/'data') as temp:
+            path=Path(temp)/'checkpoint'
+            save(path,self.w,bundle_tensors(self.b,self.c,self.ref),self.saved['identities'],{'fixture':'exact restore, no update'},
+                reference_frozen=True,reference_id=self.reference_id)
+            restore_model(path,self.b,self.c,self.ref,self.saved['identities'],window=self.w)
+            self.assertNotEqual(stamp,tuple((id(p),p._version) for p in self.ref.parameters()))
+            with torch.no_grad():after,_,_=producer(self.row)
+        self.assertNotIn('failure',after.episode_report);self.assertEqual(heads,after.episode_report['head'])
+        self.assertEqual(losses,after.episode_report['losses']);self.assertGreater(producer.encoder.source_cache_hits,0)
+        self.assertEqual(producer.encoder.reference_stamp,tuple((id(p),p._version) for p in self.ref.parameters()))
+        self.assertEqual(self.reference_id,self.ref.fingerprint());self.assertEqual(self.w.optimizer_updates,188)
+        record({'check':'v2-cached-input-restore','heads_and_losses_exact':True,'source_cache_hits':producer.encoder.source_cache_hits,
+                'reference_unchanged':True,'optimizer_updates':0})

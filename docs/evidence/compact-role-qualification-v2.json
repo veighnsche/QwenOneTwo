@@ -1,5 +1,18 @@
 {
   "RD09": "unstarted; no native qualification or supervision waiver",
+  "cache_restore_fix": {
+    "changed_sources": {
+      "qwen_one_two/training/clean.py": {
+        "before": "adf94b432412bc60ed05aab949522537e6469cb388d53f607054f63a745a99a6",
+        "current": "6c4f735404bc5a98b147048974ee2b374cf4d98bbed89334cedb310b323e9117"
+      }
+    },
+    "observed_failure": "control saved complete first update/cursor8, exact model/moment/RNG round-trip passed, then old pointer/version guard rejected unchanged restored reference; checkpoint and all1500 baseline observations preserved",
+    "previous_qualification": "data/redesign-format-v2-20261108/compact-role-qualification-v2.json.before-cache-fix",
+    "previous_sha256": "a5badd71f9384e814fe214d381fc6694c6960236e2b25b837ae6023278dfeb85",
+    "proof": "all encoding/model/optimizer/codec methods unchanged; complete originally bound reference fingerprint and frozen ownership required on version-counter change; actual cached heads/losses and source-cache reuse exact after real checkpoint restore",
+    "static_negative_tests": "unchanged content permits rebind; changed bytes, artifact identity or ownership rejects;3 tests pass in0.109s"
+  },
   "checks": {
     "RD03-GPU-CACHE-PARITY": {
       "run": "gpu-1",
@@ -95,12 +108,17 @@
       "run": "gpu-2",
       "status": "pass",
       "test": "tests.test_compact_roles_gpu.CompactResumeGPU.test_complete_window_resume_and_frozen_owners"
+    },
+    "V2-GPU-RESUME-CACHED-INPUTS": {
+      "run": "gpu-cache",
+      "status": "pass",
+      "test": "tests.test_compact_roles_gpu.CompactResumeGPU.test_cached_component_survives_exact_checkpoint_restore"
     }
   },
   "comparison_protocol": "data/redesign-format-v2-20261108/comparison-protocol.json",
   "comparison_protocol_sha256": "2da758562ac3a5b4d9fb8981ef59f01ae2f6bcf5edebb7fc5d1b5f527705f63c",
   "coverage": "docs/evidence/compact-role-layout-coverage-v2.json",
-  "coverage_sha256": "f29db678293aa44a0ee057e59da00b9fa5971dc8b1b6caa49a185cb0facadb6c",
+  "coverage_sha256": "bf3371842de42a80adf9b31bd89d895d02eab354ec5a28a867be22397d650dc5",
   "environment": {
     "cuda": "13.2",
     "device": "NVIDIA GeForce RTX 3090",
@@ -143,7 +161,13 @@
     "data/redesign-format-v2-20261108/assemble_qualification.py": "46f3378a5a5ec8488a960c10a88b4bfd6dfbb1adcb5d8b5a4a98c3e98c07e7a2",
     "data/redesign-format-v2-20261108/audit_blocked.py": "86952483b9552cd8dc31141f901f11069d2c9495233d78c67585e659904f4513",
     "data/redesign-format-v2-20261108/common-support.json": "a9961a0a7d7bb643073145a143eac896f4d9b77d93a261dc411a7d86deaecd60",
+    "data/redesign-format-v2-20261108/compact-role-layout-coverage-v2.json.before-cache-fix": "f29db678293aa44a0ee057e59da00b9fa5971dc8b1b6caa49a185cb0facadb6c",
+    "data/redesign-format-v2-20261108/compact-role-qualification-v2.json.before-cache-fix": "a5badd71f9384e814fe214d381fc6694c6960236e2b25b837ae6023278dfeb85",
     "data/redesign-format-v2-20261108/comparison-protocol.json": "2da758562ac3a5b4d9fb8981ef59f01ae2f6bcf5edebb7fc5d1b5f527705f63c",
+    "data/redesign-format-v2-20261108/control/checkpoint-0189/manifest.json": "df5dafd3817404e15bd669944ab8f56deb680140e56377414498d9e435170c5a",
+    "data/redesign-format-v2-20261108/control/panel-00.jsonl": "cb24898d081ea8c53985ad56e799f7cc2771196ece3e10203fc702d45ea61f80",
+    "data/redesign-format-v2-20261108/control/report.json": "dc38549ce8438fb6885b8dfa99c1349638e47c02e4ff9a311658887379b53d17",
+    "data/redesign-format-v2-20261108/control/training.jsonl": "0c74245c1716d1e81cf4f1ac8fb4b4795d60e8d4fe0e4802193c26c3249ed273",
     "data/redesign-format-v2-20261108/coverage.log": "ad1c348cd4032fdd423f1ee74a454b7c7f390c60383a55686bb724cedc72e638",
     "data/redesign-format-v2-20261108/coverage/records.json": "48484955c4da5c65dfa2ac4f9f546b8e8848f5a48ead3b6b3bfe90db7abcdb0f",
     "data/redesign-format-v2-20261108/coverage/report.json": "77ce3502a72b39b2080aa1f9600eccc00342b414086c6ea21856667001bf84df",
@@ -153,12 +177,17 @@
     "data/redesign-format-v2-20261108/gpu-2.log": "f145c31a608e08478c4d01e443828ca206c41592a56e774aee4408ad571d087c",
     "data/redesign-format-v2-20261108/gpu-2/metrics.jsonl": "6cba568d3aa39aa632a393da61118cc1a407645c8915b7af9e323ff922606d1d",
     "data/redesign-format-v2-20261108/gpu-2/report.json": "7a39cc1bf774bd1c0e5883125e3bf4f935e28d806b77463bd036dd0d706e3a42",
+    "data/redesign-format-v2-20261108/gpu-cache.log": "d5a5795a5a5a92e03e78139ece7943278ba7ea356a569c514707037b260adb37",
+    "data/redesign-format-v2-20261108/gpu-cache/metrics.jsonl": "491c824f09e78e5c015b1277045be601817658b2261815c0d730ec89cf9a5cdd",
+    "data/redesign-format-v2-20261108/gpu-cache/report.json": "df5eec84611aa1ed2d0feb98576659378fdbb0a31912de673230937dff53a8dc",
     "data/redesign-format-v2-20261108/qualify.py": "59402d931af0925be35b46ddf8e7838b8134f19c21d512bdacfe8bcdeb693af0",
+    "data/redesign-format-v2-20261108/qualify_cache.py": "e1d85c57c9899cfff9ea5451757af14c18e806b01d655af5296d186546ef16da",
     "data/redesign-format-v2-20261108/qualify_delta.py": "d361f820b12e5e1e0d38e25d922b94c2b57ac76ae9f887d1731d0162d1eac6a0",
     "data/redesign-format-v2-20261108/static-1.log": "110ede314867b8f1f92a15e43217535b2575c4983fb3fd699e2b762e0c23da77",
     "data/redesign-format-v2-20261108/static-2.log": "66d71d1e6558c0c1dcb2bb57fc2568e4bd2fc4de49f21e55954164e22bc47ee3",
     "data/redesign-format-v2-20261108/static-binding-final.log": "b7bee46e34ec42e83802fbf7f30f387aac5893f276e174ffa2e8c78e6249384e",
     "data/redesign-format-v2-20261108/static-boundaries.log": "720fe55f3c65cd5e2712d120d9dff7f7b0b2a143bfc6e319bd3071e3be0e0af3",
+    "data/redesign-format-v2-20261108/static-cache-fix.log": "a51deb963dc74776d322d29298792906eebf3afc14c51425b9a4a7aa079a6974",
     "data/redesign-format-v2-20261108/static-final-core.log": "3ffab6c5b0b3baea8404016771e2a092f80bd2ed167038374ab856106d28d4cc",
     "data/redesign-format-v2-20261108/static-final.log": "3137b3a2af7e42c92296f00534187d65e09383a2393239862f5069f7c65732c3",
     "data/redesign-format-v2-20261108/static-plan-refreshed.log": "11caf449f521b1bfc8874bc308843c616e2d97b39847f266ee2d51553bbf53ac"
@@ -275,6 +304,29 @@
       "skipped": 0,
       "sources_unchanged": true,
       "status": "PASS"
+    },
+    "gpu-cache": {
+      "class_frozen_checks": [
+        {
+          "class": "CompactResumeGPU",
+          "frozen_W": {
+            "base_tied_storage": true,
+            "mismatches": [],
+            "parameters_checked": 320,
+            "pass": true
+          },
+          "reference_id": "5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f",
+          "reference_unchanged": true
+        }
+      ],
+      "errors": 0,
+      "executed_tests": 1,
+      "failures": 0,
+      "optimizer_updates": 0,
+      "pid": 616555,
+      "skipped": 0,
+      "sources_unchanged": true,
+      "status": "PASS"
     }
   },
   "services_changed": false,
@@ -326,7 +378,7 @@
     "qwen_one_two/training/binding.py": "d3e017ef6547ab9ceffa11d6e5684b3f6aab16182d25b20bc9bdcef0e4323343",
     "qwen_one_two/training/checkpoint.py": "ae693ea7ae8fa465d71f8dabbf7d5ba24f92efd8fa8af6efc080f6103a34ee54",
     "qwen_one_two/training/checkpoint_metadata.py": "4806b4ca4f6331874743c77e6983e0060dd35a310956b4f67683680603e104d3",
-    "qwen_one_two/training/clean.py": "adf94b432412bc60ed05aab949522537e6469cb388d53f607054f63a745a99a6",
+    "qwen_one_two/training/clean.py": "6c4f735404bc5a98b147048974ee2b374cf4d98bbed89334cedb310b323e9117",
     "qwen_one_two/training/clean_packets.py": "9bfbcb63c4ecbeb0bcdbeb6f75bd6b30c2f5e2cc5f51cc7670cf55cb63681d2b",
     "qwen_one_two/training/component_admission.py": "0ab3b22429d93d2d0d204f0e78b097fa77ba1d02141d7ae9b58470304edcd399",
     "qwen_one_two/training/component_producer.py": "9e8cd12db50ec254344cc8958c0f6bde688bee5b2ae9e5b997c5558e35458f00",

@@ -111,9 +111,15 @@
     "training": "c70d4f44135a34c00e7fa0348833b1ec56613def15f5753231589492ed35478f"
   },
   "scope": "BPE/position metadata only; no features or model execution",
+  "source_migration": {
+    "before": "adf94b432412bc60ed05aab949522537e6469cb388d53f607054f63a745a99a6",
+    "current": "6c4f735404bc5a98b147048974ee2b374cf4d98bbed89334cedb310b323e9117",
+    "path": "qwen_one_two/training/clean.py",
+    "proof": "CleanView/tokenize_excerpt and all payload encoding methods AST-identical; only identical-reference version-counter rebind guard changed; full1810 BPE/coverage audit reused"
+  },
   "sources": {
     "qwen_one_two/codec/layout.py": "b9307ee89df6cd38e80d3f4776acf7ce06d0cb38efa1adbbf5c346f1b1487577",
-    "qwen_one_two/training/clean.py": "adf94b432412bc60ed05aab949522537e6469cb388d53f607054f63a745a99a6",
+    "qwen_one_two/training/clean.py": "6c4f735404bc5a98b147048974ee2b374cf4d98bbed89334cedb310b323e9117",
     "qwen_one_two/training/direct_roles.py": "ab3333e16647057e9d38dfbc719a8d828b22ca5adb2d2d4b1005be70f27cddec",
     "scripts/audit_direct_roles.py": "3c1f7b2a8b8ba2e7638394d3efda956368e808ee30dd2dc51cd3ff27a83f1dfc"
   },

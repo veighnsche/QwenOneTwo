@@ -87,3 +87,29 @@ not authorization to retry or proceed to RD-09.
 Execution and useful-improvement outcome are tracked separately. At this
 pre-execution commit no optimizer update has run. Fit artifacts and actual
 results will be recorded here and in the ledger/handoff as execution proceeds.
+
+### First-update recovery
+
+Control baseline completed all1500 actual head/delivery observations. Its first
+update and exact model/Adam/RNG round-trip passed, with checkpoint0189/cursor8
+saved. The next input then failed a stale reference version-counter guard:
+restoring identical frozen tensors advances PyTorch counters. No reference bytes
+changed. The guard now accepts that metadata change only after full checksum
+validation against the originally bound immutable artifact and frozen ownership;
+changed content/artifact/ownership still rejects. Payload/tokenizer/codec/model/
+loss/optimizer arithmetic is unchanged by AST/source proof. A targeted real3090
+checkpoint/cache test passes (32.961 s): cached heads/losses exact, cache hits2,
+W320/tying/reference pass,0 optimizer steps. Three model-free compact tests pass.
+Qualification now has18 resolved IDs; original17 core results remain valid.
+
+The first update, eight exposures, full1500-case baseline and original failed log
+are preserved. The explicit metadata-only migration in
+`data/redesign-format-v2-20261108/control-migration.json` copies weights, optimizer,
+effective rows and RNG byte-for-byte; only qualified source/protocol bindings
+change. All original files, owner shapes, objectives, schedule, full6000 order and
+sampler receipts remain. New plans are `plans-cache/{control,candidate}/plan.json`.
+The resumed control starts at cursor8 with749 windows remaining; it does not
+repeat the completed update or baseline. New output is `control-resumed/`; its
+initial panel is an unchanged copy of the original observation file, retaining
+original source provenance. Candidate remains unstarted until control finishes.
+No additional training exposure or new data is introduced by this recovery.

@@ -52,5 +52,25 @@ class CompactRoles(unittest.TestCase):
             _,p=fixture(profile,Port.NOUL)
             self.assertEqual(int(''.join(map(str,p.positions[0].payload.encode(Role.REQUEST)[:4])),2),version)
 
+    def test_cache_stamp_rebind_requires_the_original_frozen_content_identity(self):
+        from types import SimpleNamespace
+        from unittest.mock import patch
+        from qwen_one_two.training.clean import CleanEncoder
+        parameter=SimpleNamespace(_version=0,requires_grad=False)
+        reference=SimpleNamespace(frozen=True,artifact_id='original',parameters=lambda:[parameter],fingerprint=lambda:'original')
+        encoder=CleanEncoder.__new__(CleanEncoder);encoder.backbone=object();encoder.reference=reference
+        encoder.identity={'reference':'original'};encoder.source_binding={'identity':{'original':'W'}}
+        encoder.reference_stamp=((id(parameter),0),)
+        with patch('qwen_one_two.training.clean.bind_frozen_source',return_value=encoder.source_binding):
+            parameter._version=1;encoder._validate_source()
+            self.assertEqual(encoder.reference_stamp,((id(parameter),1),))
+            parameter._version=2;reference.fingerprint=lambda:'modified'
+            with self.assertRaisesRegex(ValueError,'contents/ownership'):encoder._validate_source()
+            self.assertEqual(encoder.reference_stamp,((id(parameter),1),))
+            reference.fingerprint=lambda:'original';parameter.requires_grad=True
+            with self.assertRaisesRegex(ValueError,'contents/ownership'):encoder._validate_source()
+            parameter.requires_grad=False;reference.artifact_id='different'
+            with self.assertRaisesRegex(ValueError,'contents/ownership'):encoder._validate_source()
+
 
 if __name__=='__main__':unittest.main()

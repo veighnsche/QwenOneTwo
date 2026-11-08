@@ -124,8 +124,16 @@ class CleanEncoder:
     def _validate_source(self):
         if self.source_binding is not None:
             check(bind_frozen_source(self.backbone)['identity']==self.source_binding['identity'], 'frozen source identity changed')
-            check(tuple((id(p),p._version) for p in self.reference.parameters())==self.reference_stamp,
-                  'frozen reference storage/version changed')
+            stamp=tuple((id(p),p._version) for p in self.reference.parameters())
+            if stamp!=self.reference_stamp:
+                # A transactional restore copies identical frozen tensors and
+                # advances their version counters. Rebind only after verifying
+                # the complete originally bound artifact, never a new reference.
+                check(self.reference.frozen and all(not p.requires_grad for p in self.reference.parameters())
+                      and self.reference.artifact_id==self.identity['reference']
+                      and self.reference.fingerprint()==self.identity['reference'],
+                      'frozen reference contents/ownership changed')
+                self.reference_stamp=stamp
 
     def _states(self, ids, limit):
         import torch

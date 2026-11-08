@@ -1,6 +1,16 @@
 {
-  "actual_updates_at_plan": 0,
+  "actual_updates_at_plan": 1,
   "baseline_commit": "47700325f445ddd438ce88852d56e0ca86cabbab",
+  "cache_fix_qualification": {
+    "heads_and_losses_exact": true,
+    "optimizer_updates": 0,
+    "pass": 1,
+    "path": "data/redesign-format-v2-20261108/gpu-cache/report.json",
+    "seconds": 32.961,
+    "sha256": "df5eec84611aa1ed2d0feb98576659378fdbb0a31912de673230937dff53a8dc",
+    "source_cache_hits": 2,
+    "tests": 1
+  },
   "comparison_protocol": {
     "RD09": "excluded; no native training/promotion/deployment",
     "acceptance": {
@@ -163,9 +173,10 @@
     "X_supported": 180,
     "X_total": 180,
     "path": "docs/evidence/compact-role-layout-coverage-v2.json",
-    "sha256": "f29db678293aa44a0ee057e59da00b9fa5971dc8b1b6caa49a185cb0facadb6c",
+    "sha256": "bf3371842de42a80adf9b31bd89d895d02eab354ec5a28a867be22397d650dc5",
     "training": 1500
   },
+  "current_static_tests": "original103 plus new cache guard test; three compact tests refreshed/pass0.109s; all model/payload/optimizer methods unchanged",
   "execution_policy": "6000 exposures/750 windows per arm; initial/final full1500 heads+delivery observations; both fits finish before E/X; no extra passes/new data/RD09/promotion",
   "matched": {
     "coefficients": true,
@@ -176,7 +187,7 @@
   },
   "plans": {
     "candidate": {
-      "path": "data/redesign-format-v2-20261108/plans/candidate/plan.json",
+      "path": "data/redesign-format-v2-20261108/plans-cache/candidate/plan.json",
       "preparation": {
         "accounting": {
           "causal_positions": 0,
@@ -193,25 +204,25 @@
           "phases": {
             "prepare": {
               "calls": 1,
-              "cpu_ns": 21034019547,
-              "exclusive_cpu_ns": 21034019547,
-              "exclusive_wall_ns": 21115437963,
+              "cpu_ns": 20975243512,
+              "exclusive_cpu_ns": 20975243512,
+              "exclusive_wall_ns": 21057866692,
               "failed_calls": 0,
-              "wall_ns": 21115437963
+              "wall_ns": 21057866692
             }
           }
         },
-        "plan_sha256": "a06b5e6b87a055590f34c553172a75077f7f978cd93d31bd3346579bb3a06450",
+        "plan_sha256": "1288e8b54738232364bb9c83f4be8d2a340a3b254dc67436b4e137e85c6b4f01",
         "protocol": "receiver-preparation-v1",
-        "run_sha256": "2e58e8ee929f7cd05b110f53cedb53a55f56d68cb8efec7bea0659212fa1f03c",
+        "run_sha256": "a63d3540377fd9ba21b7786d164534d51dd040a8a5c32813466a3f259c4c5ea7",
         "scope": "host preparation includes byte hashing only; not GPU timing or execution",
         "status": "PREPARED_NOT_EXECUTED"
       },
-      "run_sha256": "2e58e8ee929f7cd05b110f53cedb53a55f56d68cb8efec7bea0659212fa1f03c",
-      "sha256": "a06b5e6b87a055590f34c553172a75077f7f978cd93d31bd3346579bb3a06450"
+      "run_sha256": "a63d3540377fd9ba21b7786d164534d51dd040a8a5c32813466a3f259c4c5ea7",
+      "sha256": "1288e8b54738232364bb9c83f4be8d2a340a3b254dc67436b4e137e85c6b4f01"
     },
     "control": {
-      "path": "data/redesign-format-v2-20261108/plans/control/plan.json",
+      "path": "data/redesign-format-v2-20261108/plans-cache/control/plan.json",
       "preparation": {
         "accounting": {
           "causal_positions": 0,
@@ -228,30 +239,77 @@
           "phases": {
             "prepare": {
               "calls": 1,
-              "cpu_ns": 21037056422,
-              "exclusive_cpu_ns": 21037056422,
-              "exclusive_wall_ns": 21122769914,
+              "cpu_ns": 20950353392,
+              "exclusive_cpu_ns": 20950353392,
+              "exclusive_wall_ns": 21034825303,
               "failed_calls": 0,
-              "wall_ns": 21122769914
+              "wall_ns": 21034825303
             }
           }
         },
-        "plan_sha256": "66dc9e2101ef5c8985c5119f574a5b5cacfaebcedcbac3f5e55877c159fdef9b",
+        "plan_sha256": "34c049f18a8071f393b250c91cfa3e0efbdfea1c321f384f0dae27498ef3447c",
         "protocol": "receiver-preparation-v1",
-        "run_sha256": "a363887cc0fe848593beb66cf36278dacb72b60efd2044ef739fbb35ea2fe754",
+        "run_sha256": "e31eb404e77dab19580be84fce6fd397781b820de1e257f1cac35fbea01dc721",
         "scope": "host preparation includes byte hashing only; not GPU timing or execution",
         "status": "PREPARED_NOT_EXECUTED"
       },
-      "run_sha256": "a363887cc0fe848593beb66cf36278dacb72b60efd2044ef739fbb35ea2fe754",
-      "sha256": "66dc9e2101ef5c8985c5119f574a5b5cacfaebcedcbac3f5e55877c159fdef9b"
+      "run_sha256": "e31eb404e77dab19580be84fce6fd397781b820de1e257f1cac35fbea01dc721",
+      "sha256": "34c049f18a8071f393b250c91cfa3e0efbdfea1c321f384f0dae27498ef3447c"
     }
   },
+  "preserved_control_prefix": {
+    "cursor": 8,
+    "destination_checkpoint": "data/redesign-format-v2-20261108/migrated-control/checkpoint-0189",
+    "destination_manifest_sha256": "e4c4604247a1a64f572e522cc3460dc50882451ab4d00fd17426b9d863b60066",
+    "extra_training": 0,
+    "first_window": {
+      "exposures": 8,
+      "optimizer_updates": 1,
+      "path": "data/redesign-format-v2-20261108/control/training.jsonl",
+      "sha256": "0c74245c1716d1e81cf4f1ac8fb4b4795d60e8d4fe0e4802193c26c3249ed273",
+      "windows": 1
+    },
+    "historical_updates": 188,
+    "initial_measurement": {
+      "path": "data/redesign-format-v2-20261108/control/panel-00.jsonl",
+      "receiver_checkpoint": "initial0188",
+      "records": 1500,
+      "sha256": "cb24898d081ea8c53985ad56e799f7cc2771196ece3e10203fc702d45ea61f80",
+      "source_provenance": "original4137167 source retained in observations; cache guard only changed, all payload methods AST-identical; rows are copied unchanged, not relabeled"
+    },
+    "missing_recovery_state": false,
+    "new_plan": "data/redesign-format-v2-20261108/plans-cache/control/plan.json",
+    "new_plan_sha256": "34c049f18a8071f393b250c91cfa3e0efbdfea1c321f384f0dae27498ef3447c",
+    "new_updates_preserved": 1,
+    "old_plan": "data/redesign-format-v2-20261108/plans/control/plan.json",
+    "old_plan_sha256": "66dc9e2101ef5c8985c5119f574a5b5cacfaebcedcbac3f5e55877c159fdef9b",
+    "preserved_sampler_receipts": true,
+    "preserved_tensor_optimizer_rng_files": {
+      "effective-rows.safetensors": "5b1f322db8aa36a800d1aa3f0715f51bc36d64593482a0e7fa1c421910dda02b",
+      "optimizer.pt": "fa141de82717df33037f2fa5d5bb9fee3cb7dcb9b25dd6b8d8e1ef07e2d059a9",
+      "rng.pt": "cbc25a4884a7dd5171506ca5b894fc879f72440ac789b87d2a736686609ee439",
+      "weights.safetensors": "fdcb8d2c239b55dd45f92a857c35374e66c5377f4d10cf3ad03a1f14765e717b"
+    },
+    "preserved_weights_shapes": true,
+    "protocol": "rd08-cache-restore-migration-v1",
+    "remaining_windows": 749,
+    "scope": "only originally bound reference version-counter revalidation changes; payload/model/optimizer/encoding math, releases, owners, objectives, schedule/order unchanged",
+    "source_checkpoint": "data/redesign-format-v2-20261108/control/checkpoint-0189",
+    "source_delta": {
+      "qwen_one_two/training/clean.py": [
+        "adf94b432412bc60ed05aab949522537e6469cb388d53f607054f63a745a99a6",
+        "6c4f735404bc5a98b147048974ee2b374cf4d98bbed89334cedb310b323e9117"
+      ]
+    },
+    "source_manifest_sha256": "df5dafd3817404e15bd669944ab8f56deb680140e56377414498d9e435170c5a"
+  },
+  "preserved_control_prefix_sha256": "f63e8247823af978cd8b0a997a7162a9aa6fff19e8757255c8e74943e81f2362",
   "protocol": "receiver-matched-rd08-v2-plan",
   "protocol_sha256": "2da758562ac3a5b4d9fb8981ef59f01ae2f6bcf5edebb7fc5d1b5f527705f63c",
   "qualification": {
-    "checks": 17,
+    "checks": 18,
     "path": "docs/evidence/compact-role-qualification-v2.json",
-    "sha256": "a5badd71f9384e814fe214d381fc6694c6960236e2b25b837ae6023278dfeb85",
+    "sha256": "d2e6c0a6be21f5441818a39930590388c7a8c7e225294d43cc52c9933508352e",
     "status": "PASS"
   },
   "qualification_failures_retained": "gpu-1 pooled Score admission; repaired exact whole-rubric normalization; gpu-2 real VJPs/delivery/accumulation/resume pass; unchanged24 traces reused via AST/source migration",
@@ -262,6 +320,6 @@
     "seconds": 137.464,
     "sha256": "3137b3a2af7e42c92296f00534187d65e09383a2393239862f5069f7c65732c3"
   },
-  "status": "QUALIFIED_PREPARED_NOT_EXECUTED",
+  "status": "QUALIFIED_RESUMABLE_AFTER_CACHE_RESTORE_FIX",
   "training_authorization": "user explicitly authorized finite RD08 and this format recovery; authorization persists"
 }

@@ -662,3 +662,36 @@ head+delivered measurements. Both fits finish before dev evaluation. All47
 historical passing Choice IDs in the fixed50 retention panel are pinned before
 fitting. RD09/new data/deployment excluded. Implementation/evidence is committed
 and pushed before fitting; no training update yet at this entry.
+
+## RD-08 control running — 2026-11-08
+
+Implementation/qualification/finite plans4137167af95449452975233411cf932a1de494cc
+pushed and exact remote main verified before fitting. Control actualPID597060,
+`data/redesign-format-v2-20261108/control/report.json`, log`control.log`, initial
+complete-window checkpoint`control/checkpoint-0188/`. Explicit3090 UUID; standard
+`python -m scripts.train_receiver_probe --execute-gpu --input-profile frozen-w-pooled-compact-v2 --prepared-plan data/redesign-format-v2-20261108/plans/control/plan.json` with pinned snapshot/output.
+Initial full1500-row no-grad head+delivery measurement is active;0 updates at
+launch. Candidate/evaluations unstarted. Reconnect to this process, never duplicate.
+No RD09/new data/services change. Run source archives/plan and exact PID are local.
+
+## RD-08 exact first-update recovery — 2026-11-08
+
+Control PID597060 completed initial1500 measurements and1 update/8 exposures;
+exact first-update model/moments/CUDA+CPU+Python RNG round-trip passed. Next input
+failed `frozen reference storage/version changed`: identical checkpoint copies
+advance tensor counters. Original run is retained FAILED_PROBE, not a completed
+failed learning comparison. Checkpoint0189 df5dafd3817404e15bd669944ab8f56deb680140e56377414498d9e435170c5a
+preserves the exact complete window/cursor8; no missing state.
+
+Cache guard now rebinds version metadata only after complete original reference
+checksum/frozen-ownership verification. Changed bytes/artifact/ownership reject.
+All payload/model/optimizer methods and full1810 BPE mappings unchanged; coverage
+receipts explicitly migrate the source guard.18 qualified IDs: targeted real3090
+restore/cache parity1 pass32.961s, heads/losses exact and cache hits2,0 updates,
+W320/tying/reference pass. Three compact static tests pass0.109s (104 distinct
+model-free tests including103 prior unchanged results). Exact metadata-only
+checkpoint migration and retained observation/source receipts are in
+`data/redesign-format-v2-20261108/control-migration.json`. New fixed plans bind
+this qualified source; cursor8, one completed update,749 windows remaining.
+Code/qualification/migration are committed/pushed before resuming. Candidate,
+all development evaluation and RD09 remain unstarted. No fitting is repeated.
