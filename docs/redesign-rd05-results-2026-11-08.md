@@ -148,3 +148,9 @@ an optimizer update. Neither claims useful behavior or Reason qualification.
 No agents, new data/reviews, locked access, fitting, model workloads, deployment,
 service or Operating Table changes. Existing RD-01 supervision/operator gaps
 remain. Stop at RD-05; next unfinished implementation slice is RD-06.
+
+Delivery: implementation/evidence `fe90af01540fab0962167f2b4375d07cb169f84b`
+was pushed to main and authenticated remote verification returned that exact SHA.
+Ledger/handoff delivery finalization follows as a separate commit. All 217 checked
+local Markdown targets resolve. Eight GPU checks remain pending; no learning or
+GPU qualification result is claimed.

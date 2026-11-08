@@ -16,14 +16,14 @@ because a later queued task starts.
 | RD-02 | delivered | Runner preparation/rejection checks; identity/resume contracts | [Report](redesign-rd02-results-2026-11-08.md), [evidence](evidence/receiver-preparation-v1.json); 12 final preparation tests +28 reused tests pass; `254f526` pushed and verified |
 | RD-03 | delivered | Source/cache policy and static checks; explicit deferred GPU check IDs | [Report](redesign-rd03-results-2026-11-08.md), [evidence](evidence/frozen-w-source-v1.json); 50 static tests pass; three GPU checks pending RD-07; `2cbfa41` pushed and verified |
 | RD-04 | delivered | Versioned payload/admission contracts and implementation; deferred GPU IDs | Contract `2247619`, implementation `ae800a4` pushed/verified; [report](redesign-rd04-results-2026-11-08.md), [evidence](evidence/direct-role-states-v1.json); 61 static tests pass +6 refreshed; three new GPU checks pending RD-07; zero receiver support |
-| RD-05 | in_progress | Joint objectives, owners, binding/mask tests; deferred GPU IDs | [Report](redesign-rd05-results-2026-11-08.md), [evidence](evidence/joint-receiver-objectives-v1.json); 74 static tests pass +14 refreshed; implementation ready to commit/push; two new GPU checks pending RD-07 |
+| RD-05 | delivered | Joint objectives, owners, binding/mask tests; deferred GPU IDs | `fe90af0` pushed/verified; [report](redesign-rd05-results-2026-11-08.md), [evidence](evidence/joint-receiver-objectives-v1.json); 74 static tests pass +14 refreshed; two new GPU checks pending RD-07; Reason masks preserved |
 | RD-06 | pending | Native wiring/eligibility report; deferred real-return/gradient IDs | None; plan only |
 | RD-07 | pending | All required deferred/changed-path 3090 checks pass; actual counts/hashes | RD03-GPU-D-INDEPENDENCE, RD03-GPU-CACHE-PARITY, RD03-GPU-CONSUMER-GRADIENTS; RD04-GPU-IDENTITY-PROJECTION, RD04-GPU-DIRECT-ROUNDTRIP, RD04-GPU-DIRECT-GRADIENTS; RD05-GPU-GRADIENT-ACCUMULATION, RD05-GPU-RESUME pending; no GPU execution |
 | RD-08 | pending | Complete matched fit/evaluation receipts; useful-improvement outcome separate | None; training not authorized by prompt preparation |
 | RD-09 | pending | Accepted RD-08 receiver plus eligible native run/evaluation receipts | None; training not authorized by prompt preparation |
 
-Earliest unfinished implementation slice: **RD-05**, implementation/checks complete,
-awaiting commit/push and delivery finalization. RD-06..09 are unstarted.
+Earliest unfinished implementation slice: **RD-06**; RD-06..09 are unstarted.
+RD-05 is delivered under the staged implementation protocol.
 Eight RD-03/04/05 GPU checks remain pending RD-07; no redesign model job was launched.
 
 For each attempted slice add a short entry with implementation/evidence paths,
@@ -299,8 +299,8 @@ implementation check. RD-05 makes no layout or allowance revision.
 
 ## RD-05 implementation — 2026-11-08
 
-Currently due model-free acceptance: **pass**; staged delivery awaits commit/push
-and finalization. GPU qualification: **pending RD-07**. Learning outcome:
+Staged implementation acceptance: **pass**, delivered.
+GPU qualification: **pending RD-07**. Learning outcome:
 **not_applicable**; no model execution, feature extraction, fitting or update.
 
 Evidence: [report](redesign-rd05-results-2026-11-08.md),
@@ -364,3 +364,15 @@ startup retention or owner gradient was measured in RD-05. RD-01 label/native
 gaps and historical profiling receipt drift remain unchanged. No agents, new
 records/reviews, locked access, deployment, service or Operating Table changes.
 Stop after RD-05; no RD-06 implementation is included.
+
+Implementation commit: `fe90af01540fab0962167f2b4375d07cb169f84b`.
+`git -c 'credential.helper=!gh auth git-credential' push origin main`: exit 0,
+`7576540..fe90af0 main -> main`. Authenticated `git ls-remote` returned
+`fe90af01540fab0962167f2b4375d07cb169f84b refs/heads/main`, identical to local HEAD.
+217 local Markdown targets resolve. A staged new-file EOF whitespace warning was
+fixed with identical AST before pushing; four fresh `verified-final/` preparation
+receipts bind the corrected bytes. Prior preparations remain unchanged and
+explicitly superseded. This ledger/handoff delivery finalization is committed and
+pushed separately on top of the verified implementation. Eight GPU checks remain
+pending; the zero-support direct layout still blocks a future fit, without waiver.
+Stop after RD-05. Next unfinished implementation slice is RD-06.

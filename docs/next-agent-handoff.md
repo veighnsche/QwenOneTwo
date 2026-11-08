@@ -21,8 +21,9 @@ as recorded below.
 
 ## Current requested work — RD-05 joint objectives and binding, 2026-11-08
 
-RD-05 model-free implementation/checks are complete, awaiting implementation
-commit/push and delivery finalization. Read the
+RD-05 staged implementation is delivered. Implementation/evidence commit
+`fe90af0` is pushed to main and its exact remote SHA was verified; ledger/handoff
+delivery finalization is committed and pushed separately. Read the
 [RD-05 report](redesign-rd05-results-2026-11-08.md),
 [portable evidence](evidence/joint-receiver-objectives-v1.json),
 [prepared-component contract](prepared-receiver-component-v1.md) and
@@ -75,7 +76,8 @@ used. Metadata objective potentials are not admitted or measured examples.
 Existing RD-01 supervision/native gaps and historical profiling-test drift remain.
 No model execution, feature extraction, fitting, agents, new data/reviews, locked
 access, deployment, service or Operating Table changes. Stop after RD-05;
-**RD-06 is unstarted**.
+**RD-06 is unstarted**. Compilation, final staged whitespace checks, evidence
+hashes and 217 local Markdown targets pass.
 
 ## Previous requested work — RD-04 direct role states, 2026-11-08
 
