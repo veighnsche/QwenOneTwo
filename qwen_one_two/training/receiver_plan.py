@@ -11,6 +11,7 @@ from .learning_report import probe_panel
 from .loss_config import COEFFICIENTS
 from .manifest import BASE_SHA, DIAGNOSTIC_SHA, file_hash
 from .receiver_profiles import LEGACY, profile, receiver_parameter
+from .frozen_source import FROZEN_SOURCE, GPU_CHECKS
 from .reference_qualification import PROFILE
 from .release import decode, load_release
 from .two_gpu import ROOT, CHECKPOINT, CHECKPOINT_SHA, REFERENCE
@@ -131,6 +132,7 @@ def prepare(snapshot, input_profile, *, regime='component', root=ROOT):
             'distinct_records': len(selected), 'presentations': len(order), 'windows': len(order)//8,
             'examples_per_window': 8, 'failure_policy': 'failed attempts remain scheduled; no replacement/retry'},
         'required_evidence': {'RD-01': file_hash(root/COVERAGE),
+            'source_policy_checks': {key:'pending_RD07' for key in GPU_CHECKS} if spec['source_policy']==FROZEN_SOURCE else {},
             'pending_slices': spec['required_slices'], 'native_regime': 'unsupported until RD-06',
             'new_profile_gpu_qualification': 'pending RD-07' if input_profile != LEGACY else 'historical legacy path only'},
         'authorization': 'preparation only; this manifest grants no model execution, fitting or promotion'}

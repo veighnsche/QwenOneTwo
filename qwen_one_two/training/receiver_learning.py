@@ -3,7 +3,7 @@ import uuid
 from .inputs import check,digest,canonical,Exposure
 from .release import ReviewedRelease
 from .behavior_qualification import PROMPT,PROFILE,receiver_hash
-from .receiver_profiles import receiver_parameter
+from .receiver_profiles import receiver_parameter, profile, LEGACY
 
 PROTOCOL='receiver-learning-v1'
 
@@ -42,12 +42,16 @@ class ReceiverProducer:
     classifier objective. No truncated failed forward is accepted; any real
     construction/forward/resource failure still has zero eligible losses.
     """
-    def __init__(self,backbone,codec,reference,release):
+    def __init__(self,backbone,codec,reference,release,*,input_profile=LEGACY,cache_sources=False):
         from .clean import CleanEncoder
         check(release.purpose=='training','never train on development/locked records')
+        spec=profile(input_profile,'component')
+        check(spec['roles']=='frozen-reference-pooled-v1', 'direct role implementation belongs to RD-04')
         self.b,self.c,self.ref,self.release=backbone,codec,reference,release
+        self.input_profile=input_profile
         self.encoder=CleanEncoder(backbone,reference,checkpoint_hash=receiver_hash(backbone,codec),
-            profile_hash=digest(PROFILE.encode()),cache_references=True)
+            profile_hash=digest(PROFILE.encode()),cache_references=True,
+            source_policy=spec['source_policy'],cache_sources=cache_sources)
 
     def __call__(self,row):
         import torch
@@ -73,6 +77,9 @@ class ReceiverProducer:
             'text_tokens_for_invocation':0,'gold_return':False,'input_sha256':encoded['input_hash'],
             'source_audit':encoded['audit'][:len(factory.sources)]}
         s.episode_report=report
+        if self.input_profile!=LEGACY:
+            report.update(input_profile=self.input_profile,source_policy=self.encoder.source_policy,
+                          frozen_source=self.encoder.identity['frozen_source'])
         debit=rt.debit
         def bounded(kind,count,label):
             check(rt.position+count<=512,'complete receiver objective exceeds 512 positions')

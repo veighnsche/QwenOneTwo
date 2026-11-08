@@ -61,7 +61,7 @@ encoding, not by masking a few dimensions afterwards.
 
 ## 4. Source encoding profile
 
-For v1:
+The named legacy control is `current-d-source-v1`. For that control:
 
 1. Materialize permitted excerpt as derived immutable source containing only it.
 2. Tokenize afresh using pinned tokenizer/template.
@@ -77,6 +77,25 @@ Original source coordinates and parent hashes stay in external audit manifest.
 Model-facing refs/offsets address the derived CLEAN source. No original preceding
 text length, inherited position or full-source registry expansion can carry the
 withheld fact. Derive excerpt selection/order from the declared permitted view.
+
+RD-03 adds the opt-in offline policy `frozen-w-source-v1`: the same complete
+permitted bytes, template, token selection and source coordinates are encoded
+with explicit per-forward W mode, bypassing both adapters under v3 FP32
+transformer arithmetic. No adapter merge, parameter replacement or trainability
+toggle selects this mode. Existing pooled reference role payloads are retained.
+The production native prefill and connected writer states retain their actual
+R/D execution and graph; this policy must never re-encode them inside a live job.
+
+Frozen source caches hold only detached body states, not registries or pointers.
+Keys bind W/buffer content, tokenizer/template/configuration, arithmetic/software,
+complete permitted bytes and the full token/UTF-8 mapping; they exclude mutable
+D/receiver hashes. Publication rebuilds local sources and the original external
+binding audit each time. W storage/version/ownership and tokenizer/arithmetic
+drift reject cache use; overlength input is rejected before a lookup. The D
+control cannot cache source states. This implementation is **not GPU-qualified**:
+`RD03-GPU-D-INDEPENDENCE`, `RD03-GPU-CACHE-PARITY` and
+`RD03-GPU-CONSUMER-GRADIENTS` remain pending RD-07. See the
+[RD-03 report](redesign-rd03-results-2026-11-08.md).
 
 ## 5. Fresh component execution state
 

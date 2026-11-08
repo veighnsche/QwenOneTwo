@@ -19,7 +19,47 @@ change fan controls, live services or The Operating Table. Older hold statements
 below are historical. The completed comparison and next unfinished slice remain
 as recorded below.
 
-## Current requested work — RD-02 receiver preparation, 2026-11-08
+## Current requested work — RD-03 frozen-W sources, 2026-11-08
+
+RD-03 implementation/model-free evidence is complete; commit/push verification is
+being finalized in the [ledger](redesign-progress.md). Read the
+[RD-03 report](redesign-rd03-results-2026-11-08.md),
+[portable evidence](evidence/frozen-w-source-v1.json) and updated
+[clean-source contract](clean-test-construction-v1.md).
+
+`CleanEncoder` has explicit `current-d-source-v1` and opt-in
+`frozen-w-source-v1` policies. Frozen source forwards skip both adapters directly
+under v3 arithmetic, with complete permitted bytes/token mappings and fresh
+state; no merge, weight replacement or ownership toggle. Existing pooled role
+payloads and D controls remain. Cache keys bind W/buffer content, tokenizer/
+template/configuration, arithmetic/software, permitted bytes and full mappings,
+without mutable D/receiver hashes. Fresh local sources and original parent audits
+are rebuilt; only detached body states are cached. Actual native Session, writer,
+binding and cache graphs remain unchanged.
+
+All **50 model-free tests pass** (73.251 s); compilation/whitespace pass. Actual
+frozen-pooled/repeated/legacy preparation passes with model imports blocked;
+frozen plans are byte-identical, all execution counts zero, and all 1,810 existing
+receiver permitted input hashes revalidate. RD-01/02 deliveries and remote main
+were verified before edits. Historical evidence is retained; explicit old/new
+source migration supports unchanged boundary reuse. Old prepared plans are stale
+for this implementation and must not be relabeled current.
+
+**GPU qualification remains pending RD-07**, with implemented assertions:
+`RD03-GPU-D-INDEPENDENCE`, `RD03-GPU-CACHE-PARITY`,
+`RD03-GPU-CONSUMER-GRADIENTS` in `tests/test_frozen_source_gpu.py`.
+No GPU test was run or counted as passing. Execution needs explicit RD-07 opt-in
+and exact 3090 UUID before model imports. Fixtures use an existing assessed Noul
+record/parent/reference and no optimizer; broader semantic qualification remains
+separate. New profiles remain blocked for normal execution pending later slices.
+
+No model execution, source extraction, fitting, new data/reviews, agents, locked
+access, deployment, service or Operating Table changes. Existing RD-01 data/native
+supervision gaps and historical profiling-test drift remain. **Next unfinished
+implementation slice: RD-04**; it may proceed when submitted while these exact
+GPU checks remain pending RD-07. Stop after RD-03 in this task.
+
+## Previous requested work — RD-02 receiver preparation, 2026-11-08
 
 RD-02 is delivered. Implementation/evidence commit `254f526` is pushed to `main`
 and its exact remote SHA was verified; the [ledger](redesign-progress.md) records

@@ -14,16 +14,16 @@ because a later queued task starts.
 |---|---|---|---|
 | RD-01 | delivered | Coverage/panel/native-supervision manifests; model-free checks | [Report](redesign-rd01-results-2026-11-08.md), [manifest](evidence/redesign-coverage-v1.json); 23 tests pass; implementation `800c100` pushed and verified |
 | RD-02 | delivered | Runner preparation/rejection checks; identity/resume contracts | [Report](redesign-rd02-results-2026-11-08.md), [evidence](evidence/receiver-preparation-v1.json); 12 final preparation tests +28 reused tests pass; `254f526` pushed and verified |
-| RD-03 | pending | Source/cache policy and static checks; explicit deferred GPU check IDs | None; plan only |
+| RD-03 | in_progress | Source/cache policy and static checks; explicit deferred GPU check IDs | [Report](redesign-rd03-results-2026-11-08.md), [evidence](evidence/frozen-w-source-v1.json); 50 static tests pass; three GPU checks pending RD-07; push pending |
 | RD-04 | pending | Versioned payload/admission contracts and implementation; deferred GPU IDs | None; plan only |
 | RD-05 | pending | Joint objectives, owners, binding/mask tests; deferred GPU IDs | None; plan only |
 | RD-06 | pending | Native wiring/eligibility report; deferred real-return/gradient IDs | None; plan only |
-| RD-07 | pending | All required deferred/changed-path 3090 checks pass; actual counts/hashes | None; not executed |
+| RD-07 | pending | All required deferred/changed-path 3090 checks pass; actual counts/hashes | RD03-GPU-D-INDEPENDENCE, RD03-GPU-CACHE-PARITY, RD03-GPU-CONSUMER-GRADIENTS pending; no GPU execution |
 | RD-08 | pending | Complete matched fit/evaluation receipts; useful-improvement outcome separate | None; training not authorized by prompt preparation |
 | RD-09 | pending | Accepted RD-08 receiver plus eligible native run/evaluation receipts | None; training not authorized by prompt preparation |
 
-Earliest unfinished slice: **RD-03**, not started by this RD-02-only submission.
-RD-03..09 are unstarted; no redesign model job was launched.
+Earliest unfinished slice: **RD-03**, awaiting commit/push verification only.
+RD-04..09 are unstarted; no redesign model job was launched.
 
 For each attempted slice add a short entry with implementation/evidence paths,
 exact commands/results, dependency hashes, relevant implementation commits and
@@ -137,3 +137,58 @@ returned `254f5268eacedd920b1c4219b79bcda8744a4524 refs/heads/main`, identical t
 local HEAD. This ledger/handoff delivery finalization is committed and pushed
 separately on top of that verified implementation. 148 local Markdown targets
 resolve across the changed ledger/handoff/report. Stop at RD-02; next is RD-03.
+
+## RD-03 — 2026-11-08
+
+Staged implementation acceptance: **pass**. GPU qualification: **pending RD-07**.
+Learning outcome: **not_applicable**; no model execution or fit.
+
+Predecessors: RD-01/02 implementation/test/raw/reused-evidence hashes were
+unchanged at clean baseline `850a2da`; delivered commits are ancestors of main
+and remote main was verified equal. Valid earlier checks were reused. No matching
+RD-03 code/run manifest existed; sandbox process inspection has limited host
+visibility. No existing service was modified.
+
+Implementation: `training/frozen_source.py`, explicit W mode in
+`g1_backbone.py`/`codec/backbone.py`, source-policy/cache plumbing in `clean.py`
+and `receiver_learning.py`, pending-check registration in `receiver_plan.py`,
+`tests/test_frozen_source.py` and implemented/unrun `test_frozen_source_gpu.py`.
+The [clean construction owner](clean-test-construction-v1.md) versions the opt-in
+policy. Default D source and pooled roles remain controls; native source states
+retain their actual prefill graph. W source encoding never changes ownership or
+merges/replaces/zeros adapter parameters. Mutable D sources cannot be cached.
+
+Evidence: [report](redesign-rd03-results-2026-11-08.md),
+[portable manifest](evidence/frozen-w-source-v1.json), raw preparation/validation
+logs and source migration under `data/redesign-rd03-20261108/accepted/`.
+All 1,810 receiver training/E/X permitted view hashes are rechecked against the
+unchanged RD-01 inventory during preparation. Old/new source hashes and unchanged
+CleanView/tokenizer/native/dense computation bodies explain predecessor reuse;
+old plans/checkpoints are not relabeled compatible with new code. Raw previous
+evidence is retained unchanged.
+
+Commands/results:
+
+- `PYTHONPATH=tests:. python -m unittest tests.test_frozen_source tests.test_training_inputs tests.test_receiver_plan tests.test_receiver_learning tests.test_latent_semantic_audit tests.test_learning_report`: **50 pass**, 73.251 s.
+- Actual frozen-pooled, repeated frozen-pooled and legacy CLI preparations with
+  model imports blocked: exit 0; exact commands and fingerprints in evidence.
+  Repeated frozen plans are byte-identical; all model/execution counters zero.
+- Compilation of all eight changed/new Python files and `git diff --check`: pass;
+  exact compilation command in evidence. GPU file was compiled/inspected only,
+  never executed or reported as a passing skipped suite.
+
+Deferred checks (all **pending**, owner **RD-07**, exact 3090 UUID only):
+
+- `RD03-GPU-D-INDEPENDENCE` → `FrozenSourceGPU.test_frozen_features_ignore_D_updates`.
+- `RD03-GPU-CACHE-PARITY` → `FrozenSourceGPU.test_cache_matches_uncached_and_preserves_bindings`.
+- `RD03-GPU-CONSUMER-GRADIENTS` → `FrozenSourceGPU.test_consumer_gradients_and_frozen_W`.
+
+These methods use an existing reviewed assessed Noul record and actual parent/
+reference artifacts. They are targeted machinery assertions, not full semantic
+qualification. The exact future command/opt-in is recorded as **not executed**.
+No source tensors/fingerprints, parity, gradients, timing improvement or learning
+outcome were fabricated. New profile execution remains gated pending later slices.
+RD-01 data/native supervision limits and the prior historical profiling-test drift
+remain unchanged. Handoff updated. Implementation commit/push: pending finalization.
+Stop after RD-03; next implementation slice is RD-04, retaining these GPU checks
+as pending until RD-07.

@@ -15,6 +15,13 @@ from .recurrence import eager_recurrence as recurrence,graph_recurrence
 
 
 def expanded_dual(self,x):
+    if MODE.get()=='W':
+        if not (self.compensated and self.base.weight.dtype==torch.bfloat16
+                and self.precision_owner.feedback_precision=='fp32' and self.precision_owner.precision_parts==2):
+            raise ValueError('offline zero-adapter source requires v3 FP32 arithmetic')
+        # Select the frozen projection directly. No adapter tensors are read,
+        # merged, replaced or zeroed, and no ownership flag is changed.
+        return feedback_linear(x,self.base.weight,self.base.bias)
     if (self.compensated and self.base.weight.dtype==torch.bfloat16
             and self.precision_owner.feedback_precision=='fp32'):
         mode=MODE.get();a,b=(self.R_A,self.R_B) if mode=='R' else (self.D_A,self.D_B)
@@ -45,6 +52,13 @@ class Backbone(CoreBackbone):
     temporal_chunk=32
     recurrence_backend='graph-v1'
     attention_block_backend='eager'
+
+    def frozen_source(self,state,embeds):
+        from ..training.frozen_source import validate_arithmetic
+        validate_arithmetic(self)
+        if state.position!=0 or state.lineage!=1:
+            raise ValueError('offline source requires a fresh state; never native state reuse')
+        return self(state,'W',embeds,offline_source=True)
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)

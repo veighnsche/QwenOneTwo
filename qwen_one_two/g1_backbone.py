@@ -79,6 +79,7 @@ class DualLinear(nn.Module):
 
     def forward(self, x):
         mode = MODE.get()
+        assert mode in ('R','D'), 'zero-adapter W requires the expanded v3 path'
         a, b = (self.R_A, self.R_B) if mode == 'R' else (self.D_A, self.D_B)
         if self.effective_reference:
             a=a.to(torch.bfloat16).float()
@@ -107,6 +108,7 @@ class Backbone(nn.Module):
         super().__init__()
         require_cuda(torch.cuda)
         snapshot, qev = Path(snapshot), Path(qev)
+        self.snapshot_path = snapshot.resolve()
         self.tokenizer = AutoTokenizer.from_pretrained(snapshot, local_files_only=True)
         config = AutoConfig.from_pretrained(snapshot, local_files_only=True).text_config
         assert config.hidden_size == 1024 and config.num_hidden_layers == 24
@@ -257,8 +259,13 @@ class Backbone(nn.Module):
         finally:
             MODE.reset(token)
 
-    def forward(self, state, mode, embeds):
-        assert mode in ('R','D') and embeds.device.type=='cuda'
+    def forward(self, state, mode, embeds, *, offline_source=False):
+        assert mode in ('R','D','W') and embeds.device.type=='cuda'
+        if type(offline_source) is not bool or (mode=='W') != offline_source:
+            raise ValueError('W is exclusively an explicit offline source forward')
+        if mode=='W':
+            if torch.is_grad_enabled() or not self.compensated or not self.fp32_residual or self.feedback_precision!='fp32' or self.precision_parts!=2:
+                raise ValueError('offline W requires no-grad qualified v3 arithmetic')
         x = embeds.reshape(1,-1,1024).to(torch.float32 if self.fp32_residual else self.precision)
         if self.precision==torch.float32 and self.round_reference_inputs:
             x=x.to(torch.bfloat16).float()

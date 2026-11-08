@@ -3,6 +3,7 @@ from dataclasses import dataclass
 import json
 from .inputs import Binding, ReferenceInput, SLOTS, check, digest, canonical, REQUEST_KINDS, Field, reference_input
 from .host_metrics import readback_bytes
+from .frozen_source import D_SOURCE, FROZEN_SOURCE, source_mode, bind_frozen_source, source_key
 
 
 @dataclass(frozen=True)
@@ -89,21 +90,37 @@ def tokenize_excerpt(tokenizer, excerpt):
 class CleanEncoder:
     """No incoming cache/registry API: each encoding begins at position zero.
 
-    Uses evaluated W+D and a frozen reference pooler. Fresh component sessions
+    Defaults to evaluated W+D; opt-in frozen W retains the pooled reference. Fresh component sessions
     are constructed separately; returned registries contain only derived sources.
     No fitting, detached-contamination repair, or locked-case updates occur.
     """
-    def __init__(self, backbone, reference, *, checkpoint_hash, profile_hash, cache_references=False):
+    def __init__(self, backbone, reference, *, checkpoint_hash, profile_hash, cache_references=False,
+                 source_policy=D_SOURCE, cache_sources=False):
+        mode=source_mode(source_policy,cache=cache_sources)
         from ..codec.neural import cuda_only
         cuda_only()
         check(len(checkpoint_hash) == len(profile_hash) == 64, 'encoder artifact identities')
         check(reference.frozen and all(not p.requires_grad for p in reference.parameters()), 'reference must be frozen')
         check(reference.artifact_id == reference.fingerprint(), 'frozen reference state changed')
         self.backbone, self.reference = backbone, reference
+        self.source_policy=source_policy
+        self.source_cache={} if cache_sources else None
+        self.source_cache_hits=0
+        self.source_binding=bind_frozen_source(backbone) if source_policy==FROZEN_SOURCE else None
+        self.reference_stamp=tuple((id(p),p._version) for p in reference.parameters())
         self.reference_cache={} if cache_references else None
         self.reference_cache_hits=0
         self.identity = {'checkpoint': checkpoint_hash, 'profile': profile_hash,
                          'source_mode': 'D', 'reference': reference.artifact_id, 'fresh_state': True, 'kind': 'clean_component'}
+        if self.source_binding is not None:
+            self.identity.update(source_mode=mode,source_policy=source_policy,
+                frozen_source=digest(canonical(self.source_binding['identity'])))
+
+    def _validate_source(self):
+        if self.source_binding is not None:
+            check(bind_frozen_source(self.backbone)['identity']==self.source_binding['identity'], 'frozen source identity changed')
+            check(tuple((id(p),p._version) for p in self.reference.parameters())==self.reference_stamp,
+                  'frozen reference storage/version changed')
 
     def _states(self, ids, limit):
         import torch
@@ -111,22 +128,44 @@ class CleanEncoder:
         state = self.backbone.initial()
         check(state.position == 0, 'nonfresh source state')
         with torch.no_grad():
-            hidden, final = self.backbone(state, 'D', self.backbone.embedding(ids))
+            if self.source_policy==FROZEN_SOURCE:
+                self._validate_source()
+                hidden, final = self.backbone.frozen_source(state,self.backbone.embedding(ids))
+            else:
+                hidden, final = self.backbone(state, 'D', self.backbone.embedding(ids))
         check(final.position == len(ids) and final.lineage == state.lineage, 'clean encoding continuity')
         # State is deliberately not returned or reused in component execution.
         return hidden[0]
+
+    def _body_states(self, excerpt, ids, selected, offsets):
+        import torch
+        key=None
+        if self.source_binding is not None:
+            key=source_key(self.source_binding['identity'],excerpt,ids,selected,offsets)
+        if self.source_cache is not None and key in self.source_cache:
+            item=self.source_cache[key];states=item['states']
+            check(states.is_cuda and states.dtype==torch.float32 and not states.requires_grad
+                  and tuple(states.shape)==(len(selected),1024), 'invalid frozen source cache tensor')
+            check(digest(readback_bytes(states.contiguous()))==item['tensor_hash'], 'frozen source cache mutation')
+            self.source_cache_hits+=1
+            return states.clone(),key
+        states=self._states(ids,512)[selected]
+        if self.source_cache is not None:
+            frozen=states.detach().clone()
+            self.source_cache[key]={'states':frozen,'tensor_hash':digest(readback_bytes(frozen.contiguous()))}
+        return states,key
 
     def encode(self, view, provenance, *, run):
         import torch
         from ..codec.records import Registry, Source
         from ..codec.schema import Kind
+        self._validate_source()
         excerpts, model_bytes = view.materialize(provenance)
         registry = Registry(run)
         refs, slots, audit = [], [], []
         for index, excerpt in enumerate(excerpts):
             ids, selected, offsets = tokenize_excerpt(self.backbone.tokenizer, excerpt)
-            states = self._states(ids, 512)
-            body_states = states[selected]
+            body_states,key = self._body_states(excerpt,ids,selected,offsets)
             ref = registry.publish(Kind.SOURCE, Source(excerpt, tuple(ids[i] for i in selected), offsets, body_states))
             refs.append(ref)
             binding = view.evidence[index]
@@ -134,8 +173,9 @@ class CleanEncoder:
             audit.append(dict(self.identity, local_source=index, input_hash=digest(excerpt),
                               parent={'source':binding.source,'version':binding.version,'sha256':parent.sha256,
                                       'byte_start':binding.start,'byte_end':binding.end},
-                              tokens=len(ids), offsets=offsets, transformations=['fresh_tokenize', 'W+D', 'body_states'],
+                              tokens=len(ids), offsets=offsets, transformations=['fresh_tokenize', 'W' if self.source_policy==FROZEN_SOURCE else 'W+D', 'body_states'],
                               tensor_hash=digest(readback_bytes(body_states.contiguous()))))
+            if key is not None:audit[-1]['source_cache_key']=key
         for ref in view.references:
             payload=self.reference_payload(ref)
             slots.append(payload)
@@ -150,13 +190,17 @@ class CleanEncoder:
         import torch
         check(self.reference.frozen and self.reference.artifact_id==self.identity['reference']
               and all(not p.requires_grad for p in self.reference.parameters()),'reference cache identity/freeze')
-        if self.reference_cache is not None and ref.sha256 in self.reference_cache:
+        self._validate_source()
+        key=ref.sha256 if self.source_binding is None else digest(canonical({
+            'frozen':self.source_binding['identity'],'reference':self.reference.artifact_id,
+            'role':ref.role,'input':ref.sha256,'slots':SLOTS[ref.role]}))
+        if self.reference_cache is not None and key in self.reference_cache:
             self.reference_cache_hits+=1
-            return self.reference_cache[ref.sha256].clone()
+            return self.reference_cache[key].clone()
         rendered=self.backbone.tokenizer.apply_chat_template([{'role':'user','content':ref.content.decode()}],
             tokenize=False,add_generation_prompt=True,enable_thinking=True)
         ids=self.backbone.tokenizer.encode(rendered,add_special_tokens=False)
         states=self.reference.annotation_states(ids)
         with torch.no_grad():payload=self.reference.pooler(states,*SLOTS[ref.role])
-        if self.reference_cache is not None:self.reference_cache[ref.sha256]=payload.detach().clone()
+        if self.reference_cache is not None:self.reference_cache[key]=payload.detach().clone()
         return payload
