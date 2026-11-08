@@ -21,8 +21,9 @@ as recorded below.
 
 ## Current requested work — RD-01 metadata coverage, 2026-11-08
 
-RD-01 implementation and evidence are complete; commit/push verification is
-being finalized in the [progress ledger](redesign-progress.md). Read the
+RD-01 is delivered. Implementation/evidence commit `800c100` is pushed to `main`
+and its exact remote SHA was verified; the [progress ledger](redesign-progress.md)
+records commands and the delivery finalization. Read the
 [RD-01 report](redesign-rd01-results-2026-11-08.md) and
 [portable manifest](evidence/redesign-coverage-v1.json). The deterministic audit
 resolves 8,000 training +1,000 development selected records, accounts for all
@@ -40,7 +41,8 @@ continuation guard. Supplied-return reader annotations do not qualify actual-ret
 use; native binding/continuation conditions remain enforced. These are completed
 audit findings, not a waiver to train or evidence of learned behavior.
 
-Model-free acceptance checks cover repeat determinism with model imports blocked,
+All **23 model-free tests pass** (60.371 s); compilation/whitespace and 141 local
+Markdown targets pass. Acceptance covers repeat determinism with model imports blocked,
 complete accounting, split overlap, ambiguity, stale identities, hidden-label
 invariance and report denominators. Exact command/results and dependency/artifact
 hashes are in the evidence. No model/GPU workload, training, new data/review,

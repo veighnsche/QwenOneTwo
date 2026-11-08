@@ -12,7 +12,7 @@ because a later queued task starts.
 
 | Slice | Delivery | Required evidence / checks | Current evidence |
 |---|---|---|---|
-| RD-01 | in_progress | Coverage/panel/native-supervision manifests; model-free checks | [Report](redesign-rd01-results-2026-11-08.md), [manifest](evidence/redesign-coverage-v1.json); technical checks pass, push pending |
+| RD-01 | delivered | Coverage/panel/native-supervision manifests; model-free checks | [Report](redesign-rd01-results-2026-11-08.md), [manifest](evidence/redesign-coverage-v1.json); 23 tests pass; implementation `800c100` pushed and verified |
 | RD-02 | pending | Runner preparation/rejection checks; identity/resume contracts | None; plan only |
 | RD-03 | pending | Source/cache policy and static checks; explicit deferred GPU check IDs | None; plan only |
 | RD-04 | pending | Versioned payload/admission contracts and implementation; deferred GPU IDs | None; plan only |
@@ -22,7 +22,7 @@ because a later queued task starts.
 | RD-08 | pending | Complete matched fit/evaluation receipts; useful-improvement outcome separate | None; training not authorized by prompt preparation |
 | RD-09 | pending | Accepted RD-08 receiver plus eligible native run/evaluation receipts | None; training not authorized by prompt preparation |
 
-Earliest unfinished slice: **RD-01**, pending commit/push verification only.
+Earliest unfinished slice: **RD-02**, not started by this RD-01-only submission.
 RD-02..09 are unstarted; no redesign model job was launched.
 
 For each attempted slice add a short entry with implementation/evidence paths,
@@ -32,8 +32,8 @@ RD-07 resolves them. Record active run manifest/PID/log/checkpoint paths when a
 long job starts, and update them when it finishes or is interrupted. Store raw
 artifacts locally under `data/`; commit concise reports/portable evidence only.
 
-Blockers: none encountered during prompt preparation. Known data/supervision and
-layout limits are hypotheses/constraints in the plan, not completed checks.
+Current delivery blockers: **none**. RD-01 data/supervision limits below are
+measured metadata findings; layout/technical checks for later slices remain pending.
 
 ## RD-01 — 2026-11-08
 
@@ -71,4 +71,11 @@ manifest. Sandbox process inspection had limited host visibility; no service was
 changed. Initial model-free implementation/test failures are retained in the
 raw directory and superseded by the accepted run. No agents, locked data, new
 records/reviews, GPU/model work, training or deployment. Handoff updated.
-Implementation commit/push verification: pending finalization.
+Implementation commit: `800c100a56dfcc2afe33bdc004e965affef45331`.
+`git -c 'credential.helper=!gh auth git-credential' push origin main`: exit 0,
+`70dc5b2..800c100 main -> main`. A subsequent authenticated `git ls-remote`
+returned `800c100a56dfcc2afe33bdc004e965affef45331 refs/heads/main`, identical to
+local HEAD. This delivery/handoff finalization is committed and pushed separately
+on top of that verified implementation; no RD-02 work is included. 141 local
+Markdown targets resolve across the changed ledger/handoff/report. All required
+RD-01 checks pass; learned capability remains unchanged.
