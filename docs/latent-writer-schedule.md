@@ -1,5 +1,10 @@
 # Latent writer schedule
 
+The opt-in [direct native flow v1 contract](direct-native-flow-v1.md) records
+RD-06 original-prefill sources, writer emission, pre-Session training targets,
+actual-return continuation and conservative native supervision masks. GPU checks
+remain pending RD-07; existing corpus support limits are explicit.
+
 The opt-in [direct-role-states-v1 contract](direct-role-states-v1.md) versions
 variable request-role lengths, native emission capacity and complete return
 reservations together. The rules below remain the legacy default; the new

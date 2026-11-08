@@ -11,6 +11,7 @@ import uuid
 from .inputs import Exposure, canonical, check, digest
 from .profile import PHASES, guidance_prefix
 from .release import ReviewedRelease
+from ..codec.layout import LEGACY,DIRECT,valid_profile
 
 
 class PrerequisiteError(ValueError):
@@ -31,7 +32,7 @@ class NativePlan:
     release: str
 
 
-def native_plan(release, row, phase, window):
+def native_plan(release, row, phase, window,*,evaluation=False):
     """Select permitted inputs before any model execution; never serialize row."""
     check(isinstance(release, ReviewedRelease), 'load a reviewed release first')
     check(canonical(row) == canonical(release.record(row['id'])), 'record/release drift')
@@ -40,6 +41,9 @@ def native_plan(release, row, phase, window):
     check(release.purpose != 'locked', 'locked collection is not an episode-development source')
     check(phase in PHASES and phase != 'reference' and 1 <= window <= PHASES[phase], 'native phase/window')
     category = row['training_category']
+    if evaluation:
+        check(release.purpose=='development' and phase=='free_joint','native evaluation requires held-out free-control development')
+        category=row['construction'].get('transformation')
     if category in {'reference', 'receiver', 'reader', 'decision_replay'}:
         raise PrerequisiteError('use the role-specific reference/component producer for '+category)
     check(category in {'writer', 'interleaved', 'direct', 'language_replay'}, 'native category')
@@ -84,10 +88,10 @@ def native_plan(release, row, phase, window):
     # Post-call prose depends on the actual request and return. No automatic
     # transfer of a source-case answer to arbitrary predicted meanings.
     target = None
-    if category in {'direct','language_replay'}:
+    if category in {'direct','language_replay'} and not evaluation:
         target = row['supervision']['continuations'][0]
     effort_review = row.get('initial_effort_review', {})
-    effort = effort_review.get('preference') if category in {'direct','interleaved'} and effort_review.get('eligible') is True else None
+    effort = effort_review.get('preference') if not evaluation and category in {'direct','interleaved'} and effort_review.get('eligible') is True else None
     return NativePlan(row['id'],category,prompt,tuple(controls),
                       row.get('trajectory',{}).get('invocation_window') == 'during_answer',
                       target,effort,512 if phase in {'components','guided_joint'} else None,
@@ -103,8 +107,15 @@ class EpisodeProducer:
     or the evaluator result. Free phases run the production gate and writer.
     """
     def __init__(self, backbone, codec, release, *, reference=None, checkpoint_hash=None, profile_hash=None,
-                 reference_evidence=None,diagnostic_reference=False):
+                 reference_evidence=None,diagnostic_reference=False,packet_profile=LEGACY,evaluation=False):
         check(isinstance(release,ReviewedRelease), 'load a reviewed release first')
+        self.packet_profile=valid_profile(packet_profile)
+        self.evaluation=evaluation
+        if packet_profile==DIRECT:
+            codec.require_profile(DIRECT)
+            check(reference_evidence is None,'legacy qualification cannot certify native direct profile')
+            check(release.purpose=='training' or (evaluation and release.purpose=='development'),
+                  'direct native training requires training release; development needs explicit evaluation')
         self.backbone,self.codec,self.release = backbone,codec,release
         self.reference,self.reference_evidence=reference,reference_evidence
         self.diagnostic_reference=diagnostic_reference
@@ -113,7 +124,7 @@ class EpisodeProducer:
         check(reference_evidence is None or (isinstance(reference_evidence,ReferenceEvidence) and reference is not None),
               'load measured reference evidence for this artifact')
         check(not (reference_evidence is not None and diagnostic_reference),'qualified/diagnostic reference modes are distinct')
-        if reference is not None:
+        if reference is not None and packet_profile==LEGACY:
             from .reference_qualification import ReferenceEvidence
             if isinstance(reference_evidence,ReferenceEvidence):
                 reference_evidence.assert_reference(reference)
@@ -131,6 +142,8 @@ class EpisodeProducer:
         check(row['id'] in self.release.selected_ids, 'unselected episode record')
         check(phase in PHASES and 1<=window<=PHASES[phase],'phase/window')
         if row['training_category'] in {'receiver','reader','decision_replay'}:
+            check(getattr(self,'packet_profile',LEGACY)==LEGACY,
+                  'direct native producer cannot substitute prepared components or supplied-return readers')
             if self.component is None:
                 raise PrerequisiteError('isolated components require a frozen reference artifact; no reference fitting is authorized')
             result=self.component(row,phase,window)
@@ -144,9 +157,27 @@ class EpisodeProducer:
         from .clean import tokenize_excerpt
         from .losses import ExampleLosses, regression
 
-        plan = native_plan(self.release,row,phase,window)
+        plan = native_plan(self.release,row,phase,window,evaluation=getattr(self,'evaluation',False))
         ids,selected,offsets = tokenize_excerpt(self.backbone.tokenizer,plan.prompt.encode())
         check(len(ids)+6 < plan.limit, 'prompt exceeds complete-episode ceiling; never truncate')
+        packet_profile=getattr(self,'packet_profile',LEGACY)
+        prepared={};preparation_masks={}
+        if packet_profile==DIRECT and self.reference is not None:
+            from .binding import request_targets,UnsupportedNativeTargets
+            encoder=None
+            def target_encoder():
+                nonlocal encoder
+                if encoder is None:
+                    from .clean import CleanEncoder
+                    from .behavior_qualification import receiver_hash,PROFILE
+                    encoder=CleanEncoder(self.backbone,self.reference,checkpoint_hash=receiver_hash(self.backbone,self.codec),
+                        profile_hash=digest(PROFILE.encode()),source_policy='frozen-w-source-v1',role_policy=DIRECT)
+                return encoder
+            # All offline contexts end before creating the one live Session.
+            for index in range(len(plan.calls)):
+                try:prepared[index]=request_targets(self.reference,self.release,row,plan.prompt.encode(),
+                    call_index=index,profile=DIRECT,source_encoder=target_encoder,source_tokens=len(selected))
+                except UnsupportedNativeTargets as exc:preparation_masks[index]=str(exc)
         class BoundedRuntime(Runtime):
             def debit(self,kind,count,label):
                 # Guard before ledger mutation, not after charging a forward
@@ -154,7 +185,7 @@ class EpisodeProducer:
                 if self.position+count>plan.limit:
                     raise EpisodeLengthError('complete episode exceeds training ceiling')
                 return super().debit(kind,count,label)
-        rt = BoundedRuntime(str(uuid.uuid4()),len(ids),0,128)
+        rt = BoundedRuntime(str(uuid.uuid4()),len(ids),0,128,profile=packet_profile)
         session = Session(self.backbone,self.codec,rt)
         h = session.prefill(ids)
         source = rt.registry.publish(Kind.SOURCE,Source(plan.prompt.encode(),tuple(ids[i] for i in selected),
@@ -173,6 +204,14 @@ class EpisodeProducer:
         report['diagnostic_reference']=self.diagnostic_reference
         qualified=self.reference_evidence is not None and not self.diagnostic_reference
         report['receiver_behavior_accepted']=qualified
+        if packet_profile==DIRECT:
+            report.update(packet_profile=DIRECT,input_regime='actual_native_prefill',receiver_behavior_accepted=False,
+                release_purpose=self.release.purpose,evaluation=getattr(self,'evaluation',False),native_output_tokens=[],native_observations=[],
+                offline_targets_prepared_before_session=len(prepared),target_preparation_masks=preparation_masks,
+                forcing={'budget_override':plan.override,'control_prefix':plan.calls,
+                    'fields':['construct','no_attributes','operation','candidate_count','rubric_direction','full_source_spans'] if plan.calls else [],
+                    'semantic_vectors':'none; live writer emission','role_lengths':'predicted argmax, never forced',
+                    'returns':'actual receiver only; no gold substitution'})
         self.last_report = report
         teacher_forcing=plan.target is not None and phase in {'components','guided_joint'}
         compatible_prefix=bool(plan.calls)
@@ -181,7 +220,11 @@ class EpisodeProducer:
                 session.close()
             for index,control in enumerate(plan.calls):
                 targets=None
-                if self.reference is not None:
+                if packet_profile==DIRECT:
+                    if index in prepared:
+                        from .binding import source_hash
+                        targets=replace(prepared[index],source_ref=source,source_hash=source_hash(rt.registry.get(source,Kind.SOURCE)))
+                elif self.reference is not None:
                     from .binding import request_targets
                     targets=request_targets(self.reference,self.release,row,plan.prompt.encode(),call_index=index,
                         source_ref=source,source_record=rt.registry.get(source,Kind.SOURCE))
@@ -210,6 +253,8 @@ class EpisodeProducer:
                     self._overlength(session,report)
                 else:
                     losses,_ = session.native(targets,True)
+                    if packet_profile==DIRECT:
+                        report['teacher_forced_native_tokens']=list(targets)
                     for index,loss in enumerate(losses):book.add('native',str(index),loss)
                     # Predicted termination is supervised; mechanical closure is not.
                     scores,indices=self.backbone.ordinary_logits(session.hidden[0,-1],rt.phase)
@@ -225,7 +270,12 @@ class EpisodeProducer:
                     if rt.position >= plan.limit:
                         self._overlength(session,report)
                         break
-                    session.native_step()
+                    token=session.native_step()
+                    if packet_profile==DIRECT and token is not None:
+                        report['native_output_tokens'].append(token)
+                        report['native_observations'].append({'token':token,'phase':rt.phase,
+                            'kind':'control' if token in (248069,248046) else 'answer' if rt.phase==1 else 'thinking',
+                            'teacher_forced':False})
         except EpisodeLengthError:
             self._overlength(session,report)
         except ValueError as exc:
@@ -239,6 +289,10 @@ class EpisodeProducer:
         exposure.validate()
         report.update(summary=session.summary(),eligible_components=sorted(losses),
                       actual_returns_only=True)
+        if packet_profile==DIRECT:
+            from .native import admit_native_episode
+            session.native_admission=admit_native_episode(session,source,plan.category,bool(prepared))
+            report['native_admission']=session.native_admission.receipt()
         return session,losses,exposure
 
     @staticmethod
@@ -266,8 +320,25 @@ class EpisodeProducer:
         # Decoder bytes. Every semantic meaning is still a connected live emit.
         book.add('structure','record_mode',ce(self.codec.heads['record_mode'](f),0))
         book.add('structure','child_count',ce(self.codec.heads['child_count'](f),0))
-        q=rt.publish(Kind.QUESTION,Semantic(self.codec.emit(f,Role.QUESTION,8)))
-        t=rt.publish(Kind.TARGET,Semantic(self.codec.emit(f,Role.TARGET,2)))
+        direct=rt.profile==DIRECT
+        def semantic(feature,kind):
+            if not direct:
+                role,n={Kind.QUESTION:(Role.QUESTION,8),Kind.TARGET:(Role.TARGET,2),Kind.ALTERNATIVE:(Role.CANDIDATE,4)}[kind]
+                return Semantic(self.codec.emit(feature,role,n))
+            from ..codec.writer import Decoder
+            value=Decoder(self.codec,rt.registry,profile=DIRECT).semantic(feature,kind,allow_attributes=False)
+            if targets is not None:
+                from .native import length_losses
+                roles={Kind.QUESTION:(Role.QUESTION,),Kind.TARGET:(Role.TARGET,),Kind.ALTERNATIVE:(Role.CANDIDATE,),
+                       Kind.RUBRIC:(Role.DIMENSION,Role.CONDITIONS,Role.ZERO,Role.ONE,Role.MIDPOINT)}[kind]
+                names={Kind.QUESTION:['question'],Kind.TARGET:['target'],Kind.ALTERNATIVE:['alternative'],
+                       Kind.RUBRIC:['dimension','conditions','zero','one','midpoint']}[kind]
+                expected=[n for name,n in zip(targets.names,targets.field_lengths) if name in names]
+                if kind==Kind.ALTERNATIVE:expected=expected[len(writer.draft.candidates):len(writer.draft.candidates)+1]
+                length_losses(self.codec,feature,roles[:len(expected)],expected,book,str(rt.call.writer)+'-'+str(int(kind)))
+            return value
+        q=rt.publish(Kind.QUESTION,semantic(f,Kind.QUESTION))
+        t=rt.publish(Kind.TARGET,semantic(f,Kind.TARGET))
         writer.draft=replace(writer.draft,question=q,target=t)
         def tick(action):
             if rt.position+1>limit:raise EpisodeLengthError()
@@ -288,16 +359,22 @@ class EpisodeProducer:
             rt.writer_action(0)
         for index in range(count):
             f=tick(1)
-            ref=rt.publish(Kind.ALTERNATIVE,Semantic(self.codec.emit(f,Role.CANDIDATE,4)))
+            ref=rt.publish(Kind.ALTERNATIVE,semantic(f,Kind.ALTERNATIVE))
             writer.draft=replace(writer.draft,candidates=writer.draft.candidates+(ref,))
             rt.writer_action(1)
         if port==Port.SCORE:
             f=tick(2)
             value=1 if direction=='higher' else 2
             book.add('structure','direction',ce(self.codec.heads['direction'](f),value))
-            slots=torch.cat([self.codec.emit(f,r,2) for r in (Role.DIMENSION,Role.CONDITIONS,Role.ZERO,Role.ONE)])
-            slots=torch.cat((slots,slots.new_zeros(2,1024)))
-            ref=rt.publish(Kind.RUBRIC,Semantic(slots,direction=value,midpoint=False))
+            if direct and targets is not None:
+                from .losses import binary
+                book.add('structure','midpoint',binary(self.codec.heads['presence'](f).squeeze(),float(targets.midpoint)))
+            if direct:record=replace(semantic(f,Kind.RUBRIC),direction=value)
+            else:
+                slots=torch.cat([self.codec.emit(f,r,2) for r in (Role.DIMENSION,Role.CONDITIONS,Role.ZERO,Role.ONE)])
+                slots=torch.cat((slots,slots.new_zeros(2,1024)))
+                record=Semantic(slots,direction=value,midpoint=False)
+            ref=rt.publish(Kind.RUBRIC,record)
             writer.draft=replace(writer.draft,rubric=ref);rt.writer_action(2)
         tick(5)
         d=writer.draft
@@ -313,6 +390,11 @@ class EpisodeProducer:
               'input_shape':list(inputs.shape),'input_dtype':str(inputs.dtype),'cuda':inputs.is_cuda,
               'text_tokens_for_invocation':0,'predicted_status':int(evaluated['status_logits'].argmax())+1,
               'selected_by':'actual Qev heads','semantic_targets_applied':labels is not None,'binding':binding}
+        if direct:item.update(packet_profile=DIRECT,formation_targets_available=targets is not None,
+            continuation_mask='native meanings unverified; alignment does not admit outcomes',
+            role_lengths={'question':len(rt.registry.get(d.question).slots),'target':len(rt.registry.get(d.target).slots),
+                'candidates':[len(rt.registry.get(r).slots) for r in d.candidates]},
+            source_origin='original prompt prefill graph',native_semantic_binding=False)
         report['calls'].append(item)
         returned=decode_result(self.codec,rt,evaluated)
         if labels is not None:
@@ -326,6 +408,11 @@ class EpisodeProducer:
             item['compatible_return']=compatible_return(rt.registry,rt.call.result,labels,targets)
         delivered=s.deliver(returned)
         item.update(return_positions=len(returned) if returned is not None else 0,consumed=delivered)
+        if direct and delivered:
+            result=rt.registry.get(rt.call.result,Kind.RESULT)
+            item['actual_return']={'snapshot':result.snapshot.identity,'result':rt.call.result.identity,
+                'status':int(result.status),'value':None if result.scalar is None else float(result.scalar.detach()),
+                'selected_ref':None if result.selected is None else result.selected.identity}
         return delivered
 
 

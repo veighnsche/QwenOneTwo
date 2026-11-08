@@ -145,8 +145,12 @@ import tests.test_frozen_source_gpu
         for name in ('__init__','step','prefill','native','evaluate','deliver','start_budget'):
             self.assertEqual(ast.dump(next(n for n in session.body if getattr(n,'name',None)==name)),
                              ast.dump(next(n for n in old_session.body if getattr(n,'name',None)==name)))
-        for path in ('qwen_one_two/training/producer.py','qwen_one_two/training/binding.py'):
-            self.assertEqual(Path(path).read_bytes(),subprocess.check_output(['git','show','850a2da:'+path]))
+        # RD-06 explicitly versions producer/binding for native direct fields.
+        # The underlying frozen annotation and exact-value helpers stay controls.
+        path='qwen_one_two/training/binding.py'
+        old_binding=subprocess.check_output(['git','show','850a2da:'+path],text=True)
+        for name in ('annotation','encode_annotation','wire_payload','tensor_hash','source_hash','canonical_payload','candidate_mapping'):
+            self.assertEqual(ast.dump(definition(Path(path).read_text(),name)),ast.dump(definition(old_binding,name)))
         old=definition(subprocess.check_output(['git','show','850a2da:qwen_one_two/training/clean.py'],text=True),'CleanView')
         current=definition(Path('qwen_one_two/training/clean.py').read_text(),'CleanView')
         self.assertEqual(ast.dump(old),ast.dump(current))

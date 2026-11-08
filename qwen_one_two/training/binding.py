@@ -5,6 +5,11 @@ Exact reference content can bind; arbitrary learned deviations stay unresolved.
 """
 from dataclasses import dataclass
 from .inputs import (canonical,check,digest,Node,Provenance,Field,reference_input,SLOTS)
+from ..codec.layout import LEGACY,DIRECT,semantic_lengths
+
+
+class UnsupportedNativeTargets(ValueError):
+    """Explicit metadata exclusion, not a swallowed GPU/model failure."""
 
 
 def annotation(role,fields,operation):
@@ -52,9 +57,12 @@ class Targets:
     source_ref:object
     source_hash:str | None
     reason_hash:str | None
+    profile:str = LEGACY
+    field_lengths:tuple = ()
 
 
-def request_targets(reference,release,row,source,*,call_index=0,source_ref=None,source_record=None):
+def request_targets(reference,release,row,source,*,call_index=0,source_ref=None,source_record=None,
+                    profile=LEGACY,source_encoder=None,source_tokens=None):
     """Reviewed role meanings only enter the independent offline encoder."""
     check(canonical(row)==canonical(release.record(row['id'])),'target record/release drift')
     check(release.purpose!='locked','locked supervision prohibited')
@@ -73,20 +81,31 @@ def request_targets(reference,release,row,source,*,call_index=0,source_ref=None,
     rubric=meanings.get('rubric',{})
     items += [(key,rubric[key]) for key in ('dimension','conditions','zero','one','midpoint') if key in rubric]
     refs=tuple(annotation(role,value,operation) for role,value in items)
-    payloads=tuple(encode_annotation(reference,ref) for ref in refs)
+    check(profile in (LEGACY,DIRECT),'native target profile')
+    plans=None
+    if profile==DIRECT:
+        from .native import target_layout
+        plans=target_layout(refs,operation,source_tokens,reference.backbone.tokenizer)
+        if callable(source_encoder):source_encoder=source_encoder()
+        check(source_encoder is not None and source_encoder.source_policy=='frozen-w-source-v1'
+              and source_encoder.role_policy==DIRECT,'direct training targets require declared frozen W encoder')
+        payloads=tuple(source_encoder._body_states(ref.content,p['ids'],p['selected'],p['offsets'])[0]
+                       for ref,p in zip(refs,plans))
+    else:payloads=tuple(encode_annotation(reference,ref) for ref in refs)
     reason=row['supervision'].get('reason') if row['training_category']=='writer' else row['supervision'].get('reason_sequence',[None]*len(row['trajectory']['calls']))[call_index]
     # Some collections store only a single call's Reason; never reuse it for
     # a later call lacking an explicitly bound annotation.
     if row['training_category']=='interleaved' and call_index==0 and reason is None:
         reason=row['supervision'].get('reason')
-    reason_payload=None if reason is None else encode_annotation(reference,annotation('reason',reason,operation))
+    reason_payload=None if reason is None or profile==DIRECT else encode_annotation(reference,annotation('reason',reason,operation))
     check(reference.frozen and reference.artifact_id==reference.fingerprint(),'frozen unchanged target reference')
     return Targets(release.identity,row['id'],digest(canonical(row)),operation,refs,payloads,
                    tuple(role for role,_ in items),tuple(c['identity'] for c in candidates),
                    2 if rubric.get('direction')=='lower' else 1,'midpoint' in rubric,canonical(labels),
                    reason_payload,source,reference.artifact_id,tuple(tensor_hash(x) for x in payloads),
                    source_ref,None if source_record is None else source_hash(source_record),
-                   None if reason_payload is None else tensor_hash(reason_payload))
+                   None if reason_payload is None else tensor_hash(reason_payload),profile,
+                   tuple(len(p['selected']) for p in plans) if plans is not None else ())
 
 
 def tensor_hash(value):
@@ -113,9 +132,11 @@ def request_fields(registry,snapshot):
     if spec.rubric is not None:
         rubric=registry.get(spec.rubric,Kind.RUBRIC)
         extras |= bool(rubric.attributes)
-        fields += [(role,rubric.slots[index*2:index*2+2])
-                   for index,role in enumerate(('dimension','conditions','zero','one','midpoint'))
-                   if role!='midpoint' or rubric.midpoint]
+        sizes=semantic_lengths(Kind.RUBRIC,spec.profile,rubric.lengths,midpoint=rubric.midpoint)
+        start=0
+        for role,n in zip(('dimension','conditions','zero','one','midpoint'),sizes):
+            if role!='midpoint' or rubric.midpoint:fields.append((role,rubric.slots[start:start+n]))
+            start+=n
     return spec,candidates,tuple(fields),extras
 
 
@@ -146,11 +167,14 @@ def compare_request(registry,snapshot,targets):
     Extra attributes, partial evidence and changed meanings reject. Candidate
     order may change when an exact, unambiguous identity-to-Ref match exists.
     """
+    if targets.profile==DIRECT:
+        return False,'native direct writer semantics unverified; alignment is not outcome admission'
     import torch
     from ..codec.schema import Kind
     from ..codec.records import Span
     from .episodes import PORT_NAMES
     spec,candidates,fields,extras=request_fields(registry,snapshot)
+    if spec.profile!=targets.profile:return False,'native layout mismatch'
     check(tuple(tensor_hash(x) for x in targets.payloads)==targets.payload_hashes,'semantic target mutation')
     if PORT_NAMES[spec.port]!=targets.operation:return False,'operation mismatch'
     if extras:return False,'unreviewed attributes'
@@ -189,15 +213,23 @@ def formation_losses(reference,registry,snapshot,targets,book):
     """Valid formation targets survive divergent outcomes; no joint substitution."""
     from .losses import alignment
     check(tuple(tensor_hash(x) for x in targets.payloads)==targets.payload_hashes,'semantic target mutation')
-    _,_,fields,_=request_fields(registry,snapshot)
+    spec,_,fields,_=request_fields(registry,snapshot)
+    if spec.profile!=targets.profile:return
     if tuple(role for role,_ in fields)!=targets.names:return
     for index,((role,predicted),item,expected) in enumerate(zip(fields,targets.references,targets.payloads)):
+        if targets.profile==DIRECT:
+            if predicted.shape==expected.shape:
+                book.add('alignment',str(index),alignment(predicted,expected),role=role)
+            continue  # no unsupported variable-layout reference reconstruction
         book.add('alignment',str(index),alignment(predicted,expected),role=role)
         tokens=reference.backbone.tokenizer.encode(item.content.decode(),add_special_tokens=False)+[248046]
         book.add('reconstruction',str(index),reference.reconstruct(wire_payload(reference,predicted,role),tokens),role=role)
 
 
 def bind_labels(reference,evidence,registry,snapshot,targets,*,runtime=None):
+    if targets.profile==DIRECT:
+        return None,{'supported':False,'reason':'native direct writer semantics unverified; no reference/answer-based waiver',
+                     'qualification':None,'receiver_behavior_accepted':False}
     from .reference_qualification import ReferenceEvidence
     from .episodes import DecisionLabels,STATUS_NAMES
     from .release import decode
@@ -227,9 +259,9 @@ def bind_labels(reference,evidence,registry,snapshot,targets,*,runtime=None):
 
 
 def compatible_return(registry,result,labels,targets):
+    if labels is None:return False
     import torch
     from ..codec.schema import Kind,Port,Status
-    if labels is None:return False
     value=registry.get(result,Kind.RESULT)
     if value.snapshot!=labels.snapshot or value.status!=labels.status:return False
     spec=registry.get(value.snapshot,Kind.SNAPSHOT)

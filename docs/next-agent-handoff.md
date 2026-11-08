@@ -19,7 +19,64 @@ change fan controls, live services or The Operating Table. Older hold statements
 below are historical. The completed comparison and next unfinished slice remain
 as recorded below.
 
-## Current requested work — RD-05 joint objectives and binding, 2026-11-08
+## Current requested work — RD-06 native flow and supervision, 2026-11-08
+
+RD-06 model-free implementation/checks are complete, awaiting implementation
+commit/push and delivery finalization. Read the
+[RD-06 report](redesign-rd06-results-2026-11-08.md),
+[evidence](evidence/direct-native-flow-v1.json),
+[native contract](direct-native-flow-v1.md) and [ledger](redesign-progress.md).
+
+The opt-in direct EpisodeProducer now uses the original prompt prefill states,
+live ordered writer fields/predicted lengths, actual Qev evaluation and bound
+latent return in one cache. Direct offline annotation targets are prepared before
+Session creation; no re-encoding or gold return enters live invocation. Explicit
+native admission permits applicable control/formation objectives but keeps native
+decision/Reason/post-call continuation masks and rejects dev accumulation. Forcing,
+actual returned values/Refs, native phases and teacher-forced tokens are explicit.
+Default Session/runtime, coefficients, optimizer/checkpoint and numeric kernels
+remain unchanged. Legacy controls remain available; no reference qualification
+was fabricated or transferred to the new native profile.
+
+**Actual supervision eligibility limits:** all 3,220 reviewed writer/interleaved
+calls exceed return64, so zero complete direct formation targets; unverified
+native meanings also leave zero decision/post-call continuation targets. Direct
+supplied-reader support is zero across training750 /development120. All 5,590
+relevant records, fields, costs and exclusions remain in metadata. Existing no-call
+direct/language replay and legacy supplied-reader potentials remain separate,
+not evidence of actual-return understanding. Native fits cannot proceed on
+invented labels or control-only/zero-semantic-loss demonstrations. The earlier
+zero direct receiver support also remains a fit blocker requiring explicit layout
+revision/re-audit. No bounds, panel, tolerance or data/review was changed.
+
+Held-out plan: native W/F470, prepared receiver X180 and supplied-reader R/X9
+120; all100 X pairs retain their actual exposure (90 prepared /10 supplied).
+There are no actual-native-final X pair labels. Explicit native W/F evaluation
+uses free control and no targets/effort/override and cannot enter training.
+Typed-final grading is separate from receiver heads/consumed returns; extraction
+of typed values/identities from existing prose remains unprovided/unsupported,
+with no invented parser/judge. No actual final answer or pair result was measured.
+
+All **86 model-free tests pass** (116.312 s), plus ten refreshed native tests
+(14.224 s) after final telemetry/typed-field changes; final GPU registration guard
+passes. Full Rust BPE/Jinja audit and four current-byte CLI preparations pass
+with model imports blocked. Repeated direct plans are identical; all actual
+execution counters zero. Source migrations/old raw artifacts and33 unchanged
+boundary checks were verified. Historical profiling input drift remains unchanged.
+
+**Ten GPU checks remain pending RD-07**, never executed. The eight earlier IDs
+below plus `RD06-GPU-NATIVE-RETURN` and `RD06-GPU-CONNECTED-GRADIENT` are implemented
+in `tests/test_native_redesign_gpu.py`. Exact 3090 UUID and explicit submitted
+RD-07 opt-in precede model imports. Engineering forcing: guided controls, Assessed
+status, one existing token and budget512. The first covers Noul/Choice/Score;
+the second isolates native-loss -> actual return -> frozen receiver -> continuous
+writer/R gradients. No optimizer update or corpus semantic qualification is claimed.
+
+No model execution, actual Session, extraction, fitting, agents, new data/reviews,
+locked access, deployment, service or Operating Table change. Stop after RD-06;
+**RD-07 is unstarted**. Later fits remain blocked by support limits and unrun checks.
+
+## Previous requested work — RD-05 joint objectives and binding, 2026-11-08
 
 RD-05 staged implementation is delivered. Implementation/evidence commit
 `fe90af0` is pushed to main and its exact remote SHA was verified; ledger/handoff

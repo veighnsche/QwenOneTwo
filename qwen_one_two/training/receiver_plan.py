@@ -12,6 +12,7 @@ from .loss_config import COEFFICIENTS
 from .manifest import BASE_SHA, DIAGNOSTIC_SHA, file_hash
 from .receiver_profiles import LEGACY, profile, receiver_parameter,direct_projection_owners
 from .component_admission import GPU_CHECKS as JOINT_GPU_CHECKS,PROTOCOL as COMPONENT_ADMISSION
+from .native import GPU_CHECKS as NATIVE_GPU_CHECKS
 from .frozen_source import FROZEN_SOURCE, GPU_CHECKS
 from ..codec.layout import GPU_CHECKS as DIRECT_GPU_CHECKS
 from .reference_qualification import PROFILE
@@ -169,7 +170,8 @@ def prepare(snapshot, input_profile, *, regime='component', root=ROOT):
             'source_policy_checks': {key:'pending_RD07' for key in GPU_CHECKS} if spec['source_policy']==FROZEN_SOURCE else {},
             'direct_role_checks': {key:'pending_RD07' for key in DIRECT_GPU_CHECKS} if input_profile=='direct-role-states-v1' else {},
             'joint_objective_checks': {key:'pending_RD07' for key in JOINT_GPU_CHECKS} if input_profile!=LEGACY else {},
-            'pending_slices': spec['required_slices'], 'native_regime': 'unsupported until RD-06',
+            'native_checks':{key:'pending_RD07' for key in NATIVE_GPU_CHECKS} if input_profile=='direct-role-states-v1' else {},
+            'pending_slices': spec['required_slices'], 'native_regime': 'direct native implementation; corpus formation and semantic continuation unsupported; GPU pending RD-07',
             'new_profile_gpu_qualification': 'pending RD-07' if input_profile != LEGACY else 'historical legacy path only'},
         'authorization': 'preparation only; this manifest grants no model execution, fitting or promotion'}
     run_sha = digest(canonical(contract))

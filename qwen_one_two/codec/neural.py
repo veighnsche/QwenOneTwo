@@ -160,11 +160,14 @@ class Codec(nn.Module):
         require(profile!=DIRECT or all(hasattr(self,name) for name in ('direct_role_projection','direct_role_length')),
                 'direct role modules require explicit construction')
 
-    def semantic_count(self,f,role):
+    def semantic_length_logits(self,f,role):
         self.require_profile(DIRECT)
         require(role in DIRECT_ROLES,'direct emission role')
         logits=self.direct_role_length(self.condition(f,role)).clone();logits[0]=-torch.inf
-        return int(logits.argmax())
+        return logits
+
+    def semantic_count(self,f,role):
+        return int(self.semantic_length_logits(f,role).argmax())
 
     def atom_features(self,a):
         if a.role in (Role.INT64,Role.COEFFICIENT,Role.EXPONENT):

@@ -17,14 +17,14 @@ because a later queued task starts.
 | RD-03 | delivered | Source/cache policy and static checks; explicit deferred GPU check IDs | [Report](redesign-rd03-results-2026-11-08.md), [evidence](evidence/frozen-w-source-v1.json); 50 static tests pass; three GPU checks pending RD-07; `2cbfa41` pushed and verified |
 | RD-04 | delivered | Versioned payload/admission contracts and implementation; deferred GPU IDs | Contract `2247619`, implementation `ae800a4` pushed/verified; [report](redesign-rd04-results-2026-11-08.md), [evidence](evidence/direct-role-states-v1.json); 61 static tests pass +6 refreshed; three new GPU checks pending RD-07; zero receiver support |
 | RD-05 | delivered | Joint objectives, owners, binding/mask tests; deferred GPU IDs | `fe90af0` pushed/verified; [report](redesign-rd05-results-2026-11-08.md), [evidence](evidence/joint-receiver-objectives-v1.json); 74 static tests pass +14 refreshed; two new GPU checks pending RD-07; Reason masks preserved |
-| RD-06 | pending | Native wiring/eligibility report; deferred real-return/gradient IDs | None; plan only |
-| RD-07 | pending | All required deferred/changed-path 3090 checks pass; actual counts/hashes | RD03-GPU-D-INDEPENDENCE, RD03-GPU-CACHE-PARITY, RD03-GPU-CONSUMER-GRADIENTS; RD04-GPU-IDENTITY-PROJECTION, RD04-GPU-DIRECT-ROUNDTRIP, RD04-GPU-DIRECT-GRADIENTS; RD05-GPU-GRADIENT-ACCUMULATION, RD05-GPU-RESUME pending; no GPU execution |
+| RD-06 | in_progress | Native wiring/eligibility report; deferred real-return/gradient IDs | [Report](redesign-rd06-results-2026-11-08.md), [evidence](evidence/direct-native-flow-v1.json); 86 static tests pass +10 refreshed; implementation ready to commit/push; zero complete corpus formation/semantic continuation/direct reader support |
+| RD-07 | pending | All required deferred/changed-path 3090 checks pass; actual counts/hashes | RD03-GPU-D-INDEPENDENCE, RD03-GPU-CACHE-PARITY, RD03-GPU-CONSUMER-GRADIENTS; RD04-GPU-IDENTITY-PROJECTION, RD04-GPU-DIRECT-ROUNDTRIP, RD04-GPU-DIRECT-GRADIENTS; RD05-GPU-GRADIENT-ACCUMULATION, RD05-GPU-RESUME; RD06-GPU-NATIVE-RETURN, RD06-GPU-CONNECTED-GRADIENT pending; no GPU execution |
 | RD-08 | pending | Complete matched fit/evaluation receipts; useful-improvement outcome separate | None; training not authorized by prompt preparation |
 | RD-09 | pending | Accepted RD-08 receiver plus eligible native run/evaluation receipts | None; training not authorized by prompt preparation |
 
-Earliest unfinished implementation slice: **RD-06**; RD-06..09 are unstarted.
-RD-05 is delivered under the staged implementation protocol.
-Eight RD-03/04/05 GPU checks remain pending RD-07; no redesign model job was launched.
+Earliest unfinished implementation slice: **RD-06**, implementation/checks complete,
+awaiting commit/push and delivery finalization. RD-07..09 are unstarted.
+Ten RD-03..06 GPU checks remain pending RD-07; no redesign model job was launched.
 
 For each attempted slice add a short entry with implementation/evidence paths,
 exact commands/results, dependency hashes, relevant implementation commits and
@@ -33,7 +33,7 @@ RD-07 resolves them. Record active run manifest/PID/log/checkpoint paths when a
 long job starts, and update them when it finishes or is interrupted. Store raw
 artifacts locally under `data/`; commit concise reports/portable evidence only.
 
-Current RD-05 implementation delivery blockers: **none**. Future real-data fit
+Current RD-06 implementation delivery blockers: **none**. Future real-data fit
 blocker: the initial direct-role layout admits zero receiver rows (train1500,
 E130, X180). An explicit layout revision and full re-audit are required before
 that fit; no subset, allowance increase or waiver was applied. RD-01 data/native
@@ -376,3 +376,91 @@ explicitly superseded. This ledger/handoff delivery finalization is committed an
 pushed separately on top of the verified implementation. Eight GPU checks remain
 pending; the zero-support direct layout still blocks a future fit, without waiver.
 Stop after RD-05. Next unfinished implementation slice is RD-06.
+
+## RD-06 recovery — 2026-11-08
+
+Clean main `0cd19cd` matches authenticated remote main. RD-01..05 implementation,
+source/test/contract/raw evidence, recorded migrations and pushed ancestors verified.
+Valid unchanged results reused. Eight GPU checks remain pending RD-07. No matching
+RD-06 job/manifest existed; process inspection is limited to the sandbox namespace.
+No model workload or service change. The zero-support direct receiver layout remains
+a future-fit blocker, not an unfinished predecessor static implementation check.
+
+## RD-06 implementation — 2026-11-08
+
+Currently due model-free acceptance: **pass**; staged delivery awaits commit/push
+and finalization. GPU qualification: **pending RD-07**. Learning outcome:
+**not_applicable**; no model workload, source extraction, actual Session or update.
+
+Evidence: [report](redesign-rd06-results-2026-11-08.md),
+[portable manifest](evidence/direct-native-flow-v1.json),
+[contract](direct-native-flow-v1.md), raw `data/redesign-rd06-20261108/accepted/`.
+The opt-in EpisodeProducer uses actual original-prefill states, predicted ordered
+writer fields/lengths, one live cache, actual Qev results and bound latent returns.
+Optional direct annotation targets preflight/encode before Session creation; no
+offline re-encoding or gold return enters the live direct call. Length supervision
+is discrete; continuous fields remain connected. Explicit NativeEpisode admission
+preserves decision/Reason/post-call masks and rejects dev accumulation. Forcing,
+returned values/Refs and free/teacher-forced native tokens are recorded separately.
+
+Full metadata inventory: 5,590 records, 3,220 writer/interleaved calls. All calls
+exceed the unchanged worst-case return64 bound, so complete direct formation
+eligibility is **zero**. Questions exceed32 in 569 writer/2023 interleaved/33 W
+calls; complete requests exceed256 in 157/989/13 calls. 67 interleaved records
+exceed full-source spans. All affected rows/calls/fields/costs/families remain.
+Unverified native semantics imply zero decision/post-call continuation targets.
+No new explanations/corrections, allowance increases, cropping or subset were used.
+
+Direct supplied-reader support: **zero** across 750 training /120 development
+R/X9 records. Legacy metadata potentials (not executed/qualified): Noul257,
+Choice199, Score250 in training; 51/36/31 in development. Separate approved no-call
+direct500/language-replay1000 training potentials do not establish return use.
+Original 224 missing interleaved call Reasons, 746 ambiguous-source calls in373
+records and nonunique Choice writer44/interleaved139/W4 remain. Actual eligible
+gradient exposures are zero because no model was run. The earlier zero receiver
+layout support still blocks its fit; native semantic/formation/reader gaps are
+additional later-fit limits, not missing audit work.
+
+Evaluation plan: 770 held-out cases, separated into native W/F470, prepared-X180
+and supplied-reader120; 100 X pairs remain 90 prepared +10 reader, with zero
+actual-native-final pair labels. Explicit W/F free evaluation has no target,
+effort, control or override and cannot train. Final typed values/identities use
+original rules/endpoints; heads/consumed returns cannot substitute. Existing
+prose continuations provide no verified typed final-answer extractor; no parser
+or judge was invented. Missing observations/extraction provenance stay unsupported.
+
+Commands/results:
+
+- `PYTHONPATH=tests:. python -m unittest tests.test_native_redesign tests.test_episode_producer tests.test_component_admission tests.test_joint_receiver tests.test_direct_role_encoding tests.test_direct_role_packets tests.test_frozen_source tests.test_training_inputs tests.test_receiver_plan tests.test_learning_report`: **86 pass**, 116.312 s.
+- `PYTHONPATH=tests:. python -m unittest tests.test_native_redesign`: **10 refreshed
+  pass**, 14.224 s, after final native telemetry/typed-field changes; unchanged
+  other results reused. GPU collection/registration guard: **1 pass**, 13.047 s.
+- Actual `scripts.audit_native_redesign` full metadata audit with model imports
+  blocked: exit0; 5,590 records retained. Rust BPE/Jinja only, no neural features.
+  Reader-op counts derived from unchanged audited rows without rerunning BPE.
+- Four actual `accepted/verified/` final CLI preparations with model imports
+  blocked: direct/repeat/frozen-pooled/legacy pass; repeated direct plans identical,
+  current source hashes match, all execution counters zero. Earlier preparations
+  are retained as superseded after typed observation rejection tightened.
+- Compilation, staged whitespace, source/artifact identities and 33 unchanged
+  boundary/algorithm checks pass. Audit-time producer/binding source bytes were
+  recovered/hash-verified; native_plan/annotation ASTs remain unchanged by later
+  telemetry/early-unsupported-return changes. Old evidence is not relabeled current.
+
+New deferred IDs, all **pending**, owner **RD-07**:
+
+- `RD06-GPU-NATIVE-RETURN` → `NativeRedesignGPU.test_actual_native_return_and_prefill_source`.
+- `RD06-GPU-CONNECTED-GRADIENT` → `NativeRedesignGPU.test_native_loss_through_actual_return_receiver_and_writer`.
+
+The first prepares Noul/Choice/Score actual-return/source/accounting fixtures;
+the second isolates the Noul return-specific VJP through frozen receiver/codec
+weights to continuous writer states and R. Guided controls, Assessed status,
+existing continuation token and budget512 forcing are disclosed. No optimizer
+is used, and these are not valid corpus semantic continuations. Methods were
+compiled/inspected/collection-imported only, never executed or counted passing.
+All eight earlier IDs remain pending, exact 3090 UUID only; no CPU/3060 fallback.
+
+No model execution, feature extraction, training, agents, new data/reviews, locked
+access, deployment, service or Operating Table change. Historical profiling input
+drift and earlier data/native supervision gaps remain. Stop after RD-06; no RD-07
+GPU execution is included. Next unfinished slice is RD-07 technical qualification.

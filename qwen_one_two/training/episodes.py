@@ -71,14 +71,18 @@ def collect_session(window, session, losses, exposure):
     if report.get('input_profile',LEGACY)!=LEGACY or getattr(session.runtime,'profile',None)==DIRECT:
         from .component_admission import PreparedReceiver
         admission=getattr(session,'component_admission',None)
-        check(exposure.branch=='isolated_receiver',
-              'new-profile optimization requires explicit prepared receiver admission; native semantics stay masked')
-        # A failed attempt with no gradients still occupies its scheduled slot.
-        # Only a completed optimization graph requires semantic admission.
-        if losses or session.runtime.terminal not in ('Failed','Cancelled'):
-            check(isinstance(admission,PreparedReceiver),'new-profile optimization requires prepared receiver admission')
-            admission.validate(session.runtime)
-            check(report.get('component_admission')==admission.receipt(),'experimental admission telemetry drift')
+        if exposure.branch=='isolated_receiver':
+            # A failed attempt with no gradients still occupies its slot.
+            if losses or session.runtime.terminal not in ('Failed','Cancelled'):
+                check(isinstance(admission,PreparedReceiver),'new-profile optimization requires prepared receiver admission')
+                admission.validate(session.runtime)
+                check(report.get('component_admission')==admission.receipt(),'experimental admission telemetry drift')
+        else:
+            from .native import NativeEpisode
+            native=getattr(session,'native_admission',None)
+            check(exposure.branch in ('native_writer','joint_receiver') and isinstance(native,NativeEpisode),
+                  'native semantics stay masked without an explicit native receipt')
+            native.validate(session,losses)
     exposure.validate()
     summary = session.summary()
     rt = session.runtime

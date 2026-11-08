@@ -118,7 +118,7 @@ class Decoder:
         attr=Attribute(keys,value,self.profile);self.registry.attribute(attr,self.catalogue)
         return attr
 
-    def semantic(self,f,kind):
+    def semantic(self,f,kind,*,allow_attributes=True):
         c=self.codec
         if self.profile==DIRECT:
             if kind==Kind.RUBRIC:
@@ -130,7 +130,7 @@ class Decoder:
                     midpoint=midpoint,profile=DIRECT,lengths=lengths if midpoint else lengths+(0,))
             role={Kind.QUESTION:Role.QUESTION,Kind.TARGET:Role.TARGET,Kind.ALTERNATIVE:Role.CANDIDATE}[kind]
             count=c.semantic_count(f,role)
-            return Semantic(c.emit(f,role,count),self.attributes(f,role) if kind!=Kind.QUESTION else (),
+            return Semantic(c.emit(f,role,count),self.attributes(f,role) if allow_attributes and kind!=Kind.QUESTION else (),
                             profile=DIRECT,lengths=(count,))
         if kind==Kind.RUBRIC:
             logits=c.heads['direction'](f).clone();logits[0]=-torch.inf

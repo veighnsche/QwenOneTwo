@@ -1,5 +1,10 @@
 # Exact modules, optimizer ownership and accumulation v1
 
+The opt-in [direct native flow v1 contract](direct-native-flow-v1.md) records
+RD-06 original-prefill sources, writer emission, pre-Session training targets,
+actual-return continuation and conservative native supervision masks. GPU checks
+remain pending RD-07; existing corpus support limits are explicit.
+
 The opt-in [prepared receiver component v1 contract](prepared-receiver-component-v1.md)
 versions RD-05 experimental admission, exact snapshot binding, joint objectives,
 Reason masks and receiver ownership. It claims no reference qualification or
