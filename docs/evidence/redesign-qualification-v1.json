@@ -141,7 +141,7 @@
       "test": "tests.test_redesign_qualification_gpu.RedesignQualificationGPU.test_projection_forward_and_VJP_FP64_reference"
     }
   },
-  "delivery": "TECHNICAL_ACCEPTANCE_PASS_COMMIT_PUSH_FINALIZATION_PENDING",
+  "delivery": "TECHNICAL_ACCEPTANCE_PASS_DELIVERED",
   "direct_repeat_byte_identical": true,
   "final_metrics": [
     {
@@ -1022,6 +1022,15 @@
       "optimizer_updates": 0
     }
   ],
+  "implementation_commit": "7da99c652fba8729df247c62fcb029fb931d5cea",
+  "implementation_push": {
+    "command": "git -c 'credential.helper=!gh auth git-credential' push origin main",
+    "exit_code": 0,
+    "finalization": "ledger/handoff/evidence delivery finalization committed and pushed separately on top of verified implementation",
+    "remote_main_verified": "7da99c652fba8729df247c62fcb029fb931d5cea",
+    "result": "42d6fa4..7da99c6 main -> main",
+    "verification_command": "git -c 'credential.helper=!gh auth git-credential' ls-remote origin refs/heads/main"
+  },
   "initial_checkpoint": {
     "files": {
       "effective-rows.safetensors": "cb652e78f8db5bc7b69b7c4e8139c7a3bd74fe8264ccce63387e366185943539",
@@ -2257,6 +2266,13 @@
     "refreshed_count": 3,
     "refreshed_pass": 3,
     "refreshed_seconds": 0.061,
+    "staged_whitespace": "pass"
+  },
+  "validation": {
+    "compilation": "pass",
+    "current_source_test_raw_hashes": "pass",
+    "local_markdown_targets": 190,
+    "path": "data/redesign-rd07-20261108/evidence-validation.json",
     "staged_whitespace": "pass"
   }
 }

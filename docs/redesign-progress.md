@@ -18,13 +18,13 @@ because a later queued task starts.
 | RD-04 | delivered | Versioned payload/admission contracts and implementation; deferred GPU IDs | Contract `2247619`, implementation `ae800a4` pushed/verified; [report](redesign-rd04-results-2026-11-08.md), [evidence](evidence/direct-role-states-v1.json); 61 static tests pass +6 refreshed; three new GPU checks resolved by RD-07; zero receiver support |
 | RD-05 | delivered | Joint objectives, owners, binding/mask tests; deferred GPU IDs | `fe90af0` pushed/verified; [report](redesign-rd05-results-2026-11-08.md), [evidence](evidence/joint-receiver-objectives-v1.json); 74 static tests pass +14 refreshed; two new GPU checks resolved by RD-07; Reason masks preserved |
 | RD-06 | delivered | Native wiring/eligibility report; deferred real-return/gradient IDs | `6f74680` pushed/verified; [report](redesign-rd06-results-2026-11-08.md), [evidence](evidence/direct-native-flow-v1.json); 86 static tests pass +10 refreshed; two new GPU checks resolved by RD-07; zero complete corpus formation/semantic continuation/direct reader support |
-| RD-07 | in_progress | All required deferred/changed-path 3090 checks pass; actual counts/hashes | [Report](redesign-rd07-results-2026-11-08.md), [evidence](evidence/redesign-qualification-v1.json); ten deferred +three new GPU checks pass; twelve1024 traces; zero updates; commit/push finalization pending |
+| RD-07 | delivered | All required deferred/changed-path 3090 checks pass; actual counts/hashes | [Report](redesign-rd07-results-2026-11-08.md), [evidence](evidence/redesign-qualification-v1.json); ten deferred +three new GPU checks pass; twelve1024 traces; zero updates; `7da99c6` pushed and verified |
 | RD-08 | pending | Complete matched fit/evaluation receipts; useful-improvement outcome separate | None; training not authorized by prompt preparation |
 | RD-09 | pending | Accepted RD-08 receiver plus eligible native run/evaluation receipts | None; training not authorized by prompt preparation |
 
-RD-07 technical acceptance passes; delivery commit/push finalization is in progress.
+RD-07 is delivered; technical acceptance passes and implementation `7da99c6` is pushed/verified.
 All ten deferred GPU checks are resolved; no required RD-07 check remains pending.
-RD-08 is the next unfinished slice and remains unstarted, outside this submission.
+Earliest unfinished slice: **RD-08**, unstarted and outside this submission; affected fits remain blocked by layout/support limits.
 
 For each attempted slice add a short entry with implementation/evidence paths,
 exact commands/results, dependency hashes, relevant implementation commits and
@@ -524,5 +524,9 @@ counters0. Compilation/staged whitespace pass. Predecessor migration verified.
 No training, learned result, agents, new data/reviews, locked access, deployment
 or service/Operating Table changes. Native semantic/Reason masks preserved.
 No technical waiver or capability claim. Direct receiver/native supervision
-limits still block affected fits; RD-08/09 unstarted. Commit/push finalization
-will record the implementation SHA and verified remote here.
+limits still block affected fits; RD-08/09 unstarted. Implementation/evidence commit `7da99c652fba8729df247c62fcb029fb931d5cea`
+is pushed: authenticated push exit0 (`42d6fa4..7da99c6 main -> main`); subsequent
+authenticated `git ls-remote` returned the identical full SHA for main. This
+ledger/handoff/evidence delivery finalization is committed and pushed separately
+on top. 190 current local Markdown targets resolve; exact source/test/raw hashes
+verify. Stop after RD-07, no required technical checks pending.

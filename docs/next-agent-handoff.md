@@ -21,8 +21,10 @@ as recorded below.
 
 ## Current requested work — RD-07 qualification, 2026-11-08
 
-RD-07 technical acceptance **passes**; commit/push delivery finalization is in
-progress. See the [report](redesign-rd07-results-2026-11-08.md),
+RD-07 is **delivered**, with technical acceptance **pass**. Implementation/evidence
+commit `7da99c652fba8729df247c62fcb029fb931d5cea` is pushed to main, and exact
+authenticated remote SHA verified. Ledger/handoff/evidence delivery finalization
+is committed and pushed separately on top. See the [report](redesign-rd07-results-2026-11-08.md),
 [portable evidence](evidence/redesign-qualification-v1.json) and
 [ledger](redesign-progress.md). RD-01..06 predecessor evidence was recovered and
 verified from clean pushed main42d6fa4; all ten deferred GPU IDs are now resolved.
