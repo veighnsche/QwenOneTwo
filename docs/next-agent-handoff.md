@@ -21,8 +21,9 @@ as recorded below.
 
 ## Current requested work — RD-03 frozen-W sources, 2026-11-08
 
-RD-03 implementation/model-free evidence is complete; commit/push verification is
-being finalized in the [ledger](redesign-progress.md). Read the
+RD-03 staged implementation is delivered. Implementation/evidence commit
+`2cbfa41` is pushed to `main` and its exact remote SHA was verified; the
+[ledger](redesign-progress.md) records commands and delivery finalization. Read the
 [RD-03 report](redesign-rd03-results-2026-11-08.md),
 [portable evidence](evidence/frozen-w-source-v1.json) and updated
 [clean-source contract](clean-test-construction-v1.md).
@@ -37,7 +38,8 @@ without mutable D/receiver hashes. Fresh local sources and original parent audit
 are rebuilt; only detached body states are cached. Actual native Session, writer,
 binding and cache graphs remain unchanged.
 
-All **50 model-free tests pass** (73.251 s); compilation/whitespace pass. Actual
+All **50 model-free tests pass** (73.251 s); compilation/whitespace and 165 local
+Markdown targets pass. Actual
 frozen-pooled/repeated/legacy preparation passes with model imports blocked;
 frozen plans are byte-identical, all execution counts zero, and all 1,810 existing
 receiver permitted input hashes revalidate. RD-01/02 deliveries and remote main

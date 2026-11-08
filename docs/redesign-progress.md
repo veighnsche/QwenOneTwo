@@ -14,7 +14,7 @@ because a later queued task starts.
 |---|---|---|---|
 | RD-01 | delivered | Coverage/panel/native-supervision manifests; model-free checks | [Report](redesign-rd01-results-2026-11-08.md), [manifest](evidence/redesign-coverage-v1.json); 23 tests pass; implementation `800c100` pushed and verified |
 | RD-02 | delivered | Runner preparation/rejection checks; identity/resume contracts | [Report](redesign-rd02-results-2026-11-08.md), [evidence](evidence/receiver-preparation-v1.json); 12 final preparation tests +28 reused tests pass; `254f526` pushed and verified |
-| RD-03 | in_progress | Source/cache policy and static checks; explicit deferred GPU check IDs | [Report](redesign-rd03-results-2026-11-08.md), [evidence](evidence/frozen-w-source-v1.json); 50 static tests pass; three GPU checks pending RD-07; push pending |
+| RD-03 | delivered | Source/cache policy and static checks; explicit deferred GPU check IDs | [Report](redesign-rd03-results-2026-11-08.md), [evidence](evidence/frozen-w-source-v1.json); 50 static tests pass; three GPU checks pending RD-07; `2cbfa41` pushed and verified |
 | RD-04 | pending | Versioned payload/admission contracts and implementation; deferred GPU IDs | None; plan only |
 | RD-05 | pending | Joint objectives, owners, binding/mask tests; deferred GPU IDs | None; plan only |
 | RD-06 | pending | Native wiring/eligibility report; deferred real-return/gradient IDs | None; plan only |
@@ -22,7 +22,7 @@ because a later queued task starts.
 | RD-08 | pending | Complete matched fit/evaluation receipts; useful-improvement outcome separate | None; training not authorized by prompt preparation |
 | RD-09 | pending | Accepted RD-08 receiver plus eligible native run/evaluation receipts | None; training not authorized by prompt preparation |
 
-Earliest unfinished slice: **RD-03**, awaiting commit/push verification only.
+Earliest unfinished slice: **RD-04**, unstarted; RD-03 GPU checks remain pending RD-07.
 RD-04..09 are unstarted; no redesign model job was launched.
 
 For each attempted slice add a short entry with implementation/evidence paths,
@@ -189,6 +189,14 @@ qualification. The exact future command/opt-in is recorded as **not executed**.
 No source tensors/fingerprints, parity, gradients, timing improvement or learning
 outcome were fabricated. New profile execution remains gated pending later slices.
 RD-01 data/native supervision limits and the prior historical profiling-test drift
-remain unchanged. Handoff updated. Implementation commit/push: pending finalization.
+remain unchanged. Handoff updated. Implementation commit:
+`2cbfa41518a0433ea868e2f0ca2c0bad08568008`. Authenticated
+`git -c 'credential.helper=!gh auth git-credential' push origin main`: exit 0,
+`850a2da..2cbfa41 main -> main`. Subsequent authenticated `git ls-remote`
+returned `2cbfa41518a0433ea868e2f0ca2c0bad08568008 refs/heads/main`, identical to
+local HEAD. This ledger/handoff finalization is committed and pushed separately
+on top of that verified implementation. 165 local Markdown targets resolve.
+Implementation is delivered under staged protocol; all three GPU checks remain
+pending and no GPU qualification or learned result is claimed.
 Stop after RD-03; next implementation slice is RD-04, retaining these GPU checks
 as pending until RD-07.
