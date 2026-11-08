@@ -7,6 +7,7 @@ from .writer import Writer,decode_result
 from .runtime import Runtime
 from .neural import thinking_budget
 from .finite import all_finite
+from .layout import LEGACY
 import uuid
 
 
@@ -20,8 +21,9 @@ class Session:
         self.raw_budget=None;self.predicted_budget=None;self.override=None
 
     @classmethod
-    def open(cls,backbone,codec,ids,answer,override=None,run=None,cancelled=None):
-        rt=Runtime(run or str(uuid.uuid4()),len(ids),0,answer)
+    def open(cls,backbone,codec,ids,answer,override=None,run=None,cancelled=None,*,profile=LEGACY):
+        codec.require_profile(profile)
+        rt=Runtime(run or str(uuid.uuid4()),len(ids),0,answer,profile=profile)
         s=cls(backbone,codec,rt,cancelled)
         s.prefill(ids)
         s.start_budget(override)

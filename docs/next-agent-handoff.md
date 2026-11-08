@@ -19,7 +19,52 @@ change fan controls, live services or The Operating Table. Older hold statements
 below are historical. The completed comparison and next unfinished slice remain
 as recorded below.
 
-## Current requested work — RD-03 frozen-W sources, 2026-11-08
+## Current requested work — RD-04 direct role states, 2026-11-08
+
+RD-04 model-free implementation/checks are complete, awaiting implementation
+commit/push and delivery finalization. The layout/admission contract was committed
+and pushed first as `2247619`. Read the [RD-04 report](redesign-rd04-results-2026-11-08.md),
+[implementation evidence](evidence/direct-role-states-v1.json),
+[coverage evidence](evidence/direct-role-layout-coverage-v1.json),
+[versioned contract](direct-role-states-v1.md) and [ledger](redesign-progress.md).
+
+The opt-in profile carries ordered complete content-token states with explicit
+lengths/owners, no role pooling/cropping, a shared zero-delta FP32 residual
+projection, version-2 metadata, native length heads and 32-state field capacity.
+Exact attributes and immutable bindings retain their ABI. Complete all-status
+return reservations include echoes and the largest candidate; envelopes remain
+256 request /64 return. Legacy renderer fixtures stay exact; live native Session
+computation, cache lineage, budget/cancellation and numeric kernels are unchanged.
+RD-01..03 implementation/raw evidence and source migration were verified.
+
+**Known future-fit blocker: zero admissible receiver rows**: train0/1500,
+E0/130, X0/180. All rows, per-field lengths, observed costs and exclusions remain
+in the metadata inventory. No smaller panel or raised allowance was substituted.
+Preparation binds the blocker and retains the full proposed exposure schedule.
+A direct-profile real-data fit requires an explicit layout revision and full
+coverage re-audit first. This initial layout has no measured useful-learning result.
+
+All **61 model-free tests pass** (83.413 s); six packet tests were refreshed
+after adding exact selected-attribute return assertions (0.069 s). Four actual
+CLI preparations pass with model imports blocked; direct repeated plans are
+byte-identical and all execution counters zero. Rust BPE/Jinja metadata-only
+coverage keeps all 1,810 rows; 105 historical source token lengths match. No
+hidden-state extraction, model execution or optimizer update occurred.
+
+**Six GPU checks remain pending RD-07**, never run/counted passing:
+`RD03-GPU-D-INDEPENDENCE`, `RD03-GPU-CACHE-PARITY`,
+`RD03-GPU-CONSUMER-GRADIENTS`, `RD04-GPU-IDENTITY-PROJECTION`,
+`RD04-GPU-DIRECT-ROUNDTRIP`, `RD04-GPU-DIRECT-GRADIENTS`. RD-04 methods in
+`tests/test_direct_roles_gpu.py` use declared engineering latent fixtures and an
+existing prompt/parent/reference to check technical mechanisms, not corpus
+semantics. Exact 3090 selection and submitted RD-07 opt-in precede model imports.
+New-profile execution remains gated; old prepared plans are stale.
+
+No agents, new records/reviews, locked access, fitting, deployment, service or
+Operating Table changes. Existing RD-01 coverage/native supervision gaps and
+historical profiling-test drift remain. Stop at RD-04; **RD-05 is unstarted**.
+
+## Previous requested work — RD-03 frozen-W sources, 2026-11-08
 
 RD-03 staged implementation is delivered. Implementation/evidence commit
 `2cbfa41` is pushed to `main` and its exact remote SHA was verified; the

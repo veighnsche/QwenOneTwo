@@ -3,6 +3,7 @@ from dataclasses import dataclass, field, replace
 from .schema import Port, Kind, Status, Role, Invalid, require, integer, bits
 from .records import Registry, Snapshot, Bank, Result, Reason, Attribute, Span, History, owned
 from .render import Renderer
+from .layout import LEGACY,DIRECT,valid_profile
 
 
 class NotAdmitted(Invalid):
@@ -45,7 +46,8 @@ class Call:
 
 
 class Runtime:
-    def __init__(self, run, prompt, budget, answer, context=262144):
+    def __init__(self, run, prompt, budget, answer, context=262144,*,profile=LEGACY):
+        self.profile=valid_profile(profile)
         integer(context,1,262144,'context');integer(prompt,0,context,'prompt')
         integer(budget,0,131072,'B');integer(answer,1,262144,'A')
         require(prompt+answer+64<=context,'P+A+H context admission')
@@ -90,6 +92,7 @@ class Runtime:
     def publish(self,kind,record,previous=None):
         c=self.call;require(c is not None and c.state=='Writer','publication outside writer')
         require(kind in (Kind.QUESTION,Kind.TARGET,Kind.ALTERNATIVE,Kind.RUBRIC),'writer cannot mint source/result/reason objects')
+        require(record.profile==self.profile,'writer record layout mismatch')
         require(c.allocated+1+c.sealing_hold+c.record_hold<=32,'ObjectLimit')
         ref=self.registry.publish(kind,record,previous)
         c.allocated+=1
@@ -111,9 +114,9 @@ class Runtime:
         c=self.call;require(self.state=='Writer' and c.writer<=32,'seal outside writer')
         # Structural failure leaves the real draft unsealed and unchanged.
         staged=self.registry.fork()
-        bank=staged.publish(Kind.BANK,Bank(tuple(candidates))) if c.port==Port.CHOICE else None
+        bank=staged.publish(Kind.BANK,Bank(tuple(candidates),self.profile)) if c.port==Port.CHOICE else None
         require(c.port==Port.CHOICE or not candidates,'non-Choice candidates')
-        spec=Snapshot(c.port,question,target,tuple(evidence),bank,rubric,c.ordinal,c.frontier)
+        spec=Snapshot(c.port,question,target,tuple(evidence),bank,rubric,c.ordinal,c.frontier,self.profile)
         snap=staged.publish(Kind.SNAPSHOT,spec)
         renderer=Renderer(staged);packet=renderer.request(snap);rmax=renderer.return_max(snap)
         self.registry.adopt(staged)
@@ -242,7 +245,7 @@ class Runtime:
         b,a,h,c,w,t,o,phase=self.counter_values()
         if draft is not None:w=32-draft.writer;o=32-draft.allocated
         require(0<=length<=256 and 0<=candidates<=16 and 0<=evidence<=8 and 0<=children<=8,'control counts')
-        return bits([(0,4,1),(4,3,int(port if port is not None else (draft.port if draft else Port.NONE))),
+        return bits([(0,4,2 if self.profile==DIRECT else 1),(4,3,int(port if port is not None else (draft.port if draft else Port.NONE))),
             (7,1,phase),(8,18,b),(26,19,a),(45,7,h),(52,19,c),(71,6,w),(77,5,t),(82,6,o),
             (88,3,0 if not draft or draft.previous is None else draft.previous+1),(91,9,length if draft else 0),
             (100,6,draft.allocated if draft else 0),(106,5,candidates if draft else 0),

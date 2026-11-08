@@ -61,3 +61,11 @@ common-support subset is permitted.
 `RD04-GPU-DIRECT-GRADIENTS` are owned by RD-07 and remain pending. Required static
 checks precede staged delivery. None of these definitions certifies learned
 invocation, Reason meaning, numeric accuracy or useful behavior.
+
+The [RD-04 metadata audit](redesign-rd04-results-2026-11-08.md) reports **0/1,500
+training, 0/130 E and 0/180 X receiver rows admissible** under this initial
+contract. Every row remains in the inventory. No direct-profile real-data fit
+can proceed under this layout; an explicit revision and complete coverage audit
+are required first. This finding does not enlarge either envelope or authorize
+cropping, a selected subset, model execution or training. The pending GPU fixtures
+test engineering mechanisms with declared latent tensors, not corpus semantics.

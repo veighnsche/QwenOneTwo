@@ -2,6 +2,7 @@
 from dataclasses import dataclass, fields, is_dataclass, replace
 from typing import Any
 from .schema import Kind, Port, Status, ValueKind, Mode, Invalid, require, integer, encode_atoms, parse_numeric
+from .layout import LEGACY, DIRECT, valid_profile, semantic_lengths, attribute_cost
 
 
 @dataclass(frozen=True)
@@ -58,10 +59,11 @@ class Value:
 class Attribute:
     keys: Any
     value: Value
+    profile: str = LEGACY
 
     @property
     def cost(self):
-        return 3 + self.value.body_length()
+        return attribute_cost(self.profile,2 if self.profile==LEGACY else len(self.keys),self.value.body_length())
 
 
 @dataclass(frozen=True)
@@ -70,11 +72,14 @@ class Semantic:
     attributes: tuple = ()
     direction: int = 0
     midpoint: bool = False
+    profile: str = LEGACY
+    lengths: tuple = ()
 
 
 @dataclass(frozen=True)
 class Bank:
     candidates: tuple
+    profile: str = LEGACY
 
 
 @dataclass(frozen=True)
@@ -86,6 +91,7 @@ class History:
 class Reason:
     slots: Any
     attachments: tuple = ()
+    profile: str = LEGACY
 
 
 @dataclass(frozen=True)
@@ -174,15 +180,15 @@ class Registry:
             m=t.square().mean(-1,keepdim=True)
             return t / (m.where(m > 1e-12, m.new_full((), 1e-12))).sqrt()
         def attrs(items):
-            return tuple(replace(a, keys=canon(a.keys)) for a in items)
+            return tuple(replace(a, keys=a.keys if a.profile==DIRECT else canon(a.keys)) for a in items)
         if isinstance(record, Semantic):
-            slots=canon(record.slots)
-            if kind == Kind.RUBRIC and not record.midpoint:
+            slots=record.slots if record.profile==DIRECT else canon(record.slots)
+            if kind == Kind.RUBRIC and not record.midpoint and record.profile==LEGACY:
                 slots = __import__('torch').cat((slots[:8], slots.new_zeros(2,1024)))
             record=replace(record,slots=slots,attributes=attrs(record.attributes))
         elif isinstance(record, Reason):
             record=replace(record,slots=canon(record.slots),attachments=tuple(
-                replace(a,keys=canon(a.keys)) if isinstance(a,Attribute) else a for a in record.attachments))
+                replace(a,keys=a.keys if a.profile==DIRECT else canon(a.keys)) if isinstance(a,Attribute) else a for a in record.attachments))
         self._records[ref] = record
         if previous is None:
             self._next += 1
@@ -208,7 +214,9 @@ class Registry:
 
     def attribute(self, attr, catalogue=None):
         require(isinstance(attr, Attribute),'attribute')
-        tensor(attr.keys,(2,1024));v=attr.value
+        valid_profile(attr.profile)
+        length=2 if attr.profile==LEGACY else integer(len(attr.keys),1,32,'direct key length')
+        tensor(attr.keys,(length,1024));v=attr.value
         require(v.kind in tuple(ValueKind)[1:7] and type(v.present) is bool,'attribute type/presence')
         def ref(r):
             require(self.contains(r),'attribute reference')
@@ -255,30 +263,41 @@ class Registry:
             x.text.decode('utf8')
         elif kind in (Kind.QUESTION,Kind.TARGET,Kind.ALTERNATIVE,Kind.RUBRIC):
             require(isinstance(x,Semantic),'semantic record')
-            tensor(x.slots,({Kind.QUESTION:8,Kind.TARGET:2,Kind.ALTERNATIVE:4,Kind.RUBRIC:10}[kind],1024))
+            lengths=semantic_lengths(kind,x.profile,x.lengths,midpoint=x.midpoint)
+            tensor(x.slots,(sum(lengths),1024))
             require(len(x.attributes)<=8 and (kind in (Kind.TARGET,Kind.ALTERNATIVE) or not x.attributes),'attribute owner/count')
-            for a in x.attributes:self.attribute(a)
+            for a in x.attributes:
+                require(a.profile==x.profile,'attribute layout mismatch');self.attribute(a)
             if kind == Kind.RUBRIC:require(x.direction in (1,2) and type(x.midpoint) is bool,'rubric metadata')
             else:require(x.direction==0 and not x.midpoint,'non-rubric fields')
         elif kind == Kind.BANK:
             require(isinstance(x,Bank) and 1<=len(x.candidates)<=16,'candidate bank')
             require(len(set(x.candidates))==len(x.candidates),'duplicate candidates')
-            for r in x.candidates:require(self.contains(r,Kind.ALTERNATIVE),'candidate Ref')
+            valid_profile(x.profile)
+            for r in x.candidates:
+                require(self.contains(r,Kind.ALTERNATIVE),'candidate Ref')
+                require(self.get(r).profile==x.profile,'bank layout mismatch')
         elif kind == Kind.SNAPSHOT:
             require(isinstance(x,Snapshot) and x.port in (Port.NOUL,Port.CHOICE,Port.SCORE),'snapshot')
+            valid_profile(x.profile)
             integer(x.attempt,1,16,'attempt');integer(x.frontier,0,262144,'frontier')
             require(self.contains(x.question,Kind.QUESTION) and self.contains(x.target,Kind.TARGET),'question/target binding')
+            require(self.get(x.question).profile==self.get(x.target).profile==x.profile,'snapshot role layout mismatch')
             require((x.bank is not None)==(x.port==Port.CHOICE),'bank applicability')
             require((x.rubric is not None)==(x.port==Port.SCORE),'rubric applicability')
             if x.bank is not None:require(self.contains(x.bank,Kind.BANK),'bank binding')
             if x.rubric is not None:require(self.contains(x.rubric,Kind.RUBRIC),'rubric binding')
+            for ref in (x.bank,x.rubric):
+                if ref is not None:require(self.get(ref).profile==x.profile,'snapshot layout mismatch')
             require(len(x.evidence)<=8,'evidence count')
             for e in x.evidence:self.evidence(e)
         elif kind == Kind.REASON:
             require(isinstance(x,Reason) and len(x.attachments)<=8,'reason attachments')
+            valid_profile(x.profile)
             tensor(x.slots,(4,1024))
             for a in x.attachments:
-                if isinstance(a,Attribute):self.attribute(a)
+                if isinstance(a,Attribute):
+                    require(a.profile==x.profile,'reason attribute layout mismatch');self.attribute(a)
                 else:self.evidence(a)
         elif kind == Kind.RESULT:
             require(isinstance(x,Result) and self.contains(x.snapshot,Kind.SNAPSHOT),'result snapshot')
@@ -296,6 +315,7 @@ class Registry:
             else:
                 require(x.scalar is x.selected is x.selected_index is None,'non-assessed payload')
                 require(self.contains(x.reason,Kind.REASON),'non-assessed reason')
+                require(self.get(x.reason).profile==snap.profile,'result Reason layout mismatch')
         else:raise Invalid('unsupported object kind')
 
     def evidence(self, e):

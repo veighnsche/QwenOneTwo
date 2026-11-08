@@ -6,6 +6,7 @@ from torch.nn import functional as F
 from .schema import Role, Metadata, Atom, Port, Status, bits, require
 from ..g1_backbone import GPU_UUID
 from ..g1_device import require_cuda
+from .layout import LEGACY,DIRECT,DIRECT_ROLES,valid_profile
 
 
 def cuda_only(x=None):
@@ -82,6 +83,27 @@ class ReferencePooler(nn.Module):
         return norm(self.lift(norm(q)))
 
 
+class DirectRoleProjection(nn.Module):
+    """One shared FP32 residual owner; zero delta is exact identity initialization."""
+    def __init__(self):
+        super().__init__();cuda_only()
+        self.weight=nn.Parameter(torch.zeros(1024,1024,device='cuda',dtype=torch.float32))
+        self.bias=nn.Parameter(torch.zeros(1024,device='cuda',dtype=torch.float32))
+
+    def forward(self,x):
+        finite(x,'direct role state')
+        return finite(x.float()+F.linear(x.float(),self.weight,self.bias),'direct role projection')
+
+
+class DirectRoleLengths(nn.Module):
+    def __init__(self):
+        super().__init__();cuda_only()
+        self.weight=nn.Parameter(torch.zeros(33,256,device='cuda',dtype=torch.float32))
+        self.bias=nn.Parameter(torch.zeros(33,device='cuda',dtype=torch.float32))
+
+    def forward(self,x):return finite(F.linear(x.float(),self.weight,self.bias),'direct length logits')
+
+
 class Codec(nn.Module):
     def __init__(self,sigma,embedding,pointer):
         cuda_only(embedding)
@@ -127,6 +149,23 @@ class Codec(nn.Module):
             module.register_forward_hook(finite_linear_output)
         elif isinstance(module,nn.Embedding):nn.init.normal_(module.weight,std=.02)
 
+    def enable_direct_roles(self):
+        require(not hasattr(self,'direct_role_projection'),'direct role owners already constructed')
+        self.direct_role_projection=DirectRoleProjection()
+        self.direct_role_length=DirectRoleLengths()
+        return self
+
+    def require_profile(self,profile):
+        valid_profile(profile)
+        require(profile!=DIRECT or all(hasattr(self,name) for name in ('direct_role_projection','direct_role_length')),
+                'direct role modules require explicit construction')
+
+    def semantic_count(self,f,role):
+        self.require_profile(DIRECT)
+        require(role in DIRECT_ROLES,'direct emission role')
+        logits=self.direct_role_length(self.condition(f,role)).clone();logits[0]=-torch.inf
+        return int(logits.argmax())
+
     def atom_features(self,a):
         if a.role in (Role.INT64,Role.COEFFICIENT,Role.EXPONENT):
             require(a.coefficient is not None,'missing canonical numeric helpers')
@@ -162,7 +201,7 @@ class Codec(nn.Module):
                 tag=tag+table.weight[index]
         return self.sigma*norm(norm(payload)+norm(self.tags(tag)))
 
-    def position(self,p):
+    def position(self,p,profile=LEGACY):
         if isinstance(p.payload,Metadata):
             payload=self.meta(torch.tensor(p.payload.encode(p.role),device='cuda',dtype=torch.float32))
         elif isinstance(p.payload,Atom):payload=self.atom(self.atom_features(p.payload))
@@ -172,13 +211,17 @@ class Codec(nn.Module):
             if p.role==Role.BUDGET:v=v.detach().clamp(0,1)
             payload=(self.budget_value if p.role==Role.BUDGET else self.value)(torch.stack((torch.ones_like(v),v,v*v)))
         else:payload=p.payload
+        if profile==DIRECT and p.role in DIRECT_ROLES:payload=self.direct_role_projection(payload)
         cuda_only(payload)
         return self.wire(payload,p.role,p.slot,p.owner,p.attribute,p.previous)
 
     def encode(self,packet):
+        self.require_profile(packet.profile)
+        require(all(not isinstance(p.payload,Metadata) or p.payload.profile==packet.profile for p in packet.positions),
+                'packet metadata layout mismatch')
         require(len(packet)>0,'empty packet')
         require(all(p.role!=Role.PAD for p in packet.positions),'padding is outside real packet positions')
-        return torch.stack([self.position(p) for p in packet.positions])
+        return torch.stack([self.position(p,packet.profile) for p in packet.positions])
 
     def forward(self,packet):
         return self.encode(packet)
@@ -190,7 +233,7 @@ class Codec(nn.Module):
         start=next((i for i,p in enumerate(positions) if p.role==Role.ATTRIBUTE_DESC and p.attribute==index),None)
         require(start is not None,'attribute view path')
         count=1+positions[start].payload.following
-        return self.encode(Packet(positions[start:start+count],view.handles,None))
+        return self.encode(Packet(positions[start:start+count],view.handles,None,profile=view.profile))
 
     def feature(self,h,counters,memory=None):
         f=F.silu(self.control(torch.cat((norm(h),counters))))

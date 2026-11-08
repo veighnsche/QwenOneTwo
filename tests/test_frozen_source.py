@@ -140,7 +140,12 @@ import tests.test_frozen_source_gpu
         self.assertEqual(fn.args.kwonlyargs[0].arg,'offline_source')
         self.assertIs(fn.args.kw_defaults[0].value,False)
         self.assertIn('W is exclusively an explicit offline source forward',ast.unparse(fn))
-        for path in ('qwen_one_two/codec/session.py','qwen_one_two/training/producer.py','qwen_one_two/training/binding.py'):
+        session=definition(Path('qwen_one_two/codec/session.py').read_text(),'Session')
+        old_session=definition(subprocess.check_output(['git','show','850a2da:qwen_one_two/codec/session.py'],text=True),'Session')
+        for name in ('__init__','step','prefill','native','evaluate','deliver','start_budget'):
+            self.assertEqual(ast.dump(next(n for n in session.body if getattr(n,'name',None)==name)),
+                             ast.dump(next(n for n in old_session.body if getattr(n,'name',None)==name)))
+        for path in ('qwen_one_two/training/producer.py','qwen_one_two/training/binding.py'):
             self.assertEqual(Path(path).read_bytes(),subprocess.check_output(['git','show','850a2da:'+path]))
         old=definition(subprocess.check_output(['git','show','850a2da:qwen_one_two/training/clean.py'],text=True),'CleanView')
         current=definition(Path('qwen_one_two/training/clean.py').read_text(),'CleanView')

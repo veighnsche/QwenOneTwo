@@ -15,15 +15,16 @@ because a later queued task starts.
 | RD-01 | delivered | Coverage/panel/native-supervision manifests; model-free checks | [Report](redesign-rd01-results-2026-11-08.md), [manifest](evidence/redesign-coverage-v1.json); 23 tests pass; implementation `800c100` pushed and verified |
 | RD-02 | delivered | Runner preparation/rejection checks; identity/resume contracts | [Report](redesign-rd02-results-2026-11-08.md), [evidence](evidence/receiver-preparation-v1.json); 12 final preparation tests +28 reused tests pass; `254f526` pushed and verified |
 | RD-03 | delivered | Source/cache policy and static checks; explicit deferred GPU check IDs | [Report](redesign-rd03-results-2026-11-08.md), [evidence](evidence/frozen-w-source-v1.json); 50 static tests pass; three GPU checks pending RD-07; `2cbfa41` pushed and verified |
-| RD-04 | in_progress | Versioned payload/admission contracts and implementation; deferred GPU IDs | Predecessors verified with migration evidence; contract work started |
+| RD-04 | in_progress | Versioned payload/admission contracts and implementation; deferred GPU IDs | Contract `2247619` pushed; [report](redesign-rd04-results-2026-11-08.md), [evidence](evidence/direct-role-states-v1.json); 61 static tests pass +6 refreshed; implementation ready to commit/push; zero receiver support |
 | RD-05 | pending | Joint objectives, owners, binding/mask tests; deferred GPU IDs | None; plan only |
 | RD-06 | pending | Native wiring/eligibility report; deferred real-return/gradient IDs | None; plan only |
-| RD-07 | pending | All required deferred/changed-path 3090 checks pass; actual counts/hashes | RD03-GPU-D-INDEPENDENCE, RD03-GPU-CACHE-PARITY, RD03-GPU-CONSUMER-GRADIENTS pending; no GPU execution |
+| RD-07 | pending | All required deferred/changed-path 3090 checks pass; actual counts/hashes | RD03-GPU-D-INDEPENDENCE, RD03-GPU-CACHE-PARITY, RD03-GPU-CONSUMER-GRADIENTS; RD04-GPU-IDENTITY-PROJECTION, RD04-GPU-DIRECT-ROUNDTRIP, RD04-GPU-DIRECT-GRADIENTS pending; no GPU execution |
 | RD-08 | pending | Complete matched fit/evaluation receipts; useful-improvement outcome separate | None; training not authorized by prompt preparation |
 | RD-09 | pending | Accepted RD-08 receiver plus eligible native run/evaluation receipts | None; training not authorized by prompt preparation |
 
-Earliest unfinished slice: **RD-04**, unstarted; RD-03 GPU checks remain pending RD-07.
-RD-04..09 are unstarted; no redesign model job was launched.
+Earliest unfinished slice: **RD-04**, implementation/checks complete, awaiting
+implementation commit/push and delivery finalization. RD-05..09 are unstarted.
+Six RD-03/04 GPU checks remain pending RD-07; no redesign model job was launched.
 
 For each attempted slice add a short entry with implementation/evidence paths,
 exact commands/results, dependency hashes, relevant implementation commits and
@@ -32,8 +33,11 @@ RD-07 resolves them. Record active run manifest/PID/log/checkpoint paths when a
 long job starts, and update them when it finishes or is interrupted. Store raw
 artifacts locally under `data/`; commit concise reports/portable evidence only.
 
-Current delivery blockers: **none**. RD-01 data/supervision limits below are
-measured metadata findings; layout/technical checks for later slices remain pending.
+Current RD-04 implementation delivery blockers: **none**. Future real-data fit
+blocker: the initial direct-role layout admits zero receiver rows (train1500,
+E130, X180). An explicit layout revision and full re-audit are required before
+that fit; no subset, allowance increase or waiver was applied. RD-01 data/native
+supervision limits and pending later technical checks also remain.
 
 ## RD-01 — 2026-11-08
 
@@ -213,3 +217,64 @@ seven named owner specifications define version 2 metadata, 32-state fields,
 variable exact-attribute keys and complete 256/64 admission/return costs.
 `python -m unittest tests.test_role_layout`: four model-free tests pass.
 Contract commit/push precedes representation implementation as required.
+
+Contract commit: `22476193bb517b503e927cd141feddf56e02af7b`, pushed and remote
+main verified before implementation edits.
+
+## RD-04 implementation — 2026-11-08
+
+Currently due model-free acceptance: **pass**; staged delivery awaits the
+implementation commit/push and finalization. GPU qualification: **pending RD-07**.
+Learning outcome: **not_applicable**; no model execution or training.
+
+Implementation/evidence: [report](redesign-rd04-results-2026-11-08.md),
+[portable evidence](evidence/direct-role-states-v1.json),
+[coverage manifest](evidence/direct-role-layout-coverage-v1.json), raw
+`data/redesign-rd04-20261108/`. Existing registry/runtime/renderer support ordered
+variable role states, immutable profile/length metadata, absent-midpoint omission,
+exact attributes, shared identity-initialized FP32 residual projection and explicit
+writer length/capacity owners. Full all-status echo/largest-candidate reservations
+retain 256/64 envelopes. Preflight rejects before source encoding/component
+prefill, and runtime sealing rejects atomically before dispatch.
+
+Predecessor evidence/raw artifacts remain unchanged, and delivered commits are
+ancestors. Current source migration is explicit in the evidence. Native computation
+methods, producer/binding, CleanView/token mapping, checkpoint and numeric kernels
+remain unchanged; Session.open adds explicit profile selection before prefill.
+Current preparation revalidates all 1,810 permitted view identities. Earlier
+prepared plans are stale and cannot be reused as current.
+
+Commands/results:
+
+- `PYTHONPATH=tests:. python -m unittest tests.test_role_layout tests.test_codec_exact tests.test_direct_role_packets tests.test_direct_role_encoding tests.test_frozen_source tests.test_training_inputs tests.test_receiver_plan tests.test_receiver_learning`: **61 pass**, 83.413 s.
+- Final exact selected-candidate attribute return assertions:
+  `PYTHONPATH=tests:. python -m unittest tests.test_direct_role_packets`: **6 pass**,
+  0.069 s; unchanged results for the other tests reused.
+- Four actual CLI preparations (direct/repeat/frozen-pooled/legacy), with model
+  imports blocked: exit 0. Direct repeated plans are byte-identical; all execution
+  counters zero. Exact argv/source/raw hashes/receipts are in portable evidence.
+- Metadata-only Rust BPE/Jinja full-panel audit: 1,810 rows, zero supported.
+  All 105 saved source token lengths from 32 historical probe rows match pinned
+  record/input hashes. No neural tokenizer/model forward or feature extraction.
+- Compilation including GPU test file and `git diff --check`: pass. GPU methods
+  inspected/compiled/collection-imported only, never executed or counted passing.
+
+Every excluded row, family, operation, field length, mapping identity and observed
+whole-packet cost is retained. All 1,810 rows exceed the worst-case return bound;
+1,354 rows also have overlength questions, 93 have overlength alternatives, and
+three E rows exceed the request bound. No rows were cropped or removed and no
+bound increased. Preparation binds this explicit future-fit blocker while
+preserving the complete proposed exposure schedule. No learning claim follows.
+
+New deferred checks, all **pending**, owner **RD-07**:
+
+- `RD04-GPU-IDENTITY-PROJECTION` → `DirectRolesGPU.test_identity_projection_and_legacy_wire`.
+- `RD04-GPU-DIRECT-ROUNDTRIP` → `DirectRolesGPU.test_direct_packets_returns_and_immutable_bindings`.
+- `RD04-GPU-DIRECT-GRADIENTS` → `DirectRolesGPU.test_live_projection_and_consumer_gradients`.
+
+These declared engineering latent fixtures check mechanisms only; they are not
+admissible corpus features or semantic qualification. Exact 3090 UUID/opt-in is
+required before model imports. All three earlier RD-03 checks remain pending.
+No GPU/CPU model workload, optimizer update, agents, new data/reviews, locked
+access, deployment, service or Operating Table change. Earlier RD-01 label gaps
+and historical profiling-test drift remain. No RD-05 implementation is included.

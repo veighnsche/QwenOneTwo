@@ -46,12 +46,13 @@ class ReceiverProducer:
         from .clean import CleanEncoder
         check(release.purpose=='training','never train on development/locked records')
         spec=profile(input_profile,'component')
-        check(spec['roles']=='frozen-reference-pooled-v1', 'direct role implementation belongs to RD-04')
+        check(spec['roles'] in ('frozen-reference-pooled-v1','direct-role-states-v1'),'receiver role policy')
+        if spec['roles']=='direct-role-states-v1':codec.require_profile('direct-role-states-v1')
         self.b,self.c,self.ref,self.release=backbone,codec,reference,release
         self.input_profile=input_profile
         self.encoder=CleanEncoder(backbone,reference,checkpoint_hash=receiver_hash(backbone,codec),
             profile_hash=digest(PROFILE.encode()),cache_references=True,
-            source_policy=spec['source_policy'],cache_sources=cache_sources)
+            source_policy=spec['source_policy'],cache_sources=cache_sources,role_policy=spec['roles'])
 
     def __call__(self,row):
         import torch
@@ -68,9 +69,22 @@ class ReceiverProducer:
         # Identity follows the current D/codec; source states are never cached.
         self.encoder.identity['checkpoint']=receiver_hash(self.b,self.c)
         run=str(uuid.uuid4());encoded=self.encoder.encode(view,p,run=run);factory=CleanPackets(encoded,view,p)
+        def source_spans():
+            spans=[]
+            for i,ref in enumerate(factory.sources):
+                n=len(factory.registry.get(ref).token_ids)
+                spans.extend(factory.span(i,j,min(32,n-j)) for j in range(0,n,32))
+            check(len(spans)<=8,'receiver evidence exceeds eight spans; never crop')
+            return spans
+        direct_spans=None
+        if factory.profile=='direct-role-states-v1':
+            direct_spans=source_spans()
+            factory.admission(next(k for k,v in PORT_NAMES.items() if v==row['operation']),index['question'],index['target'],
+                evidence=tuple(direct_spans),candidates=index['candidates'],rubric=index['rubric'])
         rendered=self.b.tokenizer.apply_chat_template([{'role':'user','content':PROMPT}],
             tokenize=False,add_generation_prompt=True,enable_thinking=True)
-        s=Session.open(self.b,self.c,self.b.tokenizer.encode(rendered,add_special_tokens=False),128,override=512,run=run)
+        s=Session.open(self.b,self.c,self.b.tokenizer.encode(rendered,add_special_tokens=False),128,override=512,run=run,
+                       profile=factory.profile)
         rt=s.runtime;report={'producer':PROTOCOL,'record':row['id'],'record_sha256':digest(canonical(row)),
             'objective':'complete isolated request-to-heads; no feedback/native objective',
             'reference':self.ref.artifact_id,'receiver_behavior_accepted':False,'diagnostic_reference':False,
@@ -86,11 +100,7 @@ class ReceiverProducer:
             return debit(kind,count,label)
         rt.debit=bounded;losses={}
         try:
-            spans=[]
-            for i,ref in enumerate(factory.sources):
-                n=len(factory.registry.get(ref).token_ids)
-                spans.extend(factory.span(i,j,min(32,n-j)) for j in range(0,n,32))
-            check(len(spans)<=8,'receiver evidence exceeds eight spans; never crop')
+            spans=source_spans() if direct_spans is None else direct_spans
             port=next(k for k,v in PORT_NAMES.items() if v==row['operation'])
             packet=factory.request(port,index['question'],index['target'],evidence=tuple(spans),
                 candidates=index['candidates'],rubric=index['rubric'],direction=index['direction'],session=s)

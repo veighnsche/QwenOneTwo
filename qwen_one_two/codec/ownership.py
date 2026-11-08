@@ -18,6 +18,11 @@ def parameter_groups(backbone,codec):
     add('Qev_pointer',[(f'codec.qev_{side}.weight',getattr(codec,f'qev_{side}').weight) for side in ('q','k')],2e-5,0.)
     add('budget',[('codec.budget_row',codec.budget_row)],1e-4,0.)
     add('score',[('codec.score_row',codec.score_row)],1e-4,0.)
+    for owner in ('direct_role_projection','direct_role_length'):
+        if not hasattr(codec,owner):continue
+        for suffix,matrix in (('matrix',True),('bias',False)):
+            add(owner+'_'+suffix,[(f'codec.{owner}.{n}',p) for n,p in getattr(codec,owner).named_parameters()
+                if (p.ndim==2)==matrix],2e-4,.01 if matrix else 0.)
     embeddings={id(p) for m in codec.modules() if isinstance(m,nn.Embedding) for p in m.parameters()}
     matrix=[];other=[]
     for n,p in codec.named_parameters():

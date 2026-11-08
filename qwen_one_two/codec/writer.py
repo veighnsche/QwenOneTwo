@@ -5,6 +5,7 @@ from .schema import Role, Kind, Port, Status, ValueKind, Mode, Invalid, require,
 from .records import Semantic, Attribute, Value, Span, History, Reason
 from .render import Renderer
 from .neural import finite
+from .layout import LEGACY,DIRECT
 
 
 @dataclass(frozen=True)
@@ -16,11 +17,13 @@ class Draft:
     candidates: tuple = ()
     rubric: object = None
     bank: object = None  # unpublished until FINISH; no bank tag in draft view
+    profile: str = LEGACY
 
 
 class Decoder:
-    def __init__(self, codec, registry, catalogue=None):
+    def __init__(self, codec, registry, catalogue=None,*,profile=LEGACY):
         self.codec=codec;self.registry=registry
+        self.profile=profile;codec.require_profile(profile)
         self.catalogue=tuple(registry.refs() if catalogue is None else catalogue)
 
     def candidates(self, predicate):
@@ -73,10 +76,10 @@ class Decoder:
         c=self.codec;u=c.condition(f,Role.ATTRIBUTE_DESC,attribute=index)
         kind=ValueKind(int(c.heads['attribute_type'](u).argmax())+1)
         present=bool(c.heads['presence'](u).squeeze()>0)
-        keys=c.emit(f,Role.KEY,2,index)
+        keys=c.emit(f,Role.KEY,c.semantic_count(f,Role.KEY) if self.profile==DIRECT else 2,index)
         refs=self.catalogue
         unit=self.pointer('unit',u,refs,optional=True)
-        if not present:return Attribute(keys,Value(kind,False,unit=unit))
+        if not present:return Attribute(keys,Value(kind,False,unit=unit),self.profile)
         mode_logits=c.heads['source_mode'](u)
         if kind not in (ValueKind.INT64,ValueKind.DECIMAL):
             mode_logits=mode_logits.clone();mode_logits[1]=-torch.inf
@@ -84,20 +87,20 @@ class Decoder:
         for r in refs:
             x=self.registry.get(r)
             for i,a in enumerate(getattr(x,'attributes',())):
-                if a.value.kind==kind and a.value.present:copy.append((r,i,a))
+                if a.profile==self.profile and a.value.kind==kind and a.value.present:copy.append((r,i,a))
         if not copy:mode_logits=mode_logits.clone();mode_logits[0]=-torch.inf
         mode=Mode(int(mode_logits.argmax())+1)
         if mode==Mode.COPY:
             summaries=torch.stack([c.encode_attribute_view(self.registry,r,i).mean(0) for r,i,a in copy])
             j=int(c.pointer('copy',u,summaries).argmax());r,i,a=copy[j]
             value=replace(a.value,mode=Mode.COPY,copied_owner=r,copied_index=i,parsed_span=None)
-            return Attribute(keys,value)
+            return Attribute(keys,value,self.profile)
         if mode==Mode.PARSE:
             span=self.span(u);_,literal,_,_=self.registry.span(span)
-            return Attribute(keys,Value(kind,True,parse_numeric(literal,kind),mode,span.source,unit=unit,parsed_span=span))
+            return Attribute(keys,Value(kind,True,parse_numeric(literal,kind),mode,span.source,unit=unit,parsed_span=span),self.profile)
         if kind==ValueKind.SOURCE_STRING:
             span=self.span(u)
-            return Attribute(keys,Value(kind,True,span,mode,span.source,unit=unit))
+            return Attribute(keys,Value(kind,True,span,mode,span.source,unit=unit),self.profile)
         if kind==ValueKind.REFERENCE:
             data=self.pointer('reference',u,refs)
         elif kind==ValueKind.BOOLEAN:data=bool(c.heads['boolean'](u).squeeze()>0)
@@ -112,11 +115,23 @@ class Decoder:
             length=int(c.heads['utf8_length'](u).argmax())
             data=bytes(c.byte_logits(u,length,index).argmax(-1).tolist())
         value=Value(kind,True,data,mode,unit=unit)
-        attr=Attribute(keys,value);self.registry.attribute(attr,self.catalogue)
+        attr=Attribute(keys,value,self.profile);self.registry.attribute(attr,self.catalogue)
         return attr
 
     def semantic(self,f,kind):
         c=self.codec
+        if self.profile==DIRECT:
+            if kind==Kind.RUBRIC:
+                logits=c.heads['direction'](f).clone();logits[0]=-torch.inf
+                direction=int(logits.argmax());midpoint=bool(c.heads['presence'](f).squeeze()>0)
+                roles=(Role.DIMENSION,Role.CONDITIONS,Role.ZERO,Role.ONE)+( (Role.MIDPOINT,) if midpoint else () )
+                lengths=tuple(c.semantic_count(f,r) for r in roles)
+                return Semantic(torch.cat([c.emit(f,r,n) for r,n in zip(roles,lengths)]),direction=direction,
+                    midpoint=midpoint,profile=DIRECT,lengths=lengths if midpoint else lengths+(0,))
+            role={Kind.QUESTION:Role.QUESTION,Kind.TARGET:Role.TARGET,Kind.ALTERNATIVE:Role.CANDIDATE}[kind]
+            count=c.semantic_count(f,role)
+            return Semantic(c.emit(f,role,count),self.attributes(f,role) if kind!=Kind.QUESTION else (),
+                            profile=DIRECT,lengths=(count,))
         if kind==Kind.RUBRIC:
             logits=c.heads['direction'](f).clone();logits[0]=-torch.inf
             direction=int(logits.argmax());midpoint=bool(c.heads['presence'](f).squeeze()>0)
@@ -136,13 +151,13 @@ class Decoder:
             else:
                 refs=self.candidates(lambda r,x:r.kind==Kind.RESULT and x.presentation is not None)
                 attachments.append(History(self.pointer('history',f,refs)))
-        return Reason(c.emit(feature,Role.REASON,4),tuple(attachments))
+        return Reason(c.emit(feature,Role.REASON,4),tuple(attachments),self.profile)
 
 
 class Writer:
     """One start and seven learned events; caller supplies the one causal state."""
     def __init__(self,runtime,codec):
-        self.runtime=runtime;self.codec=codec;self.draft=Draft(runtime.call.port)
+        self.runtime=runtime;self.codec=codec;self.draft=Draft(runtime.call.port,profile=runtime.profile)
 
     def feature(self,h):
         view=Renderer(self.runtime.registry).draft(self.draft)
@@ -150,8 +165,8 @@ class Writer:
         return self.codec.feature(h,self.runtime.counters(),memory)
 
     def record(self,f,kind):
-        decoder=Decoder(self.codec,self.runtime.registry)
-        refs=decoder.candidates(lambda r,x:r.kind==kind)
+        decoder=Decoder(self.codec,self.runtime.registry,profile=self.runtime.profile)
+        refs=decoder.candidates(lambda r,x:r.kind==kind and x.profile==self.runtime.profile)
         logits=self.codec.heads['record_mode'](f)
         if not refs:logits=logits.clone();logits[1]=-torch.inf
         if int(logits.argmax())==1:return decoder.pointer('reuse',f,refs)
@@ -186,7 +201,7 @@ class Writer:
         action=int(logits.argmax())
         old=self.draft;packet=None
         try:
-            d=Decoder(self.codec,rt.registry)
+            d=Decoder(self.codec,rt.registry,profile=rt.profile)
             if action==0:
                 require(len(old.evidence)<8,'evidence cap')
                 kind=int(self.codec.heads['evidence_kind'](f).argmax())
@@ -225,5 +240,5 @@ def decode_result(codec,runtime,evaluated):
         if runtime.call.port==Port.CHOICE:
             return runtime.prepare_result(runtime.call.snapshot,status,selected_index=int(evaluated['pointer_logits'].argmax()))
         return runtime.prepare_result(runtime.call.snapshot,status,scalar=evaluated['value'])
-    reason=Decoder(codec,runtime.registry,runtime.call.catalogue).reason(evaluated['feature'])
+    reason=Decoder(codec,runtime.registry,runtime.call.catalogue,profile=runtime.profile).reason(evaluated['feature'])
     return runtime.prepare_result(runtime.call.snapshot,status,reason=reason)

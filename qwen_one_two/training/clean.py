@@ -95,7 +95,9 @@ class CleanEncoder:
     No fitting, detached-contamination repair, or locked-case updates occur.
     """
     def __init__(self, backbone, reference, *, checkpoint_hash, profile_hash, cache_references=False,
-                 source_policy=D_SOURCE, cache_sources=False):
+                 source_policy=D_SOURCE, cache_sources=False,role_policy='frozen-reference-pooled-v1'):
+        check(role_policy in ('frozen-reference-pooled-v1','direct-role-states-v1'),'unknown role policy')
+        check(role_policy!='direct-role-states-v1' or source_policy==FROZEN_SOURCE,'direct roles require frozen W sources')
         mode=source_mode(source_policy,cache=cache_sources)
         from ..codec.neural import cuda_only
         cuda_only()
@@ -104,6 +106,7 @@ class CleanEncoder:
         check(reference.artifact_id == reference.fingerprint(), 'frozen reference state changed')
         self.backbone, self.reference = backbone, reference
         self.source_policy=source_policy
+        self.role_policy=role_policy
         self.source_cache={} if cache_sources else None
         self.source_cache_hits=0
         self.source_binding=bind_frozen_source(backbone) if source_policy==FROZEN_SOURCE else None
@@ -161,6 +164,12 @@ class CleanEncoder:
         from ..codec.schema import Kind
         self._validate_source()
         excerpts, model_bytes = view.materialize(provenance)
+        planned=None
+        if self.role_policy=='direct-role-states-v1':
+            from .direct_roles import preflight
+            # All role/source lengths and worst-case returns are checked before
+            # the first offline model forward, never after a partial encoding.
+            planned=preflight(self.backbone.tokenizer,view,provenance)
         registry = Registry(run)
         refs, slots, audit = [], [], []
         for index, excerpt in enumerate(excerpts):
@@ -176,18 +185,28 @@ class CleanEncoder:
                               tokens=len(ids), offsets=offsets, transformations=['fresh_tokenize', 'W' if self.source_policy==FROZEN_SOURCE else 'W+D', 'body_states'],
                               tensor_hash=digest(readback_bytes(body_states.contiguous()))))
             if key is not None:audit[-1]['source_cache_key']=key
-        for ref in view.references:
-            payload=self.reference_payload(ref)
+        for index,ref in enumerate(view.references):
+            if planned is not None:
+                item=planned['roles'][index]
+                payload,key=self._body_states(ref.content,item['ids'],item['selected'],item['offsets'])
+            else:payload=self.reference_payload(ref)
             slots.append(payload)
             audit.append(dict(self.identity, role=ref.role, input_hash=ref.sha256, bindings=ref.bindings, dependencies=ref.dependencies,
                               transformations=['role_whitelist', 'fresh_tokenize', 'frozen_W', 'frozen_pooler'],
                               tensor_hash=digest(readback_bytes(payload.contiguous()))))
-        return {'registry': registry, 'sources': tuple(refs), 'slots': tuple(slots),
+            if planned is not None:
+                audit[-1].update(transformations=['role_whitelist','fresh_tokenize','frozen_W','body_states'],
+                    role_profile=self.role_policy,source_cache_key=key,selected=tuple(item['selected']),offsets=item['offsets'])
+        result={'registry': registry, 'sources': tuple(refs), 'slots': tuple(slots),
                 'input_hash': digest(model_bytes), 'audit': audit}
+        if planned is not None:result.update(role_profile=self.role_policy,admission=planned['costs'])
+        return result
 
     def reference_payload(self,ref):
         """Cache only frozen W/reference outputs; D-dependent sources stay fresh."""
         import torch
+        check(self.role_policy!='direct-role-states-v1' or ref.role=='reason',
+              'direct request roles cannot use pooled reference payloads')
         check(self.reference.frozen and self.reference.artifact_id==self.identity['reference']
               and all(not p.requires_grad for p in self.reference.parameters()),'reference cache identity/freeze')
         self._validate_source()

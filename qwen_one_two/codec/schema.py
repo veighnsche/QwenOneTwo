@@ -158,9 +158,20 @@ class Metadata:
     direction: int = 0
     parameter_a: int = 0
     parameter_b: int = 0
+    profile: str = 'b1-full-v1-compensated'
+    field_lengths: tuple = ()
 
     def encode(self, role):
+        from .layout import DIRECT, valid_profile, semantic_lengths
         role = Role(role)
+        direct=valid_profile(self.profile)==DIRECT
+        length=0
+        if direct and role in (Role.REQUEST,Role.RESULT,Role.TARGET_DESC,Role.CANDIDATE_DESC,Role.ATTRIBUTE_DESC):
+            require(type(self.field_lengths) is tuple and len(self.field_lengths)==1,'direct metadata field length')
+            length=integer(self.field_lengths[0],1,32,'direct metadata length')
+        elif direct and role==Role.RUBRIC_DESC:
+            semantic_lengths(Kind.RUBRIC,DIRECT,self.field_lengths,midpoint=self.midpoint)
+        else:require(self.field_lengths==(),'inapplicable metadata lengths')
         require(role in HEADERS | DESCRIPTORS, 'metadata role')
         Port(self.port); Status(self.status); ValueKind(self.value_kind); Mode(self.mode); Kind(self.kind)
         for name in ('owner', 'primary', 'secondary', 'unit', 'question', 'target', 'bank', 'rubric'):
@@ -177,10 +188,10 @@ class Metadata:
                  self.question is not None, self.target is not None, self.bank is not None,
                  self.rubric is not None, self.midpoint, self.historical, self.sealed)
         require(all(type(v) is bool for v in flags), 'flag type')
-        f = [(0, 4, 1), (4, 3, int(self.port)), (7, 3, int(self.status)),
+        f = [(0, 4, 2 if direct else 1), (4, 3, int(self.port)), (7, 3, int(self.status)),
              (10, 3, int(self.value_kind)), (13, 2, int(self.mode)), (15, 4, int(self.kind)),
              *[(19 + i, 1, int(v)) for i, v in enumerate(flags)],
-             (32, 8, self.owner or 0), (40, 8, self.item or 0), (48, 9, self.following), (57, 7, 0)]
+             (32, 8, self.owner or 0), (40, 8, self.item or 0), (48, 9, self.following), (57, 7, length)]
         if role in HEADERS:
             require(self.primary is self.secondary is self.unit is self.item is None, 'header descriptor refs')
             require(self.parameter_a == self.parameter_b == 0, 'header parameters')
@@ -195,8 +206,9 @@ class Metadata:
             require(self.question is self.target is self.bank is self.rubric is None, 'descriptor header refs')
             require(self.evidence == self.candidates == self.attempt == self.complete == 0, 'descriptor header fields')
             f += [(64, 8, self.primary or 0), (72, 8, self.secondary or 0),
-                  (80, 8, self.unit or 0), (88, 4, self.children), (92, 2, self.direction),
-                  (96, 16, self.parameter_a), (112, 16, self.parameter_b)]
+                  (80, 8, self.unit or 0), (88, 4, self.children), (92, 2, self.direction)]
+            f += ([(96+6*i,6,n) for i,n in enumerate(self.field_lengths)] if direct and role==Role.RUBRIC_DESC else
+                  [(96,16,self.parameter_a),(112,16,self.parameter_b)])
         if role not in (Role.REQUEST, Role.RESULT, Role.BUDGET_HEADER, Role.ATTRIBUTE_DESC):
             require(self.status == Status.NONE and self.value_kind == ValueKind.NONE and self.mode == Mode.NONE,
                     'inapplicable status/value/mode')
@@ -243,11 +255,11 @@ class Metadata:
             elif role!=Role.ATTRIBUTE_DESC:require(self.present,'record descriptor presence')
             if role==Role.SOURCE_DESC:require(1<=self.following<=32,'source length')
             if role==Role.HISTORY_DESC:require(1<=self.following<=64 and self.secondary is not None,'historical binding/length')
-            if role==Role.RUBRIC_DESC:require(self.following==10 and self.direction in (1,2),'rubric descriptor')
+            if role==Role.RUBRIC_DESC:require(self.following==(sum(self.field_lengths) if direct else 10) and self.direction in (1,2),'rubric descriptor')
             if role==Role.ATTRIBUTE_DESC:
                 require(self.value_kind in tuple(ValueKind)[1:7] and self.status==Status.NONE,'attribute kind')
                 require((self.secondary is not None)==(self.mode==Mode.COPY),'copy binding flag')
-                if not self.present:require(self.following==2 and self.mode==Mode.NONE and self.primary is self.secondary is None,'absent attribute')
+                if not self.present:require(self.following==(length if direct else 2) and self.mode==Mode.NONE and self.primary is self.secondary is None,'absent attribute')
                 else:require(self.mode!=Mode.NONE,'present creation mode')
                 if self.mode==Mode.PARSE:require(self.value_kind in (ValueKind.INT64,ValueKind.DECIMAL) and self.primary is not None,'numeric parse metadata')
                 if self.value_kind==ValueKind.UTF8:require(self.parameter_a<=128 and self.parameter_b==0,'UTF8 descriptor')

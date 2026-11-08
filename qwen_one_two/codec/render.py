@@ -3,6 +3,7 @@ from dataclasses import dataclass, replace
 from types import SimpleNamespace
 from .schema import Role, Kind, Port, Status, ValueKind, Mode, Metadata, Atom, encode_atoms, require, Invalid
 from .records import Ref, Span, History, Attribute, Result
+from .layout import LEGACY,DIRECT,semantic_lengths,packet_costs,admit
 
 
 @dataclass(frozen=True)
@@ -22,6 +23,7 @@ class Packet:
     snapshot: Ref | None
     candidate_ends: tuple = ()
     result: Ref | None = None
+    profile: str = LEGACY
 
     def __len__(self):
         return len(self.positions)
@@ -50,7 +52,10 @@ class Renderer:
     def _build(self, snapshot, result=None, prefix=(), historical=False, sealed=True, draft=None, record=None):
         reg=self.registry
         s=draft if draft is not None else (reg.get(snapshot,Kind.SNAPSHOT) if record is None else
-            SimpleNamespace(port=Port.NONE,target=None,question=None,bank=None,rubric=None))
+            SimpleNamespace(port=Port.NONE,target=None,question=None,bank=None,rubric=None,
+                profile=getattr(reg.get(record),'profile',LEGACY)))
+        profile=getattr(s,'profile',LEGACY)
+        direct=profile==DIRECT
         t=Handles(reg,prefix);out=[];candidate_ends=[]
         target=reg.get(s.target) if s.target is not None else None
         question=reg.get(s.question) if s.question is not None else None
@@ -65,7 +70,8 @@ class Renderer:
             order=('question','target','bank','rubric') if role in (Role.REQUEST,Role.RESULT) else ('primary','secondary','unit')
             encoded={name:t.intern(refs[name]) for name in order}
             require(all(refs[name] is None for name in refs if name not in order),'inapplicable reference')
-            md=Metadata(s.port,kind=kind,owner=owner_h,following=following,historical=historical,sealed=sealed,**encoded,**kw)
+            md=Metadata(s.port,kind=kind,owner=owner_h,following=following,historical=historical,sealed=sealed,
+                        profile=profile,**encoded,**kw)
             md.encode(role)
             out.append(Position(role,md,owner_h,attribute=kw.get('_attribute')))
 
@@ -84,7 +90,9 @@ class Renderer:
             primary=t.intern(v.provenance);secondary=t.intern(v.copied_owner);unit=t.intern(v.unit)
             md=Metadata(s.port,kind=owner.kind,present=v.present,owner=h,following=2+n,
                         value_kind=v.kind,mode=v.mode,primary=primary,secondary=secondary,unit=unit,
-                        parameter_a=pa,parameter_b=pb,historical=historical,sealed=sealed)
+                        parameter_a=pa,parameter_b=pb,historical=historical,sealed=sealed,profile=profile,
+                        field_lengths=(len(a.keys),) if direct else ())
+            if direct:md=replace(md,following=len(a.keys)+n)
             md.encode(Role.ATTRIBUTE_DESC)
             out.append(Position(Role.ATTRIBUTE_DESC,md,h,attribute=index))
             slots(Role.KEY,a.keys,owner,index)
@@ -98,6 +106,7 @@ class Renderer:
                     out.append(Position(a0.role,a0,h,i,index))
 
         def history(packet):
+            require(packet.profile==profile,'historical layout mismatch; no implicit conversion')
             # Translate exact identities in actual first-encounter order. Do not
             # intern the whole old sidecar or detach its continuous values.
             old=packet.handles
@@ -133,9 +142,11 @@ class Renderer:
 
         def candidate(ref,index,bank_ref):
             c=reg.get(ref,Kind.ALTERNATIVE)
+            require(c.profile==profile,'candidate layout mismatch')
             cost=sum(a.cost for a in c.attributes)
-            require(cost<=46,'candidate return bound')
-            meta(Role.CANDIDATE_DESC,ref,Kind.ALTERNATIVE,4+cost,present=True,item=index,primary=bank_ref,children=len(c.attributes))
+            require(direct or cost<=46,'candidate return bound')
+            meta(Role.CANDIDATE_DESC,ref,Kind.ALTERNATIVE,len(c.slots)+cost,present=True,item=index,primary=bank_ref,
+                 children=len(c.attributes),field_lengths=(len(c.slots),) if direct else ())
             slots(Role.CANDIDATE,c.slots,ref)
             for i,a in enumerate(c.attributes):attribute(a,ref,i)
             candidate_ends.append((index,len(out)-1))
@@ -144,14 +155,18 @@ class Renderer:
             obj=reg.get(record)
             if record.kind==Kind.QUESTION:slots(Role.QUESTION,obj.slots,record)
             elif record.kind==Kind.TARGET:
-                meta(Role.TARGET_DESC,record,Kind.TARGET,2+sum(a.cost for a in obj.attributes),present=True,children=len(obj.attributes))
+                meta(Role.TARGET_DESC,record,Kind.TARGET,len(obj.slots)+sum(a.cost for a in obj.attributes),present=True,
+                     children=len(obj.attributes),field_lengths=(len(obj.slots),) if direct else ())
                 slots(Role.TARGET,obj.slots,record)
                 for i,a in enumerate(obj.attributes):attribute(a,record,i)
             elif record.kind==Kind.ALTERNATIVE:candidate(record,0,None)
             elif record.kind==Kind.RUBRIC:
-                meta(Role.RUBRIC_DESC,record,Kind.RUBRIC,10,present=True,direction=obj.direction,midpoint=obj.midpoint)
-                for j,r in enumerate((Role.DIMENSION,Role.CONDITIONS,Role.ZERO,Role.ONE,Role.MIDPOINT)):
-                    slots(r,obj.slots[j*2:j*2+2],record)
+                sizes=semantic_lengths(Kind.RUBRIC,profile,obj.lengths,midpoint=obj.midpoint)
+                meta(Role.RUBRIC_DESC,record,Kind.RUBRIC,sum(sizes),present=True,direction=obj.direction,midpoint=obj.midpoint,
+                     field_lengths=sizes if direct else ())
+                start=0
+                for r,n in zip((Role.DIMENSION,Role.CONDITIONS,Role.ZERO,Role.ONE,Role.MIDPOINT),sizes):
+                    slots(r,obj.slots[start:start+n],record);start+=n
             elif record.kind==Kind.RESULT:history(obj.presentation)
             elif record.kind==Kind.REASON:
                 start=len(out)
@@ -165,7 +180,7 @@ class Renderer:
                 for i,r in enumerate(obj.candidates):candidate(r,i,record)
             else:raise Invalid('object has no compatible bounded presentation')
             require(len(out)<=256,'bounded object view')
-            return Packet(tuple(out),tuple(t.refs),None,tuple(candidate_ends))
+            return Packet(tuple(out),tuple(t.refs),None,tuple(candidate_ends),profile=profile)
 
         owner=snapshot if result is None else result
         rr=None if result is None else reg.get(result,Kind.RESULT)
@@ -178,18 +193,23 @@ class Renderer:
              question=s.question,target=s.target,bank=s.bank,rubric=s.rubric,
              evidence=len(s.evidence) if rr is None else 0,candidates=len(bank.candidates) if bank else 0,
              children=len(target.attributes) if rr is None else 0,attempt=s.attempt,complete=1,
-             direction=rubric.direction if rubric else 0,midpoint=rubric.midpoint if rubric else False)
+             direction=rubric.direction if rubric else 0,midpoint=rubric.midpoint if rubric else False,
+             field_lengths=(len(question.slots),) if direct else ())
         slots(Role.QUESTION,question.slots,s.question)
         at=sum(a.cost for a in target.attributes) if rr is None else 0
-        meta(Role.TARGET_DESC,s.target,Kind.TARGET,2+at,present=True,children=len(target.attributes) if rr is None else 0)
+        meta(Role.TARGET_DESC,s.target,Kind.TARGET,len(target.slots)+at,present=True,
+             children=len(target.attributes) if rr is None else 0,field_lengths=(len(target.slots),) if direct else ())
         slots(Role.TARGET,target.slots,s.target)
         if rr is None:
             for i,a in enumerate(target.attributes):attribute(a,s.target,i)
             for i,e in enumerate(s.evidence):evidence(e,i)
         if rubric:
-            meta(Role.RUBRIC_DESC,s.rubric,Kind.RUBRIC,10,present=True,direction=rubric.direction,midpoint=rubric.midpoint)
-            for j,role in enumerate((Role.DIMENSION,Role.CONDITIONS,Role.ZERO,Role.ONE,Role.MIDPOINT)):
-                values=rubric.slots[j*2:j*2+2]
+            sizes=semantic_lengths(Kind.RUBRIC,profile,rubric.lengths,midpoint=rubric.midpoint)
+            meta(Role.RUBRIC_DESC,s.rubric,Kind.RUBRIC,sum(sizes),present=True,direction=rubric.direction,midpoint=rubric.midpoint,
+                 field_lengths=sizes if direct else ())
+            start=0
+            for role,n in zip((Role.DIMENSION,Role.CONDITIONS,Role.ZERO,Role.ONE,Role.MIDPOINT),sizes):
+                values=rubric.slots[start:start+n];start+=n
                 slots(role,values,s.rubric)
         if rr is None:
             if bank:
@@ -215,13 +235,13 @@ class Renderer:
         if draft is None:out[0]=replace(out[0],payload=replace(out[0].payload,following=n-1,complete=n))
         for p in out:
             if isinstance(p.payload,Metadata):p.payload.encode(p.role)
-        return Packet(tuple(out),tuple(t.refs),snapshot,tuple(candidate_ends),result)
+        return Packet(tuple(out),tuple(t.refs),snapshot,tuple(candidate_ends),result,profile)
 
     def request(self, snapshot):
         return self._build(snapshot)
 
     def draft(self, spec):
-        if spec.question is None or spec.target is None:return Packet((),(),None)
+        if spec.question is None or spec.target is None:return Packet((),(),None,profile=spec.profile)
         return self._build(None,draft=spec,sealed=False)
 
     def object(self, ref):
@@ -238,6 +258,15 @@ class Renderer:
 
     def return_max(self, snapshot):
         s=self.registry.get(snapshot,Kind.SNAPSHOT)
+        if s.profile==DIRECT:
+            q=self.registry.get(s.question);target=self.registry.get(s.target)
+            rubric=self.registry.get(s.rubric) if s.rubric is not None else None
+            candidates=() if s.bank is None else tuple(self.registry.get(r) for r in self.registry.get(s.bank).candidates)
+            evidence=tuple(1+(e.count if isinstance(e,Span) else len(self.registry.get(e.result).presentation)) for e in s.evidence)
+            costs=packet_costs(s.port,len(q.slots),len(target.slots),rubric=rubric.lengths if rubric else (),
+                candidates=tuple((len(c.slots),sum(a.cost for a in c.attributes)) for c in candidates),
+                evidence=evidence,target_attributes=sum(a.cost for a in target.attributes))
+            return admit(costs)['return_max']
         if s.port==Port.NOUL:return 50
         if s.port==Port.SCORE:return 61
         bank=self.registry.get(s.bank,Kind.BANK)

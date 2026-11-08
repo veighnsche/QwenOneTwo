@@ -87,6 +87,21 @@ class ReceiverPlanTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'pending RD-03..07'):
             self.planning.admit_execution(p,gpu=self.planning.PRIMARY,input_profile='direct-role-states-v1',regime='component')
 
+    def test_direct_plan_retains_full_coverage_and_zero_support_blocker(self):
+        plan=self.planning.prepare(self.snapshot,'direct-role-states-v1')['contract']
+        self.assertEqual(plan['exposures']['distinct_records'],1500)
+        self.assertEqual(plan['exposures']['presentations'],6000)
+        self.assertEqual(plan['exposures']['windows'],750)
+        coverage=plan['layout_coverage']
+        self.assertIn('blocked_zero_common_support',coverage['admission'])
+        self.assertEqual({name:(s['supported'],s['total']) for name,s in coverage['panels'].items()},
+            {'train_receiver':(0,1500),'development_E':(0,130),'development_X':(0,180)})
+        owners={p['name']:p for group in plan['owners'] for p in group['parameters']}
+        self.assertEqual(owners['codec.direct_role_projection.weight']['shape'],[1024,1024])
+        self.assertEqual(owners['codec.direct_role_projection.bias']['shape'],[1024])
+        self.assertFalse(any(name.startswith('codec.direct_role_length.') for name in owners))
+        self.assertIn('codec.direct_role_length',plan['frozen_owners'])
+
     def test_wrong_gpu_profile_and_regime_reject_before_models(self):
         profile = self.plan['contract']['input_profile']
         for gpu in (None,'cpu','0','GPU-744c1cf5-9578-6aad-95c1-7a6f1c9d11db'):

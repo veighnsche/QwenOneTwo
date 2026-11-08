@@ -12,6 +12,7 @@ from .loss_config import COEFFICIENTS
 from .manifest import BASE_SHA, DIAGNOSTIC_SHA, file_hash
 from .receiver_profiles import LEGACY, profile, receiver_parameter
 from .frozen_source import FROZEN_SOURCE, GPU_CHECKS
+from ..codec.layout import GPU_CHECKS as DIRECT_GPU_CHECKS
 from .reference_qualification import PROFILE
 from .release import decode, load_release
 from .two_gpu import ROOT, CHECKPOINT, CHECKPOINT_SHA, REFERENCE
@@ -97,11 +98,28 @@ def prepare(snapshot, input_profile, *, regime='component', root=ROOT):
                 checked_views.add(key)
         check(digest(canonical(keys)) == coverage['coverage'][name]['ids_sha256'], 'panel order drift')
         panel_bindings[name] = {'ids': keys, 'ids_sha256': digest(canonical(keys))}
+    layout_coverage = None
+    if input_profile=='direct-role-states-v1':
+        path=root/'docs/evidence/direct-role-layout-coverage-v1.json'
+        layout=decode(path.read_bytes())
+        check(layout['protocol']=='direct-role-layout-coverage-v1' and layout['profile']==input_profile
+              and layout['releases']==coverage['releases'] and layout['tokenizer_files']==metadata,
+              'direct layout coverage identity drift')
+        for relative,sha in dict(layout['artifacts'],**layout['sources']).items():
+            check(file_hash(root/relative)==sha,'stale direct layout coverage dependency')
+        for name,summary in layout['panels'].items():
+            check(summary['ids_sha256']==panel_bindings[name]['ids_sha256']
+                  and summary['total']==len(panels[name]),'direct layout panel drift')
+        layout_coverage={'sha256':file_hash(path),'panels':layout['panels'],'admission':layout['admission']}
     selected = [p['id'] for p in probe_panel(train)] if input_profile == LEGACY else panels['train_receiver']
     passes = 8 if input_profile == LEGACY else 4  # Recorded probe / proposed finite RD-08 exposure.
     order = selected*passes
     check(len(order) % 8 == 0, 'complete eight-example windows; never pad or drop rows')
     saved, owners = initial_state(root)
+    if input_profile=='direct-role-states-v1':
+        owners=owners+[{'name':'direct_role_projection_'+suffix,'lr':2e-4,'weight_decay':decay,
+            'parameters':[{'name':'codec.direct_role_projection.'+name,'shape':shape,'dtype':'torch.float32'}]}
+            for suffix,name,shape,decay in [('matrix','weight',[1024,1024],.01),('bias','bias',[1024],0.)]]
     diagnostic = 'data/g1-proof/gate-repair-v2-20261105/diagnostic.safetensors'
     check(file_hash(root/diagnostic) == DIAGNOSTIC_SHA, 'diagnostic initialization drift')
     qev = decode((root/'data/qev/release_manifest.json').read_bytes())
@@ -118,14 +136,21 @@ def prepare(snapshot, input_profile, *, regime='component', root=ROOT):
     contract = {'protocol': PROTOCOL, 'input_profile': input_profile, 'profile': spec, 'regime': regime,
         'gpu_uuid': PRIMARY, 'snapshot': str(snapshot), 'releases': coverage['releases'],
         'coverage_sha256': file_hash(root/COVERAGE), 'panels': panel_bindings,
+        'layout_coverage': layout_coverage,
         'initial_checkpoint': {'path': str(CHECKPOINT), 'manifest_sha256': CHECKPOINT_SHA,
             'files': saved['files'], 'identities': saved['identities'],
             'scheduled_windows': 188, 'optimizer_updates': 188, 'schedule_profile': 'a4-v1',
             'restore': 'exact named masters, Adam moments, CUDA/torch/Python RNG; preserve schedule position'},
-        'owners': owners, 'frozen_owners': ['W', 'R', 'budget_row', 'reference'],
+        'owners': owners, 'frozen_owners': ['W', 'R', 'budget_row', 'reference']+
+            (['codec.direct_role_length'] if input_profile=='direct-role-states-v1' else []),
         'profile_only_owners': [] if input_profile != 'direct-role-states-v1' else
-            [{'status': 'pending RD-04', 'owner': 'live identity-initialized FP32 role residual projection',
-              'parameter_names_shapes': None, 'initialization': 'not yet constructed; no fabricated weights/moments'}],
+            [{'status':'implemented; GPU pending RD-07','owner':'codec.direct_role_projection',
+              'parameter_names_shapes':{'codec.direct_role_projection.weight':[1024,1024],
+                                        'codec.direct_role_projection.bias':[1024]},
+              'initialization':'FP32 zero delta; exact identity; fresh moments when fit is authorized'},
+             {'status':'implemented; frozen during receiver fit','owner':'codec.direct_role_length',
+              'parameter_names_shapes':{'codec.direct_role_length.weight':[33,256],'codec.direct_role_length.bias':[33]},
+              'initialization':'FP32 zero logits; no RNG draw; writer-only length owner'}],
         'objectives': {k: COEFFICIENTS[k] for k in ('status', 'noul', 'choice', 'score', 'feasibility', 'alignment', 'structure')},
         'objective_masks': 'existing decision_losses Eligibility; Reason only after actual non-assessed status; no new auxiliary loss',
         'dependencies': dependencies, 'training_order': order, 'exposures': {'passes': passes,
@@ -133,6 +158,7 @@ def prepare(snapshot, input_profile, *, regime='component', root=ROOT):
             'examples_per_window': 8, 'failure_policy': 'failed attempts remain scheduled; no replacement/retry'},
         'required_evidence': {'RD-01': file_hash(root/COVERAGE),
             'source_policy_checks': {key:'pending_RD07' for key in GPU_CHECKS} if spec['source_policy']==FROZEN_SOURCE else {},
+            'direct_role_checks': {key:'pending_RD07' for key in DIRECT_GPU_CHECKS} if input_profile=='direct-role-states-v1' else {},
             'pending_slices': spec['required_slices'], 'native_regime': 'unsupported until RD-06',
             'new_profile_gpu_qualification': 'pending RD-07' if input_profile != LEGACY else 'historical legacy path only'},
         'authorization': 'preparation only; this manifest grants no model execution, fitting or promotion'}

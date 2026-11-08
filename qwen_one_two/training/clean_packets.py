@@ -9,6 +9,7 @@ from ..codec.records import Semantic, Span, Attribute, Value, Reason
 from ..codec.schema import Kind, Port, Status, Role, ValueKind, Mode, parse_numeric
 from ..codec.runtime import Runtime
 from .inputs import check, digest, canonical, REQUEST_KINDS
+from ..codec.layout import LEGACY,DIRECT,packet_costs,admit
 
 
 class CleanPackets:
@@ -19,6 +20,7 @@ class CleanPackets:
         original = encoded['registry']
         check(set(original.refs()) == set(encoded['sources']), 'unclean initial registry contents')
         self.registry = original.fork()
+        self.profile=encoded.get('role_profile',LEGACY)
         self.sources,self.slots,self.view = encoded['sources'],tuple(x.clone() for x in encoded['slots']),view
         self.attributes = {}
         self.audit = encoded['audit']
@@ -67,7 +69,7 @@ class CleanPackets:
             value = Value(kind,True,literal == b'true',Mode.CONSTRUCT,span.source)
         else:
             raise ValueError('reference attributes require independently reviewed local object bindings')
-        attribute = Attribute(key_slots.clone(),value)
+        attribute = Attribute(key_slots.clone(),value,self.profile)
         self.registry.attribute(attribute)
         self.attributes[id(attribute)] = (key,value)
         return attribute
@@ -79,9 +81,10 @@ class CleanPackets:
         meaning = self.slots_for(referent,'target')
         annotation = json.loads(self.view.references[referent].content)['fields']['referent']
         check(annotation.encode() == literal, 'reference literal/neutral identity mismatch')
-        ref = self.registry.publish(Kind.TARGET,Semantic(meaning))
+        ref = self.registry.publish(Kind.TARGET,Semantic(meaning,profile=self.profile,
+            lengths=(len(meaning),) if self.profile==DIRECT else ()))
         value = Value(ValueKind.REFERENCE,True,ref,Mode.CONSTRUCT,span.source)
-        attribute = Attribute(self.slots_for(key,'key').clone(),value)
+        attribute = Attribute(self.slots_for(key,'key').clone(),value,self.profile)
         self.registry.attribute(attribute)
         self.attributes[id(attribute)] = (key,value)
         return attribute
@@ -92,7 +95,7 @@ class CleanPackets:
         value = json.loads(literal)
         check(isinstance(value,str), 'quoted UTF8 string required')
         body = Value(ValueKind.UTF8,True,value.encode(),Mode.CONSTRUCT,span.source)
-        attribute = Attribute(self.slots_for(key,'key').clone(),body)
+        attribute = Attribute(self.slots_for(key,'key').clone(),body,self.profile)
         self.registry.attribute(attribute)
         self.attributes[id(attribute)] = (key,body)
         return attribute
@@ -102,24 +105,42 @@ class CleanPackets:
         provenance.permit((node,),REQUEST_KINDS,self.view.permitted_nodes)
         check(provenance.nodes[node].content_hash == digest(canonical({'kind':int(kind),'present':False})), 'absence provenance')
         body = Value(kind,False)
-        attribute = Attribute(self.slots_for(key,'key').clone(),body)
+        attribute = Attribute(self.slots_for(key,'key').clone(),body,self.profile)
         self.registry.attribute(attribute)
         self.attributes[id(attribute)] = (key,body)
         return attribute
 
+    def admission(self,port,question,target,*,evidence=(),candidates=(),rubric=(),target_attributes=(),candidate_attributes=()):
+        if self.profile!=DIRECT:return None
+        costs=[]
+        for e in evidence:
+            if isinstance(e,Span):self.registry.span(e);costs.append(1+e.count)
+            else:
+                self.registry.evidence(e);previous=self.registry.get(e.result).presentation
+                check(previous.profile==self.profile,'historical layout mismatch');costs.append(1+len(previous))
+        sizes=tuple(len(self.slots[i]) for i in rubric)
+        if len(sizes)==4:sizes=sizes+(0,)
+        check(not candidate_attributes or len(candidate_attributes)==len(candidates),'candidate attribute count')
+        return admit(packet_costs(port,len(self.slots[question]),len(self.slots[target]),rubric=sizes,evidence=tuple(costs),
+            target_attributes=sum(a.cost for a in target_attributes),candidates=tuple((len(self.slots[i]),
+                sum(a.cost for a in candidate_attributes[n]) if candidate_attributes else 0) for n,i in enumerate(candidates))))
+
     def request(self,port,question,target,*,evidence=(),candidates=(),rubric=(),direction=1,
                 target_attributes=(),candidate_attributes=(),session=None):
         check(self.runtime is None, 'one immutable clean request per construction')
+        self.admission(port,question,target,evidence=evidence,candidates=candidates,rubric=rubric,
+                       target_attributes=target_attributes,candidate_attributes=candidate_attributes)
         self.view.validate_request_direction(bool(rubric),direction)
         check(self.view.operation in (None,{Port.NOUL:'Noul',Port.CHOICE:'Choice',Port.SCORE:'Score'}[port]), 'clean operation mismatch')
         check(all(isinstance(span,Span) and span.source in self.sources for span in evidence), 'clean evidence scope')
         # No incoming state, draft, catalogue or registry from the full context.
         if session is None:
-            rt = Runtime(self.registry.run,0,512,128)
+            rt = Runtime(self.registry.run,0,512,128,profile=self.profile)
             rt.registry = self.registry
             rt.startup(); rt.begin(port)
         else:
             rt=session.runtime
+            check(rt.profile==self.profile,'component Session layout mismatch')
             check(rt.registry.run==self.registry.run and not rt.registry.refs() and rt.state=='Native',
                   'clean component requires a fresh session registry')
             rt.registry=self.registry
@@ -131,20 +152,26 @@ class CleanPackets:
                 check(attribute.value == expected and torch.equal(attribute.keys,self.slots_for(key,'key')), 'clean attribute drift')
                 self.registry.attribute(attribute)
             return tuple(attributes)
-        q = rt.publish(Kind.QUESTION,Semantic(self.slots_for(question,'question')))
-        t = rt.publish(Kind.TARGET,Semantic(self.slots_for(target,'target'),validate_attrs(target_attributes)))
+        def semantic(index,role,attributes=()):
+            payload=self.slots_for(index,role)
+            return Semantic(payload,attributes,profile=self.profile,lengths=(len(payload),) if self.profile==DIRECT else ())
+        q = rt.publish(Kind.QUESTION,semantic(question,'question'))
+        t = rt.publish(Kind.TARGET,semantic(target,'target',validate_attrs(target_attributes)))
         refs = []
         check(not candidate_attributes or len(candidate_attributes) == len(candidates), 'candidate attribute count')
         for index,slot in enumerate(candidates):
             attrs = candidate_attributes[index] if candidate_attributes else ()
-            refs.append(rt.publish(Kind.ALTERNATIVE,Semantic(self.slots_for(slot,'alternative'),validate_attrs(attrs))))
+            refs.append(rt.publish(Kind.ALTERNATIVE,semantic(slot,'alternative',validate_attrs(attrs))))
         rubric_ref = None
         if rubric:
             check(len(rubric) in (4,5), 'rubric fields')
             payload = torch.cat([self.slots_for(index,role) for index,role in zip(rubric,('dimension','conditions','zero','one','midpoint'))])
-            if len(rubric) == 4:
+            if len(rubric) == 4 and self.profile==LEGACY:
                 payload = torch.cat((payload,payload.new_zeros(2,1024)))
-            rubric_ref = rt.publish(Kind.RUBRIC,Semantic(payload,direction=direction,midpoint=len(rubric)==5))
+            lengths=tuple(len(self.slots[i]) for i in rubric)
+            if len(rubric)==4:lengths=lengths+(0,)
+            rubric_ref = rt.publish(Kind.RUBRIC,Semantic(payload,direction=direction,midpoint=len(rubric)==5,
+                profile=self.profile,lengths=lengths if self.profile==DIRECT else ()))
         if session is None:
             rt.writer_position(); rt.writer_position()
         else:
@@ -168,7 +195,7 @@ class CleanPackets:
         if reason is not None:
             from .episodes import STATUS_NAMES
             check(json.loads(self.view.references[reason].content)['fields']['status'] == STATUS_NAMES[status], 'Reason/carrier mismatch')
-        payload = None if reason is None else Reason(self.slots_for(reason,'reason'))
+        payload = None if reason is None else Reason(self.slots_for(reason,'reason'),profile=self.profile)
         # Runtime validates status/value presence, bank selection, immutable
         # binding and every completion reservation; no hand-built result bypass.
         return rt.prepare_result(rt.call.snapshot,status,scalar=scalar,

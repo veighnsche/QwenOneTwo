@@ -15,6 +15,7 @@ PROFILES = {
 PREFIXES = ('role.', 'slot.', 'owner.', 'attribute.', 'tags.', 'meta.', 'source.', 'atom.', 'value.',
             'qev_q.', 'qev_k.', 'eval_trunk.', 'status.', 'feasibility.', 'emit1.', 'emit2.', 'emitout.',
             'heads.child_count.')
+PREFIXES = PREFIXES+('direct_role_projection.',)
 
 
 def profile(name, regime):
