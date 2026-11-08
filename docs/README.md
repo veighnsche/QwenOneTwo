@@ -9,6 +9,9 @@ reuse existing infrastructure/data, stabilize component features, test richer
 latent role inputs, preserve joint status/value behavior and verify native
 supervision before further fitting. It is a plan, not implemented behavior or
 training authorization.
+The [queue prompts](redesign-queue-prompts-2026-11-08.md) define predecessor
+recovery and conditional training scope; the [progress ledger](redesign-progress.md)
+indexes actual delivery/evidence. Every redesign implementation slice is pending.
 
 The latest architecture review has a measured
 [data/gradient baseline](architecture-baseline-2026-11-07.md) and

@@ -57,6 +57,12 @@ comparison in docs/quantity-receiver-learning-v1.md: existing training data,
 3090 only, W/reference frozen, development held out, no agents or new data.
 This authorizes its two finite receiver fits, not general/native training.
 
+For submitted RD-01..09 redesign tasks, follow the required recovery/dependency
+protocol in `docs/redesign-queue-prompts-2026-11-08.md` and keep
+`docs/redesign-progress.md` current. Finish the earliest incomplete predecessor
+before starting dependent work. Preparing queue prompts does not authorize their
+execution or training; each submitted prompt defines its own scope.
+
 One user submission, one prompt prefill, one hybrid cache. Qev decision LoRA is
 on for the initial continuous budget readout, off for native generation, and
 on temporarily when Qwen's trained internal gate requests Noul, Choice or Score.

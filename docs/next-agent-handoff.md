@@ -21,6 +21,21 @@ as recorded below.
 
 ## Current requested work — learning redesign plan, 2026-11-08
 
+Subsequent request: prepare one implementation prompt per slice, so later queue
+items recover unfinished predecessors instead of skipping them. The
+[copyable prompts and required protocol](redesign-queue-prompts-2026-11-08.md)
+and [progress ledger](redesign-progress.md) are now present. Each submitted task
+must verify code/evidence/push status, recover the earliest incomplete delivery,
+reuse an existing active run/checkpoint and preserve actual qualification gates.
+Deferred GPU checks from RD-03..06 are resolved by RD-07; a delivered but failed
+RD-08 cannot unlock RD-09. AGENTS.md points to this task-specific protocol.
+Preparing prompts did not authorize any execution. RD-01..07 prompts are
+non-training; submitting RD-08/09 explicitly authorizes their stated finite fits.
+All redesign slices remain pending. No agents, data/model work or training ran.
+Prompt-preparation validation: nine ordered prompts/nine copyable blocks, all
+referencing the recovery protocol; 200 local links across the four affected
+Markdown files resolve; whitespace checks pass. No queue manager was added.
+
 The user requested a concrete implementation plan reusing working infrastructure
 and existing data, with W frozen and latent-only communication; no agents or
 training yet. The [plan](learning-redesign-plan-2026-11-08.md) records RD-01..09,
