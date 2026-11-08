@@ -3,13 +3,12 @@
 Read `docs/next-agent-handoff.md` for the current measured status, artifact paths,
 remaining work and scope boundaries before continuing implementation.
 
-As of 2026-11-08, the user has closed both GPUs again. Do not run GPU workloads,
-device probes or GPU status tools until the user explicitly lifts this hold.
-The user also explicitly bans work that ramps up the fans: no CPU-heavy jobs,
-benchmarks, broad test suites or parallel workers during this noise hold. Keep
-any work light: small file edits, bounded text/metadata reads and lightweight
-static checks. CPU model execution remains prohibited. Do not change fan controls
-or existing services. This hold supersedes historical workload authorizations.
+On 2026-11-08, the user lifted the temporary GPU and fan-noise hold with
+"everything is allowed again." Both GPUs may be used within their authorized
+scopes below; device probes, benchmarks and ordinary CPU work are no longer
+restricted by that hold. Existing task constraints still apply, including no
+CPU model execution, no agents or new data, and no automatic extension of
+completed training experiments. Do not change fan controls or existing services.
 
 All model workloads must run on an explicitly selected CUDA GPU. Use the RTX
 3090 UUID GPU-225509c3-d702-6c27-de03-76b5e99b33b1. No CPU fallback for inference,

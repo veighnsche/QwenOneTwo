@@ -5,15 +5,19 @@ Read this first for current status, then the
 topic contracts. Historical reports describe their recorded sources and runs.
 This handoff records measured mechanisms, not learned capability.
 
-## Current operating constraint — GPU and fan-noise hold, 2026-11-08
+## Current operating permission — GPU and fan-noise hold lifted, 2026-11-08
 
-The user renewed the hold on both GPUs after the completed comparison. No GPU
-workloads, device probes or GPU status tools until explicit reopening. No CPU
-model fallback. The user further clarified that ramping up the fans is banned:
-no CPU-heavy jobs, benchmarks, broad test suites or parallel workers. Only light
-editing, bounded text/metadata reads and lightweight static checks remain within
-scope. Do not change fan controls, live services or The Operating Table. Older
-workload permissions below are historical until the user lifts this restriction.
+After temporarily closing both GPUs and banning work that ramps up the fans,
+the user explicitly reopened work with "everything is allowed again." The
+temporary noise restrictions on GPU workloads, device probes, benchmarks,
+CPU-heavy jobs and test suites are lifted. Both GPUs are available within their
+existing scopes: ordinary model/training paths use the 3090, and the 3060 is
+limited to the explicit read-only two-GPU diagnostic scope. No CPU model fallback.
+Existing no-agents/no-new-data constraints and finite experiment scopes remain;
+this reopening does not launch or extend a completed training experiment. Do not
+change fan controls, live services or The Operating Table. Older hold statements
+below are historical. The completed comparison and next unfinished slice remain
+as recorded below.
 
 ## User direction: MVP gates — 2026-11-06
 
