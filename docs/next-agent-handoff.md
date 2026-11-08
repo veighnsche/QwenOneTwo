@@ -21,8 +21,9 @@ as recorded below.
 
 ## Current requested work — RD-02 receiver preparation, 2026-11-08
 
-RD-02 implementation and model-free evidence are complete; commit/push verification
-is being finalized in the [ledger](redesign-progress.md). Read the
+RD-02 is delivered. Implementation/evidence commit `254f526` is pushed to `main`
+and its exact remote SHA was verified; the [ledger](redesign-progress.md) records
+commands and the delivery finalization. Read the
 [RD-02 report](redesign-rd02-results-2026-11-08.md) and
 [portable evidence](evidence/receiver-preparation-v1.json). The existing probe
 runner now requires explicit preparation/execution, provides named legacy,
@@ -45,7 +46,8 @@ objectives and existing owners, with separate profile/checkpoint identities.
 The RD-04 projection owner remains explicitly pending, without fabricated tensors.
 40 model-free tests pass (62.390 s); final guard changes are covered by a fresh
 12-test pass (47.402 s), reusing the other 28 unchanged results. Compilation and
-whitespace pass. No optimizer/tensor algorithm was changed or exercised.
+whitespace and 148 local Markdown link targets pass. No optimizer/tensor algorithm
+was changed or exercised.
 
 The broader initial run exposed a pre-existing historical profiling-test setup
 failure: all 130 saved E receipt view hashes use the historical schema and reject

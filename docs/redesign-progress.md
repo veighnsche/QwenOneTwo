@@ -13,7 +13,7 @@ because a later queued task starts.
 | Slice | Delivery | Required evidence / checks | Current evidence |
 |---|---|---|---|
 | RD-01 | delivered | Coverage/panel/native-supervision manifests; model-free checks | [Report](redesign-rd01-results-2026-11-08.md), [manifest](evidence/redesign-coverage-v1.json); 23 tests pass; implementation `800c100` pushed and verified |
-| RD-02 | in_progress | Runner preparation/rejection checks; identity/resume contracts | [Report](redesign-rd02-results-2026-11-08.md), [evidence](evidence/receiver-preparation-v1.json); model-free checks pass; commit/push pending |
+| RD-02 | delivered | Runner preparation/rejection checks; identity/resume contracts | [Report](redesign-rd02-results-2026-11-08.md), [evidence](evidence/receiver-preparation-v1.json); 12 final preparation tests +28 reused tests pass; `254f526` pushed and verified |
 | RD-03 | pending | Source/cache policy and static checks; explicit deferred GPU check IDs | None; plan only |
 | RD-04 | pending | Versioned payload/admission contracts and implementation; deferred GPU IDs | None; plan only |
 | RD-05 | pending | Joint objectives, owners, binding/mask tests; deferred GPU IDs | None; plan only |
@@ -22,7 +22,7 @@ because a later queued task starts.
 | RD-08 | pending | Complete matched fit/evaluation receipts; useful-improvement outcome separate | None; training not authorized by prompt preparation |
 | RD-09 | pending | Accepted RD-08 receiver plus eligible native run/evaluation receipts | None; training not authorized by prompt preparation |
 
-Earliest unfinished slice: **RD-02**, awaiting commit/push verification only.
+Earliest unfinished slice: **RD-03**, not started by this RD-02-only submission.
 RD-03..09 are unstarted; no redesign model job was launched.
 
 For each attempted slice add a short entry with implementation/evidence paths,
@@ -129,5 +129,11 @@ known limitation, not an RD-02 implementation blocker.
 
 No model/GPU execution, fitting, optimizer update, agents, new annotations/reviews,
 locked access, deployment, service or Operating Table changes. RD-01 data/native
-supervision limits remain as recorded. Handoff updated. Implementation commit/
-push verification: pending finalization. Stop at RD-02; next slice is RD-03.
+supervision limits remain as recorded. Handoff updated. Implementation commit:
+`254f5268eacedd920b1c4219b79bcda8744a4524`. Authenticated
+`git -c 'credential.helper=!gh auth git-credential' push origin main`: exit 0,
+`47c58a3..254f526 main -> main`. Subsequent authenticated `git ls-remote`
+returned `254f5268eacedd920b1c4219b79bcda8744a4524 refs/heads/main`, identical to
+local HEAD. This ledger/handoff delivery finalization is committed and pushed
+separately on top of that verified implementation. 148 local Markdown targets
+resolve across the changed ledger/handoff/report. Stop at RD-02; next is RD-03.
