@@ -12,6 +12,13 @@ PROFILES = {
              'roles': 'direct-role-states-v1', 'implementation': 'pending',
              'required_slices': ['RD-03', 'RD-04', 'RD-05', 'RD-07']},
 }
+PROFILES.update({
+    'frozen-w-pooled-compact-v2': {'source_policy':'frozen-w-source-v1','roles':'frozen-reference-pooled-v1',
+        'wire':'pooled-role-slots-v2','implementation':'compact-v2','required_slices':['RD-07-v2']},
+    'direct-role-states-v2': {'source_policy':'frozen-w-source-v1','roles':'direct-role-states-v2',
+        'wire':'direct-role-states-v2','implementation':'compact-v2','required_slices':['RD-07-v2']},
+})
+
 PREFIXES = ('role.', 'slot.', 'owner.', 'attribute.', 'tags.', 'meta.', 'source.', 'atom.', 'value.',
             'qev_q.', 'qev_k.', 'eval_trunk.', 'status.', 'feasibility.', 'emit1.', 'emit2.', 'emitout.',
             'heads.child_count.')
@@ -31,7 +38,7 @@ def extend_receiver_groups(codec,groups,input_profile):
     still need qualified initialization/resume and their separate authorization.
     """
     profile(input_profile,'component')
-    if input_profile!='direct-role-states-v1':return groups
+    if input_profile not in ('direct-role-states-v1','direct-role-states-v2'):return groups
     codec.enable_direct_roles()
     codec.direct_role_length.requires_grad_(False)
     parameters=dict(codec.named_parameters());extended=list(groups)

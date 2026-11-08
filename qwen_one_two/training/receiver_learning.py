@@ -20,7 +20,7 @@ def extend_profile_window(parent,owned,codec,input_profile):
     check(parent.examples==0 and not parent.buffers and all(p.grad is None for p in parent.parameters),
           'profile construction requires a complete-window boundary')
     check(parent.phase=='components' and parent.coefficients==COEFFICIENTS,'new profile retains existing joint coefficients')
-    if input_profile!='direct-role-states-v1':
+    if input_profile not in ('direct-role-states-v1','direct-role-states-v2'):
         profile(input_profile,'component');return parent
     groups=extend_receiver_groups(codec,owned,input_profile)
     result=Window(groups,parent.phase,schedule_profile=parent.schedule_profile)
@@ -73,15 +73,15 @@ class ReceiverProducer:
         from .clean import CleanEncoder
         check(release.purpose=='training','never train on development/locked records')
         spec=profile(input_profile,'component')
-        check(spec['roles'] in ('frozen-reference-pooled-v1','direct-role-states-v1'),'receiver role policy')
-        if spec['roles']=='direct-role-states-v1':codec.require_profile('direct-role-states-v1')
+        check(spec['roles'] in ('frozen-reference-pooled-v1','direct-role-states-v1','direct-role-states-v2'),'receiver role policy')
+        if spec['roles'] in ('direct-role-states-v1','direct-role-states-v2'):codec.require_profile(spec['roles'])
         self.b,self.c,self.ref,self.release=backbone,codec,reference,release
         self.input_profile=input_profile
         self.encoder=CleanEncoder(backbone,reference,checkpoint_hash=receiver_hash(backbone,codec),
             profile_hash=digest(PROFILE.encode()),cache_references=True,
-            source_policy=spec['source_policy'],cache_sources=cache_sources,role_policy=spec['roles'])
+            source_policy=spec['source_policy'],cache_sources=cache_sources,role_policy=spec['roles'],wire_profile=spec.get('wire'))
 
-    def __call__(self,row):
+    def __call__(self,row,*,deliver=False):
         import torch
         from .component_producer import component_view
         from .clean_packets import CleanPackets
@@ -105,7 +105,7 @@ class ReceiverProducer:
             check(len(spans)<=8,'receiver evidence exceeds eight spans; never crop')
             return spans
         direct_spans=None
-        if factory.profile=='direct-role-states-v1':
+        if factory.profile in ('direct-role-states-v1','direct-role-states-v2'):
             direct_spans=source_spans()
             factory.admission(next(k for k,v in PORT_NAMES.items() if v==row['operation']),index['question'],index['target'],
                 evidence=tuple(direct_spans),candidates=index['candidates'],rubric=index['rubric'])
@@ -176,6 +176,16 @@ class ReceiverProducer:
                 report['reason_mask']=admission.receipt()['reason_mask']
                 report['startup']={'raw':float(s.raw_budget.detach()),'predicted_budget':s.predicted_budget,
                                    'granted_budget':rt.budget,'override':s.override}
+            if deliver:
+                check(not torch.is_grad_enabled(),'delivered training measurements require no_grad')
+                from .behavior_qualification import deliver_case,grade
+                behavior={'id':row['id'],'record_sha256':report['record_sha256'],'failure':None,'actual':None,
+                          'predicted_status':head['status'],'predicted_value':head.get('value')}
+                try:
+                    deliver_case(self.c,s,packet,evaluated,index,behavior)
+                    s.close()
+                except ValueError as exc:behavior['failure']=str(exc)
+                behavior['score']=grade(row,behavior);report['behavior']=behavior
             # Ending this declared component releases unused return reservations;
             # no result is supplied or claimed consumed, and no native loss exists.
             rt.terminate('Completed',emit_end=False)

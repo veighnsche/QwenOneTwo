@@ -3,7 +3,7 @@ from dataclasses import dataclass, replace
 from types import SimpleNamespace
 from .schema import Role, Kind, Port, Status, ValueKind, Mode, Metadata, Atom, encode_atoms, require, Invalid
 from .records import Ref, Span, History, Attribute, Result
-from .layout import LEGACY,DIRECT,semantic_lengths,packet_costs,admit
+from .layout import LEGACY,DIRECT,semantic_lengths,packet_costs,admit,is_direct,is_compact
 
 
 @dataclass(frozen=True)
@@ -55,7 +55,7 @@ class Renderer:
             SimpleNamespace(port=Port.NONE,target=None,question=None,bank=None,rubric=None,
                 profile=getattr(reg.get(record),'profile',LEGACY)))
         profile=getattr(s,'profile',LEGACY)
-        direct=profile==DIRECT
+        direct=is_direct(profile)
         t=Handles(reg,prefix);out=[];candidate_ends=[]
         target=reg.get(s.target) if s.target is not None else None
         question=reg.get(s.question) if s.question is not None else None
@@ -195,27 +195,32 @@ class Renderer:
              children=len(target.attributes) if rr is None else 0,attempt=s.attempt,complete=1,
              direction=rubric.direction if rubric else 0,midpoint=rubric.midpoint if rubric else False,
              field_lengths=(len(question.slots),) if direct else ())
-        slots(Role.QUESTION,question.slots,s.question)
-        at=sum(a.cost for a in target.attributes) if rr is None else 0
-        meta(Role.TARGET_DESC,s.target,Kind.TARGET,len(target.slots)+at,present=True,
-             children=len(target.attributes) if rr is None else 0,field_lengths=(len(target.slots),) if direct else ())
-        slots(Role.TARGET,target.slots,s.target)
-        if rr is None:
-            for i,a in enumerate(target.attributes):attribute(a,s.target,i)
-            for i,e in enumerate(s.evidence):evidence(e,i)
-        if rubric:
-            sizes=semantic_lengths(Kind.RUBRIC,profile,rubric.lengths,midpoint=rubric.midpoint)
-            meta(Role.RUBRIC_DESC,s.rubric,Kind.RUBRIC,sum(sizes),present=True,direction=rubric.direction,midpoint=rubric.midpoint,
-                 field_lengths=sizes if direct else ())
-            start=0
-            for role,n in zip((Role.DIMENSION,Role.CONDITIONS,Role.ZERO,Role.ONE,Role.MIDPOINT),sizes):
-                values=rubric.slots[start:start+n];start+=n
-                slots(role,values,s.rubric)
+        if rr is None or not is_compact(profile):
+            slots(Role.QUESTION,question.slots,s.question)
+            at=sum(a.cost for a in target.attributes) if rr is None else 0
+            meta(Role.TARGET_DESC,s.target,Kind.TARGET,len(target.slots)+at,present=True,
+                 children=len(target.attributes) if rr is None else 0,field_lengths=(len(target.slots),) if direct else ())
+            slots(Role.TARGET,target.slots,s.target)
+            if rr is None:
+                for i,a in enumerate(target.attributes):attribute(a,s.target,i)
+                for i,e in enumerate(s.evidence):evidence(e,i)
+            if rubric:
+                sizes=semantic_lengths(Kind.RUBRIC,profile,rubric.lengths,midpoint=rubric.midpoint)
+                meta(Role.RUBRIC_DESC,s.rubric,Kind.RUBRIC,sum(sizes),present=True,direction=rubric.direction,midpoint=rubric.midpoint,
+                     field_lengths=sizes if direct else ())
+                start=0
+                for role,n in zip((Role.DIMENSION,Role.CONDITIONS,Role.ZERO,Role.ONE,Role.MIDPOINT),sizes):
+                    values=rubric.slots[start:start+n];start+=n
+                    slots(role,values,s.rubric)
         if rr is None:
             if bank:
                 for i,r in enumerate(bank.candidates):candidate(r,i,s.bank)
         elif assessed:
-            if s.port==Port.CHOICE:candidate(rr.selected,rr.selected_index,s.bank)
+            if s.port==Port.CHOICE:
+                if is_compact(profile):
+                    handle=t.intern(rr.selected)
+                    out.append(Position(Role.REFERENCE,encode_atoms(ValueKind.REFERENCE,rr.selected,handle)[0],handle,0))
+                else:candidate(rr.selected,rr.selected_index,s.bank)
             else:out.append(Position(Role.NOUL if s.port==Port.NOUL else Role.SCORE,rr.scalar,t.intern(result),0))
         else:
             z=reg.get(rr.reason,Kind.REASON)
@@ -258,6 +263,7 @@ class Renderer:
 
     def return_max(self, snapshot):
         s=self.registry.get(snapshot,Kind.SNAPSHOT)
+        if is_compact(s.profile):return 39
         if s.profile==DIRECT:
             q=self.registry.get(s.question);target=self.registry.get(s.target)
             rubric=self.registry.get(s.rubric) if s.rubric is not None else None

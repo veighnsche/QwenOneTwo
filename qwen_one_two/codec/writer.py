@@ -5,7 +5,7 @@ from .schema import Role, Kind, Port, Status, ValueKind, Mode, Invalid, require,
 from .records import Semantic, Attribute, Value, Span, History, Reason
 from .render import Renderer
 from .neural import finite
-from .layout import LEGACY,DIRECT
+from .layout import LEGACY,DIRECT,COMPACT_DIRECT
 
 
 @dataclass(frozen=True)
@@ -120,6 +120,7 @@ class Decoder:
 
     def semantic(self,f,kind,*,allow_attributes=True):
         c=self.codec
+        require(self.profile!=COMPACT_DIRECT,'native v2 role emission unsupported; component-only profile')
         if self.profile==DIRECT:
             if kind==Kind.RUBRIC:
                 logits=c.heads['direction'](f).clone();logits[0]=-torch.inf

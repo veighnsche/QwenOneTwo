@@ -1,0 +1,267 @@
+{
+  "actual_updates_at_plan": 0,
+  "baseline_commit": "47700325f445ddd438ce88852d56e0ca86cabbab",
+  "comparison_protocol": {
+    "RD09": "excluded; no native training/promotion/deployment",
+    "acceptance": {
+      "Choice": "retain every previously passing case in fixed50-case panel; also report every control-pass/candidate-fail",
+      "Noul": "candidate delivered success strictly exceeds control; truth accuracy beats training-defined majority-label constant on each applicable familiar cohort",
+      "Reason": "semantic support remains unsupported/masked, structural validity separate; never counted semantic qualification",
+      "Score": "candidate mean interval distance strictly improves and correct interior delivered cases are nonzero on familiar cohorts; preserve original intervals and report paired counts",
+      "familiar_cohorts": [
+        "development_E/familiar_operations_ranges",
+        "development_X/familiar_operations_ranges"
+      ],
+      "full_reports": "all case wins/losses and both-sides-correct intervention pairs, every declared subgroup; no dev selection",
+      "missing": "missing/unsupported cohorts prevent corresponding improvement claim",
+      "status": "no regression per operation/reference-status cell across full E/X"
+    },
+    "arms": {
+      "candidate": "direct-role-states-v2",
+      "control": "frozen-w-pooled-compact-v2"
+    },
+    "checkpoint_cursor_policy": [
+      0,
+      8,
+      1000,
+      2000,
+      3000,
+      4000,
+      5000,
+      6000
+    ],
+    "development": "both fixed fits must finish before either full E130/X180 evaluation; keep3 oversized E requests as failures",
+    "historical_choice_retention": {
+      "panel_ids": [
+        "development-E-0040",
+        "development-E-0041",
+        "development-E-0042",
+        "development-E-0043",
+        "development-E-0044",
+        "development-E-0045",
+        "development-E-0046",
+        "development-E-0047",
+        "development-E-0048",
+        "development-E-0049",
+        "development-X-05-000-0",
+        "development-X-05-000-1",
+        "development-X-05-001-0",
+        "development-X-05-001-1",
+        "development-X-05-002-0",
+        "development-X-05-002-1",
+        "development-X-05-003-0",
+        "development-X-05-003-1",
+        "development-X-05-004-0",
+        "development-X-05-004-1",
+        "development-X-05-005-0",
+        "development-X-05-005-1",
+        "development-X-05-006-0",
+        "development-X-05-006-1",
+        "development-X-05-007-0",
+        "development-X-05-007-1",
+        "development-X-05-008-0",
+        "development-X-05-008-1",
+        "development-X-05-009-0",
+        "development-X-05-009-1",
+        "development-X-06-000-0",
+        "development-X-06-000-1",
+        "development-X-06-001-0",
+        "development-X-06-001-1",
+        "development-X-06-002-0",
+        "development-X-06-002-1",
+        "development-X-06-003-0",
+        "development-X-06-003-1",
+        "development-X-06-004-0",
+        "development-X-06-004-1",
+        "development-X-06-005-0",
+        "development-X-06-005-1",
+        "development-X-06-006-0",
+        "development-X-06-006-1",
+        "development-X-06-007-0",
+        "development-X-06-007-1",
+        "development-X-06-008-0",
+        "development-X-06-008-1",
+        "development-X-06-009-0",
+        "development-X-06-009-1"
+      ],
+      "passing_ids": [
+        "development-E-0040",
+        "development-E-0044",
+        "development-E-0045",
+        "development-E-0046",
+        "development-E-0047",
+        "development-E-0048",
+        "development-E-0049",
+        "development-X-05-000-0",
+        "development-X-05-000-1",
+        "development-X-05-001-0",
+        "development-X-05-001-1",
+        "development-X-05-002-0",
+        "development-X-05-002-1",
+        "development-X-05-003-0",
+        "development-X-05-003-1",
+        "development-X-05-004-0",
+        "development-X-05-004-1",
+        "development-X-05-005-0",
+        "development-X-05-005-1",
+        "development-X-05-006-0",
+        "development-X-05-006-1",
+        "development-X-05-007-0",
+        "development-X-05-007-1",
+        "development-X-05-008-0",
+        "development-X-05-008-1",
+        "development-X-05-009-0",
+        "development-X-05-009-1",
+        "development-X-06-000-0",
+        "development-X-06-000-1",
+        "development-X-06-001-0",
+        "development-X-06-001-1",
+        "development-X-06-002-0",
+        "development-X-06-002-1",
+        "development-X-06-003-0",
+        "development-X-06-003-1",
+        "development-X-06-004-0",
+        "development-X-06-004-1",
+        "development-X-06-005-0",
+        "development-X-06-005-1",
+        "development-X-06-006-0",
+        "development-X-06-006-1",
+        "development-X-06-007-0",
+        "development-X-06-007-1",
+        "development-X-06-008-0",
+        "development-X-06-008-1",
+        "development-X-06-009-0",
+        "development-X-06-009-1"
+      ],
+      "raw_hashes": {
+        "data/receiver-probe-20261107/run/development-E.jsonl": "f53fe301e85e469623bc1b2463adc5a3437b3e1402c9269ae55eef06de7c43e8",
+        "data/receiver-probe-20261107/run/development-X.jsonl": "6b3a0ba01020d8f0c07b430cb459d386ac9903b6ec261ef2244eba8390cacd54"
+      },
+      "scope": "historical old-format delivered cases; candidate must preserve these IDs under original grading, no claim that wires are identical",
+      "source": "docs/evidence/receiver-training-probe-v1.json",
+      "source_sha256": "09977698f3c98d5c568bdde36cdac89999856c151e23d054bb06d66caf0d3473"
+    },
+    "new_data": false,
+    "objectives": "unchanged existing joint coefficients and eligibility; Reason masks preserved in both arms",
+    "order": "exact RD01 panels.train_receiver repeated4; cross-pass windows, no padding",
+    "per_arm": {
+      "examples_per_window": 8,
+      "exposures": 6000,
+      "passes": 4,
+      "records": 1500,
+      "windows": 750
+    },
+    "profile_only": "candidate FP32 zero-delta projection with fresh absent Adam moments; frozen unchanged33-way length head",
+    "protocol": "receiver-matched-rd08-v2",
+    "shared_initialization": "parent checkpoint0188 masters/moments/RNG/schedule; same named owners exact",
+    "training_measurements": "initial/final full1500-case head and actual delivered behavior; endpoint measurements never enter gradients or exposure counters"
+  },
+  "contract_commit": "c1021a3",
+  "coverage": {
+    "E_supported": 127,
+    "E_total": 130,
+    "X_supported": 180,
+    "X_total": 180,
+    "path": "docs/evidence/compact-role-layout-coverage-v2.json",
+    "sha256": "f29db678293aa44a0ee057e59da00b9fa5971dc8b1b6caa49a185cb0facadb6c",
+    "training": 1500
+  },
+  "execution_policy": "6000 exposures/750 windows per arm; initial/final full1500 heads+delivery observations; both fits finish before E/X; no extra passes/new data/RD09/promotion",
+  "matched": {
+    "coefficients": true,
+    "full_order": true,
+    "profile_only": "candidate identity delta projection with fresh absent moments; unchanged frozen native length head",
+    "shared_initial_checkpoint_masters_moments_rng_schedule": true,
+    "shared_owners": true
+  },
+  "plans": {
+    "candidate": {
+      "path": "data/redesign-format-v2-20261108/plans/candidate/plan.json",
+      "preparation": {
+        "accounting": {
+          "causal_positions": 0,
+          "failed_training_attempts": 0,
+          "offline_reference_encodings": 0,
+          "offline_source_encodings": 0,
+          "optimizer_updates": 0,
+          "prefills": 0,
+          "scheduled_training_attempts": 0,
+          "sessions": 0
+        },
+        "host": {
+          "counts": {},
+          "phases": {
+            "prepare": {
+              "calls": 1,
+              "cpu_ns": 21034019547,
+              "exclusive_cpu_ns": 21034019547,
+              "exclusive_wall_ns": 21115437963,
+              "failed_calls": 0,
+              "wall_ns": 21115437963
+            }
+          }
+        },
+        "plan_sha256": "a06b5e6b87a055590f34c553172a75077f7f978cd93d31bd3346579bb3a06450",
+        "protocol": "receiver-preparation-v1",
+        "run_sha256": "2e58e8ee929f7cd05b110f53cedb53a55f56d68cb8efec7bea0659212fa1f03c",
+        "scope": "host preparation includes byte hashing only; not GPU timing or execution",
+        "status": "PREPARED_NOT_EXECUTED"
+      },
+      "run_sha256": "2e58e8ee929f7cd05b110f53cedb53a55f56d68cb8efec7bea0659212fa1f03c",
+      "sha256": "a06b5e6b87a055590f34c553172a75077f7f978cd93d31bd3346579bb3a06450"
+    },
+    "control": {
+      "path": "data/redesign-format-v2-20261108/plans/control/plan.json",
+      "preparation": {
+        "accounting": {
+          "causal_positions": 0,
+          "failed_training_attempts": 0,
+          "offline_reference_encodings": 0,
+          "offline_source_encodings": 0,
+          "optimizer_updates": 0,
+          "prefills": 0,
+          "scheduled_training_attempts": 0,
+          "sessions": 0
+        },
+        "host": {
+          "counts": {},
+          "phases": {
+            "prepare": {
+              "calls": 1,
+              "cpu_ns": 21037056422,
+              "exclusive_cpu_ns": 21037056422,
+              "exclusive_wall_ns": 21122769914,
+              "failed_calls": 0,
+              "wall_ns": 21122769914
+            }
+          }
+        },
+        "plan_sha256": "66dc9e2101ef5c8985c5119f574a5b5cacfaebcedcbac3f5e55877c159fdef9b",
+        "protocol": "receiver-preparation-v1",
+        "run_sha256": "a363887cc0fe848593beb66cf36278dacb72b60efd2044ef739fbb35ea2fe754",
+        "scope": "host preparation includes byte hashing only; not GPU timing or execution",
+        "status": "PREPARED_NOT_EXECUTED"
+      },
+      "run_sha256": "a363887cc0fe848593beb66cf36278dacb72b60efd2044ef739fbb35ea2fe754",
+      "sha256": "66dc9e2101ef5c8985c5119f574a5b5cacfaebcedcbac3f5e55877c159fdef9b"
+    }
+  },
+  "protocol": "receiver-matched-rd08-v2-plan",
+  "protocol_sha256": "2da758562ac3a5b4d9fb8981ef59f01ae2f6bcf5edebb7fc5d1b5f527705f63c",
+  "qualification": {
+    "checks": 17,
+    "path": "docs/evidence/compact-role-qualification-v2.json",
+    "sha256": "a5badd71f9384e814fe214d381fc6694c6960236e2b25b837ae6023278dfeb85",
+    "status": "PASS"
+  },
+  "qualification_failures_retained": "gpu-1 pooled Score admission; repaired exact whole-rubric normalization; gpu-2 real VJPs/delivery/accumulation/resume pass; unchanged24 traces reused via AST/source migration",
+  "static_tests": {
+    "count": 103,
+    "pass": 103,
+    "path": "data/redesign-format-v2-20261108/static-final.log",
+    "seconds": 137.464,
+    "sha256": "3137b3a2af7e42c92296f00534187d65e09383a2393239862f5069f7c65732c3"
+  },
+  "status": "QUALIFIED_PREPARED_NOT_EXECUTED",
+  "training_authorization": "user explicitly authorized finite RD08 and this format recovery; authorization persists"
+}

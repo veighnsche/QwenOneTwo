@@ -87,15 +87,17 @@ class ReceiverPlanTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'pending RD-03..07'):
             self.planning.admit_execution(p,gpu=self.planning.PRIMARY,input_profile='direct-role-states-v1',regime='component')
 
-    def test_direct_plan_retains_full_coverage_and_zero_support_blocker(self):
-        plan=self.planning.prepare(self.snapshot,'direct-role-states-v1')['contract']
+    def test_v2_plan_retains_full_coverage_and_v1_audit_stays_historical(self):
+        with self.assertRaisesRegex(ValueError,'stale direct layout coverage dependency'):
+            self.planning.prepare(self.snapshot,'direct-role-states-v1')
+        plan=self.planning.prepare(self.snapshot,'direct-role-states-v2')['contract']
         self.assertEqual(plan['exposures']['distinct_records'],1500)
         self.assertEqual(plan['exposures']['presentations'],6000)
         self.assertEqual(plan['exposures']['windows'],750)
         coverage=plan['layout_coverage']
-        self.assertIn('blocked_zero_common_support',coverage['admission'])
+        self.assertIn('all1500 training supported',coverage['admission'])
         self.assertEqual({name:(s['supported'],s['total']) for name,s in coverage['panels'].items()},
-            {'train_receiver':(0,1500),'development_E':(0,130),'development_X':(0,180)})
+            {'train_receiver':(1500,1500),'development_E':(127,130),'development_X':(180,180)})
         owners={p['name']:p for group in plan['owners'] for p in group['parameters']}
         self.assertEqual(owners['codec.direct_role_projection.weight']['shape'],[1024,1024])
         self.assertEqual(owners['codec.direct_role_projection.bias']['shape'],[1024])
@@ -104,8 +106,9 @@ class ReceiverPlanTests(unittest.TestCase):
         self.assertIsNone(plan['experimental_component_admission']['reference_qualification'])
         self.assertFalse(plan['experimental_component_admission']['receiver_behavior_accepted'])
         self.assertIn('unsupported/masked',plan['experimental_component_admission']['Reason'])
-        self.assertEqual(set(plan['required_evidence']['joint_objective_checks']),
-                         {'RD05-GPU-GRADIENT-ACCUMULATION','RD05-GPU-RESUME'})
+        self.assertTrue(plan['required_evidence']['qualification_required_before_fit'])
+        self.assertIn('historical_RD07',plan['required_evidence'])
+        self.assertIn('changed_v2',plan['required_evidence'])
         self.assertEqual(plan['objectives']['status'],1.)
         self.assertEqual(plan['objectives']['feasibility'],.5)
 

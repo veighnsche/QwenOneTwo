@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from .inputs import canonical,check,digest
 from .receiver_profiles import LEGACY,profile
 from .binding import tensor_hash,source_hash,canonical_payload
-from ..codec.layout import DIRECT,LEGACY as WIRE_LEGACY,semantic_lengths
+from ..codec.layout import DIRECT,LEGACY as WIRE_LEGACY,semantic_lengths,is_direct
 from ..codec.schema import Kind,Port
 from ..codec.records import Span
 
@@ -112,13 +112,22 @@ def admit_prepared_component(release,row,view,provenance,encoded,index,runtime,p
     check(encoded['input_hash']==digest(input_bytes),'component input identity drift')
     check(runtime.state=='Evaluating' and runtime.call.snapshot==packet.snapshot and runtime.call.request is packet,
           'component is not the actual admitted request')
-    wire=DIRECT if spec['roles']==DIRECT else WIRE_LEGACY
+    wire=spec.get('wire',DIRECT if spec['roles']==DIRECT else WIRE_LEGACY)
     actual,candidates,fields=_fields(runtime.registry,packet.snapshot)
     check(actual.profile==wire==encoded.get('role_profile',WIRE_LEGACY),'component layout mismatch')
     check({Port.NOUL:'Noul',Port.CHOICE:'Choice',Port.SCORE:'Score'}[actual.port]==row['operation'],'component operation drift')
     check(len(encoded['slots'])==len(view.references),'component role coverage')
-    expected=tuple((ref.role,tensor_hash(value if wire==DIRECT else canonical_payload(value)))
-                   for ref,value in zip(view.references,encoded['slots']))
+    normalized={i:value if is_direct(wire) else canonical_payload(value) for i,value in enumerate(encoded['slots'])}
+    if not is_direct(wire) and index['rubric']:
+        # Registry normalizes the complete concatenated rubric, including absent
+        # midpoint padding. Match that exact reduction shape, not separate fields.
+        import torch
+        pieces=[encoded['slots'][i] for i in index['rubric']]
+        if len(pieces)==4:pieces.append(pieces[0].new_zeros(2,1024))
+        joined=canonical_payload(torch.cat(pieces));start=0
+        for i in index['rubric']:
+            n=len(encoded['slots'][i]);normalized[i]=joined[start:start+n];start+=n
+    expected=tuple((ref.role,tensor_hash(normalized[i])) for i,ref in enumerate(view.references))
     check(fields==expected,'actual role/candidate content differs from reviewed component')
     check(len(index['identities'])==len(candidates) and len(set(index['identities']))==len(candidates),'ambiguous candidate identities')
     rubric=None if actual.rubric is None else runtime.registry.get(actual.rubric)

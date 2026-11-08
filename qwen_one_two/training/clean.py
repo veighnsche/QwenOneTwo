@@ -95,9 +95,10 @@ class CleanEncoder:
     No fitting, detached-contamination repair, or locked-case updates occur.
     """
     def __init__(self, backbone, reference, *, checkpoint_hash, profile_hash, cache_references=False,
-                 source_policy=D_SOURCE, cache_sources=False,role_policy='frozen-reference-pooled-v1'):
-        check(role_policy in ('frozen-reference-pooled-v1','direct-role-states-v1'),'unknown role policy')
-        check(role_policy!='direct-role-states-v1' or source_policy==FROZEN_SOURCE,'direct roles require frozen W sources')
+                 source_policy=D_SOURCE, cache_sources=False,role_policy='frozen-reference-pooled-v1',wire_profile=None):
+        from ..codec.layout import is_direct
+        check(role_policy in ('frozen-reference-pooled-v1','direct-role-states-v1','direct-role-states-v2'),'unknown role policy')
+        check(not is_direct(role_policy) or source_policy==FROZEN_SOURCE,'direct roles require frozen W sources')
         mode=source_mode(source_policy,cache=cache_sources)
         from ..codec.neural import cuda_only
         cuda_only()
@@ -107,6 +108,7 @@ class CleanEncoder:
         self.backbone, self.reference = backbone, reference
         self.source_policy=source_policy
         self.role_policy=role_policy
+        self.wire_profile=wire_profile
         self.source_cache={} if cache_sources else None
         self.source_cache_hits=0
         self.source_binding=bind_frozen_source(backbone) if source_policy==FROZEN_SOURCE else None
@@ -165,11 +167,11 @@ class CleanEncoder:
         self._validate_source()
         excerpts, model_bytes = view.materialize(provenance)
         planned=None
-        if self.role_policy=='direct-role-states-v1':
+        if self.role_policy in ('direct-role-states-v1','direct-role-states-v2'):
             from .direct_roles import preflight
             # All role/source lengths and worst-case returns are checked before
             # the first offline model forward, never after a partial encoding.
-            planned=preflight(self.backbone.tokenizer,view,provenance)
+            planned=preflight(self.backbone.tokenizer,view,provenance,profile=self.role_policy)
         registry = Registry(run)
         refs, slots, audit = [], [], []
         for index, excerpt in enumerate(excerpts):
@@ -200,12 +202,13 @@ class CleanEncoder:
         result={'registry': registry, 'sources': tuple(refs), 'slots': tuple(slots),
                 'input_hash': digest(model_bytes), 'audit': audit}
         if planned is not None:result.update(role_profile=self.role_policy,admission=planned['costs'])
+        if self.wire_profile is not None:result['role_profile']=self.wire_profile
         return result
 
     def reference_payload(self,ref):
         """Cache only frozen W/reference outputs; D-dependent sources stay fresh."""
         import torch
-        check(self.role_policy!='direct-role-states-v1' or ref.role=='reason',
+        check(self.role_policy not in ('direct-role-states-v1','direct-role-states-v2') or ref.role=='reason',
               'direct request roles cannot use pooled reference payloads')
         check(self.reference.frozen and self.reference.artifact_id==self.identity['reference']
               and all(not p.requires_grad for p in self.reference.parameters()),'reference cache identity/freeze')

@@ -162,15 +162,16 @@ class Metadata:
     field_lengths: tuple = ()
 
     def encode(self, role):
-        from .layout import DIRECT, valid_profile, semantic_lengths
+        from .layout import DIRECT, valid_profile, semantic_lengths, is_direct, field_limit, wire_version
         role = Role(role)
-        direct=valid_profile(self.profile)==DIRECT
+        valid_profile(self.profile)
+        direct=is_direct(self.profile)
         length=0
         if direct and role in (Role.REQUEST,Role.RESULT,Role.TARGET_DESC,Role.CANDIDATE_DESC,Role.ATTRIBUTE_DESC):
             require(type(self.field_lengths) is tuple and len(self.field_lengths)==1,'direct metadata field length')
-            length=integer(self.field_lengths[0],1,32,'direct metadata length')
+            length=integer(self.field_lengths[0],1,field_limit(self.profile),'direct metadata length')
         elif direct and role==Role.RUBRIC_DESC:
-            semantic_lengths(Kind.RUBRIC,DIRECT,self.field_lengths,midpoint=self.midpoint)
+            semantic_lengths(Kind.RUBRIC,self.profile,self.field_lengths,midpoint=self.midpoint)
         else:require(self.field_lengths==(),'inapplicable metadata lengths')
         require(role in HEADERS | DESCRIPTORS, 'metadata role')
         Port(self.port); Status(self.status); ValueKind(self.value_kind); Mode(self.mode); Kind(self.kind)
@@ -188,7 +189,7 @@ class Metadata:
                  self.question is not None, self.target is not None, self.bank is not None,
                  self.rubric is not None, self.midpoint, self.historical, self.sealed)
         require(all(type(v) is bool for v in flags), 'flag type')
-        f = [(0, 4, 2 if direct else 1), (4, 3, int(self.port)), (7, 3, int(self.status)),
+        f = [(0, 4, wire_version(self.profile)), (4, 3, int(self.port)), (7, 3, int(self.status)),
              (10, 3, int(self.value_kind)), (13, 2, int(self.mode)), (15, 4, int(self.kind)),
              *[(19 + i, 1, int(v)) for i, v in enumerate(flags)],
              (32, 8, self.owner or 0), (40, 8, self.item or 0), (48, 9, self.following), (57, 7, length)]

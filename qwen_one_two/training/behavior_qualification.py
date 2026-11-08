@@ -131,6 +131,31 @@ def source_hashes():
     return {str(p.relative_to(root)):digest(p.read_bytes()) for p in files}
 
 
+
+def deliver_case(codec,s,packet,evaluated,indices,case):
+    from ..codec.writer import decode_result
+    from ..codec.schema import Kind
+    from ..codec.render import Packet
+    from .episodes import STATUS_NAMES
+    rt=s.runtime
+    returned=decode_result(codec,rt,evaluated)
+    result=rt.registry.get(rt.call.result,Kind.RESULT)
+    snapshot=rt.registry.get(packet.snapshot,Kind.SNAPSHOT)
+    candidates=() if snapshot.bank is None else rt.registry.get(snapshot.bank,Kind.BANK).candidates
+    selected=None if result.selected is None else indices['identities'][candidates.index(result.selected)]
+    case['actual']={'status':STATUS_NAMES[result.status],
+        'value':None if result.scalar is None else float(result.scalar),'selected':selected,
+        'reason_present':result.reason is not None}
+    consumed=s.deliver(returned)
+    summary=s.summary()
+    case['transport']={'latent_request':isinstance(packet,Packet),'latent_return':isinstance(returned,Packet),
+        'bound_snapshot':returned.snapshot==packet.snapshot==result.snapshot,
+        'candidate_binding':result.selected is None or result.selected in candidates,
+        'consumed':consumed,'single_prefill':s.prefills==1,'cache_continuity':s.state.lineage==1,
+        'accounting':s.state.position==rt.position==sum(summary[k] for k in ('P','B','A','H'))}
+    check(len(packet)+len(returned)>0,'empty latent exchange')
+    return case
+
 def evaluate_case(backbone,codec,reference,release,row,encoder,*,construction=None,input_profile='d-pooled-role-slots-v1'):
     import torch
     from .component_producer import component_view
@@ -178,22 +203,7 @@ def evaluate_case(backbone,codec,reference,release,row,encoder,*,construction=No
         # Record unmodified head decisions even if Reason decoding later fails.
         case['predicted_status']=STATUS_NAMES[int(evaluated['status_logits'].argmax())+1]
         if 'value' in evaluated:case['predicted_value']=float(evaluated['value'])
-        returned=decode_result(codec,rt,evaluated)
-        result=rt.registry.get(rt.call.result,Kind.RESULT)
-        snapshot=rt.registry.get(packet.snapshot,Kind.SNAPSHOT)
-        candidates=() if snapshot.bank is None else rt.registry.get(snapshot.bank,Kind.BANK).candidates
-        selected=None if result.selected is None else indices['identities'][candidates.index(result.selected)]
-        case['actual']={'status':STATUS_NAMES[result.status],
-            'value':None if result.scalar is None else float(result.scalar),'selected':selected,
-            'reason_present':result.reason is not None}
-        consumed=s.deliver(returned)
-        summary=s.summary()
-        case['transport']={'latent_request':isinstance(packet,Packet),'latent_return':isinstance(returned,Packet),
-            'bound_snapshot':returned.snapshot==packet.snapshot==result.snapshot,
-            'candidate_binding':result.selected is None or result.selected in candidates,
-            'consumed':consumed,'single_prefill':s.prefills==1,'cache_continuity':s.state.lineage==1,
-            'accounting':s.state.position==rt.position==sum(summary[k] for k in ('P','B','A','H'))}
-        check(len(packet)+len(returned)>0,'empty latent exchange')
+        deliver_case(codec,s,packet,evaluated,indices,case)
         s.close();rt.terminate('Completed',emit_end=False)
     except ValueError as exc:
         case['failure']=str(exc)

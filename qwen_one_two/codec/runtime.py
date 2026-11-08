@@ -3,7 +3,7 @@ from dataclasses import dataclass, field, replace
 from .schema import Port, Kind, Status, Role, Invalid, require, integer, bits
 from .records import Registry, Snapshot, Bank, Result, Reason, Attribute, Span, History, owned
 from .render import Renderer
-from .layout import LEGACY,DIRECT,valid_profile
+from .layout import LEGACY,DIRECT,valid_profile,wire_version
 
 
 class NotAdmitted(Invalid):
@@ -245,7 +245,7 @@ class Runtime:
         b,a,h,c,w,t,o,phase=self.counter_values()
         if draft is not None:w=32-draft.writer;o=32-draft.allocated
         require(0<=length<=256 and 0<=candidates<=16 and 0<=evidence<=8 and 0<=children<=8,'control counts')
-        return bits([(0,4,2 if self.profile==DIRECT else 1),(4,3,int(port if port is not None else (draft.port if draft else Port.NONE))),
+        return bits([(0,4,wire_version(self.profile)),(4,3,int(port if port is not None else (draft.port if draft else Port.NONE))),
             (7,1,phase),(8,18,b),(26,19,a),(45,7,h),(52,19,c),(71,6,w),(77,5,t),(82,6,o),
             (88,3,0 if not draft or draft.previous is None else draft.previous+1),(91,9,length if draft else 0),
             (100,6,draft.allocated if draft else 0),(106,5,candidates if draft else 0),

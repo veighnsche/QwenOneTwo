@@ -1,0 +1,410 @@
+{
+  "RD09": "unstarted; no native qualification or supervision waiver",
+  "checks": {
+    "RD03-GPU-CACHE-PARITY": {
+      "run": "gpu-1",
+      "scope": "unchanged kernel/legacy path; admission/measurement delta requalified in gpu-2",
+      "status": "pass",
+      "test": "tests.test_frozen_source_gpu.FrozenSourceGPU.test_cache_matches_uncached_and_preserves_bindings"
+    },
+    "RD03-GPU-CONSUMER-GRADIENTS": {
+      "run": "gpu-1",
+      "scope": "unchanged kernel/legacy path; admission/measurement delta requalified in gpu-2",
+      "status": "pass",
+      "test": "tests.test_frozen_source_gpu.FrozenSourceGPU.test_consumer_gradients_and_frozen_W"
+    },
+    "RD03-GPU-D-INDEPENDENCE": {
+      "run": "gpu-1",
+      "scope": "unchanged kernel/legacy path; admission/measurement delta requalified in gpu-2",
+      "status": "pass",
+      "test": "tests.test_frozen_source_gpu.FrozenSourceGPU.test_frozen_features_ignore_D_updates"
+    },
+    "RD04-GPU-DIRECT-GRADIENTS": {
+      "run": "gpu-1",
+      "scope": "unchanged kernel/legacy path; admission/measurement delta requalified in gpu-2",
+      "status": "pass",
+      "test": "tests.test_direct_roles_gpu.DirectRolesGPU.test_live_projection_and_consumer_gradients"
+    },
+    "RD04-GPU-DIRECT-ROUNDTRIP": {
+      "run": "gpu-1",
+      "scope": "unchanged kernel/legacy path; admission/measurement delta requalified in gpu-2",
+      "status": "pass",
+      "test": "tests.test_direct_roles_gpu.DirectRolesGPU.test_direct_packets_returns_and_immutable_bindings"
+    },
+    "RD04-GPU-IDENTITY-PROJECTION": {
+      "run": "gpu-1",
+      "scope": "unchanged kernel/legacy path; admission/measurement delta requalified in gpu-2",
+      "status": "pass",
+      "test": "tests.test_direct_roles_gpu.DirectRolesGPU.test_identity_projection_and_legacy_wire"
+    },
+    "RD05-GPU-GRADIENT-ACCUMULATION": {
+      "run": "gpu-1",
+      "scope": "unchanged kernel/legacy path; admission/measurement delta requalified in gpu-2",
+      "status": "pass",
+      "test": "tests.test_joint_receiver_gpu.JointReceiverGPU.test_joint_VJPs_and_eligible_accumulation"
+    },
+    "RD05-GPU-RESUME": {
+      "run": "gpu-1",
+      "scope": "unchanged kernel/legacy path; admission/measurement delta requalified in gpu-2",
+      "status": "pass",
+      "test": "tests.test_joint_receiver_gpu.JointReceiverGPU.test_complete_window_resume_and_frozen_owners"
+    },
+    "RD06-GPU-CONNECTED-GRADIENT": {
+      "run": "gpu-1",
+      "scope": "unchanged kernel/legacy path; admission/measurement delta requalified in gpu-2",
+      "status": "pass",
+      "test": "tests.test_native_redesign_gpu.NativeRedesignGPU.test_native_loss_through_actual_return_receiver_and_writer"
+    },
+    "RD06-GPU-NATIVE-RETURN": {
+      "run": "gpu-1",
+      "scope": "unchanged kernel/legacy path; admission/measurement delta requalified in gpu-2",
+      "status": "pass",
+      "test": "tests.test_native_redesign_gpu.NativeRedesignGPU.test_actual_native_return_and_prefill_source"
+    },
+    "V2-GPU-ALL-STATUS-BOUNDS": {
+      "run": "gpu-1",
+      "status": "pass",
+      "test": "tests.test_compact_roles_gpu.CompactRolesGPU.test_b_all_statuses_maximum_reason_and_256_boundary"
+    },
+    "V2-GPU-CANCELLATION": {
+      "run": "gpu-1",
+      "status": "pass",
+      "test": "tests.test_compact_roles_gpu.CompactRolesGPU.test_d_cancellation"
+    },
+    "V2-GPU-JOINT-ACCUMULATION": {
+      "run": "gpu-2",
+      "status": "pass",
+      "test": "tests.test_compact_roles_gpu.CompactResumeGPU.test_eight_example_v2_joint_accumulation"
+    },
+    "V2-GPU-LONG-PARITY": {
+      "run": "gpu-1",
+      "status": "pass",
+      "test": "tests.test_compact_roles_gpu.CompactRolesGPU.test_z_both_formats_1024_functional_checkpoint_serving_FP32"
+    },
+    "V2-GPU-PROJECTION-FP64": {
+      "run": "gpu-1",
+      "status": "pass",
+      "test": "tests.test_compact_roles_gpu.CompactRolesGPU.test_c_FP64_projection_reference"
+    },
+    "V2-GPU-REAL-INPUTS": {
+      "run": "gpu-2",
+      "status": "pass",
+      "test": "tests.test_compact_roles_gpu.CompactRolesGPU.test_a_existing_reviewed_inputs_and_joint_VJPs"
+    },
+    "V2-GPU-RESUME": {
+      "run": "gpu-2",
+      "status": "pass",
+      "test": "tests.test_compact_roles_gpu.CompactResumeGPU.test_complete_window_resume_and_frozen_owners"
+    }
+  },
+  "comparison_protocol": "data/redesign-format-v2-20261108/comparison-protocol.json",
+  "comparison_protocol_sha256": "2da758562ac3a5b4d9fb8981ef59f01ae2f6bcf5edebb7fc5d1b5f527705f63c",
+  "coverage": "docs/evidence/compact-role-layout-coverage-v2.json",
+  "coverage_sha256": "f29db678293aa44a0ee057e59da00b9fa5971dc8b1b6caa49a185cb0facadb6c",
+  "environment": {
+    "cuda": "13.2",
+    "device": "NVIDIA GeForce RTX 3090",
+    "device_uuid": "225509c3-d702-6c27-de03-76b5e99b33b1",
+    "torch": "2.15.0+cu132"
+  },
+  "failure": "gpu-1 real pooled Score binding compared independently normalized fields to whole-rubric normalization. Corrected exact reduction shape; no tolerance relaxation. gpu-2 resolves it; initial failed log retained.",
+  "forcing": "existing inputs/tokens and disclosed engineering latent states; guided Assessed/Choice index0/budget512 only for qualification; not training or learned invocation",
+  "gpu_uuid": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+  "long_traces": {
+    "comparisons": 18,
+    "count": 24,
+    "minimum_gradient_cosine": 0.9999999999993345,
+    "ports": [
+      1,
+      2,
+      3
+    ],
+    "positions": 1024,
+    "profiles": [
+      "functional",
+      "checkpoint",
+      "serving",
+      "fp32"
+    ],
+    "wire_profiles": [
+      "pooled-role-slots-v2",
+      "direct-role-states-v2"
+    ],
+    "worst_gradient_rms": 1.2336808209461487e-06,
+    "worst_logit_rms": 2.9022025210697956e-06,
+    "worst_state_rms": 0.0
+  },
+  "new_data": false,
+  "numeric_reuse": "unchanged g1/codec precision/backbone/recurrence/attention kernels; historical324/108 matrix report/child hashes remain pinned by original RD07 evidence; new paths use actual v2 FP32/FP64 comparisons",
+  "optimizer_updates": 0,
+  "pending_checks": [],
+  "protocol": "compact-role-qualification-v2",
+  "raw_hashes": {
+    "data/redesign-format-v2-20261108/assemble_qualification.py": "46f3378a5a5ec8488a960c10a88b4bfd6dfbb1adcb5d8b5a4a98c3e98c07e7a2",
+    "data/redesign-format-v2-20261108/audit_blocked.py": "86952483b9552cd8dc31141f901f11069d2c9495233d78c67585e659904f4513",
+    "data/redesign-format-v2-20261108/common-support.json": "a9961a0a7d7bb643073145a143eac896f4d9b77d93a261dc411a7d86deaecd60",
+    "data/redesign-format-v2-20261108/comparison-protocol.json": "2da758562ac3a5b4d9fb8981ef59f01ae2f6bcf5edebb7fc5d1b5f527705f63c",
+    "data/redesign-format-v2-20261108/coverage.log": "ad1c348cd4032fdd423f1ee74a454b7c7f390c60383a55686bb724cedc72e638",
+    "data/redesign-format-v2-20261108/coverage/records.json": "48484955c4da5c65dfa2ac4f9f546b8e8848f5a48ead3b6b3bfe90db7abcdb0f",
+    "data/redesign-format-v2-20261108/coverage/report.json": "77ce3502a72b39b2080aa1f9600eccc00342b414086c6ea21856667001bf84df",
+    "data/redesign-format-v2-20261108/gpu-1.log": "b9943bf9f207fb34cf6d9f4dfbf2c8bd4cbffe71b2a7be15dc55251b7b401d48",
+    "data/redesign-format-v2-20261108/gpu-1/metrics.jsonl": "4f8071e5133846c0f3eb1566b841d76f0f5f2d508420a58b0c604e11df76222c",
+    "data/redesign-format-v2-20261108/gpu-1/report.json": "114f61fd84ad2c4a298f3adf7b94037701e048c29e4f337520bd0e7c0ec77290",
+    "data/redesign-format-v2-20261108/gpu-2.log": "f145c31a608e08478c4d01e443828ca206c41592a56e774aee4408ad571d087c",
+    "data/redesign-format-v2-20261108/gpu-2/metrics.jsonl": "6cba568d3aa39aa632a393da61118cc1a407645c8915b7af9e323ff922606d1d",
+    "data/redesign-format-v2-20261108/gpu-2/report.json": "7a39cc1bf774bd1c0e5883125e3bf4f935e28d806b77463bd036dd0d706e3a42",
+    "data/redesign-format-v2-20261108/qualify.py": "59402d931af0925be35b46ddf8e7838b8134f19c21d512bdacfe8bcdeb693af0",
+    "data/redesign-format-v2-20261108/qualify_delta.py": "d361f820b12e5e1e0d38e25d922b94c2b57ac76ae9f887d1731d0162d1eac6a0",
+    "data/redesign-format-v2-20261108/static-1.log": "110ede314867b8f1f92a15e43217535b2575c4983fb3fd699e2b762e0c23da77",
+    "data/redesign-format-v2-20261108/static-2.log": "66d71d1e6558c0c1dcb2bb57fc2568e4bd2fc4de49f21e55954164e22bc47ee3",
+    "data/redesign-format-v2-20261108/static-binding-final.log": "b7bee46e34ec42e83802fbf7f30f387aac5893f276e174ffa2e8c78e6249384e",
+    "data/redesign-format-v2-20261108/static-boundaries.log": "720fe55f3c65cd5e2712d120d9dff7f7b0b2a143bfc6e319bd3071e3be0e0af3",
+    "data/redesign-format-v2-20261108/static-final-core.log": "3ffab6c5b0b3baea8404016771e2a092f80bd2ed167038374ab856106d28d4cc",
+    "data/redesign-format-v2-20261108/static-final.log": "3137b3a2af7e42c92296f00534187d65e09383a2393239862f5069f7c65732c3",
+    "data/redesign-format-v2-20261108/static-plan-refreshed.log": "11caf449f521b1bfc8874bc308843c616e2d97b39847f266ee2d51553bbf53ac"
+  },
+  "runs": {
+    "gpu-1": {
+      "class_frozen_checks": [
+        {
+          "class": "FrozenSourceGPU",
+          "frozen_W": {
+            "base_tied_storage": true,
+            "mismatches": [],
+            "parameters_checked": 320,
+            "pass": true
+          },
+          "reference_id": "5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f",
+          "reference_unchanged": true
+        },
+        {
+          "class": "DirectRolesGPU",
+          "frozen_W": {
+            "base_tied_storage": true,
+            "mismatches": [],
+            "parameters_checked": 320,
+            "pass": true
+          },
+          "reference_id": "5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f",
+          "reference_unchanged": true
+        },
+        {
+          "class": "JointReceiverGPU",
+          "frozen_W": {
+            "base_tied_storage": true,
+            "mismatches": [],
+            "parameters_checked": 320,
+            "pass": true
+          },
+          "reference_id": "5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f",
+          "reference_unchanged": true
+        },
+        {
+          "class": "NativeRedesignGPU",
+          "frozen_W": {
+            "base_tied_storage": true,
+            "mismatches": [],
+            "parameters_checked": 320,
+            "pass": true
+          },
+          "reference_id": "5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f",
+          "reference_unchanged": true
+        },
+        {
+          "class": "CompactRolesGPU",
+          "frozen_W": {
+            "base_tied_storage": true,
+            "mismatches": [],
+            "parameters_checked": 320,
+            "pass": true
+          },
+          "reference_id": "5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f",
+          "reference_unchanged": true
+        },
+        {
+          "class": "CompactResumeGPU",
+          "frozen_W": {
+            "base_tied_storage": true,
+            "mismatches": [],
+            "parameters_checked": 320,
+            "pass": true
+          },
+          "reference_id": "5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f",
+          "reference_unchanged": true
+        }
+      ],
+      "errors": 0,
+      "executed_tests": 16,
+      "failures": 1,
+      "optimizer_updates": 0,
+      "pid": 589637,
+      "skipped": 0,
+      "sources_unchanged": true,
+      "status": "FAILED"
+    },
+    "gpu-2": {
+      "class_frozen_checks": [
+        {
+          "class": "CompactRolesGPU",
+          "frozen_W": {
+            "base_tied_storage": true,
+            "mismatches": [],
+            "parameters_checked": 320,
+            "pass": true
+          },
+          "reference_id": "5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f",
+          "reference_unchanged": true
+        },
+        {
+          "class": "CompactResumeGPU",
+          "frozen_W": {
+            "base_tied_storage": true,
+            "mismatches": [],
+            "parameters_checked": 320,
+            "pass": true
+          },
+          "reference_id": "5c6015dfedcd0667ab893025b39e8c35cb08cb04701138ecd66e310b64c45d3f",
+          "reference_unchanged": true
+        }
+      ],
+      "errors": 0,
+      "executed_tests": 3,
+      "failures": 0,
+      "optimizer_updates": 0,
+      "pid": 593943,
+      "skipped": 0,
+      "sources_unchanged": true,
+      "status": "PASS"
+    }
+  },
+  "services_changed": false,
+  "source_hashes": {
+    "qwen_one_two/__init__.py": "b6236192beea05d03b8d7c828e63761bca002cbd4ca967ecbc2fea0f7c02caad",
+    "qwen_one_two/codec/__init__.py": "9b577482d1138d4d449fcc2bc9aa493538658afefe0bffb2a72828ab12e7ea38",
+    "qwen_one_two/codec/attention_block.py": "e0aac0b53d7a6afed5bd5dbe0cc3570bdb9254391d1e1cb7eb8acd12674196c9",
+    "qwen_one_two/codec/backbone.py": "9d29c788e0a5f7cacba817c5bab72b747dd4d022f1108c9138c092b35102f282",
+    "qwen_one_two/codec/diagnose_precision.py": "4edc64ec7af6525493e57c33f5fe4866e9ec0c0709086ae1fa99898d75fb23f3",
+    "qwen_one_two/codec/finite.py": "031cd3714a070650619284a83205d48af5aa08f04865028f3a29076d13c98f70",
+    "qwen_one_two/codec/fixtures.py": "36c91e9d949d2d03d4aaaafa709853eaeb7796465b02f6a9853f109f95221bc3",
+    "qwen_one_two/codec/layout.py": "b9307ee89df6cd38e80d3f4776acf7ce06d0cb38efa1adbbf5c346f1b1487577",
+    "qwen_one_two/codec/neural.py": "6880defe808f22438583eac5225ac37566c879d0bee71b1698cfc36f6377c8d9",
+    "qwen_one_two/codec/ownership.py": "93676675270ef9edccad7b11298f0e7f175728d647a7f761576413ec84109374",
+    "qwen_one_two/codec/precision.py": "9eb775efc303ce6d9eb8bbec26ffdcd6422f37ad0732e03ef0885ae9433c8e5b",
+    "qwen_one_two/codec/qualify.py": "d1204bd1e1ce70721d03e936ec92c8e30cd9b54ce0d79e50bbab46e3fd540851",
+    "qwen_one_two/codec/qualify_matrix.py": "07e25deee4eb930d498d5ca071f76c9022ee27823d62d90fcad45f59efb5a1ff",
+    "qwen_one_two/codec/records.py": "3be90c5aacebe0d8826b8dffc440560a68e9666075f29377a92be961c7e1aede",
+    "qwen_one_two/codec/recurrence.py": "ccab3956c20373b6a54cb2ebfcf26289193a7325b09f9f6a38e10883c23694c2",
+    "qwen_one_two/codec/render.py": "a9073deb062ab665d6283c2fa46025092416c116837dce2cf42fb2a0ce1b98ef",
+    "qwen_one_two/codec/runtime.py": "86df8a13be51183dfe3763b8435047fd88d28d07cd26ea953b836ac1ed866653",
+    "qwen_one_two/codec/schema.py": "5d3633568d697b8aed06171899fb72afa2454c353e3cbd0d77a3618888e8ac0e",
+    "qwen_one_two/codec/session.py": "4a148f8916c0135287ceb34ad8f855d86e1132e3b227685831c0e14f25d7b585",
+    "qwen_one_two/codec/writer.py": "1dea35b621f37d855c6c2108eafb6adbb18d2cdf6182d7371c4fbd699883f75f",
+    "qwen_one_two/curriculum.py": "7d4f4172e4a1b733ba38721224b58079c0b6196dc914cfb30e783d308328a2cf",
+    "qwen_one_two/decision.py": "0ef4605594a83668996abc0546f89ecf0faa67afd1c383acbc333b73b889864a",
+    "qwen_one_two/download.py": "eb3e8ca5009302d43abe5cbf2e4ec3b53c28ffc2ec6a786440ee40099fee53d4",
+    "qwen_one_two/g1_accounting.py": "6d6d872a7337dd026da0354c9526e7eee012576cf518e19397832896cc3a4dd2",
+    "qwen_one_two/g1_backbone.py": "400899b2301ca77f56431827e6bb787f3f054627fef23f1ba883275de09701a9",
+    "qwen_one_two/g1_checks.py": "7c32e89b246a6e26235e48e041f6ff5923b589cdf48df073a17bf253ed470950",
+    "qwen_one_two/g1_device.py": "e4a550b80ac3f1de35be7c6057cca65b0e46ec2ba2248ca72e0d67b6451b5f2e",
+    "qwen_one_two/g1_evidence.py": "2f882bed4c0ac93dcf0015d6083b471764a8a8fe3d586d337759da1117bb7aba",
+    "qwen_one_two/g1_gate_diagnosis.py": "d38c6a40d66ccf41195ccbdefd77f1bccda632492ecdbbd6841049f26874a3e3",
+    "qwen_one_two/g1_gate_repair.py": "18c25a33ccf05a16630960df40f29d309d19af0a12b23b6e99c3c2341e732b91",
+    "qwen_one_two/g1_precision_diagnosis.py": "acdc5008e7e02c13a24eda2f64a40f7f30176cdfb09e95bb637b20c0126ce3d9",
+    "qwen_one_two/g1_precision_math.py": "bc2e5a6393012079684734de386ad71afd5cbd26b2423a24f22f33ed6b9aedcf",
+    "qwen_one_two/g1_proof.py": "5a0d9991cffff111b12d23df1a5ad46be7cb77f1f67ba16c4038dbfa60ac9cb9",
+    "qwen_one_two/g1_protocol.py": "156ba44aa27b459279404d404e2a16da35e443717fca4d15851627e80cfeaba4",
+    "qwen_one_two/model.py": "65361404f081a2933830acc65453ee147098e6b12a000918c00dc83d991bfb00",
+    "qwen_one_two/policy.py": "a1b43898e6a695536276b44d6bb713b45c3ae5f56a363e586b6c4e3ff2afe978",
+    "qwen_one_two/refine_routes.py": "2a9ed2e1999290d985f5cdced7bfa83e00ec4c56247349848f7b205e7235db5c",
+    "qwen_one_two/server.py": "d83a9dc6764fb0d02ccfd87b40d2c5ba4bd69167a3733e27686b17d52d45139d",
+    "qwen_one_two/thinking.py": "47bfaf4c91e33f8587f4bad856f0d2b36c0e31705132b11f5e1d7f22a504e36b",
+    "qwen_one_two/train.py": "1d316c57efb6db71810ae6a43ba491832d0d7e66e91bc065de8e208c5dc38538",
+    "qwen_one_two/train_feedback.py": "234b516d33e7b070b44b47a1b0b5738917af0cc33bb4df67ad88fc7bf17af952",
+    "qwen_one_two/training/__init__.py": "0a5bc5745bdcb26cbf81df3d10f5363d39539d811fd869326cb37ecb4a29a47e",
+    "qwen_one_two/training/architecture_audit.py": "fee2b1a77a56ac1a0652e7133f673b4e45c418d9d926358318754eeec99888d6",
+    "qwen_one_two/training/behavior_qualification.py": "b97d4656a843b387bdb5220cf10a24e98c14e3743c41433f7a596efe29a8516b",
+    "qwen_one_two/training/binding.py": "d3e017ef6547ab9ceffa11d6e5684b3f6aab16182d25b20bc9bdcef0e4323343",
+    "qwen_one_two/training/checkpoint.py": "ae693ea7ae8fa465d71f8dabbf7d5ba24f92efd8fa8af6efc080f6103a34ee54",
+    "qwen_one_two/training/checkpoint_metadata.py": "4806b4ca4f6331874743c77e6983e0060dd35a310956b4f67683680603e104d3",
+    "qwen_one_two/training/clean.py": "adf94b432412bc60ed05aab949522537e6469cb388d53f607054f63a745a99a6",
+    "qwen_one_two/training/clean_packets.py": "9bfbcb63c4ecbeb0bcdbeb6f75bd6b30c2f5e2cc5f51cc7670cf55cb63681d2b",
+    "qwen_one_two/training/component_admission.py": "0ab3b22429d93d2d0d204f0e78b097fa77ba1d02141d7ae9b58470304edcd399",
+    "qwen_one_two/training/component_producer.py": "9e8cd12db50ec254344cc8958c0f6bde688bee5b2ae9e5b997c5558e35458f00",
+    "qwen_one_two/training/diagnostics.py": "0e5ec6271090c034744a182c2bd4a86d421ee099be0b056da4b29438120b3060",
+    "qwen_one_two/training/direct_readout.py": "9444a03f495bac141a8638ab86c0b304c1eb7ae12161f22fe76304a8a75b611a",
+    "qwen_one_two/training/direct_roles.py": "ab3333e16647057e9d38dfbc719a8d828b22ca5adb2d2d4b1005be70f27cddec",
+    "qwen_one_two/training/driver.py": "c46128c8d9e0de5288717f4a2c6a78b6bb3fed5e4fa2a245b6123c267a587bc2",
+    "qwen_one_two/training/eligibility.py": "5534522a13892d40a95dd8282698da7248685fd4d5b50273474f93a7e4f73571",
+    "qwen_one_two/training/engine.py": "2500a47211fc13a41c3e646d2f315d2233b4304d1f67c71fb73b3eebc57aee4d",
+    "qwen_one_two/training/episodes.py": "6975fec4335ae10a7725c21a8b5979df2a09b1b9eb19431b330dc844afe9d7b2",
+    "qwen_one_two/training/frozen_source.py": "cce87a33fff5e0309374f6657fc7da0eebae82465bf0eec6a16b991b80c1399c",
+    "qwen_one_two/training/host_metrics.py": "d544d401b6a970f14ba614026c699f0f83c2b1ad6809cd6d6ed41588c45906bc",
+    "qwen_one_two/training/host_profile.py": "31d52a713e33de61e5b802a26c63f24e6dbcb476325d01afea788097e97d23e0",
+    "qwen_one_two/training/information_loss.py": "7fa33d9dcd33fe08fba00e34857bf7339d646cf617845c4d7c3c770275b0cf23",
+    "qwen_one_two/training/inputs.py": "8a96776ac2ab7a65f2cc51c3baaee12a333e76278775cc3d6b37b68cee99e332",
+    "qwen_one_two/training/learning_report.py": "16be5a713a1d290529e6f26f75a7b87748e75f665cd27e4d023ad665de1a864e",
+    "qwen_one_two/training/loss_config.py": "7beadba9261208767775679ee7ae7a75dfcf777de8fd42c65acaaa57a6fa23e4",
+    "qwen_one_two/training/losses.py": "0bea5c33730baab3d376a635286d409b1c7bf664cd852c08d2c6cfe80d94abcc",
+    "qwen_one_two/training/manifest.py": "468257734527ceb5ec8656b6155388c2b3e92298f457cfa1764fd87cd58cbf5d",
+    "qwen_one_two/training/native.py": "7f30e4b42f20bfc8b5e1b1f4ffa2127dc12eb289381ee67670034c141c131cca",
+    "qwen_one_two/training/native_coverage.py": "42b5f7c2ba24a3b41780c10e7f0d114375480fadf231042360868245a59b88b9",
+    "qwen_one_two/training/native_evaluation.py": "a6f180b6f43041a985e310ec9fad0de995a1b410f01a7c0f5a823c1b89bf3446",
+    "qwen_one_two/training/numeric_access.py": "4466187959d430d1eeabc5e7c5eea73082ec9699bbc4812d972f73fcf978bf20",
+    "qwen_one_two/training/producer.py": "cc3a439fd6b8e896500179d8f898fcd6a9d819eb5ac8cec12ff85dc7c946a6e8",
+    "qwen_one_two/training/profile.py": "3369e8e23579454fa3e71408fcb6196443cb86ed1c7e0f1f95974b91c9cc9cdb",
+    "qwen_one_two/training/qualification.py": "22d1de030bc85361a2366d03eb4c1c6c47a69f72e87fdcf59d6a9f8e04da72a9",
+    "qwen_one_two/training/quantity_learning.py": "e5f560a086ae3733ecd57bc13aa1c3d52d1fc7f119d5b03e2dd8090a6cc74a07",
+    "qwen_one_two/training/receiver_comparison.py": "1ce75b3747d72331232260142168e6787397f62862df2e0fe8484d0a95fc7f6b",
+    "qwen_one_two/training/receiver_learning.py": "d5b989455ef08a0c3ec1ba4f0b91a57b9d9098ee3921191828d9902d280c2d97",
+    "qwen_one_two/training/receiver_plan.py": "2d68091261fa328c9ec98a772f841cf7cc8ff05cafe779293dc393689e5ce127",
+    "qwen_one_two/training/receiver_profiles.py": "0b3053d681b39ddf2602ec42bc414c614655e5a94ab649b6691bdbffb05cfd02",
+    "qwen_one_two/training/receiver_repair.py": "e03e065e1c40ad670399ee28fadd7f70da187bc9d1fe14430d6e9a4457d43222",
+    "qwen_one_two/training/redesign_coverage.py": "c0cff951a6193f16cc4ebec68ff461a7baee8b0429a7b004dbffc832480c4bb1",
+    "qwen_one_two/training/reference.py": "44cbd6da4b3374d3de7082cac633f9b63fd91cef768bd8462a01fcb17c0f2aec",
+    "qwen_one_two/training/reference_data.py": "5855ecf472ac6d553bf16372af54cc640c48deb704014e7f26eb652387a01e70",
+    "qwen_one_two/training/reference_exposure.py": "f6e576cb0ce1cd8c48275047d7c0360cf23d4b20f0bcf20eaafc3433971e1a3c",
+    "qwen_one_two/training/reference_qualification.py": "9e02394240fb88b2e4e77b604b020300d200cfae5bb217e3717247da27505db0",
+    "qwen_one_two/training/release.py": "906d6bf7fefaa9b251338e46b13dac289365f5347b73cd03b680e593578888c3",
+    "qwen_one_two/training/sampler.py": "aeee24107468a9a27657efa3ba5c053d36101aee982fad069af8411762e28950",
+    "qwen_one_two/training/shared_frozen.py": "750ebdc0b069122485f7974784be101d2b2c8c76c8443036c4659e25e2df6a5f",
+    "qwen_one_two/training/simple_latent.py": "d1e2f07438245a2a2842d06395874d17bc7e61fd82bc26bb5980ddedcc37dc90",
+    "qwen_one_two/training/two_gpu.py": "dca18fef30e5ef9ca6346c297f42c56fdcfae65c25cec683d65fdadc345a3cc1",
+    "qwen_one_two/training/two_gpu_worker.py": "2fe83f3be4905753fe722eba14813b260449037f46df5c9c151c9d6cc0e16da2",
+    "qwen_one_two/training/weight_repair.py": "aff987d19f012820218758e02162d8352acce6d2983b74b9663a7afd9f4917bc",
+    "scripts/fit_reference.py": "6869030b858015cd6b01356e0103c78f2e0fa180a86368b2552acad67149c926",
+    "scripts/train_receiver_probe.py": "ab755f57d677219d500196bb56d08cfcf5fbe366b4d30c74d09562847a1b6018"
+  },
+  "source_migration": {
+    "changed_since_gpu1": {
+      "qwen_one_two/training/behavior_qualification.py": {
+        "current": "b97d4656a843b387bdb5220cf10a24e98c14e3743c41433f7a596efe29a8516b",
+        "gpu1": "7cac8c5aecd2640b550d43d6758793b69f38c5f7c8e1f99a102b77887ea78e55"
+      },
+      "qwen_one_two/training/component_admission.py": {
+        "current": "0ab3b22429d93d2d0d204f0e78b097fa77ba1d02141d7ae9b58470304edcd399",
+        "gpu1": "ad2490f8c9f775e2fdae87b5ca7c6d0e52c638a368c9ba7fb7e1cae1b8e49fda"
+      },
+      "qwen_one_two/training/receiver_learning.py": {
+        "current": "d5b989455ef08a0c3ec1ba4f0b91a57b9d9098ee3921191828d9902d280c2d97",
+        "gpu1": "82d8fbb2b7def70a7918c4bc632870910d7d403ac6dc737411946529ed905d62"
+      },
+      "scripts/train_receiver_probe.py": {
+        "current": "ab755f57d677219d500196bb56d08cfcf5fbe366b4d30c74d09562847a1b6018",
+        "gpu1": "0d58d9bb9d087304b6b94428bb362f9b12dd71cceffa1372019cddbc7e3d0ade"
+      }
+    },
+    "scope": "only exact pooled rubric admission and read-only delivery observations/orchestration changed; neural/renderer/Session/math/optimizer code identical to gpu-1. Real-input VJPs/delivery, exact eight-example accumulation and v2 resume executed on final source.",
+    "unchanged_v2_test_methods_AST": [
+      "vectors",
+      "ids",
+      "packet",
+      "trace",
+      "test_z_both_formats_1024_functional_checkpoint_serving_FP32",
+      "test_b_all_statuses_maximum_reason_and_256_boundary",
+      "cancellation",
+      "test_d_cancellation",
+      "test_c_FP64_projection_reference"
+    ]
+  },
+  "status": "PASS"
+}

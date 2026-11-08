@@ -19,7 +19,48 @@ change fan controls, live services or The Operating Table. Older hold statements
 below are historical. The completed comparison and next unfinished slice remain
 as recorded below.
 
-## Current requested work — conditional RD-09, 2026-11-08
+## Current requested work — explicit format recovery and RD-08, 2026-11-08
+
+The user explicitly authorized fixing the format for all1500 existing examples,
+rechecking coverage and resuming the finite RD-08 once qualified. **No new data
+and do not start RD-09**, superseding earlier conditional RD-09 execution scope.
+See [v2 report](receiver-matched-v2-results-2026-11-08.md),
+[plan](evidence/receiver-matched-v2-plan.json),
+[coverage](evidence/compact-role-layout-coverage-v2.json),
+[qualification](evidence/compact-role-qualification-v2.json), [ledger](redesign-progress.md).
+
+Full shared training support is now1500/1500: complete direct request roles with
+explicit1..63 field capacity and compact bound returns for BOTH matched arms.
+Metadata3/4; request256/return64 and other resource/numeric/semantic bounds stay.
+All1810 original field input/mapping/length and record identities match v1. E
+coverage127/130, X180/180; retain three E oversized requests as failed cases.
+Native length33 head unchanged/frozen; new native semantic/reader paths unsupported.
+
+103 static tests pass;17 GPU IDs pass through explicit source migration and delta
+qualification. All24 traces reach1024 with18 paired comparisons; all-status,
+exact256/257/39 bounds,8 cancellations, FP64/VJPs, joint accumulation, resume/
+RNG/owners, all320 W/tying/reference pass. GPU1's pooled Score normalization
+binding failure is retained and repaired exactly; GPU2 final-source3 checks pass.
+No qualification optimizer step. Unchanged kernel matrices are reused only for
+unchanged kernels. No source or service change outside this authorized scope.
+
+Both prepared plans have identical1500×4 order,6000 exposures/750 windows, exact
+parent0188 shared initialization/moments/RNG/schedule/objectives/owners. Candidate
+projection is fresh zero-delta identity; W/R/budget/reference and length head stay
+frozen. Existing runner loop is generalized; no copied loop/framework. Initial/
+final full training heads AND actual delivery measured without fitting them.
+Both fixed fits must complete before either E/X model evaluation. Protocol fixes
+familiar-cohort Noul/Score, per-cell status and47 historical Choice retention IDs
+before fitting. No dev selection, retries/extra passes, new data or deployment.
+
+Earliest unfinished RD-08 is **in_progress**. Code/evidence/plans are being
+committed/pushed before the first fit. Raw `data/redesign-format-v2-20261108/`;
+plans `plans/control/plan.json` and `plans/candidate/plan.json`. Reconnect to actual
+run manifests/logs/checkpoints if interrupted; do not duplicate a fit. RD-09 stays
+unstarted regardless of RD-08 outcome. Earlier zero-support/current-source pending
+statements below describe historical v1 and are superseded by this section.
+
+## Previous requested work — conditional RD-09, 2026-11-08
 
 The user submitted conditional finite RD-09 authorization. **RD-09 execution
 remains unstarted/blocked**; earliest unfinished predecessor is **RD-08**. See the

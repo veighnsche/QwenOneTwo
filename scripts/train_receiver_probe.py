@@ -83,10 +83,10 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--snapshot',required=True)
     parser.add_argument('--output',required=True)
     action=parser.add_mutually_exclusive_group(required=True)
-    action.add_argument('--prepare',action='store_true');action.add_argument('--execute-gpu',action='store_true')
+    action.add_argument('--prepare',action='store_true');action.add_argument('--execute-gpu',action='store_true');action.add_argument('--evaluate-gpu',action='store_true')
     parser.add_argument('--input-profile',choices=tuple(PROFILES))
     parser.add_argument('--regime',choices=('component','native'),default='component')
-    parser.add_argument('--prepared-plan');parser.add_argument('--resume');parser.add_argument('--resume-sha256')
+    parser.add_argument('--peer-report',help='other completed matched arm; required before RD08 development evaluation');parser.add_argument('--prepared-plan');parser.add_argument('--resume');parser.add_argument('--resume-sha256')
     parser.add_argument('--loss-balance-baseline',help='completed v1 control; run the single fixed tenfold reduction')
     a=parser.parse_args()
     from qwen_one_two.training import receiver_plan as planning
@@ -105,6 +105,16 @@ def main():
     else:
         check(a.input_profile in (None,LEGACY) and a.regime=='component' and not a.resume,
               'new profiles/resume require an exact prepared plan')
+    full=bool(prepared and prepared['contract']['profile']['implementation']=='compact-v2')
+    if a.evaluate_gpu:
+        check(full and a.resume and a.peer_report,'RD08 evaluation requires final checkpoint and completed peer')
+        peer=decode(Path(a.peer_report).read_bytes());peer_plan=decode((Path(a.peer_report).parent/'plan.json').read_bytes())
+        check(peer['status']=='COMPLETED_RD08_TRAINING_NOT_EVALUATED' and 0<=peer['optimizer_updates']<=750
+              and peer['scheduled_probe_windows']==750,'both fixed fits must finish before dev evaluation')
+        check(peer_plan['input_profile']!=a.input_profile and peer_plan['sources']==prepared['contract']['dependencies']['sources']
+              and peer_plan['training_order']==prepared['contract']['training_order'],'matched peer identity/order')
+        check(planning.inspect_resume(prepared,a.resume,a.resume_sha256)['sampler']['cursor']==6000,'final checkpoint required')
+    else:check(a.peer_report is None,'peer report belongs only to evaluation')
     require_visibility();check(os.environ['CUDA_VISIBLE_DEVICES']==PRIMARY,'3090 only')
     out=Path(a.output).resolve();check(out.is_relative_to(ROOT/'data'),'probe outputs belong in data/')
     check(not out.exists(),'never overwrite a probe');out.mkdir(parents=True)
@@ -113,20 +123,23 @@ def main():
     if prepared:
         check(prepared['contract']['releases']=={'training':train.identity,'development':dev.identity},
               'prepared execution release identity mismatch')
-    panel=probe_panel(train);order=[p['id'] for p in panel]
+    order=(prepared['contract']['training_order'][:1500] if full else [p['id'] for p in probe_panel(train)])
+    panel=([{'id':k,'family':train.record(k)['family']} for k in order] if full else probe_panel(train))
+    repeats=4 if full else 8;exposure_order=order*repeats
+    check(not full or len(order)==len(set(order))==1500,'full1500 catalogue, no subset/padding')
     devfamilies={dev.record(e['id'])['family'] for e in dev.manifest['records'] if e['selected']
                  and dev.record(e['id']).get('evaluation_slice') in ('E','X')}
     check(not devfamilies&{p['family'] for p in panel},'probe/development family overlap')
-    sources=source_hashes();sources['scripts/train_receiver_probe.py']=file_hash(Path(__file__))
+    sources=planning.plan_sources() if full else source_hashes();sources['scripts/train_receiver_probe.py']=file_hash(Path(__file__))
     comparison,baseline=(loss_balance_baseline(a.loss_balance_baseline,panel,sources)
                          if a.loss_balance_baseline else (None,None))
-    protocol=BALANCE_PROTOCOL if comparison else PROTOCOL
+    protocol='receiver-matched-rd08-v2' if full else (BALANCE_PROTOCOL if comparison else PROTOCOL)
     plan={'protocol':protocol,'parent_checkpoint':str(CHECKPOINT),'parent_manifest_sha256':CHECKPOINT_SHA,
         'receiver':RECEIVER,'reference':REFERENCE,'dataset':TRAIN_SHA,'development':DEV_SHA,'sources':sources,
-        'panel':panel,'repeats':8,'training_presentations':256,'scheduled_probe_windows':32,
+        'panel':panel,'repeats':repeats,'training_presentations':len(exposure_order),'scheduled_probe_windows':len(exposure_order)//8,
         'measurement_repeats':[0,1,2,4,8],'optimizer':'restore checkpoint-0188 moments/RNG/schedule; no warmup reset',
         'training_scope':'D and existing receiver owners only; W/R/budget/reference frozen; no native training',
-        'snapshot':str(Path(a.snapshot).resolve())}
+        'snapshot':str(Path(a.snapshot).resolve()),'input_profile':a.input_profile or LEGACY,'training_order':exposure_order}
     if comparison:plan['loss_balance']=comparison
     if prepared:plan['prepared_run_sha256']=prepared['run_sha256']
     (out/'plan.json').write_bytes(canonical(plan))
@@ -154,8 +167,9 @@ def main():
     manifest=decode((ROOT/CHECKPOINT/'manifest.json').read_bytes())
     report={'protocol':protocol,'status':'RUNNING','plan_sha256':digest(canonical(plan)),
         'gpu_uuid':PRIMARY,'measurements':[],'checkpoints':[],'optimizer_updates':0,
-        'scope':'training-panel learnability, not full-catalogue training or promotion','training_performed':True}
+        'scope':'fixed full-catalogue RD08 comparison; no promotion' if full else 'training-panel learnability, not full-catalogue training or promotion','training_performed':not a.evaluate_gpu,'pid':os.getpid()}
     def persist():(out/'report.json').write_bytes(canonical(report))
+    persist()
     def emit(**v):print(json.dumps(v,allow_nan=False),flush=True)
     execution_meter=Recorder()
     with sdpa_kernel(SDPBackend.MATH), execution_meter.patch([
@@ -175,7 +189,14 @@ def main():
         restore_model(ROOT/CHECKPOINT,b,c,ref,manifest['identities'],window=w)
         check(w.scheduled_windows==w.optimizer_updates==188 and receiver_hash(b,c)==RECEIVER
               and ref.fingerprint()==REFERENCE,'restored parent state')
-        producer=ReceiverProducer(b,c,ref,train)
+        report['shared_initial_receiver']=receiver_hash(b,c)
+        from qwen_one_two.training.receiver_learning import extend_profile_window
+        if full:w=extend_profile_window(w,owned,c,a.input_profile)
+        producer=ReceiverProducer(b,c,ref,train,input_profile=a.input_profile or LEGACY,cache_sources=full)
+        report['initial_moments']=state_fingerprint({n+'.'+k:v for n,p in zip(w.names,w.parameters)
+            for k,v in w.optimizer.state.get(p,{}).items()})
+        report['initial_cuda_rng']=digest(torch.cuda.get_rng_state(0).cpu().numpy().tobytes())
+        report['initial_python_rng']=digest(repr(random.getstate()).encode())
         native=lambda:state_fingerprint({**{n:p for n,p in b.named_parameters() if n.endswith(('.R_A','.R_B'))},
             **{'codec.'+n:p for n,p in c.named_parameters() if not p.requires_grad}})
         frozen_native=native();report['initial_base']=frozen_check(b,a.snapshot)
@@ -186,7 +207,7 @@ def main():
         report['migration']='new explicitly declared probe fork; original identities validated on restore; moments/RNG/counters retained; original sampler is not relabeled as probe history'
         identities=dict(manifest['identities'],protocol=digest(protocol.encode()),sources=digest(canonical(sources)))
         if prepared:
-            check(order*8==prepared['contract']['training_order'] and w.ownership==prepared['contract']['owners'],
+            check(exposure_order==prepared['contract']['training_order'] and w.ownership==prepared['contract']['owners'],
                   'prepared schedule/ownership differs from actual Window')
             identities=prepared['checkpoint_identities']
         exposures=Counter();eligible=Counter();failures=Counter();cursor=0
@@ -216,7 +237,7 @@ def main():
             frozen();before=receiver_hash(b,c);cases=[]
             with torch.no_grad(),(out/f'panel-{repeat:02d}.jsonl').open('x') as stream:
                 for key in order:
-                    s,_,_=producer(train.record(key));case=s.episode_report;cases.append(case)
+                    s,_,_=producer(train.record(key),deliver=full);case=s.episode_report;cases.append(case)
                     stream.write(json.dumps(case,allow_nan=False)+'\n');stream.flush();del s
             check(receiver_hash(b,c)==before,'measurement changed receiver');frozen()
             summary=summarize_learning(train,cases,order,kind='heads')
@@ -226,74 +247,81 @@ def main():
                 check(all(all(left[k]==right[k] for k in ('record','record_sha256','input_sha256','head','losses'))
                           for left,right in zip(cases,saved)) and len(cases)==len(saved),'initial control receipt mismatch')
                 report['baseline_initial_panel_exact']=True
-            report['measurements'].append({'repeat':repeat,'receiver':before,'report':summary});persist()
+            measurement={'repeat':repeat,'receiver':before,'report':summary}
+            if full:measurement['delivered']=summarize_learning(train,[c['behavior'] for c in cases],order,kind='behavior')
+            report['measurements'].append(measurement);persist()
             emit(event='panel',repeat=repeat,operations={op:x['counts'] for op,x in summary['operations'].items()})
         try:
             if not a.resume:checkpoint(0,0);measure(0)
-            elif cursor in (0,32,64,128,256) and cursor//32 not in {m['repeat'] for m in report['measurements']}:
+            elif not full and cursor in (0,32,64,128,256) and cursor//32 not in {m['repeat'] for m in report['measurements']}:
                 measure(cursor//32)
             with (out/'training.jsonl').open('x') as stream:
-                for repeat in range(1,9):
-                    for offset in range(0,32,8):
-                        if (repeat-1)*32+offset<cursor:continue
-                        cases=[];t=time.monotonic()
-                        for key in order[offset:offset+8]:
-                            s,losses,exposure=producer(train.record(key));case=s.episode_report
-                            collect_session(w,s,losses,exposure);cases.append(case);exposures[key]+=1
-                            if case.get('failure'):failures[case['failure']]+=1
-                            else:eligible.update(case['losses'].keys())
-                            del s,losses
-                        diagnostic=gradient_report(w) if repeat in (1,8) else None
-                        if comparison and w.scheduled_windows==188:
-                            control=decode((Path(a.loss_balance_baseline)/'training.jsonl').read_bytes().splitlines()[0])
-                            check(all(all(left[k]==right[k] for k in ('record','record_sha256','input_sha256','head','losses'))
-                                      for left,right in zip(cases,control['episodes'])), 'first-window control mismatch')
-                            old=control['gradient_diagnostics']
-                            check(diagnostic['D_cosine_with_status']==old['D_cosine_with_status'], 'initial gradient cosine mismatch')
-                            check(set(diagnostic['components'])==set(old['components']), 'initial gradient eligibility mismatch')
-                            for component,values in diagnostic['components'].items():
-                                scale=.1 if component in BALANCE_OVERRIDES else 1.
-                                check(values['eligible']==old['components'][component]['eligible'], 'initial gradient denominator mismatch')
-                                for name in ('weighted_norm','weighted_D_norm'):
-                                    check(math.isclose(values[name],old['components'][component][name]*scale,
-                                                       rel_tol=1e-12,abs_tol=1e-12), 'initial gradient scaling mismatch')
-                            report['baseline_initial_gradient_norms_match']=True
-                        result=w.step();entry={'repeat':repeat,'offset':offset,'window':result,'episodes':cases,
-                            'gradient_diagnostics':diagnostic,'seconds':time.monotonic()-t}
-                        stream.write(json.dumps(entry,allow_nan=False)+'\n');stream.flush()
-                        report.update(optimizer_updates=w.optimizer_updates-188,scheduled_probe_windows=w.scheduled_windows-188,
-                                      exposures=dict(exposures),eligible_examples=dict(eligible),failed_exposures=dict(failures));persist()
-                        emit(event='update',repeat=repeat,window=w.scheduled_windows,updates=w.optimizer_updates-188,seconds=entry['seconds'])
-                        if w.scheduled_windows==189:
-                            path=checkpoint(repeat,8);before=receiver_hash(b,c)
-                            moments=state_fingerprint({str(i)+'.'+k:v for i,state in enumerate(w.optimizer.state.values()) for k,v in state.items()})
-                            cuda_rng=torch.cuda.get_rng_state(0);cpu_rng=torch.get_rng_state();python_rng=random.getstate()
-                            restore_model(path,b,c,ref,identities,window=w)
-                            check(receiver_hash(b,c)==before and moments==state_fingerprint({str(i)+'.'+k:v for i,state in enumerate(w.optimizer.state.values()) for k,v in state.items()}),'first-update roundtrip')
-                            check(torch.equal(cuda_rng,torch.cuda.get_rng_state(0)) and torch.equal(cpu_rng,torch.get_rng_state())
-                                  and python_rng==random.getstate(),'first-update RNG roundtrip')
-                            report['first_update_roundtrip_exact']=True
-                    if repeat in (1,2,4,8) and repeat*32>cursor:checkpoint(repeat,repeat*32);measure(repeat)
-            # Actual feedback decoding/delivery, on held-out data only after updates.
-            b.checkpointing=False
-            encoder=CleanEncoder(b,ref,checkpoint_hash=receiver_hash(b,c),profile_hash=digest(PROFILE.encode()),cache_references=True)
-            encoder.reference_cache=producer.encoder.reference_cache
-            eids=[e['id'] for e in dev.manifest['records'] if e['selected'] and dev.record(e['id']).get('evaluation_slice')=='E']
-            pairs,omitted=suite(dev);xids=[k for pair in pairs for k in pair['ids']]
-            for panel_name,keys in (('E',eids),('X',xids)):
-                cases=[]
-                with torch.no_grad(),(out/f'development-{panel_name}.jsonl').open('x') as stream:
-                    for key in keys:
-                        case=evaluate_case(b,c,ref,dev,dev.record(key),encoder);cases.append(case)
-                        stream.write(json.dumps(case,allow_nan=False)+'\n');stream.flush()
-                        emit(event='development',panel=panel_name,id=key,passed=case['score']['passed'])
-                report['development_'+panel_name]=summarize_learning(dev,cases,keys,kind='behavior')
-                if panel_name=='X':report['interventions']=summarize(dev,cases,unchanged=True)
-                persist()
+                for start in range(0,len(exposure_order),8):
+                    if start<cursor or a.evaluate_gpu:continue
+                    repeat=start//len(order)+1;offset=start%len(order)
+                    cases=[];t=time.monotonic()
+                    for key in exposure_order[start:start+8]:
+                        s,losses,exposure=producer(train.record(key));case=s.episode_report
+                        collect_session(w,s,losses,exposure);cases.append(case);exposures[key]+=1
+                        if case.get('failure'):failures[case['failure']]+=1
+                        else:eligible.update(case['losses'].keys())
+                        del s,losses
+                    diagnostic=gradient_report(w) if (start in (0,len(exposure_order)-8) if full else repeat in (1,8)) else None
+                    if comparison and w.scheduled_windows==188:
+                        control=decode((Path(a.loss_balance_baseline)/'training.jsonl').read_bytes().splitlines()[0])
+                        check(all(all(left[k]==right[k] for k in ('record','record_sha256','input_sha256','head','losses'))
+                                  for left,right in zip(cases,control['episodes'])), 'first-window control mismatch')
+                        old=control['gradient_diagnostics']
+                        check(diagnostic['D_cosine_with_status']==old['D_cosine_with_status'], 'initial gradient cosine mismatch')
+                        check(set(diagnostic['components'])==set(old['components']), 'initial gradient eligibility mismatch')
+                        for component,values in diagnostic['components'].items():
+                            scale=.1 if component in BALANCE_OVERRIDES else 1.
+                            check(values['eligible']==old['components'][component]['eligible'], 'initial gradient denominator mismatch')
+                            for name in ('weighted_norm','weighted_D_norm'):
+                                check(math.isclose(values[name],old['components'][component][name]*scale,
+                                                   rel_tol=1e-12,abs_tol=1e-12), 'initial gradient scaling mismatch')
+                        report['baseline_initial_gradient_norms_match']=True
+                    result=w.step();entry={'repeat':repeat,'offset':offset,'window':result,'episodes':cases,
+                        'gradient_diagnostics':diagnostic,'seconds':time.monotonic()-t}
+                    stream.write(json.dumps(entry,allow_nan=False)+'\n');stream.flush()
+                    report.update(optimizer_updates=w.optimizer_updates-188,scheduled_probe_windows=w.scheduled_windows-188,
+                                  exposures=dict(exposures),eligible_examples=dict(eligible),failed_exposures=dict(failures));persist()
+                    emit(event='update',repeat=repeat,window=w.scheduled_windows,updates=w.optimizer_updates-188,seconds=entry['seconds'])
+                    if w.scheduled_windows==189:
+                        path=checkpoint(repeat,start+8);before=receiver_hash(b,c)
+                        moments=state_fingerprint({str(i)+'.'+k:v for i,state in enumerate(w.optimizer.state.values()) for k,v in state.items()})
+                        cuda_rng=torch.cuda.get_rng_state(0);cpu_rng=torch.get_rng_state();python_rng=random.getstate()
+                        restore_model(path,b,c,ref,identities,window=w)
+                        check(receiver_hash(b,c)==before and moments==state_fingerprint({str(i)+'.'+k:v for i,state in enumerate(w.optimizer.state.values()) for k,v in state.items()}),'first-update roundtrip')
+                        check(torch.equal(cuda_rng,torch.cuda.get_rng_state(0)) and torch.equal(cpu_rng,torch.get_rng_state())
+                              and python_rng==random.getstate(),'first-update RNG roundtrip')
+                        report['first_update_roundtrip_exact']=True
+                    if full:
+                        if (start+8)//8%125==0:checkpoint(repeat,start+8)
+                        if start+8==len(exposure_order):measure(repeats)
+                    elif (start+8)%32==0 and repeat in (1,2,4,8):checkpoint(repeat,start+8);measure(repeat)
+            omitted=[]
+            if not full or a.evaluate_gpu:
+                # Actual feedback decoding/delivery, on held-out data only after updates.
+                b.checkpointing=False
+                encoder=producer.encoder
+                encoder.reference_cache=producer.encoder.reference_cache
+                eids=[e['id'] for e in dev.manifest['records'] if e['selected'] and dev.record(e['id']).get('evaluation_slice')=='E']
+                pairs,omitted=suite(dev);xids=[k for pair in pairs for k in pair['ids']]
+                for panel_name,keys in (('E',eids),('X',xids)):
+                    cases=[]
+                    with torch.no_grad(),(out/f'development-{panel_name}.jsonl').open('x') as stream:
+                        for key in keys:
+                            case=evaluate_case(b,c,ref,dev,dev.record(key),encoder,input_profile=a.input_profile or LEGACY);cases.append(case)
+                            stream.write(json.dumps(case,allow_nan=False)+'\n');stream.flush()
+                            emit(event='development',panel=panel_name,id=key,passed=case['score']['passed'])
+                    report['development_'+panel_name]=summarize_learning(dev,cases,keys,kind='behavior')
+                    if panel_name=='X':report['interventions']=summarize(dev,cases,unchanged=True)
+                    persist()
             report['omitted_reader_ids']=omitted;report['final_base']=frozen_check(b,a.snapshot);frozen()
             check(report['final_base']['pass'] and report['final_base']['base_tied_storage'],'final W/tie')
-            check(sum(exposures.values())==256 and len(exposures)==32 and set(exposures.values())=={8},'complete probe exposure accounting')
-            report.update(status='COMPLETED_PROBE_NOT_PROMOTED',receiver_after=receiver_hash(b,c),reference_unchanged=True,
+            check(sum(exposures.values())==len(exposure_order) and len(exposures)==len(order) and set(exposures.values())=={repeats},'complete fixed exposure accounting')
+            report.update(status=('COMPLETED_RD08_EVALUATION_NOT_PROMOTED' if a.evaluate_gpu else 'COMPLETED_RD08_TRAINING_NOT_EVALUATED') if full else 'COMPLETED_PROBE_NOT_PROMOTED',receiver_after=receiver_hash(b,c),reference_unchanged=True,
                 frozen_native_unchanged=True,gradients_none=True,seconds=time.monotonic()-started,peak_cuda_bytes=torch.cuda.max_memory_allocated())
         except BaseException as error:
             report.update(status='FAILED_PROBE',error=repr(error),seconds=time.monotonic()-started);raise

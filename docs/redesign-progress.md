@@ -19,12 +19,12 @@ because a later queued task starts.
 | RD-05 | delivered | Joint objectives, owners, binding/mask tests; deferred GPU IDs | `fe90af0` pushed/verified; [report](redesign-rd05-results-2026-11-08.md), [evidence](evidence/joint-receiver-objectives-v1.json); 74 static tests pass +14 refreshed; two new GPU checks resolved by RD-07; Reason masks preserved |
 | RD-06 | delivered | Native wiring/eligibility report; deferred real-return/gradient IDs | `6f74680` pushed/verified; [report](redesign-rd06-results-2026-11-08.md), [evidence](evidence/direct-native-flow-v1.json); 86 static tests pass +10 refreshed; two new GPU checks resolved by RD-07; zero complete corpus formation/semantic continuation/direct reader support |
 | RD-07 | delivered | All required deferred/changed-path 3090 checks pass; actual counts/hashes | [Report](redesign-rd07-results-2026-11-08.md), [evidence](evidence/redesign-qualification-v1.json); ten deferred +three new GPU checks pass; twelve1024 traces; zero updates; `7da99c6` pushed and verified |
-| RD-08 | in_progress | Complete matched fit/evaluation receipts; useful-improvement outcome separate | [Report](redesign-rd08-results-2026-11-08.md), [evidence](evidence/receiver-comparison-rd08-v1.json); RD-07 passes/current; common support0/1500; neither fit launched, zero updates; learning not evaluated; blocker `2c977ce` pushed/verified |
+| RD-08 | in_progress | Complete matched fit/evaluation receipts; useful-improvement separate | [v2 report](receiver-matched-v2-results-2026-11-08.md), [qualified plan](evidence/receiver-matched-v2-plan.json); full1500 common support,17 GPU IDs pass,103 static tests pass; fixed fits next |
 | RD-09 | blocked | Accepted RD-08 receiver plus eligible native run/evaluation receipts | [Report](redesign-rd09-results-2026-11-08.md), [evidence](evidence/native-demonstration-rd09-v1.json); conditional authorization recorded; blocked on RD-08/no accepted receiver and zero native supervision; execution unstarted, zero updates; blocker `a864b65` pushed/verified |
 
 RD-07 is delivered; technical acceptance passes and implementation `7da99c6` is pushed/verified.
 All ten deferred GPU checks are resolved; no required RD-07 check remains pending.
-Earliest unfinished slice: **RD-08**, authorized but blocked before either fit: complete shared support0/1500. Explicit layout revision/full re-audit required; RD-09 is conditionally authorized but execution remains unstarted/blocked.
+Earliest unfinished slice: **RD-08**, in progress after explicit v2 format recovery:1500/1500 shared training support, changed-path qualification passes. RD-09 remains unstarted by current user instruction.
 
 For each attempted slice add a short entry with implementation/evidence paths,
 exact commands/results, dependency hashes, relevant implementation commits and
@@ -633,3 +633,32 @@ Both matched arms use compact returns; candidate carries all role states with
 explicit63-state field capacity. Existing256/64 envelopes and old profiles stay.
 Native v2 writing is unsupported/unstarted; no old native length owner is resized.
 Contract is committed before runtime implementation. No fit launched yet.
+
+## RD-08 v2 implementation/qualification — 2026-11-08
+
+Contract c1021a3 committed/pushed before implementation. All1500 original training
+examples now fit without cropping, new data or request/return envelope increases.
+Both arms use compact bound returns; direct fields explicitly1..63, old native
+length head unchanged/frozen. Full1810 metadata audit and field input/mapping
+parity with v1 pass; common train1500/1500, E127/130, X180/180. Three E oversize
+requests retained as failures, no performance-based selection.
+
+103 final static tests pass (137.464 s). GPU1:16 tests,15 pass/1 pooled-Score
+admission failure; whole-rubric exact normalization repairs it. GPU2:3 pass on
+final source: real input/endpoint delivery, resume, exact both-format8-example
+accumulation.24 passing1024 traces/18 comparisons and all-status/cancellation/
+FP64 methods are unchanged and reused with pinned source migration.17 required
+IDs resolved; all320 W/tying/reference checks pass,0 qualification optimizer calls.
+No numeric/optimizer kernel or tolerance changed. Evidence:
+[coverage](evidence/compact-role-layout-coverage-v2.json),
+[qualification](evidence/compact-role-qualification-v2.json),
+[finite matched plan](evidence/receiver-matched-v2-plan.json).
+
+Current-source model-import-blocked preparations pass, both full6000-element
+orders/initial checkpoints/shared owners/coefficients match exactly; candidate
+only adds identity projection owners with fresh absent moments. Existing runner
+loop consumes these full plans, retains750 windows/arm and initial/final actual
+head+delivered measurements. Both fits finish before dev evaluation. All47
+historical passing Choice IDs in the fixed50 retention panel are pinned before
+fitting. RD09/new data/deployment excluded. Implementation/evidence is committed
+and pushed before fitting; no training update yet at this entry.

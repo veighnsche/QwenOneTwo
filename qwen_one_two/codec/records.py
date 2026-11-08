@@ -2,7 +2,7 @@
 from dataclasses import dataclass, fields, is_dataclass, replace
 from typing import Any
 from .schema import Kind, Port, Status, ValueKind, Mode, Invalid, require, integer, encode_atoms, parse_numeric
-from .layout import LEGACY, DIRECT, valid_profile, semantic_lengths, attribute_cost
+from .layout import LEGACY, DIRECT, valid_profile, semantic_lengths, attribute_cost, is_direct, field_limit
 
 
 @dataclass(frozen=True)
@@ -180,15 +180,15 @@ class Registry:
             m=t.square().mean(-1,keepdim=True)
             return t / (m.where(m > 1e-12, m.new_full((), 1e-12))).sqrt()
         def attrs(items):
-            return tuple(replace(a, keys=a.keys if a.profile==DIRECT else canon(a.keys)) for a in items)
+            return tuple(replace(a, keys=a.keys if is_direct(a.profile) else canon(a.keys)) for a in items)
         if isinstance(record, Semantic):
-            slots=record.slots if record.profile==DIRECT else canon(record.slots)
-            if kind == Kind.RUBRIC and not record.midpoint and record.profile==LEGACY:
+            slots=record.slots if is_direct(record.profile) else canon(record.slots)
+            if kind == Kind.RUBRIC and not record.midpoint and not is_direct(record.profile):
                 slots = __import__('torch').cat((slots[:8], slots.new_zeros(2,1024)))
             record=replace(record,slots=slots,attributes=attrs(record.attributes))
         elif isinstance(record, Reason):
             record=replace(record,slots=canon(record.slots),attachments=tuple(
-                replace(a,keys=a.keys if a.profile==DIRECT else canon(a.keys)) if isinstance(a,Attribute) else a for a in record.attachments))
+                replace(a,keys=a.keys if is_direct(a.profile) else canon(a.keys)) if isinstance(a,Attribute) else a for a in record.attachments))
         self._records[ref] = record
         if previous is None:
             self._next += 1
@@ -215,7 +215,7 @@ class Registry:
     def attribute(self, attr, catalogue=None):
         require(isinstance(attr, Attribute),'attribute')
         valid_profile(attr.profile)
-        length=2 if attr.profile==LEGACY else integer(len(attr.keys),1,32,'direct key length')
+        length=2 if not is_direct(attr.profile) else integer(len(attr.keys),1,field_limit(attr.profile),'direct key length')
         tensor(attr.keys,(length,1024));v=attr.value
         require(v.kind in tuple(ValueKind)[1:7] and type(v.present) is bool,'attribute type/presence')
         def ref(r):

@@ -101,10 +101,10 @@ def prepare(snapshot, input_profile, *, regime='component', root=ROOT):
         check(digest(canonical(keys)) == coverage['coverage'][name]['ids_sha256'], 'panel order drift')
         panel_bindings[name] = {'ids': keys, 'ids_sha256': digest(canonical(keys))}
     layout_coverage = None
-    if input_profile=='direct-role-states-v1':
-        path=root/'docs/evidence/direct-role-layout-coverage-v1.json'
+    if spec['implementation']=='compact-v2' or input_profile in ('direct-role-states-v1','direct-role-states-v2'):
+        path=root/('docs/evidence/compact-role-layout-coverage-v2.json' if spec['implementation']=='compact-v2' else 'docs/evidence/direct-role-layout-coverage-v1.json')
         layout=decode(path.read_bytes())
-        check(layout['protocol']=='direct-role-layout-coverage-v1' and layout['profile']==input_profile
+        check(layout['protocol'] in ('direct-role-layout-coverage-v1','compact-role-layout-coverage-v2') and layout['profile']==('direct-role-states-v2' if spec['implementation']=='compact-v2' else input_profile)
               and layout['releases']==coverage['releases'] and layout['tokenizer_files']==metadata,
               'direct layout coverage identity drift')
         for relative,sha in dict(layout['artifacts'],**layout['sources']).items():
@@ -118,7 +118,7 @@ def prepare(snapshot, input_profile, *, regime='component', root=ROOT):
     order = selected*passes
     check(len(order) % 8 == 0, 'complete eight-example windows; never pad or drop rows')
     saved, owners = initial_state(root)
-    if input_profile=='direct-role-states-v1':
+    if input_profile in ('direct-role-states-v1','direct-role-states-v2'):
         owners=owners+direct_projection_owners()
     diagnostic = 'data/g1-proof/gate-repair-v2-20261105/diagnostic.safetensors'
     check(file_hash(root/diagnostic) == DIAGNOSTIC_SHA, 'diagnostic initialization drift')
@@ -142,8 +142,8 @@ def prepare(snapshot, input_profile, *, regime='component', root=ROOT):
             'scheduled_windows': 188, 'optimizer_updates': 188, 'schedule_profile': 'a4-v1',
             'restore': 'exact named masters, Adam moments, CUDA/torch/Python RNG; preserve schedule position'},
         'owners': owners, 'frozen_owners': ['W', 'R', 'budget_row', 'reference']+
-            (['codec.direct_role_length'] if input_profile=='direct-role-states-v1' else []),
-        'profile_only_owners': [] if input_profile != 'direct-role-states-v1' else
+            (['codec.direct_role_length'] if input_profile in ('direct-role-states-v1','direct-role-states-v2') else []),
+        'profile_only_owners': [] if input_profile not in ('direct-role-states-v1','direct-role-states-v2') else
             [{'status':'implemented; GPU pending RD-07','owner':'codec.direct_role_projection',
               'parameter_names_shapes':{'codec.direct_role_projection.weight':[1024,1024],
                                         'codec.direct_role_projection.bias':[1024]},
@@ -151,7 +151,7 @@ def prepare(snapshot, input_profile, *, regime='component', root=ROOT):
              {'status':'implemented; frozen during receiver fit','owner':'codec.direct_role_length',
               'parameter_names_shapes':{'codec.direct_role_length.weight':[33,256],'codec.direct_role_length.bias':[33]},
               'initialization':'FP32 zero logits; no RNG draw; writer-only length owner'}],
-        'profile_construction':'restore exact parent Window first; extend_profile_window retains old masters/Adam moments/RNG/counters; new zero-delta projection moments stay absent until eligible gradients' if input_profile=='direct-role-states-v1' else 'exact existing parent Window; no owner migration',
+        'profile_construction':'restore exact parent Window first; extend_profile_window retains old masters/Adam moments/RNG/counters; new zero-delta projection moments stay absent until eligible gradients' if input_profile in ('direct-role-states-v1','direct-role-states-v2') else 'exact existing parent Window; no owner migration',
         'objectives': {k: COEFFICIENTS[k] for k in ('status', 'noul', 'choice', 'score', 'feasibility', 'alignment', 'structure')},
         'objective_masks': 'existing decision_losses Eligibility; Reason only after actual non-assessed status; no new auxiliary loss',
         'experimental_component_admission':None if input_profile==LEGACY else {
@@ -168,12 +168,17 @@ def prepare(snapshot, input_profile, *, regime='component', root=ROOT):
             'examples_per_window': 8, 'failure_policy': 'failed attempts remain scheduled; no replacement/retry'},
         'required_evidence': {'RD-01': file_hash(root/COVERAGE),
             'source_policy_checks': {key:'pending_RD07' for key in GPU_CHECKS} if spec['source_policy']==FROZEN_SOURCE else {},
-            'direct_role_checks': {key:'pending_RD07' for key in DIRECT_GPU_CHECKS} if input_profile=='direct-role-states-v1' else {},
+            'direct_role_checks': {key:'pending_RD07' for key in DIRECT_GPU_CHECKS} if input_profile in ('direct-role-states-v1','direct-role-states-v2') else {},
             'joint_objective_checks': {key:'pending_RD07' for key in JOINT_GPU_CHECKS} if input_profile!=LEGACY else {},
-            'native_checks':{key:'pending_RD07' for key in NATIVE_GPU_CHECKS} if input_profile=='direct-role-states-v1' else {},
+            'native_checks':{key:'pending_RD07' for key in NATIVE_GPU_CHECKS} if input_profile in ('direct-role-states-v1','direct-role-states-v2') else {},
             'pending_slices': spec['required_slices'], 'native_regime': 'direct native implementation; corpus formation and semantic continuation unsupported; GPU pending RD-07',
             'new_profile_gpu_qualification': 'pending RD-07' if input_profile != LEGACY else 'historical legacy path only'},
         'authorization': 'preparation only; this manifest grants no model execution, fitting or promotion'}
+    if spec['implementation']=='compact-v2':
+        qpath=root/'docs/evidence/compact-role-qualification-v2.json'
+        contract['required_evidence']={'historical_RD07':file_hash(root/'docs/evidence/redesign-qualification-v1.json'),
+            'changed_v2':file_hash(qpath) if qpath.exists() else None,
+            'native_regime':'unsupported; no RD09 execution','qualification_required_before_fit':True}
     run_sha = digest(canonical(contract))
     identities = dict(saved['identities'], protocol=run_sha, sources=digest(canonical(sources)))
     return {'contract': contract, 'run_sha256': run_sha, 'checkpoint_identities': identities,
@@ -274,6 +279,22 @@ def admit_execution(plan, *, gpu, input_profile, regime):
     check(gpu == PRIMARY, '3090 UUID required; never CPU/3060')
     check(input_profile == plan['contract']['input_profile'] and regime == plan['contract']['regime'],
           'execution profile/regime mismatch')
+    if plan['contract']['profile']['implementation']=='compact-v2':
+        qualification_path=ROOT/'docs/evidence/compact-role-qualification-v2.json'
+        qualification=decode(qualification_path.read_bytes())
+        check(qualification['status']=='PASS' and qualification['optimizer_updates']==0,
+              'passing no-update v2 qualification required')
+        check(qualification['source_hashes']==plan['contract']['dependencies']['sources'],
+              'v2 qualification source drift')
+        check(plan['contract']['layout_coverage']['panels']['train_receiver']['supported']==1500,
+              'complete1500-record shared support required; no smaller substitute')
+        import subprocess
+        tracked=subprocess.check_output(['git','show','HEAD:docs/evidence/compact-role-qualification-v2.json'],cwd=ROOT)
+        check(tracked==qualification_path.read_bytes(),'qualification must be committed before fitting')
+        check(subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT).strip()==
+              subprocess.check_output(['git','rev-parse','refs/remotes/origin/main'],cwd=ROOT).strip(),
+              'qualification must be pushed before fitting')
+        return
     check(plan['contract']['profile']['implementation'] == 'legacy',
           'profile implementation/qualification pending RD-03..07; preparation is not execution authorization')
 

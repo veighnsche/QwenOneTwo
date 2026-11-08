@@ -33,7 +33,7 @@ class MetadataTokenizer:
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--snapshot',required=True);parser.add_argument('--output',required=True)
+    parser.add_argument('--profile',choices=('direct-role-states-v1','direct-role-states-v2'),default='direct-role-states-v1');parser.add_argument('--snapshot',required=True);parser.add_argument('--output',required=True)
     a=parser.parse_args();root=Path(__file__).resolve().parents[1];output=Path(a.output).resolve()
     check(output.is_relative_to(root/'data') and not output.exists(),'fresh local data output required')
     snapshot=Path(a.snapshot).resolve();tokenizer=MetadataTokenizer(snapshot)
@@ -44,10 +44,10 @@ def main():
     train=load_release(root/'data/training-collections-20261105/releases/train',expected_hash=TRAIN_SHA)
     dev=load_release(root/'data/training-collections-20261105/releases/development',expected_hash=DEV_SHA)
     results={name:coverage(train if name=='train_receiver' else dev,panels[name],tokenizer,
-        intervention=name!='train_receiver') for name in ('train_receiver','development_E','development_X')}
+        intervention=name!='train_receiver',profile=a.profile) for name in ('train_receiver','development_E','development_X')}
     output.mkdir(parents=True)
     (output/'records.json').write_bytes(canonical({name:r['records'] for name,r in results.items()}))
-    report={'profile':'direct-role-states-v1','scope':'BPE/position metadata only; no features or model execution',
+    report={'profile':a.profile,'scope':'BPE/position metadata only; no features or model execution',
         'releases':{'training':TRAIN_SHA,'development':DEV_SHA},
         'tokenizer_files':{p.name:file_hash(p) for p in snapshot.iterdir() if p.suffix in {'.json','.jinja'}},
         'panels':{name:r['summary'] for name,r in results.items()},

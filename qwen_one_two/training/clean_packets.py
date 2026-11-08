@@ -9,7 +9,7 @@ from ..codec.records import Semantic, Span, Attribute, Value, Reason
 from ..codec.schema import Kind, Port, Status, Role, ValueKind, Mode, parse_numeric
 from ..codec.runtime import Runtime
 from .inputs import check, digest, canonical, REQUEST_KINDS
-from ..codec.layout import LEGACY,DIRECT,packet_costs,admit
+from ..codec.layout import LEGACY,DIRECT,packet_costs,admit,is_direct
 
 
 class CleanPackets:
@@ -82,7 +82,7 @@ class CleanPackets:
         annotation = json.loads(self.view.references[referent].content)['fields']['referent']
         check(annotation.encode() == literal, 'reference literal/neutral identity mismatch')
         ref = self.registry.publish(Kind.TARGET,Semantic(meaning,profile=self.profile,
-            lengths=(len(meaning),) if self.profile==DIRECT else ()))
+            lengths=(len(meaning),) if is_direct(self.profile) else ()))
         value = Value(ValueKind.REFERENCE,True,ref,Mode.CONSTRUCT,span.source)
         attribute = Attribute(self.slots_for(key,'key').clone(),value,self.profile)
         self.registry.attribute(attribute)
@@ -111,7 +111,7 @@ class CleanPackets:
         return attribute
 
     def admission(self,port,question,target,*,evidence=(),candidates=(),rubric=(),target_attributes=(),candidate_attributes=()):
-        if self.profile!=DIRECT:return None
+        if not is_direct(self.profile):return None
         costs=[]
         for e in evidence:
             if isinstance(e,Span):self.registry.span(e);costs.append(1+e.count)
@@ -123,7 +123,7 @@ class CleanPackets:
         check(not candidate_attributes or len(candidate_attributes)==len(candidates),'candidate attribute count')
         return admit(packet_costs(port,len(self.slots[question]),len(self.slots[target]),rubric=sizes,evidence=tuple(costs),
             target_attributes=sum(a.cost for a in target_attributes),candidates=tuple((len(self.slots[i]),
-                sum(a.cost for a in candidate_attributes[n]) if candidate_attributes else 0) for n,i in enumerate(candidates))))
+                sum(a.cost for a in candidate_attributes[n]) if candidate_attributes else 0) for n,i in enumerate(candidates)),profile=self.profile))
 
     def request(self,port,question,target,*,evidence=(),candidates=(),rubric=(),direction=1,
                 target_attributes=(),candidate_attributes=(),session=None):
@@ -154,7 +154,7 @@ class CleanPackets:
             return tuple(attributes)
         def semantic(index,role,attributes=()):
             payload=self.slots_for(index,role)
-            return Semantic(payload,attributes,profile=self.profile,lengths=(len(payload),) if self.profile==DIRECT else ())
+            return Semantic(payload,attributes,profile=self.profile,lengths=(len(payload),) if is_direct(self.profile) else ())
         q = rt.publish(Kind.QUESTION,semantic(question,'question'))
         t = rt.publish(Kind.TARGET,semantic(target,'target',validate_attrs(target_attributes)))
         refs = []
@@ -166,12 +166,12 @@ class CleanPackets:
         if rubric:
             check(len(rubric) in (4,5), 'rubric fields')
             payload = torch.cat([self.slots_for(index,role) for index,role in zip(rubric,('dimension','conditions','zero','one','midpoint'))])
-            if len(rubric) == 4 and self.profile==LEGACY:
+            if len(rubric) == 4 and not is_direct(self.profile):
                 payload = torch.cat((payload,payload.new_zeros(2,1024)))
             lengths=tuple(len(self.slots[i]) for i in rubric)
             if len(rubric)==4:lengths=lengths+(0,)
             rubric_ref = rt.publish(Kind.RUBRIC,Semantic(payload,direction=direction,midpoint=len(rubric)==5,
-                profile=self.profile,lengths=lengths if self.profile==DIRECT else ()))
+                profile=self.profile,lengths=lengths if is_direct(self.profile) else ()))
         if session is None:
             rt.writer_position(); rt.writer_position()
         else:

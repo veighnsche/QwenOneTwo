@@ -6,7 +6,7 @@ from torch.nn import functional as F
 from .schema import Role, Metadata, Atom, Port, Status, bits, require
 from ..g1_backbone import GPU_UUID
 from ..g1_device import require_cuda
-from .layout import LEGACY,DIRECT,DIRECT_ROLES,valid_profile
+from .layout import LEGACY,DIRECT,DIRECT_ROLES,valid_profile,is_direct
 
 
 def cuda_only(x=None):
@@ -157,7 +157,7 @@ class Codec(nn.Module):
 
     def require_profile(self,profile):
         valid_profile(profile)
-        require(profile!=DIRECT or all(hasattr(self,name) for name in ('direct_role_projection','direct_role_length')),
+        require(not is_direct(profile) or all(hasattr(self,name) for name in ('direct_role_projection','direct_role_length')),
                 'direct role modules require explicit construction')
 
     def semantic_length_logits(self,f,role):
@@ -214,7 +214,7 @@ class Codec(nn.Module):
             if p.role==Role.BUDGET:v=v.detach().clamp(0,1)
             payload=(self.budget_value if p.role==Role.BUDGET else self.value)(torch.stack((torch.ones_like(v),v,v*v)))
         else:payload=p.payload
-        if profile==DIRECT and p.role in DIRECT_ROLES:payload=self.direct_role_projection(payload)
+        if is_direct(profile) and p.role in DIRECT_ROLES:payload=self.direct_role_projection(payload)
         cuda_only(payload)
         return self.wire(payload,p.role,p.slot,p.owner,p.attribute,p.previous)
 
