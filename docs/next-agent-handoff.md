@@ -19,6 +19,27 @@ change fan controls, live services or The Operating Table. Older hold statements
 below are historical. The completed comparison and next unfinished slice remain
 as recorded below.
 
+## Current requested work — learning redesign plan, 2026-11-08
+
+The user requested a concrete implementation plan reusing working infrastructure
+and existing data, with W frozen and latent-only communication; no agents or
+training yet. The [plan](learning-redesign-plan-2026-11-08.md) records RD-01..09,
+code/contract owners, per-slice acceptance and evidence, and explicit data and
+native-supervision blockers. It supersedes older next-slice suggestions as the
+proposed work order, without changing current runtime or historical results.
+
+Completed this turn: implementation/report inspection and the plan only. All 197
+local Markdown link targets across three files resolve; whitespace checks pass.
+No model/GPU execution, training,
+new data/reviews, agents or service changes. No redesign implementation has run.
+
+**Next unfinished implementation slice: RD-01**, the metadata-only coverage,
+comparison-panel and native-supervision manifest. RD-02..06 add runner/profile,
+stable component features, richer latent roles, joint objectives/binding and
+native wiring; RD-07 performs targeted no-update 3090 qualification when requested.
+RD-08/09 describe future receiver/native learning and require subsequent training
+authorization. Current learned capability remains exactly as reported below.
+
 ## User direction: MVP gates — 2026-11-06
 
 Keep the following tests and their recorded results, but reconsider their role

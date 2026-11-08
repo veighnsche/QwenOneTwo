@@ -4,6 +4,12 @@ For current measured status, artifact locations and remaining tasks, start with
 the [next-agent handoff](next-agent-handoff.md). This is the single current
 completion report; topic documents below define contracts and starting defaults.
 
+The proposed next work is the [learning redesign plan](learning-redesign-plan-2026-11-08.md):
+reuse existing infrastructure/data, stabilize component features, test richer
+latent role inputs, preserve joint status/value behavior and verify native
+supervision before further fitting. It is a plan, not implemented behavior or
+training authorization.
+
 The latest architecture review has a measured
 [data/gradient baseline](architecture-baseline-2026-11-07.md) and
 [read-only information-loss results](information-loss-results-2026-11-07.md).
