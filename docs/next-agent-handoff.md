@@ -19,7 +19,36 @@ change fan controls, live services or The Operating Table. Older hold statements
 below are historical. The completed comparison and next unfinished slice remain
 as recorded below.
 
-## Current requested work — learning redesign plan, 2026-11-08
+## Current requested work — RD-01 metadata coverage, 2026-11-08
+
+RD-01 implementation and evidence are complete; commit/push verification is
+being finalized in the [progress ledger](redesign-progress.md). Read the
+[RD-01 report](redesign-rd01-results-2026-11-08.md) and
+[portable manifest](evidence/redesign-coverage-v1.json). The deterministic audit
+resolves 8,000 training +1,000 development selected records, accounts for all
+1,500 receiver training rows, fixes complete E130/X180 panels and 50 assessed
+Choice retention cases, and inventories conditional native targets. Existing
+semantic/architecture audit receipts are reused, with original raw hashes checked.
+
+Known limits for later work: no assessed receiver training coverage for negated
+AND/OR, remaining/half-completion or denominator 200; no assessed Score E/X cohort
+meets the declared familiar numeric-range condition. Unclassified prose remains
+unclassified. The native inventory records 224 interleaved calls without their own
+Reason, 373 interleaved records with ambiguous source occurrences, and 44 writer/
+139 interleaved Choice targets that cannot satisfy the current unique-selection
+continuation guard. Supplied-return reader annotations do not qualify actual-return
+use; native binding/continuation conditions remain enforced. These are completed
+audit findings, not a waiver to train or evidence of learned behavior.
+
+Model-free acceptance checks cover repeat determinism with model imports blocked,
+complete accounting, split overlap, ambiguity, stale identities, hidden-label
+invariance and report denominators. Exact command/results and dependency/artifact
+hashes are in the evidence. No model/GPU workload, training, new data/review,
+agents, locked access, deployment or service change occurred. There are no deferred
+RD-01 GPU checks. **Next unfinished slice: RD-02**, runner preparation and resumable
+identities, requiring its own submitted prompt. Stop after RD-01 in this task.
+
+## Previous requested work — learning redesign plan and queue preparation
 
 Subsequent request: prepare one implementation prompt per slice, so later queue
 items recover unfinished predecessors instead of skipping them. The
@@ -31,7 +60,7 @@ Deferred GPU checks from RD-03..06 are resolved by RD-07; a delivered but failed
 RD-08 cannot unlock RD-09. AGENTS.md points to this task-specific protocol.
 Preparing prompts did not authorize any execution. RD-01..07 prompts are
 non-training; submitting RD-08/09 explicitly authorizes their stated finite fits.
-All redesign slices remain pending. No agents, data/model work or training ran.
+At prompt preparation all redesign slices remained pending. No agents, data/model work or training ran.
 Prompt-preparation validation: nine ordered prompts/nine copyable blocks, all
 referencing the recovery protocol; 200 local links across the four affected
 Markdown files resolve; whitespace checks pass. No queue manager was added.
@@ -46,9 +75,9 @@ proposed work order, without changing current runtime or historical results.
 Completed this turn: implementation/report inspection and the plan only. All 197
 local Markdown link targets across three files resolve; whitespace checks pass.
 No model/GPU execution, training,
-new data/reviews, agents or service changes. No redesign implementation has run.
+new data/reviews, agents or service changes. No redesign implementation ran during that plan-only turn.
 
-**Next unfinished implementation slice: RD-01**, the metadata-only coverage,
+**At plan preparation, next unfinished implementation slice: RD-01**, the metadata-only coverage,
 comparison-panel and native-supervision manifest. RD-02..06 add runner/profile,
 stable component features, richer latent roles, joint objectives/binding and
 native wiring; RD-07 performs targeted no-update 3090 qualification when requested.

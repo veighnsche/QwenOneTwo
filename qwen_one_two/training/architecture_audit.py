@@ -1,7 +1,8 @@
 """CPU metadata audit of existing annotations; never loads a model or locked data."""
 from collections import Counter, defaultdict
+import re
 from .inputs import canonical, check, digest
-from .behavior_qualification import expected, suite
+from .behavior_qualification import expected, suite, fp32
 from .component_producer import component_view, reference_record
 
 
@@ -73,3 +74,61 @@ def audit(train, dev):
             'development_pairs': len(groups), 'omitted_reader_cases': len(omitted),
             'model_execution': False, 'locked_opened': False,
             'scope': 'metadata and permitted-input audit; no new annotations, review, fitting or semantic certification'}
+
+
+def recipe(row):
+    """Recognize only exact known generator templates, checking reviewed targets."""
+    check(row['construction']['template_version'] == 'controlled-data-v1', 'unknown controlled template')
+    gold = expected(row)
+    if gold['status'] != 'Assessed':
+        return {'recipe': 'non_assessed/' + gold['status']}
+    op = row['operation']; semantics = row['semantics']
+    if op == 'Choice':
+        return {'recipe': 'capacity_maximum'}
+    facts = row['model_inputs']['evidence']['facts']
+    question = semantics['question']
+    if op == 'Noul':
+        values = []
+        for fact in facts:
+            match = re.fullmatch(r'.+: (yes|no)\.', fact)
+            check(match is not None, 'unknown assessed Boolean fact template')
+            values.append(match[1] == 'yes')
+        check(len(values) in (1, 2), 'known Boolean arity')
+        negated = question['proposition'].startswith('Negation of: ')
+        if question['criterion'] == 'At least one prerequisite holds':
+            check(not negated and len(values) == 2, 'known OR intervention')
+            target = any(values); name = 'positive_or'
+        else:
+            check(question['criterion'].startswith('Both '), 'known AND criterion')
+            check(len(values) == 2 or values == [False], 'partial AND must be decisive')
+            target = all(values)
+            if negated: target = not target
+            name = 'negated_and' if negated else 'positive_and'
+        check(float(target) == gold['payload']['p_true'], 'reviewed Boolean target mismatch')
+        return {'recipe': name, 'truth': int(target), 'facts': len(values)}
+    check(op == 'Score' and len(facts) == 2, 'known assessed Score input')
+    total = re.fullmatch(r'The requirement is (\d+) (.+)\.', facts[0])
+    done = re.fullmatch(r'(\d+) (.+) are complete\.', facts[1])
+    check(total is not None and done is not None and total[2] == done[2], 'known bound count/unit template')
+    denominator, numerator = int(total[1]), int(done[1])
+    check(denominator > 0 and 0 <= numerator <= denominator, 'controlled count range')
+    value = numerator / denominator
+    conditions = semantics['rubric']['conditions']
+    if conditions == 'One minus completed count divided by required count':
+        name = 'remaining_fraction'; value = 1-value; direction = 'lower'
+    elif conditions == 'Completed count divided by twice the stated requirement':
+        name = 'half_completion'; value /= 2; direction = 'higher'
+    else:
+        check(conditions == f'Completed {total[2]} divided by required {total[2]}', 'known completion conditions')
+        name = 'completion'; direction = 'higher'
+    check(semantics['rubric']['direction'] == direction, 'known rubric direction')
+    lo, hi = gold['payload']['score_interval']
+    check(lo == hi and fp32(value) == fp32(lo), 'reviewed exact Score formula mismatch')
+    return {'recipe': name, 'numerator': numerator, 'denominator': denominator,
+            'unit': total[2], 'target': fp32(lo), 'direction': direction}
+
+
+def redesign_manifest(train, dev):
+    """RD-01 extension, separate from the historical baseline schema."""
+    from .redesign_coverage import build_manifest
+    return build_manifest(train, dev)

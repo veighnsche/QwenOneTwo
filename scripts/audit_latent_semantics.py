@@ -4,7 +4,6 @@ from collections import Counter, defaultdict
 import json
 import math
 from pathlib import Path
-import re
 import statistics
 
 from qwen_one_two.training.inputs import canonical, check, digest
@@ -13,6 +12,7 @@ from qwen_one_two.training.release import load_release
 from qwen_one_two.training.component_producer import component_view, reference_record
 from qwen_one_two.training.behavior_qualification import expected, fp32, grade, suite
 from scripts.fit_reference import TRAIN_SHA, DEV_SHA
+from qwen_one_two.training.architecture_audit import recipe
 
 ROOT = Path(__file__).resolve().parents[1]
 CAPTURE = ROOT/'data/information-loss-20261107/run-v2'
@@ -33,58 +33,6 @@ def unique(rows, key):
     result = {r[key]: r for r in rows}
     check(len(result) == len(rows), 'duplicate receipt identity')
     return result
-
-
-def recipe(row):
-    """Recognize only exact known generator templates, checking reviewed targets."""
-    check(row['construction']['template_version'] == 'controlled-data-v1', 'unknown controlled template')
-    gold = expected(row)
-    if gold['status'] != 'Assessed':
-        return {'recipe': 'non_assessed/' + gold['status']}
-    op = row['operation']; semantics = row['semantics']
-    if op == 'Choice':
-        return {'recipe': 'capacity_maximum'}
-    facts = row['model_inputs']['evidence']['facts']
-    question = semantics['question']
-    if op == 'Noul':
-        values = []
-        for fact in facts:
-            match = re.fullmatch(r'.+: (yes|no)\.', fact)
-            check(match is not None, 'unknown assessed Boolean fact template')
-            values.append(match[1] == 'yes')
-        check(len(values) in (1, 2), 'known Boolean arity')
-        negated = question['proposition'].startswith('Negation of: ')
-        if question['criterion'] == 'At least one prerequisite holds':
-            check(not negated and len(values) == 2, 'known OR intervention')
-            target = any(values); name = 'positive_or'
-        else:
-            check(question['criterion'].startswith('Both '), 'known AND criterion')
-            check(len(values) == 2 or values == [False], 'partial AND must be decisive')
-            target = all(values)
-            if negated: target = not target
-            name = 'negated_and' if negated else 'positive_and'
-        check(float(target) == gold['payload']['p_true'], 'reviewed Boolean target mismatch')
-        return {'recipe': name, 'truth': int(target), 'facts': len(values)}
-    check(op == 'Score' and len(facts) == 2, 'known assessed Score input')
-    total = re.fullmatch(r'The requirement is (\d+) (.+)\.', facts[0])
-    done = re.fullmatch(r'(\d+) (.+) are complete\.', facts[1])
-    check(total is not None and done is not None and total[2] == done[2], 'known bound count/unit template')
-    denominator, numerator = int(total[1]), int(done[1])
-    check(denominator > 0 and 0 <= numerator <= denominator, 'controlled count range')
-    value = numerator / denominator
-    conditions = semantics['rubric']['conditions']
-    if conditions == 'One minus completed count divided by required count':
-        name = 'remaining_fraction'; value = 1-value; direction = 'lower'
-    elif conditions == 'Completed count divided by twice the stated requirement':
-        name = 'half_completion'; value /= 2; direction = 'higher'
-    else:
-        check(conditions == f'Completed {total[2]} divided by required {total[2]}', 'known completion conditions')
-        name = 'completion'; direction = 'higher'
-    check(semantics['rubric']['direction'] == direction, 'known rubric direction')
-    lo, hi = gold['payload']['score_interval']
-    check(lo == hi and fp32(value) == fp32(lo), 'reviewed exact Score formula mismatch')
-    return {'recipe': name, 'numerator': numerator, 'denominator': denominator,
-            'unit': total[2], 'target': fp32(lo), 'direction': direction}
 
 
 def scalar_summary(rows, predictions):

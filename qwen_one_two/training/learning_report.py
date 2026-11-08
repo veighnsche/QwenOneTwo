@@ -7,6 +7,44 @@ from .behavior_qualification import expected,grade,fp32
 PROTOCOL='receiver-training-probe-v1'
 
 
+def summarize_coverage_learning(release, cases, manifest, *, panel, kind):
+    """Keep the complete E/X/training report beside metadata-selected subgroups.
+
+    Selection accepts no predictions. Missing/failed cases remain scheduled and
+    every supplied identity must still resolve to its original reviewed row.
+    """
+    check(manifest['protocol'] == 'redesign-coverage-v1', 'coverage manifest version')
+    split = 'training' if panel == 'train_receiver' else 'development'
+    check(release.identity == manifest['releases'][split], 'stale coverage release')
+    check(panel in {'train_receiver', 'development_E', 'development_X'}, 'full receiver panel required')
+    index = {entry['id']: entry for entry in manifest['inventory']}
+    check(len(index) == len(manifest['inventory']), 'duplicate coverage identity')
+    ids = manifest['panels'][panel]
+    if panel == 'development_X':
+        from .behavior_qualification import suite
+        groups, _ = suite(release)
+        original = [key for group in groups for key in group['ids']]
+    else:
+        original = [key for key in sorted(release.selected_ids)
+                    if (release.record(key)['training_category'] == 'receiver' if panel == 'train_receiver'
+                        else release.record(key).get('evaluation_slice') == 'E')]
+    check(ids == original, 'changed full coverage panel')
+    for key in ids:
+        check(index[key]['record_sha256'] == digest(canonical(release.record(key))), 'stale coverage record')
+    key_name = 'record' if kind == 'heads' else 'id'
+    complete = summarize_learning(release, cases, ids, kind=kind)
+    by_id = {case[key_name]: case for case in cases}
+    groups = {}
+    for name, selected in manifest['panels'].items():
+        if name.startswith(panel+'/'):
+            check(len(selected) == len(set(selected)) and set(selected) <= set(ids)
+                  and digest(canonical(selected)) == manifest['coverage'][name]['ids_sha256'],
+                  'stale subgroup identity')
+            groups[name] = summarize_learning(release, [by_id[k] for k in selected], selected, kind=kind)
+    return {'full': complete, 'subgroups': groups,
+            'scope': 'descriptive overlapping metadata cohorts; development remains development'}
+
+
 def probe_panel(release):
     check(release.purpose=='training','probe selection requires training release')
     rows=[release.record(e['id']) for e in release.manifest['records'] if e['selected']]
