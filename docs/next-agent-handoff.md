@@ -19,7 +19,44 @@ change fan controls, live services or The Operating Table. Older hold statements
 below are historical. The completed comparison and next unfinished slice remain
 as recorded below.
 
-## Current requested work — RD-08 receiver comparison, 2026-11-08
+## Current requested work — conditional RD-09, 2026-11-08
+
+The user submitted conditional finite RD-09 authorization. **RD-09 execution
+remains unstarted/blocked**; earliest unfinished predecessor is **RD-08**. See the
+[RD-09 report](redesign-rd09-results-2026-11-08.md),
+[evidence](evidence/native-demonstration-rd09-v1.json) and [ledger](redesign-progress.md).
+
+RD-01..07 evidence/raw hashes/pushed ancestors verify and all13 RD-07 GPU IDs
+remain pass for unchanged current sources. RD-08 still has0/1500 complete shared
+support, no fit, no useful-improvement result and no accepted receiver artifact.
+RD-08 is blocked before fitting, not a completed failed experiment. If completed
+RD-08 fails acceptance, native training stays blocked; no automatic receiver
+rerun/search. Existing finite RD-08 and conditional RD-09 authorizations persist
+only within their stated conditions.
+
+Verified native audit:5590 records;3220 calls (3150 train/70 development writer),
+complete formation0, native decision/post-call continuation0, direct supplied
+reader0 across750 train/120 dev. No verified typed-final extractor or actual-native
+X pair labels. Direct/no-call500 and language-replay1000 training potentials cannot
+substitute for actual-result use. Existing semantic masks/limits remain intact.
+
+Model-import-blocked prerequisite verifier exits0, records dependencies and reuses
+valid unchanged tests/audits without GPU reruns. Actual new model workloads,
+training attempts/exposures/windows/updates, evaluations and checkpoints are all0.
+No accepted receiver exists for retention measurement; learning not_evaluated.
+No native schedule was fixed as executable and no dependent implementation begun.
+Host3090 accessible, no matching fits/qualification job, existing server PID2094
+untouched. No agents/new data/reviews/locked access/deployment/service changes.
+
+Recovery order: explicit complete-role layout revision/full training/E/X re-audit
+and affected qualification; full authorized RD-08 comparison with accepted receiver;
+valid native supervision; then fix/commit exact finite native eligibility/owners/
+coefficients/forcing/evaluation manifests before training. Do not crop, invent
+labels, weaken acceptance, substitute a smaller experiment or start automatic
+search/extra passes. Blocker record commit/push finalization follows. Historical
+statements below about absent RD-09 authorization are superseded here.
+
+## Previous requested work — RD-08 receiver comparison, 2026-11-08
 
 The user submitted/authorized finite RD-08 training, but **RD-08 is blocked before
 execution**, not delivered as a failed experiment. See the

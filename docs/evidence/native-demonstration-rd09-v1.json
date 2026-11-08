@@ -1,0 +1,216 @@
+{
+  "RD08_accepted_receiver_artifact": null,
+  "RD08_completed_failed_experiment": false,
+  "RD08_failure_policy": "A completed failed RD08 blocks native training; no automatic rerun or search. Current RD08 is blocked before fitting, not a failed completed fit.",
+  "accounting": {
+    "agents": false,
+    "causal_positions": 0,
+    "checkpoints_created": 0,
+    "deployment": false,
+    "development_evaluations": 0,
+    "exposures": 0,
+    "locked_access": false,
+    "model_workloads": 0,
+    "native_training_attempts": 0,
+    "new_records": false,
+    "new_reviews": false,
+    "optimizer_updates": 0,
+    "prefills": 0,
+    "receiver_training_attempts": 0,
+    "services_changed": false,
+    "sessions": 0,
+    "windows": 0
+  },
+  "authorization": "Submitted conditional finite RD09; recover predecessors, require accepted receiver and valid supervision; no extra training/deployment",
+  "command": {
+    "argv": [
+      "python",
+      "data/redesign-rd09-20261108/verify_prerequisites.py"
+    ],
+    "cwd": "/home/vince/QwenOneTwo",
+    "environment": {
+      "PYTHONPATH": "."
+    },
+    "exit_code": 0,
+    "model_imports": "torch/numpy/safetensors/transformers/peft blocked",
+    "stdout_stderr": "data/redesign-rd09-20261108/prerequisites.log"
+  },
+  "delivery": "blocked",
+  "evidence_dependencies": {
+    "docs/evidence/direct-native-flow-v1.json": "a08b1bb4f9e935d3c5c3a5955c737d564c872f6066b8f45195dee593cf6fa1b0",
+    "docs/evidence/receiver-comparison-rd08-v1.json": "9197d5e02948f169a7317c794149c1a2bec3c889e2cbdbce9a2a7328748a256f",
+    "docs/evidence/redesign-qualification-v1.json": "8ddc1e52812248608a6cc5be3612e4489dcfa8ae9875479e9afd286493b66c25",
+    "docs/learning-redesign-plan-2026-11-08.md": "13bb0db70df3a8a35529d8f25650104783d8da7f0e52e56520c5a75a6c061123",
+    "docs/redesign-queue-prompts-2026-11-08.md": "d182f4a48d11adeb6b8c114ba2c74be1b992250f8cd58a0cfd566c756ce8b5b5"
+  },
+  "execution": "unstarted",
+  "host_inspection": {
+    "existing_server_pid": 2094,
+    "gpu_command": "nvidia-smi --query-gpu=uuid,name,memory.used --format=csv",
+    "matching_receiver_native_qualification_jobs": 0,
+    "process_command": "ps -eo pid,args | rg '(train_receiver|redesign-rd0[89]|run_deferred|run_changed|qwen_one_two.server)'",
+    "remote_command": "git -c 'credential.helper=!gh auth git-credential' ls-remote origin refs/heads/main",
+    "remote_main": "9af92fd93114469466933582e6dbbe5f60af60d1",
+    "service_actions": [],
+    "specified_3090_accessible": true
+  },
+  "learning_acceptance": "not_evaluated",
+  "protocol": "native-demonstration-rd09-v1",
+  "raw_hashes": {
+    "data/redesign-rd09-20261108/prerequisite-results.json": "ebd251fc83e57940315763ae4c710fed5fe14da14c07d38c4c4d3be2d6230503",
+    "data/redesign-rd09-20261108/prerequisites.log": "74e966c26446e07f0049be55e1caa7fa0488089a626cdbca16e9e10c6ca5e1e4",
+    "data/redesign-rd09-20261108/validation.json": "015ccb4f8919a627ea620b78c4b5940b0d1d33e7cc1ff763b584c76c4b5e933f",
+    "data/redesign-rd09-20261108/verify_prerequisites.py": "e91aaa995ca2f0076f44e93b9174e7edd9546e13457b37807edeec6b70034ae9"
+  },
+  "results": {
+    "RD07": {
+      "current_source_test_hashes": "pass",
+      "new_GPU_execution": false,
+      "raw_evidence": "pass",
+      "resolved_checks": 13,
+      "status": "pass"
+    },
+    "RD08": {
+      "accepted_receiver_artifact": null,
+      "common_support": 0,
+      "complete_failed_experiment": false,
+      "delivery": "blocked",
+      "learning": "not_evaluated",
+      "new_fit_or_rerun": false,
+      "required_training_records": 1500
+    },
+    "baseline_commit": "9af92fd93114469466933582e6dbbe5f60af60d1",
+    "earliest_unfinished": "RD-08",
+    "execution": {
+      "development_evaluations": 0,
+      "fitted_artifact": null,
+      "fixed_native_exposure_schedule": null,
+      "frozen_receiver_retention_measurement": null,
+      "model_workloads": 0,
+      "native_started": false,
+      "optimizer_updates": 0,
+      "receiver_started": false,
+      "training_attempts": 0,
+      "windows": 0
+    },
+    "native_supervision": {
+      "actual_native_X_pair_labels": 0,
+      "audit_reused": true,
+      "complete_formation_calls": 0,
+      "development_writer_calls": 70,
+      "direct_supplied_reader_development": 0,
+      "direct_supplied_reader_train": 0,
+      "native_decision_calls": 0,
+      "post_call_continuation_calls": 0,
+      "records": 5590,
+      "training_calls": 3150,
+      "training_no_call_potentials": {
+        "direct": 500,
+        "language_replay": 1000
+      },
+      "typed_final_extractor": "not provided; no invented parser/judge; typed-grader fixtures do not verify extraction provenance"
+    },
+    "next_recovery": [
+      "explicit layout revision/full1500-row coverage re-audit and affected qualification; preserve fixed RD08 comparison scope",
+      "finish both authorized RD08 arms and evaluate useful improvement; completed failed RD08 blocks RD09 without retries/search",
+      "require a concrete accepted receiver and valid semantic/formation/reader/native-final supervision; preserve masks",
+      "only after prerequisites pass, fix/commit deterministic finite native eligibility/owners/coefficient/schedule/evaluation manifests before execution"
+    ],
+    "predecessors": [
+      {
+        "ancestor": true,
+        "current_receipt_hash": "pass",
+        "evidence": "docs/evidence/redesign-coverage-v1.json",
+        "evidence_sha256": "2b0585a141779974ee3799439603adb5512437d348902cd1e7fa59e7662c5628",
+        "implementation_commit": "800c100a56dfcc2afe33bdc004e965affef45331",
+        "raw_hashes_rechecked": 12,
+        "raw_hashes_verified": 12,
+        "slice": "RD-01",
+        "source_test_contract_hashes_at_delivery": 13
+      },
+      {
+        "ancestor": true,
+        "current_receipt_hash": "pass",
+        "evidence": "docs/evidence/receiver-preparation-v1.json",
+        "evidence_sha256": "cb9d85bb641cac2575a8c3017abe77056360d3697093bedcc316f8a8c88474f9",
+        "implementation_commit": "254f5268eacedd920b1c4219b79bcda8744a4524",
+        "raw_hashes_rechecked": 18,
+        "raw_hashes_verified": 18,
+        "slice": "RD-02",
+        "source_test_contract_hashes_at_delivery": 86
+      },
+      {
+        "ancestor": true,
+        "current_receipt_hash": "pass",
+        "evidence": "docs/evidence/frozen-w-source-v1.json",
+        "evidence_sha256": "11234011524726f37ab0f3ec8b744de497384df8b84b47d16cc5cfb58f50b5f0",
+        "implementation_commit": "2cbfa41518a0433ea868e2f0ca2c0bad08568008",
+        "raw_hashes_rechecked": 14,
+        "raw_hashes_verified": 14,
+        "slice": "RD-03",
+        "source_test_contract_hashes_at_delivery": 91
+      },
+      {
+        "ancestor": true,
+        "current_receipt_hash": "pass",
+        "evidence": "docs/evidence/direct-role-states-v1.json",
+        "evidence_sha256": "2ae39b6d9d832dad932ef9bc554e3848d65d662e392c0d0db0509cddff69a19e",
+        "implementation_commit": "ae800a4bf675fb58e6419ca411054fa9cabb973a",
+        "raw_hashes_rechecked": 29,
+        "raw_hashes_verified": 29,
+        "slice": "RD-04",
+        "source_test_contract_hashes_at_delivery": 107
+      },
+      {
+        "ancestor": true,
+        "current_receipt_hash": "pass",
+        "evidence": "docs/evidence/joint-receiver-objectives-v1.json",
+        "evidence_sha256": "5e9f23708d0441c3adae2cdf657115d0199a8080339b77a18c2eb2de63b4435b",
+        "implementation_commit": "fe90af01540fab0962167f2b4375d07cb169f84b",
+        "raw_hashes_rechecked": 62,
+        "raw_hashes_verified": 62,
+        "slice": "RD-05",
+        "source_test_contract_hashes_at_delivery": 106
+      },
+      {
+        "ancestor": true,
+        "current_receipt_hash": "pass",
+        "evidence": "docs/evidence/direct-native-flow-v1.json",
+        "evidence_sha256": "a08b1bb4f9e935d3c5c3a5955c737d564c872f6066b8f45195dee593cf6fa1b0",
+        "implementation_commit": "6f74680c4c6a866999d271d15e681d239d9ff588",
+        "raw_hashes_rechecked": 47,
+        "raw_hashes_verified": 47,
+        "slice": "RD-06",
+        "source_test_contract_hashes_at_delivery": 113
+      },
+      {
+        "ancestor": true,
+        "current_receipt_hash": "pass",
+        "evidence": "docs/evidence/redesign-qualification-v1.json",
+        "evidence_sha256": "8ddc1e52812248608a6cc5be3612e4489dcfa8ae9875479e9afd286493b66c25",
+        "implementation_commit": "7da99c652fba8729df247c62fcb029fb931d5cea",
+        "raw_hashes_rechecked": 35,
+        "raw_hashes_verified": 35,
+        "slice": "RD-07",
+        "source_test_contract_hashes_at_delivery": 100
+      }
+    ],
+    "status": "BLOCKED_PREREQUISITES_NOT_SATISFIED"
+  },
+  "validation": {
+    "RD06_native_supervision_audit": "pass",
+    "RD07_current_source_and_thirteen_checks": "pass",
+    "RD08_zero_common_support_proof": "pass",
+    "evidence_dependency_and_raw_hashes": "pass",
+    "learning_not_evaluated_zero_execution": "pass",
+    "learning_ready": "blocked",
+    "local_markdown_targets": 207,
+    "predecessor_evidence_ancestors_raw": "pass",
+    "prerequisite_result_integrity": "pass",
+    "production_changes": 0,
+    "production_source_changes": 0,
+    "staged_whitespace": "pass",
+    "test_policy": "reuse valid unchanged recorded tests and GPU measurements",
+    "tests": "valid unchanged recorded tests and GPU results reused"
+  }
+}

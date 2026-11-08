@@ -20,11 +20,11 @@ because a later queued task starts.
 | RD-06 | delivered | Native wiring/eligibility report; deferred real-return/gradient IDs | `6f74680` pushed/verified; [report](redesign-rd06-results-2026-11-08.md), [evidence](evidence/direct-native-flow-v1.json); 86 static tests pass +10 refreshed; two new GPU checks resolved by RD-07; zero complete corpus formation/semantic continuation/direct reader support |
 | RD-07 | delivered | All required deferred/changed-path 3090 checks pass; actual counts/hashes | [Report](redesign-rd07-results-2026-11-08.md), [evidence](evidence/redesign-qualification-v1.json); ten deferred +three new GPU checks pass; twelve1024 traces; zero updates; `7da99c6` pushed and verified |
 | RD-08 | blocked | Complete matched fit/evaluation receipts; useful-improvement outcome separate | [Report](redesign-rd08-results-2026-11-08.md), [evidence](evidence/receiver-comparison-rd08-v1.json); RD-07 passes/current; common support0/1500; neither fit launched, zero updates; learning not evaluated; blocker `2c977ce` pushed/verified |
-| RD-09 | pending | Accepted RD-08 receiver plus eligible native run/evaluation receipts | None; training not authorized by prompt preparation |
+| RD-09 | blocked | Accepted RD-08 receiver plus eligible native run/evaluation receipts | [Report](redesign-rd09-results-2026-11-08.md), [evidence](evidence/native-demonstration-rd09-v1.json); conditional authorization recorded; blocked on RD-08/no accepted receiver and zero native supervision; execution unstarted, zero updates |
 
 RD-07 is delivered; technical acceptance passes and implementation `7da99c6` is pushed/verified.
 All ten deferred GPU checks are resolved; no required RD-07 check remains pending.
-Earliest unfinished slice: **RD-08**, authorized but blocked before either fit: complete shared support0/1500. Explicit layout revision/full re-audit required; RD-09 remains unstarted.
+Earliest unfinished slice: **RD-08**, authorized but blocked before either fit: complete shared support0/1500. Explicit layout revision/full re-audit required; RD-09 is conditionally authorized but execution remains unstarted/blocked.
 
 For each attempted slice add a short entry with implementation/evidence paths,
 exact commands/results, dependency hashes, relevant implementation commits and
@@ -579,3 +579,41 @@ authenticated push exit0 (`de58073..2c977ce main -> main`) and authenticated
 `git ls-remote` returned the identical SHA.197 local Markdown targets, artifact
 hashes and staged whitespace pass. This ledger/handoff/evidence finalization is
 committed/pushed separately on top. RD-08 remains blocked rather than delivered.
+
+## RD-09 request / predecessor recovery — 2026-11-08
+
+Conditional RD-09 submitted. Clean main
+`9af92fd93114469466933582e6dbbe5f60af60d1` matches authenticated remote main.
+Required recovery is rechecking earliest unfinished RD-08 before dependent native
+work. RD-09 execution remains unstarted. Host3090 is accessible; read-only process
+inspection found existing server PID2094 and no matching receiver/native fit or
+qualification job. No service changed. No model execution/update launched.
+
+## RD-09 prerequisite result — 2026-11-08
+
+[Report](redesign-rd09-results-2026-11-08.md) and
+[evidence](evidence/native-demonstration-rd09-v1.json); raw
+`data/redesign-rd09-20261108/`. Earliest incomplete predecessor remains **RD-08**:
+0/1500 shared training support, neither arm started, acceptance not_evaluated,
+accepted receiver absent. This is not a completed failed fit. A completed failed
+RD-08 would also block native training without automatic reruns/search.
+RD-01..07 evidence/raw hashes and pushed ancestors verify; all13 RD-07 checks
+remain pass against current unchanged source/tests, no pending technical check.
+
+`PYTHONPATH=. python data/redesign-rd09-20261108/verify_prerequisites.py > data/redesign-rd09-20261108/prerequisites.log 2>&1`:
+exit0, model imports blocked. Verified RD-08 row-level proof/dependencies and
+reused RD-06 native audit:5590 records,3220 calls (3150 train/70 dev),0 complete
+formation,0 native decision/post-call continuation,0 direct supplied-reader
+support across750 train/120 dev. Typed native-final extraction unsupported and
+actual-native X pairs0. Separate no-call/replay potentials500/1000 do not qualify
+actual-return supervision. No annotations, masks, limits or acceptance changed.
+
+Conditional RD-09 authorization recorded; execution remains unstarted and
+blocked. Native schedule/eligible manifests cannot be fixed as executable without
+valid supervision/accepted receiver. Actual training attempts/exposures/windows/
+updates/model workloads/evaluations/checkpoints0; no frozen-receiver retention
+measurement or learning outcome. No source change or redundant GPU test run.
+No agents, new data/reviews, locked access, deployment or service/Operating Table
+change. No new slice delivered. Recover layout/full support and RD-08 acceptance
+first, then valid native supervision; commit exact finite native manifests before
+any conditional execution. Blocker-record commit/push finalization follows.
