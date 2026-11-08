@@ -31,6 +31,7 @@ class Session:
 
     def start_budget(self,override=None):
         """Finish startup after registering connected source states from prefill."""
+        self.check_cancelled()
         require(self.prefills==1 and self.runtime.state=='Prefill','budget startup boundary')
         rt=self.runtime
         raw=self.backbone.table.scalar(248077,self.hidden[0,-1])
@@ -42,12 +43,18 @@ class Session:
         self.startup(raw)
         if rt.budget==0:self.close()
 
+    def check_cancelled(self):
+        if getattr(self,'cancelled',lambda:False)():
+            self.runtime.terminate('Cancelled',emit_end=False)
+            raise InterruptedError('cancelled before scheduling model work')
+
     def step(self,embeds,mode,label,capture=True):
         require(embeds.is_cuda,'CUDA inputs required')
         require(self.runtime.terminal is None,'post-terminal inference')
-        if self.cancelled():
-            self.runtime.terminate('Cancelled',emit_end=False)
-            raise InterruptedError('cancelled before scheduling model work')
+        # A charged chunk has already been scheduled. Finish it before honoring
+        # a racing cancellation, then discard its late output below. Public
+        # boundaries check cancellation before charging any new positions.
+        if self.runtime.position==self.state.position:self.check_cancelled()
         old=self.state;versions=tuple(t._version for pair in old.layers for t in pair)
         if mode!=self.mode:self.switches.append((old.position,self.mode,mode));self.mode=mode
         try:
@@ -75,6 +82,7 @@ class Session:
         return self.step(self.backbone.embedding(ids)[0],'D','prefill')
 
     def startup(self,raw=None):
+        self.check_cancelled()
         if raw is None:raw=self.backbone.table.scalar(248077,self.hidden[0,-1])
         self.raw_budget=raw
         if self.predicted_budget is None:self.predicted_budget=int(thinking_budget(raw))
@@ -85,6 +93,7 @@ class Session:
     def native(self,ids,loss=False):
         losses=[];logits=[]
         for token in ids:
+            self.check_cancelled()
             if self.runtime.phase==0 and self.runtime.b==self.runtime.budget:self.close()
             if loss:
                 scores,indices=self.backbone.ordinary_logits(self.hidden[0,-1],self.runtime.phase)
@@ -97,10 +106,12 @@ class Session:
         return losses,logits
 
     def close(self):
+        self.check_cancelled()
         self.runtime.close()
         self.step(self.backbone.embedding([248069,271])[0],'R','thinking_close')
 
     def begin_writer(self,port):
+        self.check_cancelled()
         self.runtime.begin(port)
         writer=Writer(self.runtime,self.codec)
         self.step(writer.tick_vector(self.hidden[0,-1])[None],'R','writer_start',False)
@@ -111,6 +122,7 @@ class Session:
         require(isinstance(packet,Packet),'Qev invocation requires a latent Packet; text is forbidden')
         require(packet is self.runtime.call.request and packet.snapshot==self.runtime.call.snapshot,
                 'unadmitted or mismatched request presentation')
+        self.check_cancelled()
         # The authoritative snapshot owns the content. A mutable Tensor view in
         # a returned Packet must not be able to rewrite a sealed invocation.
         packet=Renderer(self.runtime.registry).request(self.runtime.call.snapshot)
@@ -131,6 +143,7 @@ class Session:
         if self.runtime.terminal is not None or self.runtime.state!='Delivering' or self.runtime.call.consumed or packet.snapshot!=self.runtime.call.snapshot:
             return False
         require(self.runtime.call.result==packet.result,'return not current')
+        self.check_cancelled()
         packet=self.runtime.registry.get(packet.result,Kind.RESULT).presentation
         self.runtime.semantic_positions(len(packet),True)
         self.step(self.codec.encode(packet),'R','return')
@@ -161,6 +174,7 @@ class Session:
             raise
 
     def notice(self):
+        self.check_cancelled()
         if self.runtime.h>=64 or self.runtime.position>=self.runtime.context:
             self.runtime.terminate('Limited',usable=False,emit_end=False)
             return
@@ -175,6 +189,7 @@ class Session:
         if cancelled:
             rt.terminate('Cancelled',emit_end=False)
             return None
+        self.check_cancelled()
         require(rt.state=='Native','native boundary inside operation')
         if rt.phase==0 and rt.b==rt.budget:self.close()
         if rt.phase==1 and rt.a==rt.answer:

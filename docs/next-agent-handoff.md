@@ -19,7 +19,49 @@ change fan controls, live services or The Operating Table. Older hold statements
 below are historical. The completed comparison and next unfinished slice remain
 as recorded below.
 
-## Current requested work — RD-06 native flow and supervision, 2026-11-08
+## Current requested work — RD-07 qualification, 2026-11-08
+
+RD-07 technical acceptance **passes**; commit/push delivery finalization is in
+progress. See the [report](redesign-rd07-results-2026-11-08.md),
+[portable evidence](evidence/redesign-qualification-v1.json) and
+[ledger](redesign-progress.md). RD-01..06 predecessor evidence was recovered and
+verified from clean pushed main42d6fa4; all ten deferred GPU IDs are now resolved.
+
+Actual final execution: ten deferred tests pass (155.915 s) plus three changed-path
+checks (198.589 s), on exact RTX3090 UUID only, PyTorch2.15/cu132. Twelve direct
+traces reach1024 across all three ports and functional/checkpoint/serving/FP32;
+FP64 projection forward/VJP, all13 operation/status returns, exact256/257/64
+boundaries, cancellation, original-prefill/native-return gradients and complete
+window save/resume/RNG/owner integrity pass. All320 W tensors/tying and reference
+identity pass at every final class cleanup. Zero optimizer steps/updates;
+existing historical counter188 was restored, not incremented. No training ran.
+
+Routine failures were repaired: Noul's reported raw node now feeds its delivered
+value; cancellation checks precede ledger charges, while already charged work
+finishes before late output is discarded. Failed attempts, executed sources,
+metrics and exact commands are retained in `data/redesign-rd07-20261108/`.
+All89 distinct current model-free tests pass (86 unchanged results reused plus
+three refreshed contract tests); current CLI preparation repeats identically.
+Unchanged historical324/108 numeric matrices are hash-verified and reused only
+for unchanged kernels. No tolerance, envelope or semantic mask was relaxed.
+Preparations still conservatively block nonlegacy fitting; this qualification
+does not remove execution/admission guards or authorize a fit.
+
+**No pending RD-07 technical checks. No learning outcome.** Engineering fixtures
+force controls/status/budget/existing tokens; these do not prove semantic native
+invocation or final-answer improvement. Direct receiver support remains0/1500
+train,0/130E,0/180X; direct formation0/3220 calls; native decision/continuation and
+direct supplied-reader support0. Typed native-final extraction and actual-native
+X-pair labels remain absent. Explicit layout revision/re-audit and valid labels
+are needed before affected fits, preserving32/256/64 bounds. Historical profiling
+receipt/input drift remains unmodified and is not reported passing.
+
+RD-08 is the earliest unfinished slice; RD-08/09 remain unstarted and outside
+this submission. No agents, new data/reviews, locked access, deployment, service
+or Operating Table change. Older pending statements below are historical and
+are superseded by this section and the RD-07 evidence.
+
+## Previous requested work — RD-06 native flow and supervision, 2026-11-08
 
 RD-06 staged implementation is delivered. Implementation/evidence commit
 `6f74680` is pushed to main and its exact remote SHA was verified; ledger/handoff

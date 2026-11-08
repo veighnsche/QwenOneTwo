@@ -14,17 +14,17 @@ because a later queued task starts.
 |---|---|---|---|
 | RD-01 | delivered | Coverage/panel/native-supervision manifests; model-free checks | [Report](redesign-rd01-results-2026-11-08.md), [manifest](evidence/redesign-coverage-v1.json); 23 tests pass; implementation `800c100` pushed and verified |
 | RD-02 | delivered | Runner preparation/rejection checks; identity/resume contracts | [Report](redesign-rd02-results-2026-11-08.md), [evidence](evidence/receiver-preparation-v1.json); 12 final preparation tests +28 reused tests pass; `254f526` pushed and verified |
-| RD-03 | delivered | Source/cache policy and static checks; explicit deferred GPU check IDs | [Report](redesign-rd03-results-2026-11-08.md), [evidence](evidence/frozen-w-source-v1.json); 50 static tests pass; three GPU checks pending RD-07; `2cbfa41` pushed and verified |
-| RD-04 | delivered | Versioned payload/admission contracts and implementation; deferred GPU IDs | Contract `2247619`, implementation `ae800a4` pushed/verified; [report](redesign-rd04-results-2026-11-08.md), [evidence](evidence/direct-role-states-v1.json); 61 static tests pass +6 refreshed; three new GPU checks pending RD-07; zero receiver support |
-| RD-05 | delivered | Joint objectives, owners, binding/mask tests; deferred GPU IDs | `fe90af0` pushed/verified; [report](redesign-rd05-results-2026-11-08.md), [evidence](evidence/joint-receiver-objectives-v1.json); 74 static tests pass +14 refreshed; two new GPU checks pending RD-07; Reason masks preserved |
-| RD-06 | delivered | Native wiring/eligibility report; deferred real-return/gradient IDs | `6f74680` pushed/verified; [report](redesign-rd06-results-2026-11-08.md), [evidence](evidence/direct-native-flow-v1.json); 86 static tests pass +10 refreshed; two new GPU checks pending RD-07; zero complete corpus formation/semantic continuation/direct reader support |
-| RD-07 | pending | All required deferred/changed-path 3090 checks pass; actual counts/hashes | RD03-GPU-D-INDEPENDENCE, RD03-GPU-CACHE-PARITY, RD03-GPU-CONSUMER-GRADIENTS; RD04-GPU-IDENTITY-PROJECTION, RD04-GPU-DIRECT-ROUNDTRIP, RD04-GPU-DIRECT-GRADIENTS; RD05-GPU-GRADIENT-ACCUMULATION, RD05-GPU-RESUME; RD06-GPU-NATIVE-RETURN, RD06-GPU-CONNECTED-GRADIENT pending; no GPU execution |
+| RD-03 | delivered | Source/cache policy and static checks; explicit deferred GPU check IDs | [Report](redesign-rd03-results-2026-11-08.md), [evidence](evidence/frozen-w-source-v1.json); 50 static tests pass; three GPU checks resolved by RD-07; `2cbfa41` pushed and verified |
+| RD-04 | delivered | Versioned payload/admission contracts and implementation; deferred GPU IDs | Contract `2247619`, implementation `ae800a4` pushed/verified; [report](redesign-rd04-results-2026-11-08.md), [evidence](evidence/direct-role-states-v1.json); 61 static tests pass +6 refreshed; three new GPU checks resolved by RD-07; zero receiver support |
+| RD-05 | delivered | Joint objectives, owners, binding/mask tests; deferred GPU IDs | `fe90af0` pushed/verified; [report](redesign-rd05-results-2026-11-08.md), [evidence](evidence/joint-receiver-objectives-v1.json); 74 static tests pass +14 refreshed; two new GPU checks resolved by RD-07; Reason masks preserved |
+| RD-06 | delivered | Native wiring/eligibility report; deferred real-return/gradient IDs | `6f74680` pushed/verified; [report](redesign-rd06-results-2026-11-08.md), [evidence](evidence/direct-native-flow-v1.json); 86 static tests pass +10 refreshed; two new GPU checks resolved by RD-07; zero complete corpus formation/semantic continuation/direct reader support |
+| RD-07 | in_progress | All required deferred/changed-path 3090 checks pass; actual counts/hashes | [Report](redesign-rd07-results-2026-11-08.md), [evidence](evidence/redesign-qualification-v1.json); ten deferred +three new GPU checks pass; twelve1024 traces; zero updates; commit/push finalization pending |
 | RD-08 | pending | Complete matched fit/evaluation receipts; useful-improvement outcome separate | None; training not authorized by prompt preparation |
 | RD-09 | pending | Accepted RD-08 receiver plus eligible native run/evaluation receipts | None; training not authorized by prompt preparation |
 
-Earliest unfinished slice: **RD-07** technical qualification; RD-07..09 are unstarted.
-RD-06 is delivered under the staged implementation protocol.
-Ten RD-03..06 GPU checks remain pending RD-07; no redesign model job was launched.
+RD-07 technical acceptance passes; delivery commit/push finalization is in progress.
+All ten deferred GPU checks are resolved; no required RD-07 check remains pending.
+RD-08 is the next unfinished slice and remains unstarted, outside this submission.
 
 For each attempted slice add a short entry with implementation/evidence paths,
 exact commands/results, dependency hashes, relevant implementation commits and
@@ -33,11 +33,11 @@ RD-07 resolves them. Record active run manifest/PID/log/checkpoint paths when a
 long job starts, and update them when it finishes or is interrupted. Store raw
 artifacts locally under `data/`; commit concise reports/portable evidence only.
 
-Current RD-06 implementation delivery blockers: **none**. Future real-data fit
+Current RD-01..07 technical implementation blockers: **none**. Future real-data fit
 blocker: the initial direct-role layout admits zero receiver rows (train1500,
 E130, X180). An explicit layout revision and full re-audit are required before
 that fit; no subset, allowance increase or waiver was applied. RD-01 data/native
-supervision limits and pending later technical checks also remain.
+supervision limits also remain; qualification does not waive them.
 
 ## RD-01 — 2026-11-08
 
@@ -474,3 +474,55 @@ and staged whitespace pass. This ledger/handoff delivery finalization is committ
 and pushed separately on top of the verified implementation. Ten GPU checks remain
 pending and no learning outcome is claimed. Layout/native support limits remain
 concrete blockers for later fits. Stop after RD-06; next is RD-07 qualification.
+
+## RD-07 recovery/run — 2026-11-08
+
+Clean main `42d6fa4` matches authenticated remote main. RD-01..06 source/test/
+contract/raw evidence, migrations and pushed ancestors verified. Sandbox GPU
+visibility failed; authorized host access sees exact 3090 UUID, PyTorch2.15/cu132
+and one selected CUDA device. Existing repo server PID2094 and ComfyUI PID565871
+are independent services, not matching qualification jobs; left unchanged.
+No matching RD-07 job/manifest existed. GPU qualification now authorized, without
+optimizer steps; source/data/native-support limits remain separate fit blockers.
+Raw qualification manifest/log: `data/redesign-rd07-20261108/deferred-1/`; actual
+PID and source hashes are written by `run_deferred.py`. One CUDA process, one
+resident test W at a time; class cleanup verifies all320 W tensors/tying/reference.
+All optimizer step entry points are blocked by the diagnostic launcher.
+
+## RD-07 qualification — 2026-11-08
+
+Technical acceptance: **pass**. Learning outcome: **not_applicable**. All ten
+RD-03..06 deferred IDs plus RD07-GPU-PROJECTION-FP64, RD07-GPU-LONG-PARITY and
+RD07-GPU-CANCELLATION-ENVELOPES pass on exact3090; no required technical check
+pending. [Report](redesign-rd07-results-2026-11-08.md) and
+[portable evidence](evidence/redesign-qualification-v1.json) bind executed
+source/profile/checkpoint hashes, exact commands/results, failures and raw files.
+Raw `data/redesign-rd07-20261108/`; final runs `deferred-final/` PID574507 and
+`changed-2/` PID572811 completed, no matching job remains.
+
+Final ten deferred tests pass in155.915 s; three new GPU tests pass in198.589 s.
+Twelve direct1024 traces/nine comparisons pass, including final cache states;
+all13 operation/status cells, exact256 request/257 atomic rejection/64 return,
+four cancellation scenarios, native continuous gradients and complete-window
+resume/RNG/sampler/owners pass. All320 W tensors/physical tying/reference checked
+in five final class cleanups. Zero optimizer guard calls or updates; historical
+188 counters are restored only. Unchanged324/108 numeric matrices and raw child
+hashes verified; reuse applies only to unchanged kernels. New paths have actual
+FP32/FP64/VJP coverage under unchanged tolerances.
+
+Initial failure: reported Noul raw node was outside delivered-value graph;
+shared subtraction node repairs the return-specific VJP. Subsequent cancellation
+fixtures found pre-request58/50 and pre-return67/58 ledger/cache divergences;
+pre-charge guards plus completing/discarding charged work repair them. Initial
+failed logs remain unchanged. Current normal tensor path is pinned by AST tests.
+Model-free suite88/89 initially pass (116.988 s); source-contract whitespace
+assertion fixed, all three new tests pass (0.061 s), yielding89 distinct current
+passes with unchanged86 results reused. Four current-source, model-import-blocked
+CLI preparations pass; direct repeats identical, all preparation execution
+counters0. Compilation/staged whitespace pass. Predecessor migration verified.
+
+No training, learned result, agents, new data/reviews, locked access, deployment
+or service/Operating Table changes. Native semantic/Reason masks preserved.
+No technical waiver or capability claim. Direct receiver/native supervision
+limits still block affected fits; RD-08/09 unstarted. Commit/push finalization
+will record the implementation SHA and verified remote here.

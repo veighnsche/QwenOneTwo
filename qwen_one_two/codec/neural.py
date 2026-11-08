@@ -285,8 +285,9 @@ class Codec(nn.Module):
         if port==Port.NOUL:
             logits=(self.qev_k(self.prototypes)*q).sum(-1)/16
             finite(logits,'Noul logits')
-            finite(logits[1]-logits[0],'Noul truth logit')
-            result.update(value=(logits[1]-logits[0]).sigmoid(),raw=logits[1]-logits[0])
+            raw=logits[1]-logits[0]
+            finite(raw,'Noul truth logit')
+            result.update(value=raw.sigmoid(),raw=raw)
         elif port==Port.SCORE:
             raw=self.table.scalar(248078,h)
             finite(raw,'raw task Score')

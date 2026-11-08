@@ -142,9 +142,24 @@ import tests.test_frozen_source_gpu
         self.assertIn('W is exclusively an explicit offline source forward',ast.unparse(fn))
         session=definition(Path('qwen_one_two/codec/session.py').read_text(),'Session')
         old_session=definition(subprocess.check_output(['git','show','850a2da:qwen_one_two/codec/session.py'],text=True),'Session')
-        for name in ('__init__','step','prefill','native','evaluate','deliver','start_budget'):
+        for name in ('__init__','prefill'):
             self.assertEqual(ast.dump(next(n for n in session.body if getattr(n,'name',None)==name)),
                              ast.dump(next(n for n in old_session.body if getattr(n,'name',None)==name)))
+        # RD-07 fixes cancellation before ledger charges, without changing any
+        # normal-path tensor computation. Keep that computation pinned.
+        class StripCancelChecks(ast.NodeTransformer):
+            def visit_Expr(self,node):
+                if isinstance(node.value,ast.Call) and isinstance(node.value.func,ast.Attribute) and node.value.func.attr=='check_cancelled':return None
+                return self.generic_visit(node)
+        for name in ('native','evaluate','deliver','start_budget'):
+            current=next(n for n in session.body if getattr(n,'name',None)==name)
+            original=next(n for n in old_session.body if getattr(n,'name',None)==name)
+            self.assertEqual(ast.dump(StripCancelChecks().visit(current)),ast.dump(original))
+        def tensor_tail(cls):
+            fn=next(n for n in cls.body if getattr(n,'name',None)=='step')
+            start=next(i for i,n in enumerate(fn.body) if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='old' for t in n.targets))
+            return [ast.dump(n) for n in fn.body[start:]]
+        self.assertEqual(tensor_tail(session),tensor_tail(old_session))
         # RD-06 explicitly versions producer/binding for native direct fields.
         # The underlying frozen annotation and exact-value helpers stay controls.
         path='qwen_one_two/training/binding.py'
