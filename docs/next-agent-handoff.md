@@ -5,7 +5,36 @@ Read this first for current status, then the
 topic contracts. Historical reports describe their recorded sources and runs.
 This handoff records measured mechanisms, not learned capability.
 
-## Current work — measured performance passes; RD-08 recovery, 2026-11-09
+## Current execution — optimized RD-08 control active, 2026-11-09
+
+Qualification/recovery commit6793f252b4259ff2a19bc0ffb54e349a68374d2c was pushed
+and its exact remote SHA verified before launch. Active controlPID829981,
+`data/receiver-performance-20261109/control/report.json`, log`control.log`, host
+exec session23580. Explicit3090 and `--execution-policy retained-activations-v1`;
+prepared plan`plans-qualified/control/plan.json`, migrated checkpoint0688 SHA
+00928d0150dc6e16055206651a0fb865b2b888ce2b94deca298075e7bd0ed968. It loaded
+500 retained updates/cursor4000 and executes the remaining250 windows. All1500
+original baseline observations are copied unchanged into control/panel-00.jsonl;
+receipt`baseline-reuse.json`, no baseline model rerun.
+
+The99 lost logged windows have now been replayed;792 original input/head/loss/
+eligibility/active-owner/update-norm receipts match exactly. Original recorded
+window time3848.013s; recovery3502.353s with fresh caches, not a matched-cache
+benchmark. This does not fabricate an old599-state checkpoint. Raw proof
+`replay-parity.json`; only500 were recoverable on disk. No lost work is hidden.
+The control is now past599 retained updates, still targeting750 total.
+
+Do not change production source, qualified evidence or prepared plans during
+fitting. Reconnect, never duplicate. After control COMPLETED_RD08_TRAINING_NOT_EVALUATED
+with750 windows/6000 effective exposures, launch candidate from original188
+using plans-qualified/candidate/plan.json, same retained policy, new output
+`data/receiver-performance-20261109/candidate`. Both fixed fits must finish before
+either E/X evaluation. Existing runner `--evaluate-gpu`, final checkpoint/hash and
+completed `--peer-report` enforce that. Never start RD09. Current reduction script
+`data/receiver-performance-20261109/analyze.py` preserves predeclared acceptance,
+original graders/cohorts and explicit physical lost/replayed-work accounting.
+
+## Qualification — measured performance passes; RD-08 recovery, 2026-11-09
 
 GPU permission reopened. The retained execution policy now passes PERF-01..03:
 six alternating paired windows, pooled48.322→35.763s (−25.990%),

@@ -24,7 +24,12 @@ because a later queued task starts.
 
 RD-07 is delivered; technical acceptance passes and implementation `7da99c6` is pushed/verified.
 All ten deferred GPU checks are resolved; no required RD-07 check remains pending.
-Earliest unfinished slice: **RD-08**, with GPU permission reopened and performance qualification passed. Control has599 logged updates,500 saved on disk; former trainer is now absent. No automatic rollback/restart or fabricated599 recovery. Format recovery provides1500/1500 support; performance implementation passes PERF-01..03 and19 current-source qualification checks. Candidate/evaluation/RD09 remain unstarted.
+Earliest unfinished slice: **RD-08**, optimized control activePID829981 from the
+compatible500-update checkpoint, now beyond599 retained updates. All99 replayed
+windows/792 examples match original receipts exactly. PERF-01..03 and19 current-
+source checks pass; qualification6793f25 pushed/verified before fitting. Candidate,
+E/X and RD09 unstarted. Complete fixed fits before evaluation; no source edits or
+duplicate process during fitting.
 
 For each attempted slice add a short entry with implementation/evidence paths,
 exact commands/results, dependency hashes, relevant implementation commits and
@@ -814,3 +819,37 @@ logged windows/792 presentations must be replayed as interrupted-work recovery,
 not represented as a599-state artifact or hidden in physical execution counts.
 Original first update, failed logs,598 second-process receipts and1500 initial
 observations remain intact. No fitting launched before qualification push.
+
+## Qualified retained-policy control active — 2026-11-09
+
+Qualification/recovery commit6793f252b4259ff2a19bc0ffb54e349a68374d2c pushed and
+exact remote verified before launch. ActualPID829981, output
+`data/receiver-performance-20261109/control/`, log`control.log`; explicit3090 UUID,
+`--execution-policy retained-activations-v1 --prepared-plan .../plans-qualified/control/plan.json --resume .../migrated-control/checkpoint-0688 --resume-sha256 00928d0150dc6e16055206651a0fb865b2b888ce2b94deca298075e7bd0ed968`.
+Retains500 updates/cursor4000,250 windows remaining. Original panel00 copied
+unchanged with SHA receipt`baseline-reuse.json`; no baseline model rerun.
+Replayed99 lost logged windows remain explicit in recovery/accounting; current
+actor counters exclude preserved checkpoint prefix. Candidate/E/X/RD09 unstarted.
+No source/plan/qualification edits during fitting; reconnect, never duplicate.
+
+## Lost-window replay verified — 2026-11-09
+
+All99 original lost logged windows/792 episodes match replayed record/input
+hashes, head outputs/losses, eligibility/failures/active owners/update norms and
+step receipts exactly. Raw`data/receiver-performance-20261109/replay-parity.json`.
+Prior window time3848.013s, recovery3502.353s with fresh caches; unlike paired
+benchmark these cache states differ. No old599 weight/RNG artifact is invented.
+Current optimized control is past599; remaining effective schedule unchanged.
+Training-only Noul labels are binary:168 false/88 true among256 assessed rows,
+so the fixed mean-threshold constant equals the predeclared majority-label rule.
+No development results inspected, no acceptance change or new GPU check run.
+
+## Optimized control checkpoint625 saved — 2026-11-09
+
+Current controlPID829981 passed625 retained updates. Complete-window checkpoint
+`data/receiver-performance-20261109/control/checkpoint-0813` manifestSHA`a86da81d349e5698d4446967aac26f70e051bbea3e8c3c90bb68294eb47c4ce4` stores historical
+813 counters/cursor5000; all four file hashes verify.125 new recovery windows
+completed, including the99 lost windows whose original receipts match exactly.
+No rejected exposure. At least625 effective updates are now on disk; fitting
+continues to750 with unchanged effective schedule. Raw verification receipt
+`data/receiver-performance-20261109/checkpoint-625-verification.json`.
