@@ -9,7 +9,7 @@ The user reopened GPU work after the historical interruption. Performance and
 all19 affected GPU checks now pass and were committed/pushed before recovery.
 Control is complete:750 retained updates, all1500×4/6000 presentations and full
 initial/final1500 observations, with W/R/startup/reference frozen. Candidate
-passed375 of750 updates with no rejected exposures; shared initialization,
+passed625 of750 updates with no rejected exposures; shared initialization,
 Adam moments and CUDA/Python RNG match exactly. Its full final panel and both
 development evaluations remain due. Useful improvement is not yet evaluated.
 RD09 remains unstarted. See the [performance/recovery update](receiver-performance-v1.md)

@@ -7,7 +7,7 @@ Current2026-11-09 state: GPU work is open on the3090. Receiver performance
 validation passes: six faster matched timing pairs, exact updates/resume,19
 current-source GPU qualification checks and35 model-free tests. Control750
 retained updates/full initial-final observations complete; candidatePID878908
-passed375 of750, fixed fitting active. Reconnect, never duplicate. No source,
+passed625 of750, fixed fitting active. Reconnect, never duplicate. No source,
 plan or qualified-evidence changes during fitting. Finish candidate and final
 measurement before either E/X evaluation. Control99 lost/replayed windows are
 separately recorded; no extra effective pass. No new data, RD09, service or

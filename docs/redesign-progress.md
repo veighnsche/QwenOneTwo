@@ -19,14 +19,14 @@ because a later queued task starts.
 | RD-05 | delivered | Joint objectives, owners, binding/mask tests; deferred GPU IDs | `fe90af0` pushed/verified; [report](redesign-rd05-results-2026-11-08.md), [evidence](evidence/joint-receiver-objectives-v1.json); 74 static tests pass +14 refreshed; two new GPU checks resolved by RD-07; Reason masks preserved |
 | RD-06 | delivered | Native wiring/eligibility report; deferred real-return/gradient IDs | `6f74680` pushed/verified; [report](redesign-rd06-results-2026-11-08.md), [evidence](evidence/direct-native-flow-v1.json); 86 static tests pass +10 refreshed; two new GPU checks resolved by RD-07; zero complete corpus formation/semantic continuation/direct reader support |
 | RD-07 | delivered | All required deferred/changed-path 3090 checks pass; actual counts/hashes | [Report](redesign-rd07-results-2026-11-08.md), [evidence](evidence/redesign-qualification-v1.json); ten deferred +three new GPU checks pass; twelve1024 traces; zero updates; `7da99c6` pushed and verified |
-| RD-08 | in_progress | Complete matched fit/evaluation receipts; useful-improvement separate | [v2 report](receiver-matched-v2-results-2026-11-08.md), [performance/recovery update](receiver-performance-v1.md); control750 complete with full final observations; candidate375 checkpoint saved, fitting active; no rejected exposures; E/X unstarted |
+| RD-08 | in_progress | Complete matched fit/evaluation receipts; useful-improvement separate | [v2 report](receiver-matched-v2-results-2026-11-08.md), [performance/recovery update](receiver-performance-v1.md); control750 complete with full final observations; candidate625 checkpoint saved, fitting active; no rejected exposures; E/X unstarted |
 | RD-09 | blocked | Accepted RD-08 receiver plus eligible native run/evaluation receipts | [Report](redesign-rd09-results-2026-11-08.md), [evidence](evidence/native-demonstration-rd09-v1.json); conditional authorization recorded; blocked on RD-08/no accepted receiver and zero native supervision; execution unstarted, zero updates; blocker `a864b65` pushed/verified |
 
 RD-07 is delivered; technical acceptance passes and implementation `7da99c6` is pushed/verified.
 All ten deferred GPU checks are resolved; no required RD-07 check remains pending.
 Earliest unfinished slice: **RD-08**. Control750 retained updates/all1500×4 is
-complete, including full initial/final observations. CandidatePID878908 passed375
-updates/all1500×2 with checkpoint0563 verified, same initial shared masters/
+complete, including full initial/final observations. CandidatePID878908 passed625
+updates/5000 presentations with checkpoint0813 verified, same initial shared masters/
 moments/RNG and no rejected exposures. All99 control replay windows match original
 receipts exactly; lost/physical work remains explicit. PERF-01..03 and19 current-
 source checks pass; qualification6793f25 pushed/verified before fitting. Complete
@@ -920,3 +920,23 @@ Checkpoint`data/receiver-performance-20261109/candidate/checkpoint-0563`, manife
 hashes verify. Raw`candidate-checkpoint-375-verification.json`. No rejected
 exposures. Continue the declared750-window schedule and final full panel before
 E/X evaluation; no source/plan changes, extra passes or RD09.
+
+## Candidate500 checkpoint verified — 2026-11-09
+
+CandidatePID878908 completed500 effective windows/4000 presentations.
+Checkpoint`data/receiver-performance-20261109/candidate/checkpoint-0688`, manifestSHA
+`0e47af49d2fd61b47e1904c551ba56dcfb8851401b31ee03951a5c3839e0bbe9`, stores historical688 counters/cursor4000.
+All four file hashes verify. Raw`candidate-checkpoint-500-verification.json`. No
+rejected exposures. Continue to750 plus final full panel before E/X evaluation.
+CPU performance remains an unresolved limitation; no CPU cap, source/plan
+rewrite, extra effective pass or RD09 was introduced.
+
+## Candidate625 checkpoint verified — 2026-11-09
+
+CandidatePID878908 completed625 effective windows/5000 presentations.
+Checkpoint`data/receiver-performance-20261109/candidate/checkpoint-0813`, manifestSHA
+`6382f30c4955b7a99a768f3ef088f3c54a46dcb58c186bc7245c0ec4403cce0b`, stores historical813 counters/cursor5000.
+All four file hashes verify. Raw`candidate-checkpoint-625-verification.json`. No
+rejected exposures. Final125 updates plus full final1500 observations remain
+before either E/X evaluation. CPU bottleneck remains an explicit limitation,
+with no midfit source/plan changes, extra passes or RD09.

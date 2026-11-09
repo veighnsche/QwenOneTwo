@@ -7,13 +7,13 @@ This handoff records measured mechanisms, not learned capability.
 
 ## Current candidate progress — 2026-11-09
 
-CandidatePID878908 completed the full1500 initial observations and375 of750
+CandidatePID878908 completed the full1500 initial observations and625 of750
 updates. Shared initial weights/moments/CUDA/Python RNG match control exactly;
-first-update restore round-trip passes. Checkpoint0563 stores375 effective
-updates/cursor3000, all1500 records exactly twice, manifestSHA
-fd5d172239ebef94e6e107d7330dfa6d4e411eb896a61c7742df291cb736c08b;
-all four files verify. Prior125/250 checkpoints retained. Raw receipts
-`candidate-start-verified.json`, `candidate-checkpoint-{125,250,375}-verification.json`.
+first-update restore round-trip passes. Checkpoint0813 stores625 effective
+updates/cursor5000, manifestSHA
+6382f30c4955b7a99a768f3ef088f3c54a46dcb58c186bc7245c0ec4403cce0b;
+all four files verify. Prior125/250/375/500 checkpoints retained. Raw receipts
+`candidate-start-verified.json`, `candidate-checkpoint-{125,250,375,500,625}-verification.json`.
 No rejected exposures. ActualPID878908, host session62708, same output/log/plans
 as below. Do not duplicate or change sources/qualified evidence/plans midfit.
 Continue to750, then all1500 final observations; only then evaluate both arms.

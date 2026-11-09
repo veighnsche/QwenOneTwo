@@ -31,10 +31,24 @@ The old trainer disappeared externally with500 saved/599 logged updates. Recover
 preserved exact checkpoint0688 weights, Adam/RNG bytes and sampler state, then
 completed250 remaining windows. All99 lost/replayed windows match the original
 input/head/loss/update receipts exactly. Control750 retained updates and full
-initial/final observations are complete; candidate375 of750 is active. Physical
+initial/final observations are complete; candidate625 of750 is active. Physical
 recorded control calls849 versus750 retained are explicit; any unflushed work
 before process loss is unknown. Both fits finish before E/X evaluation. No
 599-update artifact is fabricated, extra effective pass or RD09 started.
+
+## Remaining CPU limitation
+
+The measured24–26% window speedup is incremental; it does not establish that the
+CPU bottleneck is removed. The user's requirement is that the CPU keep up with
+the GPU, rather than applying a CPU-use cap. During candidate459, a2.000s sample
+found1.025 CPU-core equivalents used by the trainer and9.30% whole-host busy on12
+logical CPUs. One separate instantaneous3090 reading was100%; it cannot establish
+sustained utilization or contradict earlier sparse activity. Raw observation:
+`data/receiver-performance-20261109/host-observation-candidate-459.json`.
+No per-function trace was collected and no new speedup claim follows. Batching,
+reducing synchronization and graph capture remain possible engineering work,
+not changes made during this source-bound matched fit. No CPU cap was requested
+or applied. The finite comparison remains fixed; no extra learning is authorized.
 
 ## Changes
 
