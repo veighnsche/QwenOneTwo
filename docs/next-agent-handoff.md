@@ -5,7 +5,42 @@ Read this first for current status, then the
 topic contracts. Historical reports describe their recorded sources and runs.
 This handoff records measured mechanisms, not learned capability.
 
-## Current operating permission — GPU and fan-noise hold lifted, 2026-11-08
+## Current operating permission — RD-08 GPU work paused, 2026-11-09
+
+The user reported being told to turn off the GPU now and asked what progress
+would be lost. Only the verified RD-08 trainer PID618710 was sent SIGSTOP; its
+state is T (stopped). No new GPU work/probes or automatic resume. Existing
+services, fan controls and devices were untouched. Pausing retains VRAM and
+process memory; it does not power off the card or save a new disk checkpoint.
+
+Control has599 completed updates/windows,4792 presentations across all1500
+records, no rejected exposures, and1500 initial observations. Last complete disk
+checkpoint is `data/redesign-format-v2-20261108/control-resumed/checkpoint-0688`,
+manifest SHA `2eaea42f7bbbbc0a125c51f0b06016afbda2fa1011c913a05c912202269d91aa`.
+All four checkpoint file hashes verify. Its historical counter688 equals500
+RD-08 updates; sampler cursor4000. Destroying the process/GPU memory loses99
+completed updates/792 presentations, measured3848.013 seconds (64.13 minutes),
+plus any partial window600. The logs alone cannot reconstruct that missing
+optimizer/RNG state. Continuing the same stopped process preserves live progress,
+but requires the user to reopen GPU work first. Do not duplicate it.
+
+Candidate, final training measurements, E/X evaluations and RD09 remain unstarted.
+RD-08 is in progress with a user GPU hold, not delivered or a completed failed
+learning comparison. No accepted receiver exists. Format support1500/1500,
+18 GPU qualification IDs and104 distinct model-free test results remain recorded;
+three oversized E cases and native/Reason supervision limits remain explicit.
+See [pause evidence](evidence/receiver-matched-v2-pause-2026-11-09.json),
+[v2 report](receiver-matched-v2-results-2026-11-08.md) and [ledger](redesign-progress.md).
+The earlier running-process instructions below are historical and superseded.
+
+Read-only performance observations found process CPU122% (about1.2 cores),
+whole-host busy9.54% over2 seconds on12 logical CPUs, and sparse GPU activity.
+Last125 windows averaged38.817s with14.272 separate component VJPs/window;
+runtime/VJP correlation0.826. Separate backwards and per-example integrity
+readbacks remain in the active path. These are observations, not a component
+profile or measured optimization. No training setting/source was changed.
+
+## Previous operating permission — GPU and fan-noise hold lifted, 2026-11-08
 
 After temporarily closing both GPUs and banning work that ramps up the fans,
 the user explicitly reopened work with "everything is allowed again." The

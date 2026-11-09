@@ -1,0 +1,117 @@
+{
+  "GPU_execution": "paused; no further model work or probes until user reopens GPU scope",
+  "RD09_started": false,
+  "accepted_receiver": null,
+  "actual_control": {
+    "completed_windows": 599,
+    "failed_exposures": {},
+    "final_measurements": 0,
+    "initial_measurements": 1500,
+    "optimizer_updates": 599,
+    "prefix_completed_updates": 1,
+    "presentations": 4792,
+    "resumed_completed_updates": 598,
+    "unique_records": 1500
+  },
+  "at_utc": "2026-11-09T01:01:37.384905+00:00",
+  "candidate_started": false,
+  "coverage": {
+    "E_oversized_stay_failed": 3,
+    "E_supported": 127,
+    "E_total": 130,
+    "X_supported": 180,
+    "X_total": 180,
+    "training_supported": 1500,
+    "training_total": 1500
+  },
+  "delivery": "in_progress_user_gpu_hold",
+  "development_started": false,
+  "disk_recovery": {
+    "all_file_hashes_verified": true,
+    "comparison_updates": 500,
+    "comparison_windows": 500,
+    "cursor": 4000,
+    "files": {
+      "effective-rows.safetensors": {
+        "actual": "e4c8b0d79d207ba17e96e98a902158109651c8c4fed8d0e5e44fbafa7af4b4e8",
+        "expected": "e4c8b0d79d207ba17e96e98a902158109651c8c4fed8d0e5e44fbafa7af4b4e8"
+      },
+      "optimizer.pt": {
+        "actual": "331f528b3769658dd61c2ff0b664c56660994387c9bd6d6bb641bc5ddc223070",
+        "expected": "331f528b3769658dd61c2ff0b664c56660994387c9bd6d6bb641bc5ddc223070"
+      },
+      "rng.pt": {
+        "actual": "cbc25a4884a7dd5171506ca5b894fc879f72440ac789b87d2a736686609ee439",
+        "expected": "cbc25a4884a7dd5171506ca5b894fc879f72440ac789b87d2a736686609ee439"
+      },
+      "weights.safetensors": {
+        "actual": "1e3d597f8f22025cc3ed83e790ac2fecca1e6aae37e6610e6a2e79a941cd941f",
+        "expected": "1e3d597f8f22025cc3ed83e790ac2fecca1e6aae37e6610e6a2e79a941cd941f"
+      }
+    },
+    "historical_optimizer_updates": 688,
+    "historical_scheduled_windows": 688,
+    "loss_if_process_or_device_memory_destroyed": "99 completed updates plus any partial window600; logs retained but cannot reconstruct exact missing optimizer/RNG state from logs alone",
+    "manifest_sha256": "2eaea42f7bbbbc0a125c51f0b06016afbda2fa1011c913a05c912202269d91aa",
+    "path": "data/redesign-format-v2-20261108/control-resumed/checkpoint-0688",
+    "unsaved_completed_training_seconds": 3848.0127604410227,
+    "unsaved_completed_windows": 99,
+    "unsaved_presentations": 792
+  },
+  "implementation_commit": "a8c33a0fbd5cc4b8f8faa7c3c23caf45f766b073",
+  "learning": "not_evaluated",
+  "matched_initial_receipts_preserved": true,
+  "new_data": false,
+  "performance": {
+    "GPU_sample_scope": "three one-second per-process nvidia-smi pmon observations, not a training-wide average",
+    "GPU_samples_percent": [
+      10,
+      1,
+      17
+    ],
+    "at_utc": "2026-11-09T00:02:14.078800+00:00",
+    "code_observations": [
+      "Window.add_episode performs separate autograd.grad per eligible component with retained shared graph",
+      "model CUDA device enforced; no CPU model fallback",
+      "ReceiverProducer refreshes full receiver fingerprint per example with explicit GPU-to-host readbacks",
+      "AdamW foreach=False and fused=False per existing numeric contract",
+      "frozen source cache enabled; default recurrence graph cache retention8; no runtime setting changed"
+    ],
+    "descriptive_seconds_per_additional_VJP": 1.5051269299711083,
+    "limitation": "No live stack/GPU timeline profiler attached. Samples cannot establish each cause share or an achievable speedup.",
+    "logical_CPUs": 12,
+    "mean_component_VJPs_per_window": 14.272,
+    "mean_window_seconds": 38.81736170070479,
+    "observed_process_CPU_percent": 122,
+    "pid": 618710,
+    "runtime_component_VJP_pearson": 0.8262059294730572,
+    "sample_windows": 125,
+    "scope": "read-only current fit metadata; no model run, source change, signal or service change",
+    "whole_host_busy_percent_over_2s": 9.54
+  },
+  "process": {
+    "command": ".venv/bin/python -m scripts.train_receiver_probe --snapshot /home/vince/the-operating-table/data/huggingface/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17 --output data/redesign-format-v2-20261108/control-resumed --execute-gpu --input-profile frozen-w-pooled-compact-v2 --prepared-plan data/redesign-format-v2-20261108/plans-cache/control/plan.json --resume data/redesign-format-v2-20261108/migrated-control/checkpoint-0189 --resume-sha256 e4c4604247a1a64f572e522cc3460dc50882451ab4d00fd17426b9d863b60066 ",
+    "in_memory_progress": "599 completed windows/updates plus potentially partial window600; preserved only while process/GPU memory survive; no new checkpoint taken",
+    "pid": 618710,
+    "scope": "only verified trainer; services/fan controls/devices unchanged",
+    "signal": "SIGSTOP",
+    "state": "T (stopped)"
+  },
+  "protocol": "receiver-matched-v2-user-pause-v1",
+  "qualification": {
+    "model_free_tests": "103 prior unchanged passes plus one cache-guard test; three compact tests refreshed pass",
+    "pending_GPU_checks": [],
+    "resolved_GPU_IDs": 18
+  },
+  "raw_sha256": {
+    "data/redesign-format-v2-20261108/active-performance-observation.json": "3059d7a3e4939a43ed5ee7a158ea36df908fac3c79c76bb51f5fe4b1fd1f2719",
+    "data/redesign-format-v2-20261108/baseline-reuse.json": "7d950579b8b346308cfd22107960976d37245db5e20640ec22ea2e52d5983cd9",
+    "data/redesign-format-v2-20261108/control-migration.json": "f63e8247823af978cd8b0a997a7162a9aa6fff19e8757255c8e74943e81f2362",
+    "data/redesign-format-v2-20261108/control-resumed.log": "b37d658c898b841482b886699b62dbbeb6a12691cb67f5b241e4630d65964e7b",
+    "data/redesign-format-v2-20261108/control-resumed/panel-00.jsonl": "cb24898d081ea8c53985ad56e799f7cc2771196ece3e10203fc702d45ea61f80",
+    "data/redesign-format-v2-20261108/control-resumed/report.paused-20261109.json": "ef31342915e72efe1649c05d3876f215a46b45412d64c662026023255d827b58",
+    "data/redesign-format-v2-20261108/control-resumed/training.jsonl": "76c916e0dde154bf5a02e8b0265f4a70af2912a8dcb4470fc3511052e7d53fb3",
+    "data/redesign-format-v2-20261108/pause-20261109.json": "bffcb67b7ec973348a37c5c1715a22f5cca7fae8e2b50696d870c7b659ebfb59"
+  },
+  "recovery": "Do not duplicate a live stopped trainer. Only after GPU permission returns, prefer continuing exact stopped process. If process/device lost, preserve all logs and use the verified complete-window checkpoint; explicitly disclose rollback/lost state and do not fabricate exact599 recovery. Both fixed fits must finish before development evaluation."
+}
