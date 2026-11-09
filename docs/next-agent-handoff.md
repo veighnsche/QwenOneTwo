@@ -51,7 +51,9 @@ not a CPU cap. Short candidate459 observation1.025 CPU-core equivalents/whole-ho
 9.30% on12 logical CPUs and instantaneousGPU100% cannot establish a full trace.
 No cap, language rewrite or new performance fitting was done during this fixed
 source-bound comparison. No RD09, new data, locked access, agents, service/fan or
-Operating Table changes. Delivery finalization is tracked in the progress ledger.
+Operating Table changes. Evidence commit a3edaf75dd109abe59314b3ba0dc3e2bb7782637
+was pushed and its exact remote SHA verified. RD08 delivery is complete in the
+progress ledger, with failed learning acceptance; RD09 remains unstarted.
 
 ## Historical execution notes (superseded by the completed result above)
 

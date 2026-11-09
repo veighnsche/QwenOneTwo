@@ -19,18 +19,20 @@ because a later queued task starts.
 | RD-05 | delivered | Joint objectives, owners, binding/mask tests; deferred GPU IDs | `fe90af0` pushed/verified; [report](redesign-rd05-results-2026-11-08.md), [evidence](evidence/joint-receiver-objectives-v1.json); 74 static tests pass +14 refreshed; two new GPU checks resolved by RD-07; Reason masks preserved |
 | RD-06 | delivered | Native wiring/eligibility report; deferred real-return/gradient IDs | `6f74680` pushed/verified; [report](redesign-rd06-results-2026-11-08.md), [evidence](evidence/direct-native-flow-v1.json); 86 static tests pass +10 refreshed; two new GPU checks resolved by RD-07; zero complete corpus formation/semantic continuation/direct reader support |
 | RD-07 | delivered | All required deferred/changed-path 3090 checks pass; actual counts/hashes | [Report](redesign-rd07-results-2026-11-08.md), [evidence](evidence/redesign-qualification-v1.json); ten deferred +three new GPU checks pass; twelve1024 traces; zero updates; `7da99c6` pushed and verified |
-| RD-08 | in_progress | Complete matched fit/evaluation receipts; useful-improvement separate | [Completed v2 report](receiver-matched-v2-results-2026-11-08.md), [portable results](evidence/receiver-matched-v2-results.json); both750-window fits and E130/X180 evaluations complete; useful acceptance FAIL; final commit/push due |
+| RD-08 | delivered | Complete matched fit/evaluation receipts; useful-improvement separate | [Completed v2 report](receiver-matched-v2-results-2026-11-08.md), [portable results](evidence/receiver-matched-v2-results.json); both750-window fits and E130/X180 evaluations complete; useful acceptance FAIL; a3edaf7 evidence pushed/verified; no accepted receiver |
 | RD-09 | blocked | Accepted RD-08 receiver plus eligible native run/evaluation receipts | Execution unstarted,0 updates; completed RD08 useful acceptance FAILS/no accepted receiver; existing native supervision gaps remain. Latest user explicitly prohibits starting RD09 |
 
 RD-07 is delivered; technical acceptance passes and implementation `7da99c6` is pushed/verified.
 All ten deferred GPU checks are resolved; no required RD-07 check remains pending.
-RD08 execution is complete; delivery finalization (commit/verified push) remains.
+RD08 is delivered: evidence commit `a3edaf75dd109abe59314b3ba0dc3e2bb7782637`
+is pushed and its exact origin/main SHA verified. RD01..08 deliveries complete.
 Both arms750 retained windows/all1500×4, full initial/final observations and both
 read-only E/X evaluations complete. Candidate28 wins/106 losses and all47 historical
 Choice passes lost: useful-improvement acceptance **fail**, no accepted receiver.
 All19 required GPU checks pass, none pending. CPU bottleneck removal unresolved;
 measured24–26% diagnostic speedup is incremental, no CPU cap requested/applied.
-RD09 remains unstarted/blocked by failed acceptance and existing supervision gaps.
+Earliest unfinished slice: RD09, unstarted/blocked by failed RD08 acceptance and
+existing supervision gaps; latest user explicitly prohibits starting it.
 No automatic extra training/search, new data, deployment or service/fan changes.
 
 For each attempted slice add a short entry with implementation/evidence paths,
@@ -987,3 +989,14 @@ Control99 lost/replayed windows and849 physical/750 retained calls remain explic
 CPU bottleneck unresolved;24–26% diagnostic speedup does not establish removal.
 RD09 unstarted, no extra passes/new data/agents/locked/deployments/service changes.
 Finalization commit/push follows; then mark RD08 delivered with failed learning.
+
+## RD08 delivered — verified push 2026-11-09
+
+Completed evidence commit `a3edaf75dd109abe59314b3ba0dc3e2bb7782637` was pushed
+and exact origin/main SHA verified with credential-scoped git push/ls-remote.
+RD08 delivery is complete; useful-improvement acceptance remains fail. Report,
+portable all310 cases/all90 pairs/all27 cohorts, actual supervision/return failures,
+frozen/init/resume/order/input/mask proofs and handoff are committed. All19 GPU
+checks pass, none pending. No accepted receiver and RD09 remains unstarted.
+CPU bottleneck removal remains unresolved; no cap or full-utilization claim.
+This final ledger/handoff update follows that verified evidence delivery.

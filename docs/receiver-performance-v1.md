@@ -30,11 +30,13 @@ steps, metrics, logs and sources are under `data/receiver-performance-20261109/g
 The old trainer disappeared externally with500 saved/599 logged updates. Recovery
 preserved exact checkpoint0688 weights, Adam/RNG bytes and sampler state, then
 completed250 remaining windows. All99 lost/replayed windows match the original
-input/head/loss/update receipts exactly. Control750 retained updates and full
-initial/final observations are complete; candidate625 of750 is active. Physical
+input/head/loss/update receipts exactly. Control and candidate each completed750 retained updates, all1500×4/6000 effective
+presentations, full initial/final panels and then read-only E/X evaluation. Useful
+acceptance failed: candidate28 wins/106 losses and all47 historical Choice passes
+lost. See [completed comparison](receiver-matched-v2-results-2026-11-08.md). Physical
 recorded control calls849 versus750 retained are explicit; any unflushed work
-before process loss is unknown. Both fits finish before E/X evaluation. No
-599-update artifact is fabricated, extra effective pass or RD09 started.
+before process loss is unknown. No599-update artifact is fabricated, extra
+effective pass or RD09 started. Evidence commit a3edaf7 is pushed/verified.
 
 ## Remaining CPU limitation
 
