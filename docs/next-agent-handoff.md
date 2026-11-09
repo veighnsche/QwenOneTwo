@@ -5,7 +5,32 @@ Read this first for current status, then the
 topic contracts. Historical reports describe their recorded sources and runs.
 This handoff records measured mechanisms, not learned capability.
 
-## Current execution — optimized RD-08 control active, 2026-11-09
+## Current execution — control complete; direct candidate starting, 2026-11-09
+
+Control `data/receiver-performance-20261109/control/report.json` is
+COMPLETED_RD08_TRAINING_NOT_EVALUATED, process exited0.750 retained windows/
+updates,1500×4/6000 effective presentations,0 failures; final1500 head/delivery
+observations complete.250 actual updates in the recovery process. All320 W/
+tying/reference/R/nonreceiver owners frozen, grad=None; initial common masters/
+moments/CUDA/Python RNG match original parent receipts. Final checkpoint0938 SHA
+f616f4c9154ff2a4c4b7d5b58b5f8d67b9afd55baf80d758e5e234a0b3073452.
+Report SHA3e0cd4bad2efcf315c683c8266d707859979fed029db3fedfad9fa9395c9d091,
+verification`control-verified.json`. Prior625 checkpoint remains. Replay99
+windows/792 examples match preserved original receipts exactly; physical lost/
+replayed work and unknown unflushed work remain explicit.
+
+Candidate was launched from original parent188, not control, with exact3090,
+qualified retained policy and `plans-qualified/candidate/plan.json`. New output
+`data/receiver-performance-20261109/candidate`, log`candidate.log`, host exec
+session62708, actualPID878908. Reconnect to manifest/PID; never duplicate. It first measures
+all1500 initial heads/deliveries, then exactly750 windows/6000 presentations,
+then final1500 observations. Both fits must finish before either E/X evaluation.
+No dev fitting/checkpoint selection/extra pass/data/agents/RD09 or service change.
+Sources/qualification/plans remain frozen. Final evaluation uses current runner
+`--evaluate-gpu`/exact final checkpoint/hash/completed peer report; reduction is
+`data/receiver-performance-20261109/analyze.py`. No evaluation has started.
+
+## Previous execution — optimized RD-08 control active, 2026-11-09
 
 Qualification/recovery commit6793f252b4259ff2a19bc0ffb54e349a68374d2c was pushed
 and its exact remote SHA verified before launch. Active controlPID829981,

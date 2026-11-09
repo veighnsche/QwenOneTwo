@@ -853,3 +853,31 @@ completed, including the99 lost windows whose original receipts match exactly.
 No rejected exposure. At least625 effective updates are now on disk; fitting
 continues to750 with unchanged effective schedule. Raw verification receipt
 `data/receiver-performance-20261109/checkpoint-625-verification.json`.
+
+## Control750 checkpoint saved; final measurement active — 2026-11-09
+
+Control completed750 retained updates, all1500 records×4/6000 presentations,
+zero rejected exposures. Eligible losses: status6000, Noul1024, Choice632,
+Score1016, feasibility1988; Reason/structure/alignment remain masked as declared.
+Final complete-window checkpoint`data/receiver-performance-20261109/control/checkpoint-0938`
+SHA`f616f4c9154ff2a4c4b7d5b58b5f8d67b9afd55baf80d758e5e234a0b3073452`,
+historical counters938/cursor6000, all four file hashes verified. Raw verification
+`checkpoint-750-verification.json`. Final1500-case no-grad head/delivery observation
+is active; report remainsRUNNING until it finishes. No further control updates.
+Candidate/development/RD09 unstarted. Keep weights/sources/plans frozen.
+
+## Control complete; candidate launched — 2026-11-09
+
+Control process exited0 with COMPLETED_RD08_TRAINING_NOT_EVALUATED.750 effective
+updates/windows,1500×4/6000 exposures, no failures, initial/final1500 observations.
+All320 W tensors/tying, reference/R/frozen codec, grad=None and matched original
+initial masters/moments/CUDA/Python RNG verify. Current recovery actual250 updates;
+prior lost/replayed99 remain separately reported. Final0938 checkpoint SHA
+f616f4c9154ff2a4c4b7d5b58b5f8d67b9afd55baf80d758e5e234a0b3073452.
+Raw verification`data/receiver-performance-20261109/control-verified.json`.
+
+Candidate launched from original188 with exact3090, same retained policy and
+`plans-qualified/candidate/plan.json`; output`data/receiver-performance-20261109/candidate`,
+log`candidate.log`, host session62708, actualPID878908. First full1500 initial head/delivery panel
+then fixed750-window fit then full final panel. No E/X evaluation or RD09 yet.
+Source/plans/qualification frozen; no duplicate or automatic extra training.
