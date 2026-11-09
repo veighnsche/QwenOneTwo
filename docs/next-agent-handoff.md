@@ -5,6 +5,56 @@ Read this first for current status, then the
 topic contracts. Historical reports describe their recorded sources and runs.
 This handoff records measured mechanisms, not learned capability.
 
+## Current result — RD08 complete, learning acceptance failed, 2026-11-09
+
+Both fixed fits completed all1500 existing records×4/6000 effective presentations/
+750 windows, initial/final1500 head and actual-delivery observations per arm, and
+then read-only E130/X180 evaluations. All four processes have exited; no active
+trainer/evaluation and no more authorized optimizer updates. Sources/plans stayed
+unchanged. Both evaluations made0 optimizer updates and preserved their receiver.
+All320 W/tying/reference/R/startup/nonreceiver ownership guards pass; exact common
+initial masters/moments/CUDA/Python RNG, planned order, input hashes and masks pass.
+Raw metadata `data/receiver-performance-20261109/final-verification.json`.
+
+Useful-improvement acceptance FAILS. Candidate28 wins/106 losses/35 both-pass/
+141 both-fail across310 cases; X both-correct pairs0/90 versus control30/90.
+All47 historical Choice passes lost (fixed50 panel); no accepted receiver.
+Familiar Noul E3/4 versus control4/4 and X10/50 versus50/50 only equals the
+training-defined constant. Familiar assessed Score cohort is absent; overall
+Score distance worsens and correct interior delivery remains0. Status cells
+regress. Return decoding failures and oversized3 E requests remain counted.
+Do not weaken grading, fit development, fabricate labels or restart/search.
+RD09 remains unstarted and blocked by failed RD08 plus existing native-supervision
+limits; latest user explicitly said not to start RD09.
+
+Final checkpoints0938 (historical938, effective750, sampler6000):
+- control SHA f616f4c9154ff2a4c4b7d5b58b5f8d67b9afd55baf80d758e5e234a0b3073452
+- candidate SHA7b12b33db61563456ac0b203d9851c9b5a7e512aa337e77418106818397f617e
+under `data/receiver-performance-20261109/{control,candidate}/checkpoint-0938`.
+All four files verify. Control849 recorded physical calls vs750 retained include99
+lost/replayed windows; exact replay proof retained, unknown unflushed work explicit.
+12 discarded performance diagnostic updates remain separate. No extra effective pass.
+
+Report `docs/receiver-matched-v2-results-2026-11-08.md`; portable results
+`docs/evidence/receiver-matched-v2-results.json`, cases310 and pairs90 sibling JSONs.
+All27 cohort metrics, before/after heads/deliveries, failures, manifests/receivers/
+source hashes, reproduction argv and46 raw artifact hashes are recorded. Model-free
+reduction `PYTHONPATH=. python data/receiver-performance-20261109/analyze.py`
+blocks model imports and regrades all immutable released cases. Metadata packaging
+`data/receiver-performance-20261109/finalize_evidence.py` does not run models.
+No required GPU check remains pending (19 pass);35 model-free checks pass, six
+performance pairs pass. Qualification6793f25 was pushed before fitting.
+
+CPU performance is unfinished: measured24–26% paired-window speedup does not show
+removal of the CPU bottleneck. User clarified the CPU must keep up with GPU,
+not a CPU cap. Short candidate459 observation1.025 CPU-core equivalents/whole-host
+9.30% on12 logical CPUs and instantaneousGPU100% cannot establish a full trace.
+No cap, language rewrite or new performance fitting was done during this fixed
+source-bound comparison. No RD09, new data, locked access, agents, service/fan or
+Operating Table changes. Delivery finalization is tracked in the progress ledger.
+
+## Historical execution notes (superseded by the completed result above)
+
 ## Current candidate progress — 2026-11-09
 
 CandidatePID878908 completed the full1500 initial observations and625 of750

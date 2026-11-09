@@ -1,169 +1,159 @@
-# RD-08 format recovery and matched comparison — 2026-11-08
+# RD-08 matched receiver comparison — completed 2026-11-09
 
-The explicitly authorized v2 format now represents **all1,500 existing training
-examples**, with complete roles, unchanged data and no cropping. Both arms have
-full shared training support. Development coverage is E127/130 and X180/180;
-three oversized E requests remain explicit failures under request256. This
-removes the training coverage blocker; it does not establish useful learning.
-The user reopened GPU work after the historical interruption. Performance and
-all19 affected GPU checks now pass and were committed/pushed before recovery.
-Control is complete:750 retained updates, all1500×4/6000 presentations and full
-initial/final1500 observations, with W/R/startup/reference frozen. Candidate
-passed625 of750 updates with no rejected exposures; shared initialization,
-Adam moments and CUDA/Python RNG match exactly. Its full final panel and both
-development evaluations remain due. Useful improvement is not yet evaluated.
-RD09 remains unstarted. See the [performance/recovery update](receiver-performance-v1.md)
-and [current ledger](redesign-progress.md). Historical599 logged/500 recoverable
-control updates and99 lost/replayed windows remain separately recorded in the
-[pause evidence](evidence/receiver-matched-v2-pause-2026-11-09.json).
+The finite comparison completed. **Useful-improvement acceptance failed.** No
+receiver is accepted; RD-09 and deployment remain unstarted. Both arms used all
+1,500 existing training examples four times: 6,000 effective presentations and
+750 eight-example updates per arm. No training exposure was rejected. Initial
+and final full 1,500-case head and actual-delivery panels are preserved per arm.
 
-Contract committed/pushed before implementation: `c1021a3`,
-[compact-role-states-v2.md](compact-role-states-v2.md).
-The full BPE audit, field-mapping parity, common-support proof, qualification and
-finite protocol are under `data/redesign-format-v2-20261108/`.
-Portable [coverage](evidence/compact-role-layout-coverage-v2.json) and
-[GPU qualification](evidence/compact-role-qualification-v2.json) pin exact bytes.
+The direct-state candidate has 28 wins/106 losses/35 both-pass/141 both-fail
+against pooled control across all 310 development cases. Both-correct X pairs:
+control 30/90, candidate 0/90. Candidate loses all 47 historically passing Choice
+cases from the fixed 50-case retention panel (control currently retains 46/47).
 
-Both matched arms use compact bound returns: metadata versions3/4 bind the
-original immutable question/target/bank/rubric and selected candidate identities
-without replaying their vectors. Assessed returns cost3; maximum Reason return39.
-Requests still carry every original role vector and all source evidence. The
-candidate's explicit field capacity is63 states, covering observed maxima49 in
-training/50 in E; the control retains the original pooled roles. Request256,
-return64, source-span32/count8, writer events, handles/records, context/budget,
-semantic grading and numeric tolerances do not increase. Old profile bytes and
-limits remain available. The native33-way length head is unchanged/frozen;
-native v2 writer/reader learning is unsupported and is not part of this task.
+[Portable results and all cohort metrics](evidence/receiver-matched-v2-results.json),
+[all 310 case outcomes](evidence/receiver-matched-v2-cases.json),
+[all 90 intervention pairs](evidence/receiver-matched-v2-pairs.json). Raw reports,
+rows, archived sources, plans and checkpoints: `data/receiver-performance-20261109/`.
 
-The new audit checks all1,810 training/E/X records with the actual Rust BPE/Jinja
-framing and no model imports. Every original field input hash, mapping hash,
-length, record/family/operation identity matches the historical v1 audit exactly.
-Pooled/direct maximum training requests are124/256, respectively. All1,500 rows
-remain in each arm's identical ordered catalogue; no common-support subset was
-substituted. The three E requests of270/276/295 remain in evaluation denominators.
+## Training measurements
 
-Technical qualification: **pass**,18 IDs including the cache-restore check below.
-The original17 core IDs remain valid. The ten predecessor GPU checks are
-refreshed and seven v2 checks cover actual reviewed Noul/Choice/Score inputs,
-joint VJPs/eligible accumulation, all13 operation/status cells for both formats,
-exact256 accepted/257 rejected requests, maximum39-position returns, eight
-cancellation scenarios, FP64 projection reference, complete-window owner/moment/
-RNG/sampler resume and24 long traces through1024. Eighteen paired comparisons
-cover functional/checkpoint/serving/explicit-FP32. All320 W tensors, physical
-tying and reference identity pass at every class cleanup; optimizer steps are
-blocked during qualification and actual updates are0. Engineering forcing is
-disclosed; no learned native capability is certified.
+Heads and decoded returns are separate. Training input support does not imply
+that a predicted return is valid or correct. Denominators include failures.
 
-The initial qualification attempt has15 passes and one real pooled-Score binding
-failure. The admission check normalized rubric fields separately while the
-constructor normalizes their concatenation. Reproducing that exact reduction
-shape repairs byte-exact binding without relaxing tolerances. The targeted
-final-source rerun has3 passes: actual inputs/endpoint delivery, v2 resume and
-both formats' exact eight-example accumulation. The24 passing long traces and
-all-status/cancellation/projection methods are AST-identical and reused; the
-qualification manifest lists the precise source migration and retains failures.
-Unchanged324/108 kernel matrices remain historical evidence, not a new-interface
-certificate. No W/reference or optimizer/numeric kernel was changed.
+| Arm / panel | Noul truth head /256 | Noul assessed delivery /256 | Choice head and assessed delivery /158 | Score head and assessed delivery /254 | Score interval distance |
+|---|---:|---:|---:|---:|---:|
+| control / 0 | 168 | 110 | 158 | 0 | 0.404325 |
+| control / 4 | 256 | 256 | 158 | 85 | 0.046883 |
+| candidate / 0 | 168 | 168 | 87 | 0 | 0.408468 |
+| candidate / 4 | 179 | 170 | 158 | 3 | 0.266343 |
 
-Final model-free suite: **103 tests pass**,137.464 s. Earlier failures from a
-literal expected position count and stale historical-plan expectations were
-corrected; initial logs remain. Historical source-bound v1 plans reject after
-source changes; old evidence was not relabeled current. Compilation and staged
-whitespace checks precede execution. The existing receiver probe loop now consumes
-the exact prepared order for the finite comparison; no copied training loop or
-worker framework was introduced. Initial/final training measurements record
-actual decoded/delivered behavior as well as heads using the same Session.
+Final whole-panel delivery, including non-assessed cases:
 
-The committed finite protocol uses the same frozen-W source policy, exact parent
-checkpoint0188 shared masters/Adam moments/RNG/schedule, seed, joint coefficients,
-owner names and6000 ordered presentations per arm: four full passes,750
-eight-example windows crossing pass boundaries without padding. New candidate
-projection parameters are FP32 zero-delta identity with fresh absent moments;
-writer length parameters stay frozen. W/R/startup row/reference remain frozen.
-Both fixed fits must finish before either development evaluation. There is no
-development checkpoint selection, extra pass, new data/review, locked access or
-promotion/deployment. Initial/final1500-case measurements are observations and
-never enter gradient exposure counts. Complete-window checkpoints use the
-existing transactional save/resume implementation.
+| Arm | Noul /501 | Choice /497 | Score /502 |
+|---|---:|---:|---:|
+| control | 393 | 414 | 246 |
+| candidate | 344 | 409 | 251 |
 
-Useful-improvement acceptance remains the original predeclared familiar-cohort
-Noul/baseline and Score/interior requirements, operation/status retention, and
-all previously passing Choice cases in the fixed50-case panel. The existing
-historical probe records47 such passing Choice IDs; their case/raw hashes are
-pinned before fitting. Full case-level wins/losses, both-sides-correct X pairs,
-all E/X cohorts, unsupported Reason semantics, failed/oversized cases and startup
-retention will be reported. A completed failed comparison is an execution result,
-not authorization to retry or proceed to RD-09.
+Actual eligible training counts per arm: status 6000, Noul 1024, Choice 632,
+Score 1016, feasibility 1988. New-profile Reason semantics stay unsupported/masked;
+structure/alignment/native supervision is not invented. No Reason semantic
+learning claim follows from structural return grading. All 1,500 paired startup
+readouts and mapped budgets are unchanged in both arms; no missing pairs.
 
-Execution and useful-improvement outcome are tracked separately. The original
-pre-execution implementation commit preceded all updates. Current actual progress
-and its user-requested pause are recorded below; this is not a completed comparison.
+## Held-out actual delivery
 
-### First-update recovery
+Both fits and final measurements finished before either development evaluation.
+Each evaluation made exactly 0 optimizer updates and kept its receiver unchanged.
 
-Control baseline completed all1500 actual head/delivery observations. Its first
-update and exact model/Adam/RNG round-trip passed, with checkpoint0189/cursor8
-saved. The next input then failed a stale reference version-counter guard:
-restoring identical frozen tensors advances PyTorch counters. No reference bytes
-changed. The guard now accepts that metadata change only after full checksum
-validation against the originally bound immutable artifact and frozen ownership;
-changed content/artifact/ownership still rejects. Payload/tokenizer/codec/model/
-loss/optimizer arithmetic is unchanged by AST/source proof. A targeted real3090
-checkpoint/cache test passes (32.961 s): cached heads/losses exact, cache hits2,
-W320/tying/reference pass,0 optimizer steps. Three model-free compact tests pass.
-Qualification now has18 resolved IDs; original17 core results remain valid.
+| Arm / panel | Noul | Choice | Score | Total |
+|---|---:|---:|---:|---:|
+| control / E | 16/40 | 22/50 | 13/40 | 51/130 |
+| control / X | 50/100 | 40/40 | 0/40 | 90/180 |
+| candidate / E | 13/40 | 16/50 | 14/40 | 43/130 |
+| candidate / X | 20/100 | 0/40 | 0/40 | 20/180 |
 
-The first update, eight exposures, full1500-case baseline and original failed log
-are preserved. The explicit metadata-only migration in
-`data/redesign-format-v2-20261108/control-migration.json` copies weights, optimizer,
-effective rows and RNG byte-for-byte; only qualified source/protocol bindings
-change. All original files, owner shapes, objectives, schedule, full6000 order and
-sampler receipts remain. New plans are `plans-cache/{control,candidate}/plan.json`.
-The resumed control starts at cursor8 with749 windows remaining; it does not
-repeat the completed update or baseline. New output is `control-resumed/`; its
-initial panel is an unchanged copy of the original observation file, retaining
-original source provenance. Candidate remains unstarted until control finishes.
-No additional training exposure or new data is introduced by this recovery.
+The predeclared familiar Noul cohorts regress: E control 4/4 versus candidate 3/4,
+X 50/50 versus10/50. Candidate truth equals the training-defined constant baseline
+(3/4 and 10/50), rather than beating it. The baseline is false, from 168 false / 88
+true assessed training labels (mean 0.34375). Familiar Score cohorts contain 0
+assessed records, so their required improvement cannot be established. Across
+all assessed Score cases, interval distance worsens: E 0.312811→0.492258,
+X 0.238843→0.517047. Correct interior delivered Score remains 0/3 E and 0/40 X
+for both arms. Several operation/status cells regress; all cells and 27 declared
+cohort reports are retained in portable evidence. None of these failures is waived.
 
-### User GPU hold and preserved progress — 2026-11-09
+| Reference operation/status | Cases | Control status correct | Candidate status correct |
+|---|---:|---:|---:|
+| Choice/Assessed | 50 | 47 | 1 |
+| Choice/Conflicting | 10 | 1 | 6 |
+| Choice/Insufficient | 10 | 8 | 5 |
+| Choice/NoFeasibleChoice | 10 | 3 | 5 |
+| Choice/Unresolved | 10 | 4 | 0 |
+| Noul/Assessed | 80 | 76 | 79 |
+| Noul/Conflicting | 10 | 3 | 2 |
+| Noul/Insufficient | 40 | 4 | 0 |
+| Noul/Unresolved | 10 | 4 | 5 |
+| Score/Assessed | 50 | 45 | 47 |
+| Score/Conflicting | 10 | 5 | 4 |
+| Score/Insufficient | 10 | 7 | 7 |
+| Score/Unresolved | 10 | 1 | 3 |
 
-At01:01:37 UTC, the verified control PID618710 was paused with SIGSTOP after the
-user reported that the GPU must be turned off now. Its process state is T
-(stopped); no more model work or device probes are scheduled. Existing services
-and devices were not changed. Pausing retains process/VRAM state and does not
-power off the card or create a new checkpoint. No automatic resume.
+Return failures remain in denominators:
 
-Actual control progress is599 completed windows/updates and4792 presentations
-across all1500 records, with zero rejected exposures. This includes the preserved
-first update and598 resumed updates. All1500 original initial head/delivery
-observations remain byte-identical. Initial shared receiver/moments/CUDA/Python
-RNG receipts match the original prefix. Final measurements and the candidate
-fit have not started; neither E/X evaluation nor RD09 has run. There is no
-useful-improvement result or accepted receiver. RD-08 remains in progress.
+- control: E {"no structurally compatible pointer entries": 3, "numeric literal": 2, "reason aggregate bound": 12}; X {"reason aggregate bound": 30}.
+- candidate: E {"direct request exceeds 256 positions; never crop": 3, "no structurally compatible pointer entries": 4}; X {}.
 
-The latest complete disk checkpoint is `control-resumed/checkpoint-0688`, manifest
-SHA `2eaea42f7bbbbc0a125c51f0b06016afbda2fa1011c913a05c912202269d91aa`.
-All four weight/effective-row/optimizer/RNG file hashes verify without model
-imports. Historical counter688 corresponds to500 new RD-08 updates and cursor4000.
-If the process or GPU memory is destroyed,99 completed updates/792 presentations
-plus any partial window600 are not recoverable from those files. The99 completed
-windows took3848.013 seconds (64.13 minutes). Their telemetry remains, but logs
-cannot reconstruct their exact missing optimizer/RNG state. If the stopped
-process survives, its live state can continue after GPU permission returns.
-Preserve both paths and never claim that checkpoint0688 contains599 updates.
+The 3 oversized candidate E requests (270/276/295 positions) remain explicit
+failures under request256. Other failures are actual predicted-return decoding
+failures, including Reason bounds, numeric literals and incompatible pointers;
+no gold repair or post-fit decoder change was applied.
 
-The user's utilization concern prompted a read-only process/source/log check.
-Trainer CPU was122% (about1.2 cores), while the12-logical-CPU machine was9.54%
-busy over a two-second sample. Three per-process GPU samples were10%,1%,17%;
-these are sparse observations, not a training-wide average. The last125 windows
-averaged38.817 seconds and14.272 separate component gradient passes; their
-runtime/count correlation was0.826. The source still performs separate component
-backwards and per-example receiver fingerprints with GPU-to-host readbacks.
-No live stack/timeline profiler was attached, so no cost share or speedup is
-claimed. No numeric setting, optimizer, batching, source or schedule was changed.
+## Qualification, matching and recovery
 
-Portable [pause evidence](evidence/receiver-matched-v2-pause-2026-11-09.json) pins
-the paused report, training rows, baseline, log, migration and performance
-observation. The raw report retains RUNNING as its last emitted state; the
-separate pause receipt records the actual stopped process. Resume requires the
-user to reopen GPU work, with no new data, duplicate fit, extra pass or RD09.
+The v2 format represents all 1,500 training records without cropping or new data.
+Every original input/field mapping/record/family hash remains bound. Complete
+roles use explicit 63-state fields; compact bound returns cost 3 positions for
+Assessed, at most 39 with Reason. Request 256 / return 64 and all other bounds stay.
+[Coverage](evidence/compact-role-layout-coverage-v2.json),
+[format contract](compact-role-states-v2.md) and
+[current GPU qualification](evidence/compact-role-qualification-v2.json) remain.
+
+All 19 affected-path 3090 checks pass with 0 optimizer updates; 35 model-free checks
+pass. The six paired performance windows and exact arithmetic/resume tests pass.
+Qualification commit 6793f252b4259ff2a19bc0ffb54e349a68374d2c was pushed and its
+exact remote SHA verified before recovery fitting. No required GPU check remains
+pending. Historical failed qualification attempts and their bounded repairs are
+preserved in prior reports/raw logs; they are not silently relabeled.
+
+Shared initial masters, Adam moments, CUDA/Python RNG match exactly. Candidate
+profile-only projection starts zero-delta identity with fresh absent moments.
+W/R/startup/reference stay frozen; all 320 W tensors, physical tying, reference
+and nonreceiver owners and grad=None pass after fitting and evaluation. All 95
+bound sources match current/archived bytes; no source/plan/qualification edits
+occurred during fitting. Initial/final/training input hashes and masks match,
+and every current-process episode matches the fixed planned order.
+
+Only 500 of 599 previously logged control updates were recoverable. The compatible
+checkpoint migration changed metadata only: all weight/Adam/RNG bytes and
+sampler state were preserved. Remaining 250 effective windows completed; 99 lost
+windows / 792 presentations were replayed with exact original input/head/loss/
+eligibility/update receipts. Recorded physical control calls 849 versus 750
+retained are disclosed; unflushed work immediately before process loss is unknown.
+The 12 discarded performance updates are separate. Original baseline 1500 rows
+were copied unchanged with original provenance, without a model rerun.
+
+| Arm | Final checkpoint | Manifest SHA256 |
+|---|---|---|
+| control | `data/receiver-performance-20261109/control/checkpoint-0938` | `f616f4c9154ff2a4c4b7d5b58b5f8d67b9afd55baf80d758e5e234a0b3073452` |
+| candidate | `data/receiver-performance-20261109/candidate/checkpoint-0938` | `7b12b33db61563456ac0b203d9851c9b5a7e512aa337e77418106818397f617e` |
+
+Both final manifests store historical counters 938 and sampler cursor 6000;
+all four files verify. RD08 contributes 750 retained updates, not 938 new updates.
+
+## Performance limitation and reproducibility
+
+The measured window speedup is 24–26%, with 35–37% lower CPU time. It does **not**
+establish removal of the CPU bottleneck. A short candidate 459 sample used 1.025
+CPU-core equivalents; whole-host busy 9.30% on 12 logical CPUs. An instantaneous
+GPU reading 100% is not a utilization distribution. The user requires that CPU
+keep up with GPU; no CPU cap was requested/applied. No further rewrite, training
+extension or promotion is implied. See [performance report](receiver-performance-v1.md).
+
+Candidate fit setup+750 windows+both full measurements:26,688.315s; peak allocation
+4,902,695,424 bytes. Recovered control setup+250 windows+final measurement:
+11,777.648s, peak3,685,016,064 bytes. These scopes differ and are not a matched
+whole-run speed comparison. Read-only E/X evaluations took 734.973s control and
+594.103s candidate. Reproduction argv/environment and source/plan/report/checkpoint/row
+hashes and all before/after metrics are in portable evidence. Reduction command:
+
+```sh
+PYTHONPATH=. python data/receiver-performance-20261109/analyze.py
+```
+
+This reduction blocks model imports and regrades every case using immutable
+released annotations. Final metadata verification also checks exact source bytes,
+planned order, inputs/masks, unchanged evaluated receiver and final checkpoint
+file hashes. No new data, semantic review, locked access, RD09, deployment,
+service/fan change or CPU model execution occurred. Execution is complete;
+commit/push delivery status is tracked in docs/redesign-progress.md.

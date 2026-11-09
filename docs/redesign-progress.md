@@ -19,19 +19,19 @@ because a later queued task starts.
 | RD-05 | delivered | Joint objectives, owners, binding/mask tests; deferred GPU IDs | `fe90af0` pushed/verified; [report](redesign-rd05-results-2026-11-08.md), [evidence](evidence/joint-receiver-objectives-v1.json); 74 static tests pass +14 refreshed; two new GPU checks resolved by RD-07; Reason masks preserved |
 | RD-06 | delivered | Native wiring/eligibility report; deferred real-return/gradient IDs | `6f74680` pushed/verified; [report](redesign-rd06-results-2026-11-08.md), [evidence](evidence/direct-native-flow-v1.json); 86 static tests pass +10 refreshed; two new GPU checks resolved by RD-07; zero complete corpus formation/semantic continuation/direct reader support |
 | RD-07 | delivered | All required deferred/changed-path 3090 checks pass; actual counts/hashes | [Report](redesign-rd07-results-2026-11-08.md), [evidence](evidence/redesign-qualification-v1.json); ten deferred +three new GPU checks pass; twelve1024 traces; zero updates; `7da99c6` pushed and verified |
-| RD-08 | in_progress | Complete matched fit/evaluation receipts; useful-improvement separate | [v2 report](receiver-matched-v2-results-2026-11-08.md), [performance/recovery update](receiver-performance-v1.md); control750 complete with full final observations; candidate625 checkpoint saved, fitting active; no rejected exposures; E/X unstarted |
-| RD-09 | blocked | Accepted RD-08 receiver plus eligible native run/evaluation receipts | [Report](redesign-rd09-results-2026-11-08.md), [evidence](evidence/native-demonstration-rd09-v1.json); conditional authorization recorded; blocked on RD-08/no accepted receiver and zero native supervision; execution unstarted, zero updates; blocker `a864b65` pushed/verified |
+| RD-08 | in_progress | Complete matched fit/evaluation receipts; useful-improvement separate | [Completed v2 report](receiver-matched-v2-results-2026-11-08.md), [portable results](evidence/receiver-matched-v2-results.json); both750-window fits and E130/X180 evaluations complete; useful acceptance FAIL; final commit/push due |
+| RD-09 | blocked | Accepted RD-08 receiver plus eligible native run/evaluation receipts | Execution unstarted,0 updates; completed RD08 useful acceptance FAILS/no accepted receiver; existing native supervision gaps remain. Latest user explicitly prohibits starting RD09 |
 
 RD-07 is delivered; technical acceptance passes and implementation `7da99c6` is pushed/verified.
 All ten deferred GPU checks are resolved; no required RD-07 check remains pending.
-Earliest unfinished slice: **RD-08**. Control750 retained updates/all1500×4 is
-complete, including full initial/final observations. CandidatePID878908 passed625
-updates/5000 presentations with checkpoint0813 verified, same initial shared masters/
-moments/RNG and no rejected exposures. All99 control replay windows match original
-receipts exactly; lost/physical work remains explicit. PERF-01..03 and19 current-
-source checks pass; qualification6793f25 pushed/verified before fitting. Complete
-candidate750 plus final panel before either E/X evaluation. No source/plan changes,
-duplicate process, new data or RD09.
+RD08 execution is complete; delivery finalization (commit/verified push) remains.
+Both arms750 retained windows/all1500×4, full initial/final observations and both
+read-only E/X evaluations complete. Candidate28 wins/106 losses and all47 historical
+Choice passes lost: useful-improvement acceptance **fail**, no accepted receiver.
+All19 required GPU checks pass, none pending. CPU bottleneck removal unresolved;
+measured24–26% diagnostic speedup is incremental, no CPU cap requested/applied.
+RD09 remains unstarted/blocked by failed acceptance and existing supervision gaps.
+No automatic extra training/search, new data, deployment or service/fan changes.
 
 For each attempted slice add a short entry with implementation/evidence paths,
 exact commands/results, dependency hashes, relevant implementation commits and
@@ -940,3 +940,50 @@ All four file hashes verify. Raw`candidate-checkpoint-625-verification.json`. No
 rejected exposures. Final125 updates plus full final1500 observations remain
 before either E/X evaluation. CPU bottleneck remains an explicit limitation,
 with no midfit source/plan changes, extra passes or RD09.
+
+## Candidate750 saved; final observations active — 2026-11-09
+
+CandidatePID878908 completed750 effective windows/all1500 records exactly four
+times,6000 presentations; no rejected exposures. Final checkpoint0938 manifestSHA
+`7b12b33db61563456ac0b203d9851c9b5a7e512aa337e77418106818397f617e`, historical938 counters/cursor6000, all four
+file hashes verify. Raw`candidate-checkpoint-750-verification.json`. Full final
+1500-case measurement is active; report remainsRUNNING until completion. No more
+optimizer updates. Both full fits must finish before E/X evaluation; no RD09.
+
+## Both fits complete; read-only control evaluation launched — 2026-11-09
+
+Candidate reportsCOMPLETED_RD08_TRAINING_NOT_EVALUATED,750 updates/6000 exposures,
+full initial/final1500 observations, all320 W/tying/reference/R/native frozen and
+grad=None. Initial shared weights/moments/CUDA/Python RNG exactly match control.
+Final0938 checkpointSHA7b12b33db61563456ac0b203d9851c9b5a7e512aa337e77418106818397f617e;
+raw`candidate-verified.json`, reportSHA12914630abbbb7acb7a1ea0daa762dc8f710853f425380eea616d832d05eb152.
+Both fits now complete. Read-only control E/X evaluation launched with exact final
+control checkpoint, qualified prepared plan/policy and completed candidate peer,
+output`data/receiver-performance-20261109/eval-control`, log`eval-control.log`,
+host session72969. No optimizer updates or RD09; no duplicate evaluation.
+
+## RD08 execution and evaluation complete — 2026-11-09
+
+Both fits and full initial/final1500 observations completed before either E/X
+read-only evaluation. Exact750 effective windows/6000 exposures per arm; no rejected
+training exposures. Shared masters/moments/CUDA/Python RNG match. Final checkpoint
+and source/input/mask/order/frozen checks pass (all95 bound source files unchanged).
+Both evals0 actual optimizer updates, receiver unchanged. Candidate loses learning
+acceptance:28 wins/106 losses,0/47 retained historicalChoice,0/90 both-correct X pairs
+versus30/90 control; familiar Noul equals constant, familiar Score absent, other
+Score distance worsens and status cells regress. No acceptance waiver/receiver.
+
+Report/evidence: `docs/receiver-matched-v2-results-2026-11-08.md`,
+`docs/evidence/receiver-matched-v2-results.json`, all310 cases/all90 pairs sibling
+JSONs. Raw `data/receiver-performance-20261109/`; analysis command
+`PYTHONPATH=. python data/receiver-performance-20261109/analyze.py` passes with
+model imports blocked; regrades310 cases and complete exposure/owner checks.
+`final-verification.json` verifies exact current/archived95 sources, all initial/
+final/training input hashes/masks/order, evaluated receiver and checkpoint files.
+No pending GPU check;19 pass and35 model-free checks preserved. All model work
+3090-only. Reason/native supervision remains unsupported/masked as declared.
+Control99 lost/replayed windows and849 physical/750 retained calls remain explicit;
+12 discarded performance updates separate, unknown unflushed work not fabricated.
+CPU bottleneck unresolved;24–26% diagnostic speedup does not establish removal.
+RD09 unstarted, no extra passes/new data/agents/locked/deployments/service changes.
+Finalization commit/push follows; then mark RD08 delivered with failed learning.

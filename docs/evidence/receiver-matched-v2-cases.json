@@ -1,0 +1,6512 @@
+[
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0000",
+    "operation": "Noul",
+    "outcome": "candidate_win",
+    "record_sha256": "7c3a5cefc17ce546013cd5c17676802e13ee713ae6d71fd6a6c5f8f564c7df33",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0001",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "5ceddc660e6e3b5541b5bccb09737596f009e3db92f74a97ead6872d0efeb253",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0002",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "1933c832d4f3cf32e13efdfe75927e9179b62c597a1987462feba829eed9c32e",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0003",
+    "operation": "Noul",
+    "outcome": "both_pass",
+    "record_sha256": "5abec5e73a49f1e5d33be8a8a9e577513c19eedb00c8147bbbcaac4e5e661de1",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0004",
+    "operation": "Noul",
+    "outcome": "candidate_win",
+    "record_sha256": "34264f733d4773d604f3cbaa39f5df2da139fcbdb85beae67f3ec1ba8eb7b96e",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0005",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "0cb4ffd908f1ac0237211654efd96fb48bfc4e69b05dc5bb6e93e58e34d19906",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "numeric literal",
+    "id": "development-E-0006",
+    "operation": "Noul",
+    "outcome": "candidate_win",
+    "record_sha256": "a71eaaac2c6f9ef05ec37050bac85609e4b343bb10e4c2ba0c63e64f2646b929",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0007",
+    "operation": "Noul",
+    "outcome": "both_pass",
+    "record_sha256": "2f6dc01a8094719d0cd991d4914a15dcb615d304585b3455805a93d2cb8ba932",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0008",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "219c10ae3231b484116bdd741d64dd0671a6b4529eb9f536e6620e73922f8b69",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0009",
+    "operation": "Noul",
+    "outcome": "both_pass",
+    "record_sha256": "123fab3f8918fd689d996b390738c01c5eb6f4eeeec474d43d4653cb685a1875",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-E-0010",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "a9d79546a53d1384360e66ac567dbe65b611e6c5f93dca5b8f576b96a9801f8d",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0011",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "90be0903eb7f8c1856b3d1a1a7b01edc8b3c59c19ed7ea4738d1aa3cf7f6e136",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0012",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "5ae22c2e434b690831e920504673f5b52612d953538181d5837d5b86f6863e3a",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0013",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "696d7eb9d205e2f3958e06a8c5b667d9fe325a21ed150d355dec50f64ca493c9",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0014",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "cf01d5996f756e208ec2417f9b944543d157ff85e3d212041e70bef227f5a5b7",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0015",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "488d6daad40185a969dd46a0521d48f75f3fa95d24a73c8955577fa765429e65",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0016",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "e75c41a7b60001fd22448060602e33248479cd120364bf51d92bdf7759eb2428",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-E-0017",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "e575fbd407252a89630d45482758ef8189ec5598d90e799da51e15e9e3968d9a",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0018",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "19f8296056cc14826e53595cb43dc50ee98afbc894a0bbc9f9e00f43131a8add",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0019",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "f45b69e17936eaa9063cd866da5b3dea9e0d0a35b262674ab7e95a2249486a62",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0020",
+    "operation": "Noul",
+    "outcome": "both_pass",
+    "record_sha256": "4b19e970197b3396c32997828e1608029b738fe07f1262df4daba2c00e1f2798",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0021",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "836026c29f92491c26443c926d85b657cabd475ab34cfff9e8e14bdbd209cb49",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0022",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "b638ab3096a854399f15bd605128ff1dc30fdd0f4a4a0cc6f520c6fbe89fe267",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0023",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "b53ccf752f8ab663e2eb485dcfabe77264c6624b91eac38a4cae99d5bfad18a2",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0024",
+    "operation": "Noul",
+    "outcome": "both_pass",
+    "record_sha256": "ea46ae186dc81373a6899bdae58284a39236de2501481dd6db25695fa64a9f45",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0025",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "ad5d9563e1877f545a9f0cbdc24c5ac7c5ad855253b251e798bb22a0c4787bba",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0026",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "28d57b7db7843e1582d6ad1e52183083b11aec549acea26e29df17bdf3be2810",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0027",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "9b1d3864c6c6d1418583fab808baf96b20e2bc023049ce14288a746e2d85aa24",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0028",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "c69d91ba08f6d6afa2b9275b527dbec91fa9040a3cc07bd7761c78024d1495fd",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0029",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "12fac47c7524b1f40b1047949a6da8a194f86b8a080d1d2f4a43926057ee3a8e",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-E-0030",
+    "operation": "Noul",
+    "outcome": "candidate_win",
+    "record_sha256": "647da0d7b74fd1cf51b529064eeac5c27ea1e55583ba6b27d01511c9dead70d9",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0031",
+    "operation": "Noul",
+    "outcome": "both_pass",
+    "record_sha256": "6098cdc597a58a6102a5d4287037820f74ebf26ddef193d15fc4bed266dd93d4",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0032",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "2a669897b4f70b35e072ccac8629822490ff23730dfd9c4d64d1db8bf923e370",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-E-0033",
+    "operation": "Noul",
+    "outcome": "candidate_win",
+    "record_sha256": "6a84c4b5d19b89d10e5923490e2494cd0624253165d09820a7e55c0bf33182d5",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0034",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "f2169ce596da192b6433ceea844c32790f97193942f4fb4727beee909fd77293",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0035",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "6186819de1343aef9dfe564671d4b9611a803c1ea91aa3c4c508ec072f436b58",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0036",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "0dcd24c4e31d0ad1595204809022392b71eaef271b4e1507823dd68ec57bffb4",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "numeric literal",
+    "id": "development-E-0037",
+    "operation": "Noul",
+    "outcome": "candidate_win",
+    "record_sha256": "fe6c81212f7cdb3eefaf3196b45ee044561c9b10435f34057931cf3d5a58a126",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0038",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "28442ba8e866bda6d995d158769640377809cbea2318182fb52c097e8d24b738",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-E-0039",
+    "operation": "Noul",
+    "outcome": "candidate_win",
+    "record_sha256": "8de3d7f9e9fbc5f07c6138ca01718d9a81f617c31e86e1ee7918dc5c3c2fb190",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0040",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "0d08c417166d99cf3a6946af5090bbd3aeca32e38283a9d868bbfaeb867163ca",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0041",
+    "operation": "Choice",
+    "outcome": "both_fail",
+    "record_sha256": "e16ebe0f2dfd088d2c9fb0b1a9d3484c423154737a95385bb6ed1d19b7e5c53a",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "candidate_failure": "direct request exceeds 256 positions; never crop",
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0042",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "59869a472417f6222dc0d6ce505b370000358ea8477659907cf06f8cb84c553a",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0043",
+    "operation": "Choice",
+    "outcome": "both_fail",
+    "record_sha256": "09908bff985fe607e05eed595bc344d6ac428d1245e894532e2d82ea2d9af374",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0044",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "bb87b4c5752dea0432fe2521f2aac3a5c73256fa2d5eb16230fdce2de0ab9f9c",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0045",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "2753ac53bc08637c2917a7ce0884d88a4d7ce749bb7bbdefb6f8717b5fdb9f25",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0046",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "8b117b194b52f5a5d92e39df8c4d13c46a8a8933a584129cb3a7fb18d37db325",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0047",
+    "operation": "Choice",
+    "outcome": "both_fail",
+    "record_sha256": "c5425e61c44cdba6cf2e6b85dc90599544b8723c2025257fa6facbbca4d415c0",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0048",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "8c05adf3ab464a7a6888853a3a70d4ea617069d81d0ee4b429cdf0da1e35ce1d",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0049",
+    "operation": "Choice",
+    "outcome": "both_fail",
+    "record_sha256": "9b5d01c32e839ec0d20129eaaf599a0bf881a3db8dcaaa2ac7995c4861d5ee2c",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0050",
+    "operation": "Choice",
+    "outcome": "both_fail",
+    "record_sha256": "682332063c9e5ff45ea627ffed9efa0a145a920ed03329331d8a4106941387e8",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0051",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "e048494edb5edb75c705ec56859466e1a20d9e06ddadbbe91208bbee209aa3cd",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0052",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "87f07f61da630bb4e0e02c70fc879c36a0664638581bbf385c7f30d27672274b",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0053",
+    "operation": "Choice",
+    "outcome": "both_fail",
+    "record_sha256": "9937b7eaa3d6c39357e500196b014f62c6750f9a424d2f996184dc6310a0f09c",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0054",
+    "operation": "Choice",
+    "outcome": "both_pass",
+    "record_sha256": "54a26af1a235f8aa31046c70b7b198420a70c53a13aaddf516c00ad6df136018",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0055",
+    "operation": "Choice",
+    "outcome": "both_pass",
+    "record_sha256": "68f2e02e37368fa4d500f17a3b011135bb725cdeb0921ff29f78c236f7627138",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0056",
+    "operation": "Choice",
+    "outcome": "both_pass",
+    "record_sha256": "412b485df8fcf5a07b45ec037a66f5de00288a63993ed2f73f3b2bdfddf8adcf",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0057",
+    "operation": "Choice",
+    "outcome": "both_pass",
+    "record_sha256": "f61cea7aade9b13fe47162f6c91ecb1c3076269d8033604f8fb8424221fe2a38",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0058",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "82880b0a8f3d3da9993ab0138e0521eba2698e23d7a4dfeb6ebde74ce1cb060c",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0059",
+    "operation": "Choice",
+    "outcome": "both_pass",
+    "record_sha256": "cad8eb55fcbc9bf0fd66c20f8fc34b3c92a9efe27d0b838d478c9c9b5b6a1fa1",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0060",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "1b10c9c401fc1cabccb0a20e07b8cf64a785eaab5c065a86a919d367429ce75b",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "candidate_failure": "direct request exceeds 256 positions; never crop",
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0061",
+    "operation": "Choice",
+    "outcome": "both_fail",
+    "record_sha256": "4a0bc786bd7734cc6d9987cdae161425df8c9be9cec8cd4fe4d8abb055c92074",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-E-0062",
+    "operation": "Choice",
+    "outcome": "candidate_win",
+    "record_sha256": "1ededac828b937af1900241a77b71177bcf83b8eb0e2cf06057c36fc05229c09",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-E-0063",
+    "operation": "Choice",
+    "outcome": "candidate_win",
+    "record_sha256": "00f48e117ab3b2a41d952251f076a82a3df5353e2dac1ae0bbdb6e8c7ba9b860",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-E-0064",
+    "operation": "Choice",
+    "outcome": "candidate_win",
+    "record_sha256": "85946e040e1570478faed19109eb6a6df7e7ecfcfef3f217b5c6fc45ee6bea5b",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-E-0065",
+    "operation": "Choice",
+    "outcome": "candidate_win",
+    "record_sha256": "1f4df114a43d2f377b604194b74d493212a54bb6d1ca4f9e4bac8c507119a1f6",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0066",
+    "operation": "Choice",
+    "outcome": "candidate_win",
+    "record_sha256": "a037b3d4caf524d8002f49fdcc16bfb177a7e581dca2af78d24077fa6e77d3fc",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-E-0067",
+    "operation": "Choice",
+    "outcome": "candidate_win",
+    "record_sha256": "8a39fbc6b6cc74e01f86196ca3bd5f69962f85584a8fe23e2d7458ecfc534ec2",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0068",
+    "operation": "Choice",
+    "outcome": "both_fail",
+    "record_sha256": "668b48c68e2424f1b4426485fdc2770cac66b65d9327038b1184ca866056e714",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0069",
+    "operation": "Choice",
+    "outcome": "both_fail",
+    "record_sha256": "847ed2d966bfc1ed67c84e88ed51b4cf55828a0b912c71bd8a37bbcdc55a6939",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "candidate_failure": "no structurally compatible pointer entries",
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0070",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "1d9a29c6edfc90eaecad1b5b9e5fa59aaa9e4a74f44a36769620e2d0fc688a13",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0071",
+    "operation": "Choice",
+    "outcome": "both_fail",
+    "record_sha256": "2ee1055e593a03331b1422d94b780d8f2c08f540067757cba7a73d53beb85821",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0072",
+    "operation": "Choice",
+    "outcome": "both_fail",
+    "record_sha256": "31d2e7295ebee2a2aa4d0ff8919d543ccc3b4cdf70fabe0a1c542c5d4b4014b9",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "candidate_failure": "no structurally compatible pointer entries",
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0073",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "6331140e36c8aefe3c89eb3dcc7cb4049261224190b63c659984dcd2ae14e570",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0074",
+    "operation": "Choice",
+    "outcome": "both_fail",
+    "record_sha256": "3fa5ce69594e666fe7bdfca851324100c79c32fc9073e740deac8185e66e4a17",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0075",
+    "operation": "Choice",
+    "outcome": "both_fail",
+    "record_sha256": "401234c5b9ccd8e37df0a674790b1118dd622037dd87b15decac8a4ebbd0d782",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0076",
+    "operation": "Choice",
+    "outcome": "both_fail",
+    "record_sha256": "2cd0f89d14ddbbd3f34f9b1d199a441335199c0fd3c8bee560cb032734e6901c",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "candidate_failure": "no structurally compatible pointer entries",
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0077",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "0f18df8a9544a6e696409014bc08baa71d3c00fc5781569f98b3977e7fa30b14",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "candidate_failure": "no structurally compatible pointer entries",
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0078",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "4bc12f7315180fa82cd1f89af0654be2a11f8a2c3e141dcd02f24fc73b44ce08",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0079",
+    "operation": "Choice",
+    "outcome": "both_fail",
+    "record_sha256": "3041cd9d62c819b84eeaabb846244a1a562e9f718982dd8e49daaeedaa512914",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-E-0080",
+    "operation": "Choice",
+    "outcome": "both_fail",
+    "record_sha256": "abfc040a149928b432eca71be5920bedc1934c6efdd295ce880f6828c533e08e",
+    "reference_status": "NoFeasibleChoice"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0081",
+    "operation": "Choice",
+    "outcome": "both_fail",
+    "record_sha256": "10a7434570e2fc7f31ff44709802f6a4274b8c1add7385c0a1b13b4864442b2a",
+    "reference_status": "NoFeasibleChoice"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0082",
+    "operation": "Choice",
+    "outcome": "candidate_win",
+    "record_sha256": "808ee36d47d946d7025e65dc11a7b1532aa88cd5794a9d98f5e99d4eb1253bbc",
+    "reference_status": "NoFeasibleChoice"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0083",
+    "operation": "Choice",
+    "outcome": "both_pass",
+    "record_sha256": "f274645c476777c11b99f9cc964304fda7daef354ed9f15101dbcfb752b91a0c",
+    "reference_status": "NoFeasibleChoice"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "candidate_failure": "direct request exceeds 256 positions; never crop",
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0084",
+    "operation": "Choice",
+    "outcome": "both_fail",
+    "record_sha256": "6458fcabdeddef320c3c4113fcf4bc5dbd315c7636ddd70149d5dce1e9f5c700",
+    "reference_status": "NoFeasibleChoice"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0085",
+    "operation": "Choice",
+    "outcome": "both_fail",
+    "record_sha256": "2659d57d14ff0bf37a59af7945ac1f1d0b3c438c7fa68ff809e6215928c0d35f",
+    "reference_status": "NoFeasibleChoice"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0086",
+    "operation": "Choice",
+    "outcome": "both_pass",
+    "record_sha256": "3114dddec4d6299489cfb085e282464d765118cbdb1518404246ffd37cee6e65",
+    "reference_status": "NoFeasibleChoice"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0087",
+    "operation": "Choice",
+    "outcome": "both_fail",
+    "record_sha256": "dfae6edac3ad28101d78b623895672a4b8a065b042c37184df9fe572d2198711",
+    "reference_status": "NoFeasibleChoice"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0088",
+    "operation": "Choice",
+    "outcome": "candidate_win",
+    "record_sha256": "c84cce8ad19e41c2fcccc8030a9b24f7fb53e2bbad62c2cd5f0fbe426787f4aa",
+    "reference_status": "NoFeasibleChoice"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0089",
+    "operation": "Choice",
+    "outcome": "both_pass",
+    "record_sha256": "34d88bbc4ee5b9491c2d63041c98acfdec25f5b06ee87bb16590f48fbcee5236",
+    "reference_status": "NoFeasibleChoice"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0090",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "af453f8a0fc094caac8cd7701f6213264cca4fc2a958043a35bfc353fa624885",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0091",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "45c36f79ce8ef0040df8afd73e78e3fd1c446feb47f14e6f537eacfce1c9520b",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0092",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "eaacf1cb7cccd1fee159a625ae3dca3abf247b7a871ccf2f7949a13d7b347b2d",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-E-0093",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "5f45109c2c35709912f50fe5c5f38572ed2887c70f53b2cec6f453a63f0b8053",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0094",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "410640356088e663e2be89772f01046d64cb699eeeb69a09109946156fa173a8",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0095",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "5900c86d57ffdbfe870a69868bc5556eb953e60aa83d7adcf7469f78143c8ee2",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0096",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "d63bfcc4954415168f53e5feaeb27a68bb6b89b2b0eb50de2d3d8f8f48928431",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0097",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "93af63b52b404513af861f5d410d3c1c3c46dc30b4de5a1e657a9caffe4c4ed4",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0098",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "25fee049429c10a9b2bb58797592983d53998bd1ea695d6a02b6bf82b6d8ec55",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0099",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "a19c520089a1c603ace91bb684aae54de8a688cc4c3fd1d112290585887d3f04",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0100",
+    "operation": "Score",
+    "outcome": "both_pass",
+    "record_sha256": "ca043300d66a1a36a4d6437d3683d1c4c925959adc3309be0e85b1afa5360be6",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0101",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "68fa8433f8a684768e9fe1439e9e6ed2fc1abf59a4462671ffa9ee66a045a9f1",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0102",
+    "operation": "Score",
+    "outcome": "both_pass",
+    "record_sha256": "a811f1c19d937cf393b9d73f1eaf655525eb4b0b0daf28d310d2ce3f0a0e486a",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0103",
+    "operation": "Score",
+    "outcome": "both_pass",
+    "record_sha256": "4b01a0ddd58146db40c09f3f7de261c6f3d55d8ecba6fc43ae8ad72fa9dda142",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0104",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "a2bf68895983cbae92e512bfb3549e673fd234812b6516dfcb34d498a55bfcb6",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0105",
+    "operation": "Score",
+    "outcome": "both_pass",
+    "record_sha256": "ad42eaf0655ca434d0515cf4a3276497916f68f7315c8dfa4e1715e7e31d1726",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0106",
+    "operation": "Score",
+    "outcome": "both_pass",
+    "record_sha256": "6a94c9d593665fc6e5f3ae7143cfa86f90c244c17b701b3f3d36c1f80fb5977a",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0107",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "fb9ae7ab3258916f311163335639e4360ba070d8daa58a1067b790350311db35",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0108",
+    "operation": "Score",
+    "outcome": "both_pass",
+    "record_sha256": "47ef5609de0fc88e90a0256f7b8788bdb9354b032f4ebedbf08ec959e9546827",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0109",
+    "operation": "Score",
+    "outcome": "both_pass",
+    "record_sha256": "8e66a47619c097d88bd744c7722fc1a0a8adba8788fcad736d2bdb20e68111d0",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0110",
+    "operation": "Score",
+    "outcome": "both_pass",
+    "record_sha256": "092a4c4ba98b27b9b1fa8d2d54bea2ab13eae3c1e115d6a05aa9ce5110ec915d",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0111",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "366069c7ae1b8277d7ac35578e9459cf6d56c3e658ab15cf59b45a347e7be3cf",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0112",
+    "operation": "Score",
+    "outcome": "both_pass",
+    "record_sha256": "fe4eb4891b2573215536cb1e338190afd3fba695bcb9f28a9dd82e72e852175d",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0113",
+    "operation": "Score",
+    "outcome": "both_pass",
+    "record_sha256": "82f84a7fca7b5b46ebf81b403e6d1b2c117a0180db2e8a410c40fd109fb71633",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0114",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "b4f44072fbb923100a769c81660db7ee0ef289efd16eead9a7d726d6695040eb",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0115",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "2b2174a5bf49a146d5514f1a52a86b6165e96138e981e02cb93ce27c253393c6",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0116",
+    "operation": "Score",
+    "outcome": "both_pass",
+    "record_sha256": "e95932887b0226d27c67d247eefcf2531a34bf38b2e56ed1a229183297dce822",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0117",
+    "operation": "Score",
+    "outcome": "candidate_loss",
+    "record_sha256": "018559a046937d7f3739d85bdc1e9a249ed9e15bac189024142308ce834222d2",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0118",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "7ad82d990809bcc3c199f795c9be689cc6d2ab8f7e76d9a0903ec7dfe715bfa3",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0119",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "ed23ab62730bb90d487a0dae9541a3ca676d275e015cb6e4c9ca1f786059f155",
+    "reference_status": "Conflicting"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0120",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "85e4ea0ab4fa1f3b282fdce6b81bd38dde7ef4310d3df732fabc7bc15687d069",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "no structurally compatible pointer entries",
+    "id": "development-E-0121",
+    "operation": "Score",
+    "outcome": "candidate_win",
+    "record_sha256": "5f625d083b73f94ea70164ed8961bdc64781270d8f062c2636c0d1218cde6cd8",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0122",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "b72d272c0af803042e838065eac7acf1fef15a313e31122bac90060e4634855b",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "no structurally compatible pointer entries",
+    "id": "development-E-0123",
+    "operation": "Score",
+    "outcome": "candidate_win",
+    "record_sha256": "177ae4dd062bc4769355b9d77d3be41b907bcc7fc5c88510aa186c971763eda2",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0124",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "0046ca4d190a045f4ce05b60c26e17a3677d439f1d8a0bf40c5ac05e262ecc20",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0125",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "8db7f237c42655bc840d2b36e2814a14febf526c4f3ef4562dd1c6a39fe9f1c3",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0126",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "d49baf71f3f19b6a500b0cc9bacf1183ad5c3c2a3081f56ca65c6fadcab58835",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-E-0127",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "9a1ce6da22736608f8f5e3d55635e031a2034489aab1782cbdfe1d363cfb449d",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "no structurally compatible pointer entries",
+    "id": "development-E-0128",
+    "operation": "Score",
+    "outcome": "candidate_win",
+    "record_sha256": "cd255cc99e22ce92aa3dd7167f8d1e9ed6b10126157edb7771af83e8d32e568f",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-E-0129",
+    "operation": "Score",
+    "outcome": "candidate_loss",
+    "record_sha256": "9d37f07c2c0ce53c115811ca5b0430105d70ed09f2d5f7c9a5845ab85e4c5c11",
+    "reference_status": "Unresolved"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-01-000-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "580a5387edacfa13caf69028375754a48c4592d1a5d119fceef59a35d2821e51",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-01-000-1",
+    "operation": "Noul",
+    "outcome": "candidate_win",
+    "record_sha256": "94216a8916cc77cd1698374f6dc2e56542e5e6b8dc6ef797d8713bf5cab6f56b",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-01-001-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "e781efbaca06278b54a66ca0e3d3478a31bf9f1221a23aecdb020c3c780e848b",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-01-001-1",
+    "operation": "Noul",
+    "outcome": "candidate_win",
+    "record_sha256": "d1ab6d1677bb97cc5eae17b4008d80e04570dc30e4c9f068f16f45d16bd26273",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-01-002-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "b0184bb1655adaebfa0ea9dfc432d2cfc5246c33c431d6b69c522a1a38329278",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-01-002-1",
+    "operation": "Noul",
+    "outcome": "candidate_win",
+    "record_sha256": "f37da2b861e2d5440fcabcf10469e026185b7ee331ba64accdda88161422cd2e",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-01-003-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "2bb0d4a61c18a3448dbf9119fa7f53b50e0b988cc73634dcc93cfbf8abcf481f",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-01-003-1",
+    "operation": "Noul",
+    "outcome": "candidate_win",
+    "record_sha256": "9a56d906d07de0d71fa764242c1f1f96fc595ccbb42b020cbd829262f54eef74",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-01-004-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "33e044faa70874752422906ff37ee08e5f5ac53bf8ecf5324d0a5eeb1ff31457",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-01-004-1",
+    "operation": "Noul",
+    "outcome": "candidate_win",
+    "record_sha256": "63aa5c10a8c713c2e5b69841718423058453581a9de532b18291fef4907bff02",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-01-005-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "7121ce21119de27a8320925b71607660acec1bb7a5e4cd0fff99041661a87a64",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-01-005-1",
+    "operation": "Noul",
+    "outcome": "candidate_win",
+    "record_sha256": "1f86fad442cc87ac9147c297b8cb0f1784339cd6dfb57d5284381db8d2d0c249",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-01-006-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "6f0bc50d826cbb16f02884b2cdec1adaeaa6696ab8e86609946e2f924b22d56e",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-01-006-1",
+    "operation": "Noul",
+    "outcome": "candidate_win",
+    "record_sha256": "450db45534625f08c13bb0e7b5b6b8a6381b9c3e86a844b6e185e4d1288d6ef7",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-01-007-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "bcd55bf1ebe86bf62bf7a010c163328f943191252f90f2ff7cae390339249dc7",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-01-007-1",
+    "operation": "Noul",
+    "outcome": "candidate_win",
+    "record_sha256": "3a67e0624b79d15e0c5fa7cf29c1213783d99770f14244b3c00b2ecbb8e7fce3",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-01-008-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "24344e5e643f24e9c74700e68d21d46f410d2e4039c85aa5ac0d4f9366007894",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-01-008-1",
+    "operation": "Noul",
+    "outcome": "candidate_win",
+    "record_sha256": "47b298376202a612564d81df81899465876f57f863eb02794ed6f42457894427",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-01-009-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "4060a8c2d1ba61bd3f60a7414c5ff54d50c5fcee2004e4112039117b1278b08f",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-01-009-1",
+    "operation": "Noul",
+    "outcome": "candidate_win",
+    "record_sha256": "9c0dc6e0c3579c2d19a31a52b903f049cb53cab564f5b14f06839b85129e53f2",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-02-000-0",
+    "operation": "Noul",
+    "outcome": "both_pass",
+    "record_sha256": "89f4ea25a739961f9328b1e2a5c06c1673ce8ab79c3fa49fda658c7950a62021",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-02-000-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "757e81fd407881e0da49fb38a282a9fa67b09591a0b5c557b6a4ec5427c384e4",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-02-001-0",
+    "operation": "Noul",
+    "outcome": "both_pass",
+    "record_sha256": "72b85a2c495824ad2c1e1fe79557a730dbe23bb44855c5906cf6d93cab3fbfdc",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-02-001-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "c883a9382c7f9fe7c0ff0f79b3ce645a47af9bf997df7ffa8072125355a2a06d",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-02-002-0",
+    "operation": "Noul",
+    "outcome": "both_pass",
+    "record_sha256": "bb6778afcfdadf4ec410fbac850bb61b82f6f84fd0c803af98e322778049e32b",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-02-002-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "77abc039db0673a428109746eab95571d49aa0ed601aac1fd507ee16eec6aa69",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-02-003-0",
+    "operation": "Noul",
+    "outcome": "both_pass",
+    "record_sha256": "cf63bd30612c79bd7fdcb88d46e2dc761d846451fc9f59238a86a09fb4d22547",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-02-003-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "2c8975637a056deb00231bb21e5a8a2d9b75f8f64334df39fefd75b8a59b6fc5",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-02-004-0",
+    "operation": "Noul",
+    "outcome": "both_pass",
+    "record_sha256": "49b927d5d8707ee376b5bc62c892f884d28ecb5889b3235dd49978fd1a1dcd12",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-02-004-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "89d1ab9647f81d8dd8937af6de87a804ffd3217a8c06073f440407c0fa374d07",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-02-005-0",
+    "operation": "Noul",
+    "outcome": "both_pass",
+    "record_sha256": "263ea51188c75f9e218963c0ec83922923f0628d0d7902ffca04b6253db32987",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-02-005-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "8a915d0f694e727d92c6d2ef8b52dc9d121534d2f0627c472742e0c8891cb01a",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-02-006-0",
+    "operation": "Noul",
+    "outcome": "both_pass",
+    "record_sha256": "76337390f3777c723e61591261693d97d53e5b88632d5853a5dd140a159004f7",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-02-006-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "290975492c43ab8962fba5ddbae01eb2dde9459d43327cf0c00bce65c71c8d5d",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-02-007-0",
+    "operation": "Noul",
+    "outcome": "both_pass",
+    "record_sha256": "9a6a64ff53af4cc9f732f8833873e8ff9cfc01c1a589aa87152e0c5a57f29557",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-02-007-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "fbebdfb22cdfb8246ae73fb7815ea5fd0c2f8e57217018f4a14e6ff34b585736",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-02-008-0",
+    "operation": "Noul",
+    "outcome": "both_pass",
+    "record_sha256": "ef819f6847d2cf573abc98e3ebd81ba54cd3f5f3474fca4304566e8444a31c01",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-02-008-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "c7e615d8abcc3e6bd2f426a268f593ef7a799ae8d0f07ec95803307523578703",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-02-009-0",
+    "operation": "Noul",
+    "outcome": "both_pass",
+    "record_sha256": "afdd2825dc0f74f63d4b6bbdc1f1b1af2f01c6a185ecdfebbc284fca142382f4",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-02-009-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "2303e6d53cea03190194794dcd83703711105518dc341813a5bf1df6528a7e7b",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-03-000-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "be6e20b548087eb335dd11a5fd6a28d854b40ebad5110ec540d07e3bef7ab9d6",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-03-000-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "18146cd7242495807af96b4537f62b342a61919bb878a0819407931a7eff62e3",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-03-001-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "dbbbf785cb0675d1debf5e2115c874a10774e1cdc454e955fe69d60bc54c205a",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-03-001-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "42bf37abbc95e7fd86d6314772621b6c677ee781af2b3854c967c7a385f71158",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-03-002-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "d18ecd6e9b3daa55c91c9ff90554359e1a2322294ddb2e9399ab02f1e75c637c",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-03-002-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "258bb8852bd04aa80344059451055c93d09942136b6d738663eb8ff7dc2e4c31",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-03-003-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "622879b0ab131acc9faf4d815e0f4fb8488f78eb27e91c8ac31b64c85ff2cfe9",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-03-003-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "892d0d148fc604c00ba9078768ec5973d77fd76637e599b40257ed4d4796c3ec",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-03-004-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "0dace297ecbfd0733b3a3eaafda9b93a13576e334ec1a307039b3af518767234",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-03-004-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "95ca2ae857e67ac4d59a6f321b60405c6035ff6113477455d8989d11e7935428",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-03-005-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "b0aec38218634f52090d6794e68bb2845f37c692f6aa46e868ec2292b11af482",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-03-005-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "f22207a91ae9da5fdbdb66a641af4874986e99dabd0516cccdedd3b83847ad7c",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-03-006-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "5048c9c6a350a6f9f8ec6ed295109d1ce7d60a30054d405e837c820abee1a380",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-03-006-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "c5556226b32a46d87f02155851d184a5c7be040b5b2fd4501cf900141a7fc2ab",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-03-007-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "7a0000ade9d76bd92a377a1e2b97332765414d659b9a82cdadbd8745f1bc235d",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-03-007-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "0446f474ccb7d800e5b36f5cc03d403acdad8c51213f055cb5c9926c5b55f1d0",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-03-008-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "b198bda50c2725b5cacafca6b6fb405c671095d2ebd2533c002e43e64db62ceb",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-03-008-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "15fdf7468fc16676bc1cd06d4d0ca6380f929b5f0d87601e9e6969a9b11f8ff6",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-03-009-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "b4f760d20444301f1c3b0c7e7fd46dac33b727a8ba01e041e686c90d74230575",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-03-009-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "93a60e162fb1057346430da887f04c7c515a3f1d3b74436f14d5a912c28bbe45",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-04-000-0",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "aa5a5fec1b5221772fe9580576cfa8776293f16f2d832a2f8eb5be9c6e2dd864",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-04-000-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "daf0e14d661a35169faf93edde48df24df74ddf94c22b28c803dcedb3fc8d4bc",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-04-001-0",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "6de0e154e321763e8c9780c15f202c4f34e934b0f0e8c6075ba2bdd167bcdabc",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-04-001-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "25803cf623f397d67db9ddf32d10e7467494b6f7d639c075ccbc24c7ebfb4ab7",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-04-002-0",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "79bd8079889d8f421b7bf51ccb64b32ae127bfd9ecffdc1507bc3b20730179a4",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-04-002-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "0525e3882e9e03b30e71dc97782066d59937c6a0ea4f809ed70e99f5bff23274",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-04-003-0",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "7c60dbe5d41a73bd4c1a02f9e7235fa4f4b58d47cbbb15fa3cd2cc3edd9214e1",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-04-003-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "b61b056a9c848c37701acd9a84bc5ad8eb89e27c68f5f03cce50ac693d4c65ab",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-04-004-0",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "efea983053cf6e47dd4aea285fb96686cd9742eef7fbfb2df340c66399a2354b",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-04-004-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "665c2d72316eba2c13a5554e9fc999d6d43ebb3eb92649eaf9d0b00667cc4192",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-04-005-0",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "f909a2c932ce7c7502ee400d8a3d002174f47abf674cc6d92a948e1785d031d7",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-04-005-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "92f40891c800cc2fd6f563354ab4fe3e5965344cff108f2720a9a2d2121686f6",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-04-006-0",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "81b6b7a13fb8788901e7f45eb1df8bda7980e1d7ccad3c039f0cf62d7eca30e3",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-04-006-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "a7c6464c157d51c11e0ae590dfe93a4deb116c7fab9aa22195bd54ba3fcf8a68",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-04-007-0",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "b000f976dc5770d4d2a20c719a938a91a269ff8f93e12f49e9a5a905ff21e4de",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-04-007-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "72dadc1a5fe8988b8348262fa78edba74a48cc85d1f8107fd92329e546909191",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-04-008-0",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "53d6553aaaa194f7b6f57e1266615bd51fee6370bba785c83afe46dfa973d7a7",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-04-008-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "f11e8fda0b164c22c0863cced68e9bd45782f4eb654a5f514303b686c4c6c567",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-04-009-0",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "537511fd4967bd6d70141e513d2312735c4b98ecc90dcad9b9bf1d6a9d80f56f",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": false,
+      "value_correct": false
+    },
+    "control_failure": "reason aggregate bound",
+    "id": "development-X-04-009-1",
+    "operation": "Noul",
+    "outcome": "both_fail",
+    "record_sha256": "2145fa1e95137c7f101b1ec713cfc0b86c26572e37ea33a53467e97b6cddc689",
+    "reference_status": "Insufficient"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-05-000-0",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "2585b5b4e2a28e6d580950c3d9575bc5e6f0d7590c83c22eb82436132a9a3e9e",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-05-000-1",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "2bf55f6c5d4f4b5e2f86050767b6e4f0b965c6e2a54f87c4ddb5247c9cd691a9",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-05-001-0",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "a659b111e1d2142b8819582912b4e56e12a15b52484d792cbf95c0ed7fa583e6",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-05-001-1",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "7643fe7e2a46b8a6a36fe6cae1f721baeb46ea95ea9cc9ddb2746a3f84c16599",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-05-002-0",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "b0b75c7c77bcc2cf94bf9e883c9e5863a8d1d9bdf49f5dc03411cc99ab98d18e",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-05-002-1",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "5fa14ef649de4e5461a1361f627e6f8aa292b5a2c71853e4fdb8f2b359c5f38f",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-05-003-0",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "38cbb18cc5a7e197ac6884251992b55da9061995cdf2a04a2c3f598f27af1f13",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-05-003-1",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "88e9cda7cb88b110265f7acca7850d3917b45e00362b1ae6dfb5305e29bc41f6",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-05-004-0",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "2111bd012f37f3f7c575ab78a8ff09b5851761f4a3cd35ac90b5bc399b45101c",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-05-004-1",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "e29821d2274092d0baab8a18ff6d7e662811ba2e442a7351368d392161ccee9a",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-05-005-0",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "f9a16b6eb3148a75c5d409bab7a528843424686fde62009c3f378734c687de91",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-05-005-1",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "77c24012c7c42e390bf9870c80fb3a39f47a047dc2173667bf142f03ac4d587f",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-05-006-0",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "c78a703f0960bfbf2e1fc0a17f858fd1fc55eabfbc3f76a6ab1d78cbc5cf0ab2",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-05-006-1",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "d8a5248bc82932091aee01e2b89bab59d8c1062cce032f1b490cdfd99c0aee9d",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-05-007-0",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "1245de45ff38fdbdf28101a73459b127a3f11e6468db6de576cf601309239a67",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-05-007-1",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "608dca47f23d237b23830f90a3ce3c342b5df6005d413624ab946910e2b8ee97",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-05-008-0",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "942a7f25fb86ae9cf92199b6fc1650c99fc315767895c423be025ca612acffa6",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-05-008-1",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "71d007d7118a208fb715a6d92282272dddae2a65a5b643d3897025c58967fff8",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-05-009-0",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "0727e8c47b9a9bfcf4cadbaa82e36978613774f05ba5038047efe202a450413a",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-05-009-1",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "2b1db95328f532892284ba72700b988dfa8586f0794be74b7703043cd6227f45",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-06-000-0",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "a89b31e1789d1c0f5f1dd2d7daac6ec990d6604e793ba6c6f72dfc37d1a7509a",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-06-000-1",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "cbe222f6c2e804989a572cd94852eff6dcf9397ade1e034b0dbff30c362fe5c0",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-06-001-0",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "bb7576b021c8bc07e58e52670fdcc890c660038d1cd3fe478f0aa76c40e0ec7a",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-06-001-1",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "6dcba42ec48cbb3900fbf1f69eb2177e49322cbdcfe568b66d2bc9e1f4fb5fd1",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-06-002-0",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "5c4bffb5abe8cf56b56a93045e5ec0618fdbba0eac2f8f1361c043a3695ad7b7",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-06-002-1",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "55982a776626543030a3be50d153f23342150738532ad9f46f8eab2e974f2215",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-06-003-0",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "1d133c74783d912b1bf2a95394a5ce346243d1086cf2203a7e7d48076d62af36",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-06-003-1",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "8f51d272b1db0617153686579d43fa28f42c4b0d2daf2be155a402bb850367a0",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-06-004-0",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "53cb381cfe0cc953a3d297fa724eb65cc78007b9755b50ba0cb7ce1388b9e87c",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-06-004-1",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "cf63fcfbd87f12b73d5a6eb2a8ba8cd64ec65ecbdf3c7a9cbce75fb5882521c7",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-06-005-0",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "6eb964f1555066a46b11ff254bfbb50180f864d2972375ac0dbc1196690bae08",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-06-005-1",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "e0a89758234f74560273a17075e1d79203e93ae5245b81730e68fab9df2324f8",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-06-006-0",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "e8e06b7adc0dec6966fbb6d680fd3e168dbbc50e591e8141a72994f36cc30efe",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-06-006-1",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "2597adb8c0e6bd379aab2ba9d0581d4ee7c28d062e763526a885ad4d06770a57",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-06-007-0",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "82d5b601d92066fa1f008c5f99a147dc4b333fd0cde7402bf746763b4756ae7b",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-06-007-1",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "1f9af2b9c7cbd92cfd9ce6176a8f69b1ad3b6b55cd99497dd84ec07ab712e78a",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-06-008-0",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "74d669f463e5435dbf468b7ba3d999e96e063e9b244671b936aabc04a3bbb3cc",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-06-008-1",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "05c26e223e8849383dbfc0f0b10dc96bc57bf6c85dd14066d4298c606fc787c3",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-06-009-0",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "e0368699a8721a23aa0ca4dd94147a83b02c69a1ad405930136e4f31381ff321",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": false,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-06-009-1",
+    "operation": "Choice",
+    "outcome": "candidate_loss",
+    "record_sha256": "c4d5bf2a6798b24b961067ce31f56a4a31dbbeacf73eae91ccf6a1af94503cde",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-07-000-0",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "84a8c425a10879807dbfa3d74d0daf3959c92867881efc9a99296de9b7b603de",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-07-000-1",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "55eba2119bc4b7b44f9211d127a86c56218e25d1ce907c4d8386bc91a710a0ad",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-07-001-0",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "7d210addc6ae89995d484eb44b056169baa6306eb52c1dc81205f12022529007",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-07-001-1",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "a923b9931a4ce36df8a991ef475d79462963101076b5e12a0a5fdb59f6e9f472",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-07-002-0",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "55805ace08c02104ba28dc1dd105786db37c6ade260c7e0ad0e7d6f47d7467e0",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-07-002-1",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "bf5b8d7ac8a48ba56724917cf71b1665a9db69c6cf61ec3b083d40b29ef3f4f1",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-07-003-0",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "3c1a17112258623271fe3a6205ce4bb13b5a0296819c8598e5a9c2ff2dd7628f",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-07-003-1",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "7a698dbb89f90efcd61bd12849a83ab45c0874ef58a221eafe6aaba06a0d9740",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-07-004-0",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "9209d5385920454fd8c66c82da2b0d12ecc2427420e9f212023d072b3bd9f07b",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-07-004-1",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "7fe9872001e480c68a6266e14b90678591c701065fde7162cca7c2cda8ef7c84",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-07-005-0",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "ef0388378c5648b10b18560393586b3ab9a603bcf00fed2b671a698a7b0311b4",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-07-005-1",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "f4d5a114b74772bd1eafa7102fcc5ce21a491f7fa4131979929180a323d52eb1",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-07-006-0",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "e5cb51b975cb42bce922e3e2731e95e4d39fbd646132c9f0e96fc3786c65a3f4",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-07-006-1",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "b06c34c3ecc0df9e8afaa309ad27496bed4e97d2c091389f7b54856a8b1a4507",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-07-007-0",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "34ffd2ec3d1f5bb4faab8b0cbaba81841acd24c161e6c9b16bc3d0a8565e3589",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-07-007-1",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "ca361c6bbb57bd4d1e3772b2aef4a56e616b670342a0df7f3ac85d5700659ce1",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-07-008-0",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "17575897e2efcdc671e60bd00f5418aedaed9122e258e299c3a92318d4853690",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-07-008-1",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "0ae581ed2cbbbf422a9f4bdb4209e00d9f1f63c12f130f2c2f2a8cba6c653afe",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-07-009-0",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "7ce225b693fc1104377c9fe5565125c20937d07e103a5fa9d372b096a40283ad",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-07-009-1",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "ec71be828a98eb783aafe6e1ad48f5caa39f68fb6324b29f30718b84c9d31b16",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-08-000-0",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "4dafb86c33aa15cb457934150ec82d0aec3bb5fa353636b51a3905959bd634b9",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-08-000-1",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "bdc3ef664b9779868adbedd5d484dea9ffc1593922ca2c12440850d35a7f9c74",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-08-001-0",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "38616363698b34dbd0c91b632ec5f108cb7ce563c4ea593e0684ec2f984356f8",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-08-001-1",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "51efe1d6e70405095b216f474c017fb3b28402401dc68c9f3cdf28470041693b",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-08-002-0",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "9bc6fd4938190b062681a6db2300c1d4ad72624e7ffe8844f79eade2f503d785",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-08-002-1",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "e11ab8ffdc350b1a4e19c1d97c36e3845b2a9c3ee44adcfd14445ef62e3f5c4d",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-08-003-0",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "23d313ea60996e109cc8146c8d9f8e7e069e5831b298defb41ce2d0cff6a08e7",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-08-003-1",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "a9fb10568e9f1e9f46f4dd85f38bac3e35cdb862b09bec881f3ed3129eec0848",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-08-004-0",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "d24d8600dc268e658a58eabf722d3b531946536b31f987947c7e0cceeba9ec92",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-08-004-1",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "b6d0816db575d9a9f2df1a6e4a07bb2e1ca74ac78ed705814a398f1264a3fa77",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-08-005-0",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "5c556e6b488501d14bd4ea4242ad243b1581fd40178a4ee2f44111da7dc23d00",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-08-005-1",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "7a1e7c3f5582fdb34ad5eddd5980e48791be3e587c1149539de85039b45f1d54",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-08-006-0",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "dd5398d92ee84ef832a5c8d440ce74dab8e6cecd7ecde4985d54495b90210267",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-08-006-1",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "68842b2e547069cc4dd4f13283d0d5196e974dd41902b306dd729ad9175be351",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-08-007-0",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "4dd0d89b7492590f26b8dceff15b016762c5c5d3cf752f1878d9aa581df9488c",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-08-007-1",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "2bab6813c9c5939496f3ff334b9e5242733c9eadd5a71cabf7f5883af86f5f65",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-08-008-0",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "ae158992e041392385af70c86604073304267dfb3492d0aa524919c721c052f1",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-08-008-1",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "de56f70090323ed93e2c996022bdeb65c1c28cd54e4350e797954fd5b7388f45",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-08-009-0",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "e026adc47b3a24a52e1adbe549b875adc6a139fa535827f117068cbaad5a5077",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "control_failure": null,
+    "id": "development-X-08-009-1",
+    "operation": "Score",
+    "outcome": "both_fail",
+    "record_sha256": "e4aea1cf71b69f3b685422a308392f5cf30387c35012522f4cf3955fb3c53568",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-10-000-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "486d1471d172d9507ef0aaf3133ece5f4813a688b895ddc43e0cb21168f1d0ed",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-10-000-1",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "f075eb52743e535d4022bfaee10a15dc5d3dbbddfe425fbe4c639dfe93bc0523",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-10-001-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "dd14f4768e48b899e43f6ec7454e0c14389d4d73fdeef0654b36f2373c95e9f9",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-10-001-1",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "5e3332fbd794d63192a8853f94ed0a16b1de3b60e6a40213905c01c26e17b0ec",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-10-002-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "da2f3535a8e10e5127932c35a199ad9124daa7f58b8c97b4305c7dbd1c92f708",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-10-002-1",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "40e0375fe07de03ea62fd060f2db481ff7d914b9f379ebba90284f87c24e91e2",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-10-003-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "e359932d5fa8777c289abfa3d67ae1a3591b333fd88f46f2facbe88ce0a6f44a",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-10-003-1",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "0befb7d68d42371b46b30ef4ed19c3fce7d9613bf0a658c03496e3f7876fcb0e",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-10-004-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "fea93791ec8e5447656fac3bc7d4c68f49113c1cc18a1f9ebd201a33a8928d99",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-10-004-1",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "6e8f5ca32d6e7d08ec1cccd6b13b5a20bcb1bf09b1b06630bfc656c41cbdb84e",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-10-005-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "db51e1ddad79463241275b5e5aacf2e94545a342b65ac06209bfd33c9f0c681b",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-10-005-1",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "b637e793d2eb7f15fd163716d565fec5acb97770f75ceee541d38d08aeb93591",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-10-006-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "fa19b60c92090c69d9372d35193324e97b7b18cfdf9ef87dcd0385c57bb0ac76",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-10-006-1",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "6d206eefebe7c0e4d426faf07683ec9ce667071a085c269957ae8c76e7894f2d",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-10-007-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "c14af7603e5e48c484880d2150c32b47a6eb5e3e95def8515b161071dbbd07be",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-10-007-1",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "1d5d911e6a15c440e37226ae3d66af176894def512313b149abe5c5c1832cb04",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-10-008-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "b4e7add93693d70983125d1170cd110ebcefd7c683b334c83af7256de52712e9",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-10-008-1",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "a726ce04c61193764a256e340fd6a2d384b7405ea9307ce895f63c274086a779",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-10-009-0",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "d792ce15e4f123a59253ed7f9b4f62d11dc753226c7e0210884a491312c231b1",
+    "reference_status": "Assessed"
+  },
+  {
+    "candidate": {
+      "passed": false,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": false
+    },
+    "candidate_failure": null,
+    "control": {
+      "passed": true,
+      "status_correct": true,
+      "transport_valid": true,
+      "value_correct": true
+    },
+    "control_failure": null,
+    "id": "development-X-10-009-1",
+    "operation": "Noul",
+    "outcome": "candidate_loss",
+    "record_sha256": "de02530436dcb40d26f6ee93d433d14adc1ea3c369c46ffcd75c4c27955eec1b",
+    "reference_status": "Assessed"
+  }
+]

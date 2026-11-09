@@ -3,15 +3,17 @@
 Read `docs/next-agent-handoff.md` for the current measured status, artifact paths,
 remaining work and scope boundaries before continuing implementation.
 
-Current2026-11-09 state: GPU work is open on the3090. Receiver performance
-validation passes: six faster matched timing pairs, exact updates/resume,19
-current-source GPU qualification checks and35 model-free tests. Control750
-retained updates/full initial-final observations complete; candidatePID878908
-passed625 of750, fixed fitting active. Reconnect, never duplicate. No source,
-plan or qualified-evidence changes during fitting. Finish candidate and final
-measurement before either E/X evaluation. Control99 lost/replayed windows are
-separately recorded; no extra effective pass. No new data, RD09, service or
-fan-control changes. See current handoff and docs/receiver-performance-v1.md.
+Current2026-11-09 state: RD08 execution is complete. Both matched arms finished
+750 effective windows/all1500 records×4 plus full initial/final measurements;
+read-only E130/X180 evaluation per arm completed with0 optimizer updates.
+Useful-improvement acceptance FAILS: candidate28 wins/106 losses, loses all47
+historically passing Choice cases. No receiver accepted. RD09 remains unstarted;
+no automatic retry/search/extra passes or deployment. All required19 GPU checks
+and35 model-free checks pass; no pending GPU check. CPU bottleneck removal is
+unresolved despite measured24–26% faster diagnostic windows. User requires CPU
+keep up with GPU, and did not request a CPU cap. No active RD08 model process.
+Only specified3090 may run model work; no CPU/3060 fallback. Read current handoff
+and docs/receiver-matched-v2-results-2026-11-08.md. No data/services/fans changes.
 
 On 2026-11-08, the user lifted the temporary GPU and fan-noise hold with
 "everything is allowed again." Both GPUs may be used within their authorized

@@ -1,0 +1,5039 @@
+{
+  "CPU_performance": {
+    "CPU_cap_requested_or_applied": false,
+    "bottleneck_removal": "not demonstrated; unresolved",
+    "limits": "paired diagnostic speedup does not establish full-catalogue utilization or remove host bottlenecks",
+    "measured_window_wall_reduction_percent": {
+      "candidate": 24.31149,
+      "control": 25.98984
+    },
+    "short_observation": {
+      "cpu_cap_requested": false,
+      "gpu_uuid": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+      "instantaneous_gpu_power_watts": 213.44,
+      "instantaneous_gpu_utilization_percent": 100,
+      "limits": "single short CPU sample and instantaneous GPU reading cannot establish a sustained utilization distribution or attribute CPU costs; no claim that bottleneck is resolved",
+      "logical_cpus": 12,
+      "pid": 878908,
+      "sample_seconds": 2.0002852659963537,
+      "scope": "read-only observation of existing candidate; no source or setting changes",
+      "trainer_core_equivalents": 1.0248538220266712,
+      "updates_at_report_read": 459,
+      "user_criterion": "CPU must keep up with GPU; a saturated CPU thread starving the GPU is an unresolved design problem",
+      "whole_host_busy_percent": 9.299416180150125
+    },
+    "user_requirement": "CPU must keep up with GPU; saturated CPU starving GPU is a design problem"
+  },
+  "Choice_retention": {
+    "candidate_lost_ids": [
+      "development-E-0040",
+      "development-E-0044",
+      "development-E-0045",
+      "development-E-0046",
+      "development-E-0047",
+      "development-E-0048",
+      "development-E-0049",
+      "development-X-05-000-0",
+      "development-X-05-000-1",
+      "development-X-05-001-0",
+      "development-X-05-001-1",
+      "development-X-05-002-0",
+      "development-X-05-002-1",
+      "development-X-05-003-0",
+      "development-X-05-003-1",
+      "development-X-05-004-0",
+      "development-X-05-004-1",
+      "development-X-05-005-0",
+      "development-X-05-005-1",
+      "development-X-05-006-0",
+      "development-X-05-006-1",
+      "development-X-05-007-0",
+      "development-X-05-007-1",
+      "development-X-05-008-0",
+      "development-X-05-008-1",
+      "development-X-05-009-0",
+      "development-X-05-009-1",
+      "development-X-06-000-0",
+      "development-X-06-000-1",
+      "development-X-06-001-0",
+      "development-X-06-001-1",
+      "development-X-06-002-0",
+      "development-X-06-002-1",
+      "development-X-06-003-0",
+      "development-X-06-003-1",
+      "development-X-06-004-0",
+      "development-X-06-004-1",
+      "development-X-06-005-0",
+      "development-X-06-005-1",
+      "development-X-06-006-0",
+      "development-X-06-006-1",
+      "development-X-06-007-0",
+      "development-X-06-007-1",
+      "development-X-06-008-0",
+      "development-X-06-008-1",
+      "development-X-06-009-0",
+      "development-X-06-009-1"
+    ],
+    "control_pass_candidate_fail": [
+      "development-E-0040",
+      "development-E-0042",
+      "development-E-0044",
+      "development-E-0045",
+      "development-E-0046",
+      "development-E-0048",
+      "development-X-05-000-0",
+      "development-X-05-000-1",
+      "development-X-05-001-0",
+      "development-X-05-001-1",
+      "development-X-05-002-0",
+      "development-X-05-002-1",
+      "development-X-05-003-0",
+      "development-X-05-003-1",
+      "development-X-05-004-0",
+      "development-X-05-004-1",
+      "development-X-05-005-0",
+      "development-X-05-005-1",
+      "development-X-05-006-0",
+      "development-X-05-006-1",
+      "development-X-05-007-0",
+      "development-X-05-007-1",
+      "development-X-05-008-0",
+      "development-X-05-008-1",
+      "development-X-05-009-0",
+      "development-X-05-009-1",
+      "development-X-06-000-0",
+      "development-X-06-000-1",
+      "development-X-06-001-0",
+      "development-X-06-001-1",
+      "development-X-06-002-0",
+      "development-X-06-002-1",
+      "development-X-06-003-0",
+      "development-X-06-003-1",
+      "development-X-06-004-0",
+      "development-X-06-004-1",
+      "development-X-06-005-0",
+      "development-X-06-005-1",
+      "development-X-06-006-0",
+      "development-X-06-006-1",
+      "development-X-06-007-0",
+      "development-X-06-007-1",
+      "development-X-06-008-0",
+      "development-X-06-008-1",
+      "development-X-06-009-0",
+      "development-X-06-009-1"
+    ],
+    "historically_passing": 47,
+    "scheduled": 50
+  },
+  "RD09_started": false,
+  "Reason": "new-profile semantic support unsupported/masked; existing structural return grading reported separately",
+  "acceptance": {
+    "Noul_beats_training_constant": false,
+    "Noul_delivered_improves": false,
+    "Score_correct_interior_delivered": false,
+    "Score_distance_improves": false,
+    "all_historical_Choice_retained": false,
+    "development_E/familiar_operations_ranges/Noul_beats_training_constant": false,
+    "development_E/familiar_operations_ranges/Noul_delivered_improves": false,
+    "development_E/familiar_operations_ranges/Score_correct_interior_delivered": false,
+    "development_E/familiar_operations_ranges/Score_distance_improves": false,
+    "development_X/familiar_operations_ranges/Noul_beats_training_constant": false,
+    "development_X/familiar_operations_ranges/Noul_delivered_improves": false,
+    "development_X/familiar_operations_ranges/Score_correct_interior_delivered": false,
+    "development_X/familiar_operations_ranges/Score_distance_improves": false,
+    "status_no_cell_regression": false
+  },
+  "accepted_receiver": null,
+  "arm_measurements": {
+    "candidate": {
+      "evaluation_execution_accounting": {
+        "actual_optimizer_updates_this_process": 0,
+        "host": {
+          "counts": {},
+          "phases": {
+            "offline_source_encoding_calls": {
+              "calls": 805,
+              "cpu_ns": 214557250849,
+              "exclusive_cpu_ns": 214557250849,
+              "exclusive_wall_ns": 214933043703,
+              "failed_calls": 0,
+              "wall_ns": 214933043703
+            },
+            "prefill_calls": {
+              "calls": 307,
+              "cpu_ns": 22130298009,
+              "exclusive_cpu_ns": 22130298009,
+              "exclusive_wall_ns": 22260451368,
+              "failed_calls": 0,
+              "wall_ns": 22260451368
+            },
+            "session_constructions": {
+              "calls": 307,
+              "cpu_ns": 636395005,
+              "exclusive_cpu_ns": 636395005,
+              "exclusive_wall_ns": 220835632,
+              "failed_calls": 0,
+              "wall_ns": 220835632
+            }
+          }
+        },
+        "scope": "actual encoding/Session/prefill calls, including failed calls; host intervals are not GPU compute time; excludes checkpoint prefix"
+      },
+      "evaluation_measurements": {
+        "E": {
+          "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+          "kind": "behavior",
+          "operations": {
+            "Choice": {
+              "counts": {
+                "assessed_behavior_passed": 0,
+                "assessed_head_correct": 0,
+                "assessed_head_status_correct": 0,
+                "assessed_scheduled": 10,
+                "assessed_selection_measured": 1,
+                "assessed_status_correct": 1,
+                "behavior_passed": 16,
+                "failed": 7,
+                "nonassessed_behavior_passed": 16,
+                "scheduled": 50,
+                "status_correct": 17,
+                "transport_valid": 43
+              },
+              "losses": {},
+              "noul_brier": {
+                "mean": null,
+                "measured": 0
+              },
+              "raw_readout": {
+                "maximum": null,
+                "mean": null,
+                "measured": 0,
+                "minimum": null
+              },
+              "score_interval_distance": {
+                "mean": null,
+                "measured": 0
+              },
+              "status_confusion": {
+                "Assessed -> Assessed": 1,
+                "Assessed -> Conflicting": 1,
+                "Assessed -> NoFeasibleChoice": 6,
+                "Assessed -> None": 1,
+                "Assessed -> Unresolved": 1,
+                "Conflicting -> Conflicting": 6,
+                "Conflicting -> NoFeasibleChoice": 3,
+                "Conflicting -> None": 1,
+                "Insufficient -> Assessed": 2,
+                "Insufficient -> Conflicting": 1,
+                "Insufficient -> Insufficient": 5,
+                "Insufficient -> NoFeasibleChoice": 1,
+                "Insufficient -> Unresolved": 1,
+                "NoFeasibleChoice -> Assessed": 2,
+                "NoFeasibleChoice -> NoFeasibleChoice": 5,
+                "NoFeasibleChoice -> None": 1,
+                "NoFeasibleChoice -> Unresolved": 2,
+                "Unresolved -> Assessed": 3,
+                "Unresolved -> Insufficient": 1,
+                "Unresolved -> NoFeasibleChoice": 2,
+                "Unresolved -> None": 4
+              }
+            },
+            "Noul": {
+              "counts": {
+                "assessed_behavior_passed": 6,
+                "assessed_head_correct": 6,
+                "assessed_head_status_correct": 6,
+                "assessed_probability_ties": 0,
+                "assessed_scheduled": 10,
+                "assessed_status_correct": 9,
+                "behavior_passed": 13,
+                "failed": 0,
+                "nonassessed_behavior_passed": 7,
+                "scheduled": 40,
+                "status_correct": 16,
+                "transport_valid": 40
+              },
+              "losses": {},
+              "noul_brier": {
+                "mean": 0.2662179446560211,
+                "measured": 10
+              },
+              "raw_readout": {
+                "maximum": null,
+                "mean": null,
+                "measured": 0,
+                "minimum": null
+              },
+              "score_interval_distance": {
+                "mean": null,
+                "measured": 0
+              },
+              "status_confusion": {
+                "Assessed -> Assessed": 9,
+                "Assessed -> Conflicting": 1,
+                "Conflicting -> Assessed": 8,
+                "Conflicting -> Conflicting": 2,
+                "Insufficient -> Assessed": 10,
+                "Unresolved -> Assessed": 5,
+                "Unresolved -> Unresolved": 5
+              }
+            },
+            "Score": {
+              "counts": {
+                "assessed_behavior_passed": 0,
+                "assessed_head_correct": 0,
+                "assessed_head_status_correct": 0,
+                "assessed_scheduled": 10,
+                "assessed_status_correct": 7,
+                "behavior_passed": 14,
+                "failed": 0,
+                "nonassessed_behavior_passed": 14,
+                "scheduled": 40,
+                "status_correct": 21,
+                "transport_valid": 40
+              },
+              "losses": {},
+              "noul_brier": {
+                "mean": null,
+                "measured": 0
+              },
+              "raw_readout": {
+                "maximum": null,
+                "mean": null,
+                "measured": 0,
+                "minimum": null
+              },
+              "score_interval_distance": {
+                "mean": 0.49225773811340334,
+                "measured": 10
+              },
+              "status_confusion": {
+                "Assessed -> Assessed": 7,
+                "Assessed -> Insufficient": 2,
+                "Assessed -> Unresolved": 1,
+                "Conflicting -> Assessed": 6,
+                "Conflicting -> Conflicting": 4,
+                "Insufficient -> Assessed": 2,
+                "Insufficient -> Insufficient": 7,
+                "Insufficient -> Unresolved": 1,
+                "Unresolved -> Assessed": 5,
+                "Unresolved -> Insufficient": 2,
+                "Unresolved -> Unresolved": 3
+              }
+            }
+          },
+          "scheduled": 130,
+          "scope": "actual decoded/delivered receiver behavior; not learned invocation"
+        },
+        "X": {
+          "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+          "kind": "behavior",
+          "operations": {
+            "Choice": {
+              "counts": {
+                "assessed_behavior_passed": 0,
+                "assessed_head_correct": 0,
+                "assessed_head_status_correct": 0,
+                "assessed_scheduled": 40,
+                "assessed_selection_measured": 0,
+                "assessed_status_correct": 0,
+                "behavior_passed": 0,
+                "failed": 0,
+                "nonassessed_behavior_passed": 0,
+                "scheduled": 40,
+                "status_correct": 0,
+                "transport_valid": 40
+              },
+              "losses": {},
+              "noul_brier": {
+                "mean": null,
+                "measured": 0
+              },
+              "raw_readout": {
+                "maximum": null,
+                "mean": null,
+                "measured": 0,
+                "minimum": null
+              },
+              "score_interval_distance": {
+                "mean": null,
+                "measured": 0
+              },
+              "status_confusion": {
+                "Assessed -> NoFeasibleChoice": 40
+              }
+            },
+            "Noul": {
+              "counts": {
+                "assessed_behavior_passed": 20,
+                "assessed_head_correct": 20,
+                "assessed_head_status_correct": 20,
+                "assessed_probability_ties": 0,
+                "assessed_scheduled": 70,
+                "assessed_status_correct": 70,
+                "behavior_passed": 20,
+                "failed": 0,
+                "nonassessed_behavior_passed": 0,
+                "scheduled": 100,
+                "status_correct": 70,
+                "transport_valid": 100
+              },
+              "losses": {},
+              "noul_brier": {
+                "mean": 0.272758408258832,
+                "measured": 70
+              },
+              "raw_readout": {
+                "maximum": null,
+                "mean": null,
+                "measured": 0,
+                "minimum": null
+              },
+              "score_interval_distance": {
+                "mean": null,
+                "measured": 0
+              },
+              "status_confusion": {
+                "Assessed -> Assessed": 70,
+                "Insufficient -> Assessed": 30
+              }
+            },
+            "Score": {
+              "counts": {
+                "assessed_behavior_passed": 0,
+                "assessed_head_correct": 0,
+                "assessed_head_status_correct": 0,
+                "assessed_scheduled": 40,
+                "assessed_status_correct": 40,
+                "behavior_passed": 0,
+                "failed": 0,
+                "nonassessed_behavior_passed": 0,
+                "scheduled": 40,
+                "status_correct": 40,
+                "transport_valid": 40
+              },
+              "losses": {},
+              "noul_brier": {
+                "mean": null,
+                "measured": 0
+              },
+              "raw_readout": {
+                "maximum": null,
+                "mean": null,
+                "measured": 0,
+                "minimum": null
+              },
+              "score_interval_distance": {
+                "mean": 0.5170474713901058,
+                "measured": 40
+              },
+              "status_confusion": {
+                "Assessed -> Assessed": 40
+              }
+            }
+          },
+          "scheduled": 180,
+          "scope": "actual decoded/delivered receiver behavior; not learned invocation"
+        }
+      },
+      "evaluation_seconds": 594.1026991379913,
+      "evaluation_status": "COMPLETED_RD08_EVALUATION_NOT_PROMOTED",
+      "final_checkpoint_manifest": {
+        "effective-rows.safetensors": "25cc1b8e788a99503f63f8e14063619f8f902ff60e24fca4431cd718261359fb",
+        "optimizer.pt": "f4fca15bc84b0bcf6b105493cbb55f1d44746cfdc5636974dc1dfd161f283248",
+        "rng.pt": "cbc25a4884a7dd5171506ca5b894fc879f72440ac789b87d2a736686609ee439",
+        "weights.safetensors": "fcdba4eecf0ca60b812951fc94f055e335d61affec065c8533d22f84f99b7e7a"
+      },
+      "fit_execution_accounting": {
+        "actual_optimizer_updates_this_process": 750,
+        "host": {
+          "counts": {},
+          "phases": {
+            "offline_source_encoding_calls": {
+              "calls": 3785,
+              "cpu_ns": 1009557105800,
+              "exclusive_cpu_ns": 1009557105800,
+              "exclusive_wall_ns": 1010782552848,
+              "failed_calls": 0,
+              "wall_ns": 1010782552848
+            },
+            "prefill_calls": {
+              "calls": 9000,
+              "cpu_ns": 708089328081,
+              "exclusive_cpu_ns": 708089328081,
+              "exclusive_wall_ns": 712169693066,
+              "failed_calls": 0,
+              "wall_ns": 712169693066
+            },
+            "session_constructions": {
+              "calls": 9000,
+              "cpu_ns": 6995409467,
+              "exclusive_cpu_ns": 6995409467,
+              "exclusive_wall_ns": 7039396497,
+              "failed_calls": 0,
+              "wall_ns": 7039396497
+            }
+          }
+        },
+        "scope": "actual encoding/Session/prefill calls, including failed calls; host intervals are not GPU compute time; excludes checkpoint prefix"
+      },
+      "fit_peak_cuda_bytes": 4902695424,
+      "fit_seconds": 26688.314754373016,
+      "prepared_run_sha256": "61ec37ee421d5ed8b4ef32e0d09a55c572f7a5e007980cbc50054d30215af52e",
+      "source_hashes": {
+        "qwen_one_two/__init__.py": "b6236192beea05d03b8d7c828e63761bca002cbd4ca967ecbc2fea0f7c02caad",
+        "qwen_one_two/codec/__init__.py": "9b577482d1138d4d449fcc2bc9aa493538658afefe0bffb2a72828ab12e7ea38",
+        "qwen_one_two/codec/attention_block.py": "e0aac0b53d7a6afed5bd5dbe0cc3570bdb9254391d1e1cb7eb8acd12674196c9",
+        "qwen_one_two/codec/backbone.py": "9d29c788e0a5f7cacba817c5bab72b747dd4d022f1108c9138c092b35102f282",
+        "qwen_one_two/codec/diagnose_precision.py": "4edc64ec7af6525493e57c33f5fe4866e9ec0c0709086ae1fa99898d75fb23f3",
+        "qwen_one_two/codec/finite.py": "031cd3714a070650619284a83205d48af5aa08f04865028f3a29076d13c98f70",
+        "qwen_one_two/codec/fixtures.py": "36c91e9d949d2d03d4aaaafa709853eaeb7796465b02f6a9853f109f95221bc3",
+        "qwen_one_two/codec/layout.py": "b9307ee89df6cd38e80d3f4776acf7ce06d0cb38efa1adbbf5c346f1b1487577",
+        "qwen_one_two/codec/neural.py": "6880defe808f22438583eac5225ac37566c879d0bee71b1698cfc36f6377c8d9",
+        "qwen_one_two/codec/ownership.py": "93676675270ef9edccad7b11298f0e7f175728d647a7f761576413ec84109374",
+        "qwen_one_two/codec/precision.py": "9eb775efc303ce6d9eb8bbec26ffdcd6422f37ad0732e03ef0885ae9433c8e5b",
+        "qwen_one_two/codec/qualify.py": "d1204bd1e1ce70721d03e936ec92c8e30cd9b54ce0d79e50bbab46e3fd540851",
+        "qwen_one_two/codec/qualify_matrix.py": "07e25deee4eb930d498d5ca071f76c9022ee27823d62d90fcad45f59efb5a1ff",
+        "qwen_one_two/codec/records.py": "3be90c5aacebe0d8826b8dffc440560a68e9666075f29377a92be961c7e1aede",
+        "qwen_one_two/codec/recurrence.py": "ccab3956c20373b6a54cb2ebfcf26289193a7325b09f9f6a38e10883c23694c2",
+        "qwen_one_two/codec/render.py": "a9073deb062ab665d6283c2fa46025092416c116837dce2cf42fb2a0ce1b98ef",
+        "qwen_one_two/codec/runtime.py": "86df8a13be51183dfe3763b8435047fd88d28d07cd26ea953b836ac1ed866653",
+        "qwen_one_two/codec/schema.py": "5d3633568d697b8aed06171899fb72afa2454c353e3cbd0d77a3618888e8ac0e",
+        "qwen_one_two/codec/session.py": "4a148f8916c0135287ceb34ad8f855d86e1132e3b227685831c0e14f25d7b585",
+        "qwen_one_two/codec/writer.py": "1dea35b621f37d855c6c2108eafb6adbb18d2cdf6182d7371c4fbd699883f75f",
+        "qwen_one_two/curriculum.py": "7d4f4172e4a1b733ba38721224b58079c0b6196dc914cfb30e783d308328a2cf",
+        "qwen_one_two/decision.py": "0ef4605594a83668996abc0546f89ecf0faa67afd1c383acbc333b73b889864a",
+        "qwen_one_two/download.py": "eb3e8ca5009302d43abe5cbf2e4ec3b53c28ffc2ec6a786440ee40099fee53d4",
+        "qwen_one_two/g1_accounting.py": "6d6d872a7337dd026da0354c9526e7eee012576cf518e19397832896cc3a4dd2",
+        "qwen_one_two/g1_backbone.py": "400899b2301ca77f56431827e6bb787f3f054627fef23f1ba883275de09701a9",
+        "qwen_one_two/g1_checks.py": "7c32e89b246a6e26235e48e041f6ff5923b589cdf48df073a17bf253ed470950",
+        "qwen_one_two/g1_device.py": "e4a550b80ac3f1de35be7c6057cca65b0e46ec2ba2248ca72e0d67b6451b5f2e",
+        "qwen_one_two/g1_evidence.py": "2f882bed4c0ac93dcf0015d6083b471764a8a8fe3d586d337759da1117bb7aba",
+        "qwen_one_two/g1_gate_diagnosis.py": "d38c6a40d66ccf41195ccbdefd77f1bccda632492ecdbbd6841049f26874a3e3",
+        "qwen_one_two/g1_gate_repair.py": "18c25a33ccf05a16630960df40f29d309d19af0a12b23b6e99c3c2341e732b91",
+        "qwen_one_two/g1_precision_diagnosis.py": "acdc5008e7e02c13a24eda2f64a40f7f30176cdfb09e95bb637b20c0126ce3d9",
+        "qwen_one_two/g1_precision_math.py": "bc2e5a6393012079684734de386ad71afd5cbd26b2423a24f22f33ed6b9aedcf",
+        "qwen_one_two/g1_proof.py": "5a0d9991cffff111b12d23df1a5ad46be7cb77f1f67ba16c4038dbfa60ac9cb9",
+        "qwen_one_two/g1_protocol.py": "156ba44aa27b459279404d404e2a16da35e443717fca4d15851627e80cfeaba4",
+        "qwen_one_two/model.py": "65361404f081a2933830acc65453ee147098e6b12a000918c00dc83d991bfb00",
+        "qwen_one_two/policy.py": "a1b43898e6a695536276b44d6bb713b45c3ae5f56a363e586b6c4e3ff2afe978",
+        "qwen_one_two/refine_routes.py": "2a9ed2e1999290d985f5cdced7bfa83e00ec4c56247349848f7b205e7235db5c",
+        "qwen_one_two/server.py": "d83a9dc6764fb0d02ccfd87b40d2c5ba4bd69167a3733e27686b17d52d45139d",
+        "qwen_one_two/thinking.py": "47bfaf4c91e33f8587f4bad856f0d2b36c0e31705132b11f5e1d7f22a504e36b",
+        "qwen_one_two/train.py": "1d316c57efb6db71810ae6a43ba491832d0d7e66e91bc065de8e208c5dc38538",
+        "qwen_one_two/train_feedback.py": "234b516d33e7b070b44b47a1b0b5738917af0cc33bb4df67ad88fc7bf17af952",
+        "qwen_one_two/training/__init__.py": "0a5bc5745bdcb26cbf81df3d10f5363d39539d811fd869326cb37ecb4a29a47e",
+        "qwen_one_two/training/architecture_audit.py": "fee2b1a77a56ac1a0652e7133f673b4e45c418d9d926358318754eeec99888d6",
+        "qwen_one_two/training/behavior_qualification.py": "b97d4656a843b387bdb5220cf10a24e98c14e3743c41433f7a596efe29a8516b",
+        "qwen_one_two/training/binding.py": "d3e017ef6547ab9ceffa11d6e5684b3f6aab16182d25b20bc9bdcef0e4323343",
+        "qwen_one_two/training/checkpoint.py": "ae693ea7ae8fa465d71f8dabbf7d5ba24f92efd8fa8af6efc080f6103a34ee54",
+        "qwen_one_two/training/checkpoint_metadata.py": "4806b4ca4f6331874743c77e6983e0060dd35a310956b4f67683680603e104d3",
+        "qwen_one_two/training/clean.py": "6c4f735404bc5a98b147048974ee2b374cf4d98bbed89334cedb310b323e9117",
+        "qwen_one_two/training/clean_packets.py": "9bfbcb63c4ecbeb0bcdbeb6f75bd6b30c2f5e2cc5f51cc7670cf55cb63681d2b",
+        "qwen_one_two/training/component_admission.py": "0ab3b22429d93d2d0d204f0e78b097fa77ba1d02141d7ae9b58470304edcd399",
+        "qwen_one_two/training/component_producer.py": "9e8cd12db50ec254344cc8958c0f6bde688bee5b2ae9e5b997c5558e35458f00",
+        "qwen_one_two/training/diagnostics.py": "0e5ec6271090c034744a182c2bd4a86d421ee099be0b056da4b29438120b3060",
+        "qwen_one_two/training/direct_readout.py": "9444a03f495bac141a8638ab86c0b304c1eb7ae12161f22fe76304a8a75b611a",
+        "qwen_one_two/training/direct_roles.py": "ab3333e16647057e9d38dfbc719a8d828b22ca5adb2d2d4b1005be70f27cddec",
+        "qwen_one_two/training/driver.py": "c46128c8d9e0de5288717f4a2c6a78b6bb3fed5e4fa2a245b6123c267a587bc2",
+        "qwen_one_two/training/eligibility.py": "5534522a13892d40a95dd8282698da7248685fd4d5b50273474f93a7e4f73571",
+        "qwen_one_two/training/engine.py": "2500a47211fc13a41c3e646d2f315d2233b4304d1f67c71fb73b3eebc57aee4d",
+        "qwen_one_two/training/episodes.py": "6975fec4335ae10a7725c21a8b5979df2a09b1b9eb19431b330dc844afe9d7b2",
+        "qwen_one_two/training/frozen_source.py": "cce87a33fff5e0309374f6657fc7da0eebae82465bf0eec6a16b991b80c1399c",
+        "qwen_one_two/training/host_metrics.py": "2f42449b20bf9343294b291365c180b5e5a03d7ecb9eccb26971c09a259199bd",
+        "qwen_one_two/training/host_profile.py": "31d52a713e33de61e5b802a26c63f24e6dbcb476325d01afea788097e97d23e0",
+        "qwen_one_two/training/information_loss.py": "7fa33d9dcd33fe08fba00e34857bf7339d646cf617845c4d7c3c770275b0cf23",
+        "qwen_one_two/training/inputs.py": "8a96776ac2ab7a65f2cc51c3baaee12a333e76278775cc3d6b37b68cee99e332",
+        "qwen_one_two/training/learning_report.py": "16be5a713a1d290529e6f26f75a7b87748e75f665cd27e4d023ad665de1a864e",
+        "qwen_one_two/training/loss_config.py": "7beadba9261208767775679ee7ae7a75dfcf777de8fd42c65acaaa57a6fa23e4",
+        "qwen_one_two/training/losses.py": "0bea5c33730baab3d376a635286d409b1c7bf664cd852c08d2c6cfe80d94abcc",
+        "qwen_one_two/training/manifest.py": "468257734527ceb5ec8656b6155388c2b3e92298f457cfa1764fd87cd58cbf5d",
+        "qwen_one_two/training/native.py": "7f30e4b42f20bfc8b5e1b1f4ffa2127dc12eb289381ee67670034c141c131cca",
+        "qwen_one_two/training/native_coverage.py": "42b5f7c2ba24a3b41780c10e7f0d114375480fadf231042360868245a59b88b9",
+        "qwen_one_two/training/native_evaluation.py": "a6f180b6f43041a985e310ec9fad0de995a1b410f01a7c0f5a823c1b89bf3446",
+        "qwen_one_two/training/numeric_access.py": "4466187959d430d1eeabc5e7c5eea73082ec9699bbc4812d972f73fcf978bf20",
+        "qwen_one_two/training/producer.py": "cc3a439fd6b8e896500179d8f898fcd6a9d819eb5ac8cec12ff85dc7c946a6e8",
+        "qwen_one_two/training/profile.py": "3369e8e23579454fa3e71408fcb6196443cb86ed1c7e0f1f95974b91c9cc9cdb",
+        "qwen_one_two/training/qualification.py": "22d1de030bc85361a2366d03eb4c1c6c47a69f72e87fdcf59d6a9f8e04da72a9",
+        "qwen_one_two/training/quantity_learning.py": "e5f560a086ae3733ecd57bc13aa1c3d52d1fc7f119d5b03e2dd8090a6cc74a07",
+        "qwen_one_two/training/receiver_comparison.py": "1ce75b3747d72331232260142168e6787397f62862df2e0fe8484d0a95fc7f6b",
+        "qwen_one_two/training/receiver_learning.py": "d5b989455ef08a0c3ec1ba4f0b91a57b9d9098ee3921191828d9902d280c2d97",
+        "qwen_one_two/training/receiver_performance.py": "a6a0b8e5793ec82b5e39a0c42305596a02635e4f475eba940166d6bd9a81c3a7",
+        "qwen_one_two/training/receiver_plan.py": "fa860597cbfeda2684d0d83f53bf785f3e4a16a09fc9b734c88aaf22dcfe38ab",
+        "qwen_one_two/training/receiver_profiles.py": "0b3053d681b39ddf2602ec42bc414c614655e5a94ab649b6691bdbffb05cfd02",
+        "qwen_one_two/training/receiver_repair.py": "e03e065e1c40ad670399ee28fadd7f70da187bc9d1fe14430d6e9a4457d43222",
+        "qwen_one_two/training/redesign_coverage.py": "c0cff951a6193f16cc4ebec68ff461a7baee8b0429a7b004dbffc832480c4bb1",
+        "qwen_one_two/training/reference.py": "527b981bfcc2d98c2c024630838321b631ceb4995bcee736a64df3e9c8e16189",
+        "qwen_one_two/training/reference_data.py": "5855ecf472ac6d553bf16372af54cc640c48deb704014e7f26eb652387a01e70",
+        "qwen_one_two/training/reference_exposure.py": "f6e576cb0ce1cd8c48275047d7c0360cf23d4b20f0bcf20eaafc3433971e1a3c",
+        "qwen_one_two/training/reference_qualification.py": "9e02394240fb88b2e4e77b604b020300d200cfae5bb217e3717247da27505db0",
+        "qwen_one_two/training/release.py": "906d6bf7fefaa9b251338e46b13dac289365f5347b73cd03b680e593578888c3",
+        "qwen_one_two/training/sampler.py": "aeee24107468a9a27657efa3ba5c053d36101aee982fad069af8411762e28950",
+        "qwen_one_two/training/shared_frozen.py": "750ebdc0b069122485f7974784be101d2b2c8c76c8443036c4659e25e2df6a5f",
+        "qwen_one_two/training/simple_latent.py": "d1e2f07438245a2a2842d06395874d17bc7e61fd82bc26bb5980ddedcc37dc90",
+        "qwen_one_two/training/two_gpu.py": "dca18fef30e5ef9ca6346c297f42c56fdcfae65c25cec683d65fdadc345a3cc1",
+        "qwen_one_two/training/two_gpu_worker.py": "2fe83f3be4905753fe722eba14813b260449037f46df5c9c151c9d6cc0e16da2",
+        "qwen_one_two/training/weight_repair.py": "aff987d19f012820218758e02162d8352acce6d2983b74b9663a7afd9f4917bc",
+        "scripts/fit_reference.py": "6869030b858015cd6b01356e0103c78f2e0fa180a86368b2552acad67149c926",
+        "scripts/train_receiver_probe.py": "e550527199909ded14635fb769f9ab60a95a6378804cc876ce05797cf06e85dc"
+      },
+      "training_measurements": [
+        {
+          "delivered": {
+            "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+            "kind": "behavior",
+            "operations": {
+              "Choice": {
+                "counts": {
+                  "assessed_behavior_passed": 87,
+                  "assessed_head_correct": 87,
+                  "assessed_head_status_correct": 87,
+                  "assessed_scheduled": 158,
+                  "assessed_selection_measured": 158,
+                  "assessed_status_correct": 158,
+                  "behavior_passed": 87,
+                  "failed": 0,
+                  "nonassessed_behavior_passed": 0,
+                  "scheduled": 497,
+                  "status_correct": 158,
+                  "transport_valid": 497
+                },
+                "losses": {},
+                "noul_brier": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "raw_readout": {
+                  "maximum": null,
+                  "mean": null,
+                  "measured": 0,
+                  "minimum": null
+                },
+                "score_interval_distance": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 158,
+                  "Conflicting -> Assessed": 86,
+                  "Insufficient -> Assessed": 82,
+                  "NoFeasibleChoice -> Assessed": 83,
+                  "Unresolved -> Assessed": 87,
+                  "Unresolved -> Conflicting": 1
+                }
+              },
+              "Noul": {
+                "counts": {
+                  "assessed_behavior_passed": 168,
+                  "assessed_head_correct": 168,
+                  "assessed_head_status_correct": 168,
+                  "assessed_probability_ties": 0,
+                  "assessed_scheduled": 256,
+                  "assessed_status_correct": 256,
+                  "behavior_passed": 248,
+                  "failed": 0,
+                  "nonassessed_behavior_passed": 80,
+                  "scheduled": 501,
+                  "status_correct": 336,
+                  "transport_valid": 501
+                },
+                "losses": {},
+                "noul_brier": {
+                  "mean": 0.23060365763672164,
+                  "measured": 256
+                },
+                "raw_readout": {
+                  "maximum": null,
+                  "mean": null,
+                  "measured": 0,
+                  "minimum": null
+                },
+                "score_interval_distance": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 256,
+                  "Conflicting -> Assessed": 2,
+                  "Conflicting -> Conflicting": 80,
+                  "Insufficient -> Assessed": 84,
+                  "Unresolved -> Assessed": 79
+                }
+              },
+              "Score": {
+                "counts": {
+                  "assessed_behavior_passed": 0,
+                  "assessed_head_correct": 0,
+                  "assessed_head_status_correct": 0,
+                  "assessed_scheduled": 254,
+                  "assessed_status_correct": 254,
+                  "behavior_passed": 0,
+                  "failed": 0,
+                  "nonassessed_behavior_passed": 0,
+                  "scheduled": 502,
+                  "status_correct": 254,
+                  "transport_valid": 502
+                },
+                "losses": {},
+                "noul_brier": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "raw_readout": {
+                  "maximum": null,
+                  "mean": null,
+                  "measured": 0,
+                  "minimum": null
+                },
+                "score_interval_distance": {
+                  "mean": 0.40846848784117246,
+                  "measured": 254
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 254,
+                  "Conflicting -> Assessed": 83,
+                  "Insufficient -> Assessed": 82,
+                  "Unresolved -> Assessed": 83
+                }
+              }
+            },
+            "scheduled": 1500,
+            "scope": "actual decoded/delivered receiver behavior; not learned invocation"
+          },
+          "receiver": "2390db5cf6b80e54b8a8302dd55fdc06565930af1efb87a75f79491f3b4fcd23",
+          "repeat": 0,
+          "report": {
+            "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+            "kind": "heads",
+            "operations": {
+              "Choice": {
+                "counts": {
+                  "assessed_head_correct": 87,
+                  "assessed_head_status_correct": 87,
+                  "assessed_scheduled": 158,
+                  "assessed_selection_measured": 158,
+                  "assessed_status_correct": 158,
+                  "complete_head_objective": 497,
+                  "failed": 0,
+                  "head_status_correct": 158,
+                  "scheduled": 497,
+                  "status_correct": 158
+                },
+                "losses": {
+                  "choice": {
+                    "eligible": 158,
+                    "mean": 1.5275725420988813
+                  },
+                  "feasibility": {
+                    "eligible": 497,
+                    "mean": 2.5398538750408957
+                  },
+                  "status": {
+                    "eligible": 497,
+                    "mean": 2.3092833822761745
+                  }
+                },
+                "noul_brier": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "raw_readout": {
+                  "maximum": null,
+                  "mean": null,
+                  "measured": 0,
+                  "minimum": null
+                },
+                "score_interval_distance": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 158,
+                  "Conflicting -> Assessed": 86,
+                  "Insufficient -> Assessed": 82,
+                  "NoFeasibleChoice -> Assessed": 83,
+                  "Unresolved -> Assessed": 87,
+                  "Unresolved -> Conflicting": 1
+                }
+              },
+              "Noul": {
+                "counts": {
+                  "assessed_head_correct": 168,
+                  "assessed_head_status_correct": 168,
+                  "assessed_probability_ties": 0,
+                  "assessed_scheduled": 256,
+                  "assessed_status_correct": 256,
+                  "complete_head_objective": 501,
+                  "failed": 0,
+                  "head_status_correct": 336,
+                  "scheduled": 501,
+                  "status_correct": 336
+                },
+                "losses": {
+                  "noul": {
+                    "eligible": 256,
+                    "mean": 0.6540429478045553
+                  },
+                  "status": {
+                    "eligible": 501,
+                    "mean": 0.8146025255292714
+                  }
+                },
+                "noul_brier": {
+                  "mean": 0.23060365763672164,
+                  "measured": 256
+                },
+                "raw_readout": {
+                  "maximum": -0.25629329681396484,
+                  "mean": -0.33378624505625515,
+                  "measured": 501,
+                  "minimum": -0.3562748432159424
+                },
+                "score_interval_distance": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 256,
+                  "Conflicting -> Assessed": 2,
+                  "Conflicting -> Conflicting": 80,
+                  "Insufficient -> Assessed": 84,
+                  "Unresolved -> Assessed": 79
+                }
+              },
+              "Score": {
+                "counts": {
+                  "assessed_clipped_readouts": 0,
+                  "assessed_head_correct": 0,
+                  "assessed_head_status_correct": 0,
+                  "assessed_scheduled": 254,
+                  "assessed_status_correct": 254,
+                  "complete_head_objective": 502,
+                  "failed": 0,
+                  "head_status_correct": 254,
+                  "scheduled": 502,
+                  "status_correct": 254
+                },
+                "losses": {
+                  "score": {
+                    "eligible": 254,
+                    "mean": 0.2054678727244128
+                  },
+                  "status": {
+                    "eligible": 502,
+                    "mean": 1.7977776552339
+                  }
+                },
+                "noul_brier": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "raw_readout": {
+                  "maximum": 0.42882856726646423,
+                  "mean": 0.3591425418260088,
+                  "measured": 502,
+                  "minimum": 0.29146134853363037
+                },
+                "score_interval_distance": {
+                  "mean": 0.40846848784117246,
+                  "measured": 254
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 254,
+                  "Conflicting -> Assessed": 83,
+                  "Insufficient -> Assessed": 82,
+                  "Unresolved -> Assessed": 83
+                }
+              }
+            },
+            "scheduled": 1500,
+            "scope": "head objectives without return delivery"
+          }
+        },
+        {
+          "delivered": {
+            "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+            "kind": "behavior",
+            "operations": {
+              "Choice": {
+                "counts": {
+                  "assessed_behavior_passed": 158,
+                  "assessed_head_correct": 158,
+                  "assessed_head_status_correct": 158,
+                  "assessed_scheduled": 158,
+                  "assessed_selection_measured": 158,
+                  "assessed_status_correct": 158,
+                  "behavior_passed": 409,
+                  "failed": 88,
+                  "nonassessed_behavior_passed": 251,
+                  "scheduled": 497,
+                  "status_correct": 409,
+                  "transport_valid": 409
+                },
+                "losses": {},
+                "noul_brier": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "raw_readout": {
+                  "maximum": null,
+                  "mean": null,
+                  "measured": 0,
+                  "minimum": null
+                },
+                "score_interval_distance": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 158,
+                  "Conflicting -> Conflicting": 86,
+                  "Insufficient -> Insufficient": 82,
+                  "NoFeasibleChoice -> NoFeasibleChoice": 83,
+                  "Unresolved -> None": 88
+                }
+              },
+              "Noul": {
+                "counts": {
+                  "assessed_behavior_passed": 170,
+                  "assessed_head_correct": 179,
+                  "assessed_head_status_correct": 170,
+                  "assessed_probability_ties": 0,
+                  "assessed_scheduled": 256,
+                  "assessed_status_correct": 247,
+                  "behavior_passed": 344,
+                  "failed": 2,
+                  "nonassessed_behavior_passed": 174,
+                  "scheduled": 501,
+                  "status_correct": 421,
+                  "transport_valid": 499
+                },
+                "losses": {},
+                "noul_brier": {
+                  "mean": 0.16305424684019199,
+                  "measured": 256
+                },
+                "raw_readout": {
+                  "maximum": null,
+                  "mean": null,
+                  "measured": 0,
+                  "minimum": null
+                },
+                "score_interval_distance": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 247,
+                  "Assessed -> Insufficient": 9,
+                  "Conflicting -> Conflicting": 82,
+                  "Insufficient -> Assessed": 69,
+                  "Insufficient -> Insufficient": 15,
+                  "Unresolved -> None": 2,
+                  "Unresolved -> Unresolved": 77
+                }
+              },
+              "Score": {
+                "counts": {
+                  "assessed_behavior_passed": 3,
+                  "assessed_head_correct": 3,
+                  "assessed_head_status_correct": 3,
+                  "assessed_scheduled": 254,
+                  "assessed_status_correct": 254,
+                  "behavior_passed": 251,
+                  "failed": 0,
+                  "nonassessed_behavior_passed": 248,
+                  "scheduled": 502,
+                  "status_correct": 502,
+                  "transport_valid": 502
+                },
+                "losses": {},
+                "noul_brier": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "raw_readout": {
+                  "maximum": null,
+                  "mean": null,
+                  "measured": 0,
+                  "minimum": null
+                },
+                "score_interval_distance": {
+                  "mean": 0.26634348603332136,
+                  "measured": 254
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 254,
+                  "Conflicting -> Conflicting": 83,
+                  "Insufficient -> Insufficient": 82,
+                  "Unresolved -> Unresolved": 83
+                }
+              }
+            },
+            "scheduled": 1500,
+            "scope": "actual decoded/delivered receiver behavior; not learned invocation"
+          },
+          "receiver": "c2ccf5effe3280176b062292fe0c600184e8fa7c6fbdf69d6a3650c1b424b5a2",
+          "repeat": 4,
+          "report": {
+            "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+            "kind": "heads",
+            "operations": {
+              "Choice": {
+                "counts": {
+                  "assessed_head_correct": 158,
+                  "assessed_head_status_correct": 158,
+                  "assessed_scheduled": 158,
+                  "assessed_selection_measured": 158,
+                  "assessed_status_correct": 158,
+                  "complete_head_objective": 497,
+                  "failed": 0,
+                  "head_status_correct": 497,
+                  "scheduled": 497,
+                  "status_correct": 497
+                },
+                "losses": {
+                  "choice": {
+                    "eligible": 158,
+                    "mean": 5.346612085269976e-05
+                  },
+                  "feasibility": {
+                    "eligible": 497,
+                    "mean": 0.001588956063835218
+                  },
+                  "status": {
+                    "eligible": 497,
+                    "mean": 0.007153205611511912
+                  }
+                },
+                "noul_brier": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "raw_readout": {
+                  "maximum": null,
+                  "mean": null,
+                  "measured": 0,
+                  "minimum": null
+                },
+                "score_interval_distance": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 158,
+                  "Conflicting -> Conflicting": 86,
+                  "Insufficient -> Insufficient": 82,
+                  "NoFeasibleChoice -> NoFeasibleChoice": 83,
+                  "Unresolved -> Unresolved": 88
+                }
+              },
+              "Noul": {
+                "counts": {
+                  "assessed_head_correct": 179,
+                  "assessed_head_status_correct": 170,
+                  "assessed_probability_ties": 0,
+                  "assessed_scheduled": 256,
+                  "assessed_status_correct": 247,
+                  "complete_head_objective": 501,
+                  "failed": 0,
+                  "head_status_correct": 423,
+                  "scheduled": 501,
+                  "status_correct": 423
+                },
+                "losses": {
+                  "noul": {
+                    "eligible": 256,
+                    "mean": 0.4716088109416887
+                  },
+                  "status": {
+                    "eligible": 501,
+                    "mean": 0.23655492041477796
+                  }
+                },
+                "noul_brier": {
+                  "mean": 0.16305424684019199,
+                  "measured": 256
+                },
+                "raw_readout": {
+                  "maximum": 0.3433363437652588,
+                  "mean": -1.1757844654813467,
+                  "measured": 501,
+                  "minimum": -3.0792489051818848
+                },
+                "score_interval_distance": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 247,
+                  "Assessed -> Insufficient": 9,
+                  "Conflicting -> Conflicting": 82,
+                  "Insufficient -> Assessed": 69,
+                  "Insufficient -> Insufficient": 15,
+                  "Unresolved -> Unresolved": 79
+                }
+              },
+              "Score": {
+                "counts": {
+                  "assessed_clipped_readouts": 6,
+                  "assessed_head_correct": 3,
+                  "assessed_head_status_correct": 3,
+                  "assessed_scheduled": 254,
+                  "assessed_status_correct": 254,
+                  "complete_head_objective": 502,
+                  "failed": 0,
+                  "head_status_correct": 502,
+                  "scheduled": 502,
+                  "status_correct": 502
+                },
+                "losses": {
+                  "score": {
+                    "eligible": 254,
+                    "mean": 0.11291645706847975
+                  },
+                  "status": {
+                    "eligible": 502,
+                    "mean": 0.003426916286406571
+                  }
+                },
+                "noul_brier": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "raw_readout": {
+                  "maximum": 1.1440582275390625,
+                  "mean": 0.8047042297889512,
+                  "measured": 502,
+                  "minimum": 0.15311002731323242
+                },
+                "score_interval_distance": {
+                  "mean": 0.26634348603332136,
+                  "measured": 254
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 254,
+                  "Conflicting -> Conflicting": 83,
+                  "Insufficient -> Insufficient": 82,
+                  "Unresolved -> Unresolved": 83
+                }
+              }
+            },
+            "scheduled": 1500,
+            "scope": "head objectives without return delivery"
+          }
+        }
+      ],
+      "training_status": "COMPLETED_RD08_TRAINING_NOT_EVALUATED"
+    },
+    "control": {
+      "evaluation_execution_accounting": {
+        "actual_optimizer_updates_this_process": 0,
+        "host": {
+          "counts": {},
+          "phases": {
+            "offline_reference_encoding_calls": {
+              "calls": 472,
+              "cpu_ns": 39575040748,
+              "exclusive_cpu_ns": 39575040748,
+              "exclusive_wall_ns": 39796451184,
+              "failed_calls": 0,
+              "wall_ns": 39796451184
+            },
+            "offline_source_encoding_calls": {
+              "calls": 368,
+              "cpu_ns": 97800401397,
+              "exclusive_cpu_ns": 97800401397,
+              "exclusive_wall_ns": 98153083827,
+              "failed_calls": 0,
+              "wall_ns": 98153083827
+            },
+            "prefill_calls": {
+              "calls": 310,
+              "cpu_ns": 22252967393,
+              "exclusive_cpu_ns": 22252967393,
+              "exclusive_wall_ns": 22382434564,
+              "failed_calls": 0,
+              "wall_ns": 22382434564
+            },
+            "session_constructions": {
+              "calls": 310,
+              "cpu_ns": 468257870,
+              "exclusive_cpu_ns": 468257870,
+              "exclusive_wall_ns": 232154894,
+              "failed_calls": 0,
+              "wall_ns": 232154894
+            }
+          }
+        },
+        "scope": "actual encoding/Session/prefill calls, including failed calls; host intervals are not GPU compute time; excludes checkpoint prefix"
+      },
+      "evaluation_measurements": {
+        "E": {
+          "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+          "kind": "behavior",
+          "operations": {
+            "Choice": {
+              "counts": {
+                "assessed_behavior_passed": 6,
+                "assessed_head_correct": 6,
+                "assessed_head_status_correct": 6,
+                "assessed_scheduled": 10,
+                "assessed_selection_measured": 7,
+                "assessed_status_correct": 7,
+                "behavior_passed": 22,
+                "failed": 6,
+                "nonassessed_behavior_passed": 16,
+                "scheduled": 50,
+                "status_correct": 23,
+                "transport_valid": 44
+              },
+              "losses": {},
+              "noul_brier": {
+                "mean": null,
+                "measured": 0
+              },
+              "raw_readout": {
+                "maximum": null,
+                "mean": null,
+                "measured": 0,
+                "minimum": null
+              },
+              "score_interval_distance": {
+                "mean": null,
+                "measured": 0
+              },
+              "status_confusion": {
+                "Assessed -> Assessed": 7,
+                "Assessed -> Insufficient": 2,
+                "Assessed -> Unresolved": 1,
+                "Conflicting -> Assessed": 1,
+                "Conflicting -> Conflicting": 1,
+                "Conflicting -> Insufficient": 2,
+                "Conflicting -> None": 5,
+                "Conflicting -> Unresolved": 1,
+                "Insufficient -> Assessed": 1,
+                "Insufficient -> Conflicting": 1,
+                "Insufficient -> Insufficient": 8,
+                "NoFeasibleChoice -> Assessed": 4,
+                "NoFeasibleChoice -> Insufficient": 1,
+                "NoFeasibleChoice -> NoFeasibleChoice": 3,
+                "NoFeasibleChoice -> None": 1,
+                "NoFeasibleChoice -> Unresolved": 1,
+                "Unresolved -> Assessed": 6,
+                "Unresolved -> Unresolved": 4
+              }
+            },
+            "Noul": {
+              "counts": {
+                "assessed_behavior_passed": 5,
+                "assessed_head_correct": 6,
+                "assessed_head_status_correct": 5,
+                "assessed_probability_ties": 0,
+                "assessed_scheduled": 10,
+                "assessed_status_correct": 6,
+                "behavior_passed": 16,
+                "failed": 7,
+                "nonassessed_behavior_passed": 11,
+                "scheduled": 40,
+                "status_correct": 17,
+                "transport_valid": 33
+              },
+              "losses": {},
+              "noul_brier": {
+                "mean": 0.3654913957181315,
+                "measured": 10
+              },
+              "raw_readout": {
+                "maximum": null,
+                "mean": null,
+                "measured": 0,
+                "minimum": null
+              },
+              "score_interval_distance": {
+                "mean": null,
+                "measured": 0
+              },
+              "status_confusion": {
+                "Assessed -> Assessed": 6,
+                "Assessed -> Conflicting": 2,
+                "Assessed -> None": 1,
+                "Assessed -> Unresolved": 1,
+                "Conflicting -> Assessed": 1,
+                "Conflicting -> Conflicting": 3,
+                "Conflicting -> Insufficient": 1,
+                "Conflicting -> Unresolved": 5,
+                "Insufficient -> Assessed": 2,
+                "Insufficient -> Insufficient": 4,
+                "Insufficient -> None": 2,
+                "Insufficient -> Unresolved": 2,
+                "Unresolved -> Assessed": 2,
+                "Unresolved -> None": 4,
+                "Unresolved -> Unresolved": 4
+              }
+            },
+            "Score": {
+              "counts": {
+                "assessed_behavior_passed": 0,
+                "assessed_head_correct": 3,
+                "assessed_head_status_correct": 0,
+                "assessed_scheduled": 10,
+                "assessed_status_correct": 5,
+                "behavior_passed": 13,
+                "failed": 4,
+                "nonassessed_behavior_passed": 13,
+                "scheduled": 40,
+                "status_correct": 18,
+                "transport_valid": 36
+              },
+              "losses": {},
+              "noul_brier": {
+                "mean": null,
+                "measured": 0
+              },
+              "raw_readout": {
+                "maximum": null,
+                "mean": null,
+                "measured": 0,
+                "minimum": null
+              },
+              "score_interval_distance": {
+                "mean": 0.3128107156604528,
+                "measured": 10
+              },
+              "status_confusion": {
+                "Assessed -> Assessed": 5,
+                "Assessed -> Insufficient": 4,
+                "Assessed -> None": 1,
+                "Conflicting -> Assessed": 4,
+                "Conflicting -> Conflicting": 5,
+                "Conflicting -> Unresolved": 1,
+                "Insufficient -> Assessed": 1,
+                "Insufficient -> Conflicting": 2,
+                "Insufficient -> Insufficient": 7,
+                "Unresolved -> Assessed": 4,
+                "Unresolved -> Insufficient": 2,
+                "Unresolved -> None": 3,
+                "Unresolved -> Unresolved": 1
+              }
+            }
+          },
+          "scheduled": 130,
+          "scope": "actual decoded/delivered receiver behavior; not learned invocation"
+        },
+        "X": {
+          "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+          "kind": "behavior",
+          "operations": {
+            "Choice": {
+              "counts": {
+                "assessed_behavior_passed": 40,
+                "assessed_head_correct": 40,
+                "assessed_head_status_correct": 40,
+                "assessed_scheduled": 40,
+                "assessed_selection_measured": 40,
+                "assessed_status_correct": 40,
+                "behavior_passed": 40,
+                "failed": 0,
+                "nonassessed_behavior_passed": 0,
+                "scheduled": 40,
+                "status_correct": 40,
+                "transport_valid": 40
+              },
+              "losses": {},
+              "noul_brier": {
+                "mean": null,
+                "measured": 0
+              },
+              "raw_readout": {
+                "maximum": null,
+                "mean": null,
+                "measured": 0,
+                "minimum": null
+              },
+              "score_interval_distance": {
+                "mean": null,
+                "measured": 0
+              },
+              "status_confusion": {
+                "Assessed -> Assessed": 40
+              }
+            },
+            "Noul": {
+              "counts": {
+                "assessed_behavior_passed": 50,
+                "assessed_head_correct": 50,
+                "assessed_head_status_correct": 50,
+                "assessed_probability_ties": 0,
+                "assessed_scheduled": 70,
+                "assessed_status_correct": 70,
+                "behavior_passed": 50,
+                "failed": 30,
+                "nonassessed_behavior_passed": 0,
+                "scheduled": 100,
+                "status_correct": 70,
+                "transport_valid": 70
+              },
+              "losses": {},
+              "noul_brier": {
+                "mean": 0.28531065384114535,
+                "measured": 70
+              },
+              "raw_readout": {
+                "maximum": null,
+                "mean": null,
+                "measured": 0,
+                "minimum": null
+              },
+              "score_interval_distance": {
+                "mean": null,
+                "measured": 0
+              },
+              "status_confusion": {
+                "Assessed -> Assessed": 70,
+                "Insufficient -> None": 30
+              }
+            },
+            "Score": {
+              "counts": {
+                "assessed_behavior_passed": 0,
+                "assessed_head_correct": 0,
+                "assessed_head_status_correct": 0,
+                "assessed_scheduled": 40,
+                "assessed_status_correct": 40,
+                "behavior_passed": 0,
+                "failed": 0,
+                "nonassessed_behavior_passed": 0,
+                "scheduled": 40,
+                "status_correct": 40,
+                "transport_valid": 40
+              },
+              "losses": {},
+              "noul_brier": {
+                "mean": null,
+                "measured": 0
+              },
+              "raw_readout": {
+                "maximum": null,
+                "mean": null,
+                "measured": 0,
+                "minimum": null
+              },
+              "score_interval_distance": {
+                "mean": 0.23884277830366046,
+                "measured": 40
+              },
+              "status_confusion": {
+                "Assessed -> Assessed": 40
+              }
+            }
+          },
+          "scheduled": 180,
+          "scope": "actual decoded/delivered receiver behavior; not learned invocation"
+        }
+      },
+      "evaluation_seconds": 734.9727007529873,
+      "evaluation_status": "COMPLETED_RD08_EVALUATION_NOT_PROMOTED",
+      "final_checkpoint_manifest": {
+        "effective-rows.safetensors": "3bf27b87b28284504ba8f01d58013758b356ba285c8ce872a22d8aa150f4e908",
+        "optimizer.pt": "dc1acb4479dec982489c21f5647aa34e98806f10984073d902a754c4b0f2f802",
+        "rng.pt": "cbc25a4884a7dd5171506ca5b894fc879f72440ac789b87d2a736686609ee439",
+        "weights.safetensors": "878227f0a5e38f3ae7fd753c67a9020f6348d3a237d6a62a67659ca0b0b29439"
+      },
+      "fit_execution_accounting": {
+        "actual_optimizer_updates_this_process": 250,
+        "host": {
+          "counts": {},
+          "phases": {
+            "offline_reference_encoding_calls": {
+              "calls": 1643,
+              "cpu_ns": 149887061707,
+              "exclusive_cpu_ns": 149887061707,
+              "exclusive_wall_ns": 150720094219,
+              "failed_calls": 0,
+              "wall_ns": 150720094219
+            },
+            "offline_source_encoding_calls": {
+              "calls": 2142,
+              "cpu_ns": 616834780924,
+              "exclusive_cpu_ns": 616834780924,
+              "exclusive_wall_ns": 618832529631,
+              "failed_calls": 0,
+              "wall_ns": 618832529631
+            },
+            "prefill_calls": {
+              "calls": 3500,
+              "cpu_ns": 290422458596,
+              "exclusive_cpu_ns": 290422458596,
+              "exclusive_wall_ns": 292125118291,
+              "failed_calls": 0,
+              "wall_ns": 292125118291
+            },
+            "session_constructions": {
+              "calls": 3500,
+              "cpu_ns": 6191013781,
+              "exclusive_cpu_ns": 6191013781,
+              "exclusive_wall_ns": 2960269216,
+              "failed_calls": 0,
+              "wall_ns": 2960269216
+            }
+          }
+        },
+        "scope": "actual encoding/Session/prefill calls, including failed calls; host intervals are not GPU compute time; excludes checkpoint prefix"
+      },
+      "fit_peak_cuda_bytes": 3685016064,
+      "fit_seconds": 11777.647566681,
+      "prepared_run_sha256": "2cdd817f25053d1bba56b8542005d9b54fcac341fc70cbc16635b6d980aaca36",
+      "source_hashes": {
+        "qwen_one_two/__init__.py": "b6236192beea05d03b8d7c828e63761bca002cbd4ca967ecbc2fea0f7c02caad",
+        "qwen_one_two/codec/__init__.py": "9b577482d1138d4d449fcc2bc9aa493538658afefe0bffb2a72828ab12e7ea38",
+        "qwen_one_two/codec/attention_block.py": "e0aac0b53d7a6afed5bd5dbe0cc3570bdb9254391d1e1cb7eb8acd12674196c9",
+        "qwen_one_two/codec/backbone.py": "9d29c788e0a5f7cacba817c5bab72b747dd4d022f1108c9138c092b35102f282",
+        "qwen_one_two/codec/diagnose_precision.py": "4edc64ec7af6525493e57c33f5fe4866e9ec0c0709086ae1fa99898d75fb23f3",
+        "qwen_one_two/codec/finite.py": "031cd3714a070650619284a83205d48af5aa08f04865028f3a29076d13c98f70",
+        "qwen_one_two/codec/fixtures.py": "36c91e9d949d2d03d4aaaafa709853eaeb7796465b02f6a9853f109f95221bc3",
+        "qwen_one_two/codec/layout.py": "b9307ee89df6cd38e80d3f4776acf7ce06d0cb38efa1adbbf5c346f1b1487577",
+        "qwen_one_two/codec/neural.py": "6880defe808f22438583eac5225ac37566c879d0bee71b1698cfc36f6377c8d9",
+        "qwen_one_two/codec/ownership.py": "93676675270ef9edccad7b11298f0e7f175728d647a7f761576413ec84109374",
+        "qwen_one_two/codec/precision.py": "9eb775efc303ce6d9eb8bbec26ffdcd6422f37ad0732e03ef0885ae9433c8e5b",
+        "qwen_one_two/codec/qualify.py": "d1204bd1e1ce70721d03e936ec92c8e30cd9b54ce0d79e50bbab46e3fd540851",
+        "qwen_one_two/codec/qualify_matrix.py": "07e25deee4eb930d498d5ca071f76c9022ee27823d62d90fcad45f59efb5a1ff",
+        "qwen_one_two/codec/records.py": "3be90c5aacebe0d8826b8dffc440560a68e9666075f29377a92be961c7e1aede",
+        "qwen_one_two/codec/recurrence.py": "ccab3956c20373b6a54cb2ebfcf26289193a7325b09f9f6a38e10883c23694c2",
+        "qwen_one_two/codec/render.py": "a9073deb062ab665d6283c2fa46025092416c116837dce2cf42fb2a0ce1b98ef",
+        "qwen_one_two/codec/runtime.py": "86df8a13be51183dfe3763b8435047fd88d28d07cd26ea953b836ac1ed866653",
+        "qwen_one_two/codec/schema.py": "5d3633568d697b8aed06171899fb72afa2454c353e3cbd0d77a3618888e8ac0e",
+        "qwen_one_two/codec/session.py": "4a148f8916c0135287ceb34ad8f855d86e1132e3b227685831c0e14f25d7b585",
+        "qwen_one_two/codec/writer.py": "1dea35b621f37d855c6c2108eafb6adbb18d2cdf6182d7371c4fbd699883f75f",
+        "qwen_one_two/curriculum.py": "7d4f4172e4a1b733ba38721224b58079c0b6196dc914cfb30e783d308328a2cf",
+        "qwen_one_two/decision.py": "0ef4605594a83668996abc0546f89ecf0faa67afd1c383acbc333b73b889864a",
+        "qwen_one_two/download.py": "eb3e8ca5009302d43abe5cbf2e4ec3b53c28ffc2ec6a786440ee40099fee53d4",
+        "qwen_one_two/g1_accounting.py": "6d6d872a7337dd026da0354c9526e7eee012576cf518e19397832896cc3a4dd2",
+        "qwen_one_two/g1_backbone.py": "400899b2301ca77f56431827e6bb787f3f054627fef23f1ba883275de09701a9",
+        "qwen_one_two/g1_checks.py": "7c32e89b246a6e26235e48e041f6ff5923b589cdf48df073a17bf253ed470950",
+        "qwen_one_two/g1_device.py": "e4a550b80ac3f1de35be7c6057cca65b0e46ec2ba2248ca72e0d67b6451b5f2e",
+        "qwen_one_two/g1_evidence.py": "2f882bed4c0ac93dcf0015d6083b471764a8a8fe3d586d337759da1117bb7aba",
+        "qwen_one_two/g1_gate_diagnosis.py": "d38c6a40d66ccf41195ccbdefd77f1bccda632492ecdbbd6841049f26874a3e3",
+        "qwen_one_two/g1_gate_repair.py": "18c25a33ccf05a16630960df40f29d309d19af0a12b23b6e99c3c2341e732b91",
+        "qwen_one_two/g1_precision_diagnosis.py": "acdc5008e7e02c13a24eda2f64a40f7f30176cdfb09e95bb637b20c0126ce3d9",
+        "qwen_one_two/g1_precision_math.py": "bc2e5a6393012079684734de386ad71afd5cbd26b2423a24f22f33ed6b9aedcf",
+        "qwen_one_two/g1_proof.py": "5a0d9991cffff111b12d23df1a5ad46be7cb77f1f67ba16c4038dbfa60ac9cb9",
+        "qwen_one_two/g1_protocol.py": "156ba44aa27b459279404d404e2a16da35e443717fca4d15851627e80cfeaba4",
+        "qwen_one_two/model.py": "65361404f081a2933830acc65453ee147098e6b12a000918c00dc83d991bfb00",
+        "qwen_one_two/policy.py": "a1b43898e6a695536276b44d6bb713b45c3ae5f56a363e586b6c4e3ff2afe978",
+        "qwen_one_two/refine_routes.py": "2a9ed2e1999290d985f5cdced7bfa83e00ec4c56247349848f7b205e7235db5c",
+        "qwen_one_two/server.py": "d83a9dc6764fb0d02ccfd87b40d2c5ba4bd69167a3733e27686b17d52d45139d",
+        "qwen_one_two/thinking.py": "47bfaf4c91e33f8587f4bad856f0d2b36c0e31705132b11f5e1d7f22a504e36b",
+        "qwen_one_two/train.py": "1d316c57efb6db71810ae6a43ba491832d0d7e66e91bc065de8e208c5dc38538",
+        "qwen_one_two/train_feedback.py": "234b516d33e7b070b44b47a1b0b5738917af0cc33bb4df67ad88fc7bf17af952",
+        "qwen_one_two/training/__init__.py": "0a5bc5745bdcb26cbf81df3d10f5363d39539d811fd869326cb37ecb4a29a47e",
+        "qwen_one_two/training/architecture_audit.py": "fee2b1a77a56ac1a0652e7133f673b4e45c418d9d926358318754eeec99888d6",
+        "qwen_one_two/training/behavior_qualification.py": "b97d4656a843b387bdb5220cf10a24e98c14e3743c41433f7a596efe29a8516b",
+        "qwen_one_two/training/binding.py": "d3e017ef6547ab9ceffa11d6e5684b3f6aab16182d25b20bc9bdcef0e4323343",
+        "qwen_one_two/training/checkpoint.py": "ae693ea7ae8fa465d71f8dabbf7d5ba24f92efd8fa8af6efc080f6103a34ee54",
+        "qwen_one_two/training/checkpoint_metadata.py": "4806b4ca4f6331874743c77e6983e0060dd35a310956b4f67683680603e104d3",
+        "qwen_one_two/training/clean.py": "6c4f735404bc5a98b147048974ee2b374cf4d98bbed89334cedb310b323e9117",
+        "qwen_one_two/training/clean_packets.py": "9bfbcb63c4ecbeb0bcdbeb6f75bd6b30c2f5e2cc5f51cc7670cf55cb63681d2b",
+        "qwen_one_two/training/component_admission.py": "0ab3b22429d93d2d0d204f0e78b097fa77ba1d02141d7ae9b58470304edcd399",
+        "qwen_one_two/training/component_producer.py": "9e8cd12db50ec254344cc8958c0f6bde688bee5b2ae9e5b997c5558e35458f00",
+        "qwen_one_two/training/diagnostics.py": "0e5ec6271090c034744a182c2bd4a86d421ee099be0b056da4b29438120b3060",
+        "qwen_one_two/training/direct_readout.py": "9444a03f495bac141a8638ab86c0b304c1eb7ae12161f22fe76304a8a75b611a",
+        "qwen_one_two/training/direct_roles.py": "ab3333e16647057e9d38dfbc719a8d828b22ca5adb2d2d4b1005be70f27cddec",
+        "qwen_one_two/training/driver.py": "c46128c8d9e0de5288717f4a2c6a78b6bb3fed5e4fa2a245b6123c267a587bc2",
+        "qwen_one_two/training/eligibility.py": "5534522a13892d40a95dd8282698da7248685fd4d5b50273474f93a7e4f73571",
+        "qwen_one_two/training/engine.py": "2500a47211fc13a41c3e646d2f315d2233b4304d1f67c71fb73b3eebc57aee4d",
+        "qwen_one_two/training/episodes.py": "6975fec4335ae10a7725c21a8b5979df2a09b1b9eb19431b330dc844afe9d7b2",
+        "qwen_one_two/training/frozen_source.py": "cce87a33fff5e0309374f6657fc7da0eebae82465bf0eec6a16b991b80c1399c",
+        "qwen_one_two/training/host_metrics.py": "2f42449b20bf9343294b291365c180b5e5a03d7ecb9eccb26971c09a259199bd",
+        "qwen_one_two/training/host_profile.py": "31d52a713e33de61e5b802a26c63f24e6dbcb476325d01afea788097e97d23e0",
+        "qwen_one_two/training/information_loss.py": "7fa33d9dcd33fe08fba00e34857bf7339d646cf617845c4d7c3c770275b0cf23",
+        "qwen_one_two/training/inputs.py": "8a96776ac2ab7a65f2cc51c3baaee12a333e76278775cc3d6b37b68cee99e332",
+        "qwen_one_two/training/learning_report.py": "16be5a713a1d290529e6f26f75a7b87748e75f665cd27e4d023ad665de1a864e",
+        "qwen_one_two/training/loss_config.py": "7beadba9261208767775679ee7ae7a75dfcf777de8fd42c65acaaa57a6fa23e4",
+        "qwen_one_two/training/losses.py": "0bea5c33730baab3d376a635286d409b1c7bf664cd852c08d2c6cfe80d94abcc",
+        "qwen_one_two/training/manifest.py": "468257734527ceb5ec8656b6155388c2b3e92298f457cfa1764fd87cd58cbf5d",
+        "qwen_one_two/training/native.py": "7f30e4b42f20bfc8b5e1b1f4ffa2127dc12eb289381ee67670034c141c131cca",
+        "qwen_one_two/training/native_coverage.py": "42b5f7c2ba24a3b41780c10e7f0d114375480fadf231042360868245a59b88b9",
+        "qwen_one_two/training/native_evaluation.py": "a6f180b6f43041a985e310ec9fad0de995a1b410f01a7c0f5a823c1b89bf3446",
+        "qwen_one_two/training/numeric_access.py": "4466187959d430d1eeabc5e7c5eea73082ec9699bbc4812d972f73fcf978bf20",
+        "qwen_one_two/training/producer.py": "cc3a439fd6b8e896500179d8f898fcd6a9d819eb5ac8cec12ff85dc7c946a6e8",
+        "qwen_one_two/training/profile.py": "3369e8e23579454fa3e71408fcb6196443cb86ed1c7e0f1f95974b91c9cc9cdb",
+        "qwen_one_two/training/qualification.py": "22d1de030bc85361a2366d03eb4c1c6c47a69f72e87fdcf59d6a9f8e04da72a9",
+        "qwen_one_two/training/quantity_learning.py": "e5f560a086ae3733ecd57bc13aa1c3d52d1fc7f119d5b03e2dd8090a6cc74a07",
+        "qwen_one_two/training/receiver_comparison.py": "1ce75b3747d72331232260142168e6787397f62862df2e0fe8484d0a95fc7f6b",
+        "qwen_one_two/training/receiver_learning.py": "d5b989455ef08a0c3ec1ba4f0b91a57b9d9098ee3921191828d9902d280c2d97",
+        "qwen_one_two/training/receiver_performance.py": "a6a0b8e5793ec82b5e39a0c42305596a02635e4f475eba940166d6bd9a81c3a7",
+        "qwen_one_two/training/receiver_plan.py": "fa860597cbfeda2684d0d83f53bf785f3e4a16a09fc9b734c88aaf22dcfe38ab",
+        "qwen_one_two/training/receiver_profiles.py": "0b3053d681b39ddf2602ec42bc414c614655e5a94ab649b6691bdbffb05cfd02",
+        "qwen_one_two/training/receiver_repair.py": "e03e065e1c40ad670399ee28fadd7f70da187bc9d1fe14430d6e9a4457d43222",
+        "qwen_one_two/training/redesign_coverage.py": "c0cff951a6193f16cc4ebec68ff461a7baee8b0429a7b004dbffc832480c4bb1",
+        "qwen_one_two/training/reference.py": "527b981bfcc2d98c2c024630838321b631ceb4995bcee736a64df3e9c8e16189",
+        "qwen_one_two/training/reference_data.py": "5855ecf472ac6d553bf16372af54cc640c48deb704014e7f26eb652387a01e70",
+        "qwen_one_two/training/reference_exposure.py": "f6e576cb0ce1cd8c48275047d7c0360cf23d4b20f0bcf20eaafc3433971e1a3c",
+        "qwen_one_two/training/reference_qualification.py": "9e02394240fb88b2e4e77b604b020300d200cfae5bb217e3717247da27505db0",
+        "qwen_one_two/training/release.py": "906d6bf7fefaa9b251338e46b13dac289365f5347b73cd03b680e593578888c3",
+        "qwen_one_two/training/sampler.py": "aeee24107468a9a27657efa3ba5c053d36101aee982fad069af8411762e28950",
+        "qwen_one_two/training/shared_frozen.py": "750ebdc0b069122485f7974784be101d2b2c8c76c8443036c4659e25e2df6a5f",
+        "qwen_one_two/training/simple_latent.py": "d1e2f07438245a2a2842d06395874d17bc7e61fd82bc26bb5980ddedcc37dc90",
+        "qwen_one_two/training/two_gpu.py": "dca18fef30e5ef9ca6346c297f42c56fdcfae65c25cec683d65fdadc345a3cc1",
+        "qwen_one_two/training/two_gpu_worker.py": "2fe83f3be4905753fe722eba14813b260449037f46df5c9c151c9d6cc0e16da2",
+        "qwen_one_two/training/weight_repair.py": "aff987d19f012820218758e02162d8352acce6d2983b74b9663a7afd9f4917bc",
+        "scripts/fit_reference.py": "6869030b858015cd6b01356e0103c78f2e0fa180a86368b2552acad67149c926",
+        "scripts/train_receiver_probe.py": "e550527199909ded14635fb769f9ab60a95a6378804cc876ce05797cf06e85dc"
+      },
+      "training_measurements": [
+        {
+          "delivered": {
+            "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+            "kind": "behavior",
+            "operations": {
+              "Choice": {
+                "counts": {
+                  "assessed_behavior_passed": 158,
+                  "assessed_head_correct": 158,
+                  "assessed_head_status_correct": 158,
+                  "assessed_scheduled": 158,
+                  "assessed_selection_measured": 158,
+                  "assessed_status_correct": 158,
+                  "behavior_passed": 326,
+                  "failed": 0,
+                  "nonassessed_behavior_passed": 168,
+                  "scheduled": 497,
+                  "status_correct": 326,
+                  "transport_valid": 497
+                },
+                "losses": {},
+                "noul_brier": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "raw_readout": {
+                  "maximum": null,
+                  "mean": null,
+                  "measured": 0,
+                  "minimum": null
+                },
+                "score_interval_distance": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 158,
+                  "Conflicting -> Assessed": 71,
+                  "Conflicting -> Conflicting": 15,
+                  "Insufficient -> Assessed": 17,
+                  "Insufficient -> Insufficient": 65,
+                  "NoFeasibleChoice -> Assessed": 83,
+                  "Unresolved -> Unresolved": 88
+                }
+              },
+              "Noul": {
+                "counts": {
+                  "assessed_behavior_passed": 110,
+                  "assessed_head_correct": 168,
+                  "assessed_head_status_correct": 110,
+                  "assessed_probability_ties": 0,
+                  "assessed_scheduled": 256,
+                  "assessed_status_correct": 168,
+                  "behavior_passed": 296,
+                  "failed": 0,
+                  "nonassessed_behavior_passed": 186,
+                  "scheduled": 501,
+                  "status_correct": 354,
+                  "transport_valid": 501
+                },
+                "losses": {},
+                "noul_brier": {
+                  "mean": 0.23268481837094332,
+                  "measured": 256
+                },
+                "raw_readout": {
+                  "maximum": null,
+                  "mean": null,
+                  "measured": 0,
+                  "minimum": null
+                },
+                "score_interval_distance": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 168,
+                  "Assessed -> Insufficient": 25,
+                  "Assessed -> Unresolved": 63,
+                  "Conflicting -> Conflicting": 82,
+                  "Insufficient -> Assessed": 52,
+                  "Insufficient -> Insufficient": 25,
+                  "Insufficient -> Unresolved": 7,
+                  "Unresolved -> Unresolved": 79
+                }
+              },
+              "Score": {
+                "counts": {
+                  "assessed_behavior_passed": 0,
+                  "assessed_head_correct": 0,
+                  "assessed_head_status_correct": 0,
+                  "assessed_scheduled": 254,
+                  "assessed_status_correct": 254,
+                  "behavior_passed": 147,
+                  "failed": 0,
+                  "nonassessed_behavior_passed": 147,
+                  "scheduled": 502,
+                  "status_correct": 401,
+                  "transport_valid": 502
+                },
+                "losses": {},
+                "noul_brier": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "raw_readout": {
+                  "maximum": null,
+                  "mean": null,
+                  "measured": 0,
+                  "minimum": null
+                },
+                "score_interval_distance": {
+                  "mean": 0.40432456197349104,
+                  "measured": 254
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 254,
+                  "Conflicting -> Assessed": 79,
+                  "Conflicting -> Conflicting": 4,
+                  "Insufficient -> Assessed": 12,
+                  "Insufficient -> Insufficient": 60,
+                  "Insufficient -> Unresolved": 10,
+                  "Unresolved -> Unresolved": 83
+                }
+              }
+            },
+            "scheduled": 1500,
+            "scope": "actual decoded/delivered receiver behavior; not learned invocation"
+          },
+          "receiver": "94218aae6ec62a7745c349af8e9975fd4987520cf9f1345f38e44586e5e7742c",
+          "repeat": 0,
+          "report": {
+            "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+            "kind": "heads",
+            "operations": {
+              "Choice": {
+                "counts": {
+                  "assessed_head_correct": 158,
+                  "assessed_head_status_correct": 158,
+                  "assessed_scheduled": 158,
+                  "assessed_selection_measured": 158,
+                  "assessed_status_correct": 158,
+                  "complete_head_objective": 497,
+                  "failed": 0,
+                  "head_status_correct": 326,
+                  "scheduled": 497,
+                  "status_correct": 326
+                },
+                "losses": {
+                  "choice": {
+                    "eligible": 158,
+                    "mean": 0.00020174854258193245
+                  },
+                  "feasibility": {
+                    "eligible": 497,
+                    "mean": 0.2340563867726251
+                  },
+                  "status": {
+                    "eligible": 497,
+                    "mean": 0.7362538374673717
+                  }
+                },
+                "noul_brier": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "raw_readout": {
+                  "maximum": null,
+                  "mean": null,
+                  "measured": 0,
+                  "minimum": null
+                },
+                "score_interval_distance": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 158,
+                  "Conflicting -> Assessed": 71,
+                  "Conflicting -> Conflicting": 15,
+                  "Insufficient -> Assessed": 17,
+                  "Insufficient -> Insufficient": 65,
+                  "NoFeasibleChoice -> Assessed": 83,
+                  "Unresolved -> Unresolved": 88
+                }
+              },
+              "Noul": {
+                "counts": {
+                  "assessed_head_correct": 168,
+                  "assessed_head_status_correct": 110,
+                  "assessed_probability_ties": 0,
+                  "assessed_scheduled": 256,
+                  "assessed_status_correct": 168,
+                  "complete_head_objective": 501,
+                  "failed": 0,
+                  "head_status_correct": 354,
+                  "scheduled": 501,
+                  "status_correct": 354
+                },
+                "losses": {
+                  "noul": {
+                    "eligible": 256,
+                    "mean": 0.6583106855396181
+                  },
+                  "status": {
+                    "eligible": 501,
+                    "mean": 0.5761220621209063
+                  }
+                },
+                "noul_brier": {
+                  "mean": 0.23268481837094332,
+                  "measured": 256
+                },
+                "raw_readout": {
+                  "maximum": -0.22257021069526672,
+                  "mean": -0.2907144907348884,
+                  "measured": 501,
+                  "minimum": -0.33363157510757446
+                },
+                "score_interval_distance": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 168,
+                  "Assessed -> Insufficient": 25,
+                  "Assessed -> Unresolved": 63,
+                  "Conflicting -> Conflicting": 82,
+                  "Insufficient -> Assessed": 52,
+                  "Insufficient -> Insufficient": 25,
+                  "Insufficient -> Unresolved": 7,
+                  "Unresolved -> Unresolved": 79
+                }
+              },
+              "Score": {
+                "counts": {
+                  "assessed_clipped_readouts": 0,
+                  "assessed_head_correct": 0,
+                  "assessed_head_status_correct": 0,
+                  "assessed_scheduled": 254,
+                  "assessed_status_correct": 254,
+                  "complete_head_objective": 502,
+                  "failed": 0,
+                  "head_status_correct": 401,
+                  "scheduled": 502,
+                  "status_correct": 401
+                },
+                "losses": {
+                  "score": {
+                    "eligible": 254,
+                    "mean": 0.1965613371317214
+                  },
+                  "status": {
+                    "eligible": 502,
+                    "mean": 0.4494617341871956
+                  }
+                },
+                "noul_brier": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "raw_readout": {
+                  "maximum": 0.5153579711914062,
+                  "mean": 0.41308806735680875,
+                  "measured": 502,
+                  "minimum": 0.33768874406814575
+                },
+                "score_interval_distance": {
+                  "mean": 0.40432456197349104,
+                  "measured": 254
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 254,
+                  "Conflicting -> Assessed": 79,
+                  "Conflicting -> Conflicting": 4,
+                  "Insufficient -> Assessed": 12,
+                  "Insufficient -> Insufficient": 60,
+                  "Insufficient -> Unresolved": 10,
+                  "Unresolved -> Unresolved": 83
+                }
+              }
+            },
+            "scheduled": 1500,
+            "scope": "head objectives without return delivery"
+          }
+        },
+        {
+          "delivered": {
+            "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+            "kind": "behavior",
+            "operations": {
+              "Choice": {
+                "counts": {
+                  "assessed_behavior_passed": 158,
+                  "assessed_head_correct": 158,
+                  "assessed_head_status_correct": 158,
+                  "assessed_scheduled": 158,
+                  "assessed_selection_measured": 158,
+                  "assessed_status_correct": 158,
+                  "behavior_passed": 414,
+                  "failed": 83,
+                  "nonassessed_behavior_passed": 256,
+                  "scheduled": 497,
+                  "status_correct": 414,
+                  "transport_valid": 414
+                },
+                "losses": {},
+                "noul_brier": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "raw_readout": {
+                  "maximum": null,
+                  "mean": null,
+                  "measured": 0,
+                  "minimum": null
+                },
+                "score_interval_distance": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 158,
+                  "Conflicting -> Conflicting": 33,
+                  "Conflicting -> None": 53,
+                  "Insufficient -> Insufficient": 53,
+                  "Insufficient -> None": 29,
+                  "NoFeasibleChoice -> NoFeasibleChoice": 83,
+                  "Unresolved -> None": 1,
+                  "Unresolved -> Unresolved": 87
+                }
+              },
+              "Noul": {
+                "counts": {
+                  "assessed_behavior_passed": 256,
+                  "assessed_head_correct": 256,
+                  "assessed_head_status_correct": 256,
+                  "assessed_probability_ties": 0,
+                  "assessed_scheduled": 256,
+                  "assessed_status_correct": 256,
+                  "behavior_passed": 393,
+                  "failed": 108,
+                  "nonassessed_behavior_passed": 137,
+                  "scheduled": 501,
+                  "status_correct": 393,
+                  "transport_valid": 393
+                },
+                "losses": {},
+                "noul_brier": {
+                  "mean": 3.5584161738496406e-07,
+                  "measured": 256
+                },
+                "raw_readout": {
+                  "maximum": null,
+                  "mean": null,
+                  "measured": 0,
+                  "minimum": null
+                },
+                "score_interval_distance": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 256,
+                  "Conflicting -> Conflicting": 70,
+                  "Conflicting -> None": 12,
+                  "Insufficient -> Insufficient": 58,
+                  "Insufficient -> None": 26,
+                  "Unresolved -> None": 70,
+                  "Unresolved -> Unresolved": 9
+                }
+              },
+              "Score": {
+                "counts": {
+                  "assessed_behavior_passed": 85,
+                  "assessed_head_correct": 85,
+                  "assessed_head_status_correct": 85,
+                  "assessed_scheduled": 254,
+                  "assessed_status_correct": 254,
+                  "behavior_passed": 246,
+                  "failed": 82,
+                  "nonassessed_behavior_passed": 161,
+                  "scheduled": 502,
+                  "status_correct": 415,
+                  "transport_valid": 420
+                },
+                "losses": {},
+                "noul_brier": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "raw_readout": {
+                  "maximum": null,
+                  "mean": null,
+                  "measured": 0,
+                  "minimum": null
+                },
+                "score_interval_distance": {
+                  "mean": 0.04688275688305849,
+                  "measured": 254
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 254,
+                  "Conflicting -> Conflicting": 83,
+                  "Insufficient -> Assessed": 5,
+                  "Insufficient -> Insufficient": 77,
+                  "Unresolved -> None": 82,
+                  "Unresolved -> Unresolved": 1
+                }
+              }
+            },
+            "scheduled": 1500,
+            "scope": "actual decoded/delivered receiver behavior; not learned invocation"
+          },
+          "receiver": "fe6ef6de35067681e986d81a7f63367712a7bf27972db916691f34d8b9adf918",
+          "repeat": 4,
+          "report": {
+            "calibration_scope": "reviewed assessed cases with finite head value, regardless of predicted status; missing heads counted separately by measured denominator",
+            "kind": "heads",
+            "operations": {
+              "Choice": {
+                "counts": {
+                  "assessed_head_correct": 158,
+                  "assessed_head_status_correct": 158,
+                  "assessed_scheduled": 158,
+                  "assessed_selection_measured": 158,
+                  "assessed_status_correct": 158,
+                  "complete_head_objective": 497,
+                  "failed": 0,
+                  "head_status_correct": 497,
+                  "scheduled": 497,
+                  "status_correct": 497
+                },
+                "losses": {
+                  "choice": {
+                    "eligible": 158,
+                    "mean": 2.95759756353837e-07
+                  },
+                  "feasibility": {
+                    "eligible": 497,
+                    "mean": 5.924326186788833e-08
+                  },
+                  "status": {
+                    "eligible": 497,
+                    "mean": 8.701808921814982e-05
+                  }
+                },
+                "noul_brier": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "raw_readout": {
+                  "maximum": null,
+                  "mean": null,
+                  "measured": 0,
+                  "minimum": null
+                },
+                "score_interval_distance": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 158,
+                  "Conflicting -> Conflicting": 86,
+                  "Insufficient -> Insufficient": 82,
+                  "NoFeasibleChoice -> NoFeasibleChoice": 83,
+                  "Unresolved -> Unresolved": 88
+                }
+              },
+              "Noul": {
+                "counts": {
+                  "assessed_head_correct": 256,
+                  "assessed_head_status_correct": 256,
+                  "assessed_probability_ties": 0,
+                  "assessed_scheduled": 256,
+                  "assessed_status_correct": 256,
+                  "complete_head_objective": 501,
+                  "failed": 0,
+                  "head_status_correct": 501,
+                  "scheduled": 501,
+                  "status_correct": 501
+                },
+                "losses": {
+                  "noul": {
+                    "eligible": 256,
+                    "mean": 0.0004316071485845896
+                  },
+                  "status": {
+                    "eligible": 501,
+                    "mean": 0.0010921366103886073
+                  }
+                },
+                "noul_brier": {
+                  "mean": 3.5584161738496406e-07,
+                  "measured": 256
+                },
+                "raw_readout": {
+                  "maximum": 7.500737190246582,
+                  "mean": -2.879951436124638,
+                  "measured": 501,
+                  "minimum": -9.604458808898926
+                },
+                "score_interval_distance": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 256,
+                  "Conflicting -> Conflicting": 82,
+                  "Insufficient -> Insufficient": 84,
+                  "Unresolved -> Unresolved": 79
+                }
+              },
+              "Score": {
+                "counts": {
+                  "assessed_clipped_readouts": 87,
+                  "assessed_head_correct": 85,
+                  "assessed_head_status_correct": 85,
+                  "assessed_scheduled": 254,
+                  "assessed_status_correct": 254,
+                  "complete_head_objective": 502,
+                  "failed": 0,
+                  "head_status_correct": 497,
+                  "scheduled": 502,
+                  "status_correct": 497
+                },
+                "losses": {
+                  "score": {
+                    "eligible": 254,
+                    "mean": 0.007362648077719716
+                  },
+                  "status": {
+                    "eligible": 502,
+                    "mean": 0.034112688476168426
+                  }
+                },
+                "noul_brier": {
+                  "mean": null,
+                  "measured": 0
+                },
+                "raw_readout": {
+                  "maximum": 0.9702195525169373,
+                  "mean": 0.157935319973,
+                  "measured": 502,
+                  "minimum": -0.28003114461898804
+                },
+                "score_interval_distance": {
+                  "mean": 0.04688275688305849,
+                  "measured": 254
+                },
+                "status_confusion": {
+                  "Assessed -> Assessed": 254,
+                  "Conflicting -> Conflicting": 83,
+                  "Insufficient -> Assessed": 5,
+                  "Insufficient -> Insufficient": 77,
+                  "Unresolved -> Unresolved": 83
+                }
+              }
+            },
+            "scheduled": 1500,
+            "scope": "head objectives without return delivery"
+          }
+        }
+      ],
+      "training_status": "COMPLETED_RD08_TRAINING_NOT_EVALUATED"
+    }
+  },
+  "case_outcomes": {
+    "both_fail": 141,
+    "both_pass": 35,
+    "candidate_loss": 106,
+    "candidate_win": 28
+  },
+  "cases": {
+    "cases": 310,
+    "path": "docs/evidence/receiver-matched-v2-cases.json",
+    "sha256": "dd569ba9c0370464e8df850c4a7e6c90383d1adefdabb32de6edb7c4abc6e310"
+  },
+  "checkpoints": {
+    "candidate": {
+      "path": "data/receiver-performance-20261109/candidate/checkpoint-0938",
+      "sha256": "7b12b33db61563456ac0b203d9851c9b5a7e512aa337e77418106818397f617e"
+    },
+    "control": {
+      "path": "data/receiver-performance-20261109/control/checkpoint-0938",
+      "sha256": "f616f4c9154ff2a4c4b7d5b58b5f8d67b9afd55baf80d758e5e234a0b3073452"
+    }
+  },
+  "cohorts": {
+    "development_E/Score/endpoint": {
+      "candidate": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 7,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 7,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": 0.49217850821358816,
+          "missing_Score_heads": 0,
+          "scheduled": 7,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 7,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 7,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": 0.29677709830658777,
+          "missing_Score_heads": 0,
+          "scheduled": 7,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_E/Score/interior": {
+      "candidate": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 3,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 3,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 3,
+          "interval_distance_mean": 0.49244260787963867,
+          "missing_Score_heads": 0,
+          "scheduled": 3,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 3,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 3,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 3,
+          "interval_distance_mean": 0.35022248948613804,
+          "missing_Score_heads": 0,
+          "scheduled": 3,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_E/cell/Choice/Assessed": {
+      "candidate": {
+        "Choice": {
+          "assessed": 10,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 10,
+          "assessed_delivered_passed": 6,
+          "constant_truth_correct": null,
+          "delivered_passed": 6,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_E/cell/Choice/Conflicting": {
+      "candidate": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 6,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 1,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_E/cell/Choice/Insufficient": {
+      "candidate": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 5,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 8,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_E/cell/Choice/NoFeasibleChoice": {
+      "candidate": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 5,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 3,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_E/cell/Choice/Unresolved": {
+      "candidate": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 4,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_E/cell/Noul/Assessed": {
+      "candidate": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 10,
+          "assessed_delivered_passed": 6,
+          "constant_truth_correct": 5,
+          "delivered_passed": 6,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": 6
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 10,
+          "assessed_delivered_passed": 5,
+          "constant_truth_correct": 5,
+          "delivered_passed": 5,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": 6
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_E/cell/Noul/Conflicting": {
+      "candidate": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 2,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 3,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_E/cell/Noul/Insufficient": {
+      "candidate": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 4,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_E/cell/Noul/Unresolved": {
+      "candidate": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 5,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 4,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_E/cell/Score/Assessed": {
+      "candidate": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 10,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 10,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 3,
+          "interval_distance_mean": 0.49225773811340334,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 10,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 10,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 3,
+          "interval_distance_mean": 0.3128107156604528,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_E/cell/Score/Conflicting": {
+      "candidate": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 4,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 5,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_E/cell/Score/Insufficient": {
+      "candidate": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 7,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 7,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_E/cell/Score/Unresolved": {
+      "candidate": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 3,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 1,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 10,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_E/familiar_operations_ranges": {
+      "candidate": {
+        "Choice": {
+          "assessed": 4,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 4,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 4,
+          "assessed_delivered_passed": 3,
+          "constant_truth_correct": 3,
+          "delivered_passed": 3,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 4,
+          "truth_correct": 3
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 4,
+          "assessed_delivered_passed": 4,
+          "constant_truth_correct": null,
+          "delivered_passed": 4,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 4,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 4,
+          "assessed_delivered_passed": 4,
+          "constant_truth_correct": 3,
+          "delivered_passed": 4,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 4,
+          "truth_correct": 4
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_E/unclassified": {
+      "candidate": {
+        "Choice": {
+          "assessed": 6,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 6,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 6,
+          "assessed_delivered_passed": 3,
+          "constant_truth_correct": 2,
+          "delivered_passed": 3,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 6,
+          "truth_correct": 3
+        },
+        "Score": {
+          "assessed": 7,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 7,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 2,
+          "interval_distance_mean": 0.5633284960474286,
+          "missing_Score_heads": 0,
+          "scheduled": 7,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 6,
+          "assessed_delivered_passed": 2,
+          "constant_truth_correct": null,
+          "delivered_passed": 2,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 6,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 6,
+          "assessed_delivered_passed": 1,
+          "constant_truth_correct": 2,
+          "delivered_passed": 1,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 6,
+          "truth_correct": 2
+        },
+        "Score": {
+          "assessed": 7,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 7,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 2,
+          "interval_distance_mean": 0.41947351342865397,
+          "missing_Score_heads": 0,
+          "scheduled": 7,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_E/unseen_operator_range": {
+      "candidate": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 3,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 3,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 1,
+          "interval_distance_mean": 0.3264259696006775,
+          "missing_Score_heads": 0,
+          "scheduled": 3,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 3,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 3,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 1,
+          "interval_distance_mean": 0.06393085420131683,
+          "missing_Score_heads": 0,
+          "scheduled": 3,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_E/wording_binding_changes": {
+      "candidate": {
+        "Choice": {
+          "assessed": 10,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 16,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 50,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 10,
+          "assessed_delivered_passed": 6,
+          "constant_truth_correct": 5,
+          "delivered_passed": 13,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 40,
+          "truth_correct": 6
+        },
+        "Score": {
+          "assessed": 10,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 14,
+          "distance_measured": 10,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 3,
+          "interval_distance_mean": 0.49225773811340334,
+          "missing_Score_heads": 0,
+          "scheduled": 40,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 10,
+          "assessed_delivered_passed": 6,
+          "constant_truth_correct": null,
+          "delivered_passed": 22,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 50,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 10,
+          "assessed_delivered_passed": 5,
+          "constant_truth_correct": 5,
+          "delivered_passed": 16,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 40,
+          "truth_correct": 6
+        },
+        "Score": {
+          "assessed": 10,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 13,
+          "distance_measured": 10,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 3,
+          "interval_distance_mean": 0.3128107156604528,
+          "missing_Score_heads": 0,
+          "scheduled": 40,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_X/Score/interior": {
+      "candidate": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 40,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 40,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 40,
+          "interval_distance_mean": 0.5170474713901058,
+          "missing_Score_heads": 0,
+          "scheduled": 40,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 40,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 40,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 40,
+          "interval_distance_mean": 0.23884277830366046,
+          "missing_Score_heads": 0,
+          "scheduled": 40,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_X/cell/Choice/Assessed": {
+      "candidate": {
+        "Choice": {
+          "assessed": 40,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 40,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 40,
+          "assessed_delivered_passed": 40,
+          "constant_truth_correct": null,
+          "delivered_passed": 40,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 40,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_X/cell/Noul/Assessed": {
+      "candidate": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 70,
+          "assessed_delivered_passed": 20,
+          "constant_truth_correct": 20,
+          "delivered_passed": 20,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 70,
+          "truth_correct": 20
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 70,
+          "assessed_delivered_passed": 50,
+          "constant_truth_correct": 20,
+          "delivered_passed": 50,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 70,
+          "truth_correct": 50
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_X/cell/Noul/Insufficient": {
+      "candidate": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 30,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 30,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_X/cell/Score/Assessed": {
+      "candidate": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 40,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 40,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 40,
+          "interval_distance_mean": 0.5170474713901058,
+          "missing_Score_heads": 0,
+          "scheduled": 40,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 0,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 40,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 40,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 40,
+          "interval_distance_mean": 0.23884277830366046,
+          "missing_Score_heads": 0,
+          "scheduled": 40,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_X/familiar_operations_ranges": {
+      "candidate": {
+        "Choice": {
+          "assessed": 40,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 40,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 50,
+          "assessed_delivered_passed": 10,
+          "constant_truth_correct": 10,
+          "delivered_passed": 10,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 50,
+          "truth_correct": 10
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 40,
+          "assessed_delivered_passed": 40,
+          "constant_truth_correct": null,
+          "delivered_passed": 40,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 40,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 50,
+          "assessed_delivered_passed": 50,
+          "constant_truth_correct": 10,
+          "delivered_passed": 50,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 50,
+          "truth_correct": 50
+        },
+        "Score": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_X/unseen_operator_range": {
+      "candidate": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 20,
+          "assessed_delivered_passed": 10,
+          "constant_truth_correct": 10,
+          "delivered_passed": 10,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 20,
+          "truth_correct": 10
+        },
+        "Score": {
+          "assessed": 40,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 40,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 40,
+          "interval_distance_mean": 0.5170474713901058,
+          "missing_Score_heads": 0,
+          "scheduled": 40,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 0,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 0,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 20,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": 10,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 20,
+          "truth_correct": 0
+        },
+        "Score": {
+          "assessed": 40,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 40,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 40,
+          "interval_distance_mean": 0.23884277830366046,
+          "missing_Score_heads": 0,
+          "scheduled": 40,
+          "truth_correct": null
+        }
+      }
+    },
+    "development_X/wording_binding_changes": {
+      "candidate": {
+        "Choice": {
+          "assessed": 40,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 40,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 70,
+          "assessed_delivered_passed": 20,
+          "constant_truth_correct": 20,
+          "delivered_passed": 20,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 100,
+          "truth_correct": 20
+        },
+        "Score": {
+          "assessed": 40,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 40,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 40,
+          "interval_distance_mean": 0.5170474713901058,
+          "missing_Score_heads": 0,
+          "scheduled": 40,
+          "truth_correct": null
+        }
+      },
+      "control": {
+        "Choice": {
+          "assessed": 40,
+          "assessed_delivered_passed": 40,
+          "constant_truth_correct": null,
+          "delivered_passed": 40,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 40,
+          "truth_correct": null
+        },
+        "Noul": {
+          "assessed": 70,
+          "assessed_delivered_passed": 50,
+          "constant_truth_correct": 20,
+          "delivered_passed": 50,
+          "distance_measured": 0,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 0,
+          "interval_distance_mean": null,
+          "missing_Score_heads": 0,
+          "scheduled": 100,
+          "truth_correct": 50
+        },
+        "Score": {
+          "assessed": 40,
+          "assessed_delivered_passed": 0,
+          "constant_truth_correct": null,
+          "delivered_passed": 0,
+          "distance_measured": 40,
+          "interior_delivered_correct": 0,
+          "interior_scheduled": 40,
+          "interval_distance_mean": 0.23884277830366046,
+          "missing_Score_heads": 0,
+          "scheduled": 40,
+          "truth_correct": null
+        }
+      }
+    }
+  },
+  "commands": {
+    "argv": {
+      "candidate": [
+        ".venv/bin/python",
+        "-m",
+        "scripts.train_receiver_probe",
+        "--snapshot",
+        "/home/vince/the-operating-table/data/huggingface/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+        "--input-profile",
+        "direct-role-states-v2",
+        "--execution-policy",
+        "retained-activations-v1",
+        "--prepared-plan",
+        "data/receiver-performance-20261109/plans-qualified/candidate/plan.json",
+        "--execute-gpu",
+        "--output",
+        "data/receiver-performance-20261109/candidate"
+      ],
+      "control": [
+        ".venv/bin/python",
+        "-m",
+        "scripts.train_receiver_probe",
+        "--snapshot",
+        "/home/vince/the-operating-table/data/huggingface/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+        "--input-profile",
+        "frozen-w-pooled-compact-v2",
+        "--execution-policy",
+        "retained-activations-v1",
+        "--prepared-plan",
+        "data/receiver-performance-20261109/plans-qualified/control/plan.json",
+        "--execute-gpu",
+        "--output",
+        "data/receiver-performance-20261109/control",
+        "--resume",
+        "data/receiver-performance-20261109/migrated-control/checkpoint-0688",
+        "--resume-sha256",
+        "00928d0150dc6e16055206651a0fb865b2b888ce2b94deca298075e7bd0ed968"
+      ],
+      "eval-candidate": [
+        ".venv/bin/python",
+        "-m",
+        "scripts.train_receiver_probe",
+        "--snapshot",
+        "/home/vince/the-operating-table/data/huggingface/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+        "--input-profile",
+        "direct-role-states-v2",
+        "--execution-policy",
+        "retained-activations-v1",
+        "--prepared-plan",
+        "data/receiver-performance-20261109/plans-qualified/candidate/plan.json",
+        "--evaluate-gpu",
+        "--output",
+        "data/receiver-performance-20261109/eval-candidate",
+        "--resume",
+        "data/receiver-performance-20261109/candidate/checkpoint-0938",
+        "--resume-sha256",
+        "7b12b33db61563456ac0b203d9851c9b5a7e512aa337e77418106818397f617e",
+        "--peer-report",
+        "data/receiver-performance-20261109/control/report.json"
+      ],
+      "eval-control": [
+        ".venv/bin/python",
+        "-m",
+        "scripts.train_receiver_probe",
+        "--snapshot",
+        "/home/vince/the-operating-table/data/huggingface/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+        "--input-profile",
+        "frozen-w-pooled-compact-v2",
+        "--execution-policy",
+        "retained-activations-v1",
+        "--prepared-plan",
+        "data/receiver-performance-20261109/plans-qualified/control/plan.json",
+        "--evaluate-gpu",
+        "--output",
+        "data/receiver-performance-20261109/eval-control",
+        "--resume",
+        "data/receiver-performance-20261109/control/checkpoint-0938",
+        "--resume-sha256",
+        "f616f4c9154ff2a4c4b7d5b58b5f8d67b9afd55baf80d758e5e234a0b3073452",
+        "--peer-report",
+        "data/receiver-performance-20261109/candidate/report.json"
+      ]
+    },
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "GPU-225509c3-d702-6c27-de03-76b5e99b33b1",
+      "PYTHONPATH": "."
+    },
+    "reduction": [
+      "python",
+      "data/receiver-performance-20261109/analyze.py"
+    ]
+  },
+  "control_prefix_migration": {
+    "RD09_started": false,
+    "cursor": 4000,
+    "destination_checkpoint": "data/receiver-performance-20261109/migrated-control/checkpoint-0688",
+    "destination_manifest_sha256": "00928d0150dc6e16055206651a0fb865b2b888ce2b94deca298075e7bd0ed968",
+    "extra_effective_passes": 0,
+    "initial_measurement": {
+      "path": "data/redesign-format-v2-20261108/control/panel-00.jsonl",
+      "preserve_original_source_provenance": true,
+      "records": 1500,
+      "sha256": "cb24898d081ea8c53985ad56e799f7cc2771196ece3e10203fc702d45ea61f80"
+    },
+    "last_logged_updates": 599,
+    "lost_completed_window_presentations": 792,
+    "lost_logged_windows": 99,
+    "new_candidate_plan_sha256": "b7220bb92511768d62256f73b57581efa0dbb6a6264f3d689a3569e687f33cc3",
+    "new_data": false,
+    "new_plan": "data/receiver-performance-20261109/plans-qualified/control/plan.json",
+    "new_plan_sha256": "4da9d742927d7f9512a76e0e603f034e2987f9666d8ce7de79ac6dda30a1bad1",
+    "old_plan": "data/redesign-format-v2-20261108/plans-cache/control/plan.json",
+    "old_plan_sha256": "34c049f18a8071f393b250c91cfa3e0efbdfea1c321f384f0dae27498ef3447c",
+    "original_attempts": {
+      "path": "data/redesign-format-v2-20261108/control-resumed/training.jsonl",
+      "prefix_window": 1,
+      "recorded_windows": 598,
+      "sha256": "76c916e0dde154bf5a02e8b0265f4a70af2912a8dcb4470fc3511052e7d53fb3"
+    },
+    "physical_completed_window_accounting": "prior599 logged updates plus250 recovery updates =849 recorded completed updates, including99 lost/replayed windows; any unflushed work immediately before process loss remains unknown",
+    "preserved_effective_updates": 500,
+    "preserved_files": {
+      "effective-rows.safetensors": "e4c8b0d79d207ba17e96e98a902158109651c8c4fed8d0e5e44fbafa7af4b4e8",
+      "optimizer.pt": "331f528b3769658dd61c2ff0b664c56660994387c9bd6d6bb641bc5ddc223070",
+      "rng.pt": "cbc25a4884a7dd5171506ca5b894fc879f72440ac789b87d2a736686609ee439",
+      "weights.safetensors": "1e3d597f8f22025cc3ed83e790ac2fecca1e6aae37e6610e6a2e79a941cd941f"
+    },
+    "preserved_owners_shapes_objectives_order": true,
+    "preserved_sampler_receipts": true,
+    "protocol": "receiver-performance-recovery-v1",
+    "qualified_policy": {
+      "activation_checkpointing": false,
+      "automatic_OOM_fallback": false,
+      "component_VJPs": "unchanged separate gradients",
+      "episode_graphs_retained": 1,
+      "fingerprint_batch_bytes": 33554432,
+      "name": "retained-activations-v1",
+      "optimizer_and_objectives": "unchanged",
+      "recurrence_cache_entries": 32
+    },
+    "remaining_effective_presentations": 2000,
+    "remaining_effective_windows": 250,
+    "replay_policy": "repeat only work lost after last compatible complete-window checkpoint; retain500 saved windows; final effective order remains1500x4/6000/750",
+    "scope": "only qualified source/protocol/policy metadata bindings change; every weight/Adam/RNG byte unchanged; not a fabricated599-state artifact",
+    "source_checkpoint": "data/redesign-format-v2-20261108/control-resumed/checkpoint-0688",
+    "source_delta": {
+      "qwen_one_two/training/host_metrics.py": {
+        "current": "2f42449b20bf9343294b291365c180b5e5a03d7ecb9eccb26971c09a259199bd",
+        "previous": "d544d401b6a970f14ba614026c699f0f83c2b1ad6809cd6d6ed41588c45906bc"
+      },
+      "qwen_one_two/training/receiver_performance.py": {
+        "current": "a6a0b8e5793ec82b5e39a0c42305596a02635e4f475eba940166d6bd9a81c3a7",
+        "previous": null
+      },
+      "qwen_one_two/training/receiver_plan.py": {
+        "current": "fa860597cbfeda2684d0d83f53bf785f3e4a16a09fc9b734c88aaf22dcfe38ab",
+        "previous": "2d68091261fa328c9ec98a772f841cf7cc8ff05cafe779293dc393689e5ce127"
+      },
+      "qwen_one_two/training/reference.py": {
+        "current": "527b981bfcc2d98c2c024630838321b631ceb4995bcee736a64df3e9c8e16189",
+        "previous": "44cbd6da4b3374d3de7082cac633f9b63fd91cef768bd8462a01fcb17c0f2aec"
+      },
+      "scripts/train_receiver_probe.py": {
+        "current": "e550527199909ded14635fb769f9ab60a95a6378804cc876ce05797cf06e85dc",
+        "previous": "ab755f57d677219d500196bb56d08cfcf5fbe366b4d30c74d09562847a1b6018"
+      }
+    },
+    "source_manifest_sha256": "2eaea42f7bbbbc0a125c51f0b06016afbda2fa1011c913a05c912202269d91aa"
+  },
+  "delivery": "execution complete; delivery status tracked in docs/redesign-progress.md",
+  "deployment": false,
+  "development_exclusions": "three oversized candidate E requests retained as failures; no cropped/hidden cases",
+  "evaluation_reports": {
+    "data/receiver-performance-20261109/eval-candidate/report.json": "de4744e39a449d43ae985a441d6438a7bc67e17934954ca5c1e31dec1929557c",
+    "data/receiver-performance-20261109/eval-control/report.json": "10426482d6718188e3c4c0862a988316d822937d4c0f01c12487f592ede7878e"
+  },
+  "execution": "completed",
+  "exposures": {
+    "candidate": {
+      "eligible": {
+        "choice": 632,
+        "feasibility": 1988,
+        "noul": 1024,
+        "score": 1016,
+        "status": 6000
+      },
+      "exposures": 6000,
+      "failures": {},
+      "optimizer_updates": 750,
+      "records": 1500,
+      "windows": 750
+    },
+    "control": {
+      "eligible": {
+        "choice": 632,
+        "feasibility": 1988,
+        "noul": 1024,
+        "score": 1016,
+        "status": 6000
+      },
+      "exposures": 6000,
+      "failures": {},
+      "optimizer_updates": 750,
+      "records": 1500,
+      "windows": 750
+    }
+  },
+  "familiar_cohort_acceptance": {
+    "development_E/familiar_operations_ranges": {
+      "Noul_beats_training_constant": false,
+      "Noul_delivered_improves": false,
+      "Score_correct_interior_delivered": false,
+      "Score_distance_improves": false
+    },
+    "development_X/familiar_operations_ranges": {
+      "Noul_beats_training_constant": false,
+      "Noul_delivered_improves": false,
+      "Score_correct_interior_delivered": false,
+      "Score_distance_improves": false
+    }
+  },
+  "familiar_metrics": {
+    "candidate": {
+      "Choice": {
+        "assessed": 44,
+        "assessed_delivered_passed": 0,
+        "constant_truth_correct": null,
+        "delivered_passed": 0,
+        "distance_measured": 0,
+        "interior_delivered_correct": 0,
+        "interior_scheduled": 0,
+        "interval_distance_mean": null,
+        "missing_Score_heads": 0,
+        "scheduled": 44,
+        "truth_correct": null
+      },
+      "Noul": {
+        "assessed": 54,
+        "assessed_delivered_passed": 13,
+        "constant_truth_correct": 13,
+        "delivered_passed": 13,
+        "distance_measured": 0,
+        "interior_delivered_correct": 0,
+        "interior_scheduled": 0,
+        "interval_distance_mean": null,
+        "missing_Score_heads": 0,
+        "scheduled": 54,
+        "truth_correct": 13
+      },
+      "Score": {
+        "assessed": 0,
+        "assessed_delivered_passed": 0,
+        "constant_truth_correct": null,
+        "delivered_passed": 0,
+        "distance_measured": 0,
+        "interior_delivered_correct": 0,
+        "interior_scheduled": 0,
+        "interval_distance_mean": null,
+        "missing_Score_heads": 0,
+        "scheduled": 0,
+        "truth_correct": null
+      }
+    },
+    "control": {
+      "Choice": {
+        "assessed": 44,
+        "assessed_delivered_passed": 44,
+        "constant_truth_correct": null,
+        "delivered_passed": 44,
+        "distance_measured": 0,
+        "interior_delivered_correct": 0,
+        "interior_scheduled": 0,
+        "interval_distance_mean": null,
+        "missing_Score_heads": 0,
+        "scheduled": 44,
+        "truth_correct": null
+      },
+      "Noul": {
+        "assessed": 54,
+        "assessed_delivered_passed": 54,
+        "constant_truth_correct": 13,
+        "delivered_passed": 54,
+        "distance_measured": 0,
+        "interior_delivered_correct": 0,
+        "interior_scheduled": 0,
+        "interval_distance_mean": null,
+        "missing_Score_heads": 0,
+        "scheduled": 54,
+        "truth_correct": 54
+      },
+      "Score": {
+        "assessed": 0,
+        "assessed_delivered_passed": 0,
+        "constant_truth_correct": null,
+        "delivered_passed": 0,
+        "distance_measured": 0,
+        "interior_delivered_correct": 0,
+        "interior_scheduled": 0,
+        "interval_distance_mean": null,
+        "missing_Score_heads": 0,
+        "scheduled": 0,
+        "truth_correct": null
+      }
+    }
+  },
+  "final_verification": {
+    "candidate": {
+      "all_final_checkpoint_files_exact": true,
+      "all_initial_final_inputs_and_masks_exact": true,
+      "all_training_inputs_and_masks_exact": true,
+      "current_process_episode_receipts": 6000,
+      "current_process_windows": 750,
+      "evaluation_receiver_unchanged": true,
+      "exact_planned_order": true,
+      "final_checkpoint": {
+        "path": "data/receiver-performance-20261109/candidate/checkpoint-0938",
+        "sha256": "7b12b33db61563456ac0b203d9851c9b5a7e512aa337e77418106818397f617e"
+      },
+      "saved_cursor": 6000,
+      "unchanged_source_files": 95
+    },
+    "control": {
+      "all_final_checkpoint_files_exact": true,
+      "all_initial_final_inputs_and_masks_exact": true,
+      "all_training_inputs_and_masks_exact": true,
+      "current_process_episode_receipts": 2000,
+      "current_process_windows": 250,
+      "evaluation_receiver_unchanged": true,
+      "exact_planned_order": true,
+      "final_checkpoint": {
+        "path": "data/receiver-performance-20261109/control/checkpoint-0938",
+        "sha256": "f616f4c9154ff2a4c4b7d5b58b5f8d67b9afd55baf80d758e5e234a0b3073452"
+      },
+      "saved_cursor": 6000,
+      "unchanged_source_files": 95
+    }
+  },
+  "frozen": {
+    "candidate": {
+      "final_base": {
+        "base_tied_storage": true,
+        "mismatches": [],
+        "parameters_checked": 320,
+        "pass": true
+      },
+      "frozen_native_unchanged": true,
+      "gradients_none": true,
+      "reference_unchanged": true
+    },
+    "control": {
+      "final_base": {
+        "base_tied_storage": true,
+        "mismatches": [],
+        "parameters_checked": 320,
+        "pass": true
+      },
+      "frozen_native_unchanged": true,
+      "gradients_none": true,
+      "reference_unchanged": true
+    }
+  },
+  "interventions": {
+    "pairs": 90,
+    "path": "docs/evidence/receiver-matched-v2-pairs.json",
+    "sha256": "92912c631a33b7d87377119f617b047df08a5072e8c7138e6e686c498b95bdcc"
+  },
+  "matched_initial": {
+    "initial_cuda_rng": "51c6b540572f4e46701e7fff232618d7c538afb6360013f0f5f95cc1e28792ff",
+    "initial_moments": "37a8d2307095e666c69297ac413ccd6567610c4b76c270c0457e2886b0237c2e",
+    "initial_python_rng": "1b17bdb1c103e5c5ebb46f623f17622bd3201e046d46f4d3d4a6489ddbb647e7",
+    "shared_initial_receiver": "94218aae6ec62a7745c349af8e9975fd4987520cf9f1345f38e44586e5e7742c"
+  },
+  "new_data": false,
+  "pairs": {
+    "candidate": {
+      "both_correct": 0,
+      "scheduled": 90
+    },
+    "control": {
+      "both_correct": 30,
+      "scheduled": 90
+    }
+  },
+  "physical_completed_window_work": {
+    "control_recorded_optimizer_calls": 849,
+    "control_retained_optimizer_updates": 750,
+    "discarded_performance_diagnostic_updates": 12,
+    "lost_replayed_logged_windows": 99,
+    "unflushed_pre_loss_work": "unknown; not fabricated"
+  },
+  "protocol": "receiver-matched-rd08-v2-results",
+  "qualification": {
+    "discarded_diagnostic_updates": 12,
+    "model_free_tests": 35,
+    "pending": [],
+    "performance_pairs": 6,
+    "qualification_commit_pushed_before_fitting": "6793f252b4259ff2a19bc0ffb54e349a68374d2c",
+    "required_GPU_checks": 19
+  },
+  "raw_artifacts": {
+    "/home/vince/QwenOneTwo/data/receiver-performance-20261109/finalize_evidence.py": "8b9cb9739db0da5c1074f2f462b44090fe535c6e26587b112f264a35315396d9",
+    "data/receiver-performance-20261109/analysis.log": "6afe1a126035da78962a7f0ece77a62103e0a9da184b645d2a61b08c27cbe334",
+    "data/receiver-performance-20261109/analyze.py": "120826ec50d209a0b6e566259479e6fbce04a443469f70bdd23463f31485a0da",
+    "data/receiver-performance-20261109/baseline-reuse.json": "94c35464906d36f67e86db7fbd5b4fb298607451e37595db3903ae60c2cb2376",
+    "data/receiver-performance-20261109/candidate-verified.json": "e64daf30bc6902ba3d17559555e161ea18241afd63b828f53a820d0e23b4bb3c",
+    "data/receiver-performance-20261109/candidate.log": "dd3a2b1d6427206531bf1f5f213f4bea62116073aac361a3c6a44eade2ba439f",
+    "data/receiver-performance-20261109/candidate/checkpoint-0938/manifest.json": "7b12b33db61563456ac0b203d9851c9b5a7e512aa337e77418106818397f617e",
+    "data/receiver-performance-20261109/candidate/panel-00.jsonl": "4023a021abaee2bfd6e77a59fb6f9926c1538b1c650bf1210fa103d3dea8ba20",
+    "data/receiver-performance-20261109/candidate/panel-04.jsonl": "c3e43afeee49ead508abde63671436ea610489225338aade9fe28125fb65b2fe",
+    "data/receiver-performance-20261109/candidate/plan.json": "da6e66cf19d56143752a1f574936e18c06eac0b4d093fec3817ea7835ce46619",
+    "data/receiver-performance-20261109/candidate/report.json": "12914630abbbb7acb7a1ea0daa762dc8f710853f425380eea616d832d05eb152",
+    "data/receiver-performance-20261109/candidate/training.jsonl": "a0153055a40e36ae5bd470abd5ec7720e48ad42a07a381e9e7348ad71a573095",
+    "data/receiver-performance-20261109/case-comparison.json": "dd569ba9c0370464e8df850c4a7e6c90383d1adefdabb32de6edb7c4abc6e310",
+    "data/receiver-performance-20261109/cohort-reports.json": "ea871c07d66ee892d63088ac685e99c3b1a8bb9088894c6016388e6976a54ecc",
+    "data/receiver-performance-20261109/control-verified.json": "fda4567982d366da9df330ef1db6da340ff14adc45366e108564160a0e113536",
+    "data/receiver-performance-20261109/control.log": "5203ece5192218432b1d67aafa42ec0fc3cf3e1b4fd9caa62e0156cea55ef7e6",
+    "data/receiver-performance-20261109/control/checkpoint-0938/manifest.json": "f616f4c9154ff2a4c4b7d5b58b5f8d67b9afd55baf80d758e5e234a0b3073452",
+    "data/receiver-performance-20261109/control/panel-00.jsonl": "cb24898d081ea8c53985ad56e799f7cc2771196ece3e10203fc702d45ea61f80",
+    "data/receiver-performance-20261109/control/panel-04.jsonl": "8deffa17f9a9c1e683611a612fd601ea002f8c40a077a654e8c85e49069682bf",
+    "data/receiver-performance-20261109/control/plan.json": "cd289c010fd6dca13667e3b0049a4a54956344f3db83be6356276fcf29a87d4d",
+    "data/receiver-performance-20261109/control/report.json": "3e0cd4bad2efcf315c683c8266d707859979fed029db3fedfad9fa9395c9d091",
+    "data/receiver-performance-20261109/control/training.jsonl": "c49438338f42c58f65cc4a00ae8a778a08efc8960c50ee7647d3fd7fabf429bb",
+    "data/receiver-performance-20261109/eval-candidate-verified.json": "cbe56de0eabac210e9f753fa8ccb223b2cfa6d9b275c339b1a9cf48b628e3134",
+    "data/receiver-performance-20261109/eval-candidate.log": "ada1989808dec08edabe8ef6bd7263df8460556d86c6794511c5d630553ea653",
+    "data/receiver-performance-20261109/eval-candidate/development-E.jsonl": "ac2bcd2d3e297a5124ea1ef922ba9ecacc9f2d7a90bb8d728e980f1d31c2f15f",
+    "data/receiver-performance-20261109/eval-candidate/development-X.jsonl": "6fa9879c7c4b928ac9c9e7d05f33d4be82c7cdbbd8ecce98b5e9b5d12ad36161",
+    "data/receiver-performance-20261109/eval-candidate/plan.json": "da6e66cf19d56143752a1f574936e18c06eac0b4d093fec3817ea7835ce46619",
+    "data/receiver-performance-20261109/eval-candidate/report.json": "de4744e39a449d43ae985a441d6438a7bc67e17934954ca5c1e31dec1929557c",
+    "data/receiver-performance-20261109/eval-control-verified.json": "6a43fc25e068c27185b9808bbf709b1c54b7b48bc03381f36ebe00921125fa87",
+    "data/receiver-performance-20261109/eval-control.log": "b8ef61c6307e953799bb0cd4b5bcdeedb2e5689ca0778e51e0f1806e6a53c874",
+    "data/receiver-performance-20261109/eval-control/development-E.jsonl": "47af4b05190e3c4e39a543a0923bfd0a136da843661854e30f95d82551770e3c",
+    "data/receiver-performance-20261109/eval-control/development-X.jsonl": "88dfe01f4d7e6dfbfaf7912ceceff0f2fd0f6af24a54d332236186906cbdcf00",
+    "data/receiver-performance-20261109/eval-control/plan.json": "cd289c010fd6dca13667e3b0049a4a54956344f3db83be6356276fcf29a87d4d",
+    "data/receiver-performance-20261109/eval-control/report.json": "10426482d6718188e3c4c0862a988316d822937d4c0f01c12487f592ede7878e",
+    "data/receiver-performance-20261109/final-verification.json": "6f5f8919a36c6f1f44b55b50afd94fe865451024c0a2b3d42c51c5e9502a2039",
+    "data/receiver-performance-20261109/host-observation-candidate-459.json": "8b546a351e430a9fa04de78dc3beee0fd3028c70fcb38cb42182b3cc59a50be1",
+    "data/receiver-performance-20261109/pair-comparison.json": "92912c631a33b7d87377119f617b047df08a5072e8c7138e6e686c498b95bdcc",
+    "data/receiver-performance-20261109/plans-qualified/candidate/plan.json": "b7220bb92511768d62256f73b57581efa0dbb6a6264f3d689a3569e687f33cc3",
+    "data/receiver-performance-20261109/plans-qualified/control/plan.json": "4da9d742927d7f9512a76e0e603f034e2987f9666d8ce7de79ac6dda30a1bad1",
+    "data/receiver-performance-20261109/recovery-migration.json": "9485a47b2972f6b3b6106717563b50ad31a770bf69be23ee75834f3d889e3196",
+    "data/receiver-performance-20261109/replay-parity.json": "d94637d2ab48942f785bb6863b11bdb4f97c0b06f0139c7d5ac13704c9d8cde5",
+    "data/receiver-performance-20261109/results.json": "4ebd72436741f963891c28228820eb70e78eda28378e4ee324cf71a3f506a557",
+    "data/redesign-format-v2-20261108/comparison-protocol.json": "2da758562ac3a5b4d9fb8981ef59f01ae2f6bcf5edebb7fc5d1b5f527705f63c",
+    "docs/evidence/compact-role-layout-coverage-v2.json": "bf3371842de42a80adf9b31bd89d895d02eab354ec5a28a867be22397d650dc5",
+    "docs/evidence/compact-role-qualification-v2.json": "70eb323d2f00a2a01e7c4059c3ab24094213c4c52621391ad1b366d1f4d3da2e",
+    "docs/evidence/receiver-performance-v1.json": "879dc7f8b1faa05bfef7a6c972d6672658bd800df801814b706306e3d089f29d"
+  },
+  "raw_reports": {
+    "data/receiver-performance-20261109/candidate/report.json": "12914630abbbb7acb7a1ea0daa762dc8f710853f425380eea616d832d05eb152",
+    "data/receiver-performance-20261109/control/report.json": "3e0cd4bad2efcf315c683c8266d707859979fed029db3fedfad9fa9395c9d091"
+  },
+  "receivers": {
+    "candidate": "c2ccf5effe3280176b062292fe0c600184e8fa7c6fbdf69d6a3650c1b424b5a2",
+    "control": "fe6ef6de35067681e986d81a7f63367712a7bf27972db916691f34d8b9adf918"
+  },
+  "recorded_at_utc": "2026-11-09T22:19:38.223521+00:00",
+  "return_failures": {
+    "candidate": {
+      "E": {
+        "direct request exceeds 256 positions; never crop": 3,
+        "no structurally compatible pointer entries": 4
+      },
+      "X": {}
+    },
+    "control": {
+      "E": {
+        "no structurally compatible pointer entries": 3,
+        "numeric literal": 2,
+        "reason aggregate bound": 12
+      },
+      "X": {
+        "reason aggregate bound": 30
+      }
+    }
+  },
+  "startup_retention": {
+    "candidate": {
+      "mapped_budget_changed": 0,
+      "maximum_budget_difference": 0,
+      "maximum_raw_difference": 0.0,
+      "missing": 0,
+      "paired": 1500,
+      "raw_changed": 0,
+      "scheduled": 1500,
+      "scope": "private startup-row freeze does not protect shared D features; overrides are not predictions"
+    },
+    "control": {
+      "mapped_budget_changed": 0,
+      "maximum_budget_difference": 0,
+      "maximum_raw_difference": 0.0,
+      "missing": 0,
+      "paired": 1500,
+      "raw_changed": 0,
+      "scheduled": 1500,
+      "scope": "private startup-row freeze does not protect shared D features; overrides are not predictions"
+    }
+  },
+  "status_cells": {
+    "Choice/Assessed": {
+      "candidate_delivered": 0,
+      "candidate_status": 1,
+      "control_delivered": 46,
+      "control_status": 47,
+      "scheduled": 50
+    },
+    "Choice/Conflicting": {
+      "candidate_delivered": 6,
+      "candidate_status": 6,
+      "control_delivered": 1,
+      "control_status": 1,
+      "scheduled": 10
+    },
+    "Choice/Insufficient": {
+      "candidate_delivered": 5,
+      "candidate_status": 5,
+      "control_delivered": 8,
+      "control_status": 8,
+      "scheduled": 10
+    },
+    "Choice/NoFeasibleChoice": {
+      "candidate_delivered": 5,
+      "candidate_status": 5,
+      "control_delivered": 3,
+      "control_status": 3,
+      "scheduled": 10
+    },
+    "Choice/Unresolved": {
+      "candidate_delivered": 0,
+      "candidate_status": 0,
+      "control_delivered": 4,
+      "control_status": 4,
+      "scheduled": 10
+    },
+    "Noul/Assessed": {
+      "candidate_delivered": 26,
+      "candidate_status": 79,
+      "control_delivered": 55,
+      "control_status": 76,
+      "scheduled": 80
+    },
+    "Noul/Conflicting": {
+      "candidate_delivered": 2,
+      "candidate_status": 2,
+      "control_delivered": 3,
+      "control_status": 3,
+      "scheduled": 10
+    },
+    "Noul/Insufficient": {
+      "candidate_delivered": 0,
+      "candidate_status": 0,
+      "control_delivered": 4,
+      "control_status": 4,
+      "scheduled": 40
+    },
+    "Noul/Unresolved": {
+      "candidate_delivered": 5,
+      "candidate_status": 5,
+      "control_delivered": 4,
+      "control_status": 4,
+      "scheduled": 10
+    },
+    "Score/Assessed": {
+      "candidate_delivered": 0,
+      "candidate_status": 47,
+      "control_delivered": 0,
+      "control_status": 45,
+      "scheduled": 50
+    },
+    "Score/Conflicting": {
+      "candidate_delivered": 4,
+      "candidate_status": 4,
+      "control_delivered": 5,
+      "control_status": 5,
+      "scheduled": 10
+    },
+    "Score/Insufficient": {
+      "candidate_delivered": 7,
+      "candidate_status": 7,
+      "control_delivered": 7,
+      "control_status": 7,
+      "scheduled": 10
+    },
+    "Score/Unresolved": {
+      "candidate_delivered": 3,
+      "candidate_status": 3,
+      "control_delivered": 1,
+      "control_status": 1,
+      "scheduled": 10
+    }
+  },
+  "training_defined_Noul_baseline": {
+    "assessed_training_records": 256,
+    "constant_truth": false,
+    "p_true_mean": 0.34375
+  },
+  "useful_improvement": "fail"
+}
