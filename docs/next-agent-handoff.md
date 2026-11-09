@@ -5,6 +5,27 @@ Read this first for current status, then the
 topic contracts. Historical reports describe their recorded sources and runs.
 This handoff records measured mechanisms, not learned capability.
 
+## Latest task — blind architecture proposal, 2026-11-09
+
+The user explicitly authorized one other agent to propose architecture,
+implementation and training from GIVEN/WHEN/THEN requirements, with no existing
+implementation context. A fresh `fork_turns:none` Sol/High agent received only
+`docs/blind-architecture-requirements-2026-11-09.md` (22 GIVEN clauses), no code,
+run results or performance measurements. It was prohibited tools/files/history/
+browsing and reports none used. Original proposal and one requirements-only
+training clarification are preserved separately. Start at
+`docs/blind-architecture-review-2026-11-09.md`; provenance/hash JSON is linked there.
+
+This is design-only, not adopted or executed. No code/weights/training plans or
+existing acceptance criteria changed; no model workload/new data/RD09/deployment.
+Review flags: move throughput gate before costly fits (proposal ordering conflict),
+justify proposed acceptance numbers, qualify frozen-encoder semantic fidelity,
+and specify shapes/losses/exposures before an executable plan. Do not silently
+replace the implementation or resume training based on this proposal. RD08 result
+and RD09 blocker remain below. Document validation passed: 22 GIVEN/WHEN/THEN
+clauses, brief/proposal/addendum hashes, local links and whitespace. Git history
+records the planning bundle delivery commit.
+
 ## Current result — RD08 complete, learning acceptance failed, 2026-11-09
 
 Both fixed fits completed all1500 existing records×4/6000 effective presentations/
