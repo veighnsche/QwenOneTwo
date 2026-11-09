@@ -881,3 +881,31 @@ Candidate launched from original188 with exact3090, same retained policy and
 log`candidate.log`, host session62708, actualPID878908. First full1500 initial head/delivery panel
 then fixed750-window fit then full final panel. No E/X evaluation or RD09 yet.
 Source/plans/qualification frozen; no duplicate or automatic extra training.
+
+## Candidate baseline and first-update resume verified — 2026-11-09
+
+CandidatePID878908 completed all1500 initial head/delivery observations and began
+the fixed750-window fit. Shared initial receiver, named Adam moments and CUDA/
+Python RNG hashes exactly match the completed control's original188 start. First
+update's actual model/moment/RNG checkpoint round-trip passes, and second update
+succeeds afterward. Raw`candidate-start-verified.json`; checkpoints0188 and0189
+are preserved. No failures so far. Sources/qualification/plans unchanged; no E/X
+evaluation, best-checkpoint selection, new data, extra passes or RD09.
+
+## Candidate125 checkpoint verified — 2026-11-09
+
+CandidatePID878908 passed125 effective windows/1000 presentations. Complete-window
+checkpoint`data/receiver-performance-20261109/candidate/checkpoint-0313`, manifestSHA
+`3a7c699b16d60367c4f6900c8e1d104fe6618942230d5022498ba32c59adb324`, stores historical313 counters/cursor1000. All four file
+hashes verify. Raw`candidate-checkpoint-125-verification.json`. No rejected
+exposures; fitting continues to750, then full1500 final observations. No E/X
+evaluation or RD09; production sources/plans/qualification stay frozen.
+
+## Candidate250 checkpoint verified — 2026-11-09
+
+CandidatePID878908 completed250 effective windows/2000 presentations. Complete-window
+checkpoint`data/receiver-performance-20261109/candidate/checkpoint-0438`, manifestSHA
+`9415d6f32b455c356167acc8ef0f13a55c90ba9b1c85c3b093450fc67fe32c8b`, stores historical438 counters/cursor2000. All four file
+hashes verify. Raw`candidate-checkpoint-250-verification.json`. No rejected
+exposures. Fixed fitting continues to750 and full final measurement before either
+E/X evaluation. No source/plan changes, additional passes or RD09.

@@ -5,6 +5,19 @@ Read this first for current status, then the
 topic contracts. Historical reports describe their recorded sources and runs.
 This handoff records measured mechanisms, not learned capability.
 
+## Current candidate progress — 2026-11-09
+
+CandidatePID878908 completed the full1500 initial observations and250 of750
+updates. Shared initial weights/moments/CUDA/Python RNG match control exactly;
+first-update restore round-trip passes. Checkpoint0438 stores250 effective
+updates/cursor2000, manifestSHA9415d6f32b455c356167acc8ef0f13a55c90ba9b1c85c3b093450fc67fe32c8b;
+all four files verify. Prior125 checkpoint0313 retained. Raw verification receipts
+`candidate-start-verified.json`, `candidate-checkpoint-{125,250}-verification.json`.
+No rejected exposures. ActualPID878908, host session62708, same output/log/plans
+as below. Do not duplicate or change sources/qualified evidence/plans midfit.
+Continue to750, then all1500 final observations; only then evaluate both arms.
+CPU/language questions did not authorize a midfit rewrite or extra learning.
+
 ## Current execution — control complete; direct candidate starting, 2026-11-09
 
 Control `data/receiver-performance-20261109/control/report.json` is
