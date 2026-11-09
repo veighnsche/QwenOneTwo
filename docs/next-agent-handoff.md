@@ -7,6 +7,13 @@ This handoff records measured mechanisms, not learned capability.
 
 ## Latest task — 4B weights downloaded, models unloaded, 2026-11-10
 
+The user subsequently requested placement in `Projects/QwenDec`. Standalone
+copies are at `/home/vince/Projects/QwenDec/Qwen3.5-4B` and
+`/home/vince/Projects/QwenDec/decision-4b`, with `models.json` beside them. All
+13 base files and10 adapter files match their recorded SHA256 hashes; no cache
+symlink dependency. Original cached artifacts are preserved. No model was loaded.
+
+
 The user requested Qwen3.5-4B and the best compatible decision LoRA to download.
 The cached official Qwen snapshot851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a was
 completed/verified; evalengine/decision-4b snapshot aadc55517ae8bfb1264fd5932ec452b939361e47

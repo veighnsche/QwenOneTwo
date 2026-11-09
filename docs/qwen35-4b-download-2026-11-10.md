@@ -6,7 +6,7 @@ verification task; no inference, fitting, training or runtime migration occurred
 | Artifact | Pinned revision | Local files |
 |---|---|---:|
 | [Qwen/Qwen3.5-4B](https://huggingface.co/Qwen/Qwen3.5-4B) | `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a` | 9,342,905,899 bytes, 13 files |
-| [evalengine/decision-4b](https://huggingface.co/evalengine/decision-4b) | `aadc55517ae8bfb1264fd5932ec452b939361e47` | 65,042,061 bytes, 11 files |
+| [evalengine/decision-4b](https://huggingface.co/evalengine/decision-4b) | `aadc55517ae8bfb1264fd5932ec452b939361e47` | 65,042,061 bytes, 10 files |
 
 The two base weight shards were already cached; missing README/license files
 were completed. The decision adapter and accompanying documentation/license/
@@ -40,6 +40,15 @@ trained 0.8B artifacts. No integration or acceptance change was made.
 [Interface and limitations](https://huggingface.co/evalengine/decision-4b#try-it).
 
 ## Verification and paths
+
+At the user's request, standalone, SHA256-verified copies are also installed at:
+
+- `/home/vince/Projects/QwenDec/Qwen3.5-4B`
+- `/home/vince/Projects/QwenDec/decision-4b`
+
+`/home/vince/Projects/QwenDec/models.json` records their revisions and file hashes.
+These are ordinary files, not symlinks into the cache; the original cache remains.
+
 
 - Base snapshot:
   `/home/vince/.cache/huggingface/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`
