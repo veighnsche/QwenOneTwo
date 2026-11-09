@@ -265,6 +265,20 @@ def reference_objective(reference, annotation, provenance, *, operation=None, co
 def state_fingerprint(state):
     """Content identity of named small tensors, independent of serialization."""
     from .inputs import canonical
+    from .host_metrics import fingerprint_batch_bytes,packed_fingerprint
+    batch=fingerprint_batch_bytes()
+    if batch:
+        def entries():
+            for name,tensor in sorted(state.items()):
+                if not tensor.is_cuda:raise ValueError('packed fingerprint requires CUDA tensors')
+                header=canonical({'name':name,'shape':list(tensor.shape),'dtype':str(tensor.dtype)})
+                value=tensor.detach().contiguous().reshape(-1).view(torch.uint8)
+                yield header,value,value.numel()
+        def read_group(values):
+            if any(v.device!=values[0].device for v in values):
+                raise ValueError('packed fingerprint requires one CUDA device')
+            return readback_bytes(torch.cat(values))
+        return packed_fingerprint(entries(),read_group,batch)
     h = hashlib.sha256()
     for name,tensor in sorted(state.items()):
         h.update(canonical({'name':name,'shape':list(tensor.shape),'dtype':str(tensor.dtype)}))

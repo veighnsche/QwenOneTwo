@@ -18,6 +18,8 @@ from ..codec.layout import GPU_CHECKS as DIRECT_GPU_CHECKS
 from .reference_qualification import PROFILE
 from .release import decode, load_release
 from .two_gpu import ROOT, CHECKPOINT, CHECKPOINT_SHA, REFERENCE
+from .receiver_performance import (LEGACY as DEFAULT_EXECUTION,policy as execution_policy,
+                                   require_qualification,GPU_CHECKS as PERFORMANCE_CHECKS,EVIDENCE as PERFORMANCE_EVIDENCE)
 
 PROTOCOL = 'receiver-preparation-v1'
 COVERAGE = 'docs/evidence/redesign-coverage-v1.json'
@@ -64,7 +66,8 @@ def initial_state(root=ROOT):
     return saved, ownership
 
 
-def prepare(snapshot, input_profile, *, regime='component', root=ROOT):
+def prepare(snapshot, input_profile, *, regime='component', root=ROOT, execution=DEFAULT_EXECUTION):
+    performance=execution_policy(execution)
     spec = profile(input_profile, regime)
     snapshot = Path(snapshot).resolve()
     check(file_hash(snapshot/'model.safetensors-00001-of-00001.safetensors') == BASE_SHA, 'base snapshot identity mismatch')
@@ -179,6 +182,11 @@ def prepare(snapshot, input_profile, *, regime='component', root=ROOT):
         contract['required_evidence']={'historical_RD07':file_hash(root/'docs/evidence/redesign-qualification-v1.json'),
             'changed_v2':file_hash(qpath) if qpath.exists() else None,
             'native_regime':'unsupported; no RD09 execution','qualification_required_before_fit':True}
+    if execution!=DEFAULT_EXECUTION:
+        contract['execution_policy']=performance
+        contract['required_evidence']['performance_checks']={key:'pending_GPU_hold' for key in PERFORMANCE_CHECKS}
+        path=root/PERFORMANCE_EVIDENCE
+        contract['required_evidence']['performance_qualification_sha256']=file_hash(path) if path.exists() else None
     run_sha = digest(canonical(contract))
     identities = dict(saved['identities'], protocol=run_sha, sources=digest(canonical(sources)))
     return {'contract': contract, 'run_sha256': run_sha, 'checkpoint_identities': identities,
@@ -189,15 +197,21 @@ def validate_plan(plan):
     check(plan['status'] == 'PREPARED_NOT_EXECUTED' and digest(canonical(plan['contract'])) == plan['run_sha256'],
           'prepared plan identity drift')
     contract = plan['contract']
+    if 'execution_policy' in contract:
+        check(contract['execution_policy']==execution_policy(contract['execution_policy']['name']),
+              'receiver execution policy drift')
     check(contract['profile'] == profile(contract['input_profile'], contract['regime']), 'prepared profile definition drift')
     check(contract['gpu_uuid'] == PRIMARY and plan['checkpoint_identities'] == dict(
         contract['initial_checkpoint']['identities'], protocol=plan['run_sha256'],
         sources=digest(canonical(contract['dependencies']['sources']))), 'prepared profile/checkpoint identity')
 
 
-def load_plan(path, snapshot, input_profile, regime='component'):
+def load_plan(path, snapshot, input_profile, regime='component', *, execution=DEFAULT_EXECUTION):
     plan = decode(Path(path).read_bytes()); validate_plan(plan)
-    check(plan == prepare(snapshot, input_profile, regime=regime), 'stale profile/release/dependency/checkpoint plan')
+    check(plan['contract'].get('execution_policy',execution_policy(DEFAULT_EXECUTION))==execution_policy(execution),
+          'receiver execution policy mismatch')
+    kwargs={} if execution==DEFAULT_EXECUTION else {'execution':execution}
+    check(plan == prepare(snapshot, input_profile, regime=regime,**kwargs), 'stale profile/release/dependency/checkpoint plan')
     return plan
 
 
@@ -279,6 +293,14 @@ def admit_execution(plan, *, gpu, input_profile, regime):
     check(gpu == PRIMARY, '3090 UUID required; never CPU/3060')
     check(input_profile == plan['contract']['input_profile'] and regime == plan['contract']['regime'],
           'execution profile/regime mismatch')
+    require_qualification(plan['contract'],ROOT)
+    if plan['contract'].get('execution_policy',{}).get('name') not in (None,DEFAULT_EXECUTION):
+        import subprocess
+        check(subprocess.check_output(['git','show','HEAD:'+PERFORMANCE_EVIDENCE],cwd=ROOT)==
+              (ROOT/PERFORMANCE_EVIDENCE).read_bytes(),'performance qualification must be committed before fitting')
+        check(subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT).strip()==
+              subprocess.check_output(['git','rev-parse','refs/remotes/origin/main'],cwd=ROOT).strip(),
+              'performance qualification must be pushed before fitting')
     if plan['contract']['profile']['implementation']=='compact-v2':
         qualification_path=ROOT/'docs/evidence/compact-role-qualification-v2.json'
         qualification=decode(qualification_path.read_bytes())
@@ -299,8 +321,8 @@ def admit_execution(plan, *, gpu, input_profile, regime):
           'profile implementation/qualification pending RD-03..07; preparation is not execution authorization')
 
 
-def prepare_to(output, snapshot, input_profile, regime):
+def prepare_to(output, snapshot, input_profile, regime, *, execution=DEFAULT_EXECUTION):
     meter = Recorder()
     with meter.span('prepare'):
-        plan = prepare(snapshot, input_profile, regime=regime)
+        plan = prepare(snapshot, input_profile, regime=regime,execution=execution)
     return write_preparation(output, plan, meter.snapshot())

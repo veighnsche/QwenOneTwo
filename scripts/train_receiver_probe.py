@@ -1,6 +1,7 @@
 """Eight-repeat, 32-record training-only learnability probe; frozen W/R/reference."""
 import argparse
 from collections import Counter
+from contextlib import ExitStack
 import json
 import math
 import os
@@ -16,6 +17,8 @@ from qwen_one_two.training.learning_report import PROTOCOL,probe_panel,summarize
 from scripts.fit_reference import TRAIN_SHA,DEV_SHA
 from qwen_one_two.g1_device import PRIMARY,require_visibility
 from qwen_one_two.training.receiver_profiles import LEGACY, PROFILES
+from qwen_one_two.training.receiver_performance import (
+    LEGACY as DEFAULT_EXECUTION,PROFILES as EXECUTION_POLICIES,execution_scope,require_matching_policy)
 
 BALANCE_PROTOCOL='receiver-loss-balance-v1'
 BALANCE_OVERRIDES={'status':.1,'feasibility':.05}
@@ -86,6 +89,7 @@ def main():
     action.add_argument('--prepare',action='store_true');action.add_argument('--execute-gpu',action='store_true');action.add_argument('--evaluate-gpu',action='store_true')
     parser.add_argument('--input-profile',choices=tuple(PROFILES))
     parser.add_argument('--regime',choices=('component','native'),default='component')
+    parser.add_argument('--execution-policy',choices=EXECUTION_POLICIES,default=DEFAULT_EXECUTION)
     parser.add_argument('--peer-report',help='other completed matched arm; required before RD08 development evaluation');parser.add_argument('--prepared-plan');parser.add_argument('--resume');parser.add_argument('--resume-sha256')
     parser.add_argument('--loss-balance-baseline',help='completed v1 control; run the single fixed tenfold reduction')
     a=parser.parse_args()
@@ -94,17 +98,18 @@ def main():
     if a.prepare:
         check(a.input_profile is not None and not any((a.prepared_plan,a.resume,a.loss_balance_baseline)),
               'prepare requires one explicit input profile; no execution/resume/comparison flags')
-        receipt=planning.prepare_to(a.output,a.snapshot,a.input_profile,a.regime)
+        receipt=planning.prepare_to(a.output,a.snapshot,a.input_profile,a.regime,execution=a.execution_policy)
         print(json.dumps(receipt));return
     prepared=None
     if a.prepared_plan:
         check(a.input_profile is not None and not a.loss_balance_baseline,'prepared execution requires explicit profile; no historical comparison flags')
-        prepared=planning.load_plan(a.prepared_plan,a.snapshot,a.input_profile,a.regime)
+        prepared=planning.load_plan(a.prepared_plan,a.snapshot,a.input_profile,a.regime,execution=a.execution_policy)
         planning.admit_execution(prepared,gpu=os.environ.get('CUDA_VISIBLE_DEVICES'),input_profile=a.input_profile,regime=a.regime)
         if a.resume:planning.inspect_resume(prepared,a.resume,a.resume_sha256)
     else:
         check(a.input_profile in (None,LEGACY) and a.regime=='component' and not a.resume,
               'new profiles/resume require an exact prepared plan')
+        check(a.execution_policy==DEFAULT_EXECUTION,'receiver performance policy requires an exact prepared plan')
     full=bool(prepared and prepared['contract']['profile']['implementation']=='compact-v2')
     if a.evaluate_gpu:
         check(full and a.resume and a.peer_report,'RD08 evaluation requires final checkpoint and completed peer')
@@ -113,6 +118,7 @@ def main():
               and peer['scheduled_probe_windows']==750,'both fixed fits must finish before dev evaluation')
         check(peer_plan['input_profile']!=a.input_profile and peer_plan['sources']==prepared['contract']['dependencies']['sources']
               and peer_plan['training_order']==prepared['contract']['training_order'],'matched peer identity/order')
+        require_matching_policy(peer_plan,a.execution_policy)
         check(planning.inspect_resume(prepared,a.resume,a.resume_sha256)['sampler']['cursor']==6000,'final checkpoint required')
     else:check(a.peer_report is None,'peer report belongs only to evaluation')
     require_visibility();check(os.environ['CUDA_VISIBLE_DEVICES']==PRIMARY,'3090 only')
@@ -142,6 +148,7 @@ def main():
         'snapshot':str(Path(a.snapshot).resolve()),'input_profile':a.input_profile or LEGACY,'training_order':exposure_order}
     if comparison:plan['loss_balance']=comparison
     if prepared:plan['prepared_run_sha256']=prepared['run_sha256']
+    if a.execution_policy!=DEFAULT_EXECUTION:plan['execution_policy']=prepared['contract']['execution_policy']
     (out/'plan.json').write_bytes(canonical(plan))
     for name in sources:
         target=out/'source'/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(ROOT/name,target)
@@ -172,7 +179,7 @@ def main():
     persist()
     def emit(**v):print(json.dumps(v,allow_nan=False),flush=True)
     execution_meter=Recorder()
-    with sdpa_kernel(SDPBackend.MATH), execution_meter.patch([
+    with ExitStack() as execution, sdpa_kernel(SDPBackend.MATH), execution_meter.patch([
             (CleanEncoder,'_states','offline_source_encoding_calls'),
             (Reference,'annotation_states','offline_reference_encoding_calls'),
             (Session,'__init__','session_constructions'),(Session,'prefill','prefill_calls')]):
@@ -182,6 +189,7 @@ def main():
             @property
             def coefficients(self):return dict(super().coefficients,**BALANCE_OVERRIDES)
         w=(BalanceWindow if comparison else Window)(owned,'components');b.checkpointing=True
+        report['execution_policy']=execution.enter_context(execution_scope(b,a.execution_policy))
         if comparison:
             check(Window.coefficients.fget(w)['status']==1. and Window.coefficients.fget(w)['feasibility']==.5,
                   'baseline coefficient defaults changed')

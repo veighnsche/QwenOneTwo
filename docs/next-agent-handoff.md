@@ -5,7 +5,50 @@ Read this first for current status, then the
 topic contracts. Historical reports describe their recorded sources and runs.
 This handoff records measured mechanisms, not learned capability.
 
-## Current operating permission — RD-08 GPU work paused, 2026-11-09
+## Current status — performance implementation; GPU hold persists, 2026-11-09
+
+The user requested improved performance. Implemented explicit
+`retained-activations-v1`: one episode's activations retained instead of layer
+recomputation for each component VJP, recurrence scratch capacity32, packed32MiB
+fingerprint readbacks with byte-exact original canonical hashing. Default
+`checkpointed-v1` remains unchanged. No shared eight-episode graph, combined
+loss/VJP, precision/optimizer/eligibility change, skipped check, hash cache or OOM
+fallback. Existing runner/plans bind and report the policy, reject mismatched
+peer policies, and reject the candidate before model loading until source-bound
+performance evidence and affected v2 qualification pass and are committed/pushed.
+
+**GPU hold remains.** No model workload, optimizer update, device probe, training
+resume, source/protocol checkpoint migration or service change in this task.
+PERF-01 packed-hash parity, PERF-02 retained joint update/resume and PERF-03 paired
+throughput/memory are pending. No actual speedup or retained-memory fit is claimed.
+See [performance contract/report](receiver-performance-v1.md) and
+[pending evidence](evidence/receiver-performance-v1.json). Future GPU test code
+uses exactly12 discarded diagnostic updates/96 existing presentations, both
+interfaces and three alternating pairs; it is not automatic RD-08 continuation.
+Worst-case memory and affected long v2 qualification also remain prerequisites.
+
+35 distinct model-free tests pass (34 initial plus21 refreshed including one new
+peer-policy check); two GPU classes skipped. Model imports blocked. Real opaque
+checkpoint bytes preserve all1024 tensors' canonical hash and original reference
+artifact exactly;32MiB packs use4 groups for the full bundle and2 for reference.
+These are planned byte groups, not measured CUDA copies/speedup.13 arithmetic/
+optimizer/episode/checkpoint files, Reference class and full training-loop AST
+are unchanged. The unrelated historical profiling-plan input-drift failure is
+reproduced on baseline8e63aaa; retained, not waived.
+
+**Recovery state changed externally:** former pausedPID618710 is now absent.
+Read-only host process inspection found no matching replacement trainer; cause
+unknown. No newer checkpoint exists. The control log still ends at599 updates,
+but only500 are recoverable from checkpoint0688; all four file hashes verify.
+The99 unsaved updates are not reconstructible from known artifacts. This task
+did not signal/restart/kill the trainer. The serverPID2094 remains untouched.
+Raw process receipt: `data/receiver-performance-20261109/process-state.json`.
+Do not follow older instructions to SIGCONT the vanished PID, claim599-state
+recovery or automatically restart/rollback to500. After GPU permission returns,
+resolve missing-state/rollback accounting explicitly, qualify current sources,
+and bind any compatible checkpoint migration. Candidate/E/X/RD09 unstarted.
+
+## Previous operating permission — RD-08 GPU work paused, 2026-11-09
 
 The user reported being told to turn off the GPU now and asked what progress
 would be lost. Only the verified RD-08 trainer PID618710 was sent SIGSTOP; its

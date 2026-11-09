@@ -19,12 +19,12 @@ because a later queued task starts.
 | RD-05 | delivered | Joint objectives, owners, binding/mask tests; deferred GPU IDs | `fe90af0` pushed/verified; [report](redesign-rd05-results-2026-11-08.md), [evidence](evidence/joint-receiver-objectives-v1.json); 74 static tests pass +14 refreshed; two new GPU checks resolved by RD-07; Reason masks preserved |
 | RD-06 | delivered | Native wiring/eligibility report; deferred real-return/gradient IDs | `6f74680` pushed/verified; [report](redesign-rd06-results-2026-11-08.md), [evidence](evidence/direct-native-flow-v1.json); 86 static tests pass +10 refreshed; two new GPU checks resolved by RD-07; zero complete corpus formation/semantic continuation/direct reader support |
 | RD-07 | delivered | All required deferred/changed-path 3090 checks pass; actual counts/hashes | [Report](redesign-rd07-results-2026-11-08.md), [evidence](evidence/redesign-qualification-v1.json); ten deferred +three new GPU checks pass; twelve1024 traces; zero updates; `7da99c6` pushed and verified |
-| RD-08 | in_progress | Complete matched fit/evaluation receipts; useful-improvement separate | [v2 report](receiver-matched-v2-results-2026-11-08.md), [pause evidence](evidence/receiver-matched-v2-pause-2026-11-09.json); full1500 support,18 GPU IDs resolved,104 distinct static test results; control paused at599 updates,500 on disk; candidate/evaluation unstarted; user GPU hold |
+| RD-08 | in_progress | Complete matched fit/evaluation receipts; useful-improvement separate | [v2 report](receiver-matched-v2-results-2026-11-08.md), [performance/recovery update](receiver-performance-v1.md);599 control updates logged,500 on disk; former trainer absent, no restart; GPU hold; PERF-01..03 and changed-source qualification pending; candidate/evaluation unstarted |
 | RD-09 | blocked | Accepted RD-08 receiver plus eligible native run/evaluation receipts | [Report](redesign-rd09-results-2026-11-08.md), [evidence](evidence/native-demonstration-rd09-v1.json); conditional authorization recorded; blocked on RD-08/no accepted receiver and zero native supervision; execution unstarted, zero updates; blocker `a864b65` pushed/verified |
 
 RD-07 is delivered; technical acceptance passes and implementation `7da99c6` is pushed/verified.
 All ten deferred GPU checks are resolved; no required RD-07 check remains pending.
-Earliest unfinished slice: **RD-08**, paused following the user's GPU-off constraint on2026-11-09. Format recovery provides1500/1500 shared support and changed-path qualification passes. Control has599 completed updates,500 saved on disk; candidate/evaluation/RD09 remain unstarted. No automatic GPU resume.
+Earliest unfinished slice: **RD-08**, under the user's GPU-off hold. Control has599 logged updates,500 saved on disk; former trainer is now absent. No automatic rollback/restart or fabricated599 recovery. Format recovery provides1500/1500 support; performance implementation needs PERF-01..03 and current-source qualification. Candidate/evaluation/RD09 remain unstarted.
 
 For each attempted slice add a short entry with implementation/evidence paths,
 exact commands/results, dependency hashes, relevant implementation commits and
@@ -33,10 +33,11 @@ RD-07 resolves them. Record active run manifest/PID/log/checkpoint paths when a
 long job starts, and update them when it finishes or is interrupted. Store raw
 artifacts locally under `data/`; commit concise reports/portable evidence only.
 
-Current RD-01..07 technical implementation blockers: **none**. The historical
+Historical RD-01..07 technical implementation blockers: **none**. The historical
 direct-v1 zero-support blocker is resolved by the explicitly authorized v2 format
 revision and full audit. Current execution holds for the user's GPU-off constraint.
 RD-01 data/native supervision limits remain; qualification does not waive them.
+New performance/source changes require affected GPU qualification before fresh fits.
 
 ## RD-01 — 2026-11-08
 
@@ -738,3 +739,36 @@ CPUs over2s, sparse per-process GPU samples10/1/17%. Last125 windows38.817s mean
 14.272 component VJPs mean, correlation0.826. Separate backwards/host integrity
 readbacks remain; no component profiler or measured optimization. No fit setting
 or source change. Current execution hold supersedes earlier GPU reopening.
+
+## Performance implementation under GPU hold — 2026-11-09
+
+User request: improve performance. Explicit retained-activations-v1 policy uses
+one-episode activation retention,32 recurrence workspaces and32MiB packed current-
+content fingerprints. Existing loss masks/component VJPs/accumulation/clipping/
+optimizer/precision/accounting and complete1500×4 schedules stay unchanged.
+Default checkpointed policy remains; matching peer policy is enforced. New
+performance evidence must pass with exact current sources and committed/pushed
+bytes before candidate admission. Old v2 qualification is not relabeled current.
+
+35 distinct model-free tests pass:34 in110.141s, final21 refreshed including one
+new peer-policy check; model imports blocked, two GPU classes skipped. Actual
+opaque checkpoint byte parity passes1024 tensors and original reference hash.
+Source proof preserves13 arithmetic/optimizer/episode/checkpoint files, Reference
+class and full training loop. Historical ProfilingPlanTests input-drift failure
+reproduces at baseline8e63aaa; logs retained, no waiver. No measured GPU speedup.
+PERF-01..03 and affected v2/worst-case-memory qualification remain pending.
+
+See [report/contract](receiver-performance-v1.md) and
+[pending source-bound evidence](evidence/receiver-performance-v1.json). Raw
+metadata plans under data/receiver-performance-20261109/plans retain1500 records,
+6000 presentations/750 windows each; admission rejects pending GPU checks before
+model imports. Preparation is not execution. No new model work, updates/data,
+training resume, checkpoint migration, RD09, agents, services or fan/device change.
+
+A host metadata check found former pausedPID618710 absent, no replacement
+trainer and no newer checkpoint; cause unknown. Existing log ends599 updates,
+but only500 are persisted in checkpoint0688 (all four file hashes verified).
+The99 unsaved updates cannot be reconstructed from known logs/files. This task
+did not signal/restart/kill it. Keep GPU hold; resolve missing-state/rollback
+accounting and source qualification before any later authorized recovery. Do not
+claim the absent process is still paused or that500 saved updates contain599.

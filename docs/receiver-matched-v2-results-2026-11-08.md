@@ -6,7 +6,9 @@ full shared training support. Development coverage is E127/130 and X180/180;
 three oversized E requests remain explicit failures under request256. This
 removes the training coverage blocker; it does not establish useful learning.
 The fixed RD-08 comparison resumed, then paused on2026-11-09 following the user's
-GPU-off constraint. Control has599 completed updates,500 saved on disk; candidate
+GPU-off constraint. Control has599 logged updates,500 saved on disk; the former
+trainer is now absent, with no newer checkpoint found. See the
+[performance/recovery update](receiver-performance-v1.md). Candidate
 and development evaluations remain unstarted. Useful improvement is not evaluated.
 RD-09 remains unstarted. See [pause evidence](evidence/receiver-matched-v2-pause-2026-11-09.json).
 

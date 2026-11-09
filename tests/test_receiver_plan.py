@@ -121,6 +121,22 @@ class ReceiverPlanTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'profile/regime'):
                 self.planning.admit_execution(self.plan,gpu=self.planning.PRIMARY,input_profile=name,regime=regime)
 
+    def test_performance_policy_binds_plan_and_blocks_unqualified_execution(self):
+        from qwen_one_two.training.receiver_performance import RETAINED,policy,GPU_CHECKS
+        faster=self.planning.prepare(self.snapshot,self.plan['contract']['input_profile'],execution=RETAINED)
+        self.assertEqual(faster['contract']['execution_policy'],policy(RETAINED))
+        for field in ('training_order','owners','objectives','initial_checkpoint','exposures'):
+            self.assertEqual(faster['contract'][field],self.plan['contract'][field])
+        self.assertNotEqual(faster['run_sha256'],self.plan['run_sha256'])
+        self.assertEqual(set(faster['contract']['required_evidence']['performance_checks']),set(GPU_CHECKS))
+        with self.assertRaisesRegex(ValueError,'performance GPU qualification pending'):
+            self.planning.admit_execution(faster,gpu=self.planning.PRIMARY,
+                input_profile=faster['contract']['input_profile'],regime='component')
+        with tempfile.TemporaryDirectory() as temp:
+            path=Path(temp)/'plan.json';path.write_bytes(canonical(faster))
+            with self.assertRaisesRegex(ValueError,'execution policy mismatch'):
+                self.planning.load_plan(path,self.snapshot,faster['contract']['input_profile'])
+
     def test_plan_drift_and_stale_dependencies_reject(self):
         p = deepcopy(self.plan);p['contract']['releases']['training']='0'*64
         with self.assertRaisesRegex(ValueError,'identity drift'):self.planning.validate_plan(p)

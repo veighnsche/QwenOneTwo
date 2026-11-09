@@ -10,6 +10,48 @@ from functools import wraps
 import time
 
 _active=ContextVar('qot_host_metrics',default=None)
+_fingerprint_batch_bytes=ContextVar('qot_fingerprint_batch_bytes',default=0)
+
+
+@contextmanager
+def fingerprint_transfers(max_bytes):
+    """Explicit process-local audit policy; never reuse a content hash."""
+    if type(max_bytes) is not int or max_bytes < 0:
+        raise ValueError('nonnegative fingerprint batch size required')
+    token=_fingerprint_batch_bytes.set(max_bytes)
+    try:yield
+    finally:_fingerprint_batch_bytes.reset(token)
+
+
+def fingerprint_batch_bytes():return _fingerprint_batch_bytes.get()
+
+
+def packed_fingerprint(entries,read_group,max_bytes):
+    """Hash the original interleaved metadata/bytes through grouped transfers.
+
+    Entries are (canonical header bytes, opaque buffer, byte count), already in
+    canonical name order. Groups hold at most max_bytes, except an individual
+    larger buffer, which is transferred alone. No numeric operation or hash
+    cache is involved. The reader must return exactly the requested bytes.
+    """
+    import hashlib
+    if type(max_bytes) is not int or max_bytes <= 0:
+        raise ValueError('positive fingerprint batch size required')
+    h=hashlib.sha256();group=[];size=0
+    def consume():
+        body=memoryview(read_group([value for _,value,_ in group]))
+        if len(body)!=size:raise ValueError('fingerprint readback byte count mismatch')
+        offset=0
+        for header,_,count in group:
+            h.update(header);h.update(body[offset:offset+count]);offset+=count
+    for header,value,count in entries:
+        if not isinstance(header,bytes) or type(count) is not int or count<0:
+            raise ValueError('invalid fingerprint entry')
+        if group and size+count>max_bytes:
+            consume();group=[];size=0
+        group.append((header,value,count));size+=count
+    if group:consume()
+    return h.hexdigest()
 
 
 def stamp():
