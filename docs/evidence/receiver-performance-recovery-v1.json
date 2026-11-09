@@ -1,0 +1,97 @@
+{
+  "RD09_started": false,
+  "cursor": 4000,
+  "destination_checkpoint": "data/receiver-performance-20261109/migrated-control/checkpoint-0688",
+  "destination_manifest_sha256": "00928d0150dc6e16055206651a0fb865b2b888ce2b94deca298075e7bd0ed968",
+  "extra_effective_passes": 0,
+  "initial_measurement": {
+    "path": "data/redesign-format-v2-20261108/control/panel-00.jsonl",
+    "preserve_original_source_provenance": true,
+    "records": 1500,
+    "sha256": "cb24898d081ea8c53985ad56e799f7cc2771196ece3e10203fc702d45ea61f80"
+  },
+  "last_logged_updates": 599,
+  "lost_completed_window_presentations": 792,
+  "lost_logged_windows": 99,
+  "metadata_preparations": {
+    "candidate": {
+      "path": "data/receiver-performance-20261109/plans-qualified/candidate/plan.json",
+      "run_sha256": "61ec37ee421d5ed8b4ef32e0d09a55c572f7a5e007980cbc50054d30215af52e",
+      "sha256": "b7220bb92511768d62256f73b57581efa0dbb6a6264f3d689a3569e687f33cc3"
+    },
+    "control": {
+      "path": "data/receiver-performance-20261109/plans-qualified/control/plan.json",
+      "run_sha256": "2cdd817f25053d1bba56b8542005d9b54fcac341fc70cbc16635b6d980aaca36",
+      "sha256": "4da9d742927d7f9512a76e0e603f034e2987f9666d8ce7de79ac6dda30a1bad1"
+    }
+  },
+  "migration_script": {
+    "path": "data/receiver-performance-20261109/migrate_recovery.py",
+    "sha256": "0dc1ce340cc2d8d65060b8767303132d26a67acbe54aee6b9513acc1ca4dd5b9"
+  },
+  "new_candidate_plan_sha256": "b7220bb92511768d62256f73b57581efa0dbb6a6264f3d689a3569e687f33cc3",
+  "new_data": false,
+  "new_plan": "data/receiver-performance-20261109/plans-qualified/control/plan.json",
+  "new_plan_sha256": "4da9d742927d7f9512a76e0e603f034e2987f9666d8ce7de79ac6dda30a1bad1",
+  "old_plan": "data/redesign-format-v2-20261108/plans-cache/control/plan.json",
+  "old_plan_sha256": "34c049f18a8071f393b250c91cfa3e0efbdfea1c321f384f0dae27498ef3447c",
+  "original_attempts": {
+    "path": "data/redesign-format-v2-20261108/control-resumed/training.jsonl",
+    "prefix_window": 1,
+    "recorded_windows": 598,
+    "sha256": "76c916e0dde154bf5a02e8b0265f4a70af2912a8dcb4470fc3511052e7d53fb3"
+  },
+  "physical_completed_window_accounting": "prior599 logged updates plus250 recovery updates =849 recorded completed updates, including99 lost/replayed windows; any unflushed work immediately before process loss remains unknown",
+  "preserved_effective_updates": 500,
+  "preserved_files": {
+    "effective-rows.safetensors": "e4c8b0d79d207ba17e96e98a902158109651c8c4fed8d0e5e44fbafa7af4b4e8",
+    "optimizer.pt": "331f528b3769658dd61c2ff0b664c56660994387c9bd6d6bb641bc5ddc223070",
+    "rng.pt": "cbc25a4884a7dd5171506ca5b894fc879f72440ac789b87d2a736686609ee439",
+    "weights.safetensors": "1e3d597f8f22025cc3ed83e790ac2fecca1e6aae37e6610e6a2e79a941cd941f"
+  },
+  "preserved_owners_shapes_objectives_order": true,
+  "preserved_sampler_receipts": true,
+  "protocol": "receiver-performance-recovery-v1",
+  "qualified_policy": {
+    "activation_checkpointing": false,
+    "automatic_OOM_fallback": false,
+    "component_VJPs": "unchanged separate gradients",
+    "episode_graphs_retained": 1,
+    "fingerprint_batch_bytes": 33554432,
+    "name": "retained-activations-v1",
+    "optimizer_and_objectives": "unchanged",
+    "recurrence_cache_entries": 32
+  },
+  "raw_receipt": {
+    "path": "data/receiver-performance-20261109/recovery-migration.json",
+    "sha256": "9485a47b2972f6b3b6106717563b50ad31a770bf69be23ee75834f3d889e3196"
+  },
+  "remaining_effective_presentations": 2000,
+  "remaining_effective_windows": 250,
+  "replay_policy": "repeat only work lost after last compatible complete-window checkpoint; retain500 saved windows; final effective order remains1500x4/6000/750",
+  "scope": "only qualified source/protocol/policy metadata bindings change; every weight/Adam/RNG byte unchanged; not a fabricated599-state artifact",
+  "source_checkpoint": "data/redesign-format-v2-20261108/control-resumed/checkpoint-0688",
+  "source_delta": {
+    "qwen_one_two/training/host_metrics.py": {
+      "current": "2f42449b20bf9343294b291365c180b5e5a03d7ecb9eccb26971c09a259199bd",
+      "previous": "d544d401b6a970f14ba614026c699f0f83c2b1ad6809cd6d6ed41588c45906bc"
+    },
+    "qwen_one_two/training/receiver_performance.py": {
+      "current": "a6a0b8e5793ec82b5e39a0c42305596a02635e4f475eba940166d6bd9a81c3a7",
+      "previous": null
+    },
+    "qwen_one_two/training/receiver_plan.py": {
+      "current": "fa860597cbfeda2684d0d83f53bf785f3e4a16a09fc9b734c88aaf22dcfe38ab",
+      "previous": "2d68091261fa328c9ec98a772f841cf7cc8ff05cafe779293dc393689e5ce127"
+    },
+    "qwen_one_two/training/reference.py": {
+      "current": "527b981bfcc2d98c2c024630838321b631ceb4995bcee736a64df3e9c8e16189",
+      "previous": "44cbd6da4b3374d3de7082cac633f9b63fd91cef768bd8462a01fcb17c0f2aec"
+    },
+    "scripts/train_receiver_probe.py": {
+      "current": "e550527199909ded14635fb769f9ab60a95a6378804cc876ce05797cf06e85dc",
+      "previous": "ab755f57d677219d500196bb56d08cfcf5fbe366b4d30c74d09562847a1b6018"
+    }
+  },
+  "source_manifest_sha256": "2eaea42f7bbbbc0a125c51f0b06016afbda2fa1011c913a05c912202269d91aa"
+}

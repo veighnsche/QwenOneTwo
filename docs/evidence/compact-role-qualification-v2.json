@@ -14,103 +14,117 @@
     "static_negative_tests": "unchanged content permits rebind; changed bytes, artifact identity or ownership rejects;3 tests pass in0.109s"
   },
   "checks": {
+    "PERF-GPU-MAX-CORPUS": {
+      "run": "retained-current-source",
+      "scope": "eight metadata-selected existing records per interface, maximum request256, complete component VJPs, no optimizer steps",
+      "status": "pass",
+      "test": "tests.test_compact_roles_gpu.CompactResumeGPU.test_largest_existing_windows"
+    },
     "RD03-GPU-CACHE-PARITY": {
-      "run": "gpu-1",
-      "scope": "unchanged kernel/legacy path; admission/measurement delta requalified in gpu-2",
+      "run": "retained-current-source",
+      "scope": "actual refreshed retained-policy qualification; earlier evidence retained in previous manifest",
       "status": "pass",
       "test": "tests.test_frozen_source_gpu.FrozenSourceGPU.test_cache_matches_uncached_and_preserves_bindings"
     },
     "RD03-GPU-CONSUMER-GRADIENTS": {
-      "run": "gpu-1",
-      "scope": "unchanged kernel/legacy path; admission/measurement delta requalified in gpu-2",
+      "run": "retained-current-source",
+      "scope": "actual refreshed retained-policy qualification; earlier evidence retained in previous manifest",
       "status": "pass",
       "test": "tests.test_frozen_source_gpu.FrozenSourceGPU.test_consumer_gradients_and_frozen_W"
     },
     "RD03-GPU-D-INDEPENDENCE": {
-      "run": "gpu-1",
-      "scope": "unchanged kernel/legacy path; admission/measurement delta requalified in gpu-2",
+      "run": "retained-current-source",
+      "scope": "actual refreshed retained-policy qualification; earlier evidence retained in previous manifest",
       "status": "pass",
       "test": "tests.test_frozen_source_gpu.FrozenSourceGPU.test_frozen_features_ignore_D_updates"
     },
     "RD04-GPU-DIRECT-GRADIENTS": {
-      "run": "gpu-1",
-      "scope": "unchanged kernel/legacy path; admission/measurement delta requalified in gpu-2",
+      "run": "retained-current-source",
+      "scope": "actual refreshed retained-policy qualification; earlier evidence retained in previous manifest",
       "status": "pass",
       "test": "tests.test_direct_roles_gpu.DirectRolesGPU.test_live_projection_and_consumer_gradients"
     },
     "RD04-GPU-DIRECT-ROUNDTRIP": {
-      "run": "gpu-1",
-      "scope": "unchanged kernel/legacy path; admission/measurement delta requalified in gpu-2",
+      "run": "retained-current-source",
+      "scope": "actual refreshed retained-policy qualification; earlier evidence retained in previous manifest",
       "status": "pass",
       "test": "tests.test_direct_roles_gpu.DirectRolesGPU.test_direct_packets_returns_and_immutable_bindings"
     },
     "RD04-GPU-IDENTITY-PROJECTION": {
-      "run": "gpu-1",
-      "scope": "unchanged kernel/legacy path; admission/measurement delta requalified in gpu-2",
+      "run": "retained-current-source",
+      "scope": "actual refreshed retained-policy qualification; earlier evidence retained in previous manifest",
       "status": "pass",
       "test": "tests.test_direct_roles_gpu.DirectRolesGPU.test_identity_projection_and_legacy_wire"
     },
     "RD05-GPU-GRADIENT-ACCUMULATION": {
-      "run": "gpu-1",
-      "scope": "unchanged kernel/legacy path; admission/measurement delta requalified in gpu-2",
+      "run": "retained-current-source",
+      "scope": "actual refreshed retained-policy qualification; earlier evidence retained in previous manifest",
       "status": "pass",
       "test": "tests.test_joint_receiver_gpu.JointReceiverGPU.test_joint_VJPs_and_eligible_accumulation"
     },
     "RD05-GPU-RESUME": {
-      "run": "gpu-1",
-      "scope": "unchanged kernel/legacy path; admission/measurement delta requalified in gpu-2",
+      "run": "retained-current-source",
+      "scope": "actual refreshed retained-policy qualification; earlier evidence retained in previous manifest",
       "status": "pass",
       "test": "tests.test_joint_receiver_gpu.JointReceiverGPU.test_complete_window_resume_and_frozen_owners"
     },
     "RD06-GPU-CONNECTED-GRADIENT": {
-      "run": "gpu-1",
-      "scope": "unchanged kernel/legacy path; admission/measurement delta requalified in gpu-2",
+      "run": "retained-current-source",
+      "scope": "actual refreshed retained-policy qualification; earlier evidence retained in previous manifest",
       "status": "pass",
       "test": "tests.test_native_redesign_gpu.NativeRedesignGPU.test_native_loss_through_actual_return_receiver_and_writer"
     },
     "RD06-GPU-NATIVE-RETURN": {
-      "run": "gpu-1",
-      "scope": "unchanged kernel/legacy path; admission/measurement delta requalified in gpu-2",
+      "run": "retained-current-source",
+      "scope": "actual refreshed retained-policy qualification; earlier evidence retained in previous manifest",
       "status": "pass",
       "test": "tests.test_native_redesign_gpu.NativeRedesignGPU.test_actual_native_return_and_prefill_source"
     },
     "V2-GPU-ALL-STATUS-BOUNDS": {
-      "run": "gpu-1",
+      "run": "retained-current-source",
+      "scope": "actual refreshed retained-policy qualification; earlier evidence retained in previous manifest",
       "status": "pass",
       "test": "tests.test_compact_roles_gpu.CompactRolesGPU.test_b_all_statuses_maximum_reason_and_256_boundary"
     },
     "V2-GPU-CANCELLATION": {
-      "run": "gpu-1",
+      "run": "retained-current-source",
+      "scope": "actual refreshed retained-policy qualification; earlier evidence retained in previous manifest",
       "status": "pass",
       "test": "tests.test_compact_roles_gpu.CompactRolesGPU.test_d_cancellation"
     },
     "V2-GPU-JOINT-ACCUMULATION": {
-      "run": "gpu-2",
+      "run": "retained-current-source",
+      "scope": "actual refreshed retained-policy qualification; earlier evidence retained in previous manifest",
       "status": "pass",
       "test": "tests.test_compact_roles_gpu.CompactResumeGPU.test_eight_example_v2_joint_accumulation"
     },
     "V2-GPU-LONG-PARITY": {
-      "run": "gpu-1",
+      "run": "retained-current-source",
+      "scope": "actual refreshed retained-policy qualification; earlier evidence retained in previous manifest",
       "status": "pass",
       "test": "tests.test_compact_roles_gpu.CompactRolesGPU.test_z_both_formats_1024_functional_checkpoint_serving_FP32"
     },
     "V2-GPU-PROJECTION-FP64": {
-      "run": "gpu-1",
+      "run": "retained-current-source",
+      "scope": "actual refreshed retained-policy qualification; earlier evidence retained in previous manifest",
       "status": "pass",
       "test": "tests.test_compact_roles_gpu.CompactRolesGPU.test_c_FP64_projection_reference"
     },
     "V2-GPU-REAL-INPUTS": {
-      "run": "gpu-2",
+      "run": "retained-current-source",
+      "scope": "actual refreshed retained-policy qualification; earlier evidence retained in previous manifest",
       "status": "pass",
       "test": "tests.test_compact_roles_gpu.CompactRolesGPU.test_a_existing_reviewed_inputs_and_joint_VJPs"
     },
     "V2-GPU-RESUME": {
-      "run": "gpu-2",
+      "run": "retained-current-source",
+      "scope": "actual refreshed retained-policy qualification; earlier evidence retained in previous manifest",
       "status": "pass",
       "test": "tests.test_compact_roles_gpu.CompactResumeGPU.test_complete_window_resume_and_frozen_owners"
     },
     "V2-GPU-RESUME-CACHED-INPUTS": {
-      "run": "gpu-cache",
+      "run": "retained-current-source",
+      "scope": "actual refreshed retained-policy qualification; earlier evidence retained in previous manifest",
       "status": "pass",
       "test": "tests.test_compact_roles_gpu.CompactResumeGPU.test_cached_component_survives_exact_checkpoint_restore"
     }
@@ -119,6 +133,7 @@
   "comparison_protocol_sha256": "2da758562ac3a5b4d9fb8981ef59f01ae2f6bcf5edebb7fc5d1b5f527705f63c",
   "coverage": "docs/evidence/compact-role-layout-coverage-v2.json",
   "coverage_sha256": "bf3371842de42a80adf9b31bd89d895d02eab354ec5a28a867be22397d650dc5",
+  "discarded_performance_diagnostic_updates": 12,
   "environment": {
     "cuda": "13.2",
     "device": "NVIDIA GeForce RTX 3090",
@@ -132,11 +147,6 @@
     "comparisons": 18,
     "count": 24,
     "minimum_gradient_cosine": 0.9999999999993345,
-    "ports": [
-      1,
-      2,
-      3
-    ],
     "positions": 1024,
     "profiles": [
       "functional",
@@ -156,8 +166,20 @@
   "numeric_reuse": "unchanged g1/codec precision/backbone/recurrence/attention kernels; historical324/108 matrix report/child hashes remain pinned by original RD07 evidence; new paths use actual v2 FP32/FP64 comparisons",
   "optimizer_updates": 0,
   "pending_checks": [],
+  "previous_qualification": {
+    "path": "data/receiver-performance-20261109/previous-compact-qualification.json",
+    "sha256": "d2e6c0a6be21f5441818a39930590388c7a8c7e225294d43cc52c9933508352e"
+  },
   "protocol": "compact-role-qualification-v2",
   "raw_hashes": {
+    "data/receiver-performance-20261109/arithmetic-preservation.json": "22a39a8485333848085f9717a62947f49c7eca45b1e70d10fd81b9cf70ac83ac",
+    "data/receiver-performance-20261109/assemble_results.py": "8cf2fd5ee084ed5f31e31e8047a05ce0cf4a70d18695476824b2273565df6350",
+    "data/receiver-performance-20261109/gpu-core.log": "ff3bebfae9766331dfd33c8fbe6f3148b5e30941251af204add1cb24b1cba78a",
+    "data/receiver-performance-20261109/gpu-core/metrics.jsonl": "b5b7db9f18b2da4da80f6e852a3e36fa089541fbb7e404297215f3a62b36917f",
+    "data/receiver-performance-20261109/gpu-core/report.json": "433fa97676c9e79143add2839182babc09cb811ae49c9edb9b36c16c980a091f",
+    "data/receiver-performance-20261109/previous-compact-qualification.json": "d2e6c0a6be21f5441818a39930590388c7a8c7e225294d43cc52c9933508352e",
+    "data/receiver-performance-20261109/qualify_retained.py": "b854ebb4361cc58825d2f4656b78b9ab4d53dac64aa917d37e263bf1bf41afad",
+    "data/receiver-performance-20261109/static-qualified.log": "e0d66be76e897a74c2b8b0da7a78f00ebbb347eda42bfdcc588fccee475ccb15",
     "data/redesign-format-v2-20261108/assemble_qualification.py": "46f3378a5a5ec8488a960c10a88b4bfd6dfbb1adcb5d8b5a4a98c3e98c07e7a2",
     "data/redesign-format-v2-20261108/audit_blocked.py": "86952483b9552cd8dc31141f901f11069d2c9495233d78c67585e659904f4513",
     "data/redesign-format-v2-20261108/common-support.json": "a9961a0a7d7bb643073145a143eac896f4d9b77d93a261dc411a7d86deaecd60",
@@ -327,6 +349,13 @@
       "skipped": 0,
       "sources_unchanged": true,
       "status": "PASS"
+    },
+    "retained-current-source": {
+      "optimizer_updates": 0,
+      "pass": 19,
+      "report": "data/receiver-performance-20261109/gpu-core/report.json",
+      "sha256": "433fa97676c9e79143add2839182babc09cb811ae49c9edb9b36c16c980a091f",
+      "tests": 19
     }
   },
   "services_changed": false,
@@ -390,7 +419,7 @@
     "qwen_one_two/training/engine.py": "2500a47211fc13a41c3e646d2f315d2233b4304d1f67c71fb73b3eebc57aee4d",
     "qwen_one_two/training/episodes.py": "6975fec4335ae10a7725c21a8b5979df2a09b1b9eb19431b330dc844afe9d7b2",
     "qwen_one_two/training/frozen_source.py": "cce87a33fff5e0309374f6657fc7da0eebae82465bf0eec6a16b991b80c1399c",
-    "qwen_one_two/training/host_metrics.py": "d544d401b6a970f14ba614026c699f0f83c2b1ad6809cd6d6ed41588c45906bc",
+    "qwen_one_two/training/host_metrics.py": "2f42449b20bf9343294b291365c180b5e5a03d7ecb9eccb26971c09a259199bd",
     "qwen_one_two/training/host_profile.py": "31d52a713e33de61e5b802a26c63f24e6dbcb476325d01afea788097e97d23e0",
     "qwen_one_two/training/information_loss.py": "7fa33d9dcd33fe08fba00e34857bf7339d646cf617845c4d7c3c770275b0cf23",
     "qwen_one_two/training/inputs.py": "8a96776ac2ab7a65f2cc51c3baaee12a333e76278775cc3d6b37b68cee99e332",
@@ -408,11 +437,12 @@
     "qwen_one_two/training/quantity_learning.py": "e5f560a086ae3733ecd57bc13aa1c3d52d1fc7f119d5b03e2dd8090a6cc74a07",
     "qwen_one_two/training/receiver_comparison.py": "1ce75b3747d72331232260142168e6787397f62862df2e0fe8484d0a95fc7f6b",
     "qwen_one_two/training/receiver_learning.py": "d5b989455ef08a0c3ec1ba4f0b91a57b9d9098ee3921191828d9902d280c2d97",
-    "qwen_one_two/training/receiver_plan.py": "2d68091261fa328c9ec98a772f841cf7cc8ff05cafe779293dc393689e5ce127",
+    "qwen_one_two/training/receiver_performance.py": "a6a0b8e5793ec82b5e39a0c42305596a02635e4f475eba940166d6bd9a81c3a7",
+    "qwen_one_two/training/receiver_plan.py": "fa860597cbfeda2684d0d83f53bf785f3e4a16a09fc9b734c88aaf22dcfe38ab",
     "qwen_one_two/training/receiver_profiles.py": "0b3053d681b39ddf2602ec42bc414c614655e5a94ab649b6691bdbffb05cfd02",
     "qwen_one_two/training/receiver_repair.py": "e03e065e1c40ad670399ee28fadd7f70da187bc9d1fe14430d6e9a4457d43222",
     "qwen_one_two/training/redesign_coverage.py": "c0cff951a6193f16cc4ebec68ff461a7baee8b0429a7b004dbffc832480c4bb1",
-    "qwen_one_two/training/reference.py": "44cbd6da4b3374d3de7082cac633f9b63fd91cef768bd8462a01fcb17c0f2aec",
+    "qwen_one_two/training/reference.py": "527b981bfcc2d98c2c024630838321b631ceb4995bcee736a64df3e9c8e16189",
     "qwen_one_two/training/reference_data.py": "5855ecf472ac6d553bf16372af54cc640c48deb704014e7f26eb652387a01e70",
     "qwen_one_two/training/reference_exposure.py": "f6e576cb0ce1cd8c48275047d7c0360cf23d4b20f0bcf20eaafc3433971e1a3c",
     "qwen_one_two/training/reference_qualification.py": "9e02394240fb88b2e4e77b604b020300d200cfae5bb217e3717247da27505db0",
@@ -424,39 +454,45 @@
     "qwen_one_two/training/two_gpu_worker.py": "2fe83f3be4905753fe722eba14813b260449037f46df5c9c151c9d6cc0e16da2",
     "qwen_one_two/training/weight_repair.py": "aff987d19f012820218758e02162d8352acce6d2983b74b9663a7afd9f4917bc",
     "scripts/fit_reference.py": "6869030b858015cd6b01356e0103c78f2e0fa180a86368b2552acad67149c926",
-    "scripts/train_receiver_probe.py": "ab755f57d677219d500196bb56d08cfcf5fbe366b4d30c74d09562847a1b6018"
+    "scripts/train_receiver_probe.py": "e550527199909ded14635fb769f9ab60a95a6378804cc876ce05797cf06e85dc"
   },
   "source_migration": {
-    "changed_since_gpu1": {
-      "qwen_one_two/training/behavior_qualification.py": {
-        "current": "b97d4656a843b387bdb5220cf10a24e98c14e3743c41433f7a596efe29a8516b",
-        "gpu1": "7cac8c5aecd2640b550d43d6758793b69f38c5f7c8e1f99a102b77887ea78e55"
+    "changes": {
+      "qwen_one_two/training/host_metrics.py": {
+        "current": "2f42449b20bf9343294b291365c180b5e5a03d7ecb9eccb26971c09a259199bd",
+        "previous": "d544d401b6a970f14ba614026c699f0f83c2b1ad6809cd6d6ed41588c45906bc"
       },
-      "qwen_one_two/training/component_admission.py": {
-        "current": "0ab3b22429d93d2d0d204f0e78b097fa77ba1d02141d7ae9b58470304edcd399",
-        "gpu1": "ad2490f8c9f775e2fdae87b5ca7c6d0e52c638a368c9ba7fb7e1cae1b8e49fda"
+      "qwen_one_two/training/receiver_performance.py": {
+        "current": "a6a0b8e5793ec82b5e39a0c42305596a02635e4f475eba940166d6bd9a81c3a7",
+        "previous": null
       },
-      "qwen_one_two/training/receiver_learning.py": {
-        "current": "d5b989455ef08a0c3ec1ba4f0b91a57b9d9098ee3921191828d9902d280c2d97",
-        "gpu1": "82d8fbb2b7def70a7918c4bc632870910d7d403ac6dc737411946529ed905d62"
+      "qwen_one_two/training/receiver_plan.py": {
+        "current": "fa860597cbfeda2684d0d83f53bf785f3e4a16a09fc9b734c88aaf22dcfe38ab",
+        "previous": "2d68091261fa328c9ec98a772f841cf7cc8ff05cafe779293dc393689e5ce127"
+      },
+      "qwen_one_two/training/reference.py": {
+        "current": "527b981bfcc2d98c2c024630838321b631ceb4995bcee736a64df3e9c8e16189",
+        "previous": "44cbd6da4b3374d3de7082cac633f9b63fd91cef768bd8462a01fcb17c0f2aec"
       },
       "scripts/train_receiver_probe.py": {
-        "current": "ab755f57d677219d500196bb56d08cfcf5fbe366b4d30c74d09562847a1b6018",
-        "gpu1": "0d58d9bb9d087304b6b94428bb362f9b12dd71cceffa1372019cddbc7e3d0ade"
+        "current": "e550527199909ded14635fb769f9ab60a95a6378804cc876ce05797cf06e85dc",
+        "previous": "ab755f57d677219d500196bb56d08cfcf5fbe366b4d30c74d09562847a1b6018"
       }
     },
-    "scope": "only exact pooled rubric admission and read-only delivery observations/orchestration changed; neural/renderer/Session/math/optimizer code identical to gpu-1. Real-input VJPs/delivery, exact eight-example accumulation and v2 resume executed on final source.",
-    "unchanged_v2_test_methods_AST": [
-      "vectors",
-      "ids",
-      "packet",
-      "trace",
-      "test_z_both_formats_1024_functional_checkpoint_serving_FP32",
-      "test_b_all_statuses_maximum_reason_and_256_boundary",
-      "cancellation",
-      "test_d_cancellation",
-      "test_c_FP64_projection_reference"
-    ]
+    "default_path": "unchanged equations; original readbacks are still default; measured old/new updates exact",
+    "performance_policy": {
+      "activation_checkpointing": false,
+      "automatic_OOM_fallback": false,
+      "component_VJPs": "unchanged separate gradients",
+      "episode_graphs_retained": 1,
+      "fingerprint_batch_bytes": 33554432,
+      "name": "retained-activations-v1",
+      "optimizer_and_objectives": "unchanged",
+      "recurrence_cache_entries": 32
+    },
+    "reason": "explicit performance execution policy; unchanged arithmetic/optimizer/episode/checkpoint sources proved; current-source checks actually refreshed",
+    "source_proof": "data/receiver-performance-20261109/arithmetic-preservation.json"
   },
-  "status": "PASS"
+  "status": "PASS",
+  "update_accounting_scope": "optimizer_updates0 covers this core qualification; separate performance timing experiment executed12 discarded diagnostic updates, no RD08 continuation"
 }

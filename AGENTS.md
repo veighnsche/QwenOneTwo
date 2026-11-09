@@ -3,11 +3,14 @@
 Read `docs/next-agent-handoff.md` for the current measured status, artifact paths,
 remaining work and scope boundaries before continuing implementation.
 
-Current2026-11-09 state: the user's GPU-off hold persists. Former trainerPID618710
-is now absent;500 RD-08 updates are on disk,599 were logged. The subsequent
-performance request is implemented with model-free checks; do not restart
-training or run GPU probes/benchmarks until the user reopens GPU work. See the
-current handoff and docs/receiver-performance-v1.md.
+Current2026-11-09 state: the user reopened GPU work. Receiver performance
+validation passes: six faster matched timing pairs, exact updates/resume,19
+current-source GPU qualification checks and35 model-free tests. Only the3090
+may run model work. Former trainerPID618710 is absent; recover the compatible
+500-update checkpoint with exact optimizer/RNG/sampler state, recording99 lost
+logged windows and any replay separately. Preserve the finite effective schedule;
+no extra learning passes, new data, RD09, service or fan-control changes.
+See the current handoff and docs/receiver-performance-v1.md.
 
 On 2026-11-08, the user lifted the temporary GPU and fan-noise hold with
 "everything is allowed again." Both GPUs may be used within their authorized

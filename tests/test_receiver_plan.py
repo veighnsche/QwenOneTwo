@@ -129,9 +129,16 @@ class ReceiverPlanTests(unittest.TestCase):
             self.assertEqual(faster['contract'][field],self.plan['contract'][field])
         self.assertNotEqual(faster['run_sha256'],self.plan['run_sha256'])
         self.assertEqual(set(faster['contract']['required_evidence']['performance_checks']),set(GPU_CHECKS))
-        with self.assertRaisesRegex(ValueError,'performance GPU qualification pending'):
-            self.planning.admit_execution(faster,gpu=self.planning.PRIMARY,
-                input_profile=faster['contract']['input_profile'],regime='component')
+        # Exercise genuinely pending evidence even after repository qualification
+        # has passed; the test must not depend on its current delivery status.
+        from qwen_one_two.training.receiver_performance import EVIDENCE
+        with tempfile.TemporaryDirectory() as temp:
+            path=Path(temp)/EVIDENCE;path.parent.mkdir(parents=True)
+            path.write_bytes(canonical({'status':'GPU_PENDING'}))
+            with patch.object(self.planning,'ROOT',Path(temp)):
+                with self.assertRaisesRegex(ValueError,'performance GPU qualification pending'):
+                    self.planning.admit_execution(faster,gpu=self.planning.PRIMARY,
+                        input_profile=faster['contract']['input_profile'],regime='component')
         with tempfile.TemporaryDirectory() as temp:
             path=Path(temp)/'plan.json';path.write_bytes(canonical(faster))
             with self.assertRaisesRegex(ValueError,'execution policy mismatch'):

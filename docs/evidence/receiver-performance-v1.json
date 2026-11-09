@@ -1,7 +1,14 @@
 {
   "RD09_started": false,
-  "actual_GPU_work_this_task": 0,
-  "actual_optimizer_updates_this_task": 0,
+  "actual_GPU_tests": {
+    "core": 19,
+    "core_optimizer_updates": 0,
+    "diagnostic_optimizer_updates": 12,
+    "diagnostic_presentations": 96,
+    "performance": 2
+  },
+  "actual_GPU_work_this_task": "completed:2 performance tests and19 affected-path core tests",
+  "actual_optimizer_updates_this_task": 12,
   "arithmetic_preservation": {
     "path": "data/receiver-performance-20261109/arithmetic-preservation.json",
     "sha256": "22a39a8485333848085f9717a62947f49c7eca45b1e70d10fd81b9cf70ac83ac"
@@ -12,9 +19,13 @@
   },
   "checkpoint_migration_performed": false,
   "checks": {
-    "PERF-01-packed-hash-parity": "PENDING_GPU_HOLD",
-    "PERF-02-retained-joint-update-resume": "PENDING_GPU_HOLD",
-    "PERF-03-matched-throughput-memory": "PENDING_GPU_HOLD"
+    "PERF-01-packed-hash-parity": "PASS",
+    "PERF-02-retained-joint-update-resume": "PASS",
+    "PERF-03-matched-throughput-memory": "PASS"
+  },
+  "core_qualification": {
+    "path": "docs/evidence/compact-role-qualification-v2.json",
+    "sha256": "70eb323d2f00a2a01e7c4059c3ab24094213c4c52621391ad1b366d1f4d3da2e"
   },
   "disk_saved_updates": 500,
   "execution_policy": {
@@ -30,7 +41,8 @@
   "future_diagnostic_presentations_if_authorized": 96,
   "future_diagnostic_updates_if_authorized": 12,
   "future_validation_scope": "same eight existing assessed Noul/Choice/Score presentations, both interfaces, three alternating cold-window pairs; all updates restored from parent and discarded; no RD08 continuation",
-  "implementation_delivery": "implemented_static_checked_GPU_pending",
+  "gpu_hold": "lifted by user: GPU is open again",
+  "implementation_delivery": "implemented_GPU_qualified_measured",
   "known_preexisting_failure": {
     "baseline_log": "data/receiver-performance-20261109/baseline-profiling-tests.log",
     "error": "profiling receipt input drift",
@@ -39,14 +51,116 @@
     "waived": false
   },
   "limitations": [
-    "No measured end-to-end speedup or GPU memory result yet.",
-    "GPU tests deferred by explicit user GPU-off constraint.",
-    "Historical qualification remains valid only for its original source; fresh fits need current-source qualification and source/protocol migration.",
-    "Retained activation memory at full corpus extremes and long traces still needs affected qualification.",
-    "Previous trainer is absent; only500-update disk state is recoverable from known files, despite599 logged updates. No automatic restart or rollback."
+    "Paired cold-window speedups exclude setup and extra qualification inspection; no guarantee of100% GPU utilization or identical full-catalogue timing.",
+    "Former RD08 worker absent; only500 updates saved despite599 logged. Recover from exact compatible state and disclose99 lost/replayed windows.",
+    "No new data, extra effective learning pass, RD09 or deployment authorized by these measurements."
   ],
+  "long_traces": {
+    "comparisons": 18,
+    "count": 24,
+    "minimum_gradient_cosine": 0.9999999999993345,
+    "positions": 1024,
+    "profiles": [
+      "functional",
+      "checkpoint",
+      "serving",
+      "fp32"
+    ],
+    "wire_profiles": [
+      "pooled-role-slots-v2",
+      "direct-role-states-v2"
+    ],
+    "worst_gradient_rms": 1.2336808209461487e-06,
+    "worst_logit_rms": 2.9022025210697956e-06,
+    "worst_state_rms": 0.0
+  },
+  "maximum_existing_window_memory": [
+    {
+      "check": "PERF-max-existing-window",
+      "eligible": {
+        "choice": 2,
+        "feasibility": 3,
+        "noul": 1,
+        "score": 2,
+        "status": 8
+      },
+      "ids": [
+        "train-receiver-0715",
+        "train-receiver-0139",
+        "train-receiver-0781",
+        "train-receiver-0205",
+        "train-receiver-1063",
+        "train-receiver-0199",
+        "train-receiver-0000",
+        "train-receiver-0001"
+      ],
+      "input_profile": "frozen-w-pooled-compact-v2",
+      "maximum_request": 256,
+      "optimizer_updates": 0,
+      "peak_cuda_allocated_bytes": 3369452032
+    },
+    {
+      "check": "PERF-max-existing-window",
+      "eligible": {
+        "choice": 2,
+        "feasibility": 3,
+        "noul": 1,
+        "score": 2,
+        "status": 8
+      },
+      "ids": [
+        "train-receiver-0715",
+        "train-receiver-0139",
+        "train-receiver-0781",
+        "train-receiver-0205",
+        "train-receiver-1063",
+        "train-receiver-0199",
+        "train-receiver-0000",
+        "train-receiver-0001"
+      ],
+      "input_profile": "direct-role-states-v2",
+      "maximum_request": 256,
+      "optimizer_updates": 0,
+      "peak_cuda_allocated_bytes": 4486932992
+    }
+  ],
+  "measurements": {
+    "direct-role-states-v2": {
+      "all_pairs_faster": true,
+      "checkpointed-v1": {
+        "median_cpu_seconds": 62.333925198999964,
+        "median_seconds": 52.83722290498554,
+        "peak_cuda_allocated_bytes": 3169097728
+      },
+      "cpu_reduction_percent": 34.76627358186598,
+      "retained-activations-v1": {
+        "median_cpu_seconds": 40.662742229999935,
+        "median_seconds": 39.99170472699916,
+        "peak_cuda_allocated_bytes": 4282724864
+      },
+      "throughput_ratio": 1.3212045664388525,
+      "wall_reduction_percent": 24.31149381390807
+    },
+    "frozen-w-pooled-compact-v2": {
+      "all_pairs_faster": true,
+      "checkpointed-v1": {
+        "median_cpu_seconds": 57.68007848199994,
+        "median_seconds": 48.32208493098733,
+        "peak_cuda_allocated_bytes": 2732224512
+      },
+      "cpu_reduction_percent": 37.366711020904695,
+      "retained-activations-v1": {
+        "median_cpu_seconds": 36.12693023899999,
+        "median_seconds": 35.76325219796854,
+        "peak_cuda_allocated_bytes": 3323937280
+      },
+      "throughput_ratio": 1.3511658465370822,
+      "wall_reduction_percent": 25.989840361720884
+    }
+  },
   "new_data": false,
   "paused_completed_updates": 599,
+  "pending_GPU_checks": [],
   "previously_paused_PID": 618710,
   "process_state": {
     "RD09_started": false,
@@ -67,19 +181,30 @@
   },
   "protocol": "receiver-performance-v1",
   "qualification_command": "CUDA_VISIBLE_DEVICES=GPU-225509c3-d702-6c27-de03-76b5e99b33b1 QOT_RECEIVER_PERFORMANCE_GPU=1 QOT_RD05_GPU_QUALIFY=1 QOT_QUALIFY_SNAPSHOT=<existing-snapshot> QOT_PERF_OUTPUT=data/receiver-performance-20261109/paired-windows.jsonl PYTHONPATH=. .venv/bin/python -m unittest tests.test_receiver_performance_gpu",
+  "qualification_command_executed": true,
   "raw_hashes": {
     "data/receiver-performance-20261109/arithmetic-preservation.json": "22a39a8485333848085f9717a62947f49c7eca45b1e70d10fd81b9cf70ac83ac",
+    "data/receiver-performance-20261109/assemble_results.py": "8cf2fd5ee084ed5f31e31e8047a05ce0cf4a70d18695476824b2273565df6350",
     "data/receiver-performance-20261109/baseline-profiling-tests.log": "7d4fe424e961ecc0fcce3ff7d559dfb6316e0059898278adbb343d27f097f425",
     "data/receiver-performance-20261109/checkpoint-byte-parity.json": "3f33273a91ad44178bea43f19152e880ba2a895be3f3e3b4f0c479eb5cf0e749",
     "data/receiver-performance-20261109/final-delta-blocked.log": "ed8ad02d5c34c013bab8b555f1bc1293fa2847ef794096b67e0e39ebadcde5cd",
     "data/receiver-performance-20261109/final-delta.log": "c5a997f3c15176ac967caabaa5432f3eaab51f8c125fa743061700bddd714716",
+    "data/receiver-performance-20261109/gpu-1/paired-windows.jsonl": "9c7dc7842adb6b415f3ffdf4973b42b23efbc7057bf569006d16b97c53122859",
+    "data/receiver-performance-20261109/gpu-1/report.json": "246531b9a6697a7bdf5674bdb70d03a800e54f28959cf317a1209d9ea2bb8945",
+    "data/receiver-performance-20261109/gpu-1/tests.log": "506a2d01517002d1a2b1e9458d14ee5f794e394ef6f63044a2bef18419fd9cf5",
+    "data/receiver-performance-20261109/gpu-core.log": "ff3bebfae9766331dfd33c8fbe6f3148b5e30941251af204add1cb24b1cba78a",
+    "data/receiver-performance-20261109/gpu-core/metrics.jsonl": "b5b7db9f18b2da4da80f6e852a3e36fa089541fbb7e404297215f3a62b36917f",
+    "data/receiver-performance-20261109/gpu-core/report.json": "433fa97676c9e79143add2839182babc09cb811ae49c9edb9b36c16c980a091f",
+    "data/receiver-performance-20261109/pending-performance-evidence.json": "1411f4474ddaf261c7d63d431d31a6416e8aa86ec5c3fb4c2875f9253d6b9cdf",
     "data/receiver-performance-20261109/plan-first.log": "40aafa01ab0f24f7d24526e23f3ab74d210a5ad0e37bc31bd6652fe682754bf9",
     "data/receiver-performance-20261109/process-state.json": "21f41cb050ee6c8f5c6e898410c10672f023934c277b4fcb4c9d5e968e1f3ff8",
+    "data/receiver-performance-20261109/qualify_retained.py": "b854ebb4361cc58825d2f4656b78b9ab4d53dac64aa917d37e263bf1bf41afad",
     "data/receiver-performance-20261109/static-all.log": "717fc445d19f718c6c5459371c917e1ce9dec2e0c6e3aca27059815ba0d6a4e5",
     "data/receiver-performance-20261109/static-final.log": "ffd50e4af8df90bf988e3d199f756badb59cf9d07bde3ef4b1d1c6cedf59fd6a",
     "data/receiver-performance-20261109/static-first.log": "e353a37a24bacf5aab4e6368d31a2d9847e737531853ef9c5ccb3ca2ec39b0fb",
     "data/receiver-performance-20261109/static-focused.log": "5820801335a087168e3baa498507aaf64b82396a118e72c20e09b34fa2238168",
-    "data/receiver-performance-20261109/static-policy.log": "6cf9936903b21d4eefcb6e3dba9d3f5f3ef444a970a237e058dcc6951009a1f0"
+    "data/receiver-performance-20261109/static-policy.log": "6cf9936903b21d4eefcb6e3dba9d3f5f3ef444a970a237e058dcc6951009a1f0",
+    "data/receiver-performance-20261109/static-qualified.log": "e0d66be76e897a74c2b8b0da7a78f00ebbb347eda42bfdcc588fccee475ccb15"
   },
   "source_hashes": {
     "qwen_one_two/__init__.py": "b6236192beea05d03b8d7c828e63761bca002cbd4ca967ecbc2fea0f7c02caad",
@@ -178,8 +303,14 @@
     "scripts/fit_reference.py": "6869030b858015cd6b01356e0103c78f2e0fa180a86368b2552acad67149c926",
     "scripts/train_receiver_probe.py": "e550527199909ded14635fb769f9ab60a95a6378804cc876ce05797cf06e85dc"
   },
-  "status": "GPU_PENDING",
+  "status": "PASS",
   "test_results": {
+    "current_source_final": {
+      "log": "data/receiver-performance-20261109/static-qualified.log",
+      "model_imports_blocked": true,
+      "pass": 35,
+      "seconds": 109.098
+    },
     "distinct_pass": 35,
     "final_peer_guard_delta": {
       "log": "data/receiver-performance-20261109/final-delta-blocked.log",
@@ -199,7 +330,8 @@
     "tests/test_joint_receiver_gpu.py": "e0dee1a08f90deb9d036d5237a809505ca5c559a039e2f584ded63a5c80b5cc9",
     "tests/test_receiver_performance.py": "cc2b6f3a2fd3c0cae448b98f9fe0dc99e3079f849305f77c05328e1e5db7d73f",
     "tests/test_receiver_performance_gpu.py": "2b5a617aed899ad3c3043b7b3ea41ba325ff99807a6d600ca720094659fb8725",
-    "tests/test_receiver_plan.py": "2e7984e9763645df0823b9e3d25107381a9492dfdb6cb93314d942ac0ddb5970"
+    "tests/test_receiver_plan.py": "c4ac933e72d4854cab9745c274cb89a7b178200077d533adea0e87e6608b2339"
   },
-  "training_resumed": false
+  "training_resumed": false,
+  "training_resumed_field_scope": "qualification-phase snapshot only; current fit state is recorded in its own report/ledger"
 }

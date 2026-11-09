@@ -5,7 +5,58 @@ Read this first for current status, then the
 topic contracts. Historical reports describe their recorded sources and runs.
 This handoff records measured mechanisms, not learned capability.
 
-## Current status — performance implementation; GPU hold persists, 2026-11-09
+## Current work — measured performance passes; RD-08 recovery, 2026-11-09
+
+GPU permission reopened. The retained execution policy now passes PERF-01..03:
+six alternating paired windows, pooled48.322→35.763s (−25.990%),
+direct52.837→39.992s (−24.311%); CPU reductions37.367%/34.766%. Exact component
+VJPs, updated masters/Adam moments, eligibility/None structure, frozen R/startup/
+reference and transactional resume.12 discarded diagnostic updates/96 existing
+presentations are separate from RD08. All19 current-source core checks pass with
+0 optimizer steps:24 long1024 traces/18 comparisons, all statuses/bounds,
+cancellation/FP64/source isolation, resume and eight-record largest-request
+windows in both interfaces. Maximum request256; largest direct peak4.18GiB.
+Every class cleanup verifies all320 W tensors/tying/reference.35 final static
+checks pass109.098s with model imports blocked. Sources/kernels/limits unchanged;
+no full-catalogue speedup or100% GPU-utilization guarantee is claimed.
+
+Updated qualification and measured performance evidence must be committed/pushed
+and exact remote SHA verified before fitting. Qualified metadata plans use
+`data/receiver-performance-20261109/plans-qualified/{control,candidate}/plan.json`.
+The full1500×4/6000-presentation/750-window effective schedule, shared parent0188,
+owners/moments/RNG/objectives and Reason masks remain. Candidate/evaluation/RD09
+unstarted. Runtime policy must be selected explicitly as `retained-activations-v1`.
+
+Resume control from checkpoint0688's500 retained updates/cursor4000 after a
+verified metadata-only source/policy binding transition. Preserve every tensor,
+Adam/RNG byte and sampler receipt. The prior599 logged updates include99 lost
+windows after the last checkpoint; recovery replays that lost work rather than
+claiming a599-state artifact or retaining extra effective passes. Record physical
+completed-window work separately: prior599 plus250 recovery windows gives at
+least849 actual completed optimizer calls versus750 retained updates; any work
+between the last flushed receipt and process loss is unknown. Never hide it or
+replace the effective schedule with a smaller experiment. Keep original logs,
+failed prefix,1500 baseline observations and old manifests intact. Both fixed
+fits finish before either development evaluation. No new data/agents/RD09 or
+services/fans/Operating Table changes.
+
+See [measured report](receiver-performance-v1.md),
+[performance evidence](evidence/receiver-performance-v1.json),
+[current core qualification](evidence/compact-role-qualification-v2.json).
+
+## Previous work — GPU reopened; performance validation active, 2026-11-09
+
+The user reopened GPU work with "GPU is open again." The declared finite
+PERF-01..03 validation is active on the exact3090 UUID. No matching RD08 trainer
+existed at launch; serverPID2094 remains untouched. Source6f90391 is archived
+under `data/receiver-performance-20261109/gpu-1/source/`; execution manifest and
+`tests.log` are there. Reconnect to the actual `tests.test_receiver_performance_gpu`
+process, never duplicate. Packed CUDA hash parity/mutation test has passed;
+matched twelve-discarded-update/six-pair validation is running. No promotion,
+RD08 continuation, lost-state replay or RD09 has occurred. Affected long traces,
+maximum-corpus memory and current-source qualification still precede use.
+
+## Previous status — performance implementation; GPU hold persisted, 2026-11-09
 
 The user requested improved performance. Implemented explicit
 `retained-activations-v1`: one episode's activations retained instead of layer

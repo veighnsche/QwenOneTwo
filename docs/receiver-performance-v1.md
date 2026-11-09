@@ -1,12 +1,35 @@
 # Receiver execution performance — 2026-11-09
 
-The user requested better performance after the RD-08 GPU hold. The new explicit
-`retained-activations-v1` execution policy is implemented, with model-free checks.
-**GPU validation and measured speedup remain pending.** The trainer is still
-formerly paused at599 completed updates; it is now absent and500 remain on disk.
-No newer checkpoint or matching replacement trainer was found. The disappearance
-cause is unknown. This task did not resume, kill, hotpatch or roll back anything.
-No new data, RD09 or service change.
+The user reopened GPU work with "GPU is open again." The explicit
+`retained-activations-v1` policy now passes actual3090 validation, with unchanged
+numeric limits, exact component gradients/updated weights/Adam moments/resume,
+and all19 affected-path checks. No new data, RD09, service or fan change.
+
+| Input interface | Original median window | Optimized median window | Wall reduction | CPU reduction | Optimized peak allocation |
+|---|---:|---:|---:|---:|---:|
+| Pooled control |48.322s|35.763s|25.990%|37.367%|3,323,937,280 bytes|
+| Direct candidate |52.837s|39.992s|24.311%|34.766%|4,282,724,864 bytes|
+
+Every one of six alternating timing pairs improves. These are cold eight-
+presentation diagnostic windows, restoring parent0188 each time; setup and extra
+qualification inspection are excluded. They establish a measured improvement,
+not a guarantee of100% GPU utilization or an identical whole-catalogue speedup.
+The performance suite passes2 tests in680.715s with12 discarded diagnostic
+updates/96 existing presentations; no RD08 training state uses those updates.
+Raw report/rows/log/source archive: `data/receiver-performance-20261109/gpu-1/`.
+
+All19 affected-path GPU checks pass with0 optimizer updates, including24 traces
+through1024 positions and18 comparisons under the original limits. State RMS is0,
+worst logit RMS2.9022e-6, worst gradient RMS1.2337e-6, minimum gradient cosine
+0.9999999999993345. Every class cleanup verifies all320 W tensors, physical tying
+and the immutable reference. Both interfaces also pass an eight-record window
+selected for the largest existing requests, including request256; direct peak
+allocation4,486,932,992 bytes (4.18GiB), pooled3,369,452,032 bytes. Raw core report,
+steps, metrics, logs and sources are under `data/receiver-performance-20261109/gpu-core/`.
+
+The old trainer is absent. Only500 updates are saved despite599 logged; no newer
+checkpoint was found. Recovery will use exact checkpoint0688 and disclose the99
+lost windows separately. No599-update state is fabricated. RD09 stays unstarted.
 
 ## Changes
 
@@ -36,9 +59,9 @@ No model, optimizer, loss, precision or finite-predicate implementation changed.
 The larger existing attention-block backend remains unselected; this is not an
 architecture search or a replacement training loop.
 
-## Evidence and remaining GPU work
+## Evidence and GPU validation
 
-[Portable evidence](evidence/receiver-performance-v1.json) records pending GPU
+[Portable evidence](evidence/receiver-performance-v1.json) records actual passing GPU
 IDs and exact sources. Literal-byte tests cover canonical ordering, empty and
 oversized buffers, signed-zero/NaN payload bytes, mutations, copy failure and
 truncated readbacks. Real checkpoint opaque-byte hashing reproduces all1024
@@ -59,10 +82,10 @@ R/startup/nonreceiver owners/reference and transactional resume must match.
 All six timing pairs must improve wall time; median CPU time must improve in
 each interface. Peak allocated memory is reported. Timing excludes setup and
 extra gradient-hash/checkpoint inspection. Cold-window results do not establish
-long-run speed or memory at every corpus extreme; affected full v2 qualification
-and worst-case memory still need validation before fitting under the policy.
+long-run speed or memory for arbitrary future workloads. Affected v2 long traces
+and current-corpus maximum-request memory checks also pass as recorded above.
 
-The deferred test command, **only after the user reopens GPU work**, is:
+The executed finite validation command (fresh output path on each authorized run) is:
 
 ```sh
 CUDA_VISIBLE_DEVICES=GPU-225509c3-d702-6c27-de03-76b5e99b33b1 \
@@ -73,14 +96,14 @@ PYTHONPATH=. .venv/bin/python -m unittest tests.test_receiver_performance_gpu
 ```
 
 That command includes exactly12 discarded diagnostic updates/96 existing-data
-presentations, not RD-08 continuation. Do not execute it while the GPU hold
-remains. Never switch cards or use CPU fallback. No automatic extra trials.
+presentations, not RD-08 continuation. Do not execute it under any later GPU hold.  Never switch cards or use CPU fallback. No automatic extra trials.
 Actual failures, OOM and timing regressions must be retained without promotion.
 
 Admission rejects the candidate before model loading until the three performance
 IDs pass with exact source-bound evidence committed/pushed. Existing v2 evidence
 also rejects changed sources; it was not relabeled current or silently migrated.
-Fresh prepared plans are metadata, not permission or qualification to execute.
+Fresh prepared plans still require committed/pushed matching qualification;
+preparation alone is not execution or a fitted receiver.
 
 An attempted historical profiling-plan test still rejects old input receipts.
 The same `profiling receipt input drift` failure reproduces at pre-change commit
@@ -94,9 +117,8 @@ The former paused worker is no longer present. A read-only host process check
 found no matching replacement; logs and checkpoint files remain at599 logged /
 500 persisted updates. The99 unsaved updates' exact optimizer/RNG state cannot
 be reconstructed from logs. All four checkpoint0688 file hashes still verify.
-No automatic restart or claimed599-update recovery is allowed. After GPU
-permission returns, resolve the disclosed rollback/execution accounting and a
-qualified source/policy transition explicitly. Bind unchanged persisted tensor/
+No automatic restart or claimed599-update recovery is allowed. The GPU hold is lifted. Resolve the disclosed rollback/execution accounting and
+qualified source/policy transition explicitly before continuing RD08. Bind unchanged persisted tensor/
 moment/RNG/sampler bytes and retained observations; never silently repeat valid
 saved updates or relabel missing state. Both arms retain their matching rules.
 Native learning remains unstarted.
@@ -111,3 +133,20 @@ These are prospective contracts, not fit receipts or authorization to restart.
 
 - control: `data/receiver-performance-20261109/plans/control/plan.json`, SHA `907e57f74e5ef41ab8af59a096993de65035e665baf384bf0b209e654a034e69`; contract `09a69345575a332c88b4feeaab61e92cb30483c6fc7e903380735e5c89ebeb7f`.
 - candidate: `data/receiver-performance-20261109/plans/candidate/plan.json`, SHA `7398efdcf9cce5fadb885465150104e38a42c4c8a34f21f5edd40cf0b3d81479`; contract `db64f32fccfcf1670fb20ba2947e8d2b53be0287bd2938f4ab960a6c92e431f7`.
+
+## Qualified checkpoint transition
+
+[Recovery evidence](evidence/receiver-performance-recovery-v1.json) pins final
+qualified plans and the metadata-only copy of checkpoint0688. Weights, Adam
+moments, RNG, complete-window counters and sampler receipts are byte-identical.
+Only qualified source/policy/protocol identities change. Manifest SHA
+`00928d0150dc6e16055206651a0fb865b2b888ce2b94deca298075e7bd0ed968`.
+Retain500 effective windows/cursor4000, execute the remaining250 windows and
+preserve the original1500 baseline observations. Original599 logged windows
+include99 whose state was lost; those are replayed from the compatible checkpoint.
+Final retained learning still uses exactly1500×4/6000/750; report at least849
+completed physical optimizer calls including the99 lost/replayed calls, plus
+any unflushed pre-loss work whose amount is unknown. Twelve performance diagnostic
+updates are separate discarded qualification work. Candidate starts from original
+parent0188, never from the control. Both fits finish before development evaluation.
+No extra effective pass, data, RD09 or deployment.

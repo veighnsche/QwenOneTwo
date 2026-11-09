@@ -19,12 +19,12 @@ because a later queued task starts.
 | RD-05 | delivered | Joint objectives, owners, binding/mask tests; deferred GPU IDs | `fe90af0` pushed/verified; [report](redesign-rd05-results-2026-11-08.md), [evidence](evidence/joint-receiver-objectives-v1.json); 74 static tests pass +14 refreshed; two new GPU checks resolved by RD-07; Reason masks preserved |
 | RD-06 | delivered | Native wiring/eligibility report; deferred real-return/gradient IDs | `6f74680` pushed/verified; [report](redesign-rd06-results-2026-11-08.md), [evidence](evidence/direct-native-flow-v1.json); 86 static tests pass +10 refreshed; two new GPU checks resolved by RD-07; zero complete corpus formation/semantic continuation/direct reader support |
 | RD-07 | delivered | All required deferred/changed-path 3090 checks pass; actual counts/hashes | [Report](redesign-rd07-results-2026-11-08.md), [evidence](evidence/redesign-qualification-v1.json); ten deferred +three new GPU checks pass; twelve1024 traces; zero updates; `7da99c6` pushed and verified |
-| RD-08 | in_progress | Complete matched fit/evaluation receipts; useful-improvement separate | [v2 report](receiver-matched-v2-results-2026-11-08.md), [performance/recovery update](receiver-performance-v1.md);599 control updates logged,500 on disk; former trainer absent, no restart; GPU hold; PERF-01..03 and changed-source qualification pending; candidate/evaluation unstarted |
+| RD-08 | in_progress | Complete matched fit/evaluation receipts; useful-improvement separate | [v2 report](receiver-matched-v2-results-2026-11-08.md), [performance/recovery update](receiver-performance-v1.md);599 control updates logged,500 on disk; former trainer absent, no restart; GPU reopened; PERF-01..03 and19 current-source checks pass; compatible500-update recovery next; candidate/evaluation unstarted |
 | RD-09 | blocked | Accepted RD-08 receiver plus eligible native run/evaluation receipts | [Report](redesign-rd09-results-2026-11-08.md), [evidence](evidence/native-demonstration-rd09-v1.json); conditional authorization recorded; blocked on RD-08/no accepted receiver and zero native supervision; execution unstarted, zero updates; blocker `a864b65` pushed/verified |
 
 RD-07 is delivered; technical acceptance passes and implementation `7da99c6` is pushed/verified.
 All ten deferred GPU checks are resolved; no required RD-07 check remains pending.
-Earliest unfinished slice: **RD-08**, under the user's GPU-off hold. Control has599 logged updates,500 saved on disk; former trainer is now absent. No automatic rollback/restart or fabricated599 recovery. Format recovery provides1500/1500 support; performance implementation needs PERF-01..03 and current-source qualification. Candidate/evaluation/RD09 remain unstarted.
+Earliest unfinished slice: **RD-08**, with GPU permission reopened and performance qualification passed. Control has599 logged updates,500 saved on disk; former trainer is now absent. No automatic rollback/restart or fabricated599 recovery. Format recovery provides1500/1500 support; performance implementation passes PERF-01..03 and19 current-source qualification checks. Candidate/evaluation/RD09 remain unstarted.
 
 For each attempted slice add a short entry with implementation/evidence paths,
 exact commands/results, dependency hashes, relevant implementation commits and
@@ -772,3 +772,45 @@ The99 unsaved updates cannot be reconstructed from known logs/files. This task
 did not signal/restart/kill it. Keep GPU hold; resolve missing-state/rollback
 accounting and source qualification before any later authorized recovery. Do not
 claim the absent process is still paused or that500 saved updates contain599.
+
+## GPU reopening and performance validation — 2026-11-09
+
+User: "GPU is open again." Exact3090 UUID selected before model imports; host
+access verified. No existing training process; server2094 untouched. Running
+`CUDA_VISIBLE_DEVICES=GPU-225509c3-d702-6c27-de03-76b5e99b33b1 QOT_RECEIVER_PERFORMANCE_GPU=1 QOT_RD05_GPU_QUALIFY=1 QOT_QUALIFY_SNAPSHOT=<pinned existing snapshot> QOT_PERF_OUTPUT=data/receiver-performance-20261109/gpu-1/paired-windows.jsonl PYTHONPATH=. .venv/bin/python -m unittest -v tests.test_receiver_performance_gpu`.
+Rawtests.log/execution.json/source archive under gpu-1. PERF-01 CUDA packed hash
+parity/mutation check passes. PERF-02/03 six paired windows/twelve discarded
+diagnostic updates active. No RD08 continuation, checkpoint migration/replay,
+new data or RD09. Source stays frozen while the validation executes.
+
+## Measured performance and current-source qualification pass — 2026-11-09
+
+Two actual performance tests pass680.715s: six alternating timing pairs, exact
+component VJPs, updated masters/Adam moments/resume and protected owners. Pooled
+median48.322→35.763s (−25.990% wall/−37.367% CPU); direct52.837→39.992s
+(−24.311% wall/−34.766% CPU).12 discarded diagnostic updates/96 presentations.
+Separate core run19/19 pass with0 updates,24 long1024 traces/18 comparisons,
+all320 W tensors/tying/reference at six class cleanups, largest existing request256
+and direct peak4,486,932,992 bytes.35 model-free checks pass109.098s.
+
+Source-bound measured performance/core evidence now PASS; original pending and
+previous qualification artifacts are archived. No limit, mask, objective, numeric
+kernel or optimizer change. No automatic extra tuning. Commit/push qualification
+and validate exact remote SHA before RD08 continuation. Recover exact500-update
+checkpoint, preserve all files/RNG/receipts and disclose99 lost logged windows
+replayed from cursor4000. Physical work includes lost/replayed calls separately
+from750 retained effective updates; unflushed pre-loss work is unknown. Candidate,
+E/X and RD09 unstarted. Both fits still precede development evaluation.
+
+## Compatible recovery state prepared — 2026-11-09
+
+[Migration evidence](evidence/receiver-performance-recovery-v1.json) binds old
+checkpoint0688/cursor4000 to the qualified retained-policy plan. All four
+weight/effective-row/Adam/RNG files copied byte-for-byte; sampler receipts,
+owners/shapes/releases/order/objectives unchanged. New manifest SHA
+00928d0150dc6e16055206651a0fb865b2b888ce2b94deca298075e7bd0ed968.
+500 effective updates retained;250 windows/2000 presentations remain.99 lost
+logged windows/792 presentations must be replayed as interrupted-work recovery,
+not represented as a599-state artifact or hidden in physical execution counts.
+Original first update, failed logs,598 second-process receipts and1500 initial
+observations remain intact. No fitting launched before qualification push.
