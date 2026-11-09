@@ -4,6 +4,11 @@ For current measured status, artifact locations and remaining tasks, start with
 the [next-agent handoff](next-agent-handoff.md). This is the single current
 completion report; topic documents below define contracts and starting defaults.
 
+For a consolidated history of what was tested and what happened, read the
+[experiment summary through 9 November 2026](experiment-summary-2026-11-09.md).
+It separates engineering qualifications, training gains, held-out learning
+failures, performance measurements and blocked work, with links to source reports.
+
 The proposed next work is the [learning redesign plan](learning-redesign-plan-2026-11-08.md):
 reuse existing infrastructure/data, stabilize component features, test richer
 latent role inputs, preserve joint status/value behavior and verify native
@@ -11,7 +16,8 @@ supervision before further fitting. It is a plan, not implemented behavior or
 training authorization.
 The [queue prompts](redesign-queue-prompts-2026-11-08.md) define predecessor
 recovery and conditional training scope; the [progress ledger](redesign-progress.md)
-indexes actual delivery/evidence. Every redesign implementation slice is pending.
+indexes actual delivery/evidence. RD-01 through RD-08 are delivered; RD-08 failed
+useful-learning acceptance. RD-09 remains blocked and unstarted.
 
 The latest architecture review has a measured
 [data/gradient baseline](architecture-baseline-2026-11-07.md) and

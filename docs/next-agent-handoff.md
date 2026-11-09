@@ -5,6 +5,19 @@ Read this first for current status, then the
 topic contracts. Historical reports describe their recorded sources and runs.
 This handoff records measured mechanisms, not learned capability.
 
+## Latest documentation — experiment summary, 2026-11-09
+
+The user requested one summarized Markdown history of all experiments and results.
+`docs/experiment-summary-2026-11-09.md` groups early prototype fitting, numerical
+qualifications, data production, reference ablations/fits, receiver experiments,
+redesign coverage/qualification/RD08, performance screens and unstarted work.
+Every detailed `*results*.md` report is linked; local early-prototype metadata
+and smoke receipts are also summarized. Technical success, training loss and
+held-out acceptance are distinguished. No experiment or model workload ran to
+write it; no code, weights, data or training plans changed. Local links and
+current RD08 totals were checked; no unsupported aggregate compute total is given.
+The documentation map links the summary. Git history records its delivery.
+
 ## Latest task — blind architecture proposal, 2026-11-09
 
 The user explicitly authorized one other agent to propose architecture,
