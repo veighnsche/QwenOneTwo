@@ -27,9 +27,14 @@ selected for the largest existing requests, including request256; direct peak
 allocation4,486,932,992 bytes (4.18GiB), pooled3,369,452,032 bytes. Raw core report,
 steps, metrics, logs and sources are under `data/receiver-performance-20261109/gpu-core/`.
 
-The old trainer is absent. Only500 updates are saved despite599 logged; no newer
-checkpoint was found. Recovery will use exact checkpoint0688 and disclose the99
-lost windows separately. No599-update state is fabricated. RD09 stays unstarted.
+The old trainer disappeared externally with500 saved/599 logged updates. Recovery
+preserved exact checkpoint0688 weights, Adam/RNG bytes and sampler state, then
+completed250 remaining windows. All99 lost/replayed windows match the original
+input/head/loss/update receipts exactly. Control750 retained updates and full
+initial/final observations are complete; candidate375 of750 is active. Physical
+recorded control calls849 versus750 retained are explicit; any unflushed work
+before process loss is unknown. Both fits finish before E/X evaluation. No
+599-update artifact is fabricated, extra effective pass or RD09 started.
 
 ## Changes
 

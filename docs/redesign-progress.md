@@ -19,17 +19,19 @@ because a later queued task starts.
 | RD-05 | delivered | Joint objectives, owners, binding/mask tests; deferred GPU IDs | `fe90af0` pushed/verified; [report](redesign-rd05-results-2026-11-08.md), [evidence](evidence/joint-receiver-objectives-v1.json); 74 static tests pass +14 refreshed; two new GPU checks resolved by RD-07; Reason masks preserved |
 | RD-06 | delivered | Native wiring/eligibility report; deferred real-return/gradient IDs | `6f74680` pushed/verified; [report](redesign-rd06-results-2026-11-08.md), [evidence](evidence/direct-native-flow-v1.json); 86 static tests pass +10 refreshed; two new GPU checks resolved by RD-07; zero complete corpus formation/semantic continuation/direct reader support |
 | RD-07 | delivered | All required deferred/changed-path 3090 checks pass; actual counts/hashes | [Report](redesign-rd07-results-2026-11-08.md), [evidence](evidence/redesign-qualification-v1.json); ten deferred +three new GPU checks pass; twelve1024 traces; zero updates; `7da99c6` pushed and verified |
-| RD-08 | in_progress | Complete matched fit/evaluation receipts; useful-improvement separate | [v2 report](receiver-matched-v2-results-2026-11-08.md), [performance/recovery update](receiver-performance-v1.md);599 control updates logged,500 on disk; former trainer absent, no restart; GPU reopened; PERF-01..03 and19 current-source checks pass; compatible500-update recovery next; candidate/evaluation unstarted |
+| RD-08 | in_progress | Complete matched fit/evaluation receipts; useful-improvement separate | [v2 report](receiver-matched-v2-results-2026-11-08.md), [performance/recovery update](receiver-performance-v1.md); control750 complete with full final observations; candidate375 checkpoint saved, fitting active; no rejected exposures; E/X unstarted |
 | RD-09 | blocked | Accepted RD-08 receiver plus eligible native run/evaluation receipts | [Report](redesign-rd09-results-2026-11-08.md), [evidence](evidence/native-demonstration-rd09-v1.json); conditional authorization recorded; blocked on RD-08/no accepted receiver and zero native supervision; execution unstarted, zero updates; blocker `a864b65` pushed/verified |
 
 RD-07 is delivered; technical acceptance passes and implementation `7da99c6` is pushed/verified.
 All ten deferred GPU checks are resolved; no required RD-07 check remains pending.
-Earliest unfinished slice: **RD-08**, optimized control activePID829981 from the
-compatible500-update checkpoint, now beyond599 retained updates. All99 replayed
-windows/792 examples match original receipts exactly. PERF-01..03 and19 current-
-source checks pass; qualification6793f25 pushed/verified before fitting. Candidate,
-E/X and RD09 unstarted. Complete fixed fits before evaluation; no source edits or
-duplicate process during fitting.
+Earliest unfinished slice: **RD-08**. Control750 retained updates/all1500×4 is
+complete, including full initial/final observations. CandidatePID878908 passed375
+updates/all1500×2 with checkpoint0563 verified, same initial shared masters/
+moments/RNG and no rejected exposures. All99 control replay windows match original
+receipts exactly; lost/physical work remains explicit. PERF-01..03 and19 current-
+source checks pass; qualification6793f25 pushed/verified before fitting. Complete
+candidate750 plus final panel before either E/X evaluation. No source/plan changes,
+duplicate process, new data or RD09.
 
 For each attempted slice add a short entry with implementation/evidence paths,
 exact commands/results, dependency hashes, relevant implementation commits and
@@ -40,7 +42,7 @@ artifacts locally under `data/`; commit concise reports/portable evidence only.
 
 Historical RD-01..07 technical implementation blockers: **none**. The historical
 direct-v1 zero-support blocker is resolved by the explicitly authorized v2 format
-revision and full audit. Current execution holds for the user's GPU-off constraint.
+revision and full audit. The user has reopened GPU work on the specified3090.
 RD-01 data/native supervision limits remain; qualification does not waive them.
 New performance/source changes require affected GPU qualification before fresh fits.
 
@@ -909,3 +911,12 @@ checkpoint`data/receiver-performance-20261109/candidate/checkpoint-0438`, manife
 hashes verify. Raw`candidate-checkpoint-250-verification.json`. No rejected
 exposures. Fixed fitting continues to750 and full final measurement before either
 E/X evaluation. No source/plan changes, additional passes or RD09.
+
+## Candidate375 checkpoint verified — 2026-11-09
+
+CandidatePID878908 completed375 effective windows/all1500 records exactly twice.
+Checkpoint`data/receiver-performance-20261109/candidate/checkpoint-0563`, manifestSHA
+`fd5d172239ebef94e6e107d7330dfa6d4e411eb896a61c7742df291cb736c08b`, stores historical563 counters/cursor3000. All four file
+hashes verify. Raw`candidate-checkpoint-375-verification.json`. No rejected
+exposures. Continue the declared750-window schedule and final full panel before
+E/X evaluation; no source/plan changes, extra passes or RD09.

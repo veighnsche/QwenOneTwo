@@ -3,14 +3,15 @@
 Read `docs/next-agent-handoff.md` for the current measured status, artifact paths,
 remaining work and scope boundaries before continuing implementation.
 
-Current2026-11-09 state: the user reopened GPU work. Receiver performance
+Current2026-11-09 state: GPU work is open on the3090. Receiver performance
 validation passes: six faster matched timing pairs, exact updates/resume,19
-current-source GPU qualification checks and35 model-free tests. Only the3090
-may run model work. Former trainerPID618710 is absent; recover the compatible
-500-update checkpoint with exact optimizer/RNG/sampler state, recording99 lost
-logged windows and any replay separately. Preserve the finite effective schedule;
-no extra learning passes, new data, RD09, service or fan-control changes.
-See the current handoff and docs/receiver-performance-v1.md.
+current-source GPU qualification checks and35 model-free tests. Control750
+retained updates/full initial-final observations complete; candidatePID878908
+passed375 of750, fixed fitting active. Reconnect, never duplicate. No source,
+plan or qualified-evidence changes during fitting. Finish candidate and final
+measurement before either E/X evaluation. Control99 lost/replayed windows are
+separately recorded; no extra effective pass. No new data, RD09, service or
+fan-control changes. See current handoff and docs/receiver-performance-v1.md.
 
 On 2026-11-08, the user lifted the temporary GPU and fan-noise hold with
 "everything is allowed again." Both GPUs may be used within their authorized

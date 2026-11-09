@@ -5,12 +5,17 @@ examples**, with complete roles, unchanged data and no cropping. Both arms have
 full shared training support. Development coverage is E127/130 and X180/180;
 three oversized E requests remain explicit failures under request256. This
 removes the training coverage blocker; it does not establish useful learning.
-The fixed RD-08 comparison resumed, then paused on2026-11-09 following the user's
-GPU-off constraint. Control has599 logged updates,500 saved on disk; the former
-trainer is now absent, with no newer checkpoint found. See the
-[performance/recovery update](receiver-performance-v1.md). Candidate
-and development evaluations remain unstarted. Useful improvement is not evaluated.
-RD-09 remains unstarted. See [pause evidence](evidence/receiver-matched-v2-pause-2026-11-09.json).
+The user reopened GPU work after the historical interruption. Performance and
+all19 affected GPU checks now pass and were committed/pushed before recovery.
+Control is complete:750 retained updates, all1500×4/6000 presentations and full
+initial/final1500 observations, with W/R/startup/reference frozen. Candidate
+passed375 of750 updates with no rejected exposures; shared initialization,
+Adam moments and CUDA/Python RNG match exactly. Its full final panel and both
+development evaluations remain due. Useful improvement is not yet evaluated.
+RD09 remains unstarted. See the [performance/recovery update](receiver-performance-v1.md)
+and [current ledger](redesign-progress.md). Historical599 logged/500 recoverable
+control updates and99 lost/replayed windows remain separately recorded in the
+[pause evidence](evidence/receiver-matched-v2-pause-2026-11-09.json).
 
 Contract committed/pushed before implementation: `c1021a3`,
 [compact-role-states-v2.md](compact-role-states-v2.md).
