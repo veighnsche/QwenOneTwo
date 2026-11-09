@@ -5,6 +5,28 @@ Read this first for current status, then the
 topic contracts. Historical reports describe their recorded sources and runs.
 This handoff records measured mechanisms, not learned capability.
 
+## Latest task — 4B weights downloaded, models unloaded, 2026-11-10
+
+The user requested Qwen3.5-4B and the best compatible decision LoRA to download.
+The cached official Qwen snapshot851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a was
+completed/verified; evalengine/decision-4b snapshot aadc55517ae8bfb1264fd5932ec452b939361e47
+was downloaded. Its adapter explicitly pins that exact base revision. Selection
+is based on compatibility and published single-pass results, not a local quality
+benchmark or a universal best-model claim. Both weight shards/file hashes and all
+248 LoRA matrix-pair shapes pass static checks; no model runtime was imported.
+See `docs/qwen35-4b-download-2026-11-10.md` for paths, sources, limitations and
+portable receipt. Verifier/logs are under `data/model-downloads-20261110/`.
+
+No code/model-selection/0.8B artifacts or services changed; no training/inference,
+latent integration, deployment or RD09. This adapter's text/option-logit interface
+is not the project's latent/continuous-Score implementation. Do not use 0.8B
+adapters/heads with the 4B weights or silently claim runtime compatibility.
+
+The preceding user unload request stopped qwen-one-two.service. Post-download
+inspection confirms inactive/dead, MainPID0, no GPU compute processes,3090 VRAM
+29MiB/3060 11MiB. All models remain unloaded. Do not restart a model as part of
+this download. The historical RD08 result and blind proposal remain below.
+
 ## Latest documentation — experiment summary, 2026-11-09
 
 The user requested one summarized Markdown history of all experiments and results.
