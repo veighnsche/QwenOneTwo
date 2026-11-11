@@ -7,6 +7,9 @@ This handoff records measured mechanisms, not learned capability.
 
 ## Latest task — public attempt #1 record, 2026-11-11
 
+The README also links "Attempt #2 → QwenDec" beside the failed-attempt badge,
+pointing to https://github.com/veighnsche/QwenDec as requested by the user.
+
 The user requested making this repository public and adding a "failed attempt #1"
 sticker. The README now opens with a local SVG badge linking to the experiment
 summary and explicitly records failed RD-08 learning acceptance and unstarted

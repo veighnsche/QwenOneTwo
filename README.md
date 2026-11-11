@@ -1,6 +1,7 @@
 # QwenOneTwo
 
-[![failed attempt #1](docs/failed-attempt-1.svg)](docs/experiment-summary-2026-11-09.md)
+[![failed attempt #1](docs/failed-attempt-1.svg)](docs/experiment-summary-2026-11-09.md) ·
+[Attempt #2 → QwenDec](https://github.com/veighnsche/QwenDec)
 
 [GitHub repository](https://github.com/veighnsche/QwenOneTwo) ·
 [Documentation map](docs/README.md) ·
