@@ -5,6 +5,18 @@ Read this first for current status, then the
 topic contracts. Historical reports describe their recorded sources and runs.
 This handoff records measured mechanisms, not learned capability.
 
+## Latest task — public attempt #1 record, 2026-11-11
+
+The user requested making this repository public and adding a "failed attempt #1"
+sticker. The README now opens with a local SVG badge linking to the experiment
+summary and explicitly records failed RD-08 learning acceptance and unstarted
+RD-09. Badge XML, local targets and whitespace checks pass. A pre-publication
+check of all 1,021 historical Git blobs found no matches for common credential
+patterns; no environment files, private-key files or model weights were tracked.
+This is a bounded check, not a security certification. Publication uses the
+existing GitHub repository; no training, model load, deployment or service change
+is part of this task. GitHub visibility must be verified from the live repository.
+
 ## Latest task — 4B weights downloaded, models unloaded, 2026-11-10
 
 The user subsequently requested placement in `Projects/QwenDec`. Standalone
